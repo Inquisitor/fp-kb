@@ -23,4 +23,5 @@
 - [ ] Set up backup script (robocopy + Task Scheduler)
 
 ## Future
+- [ ] Skills for KB conventions (kb-create-task, kb-create-review, kb-close-task, kb-orient) — after conventions stabilize
 - [ ] SQLite index — add when grep on log.md/backlog.md stops scaling (~500+ entries)

@@ -20,6 +20,8 @@
 - Task journals: `tasks/FP-XXXXX--slug/journal.md`
 - Module decision logs: `modules/<name>.log.md`
 - Module backlogs: `modules/<name>.backlog.md`
+- Journal/review metadata: blockquote with `\` line breaks (not `##` headings)
+- No line numbers in analysis docs — use method names (grep-friendly, won't drift)
 
 ## Rules
 - All content in English (artifacts from external sources may stay in original language)
