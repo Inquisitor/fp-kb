@@ -1,0 +1,23 @@
+# Knowledge Base
+
+## Active Tasks
+| Task | Project | Topic | Status | Path |
+|------|---------|-------|--------|------|
+| FP-41746 | FP/server | matchmaking | in-progress | fishing-planet/tasks/FP-41746--matchmaking/ |
+| FP-42033 | FP/server | game-logic | investigating | fishing-planet/tasks/FP-42033--torch-sinker/ |
+
+## Active Reviews
+| Task | Executor | Path |
+|------|----------|------|
+| FP-41962 | Stanislav | fishing-planet/review/FP-41962--line-logging/ |
+
+## Active Confluence Work
+(none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
+
+> Completed tasks are removed from this table. History lives in task journals under `fishing-planet/tasks/`.
+
+## Quick Links
+- [FP Server modules](fishing-planet/server/_index.md)
+- [FP Client modules](fishing-planet/client/_index.md)
+- [Confluence progress](confluence/_index.md)
+- [Glossary](fishing-planet/glossary.md)
