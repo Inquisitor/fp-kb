@@ -9,7 +9,7 @@
 - [ ] Plan client/_index.md code map (requires codebase exploration)
 
 ## Confluence
-- [ ] Index SERVER section (152 pages) into confluence/_index.md
+- [ ] Index SERVER section into confluence/_index.md
 
 ## Glossary
 - [ ] Fill glossary.md with canonical terminology from TRM-002
