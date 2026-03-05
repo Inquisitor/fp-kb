@@ -9,7 +9,7 @@
 ## Workflows
 - Starting a session: read `_index.md` first
 - Starting a task: find or create `tasks/FP-XXXXX--slug/`
-- Working on code: read relevant `modules/*.md` for entry points
+- Working on code: read relevant `modules/<name>/_card.md` for entry points
 - Making a decision: append to nearest `log.md` (task > module > server/client > KB root)
 - Closing a task: set status to `completed` in journal, remove from `_index.md`, bubble up open backlog items (task → module/server → KB root)
 - Reviewing: create/update `review/FP-XXXXX--slug/review.md`
@@ -18,8 +18,9 @@
 ## Conventions
 - Task artifacts: `tasks/FP-XXXXX--slug/artifacts/`
 - Task journals: `tasks/FP-XXXXX--slug/journal.md`
-- Module decision logs: `modules/<name>.log.md`
-- Module backlogs: `modules/<name>.backlog.md`
+- Module cards: `modules/<name>/_card.md`
+- Module decision logs: `modules/<name>/log.md`
+- Module backlogs: `modules/<name>/backlog.md`
 - Journal/review metadata: blockquote with `\` line breaks (not `##` headings)
 - No line numbers in analysis docs — use method names (grep-friendly, won't drift)
 
