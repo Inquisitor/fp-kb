@@ -8,6 +8,9 @@
 - [ ] Plan server/_index.md code map (requires codebase exploration)
 - [ ] Plan client/_index.md code map (requires codebase exploration)
 
+## Workflows
+- [ ] Design flow for "waiting for release" tasks (code done, need post-release verification). Consider JIRA filter vs KB tracking
+
 ## Confluence
 - [ ] Index SERVER section into confluence/_index.md
 
