@@ -1,0 +1,21 @@
+Case	Old B1	Old B2	Old B3	New B1	New B2	New B3	Description
+008	0	0	70	0	0	55	Only third group has players, it is complete
+016	15	15	15	20	0	35	Third pulls 5 from second (reaches 20); second (15) merges into third in Phase B
+020	0	0	40	20	0	20	First pulls 18 from second (reaches 20); third pulls remaining 8 from second (reaches 20)
+022	0	0	45	45	0	0	Third (15) has no adjacent non-visited source; merges into first in Phase B
+023	0	0	32	32	0	0	First pulls 5 from second (reaches 20); third pulls remaining 4 from second; third (12) merges into first in Phase B
+024	0	0	33	33	0	0	First pulls 5 from second (reaches 20); third pulls remaining 4 from second; third (13) merges into first in Phase B
+025	15	0	15	30	0	0	First pulls all 10 from second (reaches 20); third (10) merges into first in Phase B
+026	15	0	37	20	0	37	First pulls 1 from second (reaches 20); third pulls 1 from second (reaches 20); second (17) merges into third in Phase B
+029	0	0	26	26	0	0	First pulls all 9 from second, then 7 from third (reaches 20); third (6) merges into first in Phase B
+030	0	0	21	21	0	0	First pulls 1 from second, then 8 from third (reaches 20); third (1) merges into first in Phase B
+031	0	21	0	21	0	0	First pulls all 11 from second (reaches 20); third (1) merges into first in Phase B
+033	0	29	0	29	0	0	First pulls 11 from second (reaches 20); third pulls remaining 4 from second; third (9) merges into first in Phase B
+035	0	0	34	34	0	0	First pulls all 10 from second, then 5 from third (reaches 20); third (14) merges into first in Phase B
+036	0	0	21	21	0	0	First pulls 1 from second, then 18 from third (reaches 20); third (1) merges into first in Phase B
+038	20	0	20	20	0	21	First pulls 19 from second (reaches 20); third pulls 1 from second (reaches 20); second (1) merges into third in Phase B
+051	20	0	25	20	0	24	First pulls 6 from second (reaches 20); third pulls 5 from second (reaches 20); second (4) merges into third in Phase B
+052	20	0	25	20	0	24	First pulls 5 from second (reaches 20); third pulls 5 from second (reaches 20); second (4) merges into third in Phase B
+053	20	0	25	20	0	24	First pulls 5 from second (reaches 20); third pulls 6 from second (reaches 20); second (4) merges into third in Phase B
+058	34	0	0	35	0	0	First pulls 10 from second (reaches 20); third pulls remaining 6 from second; third (15) merges into first in Phase B
+066	20	44	20	20	24	20	First pulls 10 from second (reaches 20); third pulls 16 from second (reaches 20)
