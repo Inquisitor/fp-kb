@@ -7,9 +7,10 @@ related: FP-41833
 # FP-41746: Matchmaking Alignment
 
 ## Status
-Phases 1-4, 6 code complete. Phase 6 GDD/TDD updates TODO. Next code work: Phase 8 (TRM-003 — DAL mapper enhancement).
-Blocker for TRM-003: `RestoreObjectFromReader` uses reflection with exact name match, needs mapping attribute support.
-Full status: [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md).
+Phase 8 in progress: TRM-003 (full DB rename `GroupId` → `BracketId`) + DCD-004 (IsRated) + DCD-005 (IsCanceled).
+Design approved, implementation plan created. Executing step by step with review.
+Next: Task 0 (diagnostic queries on DEV/Prod), then Task 2 (SP files), then C# code.
+- [Design](artifacts/TRM-003-DB-Rename-Design.md) | [Implementation Plan](artifacts/TRM-003-Implementation-Plan.md) | [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary
 JIRA task was originally "add 2 new parameters for competitions JSON" (`MaxSize`, `MaxGroupCount`). Investigation revealed misalignment between GDD, TDD and code — outdated terminology, dead code, untested edge cases. Scope expanded into a full alignment effort across documentation, terminology, algorithm, and test coverage.
@@ -33,3 +34,4 @@ Related task FP-41833 ("matchmaking algorithm rework: cases with 2 new parameter
 - 2026-03-04: Extracted common test helpers into shared infrastructure (r15883). Full FFS test coverage committed (r15884)
 - 2026-03-05: Migrated task to KB, reorganized artifacts into active/archived structure
 - 2026-03-06: Refactored Alignment Plan — Summary to top, DONE items extracted to archived/subtasks/
+- 2026-03-08: TRM-003 design change — full DB rename instead of DAL mapper enhancement. DCD-004/DCD-005 added to scope. [Design](artifacts/TRM-003-DB-Rename-Design.md) + [Implementation Plan](artifacts/TRM-003-Implementation-Plan.md) created

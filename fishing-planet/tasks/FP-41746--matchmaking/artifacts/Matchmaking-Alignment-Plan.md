@@ -37,14 +37,14 @@
 
 ### Phase 4 — Dead Code & Obsolete Fields Removal — PARTIAL
 
-| ID      | Description                                                 | Status   | Details                                                            |
-|---------|-------------------------------------------------------------|----------|--------------------------------------------------------------------|
-| DCD-001 | Remove TournamentGroup.IsNotRated + DB cleanup              | DONE     | [details](archived/subtasks/DCD-001--remove-is-not-rated-group.md) |
-| DCD-002 | Remove TournamentGroup.IsCanceled + DB cleanup              | DONE     | [details](archived/subtasks/DCD-002--remove-is-canceled-group.md)  |
-| DCD-003 | Remove FindFirstAdjacentIncompleteGroupsCombination         | DONE     | [details](archived/subtasks/DCD-003--remove-dead-find-adjacent.md) |
-| DCD-004 | Remove TournamentGroupParticipant.IsNotRated + DB cleanup   | DEFERRED |
-| DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | DEFERRED |
-| CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | DEFERRED |
+| ID      | Description                                                 | Status    | Details                                                            |
+|---------|-------------------------------------------------------------|-----------|--------------------------------------------------------------------|
+| DCD-001 | Remove TournamentGroup.IsNotRated + DB cleanup              | DONE      | [details](archived/subtasks/DCD-001--remove-is-not-rated-group.md) |
+| DCD-002 | Remove TournamentGroup.IsCanceled + DB cleanup              | DONE      | [details](archived/subtasks/DCD-002--remove-is-canceled-group.md)  |
+| DCD-003 | Remove FindFirstAdjacentIncompleteGroupsCombination         | DONE      | [details](archived/subtasks/DCD-003--remove-dead-find-adjacent.md) |
+| DCD-004 | Remove TournamentGroupParticipant.IsNotRated + DB cleanup   | → Phase 8 |
+| DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | → Phase 8 |
+| CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | → Phase 8 |
 
 ### Phase 5 — Code Refactoring — DEFERRED
 
@@ -78,11 +78,13 @@
 | DOC-001 | Fix typo in TDD validation rules (wrong array index)               |
 | DOC-003 | Proofread GDD and TDD — fix spelling errors                        |
 
-### Phase 8 — Code Rename — TODO
+### Phase 8 — DB + Code Rename — TODO
 
-| ID      | Description                                                  | Status |
-|---------|--------------------------------------------------------------|--------|
-| TRM-003 | Enhance DAL mapper + rename deferred DTO properties (P6-P14) | TODO   |
+| ID      | Description                                                 | Status | Details                                                         |
+|---------|-------------------------------------------------------------|--------|-----------------------------------------------------------------|
+| TRM-003 | Full DB rename `GroupId` → `BracketId` + code rename P6-P14 | TODO   | [design](TRM-003-DB-Rename-Design.md)                           |
+| DCD-004 | Remove `IsRated` from DB + code (alongside TRM-003)         | TODO   | [design](TRM-003-DB-Rename-Design.md#dcd-004-remove-israted)    |
+| DCD-005 | Remove participant `IsCanceled` chain from DB + code        | TODO   | [design](TRM-003-DB-Rename-Design.md#dcd-005-remove-iscanceled) |
 
 ### Phase 9 — Final Documentation (after all code changes)
 
@@ -164,16 +166,19 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
   been validated as safe. See [Terminology-Rename-Plan.md](Terminology-Rename-Plan.md) §Implications.
 - **Depends on:** TRM-002 (DONE).
 
-**Decision:** Enhance `RestoreObjectFromReader` to support a column mapping attribute (e.g.
-`[Column("GroupId")]`), then rename `GroupId` → `BracketId` in all P6-P14 classes synchronously.
-DB columns and stored procedures stay unchanged. Requires detailed investigation.
+**Decision (revised 2026-03-08):** Rename DB columns directly instead of enhancing the DAL mapper.
+Feature is deployed but disabled — columns contain no data. Atomic deployment with downtime.
+Also removes `IsRated` (DCD-004) and participant `IsCanceled` chain (DCD-005) from DB.
 
-| Action                                                                                                        | Status |
-|---------------------------------------------------------------------------------------------------------------|--------|
-| **Code:** Add column mapping attribute support to `RestoreObjectFromReader` in `DtoExtensions.cs`.            | TODO   |
-| **Code:** Rename `GroupId` → `BracketId` in P6-P14 classes. Add `[Column("GroupId")]` attrs to DTOs (P9-P12). | TODO   |
+| Action                                                                                          | Status |
+|-------------------------------------------------------------------------------------------------|--------|
+| **DB:** `sp_rename` `[GroupId]` → `[BracketId]` in 7 tables + update 18+ stored procedures.     | TODO   |
+| **DB:** `REPLACE()` ConfigJson in `Tournaments`, `TournamentTemplates`, `ArchiveTournaments`.   | TODO   |
+| **Code:** Rename `GroupId` → `BracketId` in P6-P14 classes. Remove `[JsonProperty]` attributes. | TODO   |
 
-**Priority:** Low (deferred from TRM-002; non-blocking — old names work correctly)
+Full design: [TRM-003-DB-Rename-Design.md](TRM-003-DB-Rename-Design.md)
+
+**Priority:** Medium (unblocked by DB rename approach)
 
 ---
 
