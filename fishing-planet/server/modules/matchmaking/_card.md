@@ -1,38 +1,34 @@
+---
+module: matchmaking
+---
+
 # Matchmaking
+> Groups tournament participants into balanced buckets using rating-based brackets.
 
 ## Entry Points
-- `MatchmakingLogic` — `Shared/SharedLib/Tournaments/MatchmakingLogic.cs` (core algorithm: `ProcessGrouping()`, `BalanceBuckets()`, `AllocateGroupBudget()`)
-- `TournamentStartAdapter` — `Shared/SharedLib/Tournaments/TournamentStartAdapter.cs` (calls `MatchmakingLogic.ProcessGrouping()` at tournament start)
-- `TournamentBracket` — `Shared/ObjectModel/Tournaments/TournamentBracket.cs` (rating range config per bracket)
-- `TournamentBucket` — `Shared/ObjectModel/Tournaments/TournamentBucket.cs` (runtime bucket extending `TournamentBracket`)
-- `TournamentGroupingRule` — `Shared/ObjectModel/Tournaments/TournamentGroupingRule.cs` (grouping config: brackets, min/max/target sizes)
-- `TournamentGroup` — `Shared/ObjectModel/Tournaments/TournamentGroup.cs` (output: group of participants)
+- `MatchmakingLogic` — `Shared/SharedLib/Tournaments/MatchmakingLogic.cs` (core: `ProcessGrouping()`, `BalanceBuckets()`, `AllocateGroupBudget()`)
 
-## Test Infrastructure
-- `MatchmakingLogicTests` — `Shared/SharedLib.Tests/Tournaments/MatchmakingLogicTests.cs`
-- `MatchmakingTestCase` — `Shared/SharedLib.Tests/Tournaments/Helpers/MatchmakingTestCase.cs` (string-notation parser)
+## Key Types
+- `TournamentBracket` — rating range config per bracket
+- `TournamentBucket` — runtime bucket extending TournamentBracket
+- `TournamentGroupingRule` — grouping config: brackets, min/max/target sizes
+- `TournamentGroup` — output: group of participants
 - `Rational` — `Shared/SharedLib/Helpers/Rational.cs` (exact arithmetic for swap improvement)
 
-## Data
-- SQL: `Tournaments`, `TournamentTemplates`, `TournamentSeries`, `TournamentGrid`, `TournamentParticipants`, `TournamentIndividualResults`
-- Config: `TournamentGroupingRule` JSON inside tournament templates (DB + WebAdmin)
+## Dependencies
+→ ObjectModel: TournamentBracket, TournamentBucket, TournamentGroup, TournamentGroupParticipant
+← TournamentStartAdapter: calls `ProcessGrouping()` at tournament start
+← TournamentsHelper: `InitializeGrouping()`
+← TournamentAdapter: game server DAL
+← WebAdmin: CompetetiveActivityBreaksModel, ReviewTournamentModel, ToolsController, StatsController
 
-## Depends On
-- ObjectModel (`TournamentBracket`, `TournamentBucket`, `TournamentGroup`, `TournamentGroupParticipant`)
-- SharedLib/Helpers (`Rational`)
-
-## Used By
-- `TournamentStartAdapter` (tournament start flow)
-- `TournamentsHelper` (`InitializeGrouping()`)
-- `TournamentAdapter` — `Photon/.../DalAdapters/TournamentAdapter.cs` (game server DAL)
-- `CompetetiveActivityBreaksModel` — `WebAdmin/.../Models/Stats/CompetetiveActivityBreaksModel.cs`
-- `ReviewTournamentModel` — `WebAdmin/.../Models/Tools/ReviewTournamentModel.cs`
-- `ToolsController`, `StatsController` — WebAdmin controllers
-
-## Confluence Pages
-- 4339925004: Matchmaking (stale — missing group budget algorithm)
-- 4339925014: Matchmaking testing (current)
+## Deep Dives
+Tests: `SharedLib.Tests/Tournaments/MatchmakingLogicTests.cs` + `MatchmakingTestCase.cs` (string-notation parser)
+Data: SQL `Tournaments`, `TournamentTemplates`, `TournamentSeries`, `TournamentGrid`; config via `TournamentGroupingRule` JSON in DB/WebAdmin
+Confluence: 4339925004 (Matchmaking, stale), 4339925014 (Matchmaking testing, current)
 
 ## Related Tasks
 - FP-41746: Alignment plan — bug fixes, rename, algorithm (active)
 - FP-41833: Tests and test infrastructure
+
+See also: [backlog](backlog.md) | [log](log.md)
