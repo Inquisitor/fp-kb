@@ -1,7 +1,7 @@
 # Knowledge Base System Design
 
 **Date:** 2026-03-05
-**Status:** Approved
+**Status:** Superseded — conventions evolved in CLAUDE.md (2026-03-07 v2: strict card format, module grouping, system overviews). This document remains as historical rationale.
 **Author:** Team Lead + Claude Code (expert panel review)
 
 ## 1. Purpose
