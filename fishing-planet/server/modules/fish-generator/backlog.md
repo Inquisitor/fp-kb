@@ -41,7 +41,7 @@ Deferred — low risk:
 ## Documentation Items
 - [ ] Document hooking probability curve in detail (`Hooker` class piecewise formula)
 - [ ] Document bite time generation (`GetBiteTime()`, `GetAttackDelay()`)
-- [ ] Document BiteSystem integration (BiteEditor.ObjectModel.Pond → weight generation pipeline)
+- [x] Document BiteSystem integration (BiteEditor.ObjectModel.Pond → weight generation pipeline) → [normal-distribution.md](normal-distribution.md)
 - [ ] Document `FishValueModulator` — modulates XP and club points via Force (derived from weight)
 - [ ] Document `LicenseModel` weight range merging — licenses intersect MinWeight/MaxWeight ranges for legal catches
 - [ ] Document WebAdmin `FishWeightDistribution()` analytics in `StatsController`

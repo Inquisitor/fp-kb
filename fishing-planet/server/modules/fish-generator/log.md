@@ -23,5 +23,17 @@ Full review of all test files related to fish generator module. Findings documen
 2. `Hooker.HookingProbablity` can theoretically go negative (no floor guard)
 3. `GetMinMaxValue` asymmetric clamping (lower only, no upper)
 
+## 2026-03-08: Normal distribution deep dive
+
+Investigated all uses of normal distribution in fish weight generation. Documented in [normal-distribution.md](normal-distribution.md).
+
+**Key findings:**
+- Two independent implementations: `NormalRandom` (Box-Muller/sin, GameModel) and `NormalDistribution` (Marsaglia polar, BiteSystem)
+- GameModel path: normal distribution only activates when `FishWeightBias` ≠ No (half-normal for Min/Max bias)
+- BiteSystem path: hybrid uniform/normal — normal kicks in above configurable threshold (production default 0.95 = only top 5%)
+- Form-specific polynomials add pre-normal nonlinearity: Young inflates norm (x=0.9→0.99, enters normal branch more easily); Unique is non-monotonic (peak at x≈0.3, dip at x≈0.7)
+- `weightK` applied twice (to norm and to weight) — if weightK>1, guarantees normal branch
+- Hardcoded defaults (0.75/0.2) vs SQL defaults (0.95/0.55) diverge significantly — fallback behavior is very different
+
 ## FP-33182: Fish generation improvements
 - Details TBD
