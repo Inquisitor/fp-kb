@@ -100,11 +100,11 @@ Called from `PondServer.GetFish()` — BiteSystem path.
 
 ### Form-specific polynomials (`FishDescription._formToNorm`)
 
-| Form | Polynomial | Effect |
-|------|-----------|--------|
-| Young | `-0.0135x³ - 0.9727x² + 1.9829x + 0.0032` | Concave above identity — inflates norm (x=0.5→0.75, x=0.9→0.99) |
-| Common | `x` | Identity — uniform input preserved |
-| Trophy | `x` | Identity — uniform input preserved |
+| Form   | Polynomial                                | Effect                                                           |
+|--------|-------------------------------------------|------------------------------------------------------------------|
+| Young  | `-0.0135x³ - 0.9727x² + 1.9829x + 0.0032` | Concave above identity — inflates norm (x=0.5→0.75, x=0.9→0.99)  |
+| Common | `x`                                       | Identity — uniform input preserved                               |
+| Trophy | `x`                                       | Identity — uniform input preserved                               |
 | Unique | `8.5574x³ - 13.5356x² + 6.0272x - 0.0489` | Non-monotonic: peak ~0.77 at x≈0.3, dips below identity at x≈0.7 |
 
 Sample values:
@@ -121,11 +121,11 @@ Sample values:
 
 ## Configurable Parameters
 
-| Parameter | Hardcoded default | SQL/GlobalVariables default | Effect |
-|-----------|-------------------|-----------------------------|--------|
-| `UseNormalDistributionForFishGeneratingFrom` | 0.75 (`Pond` field) | **0.95** | Threshold above which normal distribution kicks in |
-| `NormalDistributionForFishGeneratingSigma` | 0.2 (`Pond` field) | **0.55** | Sigma for Marsaglia in weight generation |
-| `MarsagliaSigma` | 0.55 (`FishSelector` field) | 0.55 | Sigma for fish generation probability dice (NOT weight) |
+| Parameter                                    | Hardcoded default           | SQL/GlobalVariables default | Effect                                                  |
+|----------------------------------------------|-----------------------------|-----------------------------|---------------------------------------------------------|
+| `UseNormalDistributionForFishGeneratingFrom` | 0.75 (`Pond` field)         | **0.95**                    | Threshold above which normal distribution kicks in      |
+| `NormalDistributionForFishGeneratingSigma`   | 0.2 (`Pond` field)          | **0.55**                    | Sigma for Marsaglia in weight generation                |
+| `MarsagliaSigma`                             | 0.55 (`FishSelector` field) | 0.55                        | Sigma for fish generation probability dice (NOT weight) |
 
 **Injection chain**: SQL `GlobalVariables` → `GlobalVariablesCache` properties → `Pond` / `FishSelector` static fields.
 
@@ -145,25 +145,25 @@ If GlobalVariables fail to load, behavior changes substantially.
 ## Data Flow Summary
 
 ```
-┌──────────── GameModel Path ────────────────────────┐
-│ FishGenerator.GenerateFishTemplate()                │
-│   └─ GameUtils.RandomizeFishWeight(min, max, bias)  │
-│       ├─ Bias.No  → Uniform              (no normal)│
-│       ├─ Bias.Min → |N(0, ~0.25)|        (→ lighter)│
-│       └─ Bias.Max → 1 - |N(0, ~0.25)|   (→ heavier)│
-│       └─ weight = lerp(min, max, sizeRnd)           │
-└─────────────────────────────────────────────────────┘
+┌──────────── GameModel Path ────────────────────────--┐
+│ FishGenerator.GenerateFishTemplate()                 │
+│   └─ GameUtils.RandomizeFishWeight(min, max, bias)   │
+│       ├─ Bias.No  → Uniform              (no normal) │
+│       ├─ Bias.Min → |N(0, ~0.25)|        (→ lighter) │
+│       └─ Bias.Max → 1 - |N(0, ~0.25)|   (→ heavier)  │
+│       └─ weight = lerp(min, max, sizeRnd)            │
+└────────────────────────────────────────────────────-─┘
 
-┌──────────── BiteSystem Path ───────────────────────┐
-│ PondServer.GetFish()                                │
-│   └─ FishDescription.GenerateRandomWeight()         │
-│       1. norm = formPolynomial(uniform)              │
-│       2. norm *= weightK                            │
-│       3. GetPossibleNormalFloat(norm, min, max,     │
-│              threshold=0.95, sigma=0.55)            │
-│          ├─ norm < 0.95 → lerp      (no normal)    │
+┌──────────── BiteSystem Path ──────────────────────┐
+│ PondServer.GetFish()                              │
+│   └─ FishDescription.GenerateRandomWeight()       │
+│       1. norm = formPolynomial(uniform)           │
+│       2. norm *= weightK                          │
+│       3. GetPossibleNormalFloat(norm, min, max,   │
+│              threshold=0.95, sigma=0.55)          │
+│          ├─ norm < 0.95 → lerp      (no normal)   │
 │          └─ norm ≥ 0.95 → |N(0,0.55)| in upper 5% │
-└─────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────┘
 ```
 
 ## Key Observations
