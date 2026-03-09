@@ -50,6 +50,11 @@
 - Subtask files: `artifacts/archived/subtasks/FP-XXXXX--<ID>--<slug>.md` — prefixed with parent JIRA ID
 - Temporary work products (audits, investigations) live under `tasks/`, not in `modules/`
 
+### Creating a module
+1. Create `modules/<name>/` with `_card.md`, `log.md`, `backlog.md`
+2. Register in `server/_index.md` (or `client/_index.md`) under appropriate group section
+3. If new group needed — add section header to `_index.md`
+
 ### Modules
 - Module cards: `modules/<name>/_card.md` — strict 5-section format:
   1. Entry Points (class + file path)
@@ -59,7 +64,7 @@
   5. Related Tasks
 - Module cards: 25-35 lines target, never exceed 40. If overflowing — extract into deep dive
 - Deep dives: permanent reference docs in module folder, no line limit
-- Module decision logs: `modules/<name>/log.md` — decisions with rationale + lessons learned only
+- Module decision logs: `modules/<name>/log.md` — decisions with rationale + lessons learned. Prefix findings (unverified observations) with `Finding:` to distinguish from decisions. Unverified findings → card gets *(UNVERIFIED)* annotation, backlog gets verify item
 - Module backlogs: `modules/<name>/backlog.md`
 - Max nesting: 2 levels from `modules/` — `modules/<name>/<file>.md`
 

@@ -30,10 +30,13 @@
 - [x] Clean module matchmaking/log.md: remove non-decisions, keep only decisions with rationale
 - [x] Convert FP-41746 and FP-42033 journals to YAML frontmatter + `## Status`
 - [ ] Fix stale path in Alignment Plan (pre-KB migration reference to `Docs/Plans/Architecture/Matchmaking/`)
-- [ ] Retrospective: review task workflow after applying it to 1-2 fresh tasks. Validate conventions, fix pain points, then codify as skill
+- [x] Retrospective: review task workflow after applying it to 1-2 fresh tasks. Validate conventions, fix pain points, then codify as skill
+  - Done 2026-03-09: Phase 8 revealed satellite file update gap → kb-finalize-milestone skill planned
 
 ## Future
 - [ ] Append-only daily journal (cross-task temporal view) — when pain is real
-- [ ] Skills: kb-create-task, kb-create-review, kb-close-task, kb-orient — after conventions stabilize
+- [ ] Skills: kb-create-task, kb-create-review, kb-close-task, kb-orient — conventions stable enough, ready to implement
+- [ ] First skill: kb-finalize-milestone (satellite file updates on milestone completion) — pain point confirmed
+- [ ] Symlink `D:\kb\.claude\skills\` → project `.claude\skills\` for each working branch
 - [ ] Skill: task workflow (for Claude — task lifecycle automation)
 - [ ] SQLite index — add when grep on log.md/backlog.md stops scaling (~500+ entries)
