@@ -24,25 +24,6 @@ This document uses the unified terminology adopted across GDD, TDD, and code:
 > All other JSON keys (`MinSize`, `TargetSize`, `MaxSize`, `MaxGroupCount`, `MinRating`, `MaxRating`,
 > `RatingMultiplier`, `RewardMultiplier`) match their C# property names directly.
 
-### Removed parameters
-
-The following parameters appeared in earlier versions of this TDD but were **never implemented**
-in the codebase and have been removed from the specification:
-
-| Parameter | Original description | Reason for removal |
-|---|---|---|
-| `CrossMovesAllowed` | bool, default true — allow pulling players from other brackets | Behavior is always on; the flag was never implemented. |
-| `CanceledIfIncomplete` | bool, default true — cancel competition for incomplete groups | Never implemented. Entire tournament is canceled if grouping fails (see Stage 4). |
-| `NotRatedIfIncomplete` | bool, default false — skip rating for incomplete groups | Never implemented. `IsRated` is always `true` for all participants. |
-| `IsLowRatingGroupProtectionOn` | bool, default true — protect lower brackets from strong players | Replaced by unconditional behavior: Phase B always merges upward, and the no-split rule protects the lowest bracket (see Stage 3a, No-split rule). |
-
-> **Obsolete fields pending removal:** `TournamentGroupParticipant.IsNotRated` and
-> `TournamentGroupParticipant.IsCanceled` exist in the C# model but are never set by the
-> matchmaking algorithm. They are remnants of the `NotRatedIfIncomplete` / `CanceledIfIncomplete`
-> design and should be removed. Similarly, the `IsRated` and `IsCanceled` columns in
-> `TournamentParticipants` always contain their default values (`1` and `0` respectively).
-> See Alignment Plan items DCD-004, DCD-005, CFG-003.
-
 ---
 
 ## Domain Model

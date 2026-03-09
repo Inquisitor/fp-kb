@@ -62,21 +62,21 @@
 | TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE                    | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
 | SUB-001 | Implement new group parameters, update docs                        | Code=DONE, GDD/TDD=TODO |
 
-### Phase 7 — Documentation Cleanup — TODO
+### Phase 7 — Documentation Cleanup — IN PROGRESS
 
-| ID      | Description                                                        |
-|---------|--------------------------------------------------------------------|
-| CFG-001 | Remove CrossMovesAllowed from GDD + TDD                            |
-| CFG-002 | Remove CanceledIfIncomplete from TDD                               |
-| CFG-003 | Remove NotRatedIfIncomplete from TDD                               |
-| CFG-004 | Remove IsLowRatingGroupProtectionOn from TDD                       |
-| ALG-001 | Update GDD: ping-pong traversal instead of semantic priority       |
-| ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" |
-| ALG-003 | Add Phase B brief note to GDD                                      |
-| ALG-007 | Remove "MinSize*2 single group" statement from GDD                 |
-| FTR-001 | Add multipliers note to TDD                                        |
-| DOC-001 | Fix typo in TDD validation rules (wrong array index)               |
-| DOC-003 | Proofread GDD and TDD — fix spelling errors                        |
+| ID      | Description                                                        | Status | Details                                                                                  |
+|---------|--------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
+| CFG-001 | Remove CrossMovesAllowed from GDD + TDD                            | DONE   | [details](archived/subtasks/FP-41746--CFG-001--remove-crossmovesallowed.md)              |
+| CFG-002 | Remove CanceledIfIncomplete from TDD                               | DONE   | [details](archived/subtasks/FP-41746--CFG-002--remove-canceledifincomplete.md)           |
+| CFG-003 | Remove NotRatedIfIncomplete from TDD                               | DONE   | [details](archived/subtasks/FP-41746--CFG-003--remove-notratedifincomplete.md)           |
+| CFG-004 | Remove IsLowRatingGroupProtectionOn from TDD                       | DONE   | [details](archived/subtasks/FP-41746--CFG-004--remove-islowratinggroupprotectionon.md)   |
+| ALG-001 | Update GDD: ping-pong traversal instead of semantic priority       | TODO   |                                                                                          |
+| ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" | TODO   |                                                                                          |
+| ALG-003 | Add Phase B brief note to GDD                                      | TODO   |                                                                                          |
+| ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | TODO   |                                                                                          |
+| FTR-001 | Add multipliers note to TDD                                        | TODO   |                                                                                          |
+| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | TODO   |                                                                                          |
+| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | TODO   |                                                                                          |
 
 ### Phase 8 — DB + Code Rename — DONE
 
@@ -148,81 +148,6 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 ---
 
 ## 2. Configuration Parameters
-
-### CFG-001. `CrossMovesAllowed` — documented but not in code model
-
-- **GDD:** Described. Says "always true, because we always form groups and run competition if possible."
-- **TDD:** Described. Says "deprecated, will be removed."
-- **Code:** Not in `TournamentGroupingRule`. Algorithm always allows cross-moves.
-
-**Decision:** Remove from documentation entirely. Feature not released — no need to keep history.
-
-| Action                                                       | Status                                                    |
-|--------------------------------------------------------------|-----------------------------------------------------------|
-| **GDD:** Remove all mentions of `CrossMovesAllowed`.         | DONE (removed in Confluence, local .md synced 2026-02-17) |
-| **TDD:** Remove all mentions of `CrossMovesAllowed`.         | TODO                                                      |
-| **Code:** No changes needed — parameter was already removed. | N/A                                                       |
-
-**Priority:** Low
-
----
-
-### CFG-002. `CanceledIfIncomplete` — in TDD, not in code
-
-- **TDD:** `bool, default true` — "if the group still has less members than MinSize, competitive activity is canceled
-  for players in the group."
-- **Code:** `TournamentGroup.IsCanceled` (was `TournamentSubgroup.IsCanceled`) exists (marked `[Obsolete]`), but no
-  logic ever sets it to `true`. `TournamentGroupParticipant.IsCanceled` also exists, unused.
-
-**Decision:** Feature not released. Remove from TDD and remove obsolete fields from code.
-
-| Action                                                  | Status |
-|---------------------------------------------------------|--------|
-| **GDD:** No mention — no changes.                       | N/A    |
-| **TDD:** Remove all mentions of `CanceledIfIncomplete`. | TODO   |
-| **Code:** See DCD-002, DCD-005.                         | N/A    |
-
-**Priority:** Low (documentation cleanup)
-
----
-
-### CFG-003. `NotRatedIfIncomplete` — in TDD, not in code
-
-- **TDD:** `bool, default false` — "if the group still has less members than MinSize, rating is not calculated for this
-  group."
-- **Code:** `TournamentGroup.IsNotRated` (was `TournamentSubgroup.IsNotRated`) exists (marked `[Obsolete]`), but no
-  logic ever sets it to `true`. `TournamentGroupParticipant.IsNotRated` also exists, unused.
-
-**Decision:** Feature not released. Remove from TDD and remove obsolete fields from code. Investigate `IsRated` columns
-in DB tables `TournamentParticipant*` — may keep as groundwork for future.
-
-| Action                                                                                                                                       | Status |
-|----------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** No mention — no changes.                                                                                                            | N/A    |
-| **TDD:** Remove all mentions of `NotRatedIfIncomplete`.                                                                                      | TODO   |
-| **Code:** Investigate `IsRated` columns in `TournamentParticipant*` DB tables — decide: keep or remove. Field removal: see DCD-001, DCD-004. | DONE   |
-
-**Priority:** Medium (DB investigation + documentation cleanup)
-
----
-
-### CFG-004. `IsLowRatingGroupProtectionOn` — in TDD, removed from code
-
-- **TDD:** `bool, default true` — "players from upper buckets are protected from joining lower buckets."
-- **Code:** Flag removed from codebase. Only referenced in a stale test name
-  `CreateGroups_LowRatingProtectionIsOn_AddsMinimalPossiblePlayers` (was `CreateSubgroups_...`).
-
-**Decision:** Feature not released. Remove from TDD. Stale test — see TST-003.
-
-| Action                                                          | Status |
-|-----------------------------------------------------------------|--------|
-| **GDD:** No mention — no changes.                               | N/A    |
-| **TDD:** Remove all mentions of `IsLowRatingGroupProtectionOn`. | TODO   |
-| **Code:** See TST-003.                                          | DONE   |
-
-**Priority:** Medium
-
----
 
 ### CFG-005. `MaxGroupCount` — in GDD, not in code
 
