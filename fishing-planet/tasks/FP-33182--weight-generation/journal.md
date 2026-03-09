@@ -64,14 +64,14 @@ Without this system, uniform distribution generates weights so close to the boun
 
 ### Files on Production (LBM20251201)
 
-| File | Role |
-|------|------|
-| `Shared/BiteSystem/Common/NormalDistribution.cs` | `GetPossibleNormalFloat()` — hybrid uniform/normal |
-| `Shared/BiteSystem/Common/ObjectModel/FishDescription.cs` | `GenerateRandomWeight()` — calling chain |
-| `Shared/BiteSystem/ServerOnly/PondServer.cs` | `Pond` partial — static parameter fields + call site |
-| `Shared/SharedLib/Config/GlobalVariablesCache.cs` | Properties (defaults 0.95/0.55) + injection |
-| `SQL/Patches/IMV.M.2025.06.25-015.sql` | DB defaults (0.95/0.55) |
-| `Shared/SharedLib.Tests/NormalDistributionTest.cs` | Visualization tests (no assertions) |
+| File                                                      | Role                                                 |
+|-----------------------------------------------------------|------------------------------------------------------|
+| `Shared/BiteSystem/Common/NormalDistribution.cs`          | `GetPossibleNormalFloat()` — hybrid uniform/normal   |
+| `Shared/BiteSystem/Common/ObjectModel/FishDescription.cs` | `GenerateRandomWeight()` — calling chain             |
+| `Shared/BiteSystem/ServerOnly/PondServer.cs`              | `Pond` partial — static parameter fields + call site |
+| `Shared/SharedLib/Config/GlobalVariablesCache.cs`         | Properties (defaults 0.95/0.55) + injection          |
+| `SQL/Patches/IMV.M.2025.06.25-016.sql`                    | DB defaults (0.95/0.55)                              |
+| `Shared/SharedLib.Tests/NormalDistributionTest.cs`        | Visualization tests (no assertions)                  |
 
 ### Core Algorithm: `GetPossibleNormalFloat()`
 ```
@@ -128,10 +128,10 @@ else → return weight;                                    // WITHOUT 2nd weight
 - If fish crosses to another form → returned `changedWeight` has weightK applied twice (direct multiplication)
 
 ### Configurable Parameters
-| Parameter | Hardcoded (Pond field) | Hardcoded (GlobalVariablesCache) | SQL (production) | Effect |
-|-----------|------------------------|----------------------------------|-------------------|--------|
-| `UseNormalDistributionForFishGeneratingFrom` | 0.75 | 0.95 | **0.95** | Threshold above which normal distribution kicks in |
-| `NormalDistributionForFishGeneratingSigma` | 0.2 | 0.55 | **0.55** | Sigma for Marsaglia half-normal |
+| Parameter                                    | Hardcoded (Pond field) | Hardcoded (GlobalVariablesCache) | SQL (production) | Effect                                             |
+|----------------------------------------------|------------------------|----------------------------------|------------------|----------------------------------------------------|
+| `UseNormalDistributionForFishGeneratingFrom` | 0.75                   | 0.95                             | **0.95**         | Threshold above which normal distribution kicks in |
+| `NormalDistributionForFishGeneratingSigma`   | 0.2                    | 0.55                             | **0.55**         | Sigma for Marsaglia half-normal                    |
 
 **Injection chain**: SQL `GlobalVariables` → `GlobalVariablesCache` properties (defaults 0.95/0.55) → `Pond` static fields (defaults 0.75/0.2).
 If SQL values exist → Pond gets 0.95/0.55. If SQL empty but GlobalVariablesCache works → Pond gets 0.95/0.55. If GlobalVariablesCache injection fails → Pond uses own defaults 0.75/0.2.
@@ -140,12 +140,12 @@ If SQL values exist → Pond gets 0.95/0.55. If SQL empty but GlobalVariablesCac
 
 Applied to the uniform random value **before** the threshold check. These polynomials were part of the original BiteSystem and predate rev. 12950.
 
-| Form    | Polynomial                                       | Effect on norm |
-|---------|--------------------------------------------------|----------------|
-| Young   | `-0.0135x³ - 0.9727x² + 1.9829x + 0.0032`       | Concave above identity: inflates norm (x=0.5→0.75, x=0.9→0.99) |
-| Common  | `x` (identity)                                   | No change |
-| Trophy  | `x` (identity)                                   | No change |
-| Unique  | `8.5574x³ - 13.5356x² + 6.0272x - 0.0489`       | Non-monotonic: peak ~0.77 at x≈0.3, dips below identity at x≈0.7. Produces two "humps" in weight distribution |
+| Form   | Polynomial                                | Effect on norm                                                                                                |
+|--------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Young  | `-0.0135x³ - 0.9727x² + 1.9829x + 0.0032` | Concave above identity: inflates norm (x=0.5→0.75, x=0.9→0.99)                                                |
+| Common | `x` (identity)                            | No change                                                                                                     |
+| Trophy | `x` (identity)                            | No change                                                                                                     |
+| Unique | `8.5574x³ - 13.5356x² + 6.0272x - 0.0489` | Non-monotonic: peak ~0.77 at x≈0.3, dips below identity at x≈0.7. Produces two "humps" in weight distribution |
 
 **Interaction with new system**: Because Young polynomial inflates norm (x=0.9→0.99), Young fish cross the 0.95 threshold more readily than Common/Trophy, making them disproportionately affected by the normal distribution branch. Unique polynomial creates complex multi-modal behavior.
 
@@ -154,33 +154,33 @@ This system applies **only to the BiteSystem weight generation path** (`PondServ
 
 ### Branch History of the Code
 
-| Branch | Has rev. 12950 code? | Notes |
-|--------|---------------------|-------|
-| GRM20240409 | Originally merged, then reverted (r13378) | Reverted before release |
-| HFH (next release) | Inherited, then reverted (r13848) | Reverted before release |
-| IMV20250220 | Inherited, reverted (r14879), env vars dropped (r14881) | Clean revert — went to release WITHOUT the feature |
-| JLM20250520 | **Kept** + received GlobalVariables fix (r14439) + tests (r14637) | Carried feature forward |
-| KNW | Received tests merge (r14703) | Inherited from JLM |
-| LBM20251201 | **Present** — current production branch | Feature is live |
+| Branch             | Has rev. 12950 code?                                              | Notes                                              |
+|--------------------|-------------------------------------------------------------------|----------------------------------------------------|
+| GRM20240409        | Originally merged, then reverted (r13378)                         | Reverted before release                            |
+| HFH (next release) | Inherited, then reverted (r13848)                                 | Reverted before release                            |
+| IMV20250220        | Inherited, reverted (r14879), env vars dropped (r14881)           | Clean revert — went to release WITHOUT the feature |
+| JLM20250520        | **Kept** + received GlobalVariables fix (r14439) + tests (r14637) | Carried feature forward                            |
+| KNW                | Received tests merge (r14703)                                     | Inherited from JLM                                 |
+| LBM20251201        | **Present** — current production branch                           | Feature is live                                    |
 
 ## Test Results (from Confluence)
 
 **Interval 0.1 – 1 kg (simulated over long period):**
 
-| Method | Average | <33% range | 33%-66% | >66% range |
-|--------|---------|------------|---------|------------|
-| Uniform | 0.550 kg | 32.95% | 33.02% | 34.03% |
-| Marsaglia | 0.550 kg | 4.44% | 90.08% | 5.48% |
+| Method    | Average  | <33% range | 33%-66% | >66% range |
+|-----------|----------|------------|---------|------------|
+| Uniform   | 0.550 kg | 32.95%     | 33.02%  | 34.03%     |
+| Marsaglia | 0.550 kg | 4.44%      | 90.08%  | 5.48%      |
 
 - Uniform: extreme values reach 0.1000013 ... 0.9999992 (essentially touching boundaries)
 - Marsaglia: extreme values only reach 0.1373 ... 0.9799 (significant gap from boundaries)
 
 **Interval 10 – 30 kg:**
 
-| Method | Average | <33% range | 33%-66% | >66% range |
-|--------|---------|------------|---------|------------|
-| Uniform | 20.003 kg | 32.95% | 33.05% | 34.00% |
-| Marsaglia | 20.001 kg | 4.47% | 90.09% | 5.44% |
+| Method    | Average   | <33% range | 33%-66% | >66% range |
+|-----------|-----------|------------|---------|------------|
+| Uniform   | 20.003 kg | 32.95%     | 33.05%  | 34.00%     |
+| Marsaglia | 20.001 kg | 4.47%      | 90.09%  | 5.44%      |
 
 Average is preserved in both cases, confirming balance is not broken.
 
@@ -215,38 +215,38 @@ Average is preserved in both cases, confirming balance is not broken.
 
 ## Related Tasks
 
-| Task | Summary | Status | Relationship |
-|------|---------|--------|-------------|
-| **FP-41845** | Implement new system of weight generation | In Progress | Successor — fixes mathematical model errors |
-| **FP-38549** | Collect stats on prod of random fish generation | Closed | Statistics collection for analysis |
+| Task         | Summary                                             | Status            | Relationship                                                                  |
+|--------------|-----------------------------------------------------|-------------------|-------------------------------------------------------------------------------|
+| **FP-41845** | Implement new system of weight generation           | In Progress       | Successor — fixes mathematical model errors                                   |
+| **FP-38549** | Collect stats on prod of random fish generation     | Closed            | Statistics collection for analysis                                            |
 | **FP-39522** | Disable new system of random fish weight generation | Closed (Won't Do) | Decided to rework the system entirely (FP-41845) instead of reverting on prod |
-| **FP-42080** | New system of random fish weight Generation support | To Do | Game design support task (Andrii Maslov) |
-| FP-26788 | Leaderboards and ratings | — | Parent epic |
+| **FP-42080** | New system of random fish weight Generation support | To Do             | Game design support task (Andrii Maslov)                                      |
+| FP-26788     | Leaderboards and ratings                            | —                 | Parent epic                                                                   |
 
 ## Chronology
 
-| Date | Event | Branch/Rev |
-|------|-------|------------|
-| 2024-08-29 | Task created (Reporter: Ivan Malyshev) | — |
-| 2024-09-23 | Max Komisarenko: test results — uniform vs Marsaglia distribution comparison | — |
-| 2024-09-25 | **Original implementation merged** onto GRM branch | GRM@12950 |
-| 2024-09-25 | Kyrylo Rovnyi: "Changes are scary, not taking into current release" | — |
-| 2024-10-17 | Stanislav Stefaniak: feature useful and needed for leaderboards; code correctness should be verified; pass to Andrii Maslov for distribution review | — |
-| 2024-12-12 | **Reverted on GRM** before release | GRM@13378 |
-| 2025-03-10 | **Reverted on HFH** before release | HFH@13848 |
-| 2025-04-03 | Available on IMV branch (inherited from trunk after GRM) | IMV |
-| 2025-05-25 | Discussion: DB patch for GlobalVariables missing | — |
-| 2025-06-24 | After discussion — task approved as-is | — |
-| 2025-06-25 | Stanislav Stefaniak: need to add `UseNormalDistributionForFishGeneratingFrom` and `NormalDistributionForFishGeneratingSigma` to GlobalVariables | — |
-| 2025-06-25 | Added GlobalVariables: changed defaults 0.75/0.2 → 0.95/0.55 + SQL patch | IMV@14437, JLM@14439 |
-| 2025-06-25 | Fixed patch name | IMV@14440, JLM@14441 |
-| 2025-08-04 | Added visualization tests (WeightStats, data-driven tests, still no assertions) | JLM@14637, KNW@14703 |
-| 2025-09-03 | **Clean revert of rev. 12950 on IMV** — IMV went to release WITHOUT the feature | IMV@14879 |
-| 2025-09-03 | Dropped GlobalVariables entries on IMV (SQL DELETE patch) | IMV@14881 |
-| — | **JLM kept the code** → inherited by KNW → inherited by LBM | JLM → KNW → LBM20251201 |
-| — | System deployed to production via JLM lineage | LBM20251201 (current) |
-| 2025-11-20 | JIRA updated: boundary suppression only for eldest form | — |
-| 2026-03-02 | Task reopened, linked to FP-41845 | — |
+| Date       | Event                                                                                                                                               | Branch/Rev              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
+| 2024-08-29 | Task created (Reporter: Ivan Malyshev)                                                                                                              | —                       |
+| 2024-09-23 | Max Komisarenko: test results — uniform vs Marsaglia distribution comparison                                                                        | —                       |
+| 2024-09-25 | **Original implementation merged** onto GRM branch                                                                                                  | GRM@12950               |
+| 2024-09-25 | Kyrylo Rovnyi: "Changes are scary, not taking into current release"                                                                                 | —                       |
+| 2024-10-17 | Stanislav Stefaniak: feature useful and needed for leaderboards; code correctness should be verified; pass to Andrii Maslov for distribution review | —                       |
+| 2024-12-12 | **Reverted on GRM** before release                                                                                                                  | GRM@13378               |
+| 2025-03-10 | **Reverted on HFH** before release                                                                                                                  | HFH@13848               |
+| 2025-04-03 | Available on IMV branch (inherited from trunk after GRM)                                                                                            | IMV                     |
+| 2025-05-25 | Discussion: DB patch for GlobalVariables missing                                                                                                    | —                       |
+| 2025-06-24 | After discussion — task approved as-is                                                                                                              | —                       |
+| 2025-06-25 | Stanislav Stefaniak: need to add `UseNormalDistributionForFishGeneratingFrom` and `NormalDistributionForFishGeneratingSigma` to GlobalVariables     | —                       |
+| 2025-06-25 | Added GlobalVariables: changed defaults 0.75/0.2 → 0.95/0.55 + SQL patch                                                                            | IMV@14437, JLM@14439    |
+| 2025-06-25 | Fixed patch name                                                                                                                                    | IMV@14440, JLM@14441    |
+| 2025-08-04 | Added visualization tests (WeightStats, data-driven tests, still no assertions)                                                                     | JLM@14637, KNW@14703    |
+| 2025-09-03 | **Clean revert of rev. 12950 on IMV** — IMV went to release WITHOUT the feature                                                                     | IMV@14879               |
+| 2025-09-03 | Dropped GlobalVariables entries on IMV (SQL DELETE patch)                                                                                           | IMV@14881               |
+| —          | **JLM kept the code** → inherited by KNW → inherited by LBM                                                                                         | JLM → KNW → LBM20251201 |
+| —          | System deployed to production via JLM lineage                                                                                                       | LBM20251201 (current)   |
+| 2025-11-20 | JIRA updated: boundary suppression only for eldest form                                                                                             | —                       |
+| 2026-03-02 | Task reopened, linked to FP-41845                                                                                                                   | —                       |
 
 ## Milestones
 - 2024-09-25: Original implementation (r12950, Max Komisarenko) — added `GetPossibleNormalFloat()`, modified `GenerateRandomWeight()`, added GlobalVariables + test
