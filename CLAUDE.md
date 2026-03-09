@@ -47,7 +47,7 @@
 - Task artifacts: `tasks/FP-XXXXX--slug/artifacts/`
 - Task journals: `tasks/FP-XXXXX--slug/journal.md` — structure top-to-bottom: YAML frontmatter → Status (1-3 sentences) → Summary → Plan (link or inline) → Milestones (append-only, bottom)
 - Task backlogs: `tasks/FP-XXXXX--slug/backlog.md` — immediate TODOs, deferred items; bubble up to module on task close
-- Subtask files: `artifacts/archived/subtasks/FP-XXXXX--<ID>--<slug>.md` — prefixed with parent JIRA ID
+- Subtask files: `artifacts/archived/subtasks/<jira-task-id>--<subtask-id>--<slug>.md` (e.g. `FP-41746--TRM-003--db-rename.md`)
 - Temporary work products (audits, investigations) live under `tasks/`, not in `modules/`
 
 ### Creating a module

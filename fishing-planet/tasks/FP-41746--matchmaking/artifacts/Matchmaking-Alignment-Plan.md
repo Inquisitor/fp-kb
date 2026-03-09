@@ -14,37 +14,37 @@
 
 ### Phase 1 — Bug Fixes (High Priority) — DONE
 
-| ID      | Description                                 | Status | Details                                                                  |
-|---------|---------------------------------------------|--------|--------------------------------------------------------------------------|
-| ALG-004 | Fix Phase B "farthest vs nearest" bug       | DONE   | [details](archived/subtasks/ALG-004--phase-b-farthest-vs-nearest-bug.md) |
-| ALG-005 | Add empty bucket skip in Phase B            | DONE   | [details](archived/subtasks/ALG-005--phase-b-skip-empty-buckets.md)      |
-| ALG-006 | Add RefreshGroup() call after Phase B merge | DONE   | [details](archived/subtasks/ALG-006--phase-b-refresh-after-merge.md)     |
+| ID      | Description                                 | Status | Details                                                                            |
+|---------|---------------------------------------------|--------|------------------------------------------------------------------------------------|
+| ALG-004 | Fix Phase B "farthest vs nearest" bug       | DONE   | [details](archived/subtasks/FP-41746--ALG-004--phase-b-farthest-vs-nearest-bug.md) |
+| ALG-005 | Add empty bucket skip in Phase B            | DONE   | [details](archived/subtasks/FP-41746--ALG-005--phase-b-skip-empty-buckets.md)      |
+| ALG-006 | Add RefreshGroup() call after Phase B merge | DONE   | [details](archived/subtasks/FP-41746--ALG-006--phase-b-refresh-after-merge.md)     |
 
 ### Phase 2 — Terminology Unification (High Priority) — PARTIAL
 
-| ID      | Description                                                         | Status                                        | Details                                                          |
-|---------|---------------------------------------------------------------------|-----------------------------------------------|------------------------------------------------------------------|
+| ID      | Description                                                         | Status                                        | Details                                                                    |
+|---------|---------------------------------------------------------------------|-----------------------------------------------|----------------------------------------------------------------------------|
 | TRM-001 | Unify terminology in TDD + code XML doc comments                    | GDD=N/A, TDD=TODO, Code=Superseded by TRM-002 |
-| TRM-002 | Rename code identifiers to unified Bracket/Bucket/Group terminology | DONE                                          | [details](archived/subtasks/TRM-002--rename-code-identifiers.md) |
+| TRM-002 | Rename code identifiers to unified Bracket/Bucket/Group terminology | DONE                                          | [details](archived/subtasks/FP-41746--TRM-002--rename-code-identifiers.md) |
 
 ### Phase 3 — Test Fixes (High Priority) — DONE
 
-| ID      | Description                                               | Status | Details                                                               |
-|---------|-----------------------------------------------------------|--------|-----------------------------------------------------------------------|
-| TST-001 | Recalculate and enable all "potentially false" test cases | DONE   | [details](archived/subtasks/TST-001--fix-3-bracket-test-cases.md)     |
-| TST-002 | Uncomment, recalculate and enable 4-group test cases      | DONE   | [details](archived/subtasks/TST-002--fix-4-bracket-test-cases.md)     |
-| TST-003 | Review stale LowRatingProtection test — rename or delete  | DONE   | [details](archived/subtasks/TST-003--rename-stale-protection-test.md) |
+| ID      | Description                                               | Status | Details                                                                         |
+|---------|-----------------------------------------------------------|--------|---------------------------------------------------------------------------------|
+| TST-001 | Recalculate and enable all "potentially false" test cases | DONE   | [details](archived/subtasks/FP-41746--TST-001--fix-3-bracket-test-cases.md)     |
+| TST-002 | Uncomment, recalculate and enable 4-group test cases      | DONE   | [details](archived/subtasks/FP-41746--TST-002--fix-4-bracket-test-cases.md)     |
+| TST-003 | Review stale LowRatingProtection test — rename or delete  | DONE   | [details](archived/subtasks/FP-41746--TST-003--rename-stale-protection-test.md) |
 
 ### Phase 4 — Dead Code & Obsolete Fields Removal — DONE
 
-| ID      | Description                                                 | Status    | Details                                                            |
-|---------|-------------------------------------------------------------|-----------|--------------------------------------------------------------------|
-| DCD-001 | Remove TournamentGroup.IsNotRated + DB cleanup              | DONE      | [details](archived/subtasks/DCD-001--remove-is-not-rated-group.md) |
-| DCD-002 | Remove TournamentGroup.IsCanceled + DB cleanup              | DONE      | [details](archived/subtasks/DCD-002--remove-is-canceled-group.md)  |
-| DCD-003 | Remove FindFirstAdjacentIncompleteGroupsCombination         | DONE      | [details](archived/subtasks/DCD-003--remove-dead-find-adjacent.md) |
-| DCD-004 | Remove TournamentGroupParticipant.IsNotRated + DB cleanup   | DONE      | → Phase 8                                                          |
-| DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | DONE      | → Phase 8                                                          |
-| CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | DONE      | → Phase 8                                                          |
+| ID      | Description                                                 | Status | Details                                                                      |
+|---------|-------------------------------------------------------------|--------|------------------------------------------------------------------------------|
+| DCD-001 | Remove TournamentGroup.IsNotRated + DB cleanup              | DONE   | [details](archived/subtasks/FP-41746--DCD-001--remove-is-not-rated-group.md) |
+| DCD-002 | Remove TournamentGroup.IsCanceled + DB cleanup              | DONE   | [details](archived/subtasks/FP-41746--DCD-002--remove-is-canceled-group.md)  |
+| DCD-003 | Remove FindFirstAdjacentIncompleteGroupsCombination         | DONE   | [details](archived/subtasks/FP-41746--DCD-003--remove-dead-find-adjacent.md) |
+| DCD-004 | Remove TournamentGroupParticipant.IsNotRated + DB cleanup   | DONE   | → Phase 8                                                                    |
+| DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | DONE   | → Phase 8                                                                    |
+| CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | DONE   | → Phase 8                                                                    |
 
 ### Phase 5 — Code Refactoring — DEFERRED
 
@@ -55,11 +55,11 @@
 
 ### Phase 6 — Feature Implementation (FP-41833) — DONE (code), TODO (docs)
 
-| ID      | Description                                                        | Status                  | Details                                                                |
-|---------|--------------------------------------------------------------------|-------------------------|------------------------------------------------------------------------|
+| ID      | Description                                                        | Status                  | Details                                                                          |
+|---------|--------------------------------------------------------------------|-------------------------|----------------------------------------------------------------------------------|
 | CFG-005 | Implement MaxGroupCount                                            | Code=DONE, GDD/TDD=TODO |
 | CFG-006 | Implement MaxGroupSize (rework GDD description)                    | Code=DONE, GDD/TDD=TODO |
-| TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE                    | [details](archived/subtasks/TST-004--recalculate-new-param-outputs.md) |
+| TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE                    | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
 | SUB-001 | Implement new group parameters, update docs                        | Code=DONE, GDD/TDD=TODO |
 
 ### Phase 7 — Documentation Cleanup — TODO
@@ -101,12 +101,12 @@
 
 ### No Action Required
 
-| ID      | Description                                           | Details                                                                 |
-|---------|-------------------------------------------------------|-------------------------------------------------------------------------|
-| ALG-008 | Minimum participants check — no discrepancy           | [details](archived/subtasks/ALG-008--min-participants-outside-logic.md) |
-| DOC-004 | Fix TournamentGroup.Participants XML doc              | [details](archived/subtasks/DOC-004--fix-participants-xml-doc.md)       |
-| DOC-005 | Rename TournamentBucket.UpdateRatings parameter       | [details](archived/subtasks/DOC-005--rename-update-ratings-param.md)    |
-| FTR-002 | Friends/club splitting — already documented as future | [details](archived/subtasks/FTR-002--friends-splitting-no-action.md)    |
+| ID      | Description                                           | Details                                                                           |
+|---------|-------------------------------------------------------|-----------------------------------------------------------------------------------|
+| ALG-008 | Minimum participants check — no discrepancy           | [details](archived/subtasks/FP-41746--ALG-008--min-participants-outside-logic.md) |
+| DOC-004 | Fix TournamentGroup.Participants XML doc              | [details](archived/subtasks/FP-41746--DOC-004--fix-participants-xml-doc.md)       |
+| DOC-005 | Rename TournamentBucket.UpdateRatings parameter       | [details](archived/subtasks/FP-41746--DOC-005--rename-update-ratings-param.md)    |
+| FTR-002 | Friends/club splitting — already documented as future | [details](archived/subtasks/FP-41746--FTR-002--friends-splitting-no-action.md)    |
 
 ---
 
