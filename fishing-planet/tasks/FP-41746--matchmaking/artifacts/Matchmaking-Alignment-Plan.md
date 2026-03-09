@@ -80,11 +80,11 @@
 
 ### Phase 8 — DB + Code Rename — DONE
 
-| ID      | Description                                                 | Status | Details                                                         |
-|---------|-------------------------------------------------------------|--------|-----------------------------------------------------------------|
-| TRM-003 | Full DB rename `GroupId` → `BracketId` + code rename P6-P14 | DONE   | [design](TRM-003-DB-Rename-Design.md)                           |
-| DCD-004 | Remove `IsRated` from DB + code (alongside TRM-003)         | DONE   | [design](TRM-003-DB-Rename-Design.md#dcd-004-remove-israted)    |
-| DCD-005 | Remove participant `IsCanceled` chain from DB + code        | DONE   | [design](TRM-003-DB-Rename-Design.md#dcd-005-remove-iscanceled) |
+| ID      | Description                                                 | Status | Details                                                                                                                                           |
+|---------|-------------------------------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| TRM-003 | Full DB rename `GroupId` → `BracketId` + code rename P6-P14 | DONE   | [details](archived/subtasks/FP-41746--TRM-003--db-rename.md), [design](TRM-003-DB-Rename-Design.md)                                               |
+| DCD-004 | Remove `IsRated` from DB + code (alongside TRM-003)         | DONE   | [details](archived/subtasks/FP-41746--DCD-004--remove-participant-isnotrated.md), [design](TRM-003-DB-Rename-Design.md#dcd-004-remove-israted)    |
+| DCD-005 | Remove participant `IsCanceled` chain from DB + code        | DONE   | [details](archived/subtasks/FP-41746--DCD-005--remove-participant-iscanceled.md), [design](TRM-003-DB-Rename-Design.md#dcd-005-remove-iscanceled) |
 
 ### Phase 9 — Final Documentation (after all code changes)
 
@@ -145,41 +145,6 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 
 ---
 
-### TRM-003. Rename deferred DTO properties (P6-P14)
-
-- **Code:** Nine classes still use `GroupId` instead of `BracketId`:
-    - **DTO (P9-P12):** `ParticipantItemDto`, `TournamentIndividualResultsDto`,
-      `TournamentParticipantDto`, `TournamentSecondaryResultDto`.
-    - **Model (P6-P8):** `PlayerFinalResult`, `TournamentIndividualResults`,
-      `TournamentSecondaryResult`.
-    - **Runtime (P13-P14):** `ProfileTournament`, `ParticipantItem` (WebAdmin).
-- **Blocker (DTOs P9-P12):** The custom DAL mapper `RestoreObjectFromReader` in `DtoExtensions.cs` maps
-  DB column names to C# property names by **exact name match** via reflection. It does not support any
-  mapping attributes. Renaming properties without enhancing the mapper would break all DAL reads.
-- **Blocker (models P6-P8, P13-P14):** Populated from DTOs via `MakeCloneOf` / `MakeEqualTo`, which also
-  use reflection with exact name matching. Renaming model properties without renaming DTOs would silently
-  break the copy.
-- **`GroupName` note:** All P6-P14 classes also have `GroupName`. Despite the name, it stores the **group
-  name** (not the bracket name). `GroupName` does NOT need to be renamed to `BracketName` — it is already
-  correct in the unified terminology.
-- **Boundary analysis:** All 13 boundary points where `BracketId` (renamed) meets `GroupId` (deferred) have
-  been validated as safe. See [Terminology-Rename-Plan.md](Terminology-Rename-Plan.md) §Implications.
-- **Depends on:** TRM-002 (DONE).
-
-**Decision (revised 2026-03-08):** Rename DB columns directly instead of enhancing the DAL mapper.
-Feature is deployed but disabled — columns contain no data. Atomic deployment with downtime.
-Also removes `IsRated` (DCD-004) and participant `IsCanceled` chain (DCD-005) from DB.
-
-| Action                                                                                          | Status |
-|-------------------------------------------------------------------------------------------------|--------|
-| **DB:** `sp_rename` `[GroupId]` → `[BracketId]` in 6 tables + update 18+ stored procedures.     | TODO   |
-| **DB:** `REPLACE()` ConfigJson in `Tournaments`, `TournamentTemplates`, `ArchiveTournaments`.   | TODO   |
-| **Code:** Rename `GroupId` → `BracketId` in P6-P14 classes. Remove `[JsonProperty]` attributes. | TODO   |
-
-Full design: [TRM-003-DB-Rename-Design.md](TRM-003-DB-Rename-Design.md)
-
-**Priority:** Medium (unblocked by DB rename approach)
-
 ---
 
 ## 2. Configuration Parameters
@@ -235,7 +200,7 @@ in DB tables `TournamentParticipant*` — may keep as groundwork for future.
 |----------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | **GDD:** No mention — no changes.                                                                                                            | N/A    |
 | **TDD:** Remove all mentions of `NotRatedIfIncomplete`.                                                                                      | TODO   |
-| **Code:** Investigate `IsRated` columns in `TournamentParticipant*` DB tables — decide: keep or remove. Field removal: see DCD-001, DCD-004. | TODO   |
+| **Code:** Investigate `IsRated` columns in `TournamentParticipant*` DB tables — decide: keep or remove. Field removal: see DCD-001, DCD-004. | DONE   |
 
 **Priority:** Medium (DB investigation + documentation cleanup)
 
@@ -442,34 +407,6 @@ code-side checks) to be revisited after CFG-007 refactoring.
 ---
 
 ## 6. Obsolete / Dead Code
-
-### DCD-004. `TournamentGroupParticipant.IsNotRated` — unused
-
-- **Code:** Property exists but is never set or checked in `MatchmakingLogic`.
-- Related to CFG-003.
-
-**Decision:** Remove entirely — feature never released. Part of CFG-003 cleanup.
-
-| Action                                                                                                                       | Status |
-|------------------------------------------------------------------------------------------------------------------------------|--------|
-| **Code:** Remove `IsNotRated` from `TournamentGroupParticipant`. Scan full codebase and DB stored procedures for references. | TODO   |
-
-**Priority:** Medium
-
----
-
-### DCD-005. `TournamentGroupParticipant.IsCanceled` — unused
-
-- **Code:** Property exists but is never set or checked in `MatchmakingLogic`.
-- Related to CFG-002.
-
-**Decision:** Remove entirely — feature never released. Part of CFG-002 cleanup.
-
-| Action                                                                                                                       | Status |
-|------------------------------------------------------------------------------------------------------------------------------|--------|
-| **Code:** Remove `IsCanceled` from `TournamentGroupParticipant`. Scan full codebase and DB stored procedures for references. | TODO   |
-
-**Priority:** Medium
 
 ---
 
