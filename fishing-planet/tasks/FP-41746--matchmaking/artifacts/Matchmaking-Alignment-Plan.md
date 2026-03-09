@@ -64,19 +64,19 @@
 
 ### Phase 7 — Documentation Cleanup — IN PROGRESS
 
-| ID      | Description                                                        | Status | Details                                                                                  |
-|---------|--------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
-| CFG-001 | Remove CrossMovesAllowed from GDD + TDD                            | DONE   | [details](archived/subtasks/FP-41746--CFG-001--remove-crossmovesallowed.md)              |
-| CFG-002 | Remove CanceledIfIncomplete from TDD                               | DONE   | [details](archived/subtasks/FP-41746--CFG-002--remove-canceledifincomplete.md)           |
-| CFG-003 | Remove NotRatedIfIncomplete from TDD                               | DONE   | [details](archived/subtasks/FP-41746--CFG-003--remove-notratedifincomplete.md)           |
-| CFG-004 | Remove IsLowRatingGroupProtectionOn from TDD                       | DONE   | [details](archived/subtasks/FP-41746--CFG-004--remove-islowratinggroupprotectionon.md)   |
-| ALG-001 | Update GDD: ping-pong traversal instead of semantic priority       | TODO   |                                                                                          |
-| ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" | TODO   |                                                                                          |
-| ALG-003 | Add Phase B brief note to GDD                                      | TODO   |                                                                                          |
-| ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | TODO   |                                                                                          |
-| FTR-001 | Add multipliers note to TDD                                        | TODO   |                                                                                          |
-| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | TODO   |                                                                                          |
-| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | TODO   |                                                                                          |
+| ID      | Description                                                        | Status             | Details                                                                                                                                                       |
+|---------|--------------------------------------------------------------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CFG-001 | Remove CrossMovesAllowed from GDD + TDD                            | DONE               | [details](archived/subtasks/FP-41746--CFG-001--remove-crossmovesallowed.md)                                                                                   |
+| CFG-002 | Remove CanceledIfIncomplete from TDD                               | DONE               | [details](archived/subtasks/FP-41746--CFG-002--remove-canceledifincomplete.md)                                                                                |
+| CFG-003 | Remove NotRatedIfIncomplete from TDD                               | DONE               | [details](archived/subtasks/FP-41746--CFG-003--remove-notratedifincomplete.md)                                                                                |
+| CFG-004 | Remove IsLowRatingGroupProtectionOn from TDD                       | DONE               | [details](archived/subtasks/FP-41746--CFG-004--remove-islowratinggroupprotectionon.md)                                                                        |
+| ALG-001 | Update GDD: ping-pong traversal instead of semantic priority       | DONE               | [details](archived/subtasks/FP-41746--ALG-001--gdd-ping-pong-traversal.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md)                 |
+| ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" | DONE               | [details](archived/subtasks/FP-41746--ALG-002--gdd-donor-principle.md), → Правка 9 in [editing instructions](GDD-Editing-Instructions.md)                     |
+| ALG-003 | Add Phase B brief note to GDD                                      | DONE               | [details](archived/subtasks/FP-41746--ALG-003--gdd-phase-b-merge.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md) (merged with ALG-001) |
+| ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | DONE               | [details](archived/subtasks/FP-41746--ALG-007--gdd-minsize-collapse.md), → Правка 10 in [editing instructions](GDD-Editing-Instructions.md)                   |
+| FTR-001 | Add multipliers note to TDD                                        | TODO               |                                                                                                                                                               |
+| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | TODO               |                                                                                                                                                               |
+| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | GDD=DONE, TDD=TODO | GDD: ~40 typos fixed in ideal GDD + typo table in editing instructions                                                                                        |
 
 ### Phase 8 — DB + Code Rename — DONE
 
@@ -209,78 +209,6 @@ boundaries on the fly from `MinRating` values. `MaxRating` should not be a persi
 ---
 
 ## 3. Algorithm Discrepancies
-
-### ALG-001. Bucket fill priority — GDD semantic vs. Code positional
-
-- **GDD:** "Priority: fill Newbies first, then Tops, then Middles last."
-- **TDD:** Ping-pong traversal described in detail. First bucket, last, second, second-to-last, etc.
-- **Code:** `PingPongTraversalIterator` — positional ping-pong. For 3 groups (Newbies=1, Middles=2, Tops=3) the result
-  is 1,3,2 — matches GDD's semantic description.
-
-**Decision:** No conflict for the standard 3-group setup. For N groups, the code is more precise. Update GDD to describe
-the positional ping-pong pattern instead of semantic names. Keep 3-group case as example.
-
-| Action                                                                                                                                                                 | Status |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Rewrite "Group Creation Logic (for N groups)" to describe ping-pong traversal pattern instead of semantic priority. Keep 3-group example showing equivalence. | TODO   |
-| **TDD:** Already correct. No changes.                                                                                                                                  | N/A    |
-| **Code:** No changes needed.                                                                                                                                           | N/A    |
-
-**Priority:** Medium
-
----
-
-### ALG-002. Merging direction — GDD says "Middles as filler"
-
-- **GDD:** "Players from bracket B (Middles) serve as filler for other buckets."
-- **Code:** Any bucket can serve as a donor. The ping-pong algorithm pulls from adjacent **unvisited** buckets
-  regardless of semantic role.
-
-**Decision:** Code behavior is correct and more general. Update GDD.
-
-| Action                                                                                                                                                                                                                                                                 | Status |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Replace "Middles serve as filler" with: "Players are pulled from adjacent unvisited buckets. The middle bucket(s) are naturally the last to be visited, so they serve as the primary donor — but any bucket can donate players to an adjacent one if needed." | TODO   |
-| **TDD:** Already correct. No changes.                                                                                                                                                                                                                                  | N/A    |
-| **Code:** No changes needed.                                                                                                                                                                                                                                           | N/A    |
-
-**Priority:** Medium
-
----
-
-### ALG-003. Incomplete bucket merge (Phase B) — not described in GDD
-
-- **GDD:** Does not describe what happens if a bucket remains incomplete after balancing.
-- **TDD:** "Prioritizes merging into a stronger group. Fallback: nearest weaker group."
-- **Code:** Merges upward (stronger), fallback to weaker. **BUG: finds farthest, not nearest** (see ALG-004).
-
-**Decision:** Add Phase B description to GDD. Fix bug in code (ALG-004).
-
-| Action                                                                                                                                                                                                                                                                                | Status |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Add a brief note describing Phase B: after ping-pong traversal, if a bucket is still below MinSize, it merges into the nearest stronger bucket; fallback — nearest weaker bucket. Include the 5 scenario categories from TST-001 as typical examples for the 3-bracket case. | TODO   |
-| **TDD:** Already describes correct ("nearest") behavior. No changes needed.                                                                                                                                                                                                           | N/A    |
-| **Code:** See ALG-004 for bug fix.                                                                                                                                                                                                                                                    | N/A    |
-
-**Priority:** Medium
-
----
-
-### ALG-007. "MinSize*2 single group" threshold — GDD describes, code doesn't enforce
-
-- **GDD:** "If total players < MinSize*2 — run competition as single group, no splitting."
-- **Code:** No explicit check for `MinSize*2` in `MatchmakingLogic`. The algorithm naturally produces one group if there
-  aren't enough players for two, but there's no explicit guard.
-
-**Decision:** Trivial — algorithm handles this naturally, no explicit check needed. Remove from GDD to avoid clutter.
-
-| Action                                                                      | Status |
-|-----------------------------------------------------------------------------|--------|
-| **GDD:** Remove the "MinSize*2 single group" statement — it's self-evident. | TODO   |
-| **TDD:** N/A                                                                | N/A    |
-| **Code:** No changes needed.                                                | N/A    |
-
-**Priority:** Low
 
 ---
 

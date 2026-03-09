@@ -7,8 +7,8 @@ related: FP-41833
 # FP-41746: Matchmaking Alignment
 
 ## Status
-Phase 7 in progress: CFG-001..004 done (removed unimplemented parameters from TDD draft).
-Next: remaining Phase 7 items (ALG-001..003, ALG-007, FTR-001, DOC-001, DOC-003), Phase 6 docs, Phase 2 (TRM-001).
+Phase 7 in progress: GDD items done (CFG-001..004, ALG-001..003, ALG-007, DOC-003 GDD proofreading). Editing instructions updated (Правки 8-10 + typo table).
+Next: Phase 7 TDD items (FTR-001, DOC-001, DOC-003 TDD proofreading), Phase 6 docs, Phase 2 (TRM-001).
 - [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary
@@ -37,3 +37,4 @@ Related task FP-41833 ("matchmaking algorithm rework: cases with 2 new parameter
 - 2026-03-08: Phase 8 implementation: SQL patch `LBM.M.2026.03.08-028`, 21 SP files updated, 20+ C# files changed across all layers. Builds successfully
 - 2026-03-09: Phase 8 finalized: patch upgraded to `028-v2` (added ConfigJson dead param removal), tests passed (114/121 tournament, 5 pre-existing failures), deep code review passed. Committed
 - 2026-03-09: Phase 7 started: CFG-001..004 — removed unimplemented parameters (`CrossMovesAllowed`, `CanceledIfIncomplete`, `NotRatedIfIncomplete`, `IsLowRatingGroupProtectionOn`) and obsolete "pending removal" note from TDD draft
+- 2026-03-09: Phase 7 GDD items completed: ALG-001..003 (ping-pong description, donor principle, Phase B merge), ALG-007 (MinSize×2 collapse), DOC-003 GDD proofreading (~40 typos fixed). Editing instructions 8-10 added
