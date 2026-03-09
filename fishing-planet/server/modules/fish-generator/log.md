@@ -36,4 +36,6 @@ Investigated all uses of normal distribution in fish weight generation. Document
 - Hardcoded defaults (0.75/0.2) vs SQL defaults (0.95/0.55) diverge significantly — fallback behavior is very different
 
 ## FP-33182: Fish generation improvements
-- Details TBD
+- Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
+- System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path
+- Mathematical model errors identified → FP-41845 in progress

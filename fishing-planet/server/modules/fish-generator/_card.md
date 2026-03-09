@@ -29,6 +29,7 @@ module: fish-generator
 - [Test coverage](test-coverage.md) — inventory of tests, gaps, potential code issues
 
 ## Related Tasks
-(none yet)
+- FP-33182: Improve random fish weight generation (reopened, on prod) → [task journal](../../tasks/FP-33182--weight-generation/journal.md)
+- FP-41845: Implement new system of weight generation (in progress)
 
 See also: [backlog](backlog.md) | [log](log.md)

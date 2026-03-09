@@ -7,6 +7,8 @@
 Two independent normal distribution implementations are used for fish weight.
 They serve different generation paths and have different algorithms, parameters, and effects.
 
+**Origin**: The BiteSystem `NormalDistribution` class and the form-specific polynomials (`_formToNorm`) predate FP-33182. Rev. 12950 (FP-33182) added `GetPossibleNormalFloat()` and related methods to the existing `NormalDistribution` class, and modified `FishDescription.GenerateRandomWeight()` to use them. See [FP-33182 journal](../../tasks/FP-33182--weight-generation/journal.md) for full change analysis.
+
 ## Implementation 1: `NormalRandom` (GameModel)
 
 **File**: `Photon/src-server/GameModel/Helpers/NormalRandom.cs`

@@ -5,6 +5,7 @@
 |------|---------|-------|--------|------|
 | FP-41746 | FP/server | matchmaking | in-progress | fishing-planet/tasks/FP-41746--matchmaking/ |
 | FP-42033 | FP/server | game-logic | investigating | fishing-planet/tasks/FP-42033--torch-sinker/ |
+| FP-33182 | FP/server | fish-weight-gen | reopened | fishing-planet/tasks/FP-33182--weight-generation/ |
 
 ## Active Reviews
 | Task | Executor | Path |
