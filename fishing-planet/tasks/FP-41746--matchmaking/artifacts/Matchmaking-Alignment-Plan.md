@@ -172,7 +172,7 @@ Also removes `IsRated` (DCD-004) and participant `IsCanceled` chain (DCD-005) fr
 
 | Action                                                                                          | Status |
 |-------------------------------------------------------------------------------------------------|--------|
-| **DB:** `sp_rename` `[GroupId]` → `[BracketId]` in 7 tables + update 18+ stored procedures.     | TODO   |
+| **DB:** `sp_rename` `[GroupId]` → `[BracketId]` in 6 tables + update 18+ stored procedures.     | TODO   |
 | **DB:** `REPLACE()` ConfigJson in `Tournaments`, `TournamentTemplates`, `ArchiveTournaments`.   | TODO   |
 | **Code:** Rename `GroupId` → `BracketId` in P6-P14 classes. Remove `[JsonProperty]` attributes. | TODO   |
 

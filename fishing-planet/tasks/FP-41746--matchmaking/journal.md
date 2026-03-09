@@ -8,8 +8,8 @@ related: FP-41833
 
 ## Status
 Phase 8 in progress: TRM-003 (full DB rename `GroupId` → `BracketId`) + DCD-004 (IsRated) + DCD-005 (IsCanceled).
-Design approved, implementation plan created. Executing step by step with review.
-Next: Task 0 (diagnostic queries on DEV/Prod), then Task 2 (SP files), then C# code.
+Task 0 (diagnostic queries) done — no blockers, findings in design doc. Executing Task 2 (SP files).
+Next: Task 2 (SP files) → Task 3 (C# TRM-003) → Task 4 (DCD-004) → Task 1 (SQL patch) → Task 5 (DCD-005).
 - [Design](artifacts/TRM-003-DB-Rename-Design.md) | [Implementation Plan](artifacts/TRM-003-Implementation-Plan.md) | [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary

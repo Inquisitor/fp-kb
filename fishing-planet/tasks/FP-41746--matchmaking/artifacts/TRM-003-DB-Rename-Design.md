@@ -25,15 +25,16 @@ Deployment is atomic (downtime). All stored procedures are recreated on any DB c
 |--------------------------------------|-------------|---------------------|
 | `TournamentIndividualResults`        | `GroupId`   | → `BracketId`       |
 | `TournamentParticipants`             | `GroupId`   | → `BracketId`       |
-| `TournamentStats`                    | `GroupId`   | → `BracketId`       |
 | `TournamentSecondaryResult`          | `GroupId`   | → `BracketId`       |
 | `ArchiveTournamentIndividualResults` | `GroupId`   | → `BracketId`       |
 | `ArchiveTournamentParticipants`      | `GroupId`   | → `BracketId`       |
 | `ArchiveTournamentSecondaryResult`   | `GroupId`   | → `BracketId`       |
-| `ArchiveTournamentStats`             | *(dropped)* | verify on DEV — N/A |
 
 > **Note:** `GroupName` in result tables stores the final group name (correct in unified
 > terminology) and is NOT renamed.
+>
+> `TournamentStats.GroupId` and `ArchiveTournamentStats.GroupId` were already dropped
+> (GRM.M.2024.05.22-013, GRM.M.2024.05.30-019). Not part of this migration.
 
 **Stored Procedures** (18 known files in `SQL/Patches/Main/Procedures/`):
 - All `[GroupId]` → `[BracketId]`, `@GroupId` → `@BracketId`
@@ -62,11 +63,11 @@ of `TournamentJsonConfig` / `TournamentTemplateJsonConfig`. No collisions with o
 Since we're already modifying the DB, remove the unused `IsRated` column added for the
 never-released CrossMovesAllowed/NotRatedIfIncomplete feature.
 
-| Layer | What to remove |
-|-------|----------------|
-| DB    | `TournamentParticipants.IsRated` + `DF_TournamentParticipants_IsRated` constraint |
+| Layer | What to remove                                                                                  |
+|-------|-------------------------------------------------------------------------------------------------|
+| DB    | `TournamentParticipants.IsRated` + `DF_TournamentParticipants_IsRated` constraint               |
 | DB    | `ArchiveTournamentParticipants.IsRated` + `DF_ArchiveTournamentParticipants_IsRated` constraint |
-| Code  | `TournamentParticipantDto.IsRated` and all consumers |
+| Code  | `TournamentParticipantDto.IsRated` and all consumers                                            |
 
 ### DCD-005: Remove `IsCanceled` for participants (alongside TRM-003)
 
@@ -107,11 +108,52 @@ Reference SVN commits: r13282, r13286.
 3. Row counts for migration time estimation
 4. Verify `TournamentStats.GroupId` vs `ArchiveTournamentStats` state (potential archivation bug)
 
+**Results (2026-03-08, Prod):**
+
+Data validation — all zeros, safe to rename:
+
+| Table                              | Rows with GroupId IS NOT NULL |
+|------------------------------------|-------------------------------|
+| TournamentIndividualResults        | 0                             |
+| TournamentParticipants             | 0                             |
+| TournamentSecondaryResult          | 0                             |
+| ArchiveTournamentIndividualResults | 0                             |
+| ArchiveTournamentParticipants      | 0                             |
+| ArchiveTournamentSecondaryResult   | 0                             |
+
+Row counts:
+
+| Table                              | Rows      | Migration impact         |
+|------------------------------------|-----------|--------------------------|
+| TournamentIndividualResults        | 104,173   | sp_rename (instant)      |
+| TournamentParticipants             | 107,714   | sp_rename + DROP IsRated |
+| TournamentSecondaryResult          | 15        | sp_rename (instant)      |
+| ArchiveTournamentIndividualResults | 4,308,583 | sp_rename (instant)      |
+| ArchiveTournamentParticipants      | 4,491,107 | sp_rename + DROP IsRated |
+| ArchiveTournamentSecondaryResult   | 509       | sp_rename (instant)      |
+| Tournaments                        | 6,756     | UPDATE ConfigJson        |
+| TournamentTemplates                | 272       | UPDATE ConfigJson        |
+| ArchiveTournaments                 | 251,005   | UPDATE ConfigJson        |
+
+Time estimate: `sp_rename` is metadata-only (instant). `DROP COLUMN` is fast.
+`UPDATE ConfigJson` scans ~258K rows — seconds.
+
+FindObjectsByText — 18 SPs match known list exactly. No unknown objects.
+Non-tournament hits: `MissionGroups.GroupId`, `Missions.GroupId`, `InventoryItems.InventorySortingGroupId`,
+`VW_AllTexts`/`VW_AllTextsMetadata` (localization views, reference MissionGroups, auto-regenerated on deploy).
+
+`TournamentStats.GroupId` — dropped in GRM.M.2024.05.22-013. `ArchiveTournamentStats.GroupId` — dropped
+in GRM.M.2024.05.30-019. Both excluded from migration.
+
+IsRated confirmed: `TournamentParticipants.IsRated BIT NOT NULL`, `ArchiveTournamentParticipants.IsRated BIT NOT NULL`.
+
+**Verdict: no blockers. Proceed with implementation.**
+
 ### Step 1: SQL Migration Patch
 
 Single patch file following project conventions. Idempotent checks throughout.
 
-1. `sp_rename` columns `[GroupId]` → `[BracketId]` in 7 tables (with `IF EXISTS` guards)
+1. `sp_rename` columns `[GroupId]` → `[BracketId]` in 6 tables (with `IF EXISTS` guards)
 2. DROP `[IsRated]` + default constraints from `TournamentParticipants` and `ArchiveTournamentParticipants`
 3. Handle `TournamentParticipants.IsCanceled` chain (DCD-005, scope per SVN history)
 4. `REPLACE()` on `ConfigJson` in `Tournaments`, `TournamentTemplates`, `ArchiveTournaments`

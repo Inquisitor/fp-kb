@@ -25,8 +25,6 @@ SELECT 'TournamentIndividualResults' AS T, COUNT(*) AS Cnt FROM TournamentIndivi
 UNION ALL
 SELECT 'TournamentParticipants',      COUNT(*) FROM TournamentParticipants      WHERE GroupId IS NOT NULL
 UNION ALL
-SELECT 'TournamentStats',             COUNT(*) FROM TournamentStats             WHERE GroupId IS NOT NULL
-UNION ALL
 SELECT 'TournamentSecondaryResult',   COUNT(*) FROM TournamentSecondaryResult   WHERE GroupId IS NOT NULL
 
 -- 2. Row counts for UPDATE ConfigJson time estimation
@@ -41,13 +39,10 @@ Run on DEV:
 ```sql
 -- 3. Find ALL DB objects referencing GroupId (compare with 18 known SP files)
 EXEC FindObjectsByText 'GroupId'
-
--- 4. Verify TournamentStats.GroupId exists (ArchiveTournamentStats already dropped it)
-SELECT COLUMN_NAME, DATA_TYPE
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME IN ('TournamentStats', 'ArchiveTournamentStats')
-  AND COLUMN_NAME = 'GroupId'
 ```
+
+**Note:** `TournamentStats.GroupId` and `ArchiveTournamentStats.GroupId` already dropped
+(GRM.M.2024.05.22-013, GRM.M.2024.05.30-019). Not part of this migration.
 
 **Blockers:** If GroupId has data → investigate before proceeding.
 If FindObjectsByText reveals unknown objects → add to SP update list.
@@ -95,11 +90,6 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
     EXEC sp_rename 'TournamentSecondaryResult.GroupId', 'BracketId', 'COLUMN';
 GO
 
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
-           WHERE TABLE_NAME = 'TournamentStats' AND COLUMN_NAME = 'GroupId')
-    EXEC sp_rename 'TournamentStats.GroupId', 'BracketId', 'COLUMN';
-GO
-
 -- Archive tables
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
            WHERE TABLE_NAME = 'ArchiveTournamentIndividualResults' AND COLUMN_NAME = 'GroupId')
@@ -116,7 +106,8 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
     EXEC sp_rename 'ArchiveTournamentSecondaryResult.GroupId', 'BracketId', 'COLUMN';
 GO
 
--- Note: ArchiveTournamentStats.GroupId was already dropped in GRM.M.2024.05.30-019
+-- Note: TournamentStats.GroupId dropped in GRM.M.2024.05.22-013
+-- Note: ArchiveTournamentStats.GroupId dropped in GRM.M.2024.05.30-019
 
 -- ============================================================
 -- TRM-003: Update JSON configs
