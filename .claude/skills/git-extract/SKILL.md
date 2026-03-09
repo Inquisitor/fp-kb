@@ -25,6 +25,11 @@ so that `git blame -C -C` traces lines back to their original commits.
 - Creating entirely new content (no history to preserve)
 - SVN repos (use `svn copy` instead)
 
+## Discipline
+- Every step in this skill is **mandatory**, not advisory.
+- Do NOT skip steps because you think you know the answer (e.g., skipping `AskUserQuestion` because global CLAUDE.md "already covers" commit policy).
+- If a step says "Use tool X" — use tool X. No substitutions, no shortcuts.
+
 ## Steps
 
 ### 0. Pre-flight

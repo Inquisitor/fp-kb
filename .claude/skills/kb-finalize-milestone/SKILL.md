@@ -51,6 +51,12 @@ You are updating all KB satellite files for task `$ARGUMENTS` after a milestone 
 ### 7. Update _index.md (only on full task close)
 - If `status: completed`: remove task from `D:\kb\_index.md` active tasks table
 
+## Discipline
+- Every step in this skill is **mandatory**, not advisory.
+- Do NOT skip steps because they seem "obvious" or because you think another instruction covers them.
+- If a step says "Use skill X" — invoke that skill. If a sub-skill says "Use tool Y" — use tool Y.
+- A skill is a checklist: execute every item in order.
+
 ## Rules
 - All content in English
 - Do NOT duplicate information — each file has its own purpose
