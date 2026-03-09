@@ -35,16 +35,16 @@
 | TST-002 | Uncomment, recalculate and enable 4-group test cases      | DONE   | [details](archived/subtasks/TST-002--fix-4-bracket-test-cases.md)     |
 | TST-003 | Review stale LowRatingProtection test — rename or delete  | DONE   | [details](archived/subtasks/TST-003--rename-stale-protection-test.md) |
 
-### Phase 4 — Dead Code & Obsolete Fields Removal — PARTIAL
+### Phase 4 — Dead Code & Obsolete Fields Removal — DONE
 
 | ID      | Description                                                 | Status    | Details                                                            |
 |---------|-------------------------------------------------------------|-----------|--------------------------------------------------------------------|
 | DCD-001 | Remove TournamentGroup.IsNotRated + DB cleanup              | DONE      | [details](archived/subtasks/DCD-001--remove-is-not-rated-group.md) |
 | DCD-002 | Remove TournamentGroup.IsCanceled + DB cleanup              | DONE      | [details](archived/subtasks/DCD-002--remove-is-canceled-group.md)  |
 | DCD-003 | Remove FindFirstAdjacentIncompleteGroupsCombination         | DONE      | [details](archived/subtasks/DCD-003--remove-dead-find-adjacent.md) |
-| DCD-004 | Remove TournamentGroupParticipant.IsNotRated + DB cleanup   | → Phase 8 |
-| DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | → Phase 8 |
-| CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | → Phase 8 |
+| DCD-004 | Remove TournamentGroupParticipant.IsNotRated + DB cleanup   | DONE      | → Phase 8                                                          |
+| DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | DONE      | → Phase 8                                                          |
+| CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | DONE      | → Phase 8                                                          |
 
 ### Phase 5 — Code Refactoring — DEFERRED
 
@@ -78,13 +78,13 @@
 | DOC-001 | Fix typo in TDD validation rules (wrong array index)               |
 | DOC-003 | Proofread GDD and TDD — fix spelling errors                        |
 
-### Phase 8 — DB + Code Rename — TODO
+### Phase 8 — DB + Code Rename — DONE
 
 | ID      | Description                                                 | Status | Details                                                         |
 |---------|-------------------------------------------------------------|--------|-----------------------------------------------------------------|
-| TRM-003 | Full DB rename `GroupId` → `BracketId` + code rename P6-P14 | TODO   | [design](TRM-003-DB-Rename-Design.md)                           |
-| DCD-004 | Remove `IsRated` from DB + code (alongside TRM-003)         | TODO   | [design](TRM-003-DB-Rename-Design.md#dcd-004-remove-israted)    |
-| DCD-005 | Remove participant `IsCanceled` chain from DB + code        | TODO   | [design](TRM-003-DB-Rename-Design.md#dcd-005-remove-iscanceled) |
+| TRM-003 | Full DB rename `GroupId` → `BracketId` + code rename P6-P14 | DONE   | [design](TRM-003-DB-Rename-Design.md)                           |
+| DCD-004 | Remove `IsRated` from DB + code (alongside TRM-003)         | DONE   | [design](TRM-003-DB-Rename-Design.md#dcd-004-remove-israted)    |
+| DCD-005 | Remove participant `IsCanceled` chain from DB + code        | DONE   | [design](TRM-003-DB-Rename-Design.md#dcd-005-remove-iscanceled) |
 
 ### Phase 9 — Final Documentation (after all code changes)
 

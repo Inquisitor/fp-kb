@@ -7,10 +7,9 @@ related: FP-41833
 # FP-41746: Matchmaking Alignment
 
 ## Status
-Phase 8 in progress: TRM-003 (full DB rename `GroupId` → `BracketId`) + DCD-004 (IsRated) + DCD-005 (IsCanceled).
-Task 0 (diagnostic queries) done — no blockers, findings in design doc. Executing Task 2 (SP files).
-Next: Task 2 (SP files) → Task 3 (C# TRM-003) → Task 4 (DCD-004) → Task 1 (SQL patch) → Task 5 (DCD-005).
-- [Design](artifacts/TRM-003-DB-Rename-Design.md) | [Implementation Plan](artifacts/TRM-003-Implementation-Plan.md) | [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
+Phase 8 complete: TRM-003 + DCD-004 + DCD-005 — committed (r15898).
+Next: documentation phases — Phase 7 (GDD/TDD cleanup, 11 items), Phase 6 docs (MaxGroupCount/MaxGroupSize), Phase 2 (TRM-001 TDD terminology).
+- [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary
 JIRA task was originally "add 2 new parameters for competitions JSON" (`MaxSize`, `MaxGroupCount`). Investigation revealed misalignment between GDD, TDD and code — outdated terminology, dead code, untested edge cases. Scope expanded into a full alignment effort across documentation, terminology, algorithm, and test coverage.
@@ -35,3 +34,5 @@ Related task FP-41833 ("matchmaking algorithm rework: cases with 2 new parameter
 - 2026-03-05: Migrated task to KB, reorganized artifacts into active/archived structure
 - 2026-03-06: Refactored Alignment Plan — Summary to top, DONE items extracted to archived/subtasks/
 - 2026-03-08: TRM-003 design change — full DB rename instead of DAL mapper enhancement. DCD-004/DCD-005 added to scope. [Design](artifacts/TRM-003-DB-Rename-Design.md) + [Implementation Plan](artifacts/TRM-003-Implementation-Plan.md) created
+- 2026-03-08: Phase 8 implementation: SQL patch `LBM.M.2026.03.08-028`, 21 SP files updated, 20+ C# files changed across all layers. Builds successfully
+- 2026-03-09: Phase 8 finalized: patch upgraded to `028-v2` (added ConfigJson dead param removal), tests passed (114/121 tournament, 5 pre-existing failures), deep code review passed. Committed

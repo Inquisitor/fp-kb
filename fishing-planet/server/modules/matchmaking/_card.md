@@ -28,7 +28,7 @@ Data: SQL `Tournaments`, `TournamentTemplates`, `TournamentSeries`, `TournamentG
 Confluence: 4339925004 (Matchmaking, stale), 4339925014 (Matchmaking testing, current)
 
 ## Related Tasks
-- FP-41746: Alignment plan — bug fixes, rename, algorithm (active)
+- FP-41746: Alignment plan — bug fixes, rename, algorithm, DB cleanup (active; phases 1-4,6,8 done)
 - FP-41833: Tests and test infrastructure
 
 See also: [backlog](backlog.md) | [log](log.md)
