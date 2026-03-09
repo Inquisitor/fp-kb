@@ -41,11 +41,11 @@ You are updating all KB satellite files for task `$ARGUMENTS` after a milestone 
 
 ### 6. Update alignment plan (if exists)
 - Check for plan files in `D:\kb\fishing-planet\tasks\$ARGUMENTS\artifacts\`
-- Update phase/subtask statuses to reflect completion
-- Collapse DONE items: detail section → one-liner in Summary table with `[details](archived/subtasks/<jira-task-id>--<subtask-id>--<slug>.md)` link
-- Extract collapsed detail body into `artifacts/archived/subtasks/<jira-task-id>--<subtask-id>--<slug>.md` (e.g. `FP-41746--TRM-003--db-rename.md`)
+- Extract detail bodies of DONE items into `artifacts/archived/subtasks/<jira-task-id>--<subtask-id>--<slug>.md` (e.g. `FP-41746--TRM-003--db-rename.md`)
 - **Use `git-extract` skill** for the extraction — 2-commit technique preserves `git blame` history
+- Collapse DONE items: detail section → one-liner in Summary table with `[details](archived/subtasks/<jira-task-id>--<subtask-id>--<slug>.md)` link
 - After extraction: verify all cross-references are correct in both the plan (source) and each extracted subtask file (links back to plan, links to related subtasks, links to design docs)
+- Update phase/subtask statuses to reflect completion
 - Only active (TODO/partial) items keep full detail sections below the Summary
 
 ### 7. Update _index.md (only on full task close)

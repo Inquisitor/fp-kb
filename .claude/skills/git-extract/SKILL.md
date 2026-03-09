@@ -34,7 +34,7 @@ so that `git blame -C -C` traces lines back to their original commits.
 
 ### 0. Pre-flight
 - Identify: source file, section(s) to extract, destination path(s)
-- Ensure source file has no uncommitted changes (copy must match last commit)
+- Ensure source file has no uncommitted changes (copy must match last commit). If not, use `git stash` to save them.
 - Ensure destination file does NOT already exist (technique relies on file creation commit; if exists — delete in a prior commit or use a different path)
 - Create destination directories if needed (`mkdir -p`)
 - Use `AskUserQuestion` to determine commit workflow:
@@ -47,6 +47,7 @@ so that `git blame -C -C` traces lines back to their original commits.
 - Stage **only** the new file(s) (do not touch the source yet)
 - Commit message: `Extract prep: copy <source> → <dest> (history anchor)`
 - **Wait for commit to complete before proceeding**
+- If there were stashed changes, restore them
 - Why full copy: `-C -C` searches files in the parent of the commit that **created** the destination. Full copy guarantees every line has an identical counterpart in the source, so blame traces regardless of the 40-char detection threshold
 
 ### 2. Edit freely, then commit
