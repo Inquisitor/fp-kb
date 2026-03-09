@@ -44,6 +44,7 @@ You are updating all KB satellite files for task `$ARGUMENTS` after a milestone 
 - Update phase/subtask statuses to reflect completion
 - Collapse DONE items: detail section → one-liner in Summary table with `[details](archived/subtasks/<ID>--<slug>.md)` link
 - Extract collapsed detail body into `artifacts/archived/subtasks/<ID>--<slug>.md` (filename: `<ID>--<slug>.md`, e.g. `TRM-003--db-rename.md`)
+- **Use `git-extract` skill** for the extraction — 2-commit technique preserves `git blame` history
 - Only active (TODO/partial) items keep full detail sections below the Summary
 
 ### 7. Update _index.md (only on full task close)
