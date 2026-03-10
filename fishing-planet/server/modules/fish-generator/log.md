@@ -6,7 +6,6 @@
 - Related: FP-33182
 
 ## 2026-03-07: Test coverage review — decision to audit
-
 Full review of all test files related to fish generator module. Findings documented in [test-coverage.md](test-coverage.md).
 
 **Key findings:**
@@ -24,7 +23,6 @@ Full review of all test files related to fish generator module. Findings documen
 3. `GetMinMaxValue` asymmetric clamping (lower only, no upper)
 
 ## 2026-03-08: Normal distribution deep dive
-
 Investigated all uses of normal distribution in fish weight generation. Documented in [normal-distribution.md](normal-distribution.md).
 
 **Key findings:**
@@ -36,7 +34,6 @@ Investigated all uses of normal distribution in fish weight generation. Document
 - Hardcoded defaults (0.75/0.2) vs SQL defaults (0.95/0.55) diverge significantly — fallback behavior is very different
 
 ## 2026-03-10: FishFact deep dive (FP-41845 phase 1.1)
-
 Investigated FishFact statistics table — schema, SQL patches, C# write path, existing queries. Documented in [fish-fact.md](fish-fact.md).
 
 **Key findings:**
@@ -50,12 +47,19 @@ Investigated FishFact statistics table — schema, SQL patches, C# write path, e
 
 **Decision:** FishFact is suitable as production data source for simulator validation (FP-41845 backlog item 1.1).
 
+## 2026-03-10: Production data validation — polynomial effects confirmed
+Extracted weight distribution histograms from FishFact for Northern Pike @ Saint-Croix and Nile Perch @ Congo River. Production data confirms form polynomial effects on weight distribution:
+- **Common/Trophy** (identity polynomial): flat rectangle + sharp spike at 95% boundary — pure algorithm artifact, no polynomial distortion
+- **Young** (concave polynomial, inflates norm): right-skewed hyperbola, massive spike at 95% — polynomial pushes most norms toward upper range, disproportionately triggering normal branch
+- **Unique** (non-monotonic polynomial): bimodal "horns" distribution with suppressed 0-30% and 70-100% edges, two peaks near 30% and 70%, saddle in between — polynomial remaps inputs to mid-range, creating double-hump pattern
+
+The 95% spike is the `GetPossibleNormalFloat()` artifact: half-normal (`GetMarsaglia01`) peaks at zero, which maps to the **lower boundary** of the 5% normal zone — concentrating fish at the 95% stitch point instead of spreading them toward maximum.
+
+These patterns match known issue #8 (form polynomial interaction) from FP-33182 journal.
+
 ## 2026-03-10: Carousel disambiguation
-
 Finding: "Carousel" refers to two unrelated mechanisms:
-
 1. **FishSelector carousel** (`FishSelector._carousel`, BiteSystem) — the primary fish selection mechanism on production. Builds weighted probability wheel from bite maps → selects which fish generates → weight via `FishDescription.GenerateRandomWeight()`. Source=`B`.
-
 2. **FishGenerator carousel** (`FishGenerator.GenerateCarouselFishTemplate()`) — legacy alternative within FishBox path. AbsoluteCarousel (Source=`A`) / ActiveCarousel (Source=`C`). Weight via `GameUtils.RandomizeFishWeight()`.
 
 **Decision:** "Carousel" in project context means FishSelector carousel (BiteSystem) unless explicitly qualified. FishGenerator carousel is legacy, FishBox system is used only in missions. Updated glossary.

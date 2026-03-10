@@ -6,12 +6,10 @@
 - [x] Study `FishFact` table — schema, fields, SQL patches, write sites in code → [fish-fact.md](../../server/modules/fish-generator/fish-fact.md)
 - [x] Determine what production data is available per fish/pond/form — FishId = form ID, Weight, Source, all lifecycle events
 - [x] Production config confirmed: `CollectFishGenerationStats` = ON, `FishGenerationStatsCleanupHorizonDays` = 90
-- [ ] Build a SQL query to extract weight distribution for a specific fish+pond, grouped by form
-- [ ] Test the query against reference fish to validate FishFact data quality:
-  - Nile Perch @ Congo River (pond=250): Y=4550, C=4560, T=4570, U=4580 (category=2020)
-  - Northern Pike @ Saint-Croix Lake (pond=115): Y=108, C=109, T=110, U=111 (category=104)
-- [ ] Review resulting histograms — assess whether FishFact captures enough data for meaningful comparison
-- [ ] Decide on histogram bucket granularity and output format (to be discussed during work)
+- [x] Build SQL query — single query with PIVOT by form (WeightBucket | Y | C | T | U | Total), Source='B' filter
+- [x] Tested on Northern Pike @ Saint-Croix (step=0.5 kg) and Nile Perch @ Congo (step=1 kg) — data quality confirmed
+- [x] Histograms match expected patterns: Common/Trophy = flat rectangle + spike at 95%; Young = right-skewed hyperbola with sharp spike; Unique = bimodal "horns" with suppressed edges — all consistent with form polynomial effects
+- [x] Output format: TSV → spreadsheet, percentages via `=IFERROR(cell/SUM(col), 0)` per form
 
 ### 1.2 Understand generation pipeline completeness
 - [x] All generation paths write to FishFact (B, X, W, C, A, M, S, E, P, D) → [fish-fact.md](../../server/modules/fish-generator/fish-fact.md)

@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Starting phase 1: building simulation and visualization tooling. No code changes yet.
+Phase 1.1 complete: FishFact studied, SQL query built, production histograms validated. Polynomial effects confirmed on prod data. Next: 1.2 (config data for simulator) → 1.3 (build simulator).
 
 ## Summary
 
@@ -37,4 +37,4 @@ See [backlog.md](backlog.md) for action items.
 - Module: [fish-generator](../../server/modules/fish-generator/_card.md)
 
 ## Milestones
-(none yet)
+- 2026-03-10: Phase 1.1 complete — FishFact deep dive, SQL query for weight histograms, production data validated (Northern Pike + Nile Perch). Form polynomial effects confirmed on real data.
