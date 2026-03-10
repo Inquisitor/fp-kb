@@ -57,7 +57,7 @@ Without this system, uniform distribution generates weights so close to the boun
 
 **Added by rev. 14437** (Stanislav Samoilov, 2025-06-25):
 - Changed hardcoded defaults in `GlobalVariablesCache` from 0.75/0.2 to **0.95/0.55**
-- Added SQL patch `IMV.M.2025.06.25-015.sql` inserting GlobalVariables with values 0.95/0.55
+- Added SQL patch `IMV.M.2025.06.25-016.sql` inserting GlobalVariables with values 0.95/0.55
 
 **Added by rev. 14637** (Stanislav Samoilov, 2025-08-04):
 - Extended `NormalDistributionTest.cs` with `WeightStats` helper and `TestUniformDistribution`/`TestUniformOrNormalDistribution` data-driven tests (still zero assertions)
@@ -165,6 +165,8 @@ This system applies **only to the BiteSystem weight generation path** (`PondServ
 
 ## Test Results (from Confluence)
 
+**⚠️ Note**: These results demonstrate `GetNextFloat` (pure normal distribution centered at midpoint, σ=0.2), **not** the production hybrid method `GetPossibleNormalFloat` (threshold=0.95, σ=0.55). The "Marsaglia" column shows what full Marsaglia-based normal distribution looks like vs uniform — it was used to justify the approach, not to test the final implementation.
+
 **Interval 0.1 – 1 kg (simulated over long period):**
 
 | Method    | Average  | <33% range | 33%-66% | >66% range |
@@ -182,7 +184,7 @@ This system applies **only to the BiteSystem weight generation path** (`PondServ
 | Uniform   | 20.003 kg | 32.95%     | 33.05%  | 34.00%     |
 | Marsaglia | 20.001 kg | 4.47%      | 90.09%  | 5.44%      |
 
-Average is preserved in both cases, confirming balance is not broken.
+Average is preserved for `GetNextFloat` (by symmetry of N(0,σ) around midpoint). For the production hybrid `GetPossibleNormalFloat`, mathematical analysis shows the combined expected output is ~0.4997 of the range (vs ideal 0.5) — a negligible deviation of ~0.06%.
 
 ## Known Issues
 
@@ -198,7 +200,7 @@ Average is preserved in both cases, confirming balance is not broken.
 
 5. **`weightK` semantic change** — Before rev. 12950: `weight = lerp(min, max, norm) * weightK` (one multiplication). After: weightK applied to `norm` before generation AND to `weight` after, but asymmetrically — `changedWeight` (with 2nd weightK) is only returned on form cross-over; otherwise plain `weight` is returned. This changes the meaning of weightK for same-form fish.
 
-6. **`weightK` forces normal branch** — When weightK > 1, `norm *= weightK` can push norm above 1.0, which always exceeds the 0.95 threshold. This means **all fish with weightK > 1 are unconditionally routed through normal distribution**, regardless of form or original norm value.
+6. **`weightK` lowers normal branch threshold** — `norm *= weightK` before the threshold check means the effective threshold drops from `0.95` to `0.95 / weightK`. With `weightK = 1.05` the threshold becomes ~0.905; with `weightK = 1.5` it drops to ~0.633; with `weightK = 2.0` to ~0.475. This progressively routes more fish through normal distribution as `weightK` grows. Additionally, any norm where `norm * weightK > 1.0` unconditionally enters the normal branch.
 
 7. **Only upper boundary handled** — Confluence describes suppression at both boundaries (0-5% AND 95-100%), but `GetPossibleNormalFloat()` only handles `norm >= threshold` (upper). The lower boundary passes through as uniform lerp. This is likely an implementation gap vs the design intent.
 

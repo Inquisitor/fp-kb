@@ -96,7 +96,7 @@ Called from `PondServer.GetFish()` — BiteSystem path.
 3. `weight = GetPossibleNormalFloat(norm, minWeight, maxWeight, threshold, sigma)`
 4. `changedWeight = weight * weightK` — if out of form bounds, search for matching form
 
-**Note on `weightK`:** Applied **twice** — once to `norm` (step 2) and once to `weight` (step 4). After step 2, `norm` can exceed 1.0 if `weightK > 1`, which guarantees entering the normal distribution branch in step 3. However, the second multiplication (`changedWeight`) only takes effect when the fish **crosses into another form** — if `changedWeight` stays within the original form bounds (or no matching form is found), the returned weight is the un-multiplied `weight`.
+**Note on `weightK`:** Applied **twice** — once to `norm` (step 2) and once to `weight` (step 4). After step 2, `norm *= weightK` lowers the effective threshold from `0.95` to `0.95 / weightK` — e.g. with `weightK = 1.5` the threshold drops to ~0.633, routing a much larger fraction of fish through the normal distribution branch. However, the second multiplication (`changedWeight`) only takes effect when the fish **crosses into another form** — if `changedWeight` stays within the original form bounds (or no matching form is found), the returned weight is the un-multiplied `weight`.
 
 ### Form-specific polynomials (`FishDescription._formToNorm`)
 
