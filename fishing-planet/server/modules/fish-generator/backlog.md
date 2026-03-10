@@ -44,6 +44,16 @@ Deferred — low risk:
 - [ ] Study and cross-reference with code: [Новая система клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/361496584) (Dmytro Lukash, Mar 2021) — high-level architecture, dynamic probability maps, map operations, chum ingredients/recipes format, formula stubs
 - [ ] After studying all three: produce a "design vs reality" summary — what was implemented, what was changed, what was dropped
 
+## Form Ratio Estimation
+Goal: give game designers a tool to predict Y:C:T:U proportions from pond configuration, without waiting for production statistics. See [fish-selector-form-ratio.md](fish-selector-form-ratio.md) for preliminary findings.
+- [ ] Extract layer assignments per form from pond config (`*_settings.srv`) for reference fish (Nile Perch, Northern Pike)
+- [ ] Compare layer `MapModifier` values across forms — verify that layer assignment is indeed the primary ratio driver
+- [ ] Prototype config-based ratio estimation: load pond → compute per-form probability weights at representative position(s)
+- [ ] Validate estimated ratios against production FishFact proportions (ref data in deep dive)
+- [ ] Investigate spatial averaging: can we compute map-wide average probability per layer (not just single point)?
+- [ ] Integrate with weight simulator: combine estimated proportions with per-form weight distributions → overall histogram
+- [ ] Two-mode UI: predicted (from config) vs actual (from FishFact) — show both on the same chart
+
 ## Documentation Items
 - [ ] Document hooking probability curve in detail (`Hooker` class piecewise formula)
 - [ ] Document bite time generation (`GetBiteTime()`, `GetAttackDelay()`)

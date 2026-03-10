@@ -107,6 +107,29 @@ Three historical BiteSystem design documents added to [module backlog](backlog.m
 
 Goal: produce "design vs reality" summary — what was implemented, changed, or dropped.
 
+## 2026-03-10: FishSelector form ratio analysis
+
+Investigated how Y:C:T:U form proportions are determined. Documented in [fish-selector-form-ratio.md](fish-selector-form-ratio.md).
+
+**Key findings:**
+- Form proportions are **emergent**, not explicitly configured as percentages
+- All forms within a single FishLayer share the same `ProbabilityMap` — spatial probability is identical
+- **Layer assignment is the primary driver**: forms in different layers have independent maps and `MapModifier` values
+- `AttractorsModifier` (per form) only affects the attractor component — zero effect at spots without attractors
+- Bait attraction is per FishId (= per form), but optimized players reduce this variation
+
+**Architecture insight:** form ratios can be estimated from pond config without running FishSelector — just read layer assignments and `MapModifier` values. This is a separate capability from weight simulation but can be combined: `overall = Σ(p_form × dist_form)`.
+
+**Decision:** added as separate backlog item in module backlog. Weight simulator (FP-41845) should be designed to accept external form proportions, making integration trivial later.
+
+## 2026-03-10: weightK bug confirmed via SVN diff (rev 12950)
+
+SVN diff of rev 12950 (FP-33182) confirms the weightK regression:
+- **Before:** `weight = lerp(min, max, norm) * weightK` — single clean application to final weight. Weight could exceed form bounds (extrapolation). Consistent behavior for all fish.
+- **After:** `norm *= weightK` (distorts distribution input) + `changedWeight = weight * weightK` (only used for form crossover). Within-form fish get `weight` WITHOUT weightK (line 122). Double application with inconsistent return.
+
+The correct refactoring would have been: `weight = GetPossibleNormalFloat(norm, ...) * weightK` — add normal distribution without touching the weightK application point.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path
