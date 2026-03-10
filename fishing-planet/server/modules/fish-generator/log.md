@@ -64,6 +64,16 @@ Finding: "Carousel" refers to two unrelated mechanisms:
 
 **Decision:** "Carousel" in project context means FishSelector carousel (BiteSystem) unless explicitly qualified. FishGenerator carousel is legacy, FishBox system is used only in missions. Updated glossary.
 
+## 2026-03-10: Form polynomial origin (oral history from Max Komisarenko)
+
+Max confirmed: polynomial coefficients in `FishDescription._formToNorm` were obtained via curve fitting on a web tool. He chose control points and fitted a cubic polynomial through them. The exact control points are lost — likely included (0,0) and (1,1) plus intermediate shape points.
+
+**Original intent:** reproduce the `FishWeightBias` (Min/Max/No) behavior from the legacy FishBox system when migrating to BiteSystem. FishBox had dynamic bias via `NormalRandom` (Box-Muller half-normal); polynomials were a static approximation of that behavior per form.
+
+**Outcome:** the goal was not fully achieved. Polynomials are a compromise — roughly similar to FishBox bias, but through a different mechanism. When `GetPossibleNormalFloat()` (FP-33182) was later added on top, the interaction between polynomials and the new threshold system was not considered, producing the anomalies visible in production data.
+
+Updated [normal-distribution.md](normal-distribution.md) with origin and intent.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path

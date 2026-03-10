@@ -100,12 +100,16 @@ Called from `PondServer.GetFish()` — BiteSystem path.
 
 ### Form-specific polynomials (`FishDescription._formToNorm`)
 
-| Form   | Polynomial                                | Effect                                                           |
-|--------|-------------------------------------------|------------------------------------------------------------------|
-| Young  | `-0.0135x³ - 0.9727x² + 1.9829x + 0.0032` | Concave above identity — inflates norm (x=0.5→0.75, x=0.9→0.99)  |
-| Common | `x`                                       | Identity — uniform input preserved                               |
-| Trophy | `x`                                       | Identity — uniform input preserved                               |
-| Unique | `8.5574x³ - 13.5356x² + 6.0272x - 0.0489` | Non-monotonic: peak ~0.77 at x≈0.3, dips below identity at x≈0.7 |
+**Origin:** Created by Max Komisarenko during BiteSystem development (predates FP-33182). Coefficients were obtained via curve fitting on a web tool — control points were chosen to approximate the `FishWeightBias` (Min/Max/No) behavior from the legacy FishBox system. The exact control points are lost; (0,0) and (1,1) were likely among them. The goal of reproducing FishBox bias was not fully achieved — the polynomials are a static approximation of what was originally a dynamic bias mechanism.
+
+| Form   | Polynomial                                | Effect                                                                                                                                     |
+|--------|-------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Young  | `-0.0135x³ - 0.9727x² + 1.9829x + 0.0032` | Concave above identity — inflates norm (x=0.5→0.75, x=0.9→0.99). Likely intended to mimic Bias.Max (heavier fish more probable)            |
+| Common | `x`                                       | Identity — uniform input preserved (equivalent to Bias.No)                                                                                 |
+| Trophy | `x`                                       | Identity — uniform input preserved (equivalent to Bias.No)                                                                                 |
+| Unique | `8.5574x³ - 13.5356x² + 6.0272x - 0.0489` | Non-monotonic: peak ~0.77 at x≈0.3, dips below identity at x≈0.7. Intent unclear — possibly an attempt at a special rare-fish distribution |
+
+Note: polynomials don't pass exactly through (0,0) — Young: f(0)=0.003, Unique: f(0)=-0.049. This is typical of least-squares regression that minimizes total error rather than pinning endpoints. Values are clamped to [0,1] after evaluation.
 
 Sample values:
 
