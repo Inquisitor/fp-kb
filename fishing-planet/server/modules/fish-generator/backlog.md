@@ -38,6 +38,12 @@ Deferred — low risk:
 - [ ] `FishTemplate.FishColorAttraction` LINQ matching
 - [ ] `NormalRandom.RandomElement<T>()` — both overloads
 
+## Confluence Research — BiteSystem & Chum Design Documents
+- [ ] Study and cross-reference with code: [Алгоритм и формулы новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/923500587) (Mary Key, Jun 2024) — bite probability formulas (two dice rolls), chum calculation, attractors/detractors, particle weight modifier (WeightK origin), form polynomial curves, global constants. **Most current doc.**
+- [ ] Study and cross-reference with code: [Детальное описание новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/424116241) (Mary Key, Nov 2018) — original design doc replacing FishBox with density maps. JSON formats for FishMaps, Attractors, AttractorGroups, Chum system (ingredients/recipes/ready chum), map types (QM, HM, FM, DM, BSM)
+- [ ] Study and cross-reference with code: [Новая система клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/361496584) (Dmytro Lukash, Mar 2021) — high-level architecture, dynamic probability maps, map operations, chum ingredients/recipes format, formula stubs
+- [ ] After studying all three: produce a "design vs reality" summary — what was implemented, what was changed, what was dropped
+
 ## Documentation Items
 - [ ] Document hooking probability curve in detail (`Hooker` class piecewise formula)
 - [ ] Document bite time generation (`GetBiteTime()`, `GetAttackDelay()`)

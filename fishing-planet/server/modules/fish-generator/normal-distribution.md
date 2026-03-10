@@ -96,7 +96,13 @@ Called from `PondServer.GetFish()` — BiteSystem path.
 3. `weight = GetPossibleNormalFloat(norm, minWeight, maxWeight, threshold, sigma)`
 4. `changedWeight = weight * weightK` — if out of form bounds, search for matching form
 
-**Note on `weightK`:** Applied **twice** — once to `norm` (step 2) and once to `weight` (step 4). After step 2, `norm *= weightK` lowers the effective threshold from `0.95` to `0.95 / weightK` — e.g. with `weightK = 1.5` the threshold drops to ~0.633, routing a much larger fraction of fish through the normal distribution branch. However, the second multiplication (`changedWeight`) only takes effect when the fish **crosses into another form** — if `changedWeight` stays within the original form bounds (or no matching form is found), the returned weight is the un-multiplied `weight`.
+**Note on `weightK`:** Originates from the **chum (groundbait) system** — specifically from **particles** (крупные частицы), a chum sub-category that affects *only weight*, not bite probability. During chum mixing (`Chum_Server`), aromatizers feed into `Attraction` (bite probability) while particles feed into `WeightK` (weight modifier) — both stored in `FishTypeAttractivity` but computed from different ingredient types.
+
+**Code chain:** `ChumPiece._fishTypeAttractivity[fishId].WeightK` → `ChumSystem.GetAttraction()` (Min pieceWeightK across chum pieces, then interpolated: `weightK = (1-norm) + norm * minWeightK`, where norm = chum effectiveness) → `FishSelector.Record._weightK` (Max across multiple chum zones via `Math.Max`) → `GenerateRandomWeight()`.
+
+Without chum, weightK = 1.0 (no effect). Applied **twice** — once to `norm` (step 2) and once to `weight` (step 4). After step 2, `norm *= weightK` lowers the effective threshold from `0.95` to `0.95 / weightK` — e.g. with `weightK = 1.5` the threshold drops to ~0.633, routing a much larger fraction of fish through the normal distribution branch. However, the second multiplication (`changedWeight`) only takes effect when the fish **crosses into another form** — if `changedWeight` stays within the original form bounds (or no matching form is found), the returned weight is the un-multiplied `weight`.
+
+**TODO — investigate deeper:** Confluence doc [Алгоритм и формулы новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/923500587) describes particle weight modifier design: `MaxEffect / OptimalBiteChumLayersCount` per layer, with form crossover on weight overflow. Verify how this maps to actual `ChumSystem` code — the GDD formula may differ from implementation. See also [backlog](backlog.md) Confluence Research section.
 
 ### Form-specific polynomials (`FishDescription._formToNorm`)
 

@@ -14,13 +14,27 @@
 ### 1.2 Understand generation pipeline completeness
 - [x] All generation paths write to FishFact (B, X, W, C, A, M, S, E, P, D) → [fish-fact.md](../../server/modules/fish-generator/fish-fact.md)
 - [x] Simulator scope: **BiteSystem path only** (Source='B'). Target fish come exclusively from BiteSystem; other sources (FishBox, FishGenerator carousel, etc.) are legacy and use a different weight algorithm (`GameUtils.RandomizeFishWeight`). Note: BiteSystem has its own internal carousel (FishSelector) for fish selection — this is the primary production mechanism
-- [ ] Document which real pond/fish configuration data the simulator needs to load (form polynomials, weightK, min/max weights, threshold, sigma)
+- [~] Document simulator config requirements — partially done, see below
+
+#### Key findings from 1.2
+- All weight generation parameters (polynomials, threshold, sigma, MinWeight/MaxWeight, form) live in BiteSystem code and config — simulator will use them directly via real code, no hardcoding needed
+- `weightK` comes from the **chum (groundbait) system** particles, not from pond/fish config. Without chum, weightK=1.0 and has no effect. All known weightK bugs (double application, threshold lowering, asymmetric return) only manifest when chum is used
+- Simulator approach: **invoke real BiteSystem code** (no code copying) — see 1.3 for options
 
 ### 1.3 Build simulator
-- [ ] Create test project (or extend existing) that can run weight generation for a specific fish+pond+form with real configuration
-- [ ] Load real pond/fish parameters (form polynomials, weightK, weight ranges, threshold, sigma) — either from DB or hardcoded per test scenario
-- [ ] Run N iterations, collect weight distribution histogram
+
+**Constraint: NO code copying.** Simulator must invoke the real BiteSystem code — not re-implement or hardcode any part of the algorithm (polynomials, Marsaglia, thresholds, etc.). Two candidate approaches:
+
+**Option A — Server-side endpoint:** Add an operation to the game server that runs N weight generations for a given fish/pond/form and returns histogram data. Requires running the server.
+
+**Option B — WebAdmin integration:** If BiteSystem is accessible from WebAdmin (it already shows PondSettings), add a simulation page/controller that runs N generations and renders histograms. Benefit: charting can be built in the same place.
+
+- [ ] Investigate which assemblies WebAdmin references — does it have access to `BiteSystem` / `FishDescription.GenerateRandomWeight()`?
+- [ ] If yes → design WebAdmin controller/page for simulation with chart output
+- [ ] If no → design server-side endpoint approach
+- [ ] Implement chosen approach: run N iterations for a specific fish+pond+form using real BiteSystem code with real configuration
 - [ ] Output results in agreed format with same bucket granularity as production stats for comparability
+- [ ] Add charting capability (histograms per form, overlay with production data)
 
 ### 1.4 Validate simulator against production
 - [ ] Get fish IDs of interest from game designers (start with reference fish from 1.1)

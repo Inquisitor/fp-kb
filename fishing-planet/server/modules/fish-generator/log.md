@@ -74,6 +74,39 @@ Max confirmed: polynomial coefficients in `FishDescription._formToNorm` were obt
 
 Updated [normal-distribution.md](normal-distribution.md) with origin and intent.
 
+## 2026-03-10: weightK origin identified — chum system
+
+`weightK` parameter in `FishDescription.GenerateRandomWeight()` originates from the **chum (groundbait) system**, not from pond or fish configuration.
+
+**Chain:** `ChumPiece._fishTypeAttractivity[fishId].WeightK` → `ChumSystem.GetAttraction()` (Min pieceWeightK across pieces, interpolated by chum effectiveness norm) → `FishSelector.Record._weightK` (Max across chum zones) → `PondServer.GetFish()` → `GenerateRandomWeight()`. During chum mixing (`Chum_Server`), particles feed into `WeightK` while aromatizers feed into `Attraction` — separate ingredient types, single `FishTypeAttractivity` struct.
+
+**Without chum:** weightK = 1.0, no effect on weight generation. The polynomial → threshold → lerp pipeline operates cleanly.
+
+**With chum:** weightK ≠ 1, and all known issues activate: double application (to norm and to weight), threshold lowering (`0.95 / weightK`), asymmetric return (changedWeight only returned on form cross-over).
+
+**Implication:** weightK bugs may have gone unnoticed because most fishing occurs without chum. The baseline weight distribution (no chum) is unaffected by weightK.
+
+Updated [normal-distribution.md](normal-distribution.md) weightK section and FP-41845 backlog with simulator parameter table.
+
+## 2026-03-10: Simulator architecture decision — no code copying
+
+**Decision:** Simulator must invoke the **real BiteSystem code** directly. No re-implementation, no hardcoded polynomials/thresholds/sigma. Two candidate approaches:
+- **Option A:** Server-side endpoint — run N generations via game server operation
+- **Option B:** WebAdmin integration — if WebAdmin has access to `BiteSystem` / `FishDescription.GenerateRandomWeight()`, add simulation page with chart rendering
+
+**Rationale:** Code copying creates divergence risk — if the algorithm changes, the simulator silently becomes stale. Using real code guarantees the simulator always reflects production behavior.
+
+**Next step:** Check WebAdmin assembly references to determine if BiteSystem is accessible there (preferred — charts can be built in the same UI).
+
+## 2026-03-10: Confluence design documents catalogued
+
+Three historical BiteSystem design documents added to [module backlog](backlog.md) for future investigation:
+1. [Алгоритм и формулы новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/923500587) (Mary Key, Jun 2024) — most current, contains formulas, chum, particles (WeightK origin)
+2. [Детальное описание новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/424116241) (Mary Key, Nov 2018) — original design doc (FishBox → density maps migration)
+3. [Новая система клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/361496584) (Dmytro Lukash, Mar 2021) — high-level architecture
+
+Goal: produce "design vs reality" summary — what was implemented, changed, or dropped.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path
