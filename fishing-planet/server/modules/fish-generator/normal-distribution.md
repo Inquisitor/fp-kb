@@ -23,11 +23,11 @@ Division by 4 compresses standard N(0,1) to effective σ≈0.25. Values outside 
 
 ### Methods used for weight
 
-| Method | Range | Distribution | Used in weight? |
-|--------|-------|-------------|-----------------|
-| `NextFullNormal()` | [-1, 1] | N(0, ~0.25) truncated | Base generator |
-| `NextHalfNormal()` | [0, 1] | \|N(0, ~0.25)\| peak at 0 | Yes — `Bias.Min` / `Bias.Max` |
-| `NextNormal()` | [0, 1] | N(0.5, ~0.25) truncated | No (not used for weight) |
+| Method             | Range   | Distribution              | Used in weight?               |
+|--------------------|---------|---------------------------|-------------------------------|
+| `NextFullNormal()` | [-1, 1] | N(0, ~0.25) truncated     | Base generator                |
+| `NextHalfNormal()` | [0, 1]  | \|N(0, ~0.25)\| peak at 0 | Yes — `Bias.Min` / `Bias.Max` |
+| `NextNormal()`     | [0, 1]  | N(0.5, ~0.25) truncated   | No (not used for weight)      |
 
 ### Application — `GameUtils.RandomizeFishWeight()`
 
