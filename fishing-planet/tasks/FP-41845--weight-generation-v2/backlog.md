@@ -3,8 +3,9 @@
 ## Phase 1: Instrumentation & Simulation
 
 ### 1.1 Understand production data & validate FishFact
-- [ ] Study `FishFact` table — schema, what fields are captured, where data comes from (SQL patches + write sites in code)
-- [ ] Determine what production data is available per fish/pond/form: weight, form, pond, generation source, parameters
+- [x] Study `FishFact` table — schema, fields, SQL patches, write sites in code → [fish-fact.md](../../server/modules/fish-generator/fish-fact.md)
+- [x] Determine what production data is available per fish/pond/form — FishId = form ID, Weight, Source, all lifecycle events
+- [x] Production config confirmed: `CollectFishGenerationStats` = ON, `FishGenerationStatsCleanupHorizonDays` = 90
 - [ ] Build a SQL query to extract weight distribution for a specific fish+pond, grouped by form
 - [ ] Test the query against reference fish to validate FishFact data quality:
   - Nile Perch @ Congo River (pond=250): Y=4550, C=4560, T=4570, U=4580 (category=2020)
@@ -13,8 +14,8 @@
 - [ ] Decide on histogram bucket granularity and output format (to be discussed during work)
 
 ### 1.2 Understand generation pipeline completeness
-- [ ] Map which generation paths feed FishFact (BiteSystem only? GameModel too? FishBox/Carousel/Scripted?)
-- [ ] Determine whether simulator needs to cover only BiteSystem path or also GameModel path (`GameUtils.RandomizeFishWeight()`)
+- [x] All generation paths write to FishFact (B, X, W, C, A, M, S, E, P, D) → [fish-fact.md](../../server/modules/fish-generator/fish-fact.md)
+- [x] Simulator scope: **BiteSystem path only** (Source='B'). Target fish come exclusively from BiteSystem; other sources (FishBox, FishGenerator carousel, etc.) are legacy and use a different weight algorithm (`GameUtils.RandomizeFishWeight`). Note: BiteSystem has its own internal carousel (FishSelector) for fish selection — this is the primary production mechanism
 - [ ] Document which real pond/fish configuration data the simulator needs to load (form polynomials, weightK, min/max weights, threshold, sigma)
 
 ### 1.3 Build simulator
@@ -42,7 +43,14 @@
 | Congo River      | 250    | Nile Perch    | 2020       | 4550  | 4560   | 4570   | 4580   |
 | Saint-Croix Lake | 115    | Northern Pike | 104        | 108   | 109    | 110    | 111    |
 
+### Production config
+| Parameter                                    | Value | Source               |
+|----------------------------------------------|-------|----------------------|
+| `CollectFishGenerationStats`                 | true  | EnvironmentVariables |
+| `FishGenerationStatsCleanupHorizonDays`      | 90    | EnvironmentVariables |
+| `UseNormalDistributionForFishGeneratingFrom` | 0.95  | GlobalVariables      |
+| `NormalDistributionForFishGeneratingSigma`   | 0.55  | GlobalVariables      |
+
 ## Deferred / Questions
 - Real ratio between forms (Young/Common/Trophy/Unique) — shouldn't matter for per-form histograms, but verify
 - Unique polynomial "double hump" phenomenon — explain to Stanislav in detail when relevant
-- Scope of GameModel path (`RandomizeFishWeight` with Bias) — investigate in 1.2

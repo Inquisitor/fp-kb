@@ -35,6 +35,31 @@ Investigated all uses of normal distribution in fish weight generation. Document
 - `weightK` applied twice (to norm and to weight) — if weightK>1, guarantees normal branch
 - Hardcoded defaults (0.75/0.2) vs SQL defaults (0.95/0.55) diverge significantly — fallback behavior is very different
 
+## 2026-03-10: FishFact deep dive (FP-41845 phase 1.1)
+
+Investigated FishFact statistics table — schema, SQL patches, C# write path, existing queries. Documented in [fish-fact.md](fish-fact.md).
+
+**Key findings:**
+- FishFact is a lifecycle table: INSERT at generation, UPDATE at each event (gone/hooked/escaped/caught/etc.)
+- Records **all** generated fish, not just caught — complete weight distribution picture
+- `FishId` = form-specific ID (e.g., 4550=NilePerchY) — filtering by form is trivial
+- 11 source codes (B=BiteSystem, X=FishBox, W=PondWide, etc.) — defined in `FishGenerator.cs:26-36`
+- Existing `GetFishWeightDistributionStats` already does weight-bucket histograms with `Source = 'B'` filter
+- Feature flag: `EnvironmentVariableCache.CollectFishGenerationStats`
+- Data is ephemeral (Cleanup removes old records)
+
+**Decision:** FishFact is suitable as production data source for simulator validation (FP-41845 backlog item 1.1).
+
+## 2026-03-10: Carousel disambiguation
+
+Finding: "Carousel" refers to two unrelated mechanisms:
+
+1. **FishSelector carousel** (`FishSelector._carousel`, BiteSystem) — the primary fish selection mechanism on production. Builds weighted probability wheel from bite maps → selects which fish generates → weight via `FishDescription.GenerateRandomWeight()`. Source=`B`.
+
+2. **FishGenerator carousel** (`FishGenerator.GenerateCarouselFishTemplate()`) — legacy alternative within FishBox path. AbsoluteCarousel (Source=`A`) / ActiveCarousel (Source=`C`). Weight via `GameUtils.RandomizeFishWeight()`.
+
+**Decision:** "Carousel" in project context means FishSelector carousel (BiteSystem) unless explicitly qualified. FishGenerator carousel is legacy, FishBox system is used only in missions. Updated glossary.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path

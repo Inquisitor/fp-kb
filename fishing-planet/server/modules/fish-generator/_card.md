@@ -26,6 +26,7 @@ module: fish-generator
 ## Deep Dives
 - [Weight generation](weight-generation.md) — algorithm, sources, downstream effects, lifecycle
 - [Normal distribution](normal-distribution.md) — two implementations (NormalRandom vs NormalDistribution), parameters, form polynomials
+- [FishFact statistics](fish-fact.md) — lifecycle table in Stats DB, schema, source codes, existing queries
 - [Test coverage](test-coverage.md) — inventory of tests, gaps, potential code issues
 
 ## Related Tasks
