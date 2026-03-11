@@ -144,6 +144,124 @@ The correct refactoring would have been: `weight = GetPossibleNormalFloat(norm, 
 
 **Lesson learned:** Kendo UI 2013.2.918 does not support `style: "smooth"` for area charts (added in 2013.3.1119). Also, Kendo 2013 `dataItem` doesn't preserve custom fields when using `field`/`categoryField` mapping — workaround: external lookup map for tooltip data.
 
+## 2026-03-11: Weight simulator deployed and validated by stakeholders (FP-41845)
+
+Simulator deployed to WebAdmin. Game designers and analysts confirmed it works correctly for their use cases. Tool is now available for Phase 1.4 (production data comparison) and ongoing parameter tuning work.
+
+## 2026-03-11: Simulator validated against production data (FP-41845 phase 1.4)
+
+Quantitative comparison of simulator output vs production FishFact histograms for **Nile Perch @ Congo River**.
+
+**Setup:**
+- Fish: Nile Perch @ Congo River (PondId=250)
+- Shared params: weightK=1.0, threshold=0.95, sigma=0.55, step=1.0 kg (same on prod and in simulator)
+- Comparison metric: per-bucket percentage of form total (normalizes different sample sizes)
+
+**Raw data:**
+
+|              | Production                                                                                                                                                  | Simulation                                                                                                                                                                                                    |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| File         | [FishStats-congo-nile-perch-2026-01-01-2months.tsv](../../tasks/FP-41845--weight-generation-v2/artifacts/FishStats-congo-nile-perch-2026-01-01-2months.tsv) | [WeightSim_NilePerch_AF_CD_CongoRiver_N1000000_wK1_t0.95_s0.55_step1.00.tsv](../../tasks/FP-41845--weight-generation-v2/artifacts/WeightSim_NilePerch_AF_CD_CongoRiver_N1000000_wK1_t0.95_s0.55_step1.00.tsv) |
+| Description  | FishFact histogram, Source='B'                                                                                                                              | Simulator output, N=1M/form                                                                                                                                                                                   |
+| Period/Date  | 2026-01-01 → 2026-03-01                                                                                                                                     | 2026-03-11, r15909                                                                                                                                                                                            |
+| Total sample | 1,887,028 (Y=947,776 C=524,745 T=238,135 U=176,372)                                                                                                         | 4,000,000 (1M × 4 forms)                                                                                                                                                                                      |
+
+### Per-form deviation summary
+
+| Form   | Buckets | Prod sample | Max dev.  | Mean abs. dev. | Verdict |
+|--------|---------|-------------|-----------|----------------|---------|
+| Young  | 26      | 947,776     | 0.109pp   | 0.030pp        | Match   |
+| Common | 41      | 524,745     | 0.078pp   | 0.023pp        | Match   |
+| Trophy | 50      | 238,135     | 0.085pp   | 0.023pp        | Match   |
+| Unique | 75      | 176,372     | 0.133pp   | 0.020pp        | Match   |
+
+Maximum deviation across all forms: **0.133pp** (Unique, bucket 186 kg). This is consistent with statistical sampling noise — Unique has the smallest production sample (176K vs 1M in simulator).
+
+### Top-5 deviations per form
+
+**Young** (range 15–40 kg, right-skewed hyperbola + 95% spike):
+
+| Bucket | Prod %  | Sim %   | Δ        |
+|--------|---------|---------|----------|
+| 38 kg  | 12.611% | 12.720% | +0.109pp |
+| 19 kg  |  2.266% |  2.202% | +0.064pp |
+| 37 kg  |  6.315% |  6.374% | +0.058pp |
+| 24 kg  |  2.552% |  2.600% | +0.048pp |
+| 15 kg  |  1.909% |  1.864% | +0.045pp |
+
+**Common** (range 40–80 kg, flat rectangle + 95% spike):
+
+| Bucket | Prod %  | Sim %   | Δ        |
+|--------|---------|---------|----------|
+| 60 kg  |  2.549% |  2.471% | +0.078pp |
+| 71 kg  |  2.479% |  2.534% | +0.055pp |
+| 58 kg  |  2.539% |  2.488% | +0.051pp |
+| 72 kg  |  2.494% |  2.540% | +0.046pp |
+| 43 kg  |  2.489% |  2.530% | +0.041pp |
+
+**Trophy** (range 80–130 kg, flat rectangle + 95% spike):
+
+| Bucket  | Prod %  | Sim %   | Δ        |
+|---------|---------|---------|----------|
+| 100 kg  |  1.939% |  2.024% | +0.085pp |
+|  89 kg  |  2.057% |  1.973% | +0.084pp |
+| 114 kg  |  1.954% |  2.014% | +0.060pp |
+|  81 kg  |  2.035% |  1.980% | +0.055pp |
+| 102 kg  |  1.955% |  2.003% | +0.049pp |
+
+**Unique** (range 130–205 kg, double-hump):
+
+| Bucket  | Prod %   | Sim %    | Δ        |
+|---------|----------|----------|----------|
+| 186 kg  |  4.445%  |  4.579%  | +0.133pp |
+| 165 kg  | 10.326%  | 10.425%  | +0.099pp |
+| 169 kg  |  3.035%  |  2.943%  | +0.092pp |
+| 180 kg  |  2.592%  |  2.535%  | +0.057pp |
+| 130 kg  |  1.013%  |  1.064%  | +0.052pp |
+
+### 95% threshold spike analysis
+
+The characteristic spike at 95% of each form's weight range — the main algorithm artifact — matches with high precision:
+
+| Form   | Spike bucket | Flat avg (prod) | Spike (prod) | Spike ratio (prod) | Spike ratio (sim) |
+|--------|--------------|-----------------|--------------|--------------------|-------------------|
+| Young  | 38 kg        | 29,368          | 119,521      | 4.07x              | 4.11x             |
+| Common | 78 kg        | 13,115          | 17,816       | 1.36x              | 1.37x             |
+| Trophy | 127 kg       | 4,754           | 6,071        | 1.28x              | 1.29x             |
+
+Spike ratios match within 0.01–0.04x. The spike decreasing from Young (4x) through Common (1.4x) to Trophy (1.3x) is expected: Young polynomial inflates norms toward 1.0, concentrating more fish near the threshold; Common/Trophy identity polynomials produce a proportionally smaller spike.
+
+### Unique double-hump analysis
+
+The non-monotonic Unique polynomial creates a bimodal distribution. Both peaks and the valley between them match:
+
+| Feature              | Prod   | Sim    | Δ       |
+|----------------------|--------|--------|---------|
+| Peak 1 (165 kg)      | 10.33% | 10.43% | 0.099pp |
+| Peak 2 (187 kg)      | 8.28%  | 8.27%  | 0.012pp |
+| Valley (174–177 avg) | 2.41%  | 2.43%  | 0.014pp |
+
+Peak 1 > Peak 2 in both datasets. The valley at 174–177 kg corresponds to the polynomial's dip at normalized x ≈ 0.6–0.65.
+
+### Boundary crossover accounting
+
+Production FishFact records fish by **original form** (FishId assigned at generation). The simulator buckets by **actual form** (post-crossover). At weightK=1.0, crossovers are rare — only at exact form boundaries:
+
+| Bucket | Production              | Simulator                         |
+|--------|-------------------------|-----------------------------------|
+| 40 kg  | Young=21, Common=13,267 | Common=25,058 (21 Young absorbed) |
+| 80 kg  | Common=2, Trophy=4,802  | Trophy=20,172 (2 Common absorbed) |
+
+Total crossover fish: 23 out of ~1.9M (0.001%). Negligible — does not affect shape comparison.
+
+**Note:** at weightK > 1.0 (chum), crossovers become significant and this accounting difference matters more. For chum validation, the production SQL query would need to group by weight range rather than FishId to match simulator bucketing.
+
+### Conclusion
+
+**The simulator faithfully reproduces production weight generation.** All four distribution shapes — Young hyperbola, Common/Trophy rectangles, Unique double-hump — match within statistical noise. The 95% threshold spikes match in position, magnitude, and relative scaling across forms. `Random(42)` deterministic seed introduces no measurable bias vs production Marsaglia polar method.
+
+**Decision:** Phase 1.4 validated. Simulator is a reliable tool for algorithm analysis and design work in Phase 2.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path

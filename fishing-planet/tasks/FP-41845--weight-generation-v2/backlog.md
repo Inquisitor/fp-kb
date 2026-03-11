@@ -37,9 +37,9 @@
 **Design note:** simulator accepts `weightK` parameter for chum effect analysis. Form ratio integration deferred — see [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md).
 
 ### 1.4 Validate simulator against production
-- [ ] Get fish IDs of interest from game designers (start with reference fish from 1.1)
-- [ ] Compare simulated histograms vs production histograms — verify shapes match within each form
-- [ ] Investigate and explain discrepancies (if any)
+- [x] Get fish IDs of interest from game designers (start with reference fish from 1.1) — used Nile Perch @ Congo River
+- [x] Compare simulated histograms vs production histograms — all four forms match within 0.13pp max deviation
+- [x] Investigate and explain discrepancies — no meaningful discrepancies; boundary crossover accounting (23 fish / 1.9M = 0.001%) is negligible. Detailed analysis in [module log](../../server/modules/fish-generator/log.md)
 
 ## Phase 2: Algorithm Design & Implementation
 (to be defined after phase 1 — depends on what simulation reveals and GD requirements)
