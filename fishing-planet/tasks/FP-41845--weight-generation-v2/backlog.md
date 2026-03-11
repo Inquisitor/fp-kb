@@ -26,7 +26,7 @@
 **Constraint: NO code copying.** Chose Option B — WebAdmin integration. BiteSystem assembly is accessible from WebAdmin.
 
 - [x] Investigate which assemblies WebAdmin references — confirmed BiteSystem / `FishDescription.GenerateRandomWeight()` accessible
-- [x] Design WebAdmin controller/page for simulation with chart output → [design](artifacts/fish-weight-simulator-design.md), [plan](artifacts/fish-weight-simulator-plan.md)
+- [x] Design WebAdmin controller/page for simulation with chart output → [design](artifacts/archived/fish-weight-simulator-design.md), [plan](artifacts/archived/fish-weight-simulator-plan.md)
 - [x] Implement: `FishWeightSimulationService` in `Shared/BiteSystem/Common/`, partial `StatsController`, Razor view with Kendo area chart
 - [x] Output results: histogram buckets (same grid for all forms), TSV export with same format as production SQL query
 - [x] Charting: Kendo area chart, form toggles, shared tooltips with count+percentage, crossover info
