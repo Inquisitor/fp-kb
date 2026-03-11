@@ -37,8 +37,20 @@
 - Document changes (or add to confluence backlog if nowhere to document yet)
 - Add milestone to module card `## Related Tasks`
 
+### Reviewing a task
+1. Read Jira issue (description, status, assignee)
+2. Find relevant commits:
+   - **Jira comments** — team convention: commit ID + description posted as comment; cross-branch merges noted too
+   - **SVN log** — commits reference Jira ID in the message: `svn log --search "FP-XXXXX"`
+3. Create `review/FP-XXXXX--slug/review.md` immediately, add to Active Reviews in `_index.md`
+4. Read the actual VCS diff for each commit (`svn diff -c <rev>`)
+5. Review the diff — don't grep the codebase and assume; only review what the diff contains
+6. Multi-commit tasks: summarize diffs and analyze as a whole; if many — plan and analyze in parts
+7. Findings: assess severity in context (pre-existing gap ≠ author's oversight)
+8. Executor = commit author (not Jira assignee)
+9. Closure: set status `resolved`, remove from Active Reviews in `_index.md`
+
 ### Other workflows
-- Reviewing: create/update `review/FP-XXXXX--slug/review.md`
 - Confluence work: check `confluence/_index.md`, work in `confluence/workspace/`
 
 ## Conventions
