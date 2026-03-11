@@ -9,6 +9,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 - [fish-generator](modules/fish-generator/_card.md) — spawning, weight, hooking
 - bite-system — probabilistic fish selection, maps, attractors (TODO: create card)
 
+## Missions
+- [missions](modules/missions/_card.md) — conditions, interactions, progression (stub)
+
 ## Tournaments
 - [matchmaking](modules/matchmaking/_card.md) — grouping algorithm, brackets, buckets
 
