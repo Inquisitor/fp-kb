@@ -14,7 +14,7 @@
 ### 1.2 Understand generation pipeline completeness
 - [x] All generation paths write to FishFact (B, X, W, C, A, M, S, E, P, D) → [fish-fact.md](../../server/modules/fish-generator/fish-fact.md)
 - [x] Simulator scope: **BiteSystem path only** (Source='B'). Target fish come exclusively from BiteSystem; other sources (FishBox, FishGenerator carousel, etc.) are legacy and use a different weight algorithm (`GameUtils.RandomizeFishWeight`). Note: BiteSystem has its own internal carousel (FishSelector) for fish selection — this is the primary production mechanism
-- [~] Document simulator config requirements — partially done, see below
+- [x] Document simulator config requirements — params exposed via UI (weightK, threshold, sigma, iterations, step), defaults from GlobalVariablesCache
 
 #### Key findings from 1.2
 - All weight generation parameters (polynomials, threshold, sigma, MinWeight/MaxWeight, form) live in BiteSystem code and config — simulator will use them directly via real code, no hardcoding needed
@@ -23,20 +23,18 @@
 
 ### 1.3 Build simulator
 
-**Constraint: NO code copying.** Simulator must invoke the real BiteSystem code — not re-implement or hardcode any part of the algorithm (polynomials, Marsaglia, thresholds, etc.). Two candidate approaches:
+**Constraint: NO code copying.** Chose Option B — WebAdmin integration. BiteSystem assembly is accessible from WebAdmin.
 
-**Option A — Server-side endpoint:** Add an operation to the game server that runs N weight generations for a given fish/pond/form and returns histogram data. Requires running the server.
+- [x] Investigate which assemblies WebAdmin references — confirmed BiteSystem / `FishDescription.GenerateRandomWeight()` accessible
+- [x] Design WebAdmin controller/page for simulation with chart output → [design](artifacts/fish-weight-simulator-design.md), [plan](artifacts/fish-weight-simulator-plan.md)
+- [x] Implement: `FishWeightSimulationService` in `Shared/BiteSystem/Common/`, partial `StatsController`, Razor view with Kendo area chart
+- [x] Output results: histogram buckets (same grid for all forms), TSV export with same format as production SQL query
+- [x] Charting: Kendo area chart, form toggles, shared tooltips with count+percentage, crossover info
+- [x] Top-200 leaderboard preview per form (weights bucketed by actual form)
+- [x] Code review + fixes: null-safety, iterations cap (20M), `parseFloatSafe`, `OriginalForm` clarity, single-form test
+- [x] 11 unit tests green
 
-**Option B — WebAdmin integration:** If BiteSystem is accessible from WebAdmin (it already shows PondSettings), add a simulation page/controller that runs N generations and renders histograms. Benefit: charting can be built in the same place.
-
-- [ ] Investigate which assemblies WebAdmin references — does it have access to `BiteSystem` / `FishDescription.GenerateRandomWeight()`?
-- [ ] If yes → design WebAdmin controller/page for simulation with chart output
-- [ ] If no → design server-side endpoint approach
-- [ ] Implement chosen approach: run N iterations for a specific fish+pond+form using real BiteSystem code with real configuration
-- [ ] Output results in agreed format with same bucket granularity as production stats for comparability
-- [ ] Add charting capability (histograms per form, overlay with production data)
-
-**Design note:** architect the simulator to accept `weightK` parameter (for chum effect analysis) and external form proportions (for combined overall histogram). Form ratio estimation is a separate module backlog item — see [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md) — but the simulator API should make integration trivial: `run(fish, form, weightK, N) → histogram` per form, then combine with proportions externally.
+**Design note:** simulator accepts `weightK` parameter for chum effect analysis. Form ratio integration deferred — see [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md).
 
 ### 1.4 Validate simulator against production
 - [ ] Get fish IDs of interest from game designers (start with reference fish from 1.1)
@@ -68,3 +66,4 @@
 ## Deferred / Questions
 - ~~Real ratio between forms (Young/Common/Trophy/Unique)~~ — investigated: proportions are emergent from FishSelector layer config, can be estimated from pond config or taken from FishFact. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md). Combined overall histogram = Σ(p_form × dist_form).
 - Unique polynomial "double hump" phenomenon — explain to Stanislav in detail when relevant
+- Crossover display format in simulator — currently shows `Young→Common: 150` (original→destination). Need to decide: show from original form perspective, destination form perspective, or both? Consider adding crossover info to the chart itself (e.g., shaded overlap regions or separate crossover histogram)

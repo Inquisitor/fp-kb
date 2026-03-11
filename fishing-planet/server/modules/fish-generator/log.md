@@ -130,6 +130,20 @@ SVN diff of rev 12950 (FP-33182) confirms the weightK regression:
 
 The correct refactoring would have been: `weight = GetPossibleNormalFloat(norm, ...) * weightK` — add normal distribution without touching the weightK application point.
 
+## 2026-03-11: WebAdmin simulator built — Option B confirmed (FP-41845 phase 1.3)
+
+**Decision:** WebAdmin integration (Option B) chosen for the simulator. WebAdmin already references BiteSystem assembly — `FishDescription.GenerateRandomWeight()` is directly accessible. No server-side endpoint needed.
+
+**Architecture decisions:**
+- **Actual-form bucketing:** All accumulators (histogram counts, top-N weights, TotalGenerated) keyed by `randomWeight.Form` (post-crossover form), not original generation form. This matches FishFact production recording — when comparing simulator output to prod data, forms align 1:1.
+- **Deterministic seed:** `new Random(42)` for reproducibility. Same inputs = identical output. Enables reliable comparison and debugging.
+- **No code copying:** Service calls real `FishDescription.GenerateRandomWeight()` — no re-implementation of polynomials, Marsaglia, thresholds. Simulator always reflects production code.
+- **InvariantCulture for all float I/O:** ASP.NET MVC `FormValueProvider` uses `CurrentCulture` (ru-RU = comma decimal). JS sends dot-formatted values. Manual parsing via `float.TryParse(..., InvariantCulture)` at controller level. Razor rendering also uses InvariantCulture.
+- **Top-N via lazy sort-and-trim:** Accumulate up to 2×topN entries, sort+trim when threshold hit. O(N) amortized per form, avoids full heap for 1M+ iterations.
+- **Iterations cap:** 20M max server-side to prevent accidental DoS on admin server.
+
+**Lesson learned:** Kendo UI 2013.2.918 does not support `style: "smooth"` for area charts (added in 2013.3.1119). Also, Kendo 2013 `dataItem` doesn't preserve custom fields when using `field`/`categoryField` mapping — workaround: external lookup map for tooltip data.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path

@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Phase 1.1 complete: FishFact studied, SQL query built, production histograms validated. Polynomial effects confirmed on prod data. Next: 1.2 (config data for simulator) → 1.3 (build simulator).
+Phase 1.3 complete: WebAdmin weight simulator built and operational. Service layer invokes real `GenerateRandomWeight()`, all results bucketed by actual (post-crossover) form matching FishFact production behavior. Kendo area chart, form toggles, crossover display, top-200 leaderboard preview, TSV export. 11 unit tests green. Next: Phase 1.4 — validate simulator against production FishFact histograms.
 
 ## Summary
 
@@ -38,3 +38,5 @@ See [backlog.md](backlog.md) for action items.
 
 ## Milestones
 - 2026-03-10: Phase 1.1 complete — FishFact deep dive, SQL query for weight histograms, production data validated (Northern Pike + Nile Perch). Form polynomial effects confirmed on real data.
+- 2026-03-10: Phase 1.2 complete — all generation paths mapped, simulator scope confirmed (BiteSystem path only, Source='B'). weightK origin identified (chum system). Architecture decision: invoke real BiteSystem code, no code copying.
+- 2026-03-11: Phase 1.3 complete — WebAdmin Fish Weight Simulator built. Service (`FishWeightSimulationService`), controller (partial `StatsController`), Razor view with Kendo area chart. All accumulators (histogram, top weights, totals) keyed by actual form after crossover. Top-200 leaderboard preview per form. Culture-safe float handling (InvariantCulture). Code reviewed, 11 tests green.

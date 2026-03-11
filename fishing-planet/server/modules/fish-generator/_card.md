@@ -33,5 +33,6 @@ module: fish-generator
 ## Related Tasks
 - FP-33182: Improve random fish weight generation (reopened, on prod) → [task journal](../../tasks/FP-33182--weight-generation/journal.md)
 - FP-41845: Implement new system of weight generation (in progress) → [task journal](../../tasks/FP-41845--weight-generation-v2/journal.md)
+  - Phase 1.3 done: WebAdmin weight simulator (service + chart + leaderboard preview + TSV export, 11 tests)
 
 See also: [backlog](backlog.md) | [log](log.md)

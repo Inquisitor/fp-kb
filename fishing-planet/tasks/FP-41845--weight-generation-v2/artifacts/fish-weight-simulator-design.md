@@ -52,7 +52,7 @@ The service uses clean, descriptive names. The controller maps API field names �
 
 ```
 Browser (Kendo Area Chart + filter panel)
-    │ AJAX POST (JSON)
+    │ AJAX POST (form-encoded)
     ▼
 StatsController.FishWeightSimulation.cs (thin)
     │ loads FishDescription via lookup chain (see below)
@@ -302,7 +302,7 @@ Unit tests in `Shared/BiteSystem.Tests/FishWeightSimulationServiceTests.cs`:
 4. **weightK = 1** → zero crossovers guaranteed
 5. **Auto step** → bucket count ~200, step from the defined "nice" set
 6. **Manual step** → exact match, buckets align to provided value
-7. **All forms present** in result even if fish has fewer than 4 forms
+7. **Only existing forms** in result — no dummy entries for missing forms (fish with 2 forms → 2 entries in result)
 
 No unit tests for View/JS/Controller — manual QA via browser.
 
