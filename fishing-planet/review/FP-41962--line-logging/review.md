@@ -1,8 +1,11 @@
+---
+status: waiting-for-release
+executor: Yuriy Burda
+branch: LBM @ r15780, merged to KNW @ r15781
+jira: https://fishingplanet.atlassian.net/browse/FP-41962
+---
+
 # Review: FP-41962 — Improve logging on critical load for line and leader
-> Status: waiting-for-release \
-> Executor: Yuriy Burda \
-> Branch: LBM @ r15780, merged to KNW @ r15781 \
-> JIRA: https://fishingplanet.atlassian.net/browse/FP-41962
 
 ## Summary
 
