@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="Segoe UI, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="320" fill="#fafafa" rx="4"/>
+
+  <!-- Title -->
+  <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Figure 1: Desired Probability Density Function (PDF)</text>
+
+  <!-- Axes -->
+  <line x1="60" y1="260" x2="560" y2="260" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="60" y1="260" x2="60" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Axis labels -->
+  <text x="310" y="295" text-anchor="middle" font-size="11" fill="#555">Normalized weight (fraction of form range)</text>
+  <text x="18" y="150" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90,18,150)">Probability density f(x)</text>
+
+  <!-- Tick marks -->
+  <line x1="60" y1="260" x2="60" y2="265" stroke="#555"/>
+  <text x="60" y="278" text-anchor="middle" font-size="10" fill="#666">0%</text>
+
+  <line x1="535" y1="260" x2="535" y2="265" stroke="#555"/>
+  <text x="535" y="278" text-anchor="middle" font-size="10" fill="#666">100%</text>
+
+  <!-- Threshold line -->
+  <line x1="440" y1="45" x2="440" y2="260" stroke="#cc0000" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="440" y="42" text-anchor="middle" font-size="10" fill="#cc0000" font-weight="bold">threshold (95%)</text>
+
+  <!-- Flat zone -->
+  <rect x="60" y="100" width="380" height="160" fill="#4488cc22" stroke="none"/>
+  <line x1="60" y1="100" x2="440" y2="100" stroke="#2266aa" stroke-width="2.5"/>
+
+  <!-- Density label for flat zone -->
+  <text x="250" y="90" text-anchor="middle" font-size="11" fill="#2266aa" font-weight="bold">Uniform density = c</text>
+
+  <!-- Decay zone -->
+  <path d="M440,100 C460,100 480,120 490,150 C500,185 510,220 520,245 C525,253 530,258 535,260" fill="none" stroke="#2266aa" stroke-width="2.5"/>
+  <path d="M440,100 C460,100 480,120 490,150 C500,185 510,220 520,245 C525,253 530,258 535,260 L535,260 L440,260 Z" fill="#4488cc22" stroke="none"/>
+
+  <!-- Decay zone label -->
+  <text x="500" y="76" text-anchor="middle" font-size="10" fill="#2266aa">Smooth</text>
+  <text x="500" y="88" text-anchor="middle" font-size="10" fill="#2266aa">decay</text>
+  <text x="500" y="102" text-anchor="middle" font-size="8" fill="#999" font-style="italic">(not to scale)</text>
+
+  <!-- Seamless transition annotation -->
+  <circle cx="440" cy="100" r="4" fill="#cc0000" stroke="white" stroke-width="1.5"/>
+  <line x1="442" y1="98" x2="475" y2="68" stroke="#cc0000" stroke-width="0.8"/>
+  <text x="478" y="64" font-size="9" fill="#cc0000">Seamless: c × p(threshold) = c × 1 = c</text>
+
+  <!-- Y-axis c mark -->
+  <line x1="55" y1="100" x2="60" y2="100" stroke="#555"/>
+  <text x="50" y="104" text-anchor="end" font-size="10" fill="#666">c</text>
+
+  <!-- Zero at bottom -->
+  <text x="50" y="264" text-anchor="end" font-size="10" fill="#666">0</text>
+</svg>
