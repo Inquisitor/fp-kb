@@ -41,11 +41,52 @@
 - [x] Compare simulated histograms vs production histograms — all four forms match within 0.13pp max deviation
 - [x] Investigate and explain discrepancies — no meaningful discrepancies; boundary crossover accounting (23 fish / 1.9M = 0.001%) is negligible. Detailed analysis in [module log](../../server/modules/fish-generator/log.md)
 
-## Phase 2: Algorithm Design & Implementation
-(to be defined after phase 1 — depends on what simulation reveals and GD requirements)
+## Phase 2a: Algorithm Design & Implementation
+
+GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weight-gen.md), [historical context](artifacts/confluence-bite-system-weight-bias.md)
+
+### 2a.1 Partial revert of r12950 (FP-33182)
+- [ ] Remove Young polynomial — replace with `y=x` (uniform distribution)
+- [ ] Remove Unique polynomial — replace with `y=x` (uniform distribution)
+- [ ] Keep threshold setting (`UseNormalDistributionForFishGeneratingFrom`)
+- [ ] Sigma (`NormalDistributionForFishGeneratingSigma`) — TBD whether to keep, repurpose, or remove
+- [ ] Repurpose & rename global variables to match new algorithm semantics
+
+### 2a.2 Simulator bucket range fix (bug)
+- [ ] Buckets currently end at form max weight — fish generated beyond max (via WeightK) are invisible on chart
+- [ ] Extend bucket range to accommodate oversize fish when WeightK > 1
+
+### 2a.3 Decay algorithms in BiteSystem
+- [ ] Implement **power-law decay**: `p(x) = ((1-x)/(1-threshold))^α` — density reaches zero at 100%
+- [ ] Implement **exponential decay**: `p(x) = exp(-λ(x-threshold)/(1-threshold))` — asymptotic, density approaches zero but never reaches it
+- [ ] Both: uniform distribution from 0% to threshold%, smooth decay from threshold% to 100%
+- [ ] Both: seam at threshold is smooth by construction (density continuous)
+- [ ] GlobalVariable switch to select active algorithm (power-law vs exponential)
+- [ ] GlobalVariable for decay steepness parameter (α or λ depending on selected algorithm)
+- [ ] Decay does NOT affect WeightK — oversize fish (WeightK > 1) can still exceed 100% of elder form max
+- [ ] Generation average shifts only ~1-3% lower — acceptable for balance
+- [ ] Historical context: Max's cubic regression attempt on Unique polynomial had the right idea but wrong approach (whole-form distortion → artifacts). New approach: targeted decay only in the tail zone
+- [ ] Interactive comparison tool: [decay-comparison.html](artifacts/decay-comparison.html)
+
+### 2a.4 Decay Designer tab in simulator
+- [ ] New tab/section on WebAdmin simulator page — interactive decay curve configurator
+- [ ] Sliders for threshold, α (power-law), λ (exponential), algorithm selector
+- [ ] Live PDF preview (like decay-comparison.html but integrated into WebAdmin with Kendo charts)
+- [ ] "Apply to Simulation" button — runs selected decay config through real `GenerateRandomWeight` engine
+- [ ] Results displayed on the existing simulator histogram for direct comparison with production data
+
+### 2a.5 WeightK oversize validation
+- [ ] Verify that WeightK > 1 correctly pushes Unique fish beyond max weight of elder form
+- [ ] Ensure decay curve does not interfere with WeightK oversize behavior
+
+## Phase 2b: Simulator Enhancements
+(parallel with 2a — GD feedback during active testing)
+
+- [ ] Crossover visualization — stacked area showing crossover fish as separate layer within each form
+- (additional GD requests expected during testing)
 
 ## Phase 3: Documentation (FP-41844)
-(blocked until phase 2 complete — artifacts from phases 1-2 become source material)
+(blocked until phase 2a complete — artifacts from phases 1-2 become source material)
 
 ## Reference Data
 
@@ -65,5 +106,5 @@
 
 ## Deferred / Questions
 - ~~Real ratio between forms (Young/Common/Trophy/Unique)~~ — investigated: proportions are emergent from FishSelector layer config, can be estimated from pond config or taken from FishFact. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md). Combined overall histogram = Σ(p_form × dist_form).
-- Unique polynomial "double hump" phenomenon — explain to Stanislav in detail when relevant
-- Crossover display format in simulator — currently shows `Young→Common: 150` (original→destination). Need to decide: show from original form perspective, destination form perspective, or both? Consider adding crossover info to the chart itself (e.g., shaded overlap regions or separate crossover histogram)
+- ~~Unique polynomial "double hump" phenomenon~~ — explained, understood
+- ~~Crossover visualization~~ — moved to Phase 2b

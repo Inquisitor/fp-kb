@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weight Generation Decay — Approach Comparison</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+  h1 { text-align: center; margin-bottom: 10px; color: #00d4ff; font-size: 1.4em; }
+  .subtitle { text-align: center; margin-bottom: 20px; color: #888; font-size: 0.85em; }
+  .controls { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px; padding: 15px; background: #16213e; border-radius: 8px; }
+  .control-group { display: flex; flex-direction: column; gap: 5px; min-width: 200px; }
+  .control-group label { font-size: 0.8em; color: #aaa; }
+  .control-group .value { font-size: 0.9em; color: #00d4ff; font-weight: bold; }
+  input[type=range] { width: 100%; accent-color: #00d4ff; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .chart-box { background: #16213e; border-radius: 8px; padding: 15px; }
+  .chart-box h2 { font-size: 1em; margin-bottom: 10px; color: #ccc; text-align: center; }
+  .chart-box canvas { width: 100% !important; height: 350px !important; }
+  .chart-box.full-width { grid-column: 1 / -1; }
+  .stats { display: flex; gap: 15px; justify-content: center; margin-top: 5px; font-size: 0.75em; color: #888; }
+  .stats span { background: #0f3460; padding: 2px 8px; border-radius: 4px; }
+  .seam-warning { color: #ff6b6b; font-weight: bold; }
+  .seam-ok { color: #51cf66; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Weight Generation Decay — Approach Comparison</h1>
+<div class="subtitle">PDF (probability density) across normalized weight range [0, 1]. Threshold marks where decay begins.</div>
+
+<div class="controls">
+  <div class="control-group">
+    <label>Threshold: <span class="value" id="val-threshold">0.95</span></label>
+    <input type="range" id="threshold" min="0.70" max="0.99" step="0.01" value="0.95">
+  </div>
+  <div class="control-group">
+    <label>Normal mu: <span class="value" id="val-mu">0.50</span></label>
+    <input type="range" id="mu" min="0.10" max="0.95" step="0.01" value="0.50">
+  </div>
+  <div class="control-group">
+    <label>Normal sigma: <span class="value" id="val-sigma">0.55</span></label>
+    <input type="range" id="sigma" min="0.05" max="1.00" step="0.01" value="0.55">
+  </div>
+  <div class="control-group">
+    <label>Power-law alpha: <span class="value" id="val-alpha">2.0</span></label>
+    <input type="range" id="alpha" min="0.5" max="10.0" step="0.1" value="2.0">
+  </div>
+  <div class="control-group">
+    <label>Exponential lambda: <span class="value" id="val-lambda">7.0</span></label>
+    <input type="range" id="lambda" min="1.0" max="20.0" step="0.5" value="7.0">
+  </div>
+</div>
+
+<div class="charts">
+  <div class="chart-box">
+    <h2>Normal (your approach)</h2>
+    <canvas id="chartNormal"></canvas>
+    <div class="stats" id="statsNormal"></div>
+  </div>
+  <div class="chart-box">
+    <h2>Power-law decay</h2>
+    <canvas id="chartPower"></canvas>
+    <div class="stats" id="statsPower"></div>
+  </div>
+  <div class="chart-box">
+    <h2>Exponential decay</h2>
+    <canvas id="chartExp"></canvas>
+    <div class="stats" id="statsExp"></div>
+  </div>
+  <div class="chart-box">
+    <h2>All three — overlay</h2>
+    <canvas id="chartOverlay"></canvas>
+    <div class="stats" id="statsOverlay"></div>
+  </div>
+  <div class="chart-box full-width">
+    <h2>Simulated histogram (100k samples each)</h2>
+    <canvas id="chartHist"></canvas>
+  </div>
+</div>
+
+<script>
+const STEPS = 500;
+const HIST_SAMPLES = 100000;
+const HIST_BUCKETS = 100;
+
+function normalPDF(x, mu, sigma) {
+  var z = (x - mu) / sigma;
+  return Math.exp(-0.5 * z * z) / (sigma * Math.sqrt(2 * Math.PI));
+}
+
+function normalCDF(x, mu, sigma) {
+  var z = (x - mu) / (sigma * Math.SQRT2);
+  return 0.5 * (1 + erf(z));
+}
+
+function erf(x) {
+  var a1 =  0.254829592, a2 = -0.284496736, a3 =  1.421413741;
+  var a4 = -1.453152027, a5 =  1.061405429, p  =  0.3275911;
+  var sign = x < 0 ? -1 : 1;
+  x = Math.abs(x);
+  var t = 1.0 / (1.0 + p * x);
+  var y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+  return sign * y;
+}
+
+function randomNormal(mu, sigma) {
+  var u1, u2;
+  do { u1 = Math.random(); } while (u1 === 0);
+  u2 = Math.random();
+  return mu + sigma * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+}
+
+function pdfNormalApproach(threshold, mu, sigma) {
+  var xs = [], ys = [];
+  var cdfAtTh = normalCDF(threshold, mu, sigma);
+  var flatDensity = cdfAtTh / threshold;
+  for (var i = 0; i <= STEPS; i++) {
+    var x = i / STEPS;
+    xs.push(x);
+    ys.push(x <= threshold ? flatDensity : normalPDF(x, mu, sigma));
+  }
+  var seamLeft = flatDensity;
+  var seamRight = normalPDF(threshold, mu, sigma);
+  return { xs: xs, ys: ys, seamLeft: seamLeft, seamRight: seamRight, seamRatio: seamLeft / seamRight, tailProb: 1 - cdfAtTh };
+}
+
+function pdfPowerLaw(threshold, alpha) {
+  var xs = [], ys = [];
+  var tw = 1 - threshold;
+  var tailArea = tw / (alpha + 1);
+  var totalArea = threshold + tailArea;
+  var c = 1 / totalArea;
+  for (var i = 0; i <= STEPS; i++) {
+    var x = i / STEPS;
+    xs.push(x);
+    ys.push(x <= threshold ? c : c * Math.pow((1 - x) / tw, alpha));
+  }
+  return { xs: xs, ys: ys, seamLeft: c, seamRight: c, seamRatio: 1.0, tailProb: tailArea / totalArea, c: c };
+}
+
+function pdfExponential(threshold, lambda) {
+  var xs = [], ys = [];
+  var tw = 1 - threshold;
+  var tailArea = tw * (1 - Math.exp(-lambda)) / lambda;
+  var totalArea = threshold + tailArea;
+  var c = 1 / totalArea;
+  for (var i = 0; i <= STEPS; i++) {
+    var x = i / STEPS;
+    xs.push(x);
+    ys.push(x <= threshold ? c : c * Math.exp(-lambda * (x - threshold) / tw));
+  }
+  return { xs: xs, ys: ys, seamLeft: c, seamRight: c, seamRatio: 1.0, tailProb: tailArea / totalArea, c: c, densityAt1: c * Math.exp(-lambda) };
+}
+
+function sampleNormal(threshold, mu, sigma) {
+  var x = randomNormal(mu, sigma);
+  if (x > threshold && x <= 1.0) return x;
+  return Math.random() * threshold;
+}
+
+function samplePowerLaw(threshold, alpha) {
+  var tw = 1 - threshold;
+  var tailArea = tw / (alpha + 1);
+  var totalArea = threshold + tailArea;
+  if (Math.random() < threshold / totalArea) return Math.random() * threshold;
+  return 1 - tw * Math.pow(1 - Math.random(), 1 / (alpha + 1));
+}
+
+function sampleExponential(threshold, lambda) {
+  var tw = 1 - threshold;
+  var tailArea = tw * (1 - Math.exp(-lambda)) / lambda;
+  var totalArea = threshold + tailArea;
+  if (Math.random() < threshold / totalArea) return Math.random() * threshold;
+  var u = Math.random();
+  var maxCdf = 1 - Math.exp(-lambda);
+  return threshold + tw * (-Math.log(1 - u * maxCdf) / lambda);
+}
+
+var chartOpts = function(yMax) {
+  return {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    scales: {
+      x: { type: 'linear', title: { display: true, text: 'Weight (normalized)', color: '#888' }, min: 0, max: 1, ticks: { color: '#666' }, grid: { color: '#333' } },
+      y: { title: { display: true, text: 'Density', color: '#888' }, min: 0, max: yMax || undefined, ticks: { color: '#666' }, grid: { color: '#333' } }
+    },
+    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+    elements: { point: { radius: 0 }, line: { borderWidth: 2 } }
+  };
+};
+
+var histOptions = {
+  responsive: true, maintainAspectRatio: false, animation: false,
+  scales: {
+    x: { title: { display: true, text: 'Weight (normalized)', color: '#888' }, ticks: { color: '#666', maxTicksLimit: 20 }, grid: { color: '#333' } },
+    y: { title: { display: true, text: 'Count', color: '#888' }, ticks: { color: '#666' }, grid: { color: '#333' } }
+  },
+  plugins: { legend: { labels: { color: '#ccc' } } }
+};
+
+var chartNormal, chartPower, chartExp, chartOverlay, chartHist;
+
+function initCharts() {
+  chartNormal = new Chart(document.getElementById('chartNormal'), { type: 'line', data: { datasets: [] }, options: chartOpts() });
+  chartPower = new Chart(document.getElementById('chartPower'), { type: 'line', data: { datasets: [] }, options: chartOpts() });
+  chartExp = new Chart(document.getElementById('chartExp'), { type: 'line', data: { datasets: [] }, options: chartOpts() });
+  chartOverlay = new Chart(document.getElementById('chartOverlay'), {
+    type: 'line', data: { datasets: [] },
+    options: Object.assign({}, chartOpts(), { plugins: { legend: { labels: { color: '#ccc' } }, tooltip: { enabled: false } } })
+  });
+  chartHist = new Chart(document.getElementById('chartHist'), { type: 'bar', data: { labels: [], datasets: [] }, options: histOptions });
+}
+
+function makeDataset(xs, ys, color, label) {
+  return {
+    label: label || '', data: xs.map(function(x, i) { return { x: x, y: ys[i] }; }),
+    borderColor: color, backgroundColor: color + '20', fill: true, tension: 0
+  };
+}
+
+function makeThresholdLine(threshold, yMax) {
+  return {
+    label: 'threshold', data: [{ x: threshold, y: 0 }, { x: threshold, y: yMax }],
+    borderColor: '#ffffff44', borderDash: [5, 5], borderWidth: 1, fill: false, pointRadius: 0
+  };
+}
+
+function buildHistogram(sampleFn, n, buckets) {
+  var counts = new Array(buckets).fill(0);
+  for (var i = 0; i < n; i++) {
+    var v = sampleFn();
+    var idx = Math.min(Math.floor(v * buckets), buckets - 1);
+    if (idx >= 0) counts[idx]++;
+  }
+  return counts;
+}
+
+function setStatsText(id, parts) {
+  var container = document.getElementById(id);
+  while (container.firstChild) container.removeChild(container.firstChild);
+  parts.forEach(function(part) {
+    var span = document.createElement('span');
+    if (part.cls) span.className = part.cls;
+    span.textContent = part.text;
+    container.appendChild(span);
+  });
+}
+
+function update() {
+  var threshold = parseFloat(document.getElementById('threshold').value);
+  var mu = parseFloat(document.getElementById('mu').value);
+  var sigma = parseFloat(document.getElementById('sigma').value);
+  var alpha = parseFloat(document.getElementById('alpha').value);
+  var lambda = parseFloat(document.getElementById('lambda').value);
+
+  document.getElementById('val-threshold').textContent = threshold.toFixed(2);
+  document.getElementById('val-mu').textContent = mu.toFixed(2);
+  document.getElementById('val-sigma').textContent = sigma.toFixed(2);
+  document.getElementById('val-alpha').textContent = alpha.toFixed(1);
+  document.getElementById('val-lambda').textContent = lambda.toFixed(1);
+
+  var norm = pdfNormalApproach(threshold, mu, sigma);
+  var pow = pdfPowerLaw(threshold, alpha);
+  var exp = pdfExponential(threshold, lambda);
+
+  var yMaxAll = Math.max(
+    Math.max.apply(null, norm.ys.filter(function(v) { return isFinite(v); })),
+    Math.max.apply(null, pow.ys),
+    Math.max.apply(null, exp.ys)
+  ) * 1.15;
+
+  var thLine = makeThresholdLine(threshold, yMaxAll);
+
+  chartNormal.data.datasets = [makeDataset(norm.xs, norm.ys, '#ff6b6b'), thLine];
+  chartNormal.options.scales.y.max = yMaxAll;
+  chartNormal.update();
+
+  chartPower.data.datasets = [makeDataset(pow.xs, pow.ys, '#51cf66'), thLine];
+  chartPower.options.scales.y.max = yMaxAll;
+  chartPower.update();
+
+  chartExp.data.datasets = [makeDataset(exp.xs, exp.ys, '#00d4ff'), thLine];
+  chartExp.options.scales.y.max = yMaxAll;
+  chartExp.update();
+
+  var overlayNorm = makeDataset(norm.xs, norm.ys, '#ff6b6b', 'Normal');
+  overlayNorm.fill = false;
+  var overlayPow = makeDataset(pow.xs, pow.ys, '#51cf66', 'Power-law');
+  overlayPow.fill = false;
+  var overlayExp = makeDataset(exp.xs, exp.ys, '#00d4ff', 'Exponential');
+  overlayExp.fill = false;
+  chartOverlay.data.datasets = [overlayNorm, overlayPow, overlayExp, thLine];
+  chartOverlay.options.scales.y.max = yMaxAll;
+  chartOverlay.update();
+
+  var histNorm = buildHistogram(function() { return sampleNormal(threshold, mu, sigma); }, HIST_SAMPLES, HIST_BUCKETS);
+  var histPow = buildHistogram(function() { return samplePowerLaw(threshold, alpha); }, HIST_SAMPLES, HIST_BUCKETS);
+  var histExp = buildHistogram(function() { return sampleExponential(threshold, lambda); }, HIST_SAMPLES, HIST_BUCKETS);
+
+  var labels = Array.from({ length: HIST_BUCKETS }, function(_, i) { return (i / HIST_BUCKETS).toFixed(2); });
+  chartHist.data.labels = labels;
+  chartHist.data.datasets = [
+    { label: 'Normal', data: histNorm, backgroundColor: '#ff6b6b88', borderColor: '#ff6b6b', borderWidth: 1 },
+    { label: 'Power-law', data: histPow, backgroundColor: '#51cf6688', borderColor: '#51cf66', borderWidth: 1 },
+    { label: 'Exponential', data: histExp, backgroundColor: '#00d4ff88', borderColor: '#00d4ff', borderWidth: 1 }
+  ];
+  chartHist.update();
+
+  var seamOk = Math.abs(norm.seamRatio - 1) < 0.05;
+  setStatsText('statsNormal', [
+    { text: 'Seam: ' + norm.seamRatio.toFixed(2) + 'x ' + (seamOk ? 'smooth' : 'JUMP'), cls: seamOk ? 'seam-ok' : 'seam-warning' },
+    { text: 'P(tail): ' + (norm.tailProb * 100).toFixed(1) + '%' },
+    { text: 'Left: ' + norm.seamLeft.toFixed(3) + ', Right: ' + norm.seamRight.toFixed(3) }
+  ]);
+  setStatsText('statsPower', [
+    { text: 'Seam: smooth', cls: 'seam-ok' },
+    { text: 'P(tail): ' + (pow.tailProb * 100).toFixed(1) + '%' },
+    { text: 'Density at 100%: 0' }
+  ]);
+  setStatsText('statsExp', [
+    { text: 'Seam: smooth', cls: 'seam-ok' },
+    { text: 'P(tail): ' + (exp.tailProb * 100).toFixed(1) + '%' },
+    { text: 'Density at 100%: ' + exp.densityAt1.toFixed(6) }
+  ]);
+}
+
+initCharts();
+update();
+document.querySelectorAll('input[type=range]').forEach(function(el) { el.addEventListener('input', update); });
+</script>
+</body>
+</html>
