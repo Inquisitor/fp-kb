@@ -46,15 +46,16 @@
 GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weight-gen.md), [historical context](artifacts/confluence-bite-system-weight-bias.md)
 
 ### 2a.1 Partial revert of r12950 (FP-33182)
+- [x] Revert threshold/Marsaglia re-roll — restored pre-r12950 uniform lerp in `GenerateRandomWeight()`
+- [x] Fixed double weightK application bug (was applied to both norm and final weight in r12950)
+- [x] Method signature kept (params unused, will be repurposed for decay)
 - [ ] Remove Young polynomial — replace with `y=x` (uniform distribution)
 - [ ] Remove Unique polynomial — replace with `y=x` (uniform distribution)
-- [ ] Keep threshold setting (`UseNormalDistributionForFishGeneratingFrom`)
-- [ ] Sigma (`NormalDistributionForFishGeneratingSigma`) — TBD whether to keep, repurpose, or remove
-- [ ] Repurpose & rename global variables to match new algorithm semantics
+- [ ] Repurpose & rename GlobalVariables (`UseNormalDistributionForFishGeneratingFrom`, `NormalDistributionForFishGeneratingSigma`) to match new algorithm semantics
+- [ ] Update `GlobalVariablesCache` defaults and sync logic in `ApplyGlobalVariables()`
 
 ### 2a.2 Simulator bucket range fix (bug)
-- [ ] Buckets currently end at form max weight — fish generated beyond max (via WeightK) are invisible on chart
-- [ ] Extend bucket range to accommodate oversize fish when WeightK > 1
+- [x] Extended `globalMax *= weightMultiplier` when weightK > 1 — oversize fish now visible on chart
 
 ### 2a.3 Decay algorithms in BiteSystem
 - [ ] Implement **power-law decay**: `p(x) = ((1-x)/(1-threshold))^α` — density reaches zero at 100%

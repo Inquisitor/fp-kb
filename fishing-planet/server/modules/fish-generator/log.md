@@ -262,7 +262,34 @@ Total crossover fish: 23 out of ~1.9M (0.001%). Negligible — does not affect s
 
 **Decision:** Phase 1.4 validated. Simulator is a reliable tool for algorithm analysis and design work in Phase 2.
 
+## 2026-03-12: FP-33182 threshold/Marsaglia reverted (FP-41845 phase 2a.1)
+
+**Decision:** Reverted r12950 changes in `GenerateRandomWeight()`. Restored pre-FP-33182 uniform generation as clean baseline before implementing new decay algorithm.
+
+**What was removed:**
+- `NormalDistribution.GetPossibleNormalFloat()` call — threshold-based re-roll to Marsaglia normal distribution
+- Double weightK application (`norm *= weightK` + `changedWeight = weight * weightK`)
+
+**What was restored:** `weight = lerp(MinWeight, MaxWeight, norm) * weightK` — single clean weightK application.
+
+**What was kept:** Method signature with `normalPercentageFrom` and `normalDistributionSigma` params (unused, will be repurposed for decay). Polynomials retained for now (removal is a separate step). `NormalDistribution.cs` untouched — methods remain available.
+
+**Rationale:** New decay algorithm (Phase 2a.3) replaces the threshold/Marsaglia approach entirely. Starting from clean uniform baseline avoids layering new logic on top of known-buggy code.
+
+## 2026-03-12: Decay algorithm design — normal-first approach rejected (FP-41845 phase 2a)
+
+**Context:** Three candidate approaches for smooth weight decay in the `[threshold%, 100%]` zone:
+1. **Normal-first** (generate normal, keep if > threshold, re-roll uniform otherwise)
+2. **Power-law decay** (`p(x) = ((1-x)/(1-threshold))^α`)
+3. **Exponential decay** (`p(x) = exp(-λ(x-threshold)/(1-threshold))`)
+
+**Decision:** Normal-first rejected. Power-law and exponential both advance to implementation (2a.3) with a GlobalVariable switch.
+
+**Rationale:** Normal-first has a fundamental discontinuity at the threshold seam. The flat uniform zone has density `Φ(threshold)/threshold`, while the normal tail starts at `φ(threshold)`. These values are coupled — making the seam smooth requires high tail probability (~39%), which contradicts the goal of making tail fish rare (~5%). Power-law and exponential are seamless by construction (`p(threshold) = 1`), have single intuitive tuning parameters, and support closed-form sampling (no rejection).
+
+**Analysis artifact:** [decay-comparison.html](../../tasks/FP-41845--weight-generation-v2/artifacts/decay-comparison.html) — interactive comparison with sliders, PDF plots, and simulated histograms.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
-- System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path
+- ~~System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path~~ — reverted in FP-41845 phase 2a.1
 - Mathematical model errors identified → FP-41845 in progress

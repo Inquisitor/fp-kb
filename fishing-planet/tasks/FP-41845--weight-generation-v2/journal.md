@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Phase 1 complete. Simulator built, deployed, validated against production FishFact (Nile Perch @ Congo River) — all four forms match within 0.13pp. Next: Phase 2 — algorithm design & implementation (depends on GD requirements).
+Phase 2a in progress. GD requirements gathered, decay algorithm design analyzed (power-law vs exponential — both seamless; normal-first rejected due to seam). FP-33182 re-roll reverted (2a.1), simulator bucket bug fixed (2a.2). Next: implement both decay algorithms in BiteSystem (2a.3), then Decay Designer tab in simulator (2a.4).
 
 ## Summary
 
@@ -42,3 +42,6 @@ See [backlog.md](backlog.md) for action items.
 - 2026-03-11: Phase 1.3 complete — WebAdmin Fish Weight Simulator built. Service (`FishWeightSimulationService`), controller (partial `StatsController`), Razor view with Kendo area chart. All accumulators (histogram, top weights, totals) keyed by actual form after crossover. Top-200 leaderboard preview per form. Culture-safe float handling (InvariantCulture). Code reviewed, 11 tests green.
 - 2026-03-11: Phase 1.3 deployed — simulator live on WebAdmin, confirmed working by game designers and analysts.
 - 2026-03-11: Phase 1.4 complete — simulator validated against production FishFact (Nile Perch @ Congo River, 2 months data). All four forms match within 0.13pp max deviation. Detailed analysis in [module log](../../server/modules/fish-generator/log.md). Phase 1 fully complete.
+- 2026-03-12: Phase 2a planning — GD requirements gathered from Confluence docs and stakeholder input. Decay algorithm design: analyzed three approaches (normal-first, power-law, exponential). Normal-first rejected due to fundamental seam discontinuity at threshold. Interactive comparison tool built ([decay-comparison.html](artifacts/decay-comparison.html)).
+- 2026-03-12: Phase 2a.1 complete — FP-33182 threshold/Marsaglia re-roll reverted in `GenerateRandomWeight()`. Restored pre-r12950 uniform generation. Also eliminated double weightK application bug introduced in r12950.
+- 2026-03-12: Phase 2a.2 complete — simulator bucket range extended to `globalMax * weightK` when weightK > 1. Oversize fish now visible on chart instead of clamping into last bucket.
