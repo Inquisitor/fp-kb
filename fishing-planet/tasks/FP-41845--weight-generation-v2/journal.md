@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Phase 2a in progress. GD requirements gathered, decay algorithm design analyzed (power-law vs exponential — both seamless; normal-first rejected due to seam). FP-33182 re-roll reverted (2a.1), simulator bucket bug fixed (2a.2). Next: implement both decay algorithms in BiteSystem (2a.3), then Decay Designer tab in simulator (2a.4).
+Phase 2a design complete. Edge distribution system fully designed — spec ([edge-distribution-design.md](artifacts/edge-distribution-design.md)), implementation plan ([edge-distribution-impl-plan.md](artifacts/edge-distribution-impl-plan.md)), deep review passed. Next: implement the plan (2a.3 — 5 commits).
 
 ## Summary
 
@@ -45,3 +45,4 @@ See [backlog.md](backlog.md) for action items.
 - 2026-03-12: Phase 2a planning — GD requirements gathered from Confluence docs and stakeholder input. Decay algorithm design: analyzed three approaches (normal-first, power-law, exponential). Normal-first rejected due to fundamental seam discontinuity at threshold. Interactive comparison tool built ([decay-comparison.html](artifacts/decay-comparison.html)).
 - 2026-03-12: Phase 2a.1 complete — FP-33182 threshold/Marsaglia re-roll reverted in `GenerateRandomWeight()`. Restored pre-r12950 uniform generation. Also eliminated double weightK application bug introduced in r12950.
 - 2026-03-12: Phase 2a.2 complete — simulator bucket range extended to `globalMax * weightK` when weightK > 1. Oversize fish now visible on chart instead of clamping into last bucket.
+- 2026-03-14: Phase 2a design complete — edge distribution system spec and 5-commit implementation plan finalized. Key design decisions: "Edge Distribution" terminology (not decay/tail), zone fraction (not threshold), `[Flags]` EdgeDistributionScope (form×edge bit matrix), callback config pattern (`UpdateFromGlobalVariables` in BiteSystem), `internal set` on Config.Current. Deep review: 18 findings, all resolved.

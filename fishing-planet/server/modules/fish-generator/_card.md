@@ -29,11 +29,12 @@ module: fish-generator
 - [FishFact statistics](fish-fact.md) — lifecycle table in Stats DB, schema, source codes, existing queries
 - [Test coverage](test-coverage.md) — inventory of tests, gaps, potential code issues
 - [FishSelector form ratio](fish-selector-form-ratio.md) — how Y:C:T:U proportions emerge from FishSelector config, estimation approach
-- [Decay curves](decay-curves.md) — analysis of tail decay approaches (power-law, exponential, normal-first); design rationale for FP-41845
+- [Edge distribution curves](decay-curves.md) — analysis of edge distribution approaches (power-law, exponential, normal-first); design rationale for FP-41845
 
 ## Related Tasks
 - FP-33182: Improve random fish weight generation (reopened, on prod) → [task journal](../../tasks/FP-33182--weight-generation/journal.md)
 - FP-41845: Implement new system of weight generation (in progress) → [task journal](../../tasks/FP-41845--weight-generation-v2/journal.md)
   - Phase 1 complete: WebAdmin weight simulator built, deployed, validated vs production (all forms ≤0.13pp deviation)
+  - Phase 2a design complete: edge distribution system (4 algorithms, [Flags] scope, zone fraction config) → [design](../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md)
 
 See also: [backlog](backlog.md) | [log](log.md)

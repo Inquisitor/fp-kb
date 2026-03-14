@@ -289,6 +289,17 @@ Total crossover fish: 23 out of ~1.9M (0.001%). Negligible — does not affect s
 
 **Analysis artifact:** [decay-comparison.html](../../tasks/FP-41845--weight-generation-v2/artifacts/decay-comparison.html) — interactive comparison with sliders, PDF plots, and simulated histograms.
 
+## 2026-03-14: Edge distribution system design finalized (FP-41845 phase 2a design)
+
+**Decisions:**
+- **Naming: "Edge Distribution"** — replaces "decay"/"tail". "Edge" is directionally neutral (works for upper and lower), doesn't imply specific math (unlike "decay" → exponential). Types: `IEdgeDistributionStrategy`, `EdgeDistribution`, `EdgeDistributionScope`, `CapAtThreshold`, `Unrestricted`, `PowerLawEdge`, `ExponentialEdge`.
+- **Zone fraction replaces threshold** — external API uses fraction (0.05 = 5% of range). `threshold = 1.0 - zoneFraction` computed internally. Zone fraction works identically from either edge; threshold was one-sided and added `1-threshold` clutter to every formula.
+- **`[Flags]` EdgeDistributionScope** — bit matrix: form (Heaviest/Lightest/Others) × edge (Upper/Lower) = 6 bits. Named presets (Heaviest, Extremes, All). `Enum.TryParse` handles comma-separated custom combos. Eliminates special-case logic — `HasFlag()` replaces cascading `if/switch`.
+- **Callback config pattern** — `FishWeightGeneratorConfig.UpdateFromGlobalVariables()` assembles config inside BiteSystem assembly, called from `GlobalVariablesCache.UpdateStaticVariables()` as one-liner. Enables `internal set` on `Config.Current` (writer and config in same assembly). Fixes architectural smell where SharedLib reached into subsystem internals.
+- **Fail-safe defaults** — Algorithm=None (CapAtThreshold), Scope=All, both zones=0.05. Maximally restrictive: no fish can reach extreme weights until GD explicitly configures.
+
+**Design artifacts:** [edge-distribution-design.md](../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md), [edge-distribution-impl-plan.md](../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-impl-plan.md).
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
 - ~~System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path~~ — reverted in FP-41845 phase 2a.1
