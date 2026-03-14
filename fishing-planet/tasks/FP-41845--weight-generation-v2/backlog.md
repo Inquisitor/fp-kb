@@ -96,6 +96,36 @@ Rationale: "Edge" is neutral — it describes position (the edge of the weight r
 
 Documents updated: [edge-distribution-design.md](artifacts/edge-distribution-design.md), [edge-distribution-impl-plan.md](artifacts/edge-distribution-impl-plan.md).
 
+### Zone Fraction instead of Threshold (2026-03-14)
+
+Chosen: **Zone fraction** (`UpperEdgeZoneFraction = 0.05`, `LowerEdgeZoneFraction = 0.0`) instead of threshold (0.95).
+
+Rationale:
+- Threshold is the complement of what the algorithm actually uses — every formula had `1-threshold`, adding cognitive overhead
+- Zone size directly represents the portion where the algorithm acts
+- For the lower edge, threshold from the opposite side is counter-intuitive; zone fraction works symmetrically from either edge
+- Fractions (0–1), not percentages (0–100) — consistent with existing GV convention, no `/100` conversion in code, `Fraction` suffix self-documents the unit
+
+SQL migration: `FishWeightUpperEdgeZoneFraction = 1.0 - OldThreshold` (0.05 = 1.0 - 0.95).
+
+### [Flags] EdgeDistributionScope (2026-03-14)
+
+Chosen: **Bit flags** for `EdgeDistributionScope` — form × edge matrix (Heaviest/Lightest/Others × Upper/Lower = 6 bits).
+
+Named presets: `Heaviest` (u-----), `Extremes` (u--l--), `All` (ululul). Custom combinations via bitwise OR in GV string: `"HeaviestUpper, LightestLower"`.
+
+Rationale:
+- `Extremes` implies both edges: upper on heaviest + lower on lightest — requires flag granularity
+- Unix permissions analogy (h-l-o × u-l) — extensible without enum changes
+- `HasFlag()` eliminates special-case logic in `GetEdgeFlags()`
+- `Enum.TryParse` with `[Flags]` handles comma-separated names natively
+
+### Controller namespace: Settings (2026-03-14)
+
+Chosen: `WebAdmin.Controllers.Settings` with partial controller pattern (`SettingsController.FishWeightGenerator.cs`).
+
+Rationale: existing StatsController uses partial pattern. Settings pages should be organized, not dumped into flat Controllers/. Zero cost now, saves reorganization later.
+
 ## Deferred / Questions
 - ~~Real ratio between forms (Young/Common/Trophy/Unique)~~ — investigated: proportions are emergent from FishSelector layer config, can be estimated from pond config or taken from FishFact. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md). Combined overall histogram = Σ(p_form × dist_form).
 - ~~Unique polynomial "double hump" phenomenon~~ — explained, understood
