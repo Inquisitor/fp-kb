@@ -48,37 +48,13 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 ### 2a.1 Partial revert of r12950 (FP-33182)
 - [x] Revert threshold/Marsaglia re-roll — restored pre-r12950 uniform lerp in `GenerateRandomWeight()`
 - [x] Fixed double weightK application bug (was applied to both norm and final weight in r12950)
-- [x] Method signature kept (params unused, will be repurposed for decay)
-- [ ] Remove Young polynomial — replace with `y=x` (uniform distribution)
-- [ ] Remove Unique polynomial — replace with `y=x` (uniform distribution)
-- [ ] Repurpose & rename GlobalVariables (`UseNormalDistributionForFishGeneratingFrom`, `NormalDistributionForFishGeneratingSigma`) to match new algorithm semantics
-- [ ] Update `GlobalVariablesCache` defaults and sync logic in `ApplyGlobalVariables()`
+- [x] Method signature kept (params unused, will be repurposed for edge distribution)
 
 ### 2a.2 Simulator bucket range fix (bug)
 - [x] Extended `globalMax *= weightMultiplier` when weightK > 1 — oversize fish now visible on chart
 
-### 2a.3 Decay algorithms in BiteSystem
-- [ ] Implement **power-law decay**: `p(x) = ((1-x)/(1-threshold))^α` — density reaches zero at 100%
-- [ ] Implement **exponential decay**: `p(x) = exp(-λ(x-threshold)/(1-threshold))` — asymptotic, density approaches zero but never reaches it
-- [ ] Both: uniform distribution from 0% to threshold%, smooth decay from threshold% to 100%
-- [ ] Both: seam at threshold is smooth by construction (density continuous)
-- [ ] GlobalVariable switch to select active algorithm (power-law vs exponential)
-- [ ] GlobalVariable for decay steepness parameter (α or λ depending on selected algorithm)
-- [ ] Decay does NOT affect WeightK — oversize fish (WeightK > 1) can still exceed 100% of elder form max
-- [ ] Generation average shifts only ~1-3% lower — acceptable for balance
-- [ ] Historical context: Max's cubic regression attempt on Unique polynomial had the right idea but wrong approach (whole-form distortion → artifacts). New approach: targeted decay only in the tail zone
-- [ ] Interactive comparison tool: [decay-comparison.html](artifacts/decay-comparison.html)
-
-### 2a.4 Decay Designer tab in simulator
-- [ ] New tab/section on WebAdmin simulator page — interactive decay curve configurator
-- [ ] Sliders for threshold, α (power-law), λ (exponential), algorithm selector
-- [ ] Live PDF preview (like decay-comparison.html but integrated into WebAdmin with Kendo charts)
-- [ ] "Apply to Simulation" button — runs selected decay config through real `GenerateRandomWeight` engine
-- [ ] Results displayed on the existing simulator histogram for direct comparison with production data
-
-### 2a.5 WeightK oversize validation
-- [ ] Verify that WeightK > 1 correctly pushes Unique fish beyond max weight of elder form
-- [ ] Ensure decay curve does not interfere with WeightK oversize behavior
+### 2a.3 Edge distribution system
+- [ ] Implement edge distribution algorithms — see [design spec](artifacts/edge-distribution-design.md)
 
 ## Phase 2b: Simulator Enhancements
 (parallel with 2a — GD feedback during active testing)
@@ -104,6 +80,21 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 | `FishGenerationStatsCleanupHorizonDays`      | 90    | EnvironmentVariables |
 | `UseNormalDistributionForFishGeneratingFrom` | 0.95  | GlobalVariables      |
 | `NormalDistributionForFishGeneratingSigma`   | 0.55  | GlobalVariables      |
+
+## Decisions
+
+### Naming: "Edge" terminology (2026-03-13)
+
+Chosen: **Edge Distribution** family (`IEdgeDistributionStrategy`, `EdgeDistribution`, `EdgeDistributionScope`, `CapAtThreshold`, `Unrestricted`, `PowerLawEdge`, `ExponentialEdge`).
+
+Alternatives considered:
+- **Tail** — rejected: "tail" in probability theory means a semi-infinite range (x→∞), but here the zone is bounded [threshold, 1.0]. Would confuse anyone with statistics background.
+- **Decay** — rejected for type/variable names (kept as informal conversation term): "decay" implies exponential by default, but we have four algorithms including one that's the opposite of decay (`Unrestricted`).
+- **FishWeight** prefix on enums — rejected for enum types: enums live in their own namespace (`BiteSystem.ServerOnly.FishWeight.Edge`), so the prefix is redundant. Long prefixed names (`FishWeightEdgeDistribution`, `FishWeightEdgeScope`) used only for GlobalVariablesCache properties (flat namespace).
+
+Rationale: "Edge" is neutral — it describes position (the edge of the weight range) without implying a specific mathematical behavior. Works for all four algorithms including the pass-through.
+
+Documents updated: [edge-distribution-design.md](artifacts/edge-distribution-design.md), [edge-distribution-impl-plan.md](artifacts/edge-distribution-impl-plan.md).
 
 ## Deferred / Questions
 - ~~Real ratio between forms (Young/Common/Trophy/Unique)~~ — investigated: proportions are emergent from FishSelector layer config, can be estimated from pond config or taken from FishFact. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md). Combined overall histogram = Σ(p_form × dist_form).
