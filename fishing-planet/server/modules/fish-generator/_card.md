@@ -29,7 +29,7 @@ module: fish-generator
 - [FishFact statistics](fish-fact.md) — lifecycle table in Stats DB, schema, source codes, existing queries
 - [Test coverage](test-coverage.md) — inventory of tests, gaps, potential code issues
 - [FishSelector form ratio](fish-selector-form-ratio.md) — how Y:C:T:U proportions emerge from FishSelector config, estimation approach
-- [Edge distribution curves](decay-curves.md) — analysis of edge distribution approaches (power-law, exponential, normal-first); design rationale for FP-41845
+- [Edge distribution](edge-distribution.md) — edge distribution approaches, normalization, correct sampling; design rationale for FP-41845
 
 ## Related Tasks
 - FP-33182: Improve random fish weight generation (reopened, on prod) → [task journal](../../tasks/FP-33182--weight-generation/journal.md)

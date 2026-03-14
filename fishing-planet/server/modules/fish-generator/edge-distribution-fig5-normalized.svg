@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" font-family="Segoe UI, sans-serif">
+  <defs>
+    <marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#555"/>
+    </marker>
+    <!-- Green hatching for gained mass (central zone bump) -->
+    <pattern id="hatch-gain" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#228b22" stroke-width="1.0" opacity="0.35"/>
+    </pattern>
+    <!-- Gray hatching for deficit (edge zone mass removed) -->
+    <pattern id="hatch-deficit5" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#888" stroke-width="0.8" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="600" height="340" fill="#fafafa" rx="4"/>
+  <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Figure 5: Normalized Piecewise CDF — Seamless Transition</text>
+
+  <!-- Axes -->
+  <line x1="60" y1="280" x2="560" y2="280" stroke="#555" stroke-width="1.5" marker-end="url(#arrow3)"/>
+  <line x1="60" y1="280" x2="60" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+  <text x="310" y="315" text-anchor="middle" font-size="11" fill="#555">Normalized weight (fraction of form range)</text>
+  <text x="18" y="160" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90,18,160)">Probability density f(x)</text>
+
+  <!-- Ticks -->
+  <text x="60" y="298" text-anchor="middle" font-size="10" fill="#666">0%</text>
+  <text x="535" y="298" text-anchor="middle" font-size="10" fill="#666">100%</text>
+
+  <!-- Threshold line -->
+  <line x1="440" y1="45" x2="440" y2="280" stroke="#999" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="440" y="42" text-anchor="middle" font-size="10" fill="#999">threshold (95%)</text>
+
+  <!-- Y-axis marks -->
+  <line x1="55" y1="200" x2="65" y2="200" stroke="#555"/>
+  <text x="50" y="204" text-anchor="end" font-size="10" fill="#666">c</text>
+  <line x1="55" y1="210" x2="65" y2="210" stroke="#555"/>
+  <text x="50" y="214" text-anchor="end" font-size="10" fill="#666">1</text>
+  <text x="50" y="284" text-anchor="end" font-size="10" fill="#666">0</text>
+
+  <!-- c ≈ 1.02 annotation -->
+  <text x="75" y="196" font-size="8" fill="#228b22" font-style="italic">≈ 1.02</text>
+
+  <!-- Dashed line at y=210 (old uniform level) — central zone only, up to threshold -->
+  <line x1="60" y1="210" x2="440" y2="210" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+  <!-- Dashed lines in edge zone: where uniform=1 would continue (top + right only) -->
+  <line x1="440" y1="210" x2="535" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="535" y1="210" x2="535" y2="280" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Hatched area: decay curve above y=210 (small crescent between c and 1 in edge zone) -->
+  <path d="M440,200 C450,200 455,205 458,210 L440,210 Z"
+        fill="url(#hatch-gain)" stroke="none"/>
+
+  <!-- Hatched gain: central zone strip between c and 1 — where the edge mass went -->
+  <rect x="60" y="200" width="380" height="10" fill="url(#hatch-gain)" stroke="none"/>
+
+  <!-- Hatched deficit: edge zone mass removed (area between y=210 and decay curve) -->
+  <path d="M458,210
+    C465,215 475,240 485,258
+    C500,270 520,276 528,278
+    L535,280 L535,210 Z"
+    fill="url(#hatch-deficit5)" stroke="none"/>
+
+  <!-- Uniform zone (at level c, slightly above 1) -->
+  <rect x="60" y="200" width="380" height="80" fill="#228b2212" stroke="none"/>
+  <line x1="60" y1="200" x2="440" y2="200" stroke="#228b22" stroke-width="2.5"/>
+  <text x="250" y="240" text-anchor="middle" font-size="10" fill="#228b22">Uniform zone: PDF = c ≈ 1.02</text>
+  <text x="250" y="254" text-anchor="middle" font-size="9" fill="#228b22" font-style="italic">(≈1–3% above pure uniform — negligible for balance)</text>
+
+  <!-- Edge zone — smooth transition from c to 0 -->
+  <path d="M440,200 C455,200 465,215 475,240 C485,258 500,270 520,276 C528,278 533,279 535,280"
+        fill="none" stroke="#228b22" stroke-width="2.5"/>
+  <path d="M440,200 C455,200 465,215 475,240 C485,258 500,270 520,276 C528,278 533,279 535,280 L535,280 L440,280 Z"
+        fill="#228b2212" stroke="none"/>
+
+  <!-- Seamless transition annotation -->
+  <circle cx="440" cy="200" r="4" fill="#228b22" stroke="white" stroke-width="1.5"/>
+  <line x1="442" y1="198" x2="476" y2="118" stroke="#228b22" stroke-width="0.8"/>
+  <text x="478" y="109" font-size="9" fill="#228b22" font-weight="bold">Seamless:</text>
+  <text x="478" y="121" font-size="9" fill="#228b22">c · p(0) = c · 1 = c ✓</text>
+  <text x="478" y="136" font-size="9" fill="#228b22">No spike. No discontinuity.</text>
+
+  <!-- Probability redistribution annotation -->
+  <rect x="80" y="55" width="340" height="50" rx="4" fill="#e8f5e9" stroke="#4caf50" stroke-width="0.8"/>
+  <text x="95" y="70" font-size="9" fill="#2e7d32" font-weight="bold">Normalization fix:</text>
+  <text x="95" y="83" font-size="9" fill="#2e7d32">Edge zone gets LESS probability (proportional to edge area fraction).</text>
+  <text x="95" y="96" font-size="9" fill="#2e7d32">Central zone density rises by ~1–3% to compensate. Seam eliminated.</text>
+
+  <!-- Edge probability annotation (aligned with Seamless) -->
+  <text x="478" y="165" font-size="9" fill="#666">P(edge) ≈ 1.7%</text>
+  <text x="478" y="177" font-size="9" fill="#666">for α=2, zone=5%</text>
+  <text x="478" y="192" font-size="8" fill="#999">(vs 5% in naive</text>
+  <text x="478" y="203" font-size="8" fill="#999"> approach)</text>
+</svg>

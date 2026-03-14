@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" font-family="Segoe UI, sans-serif">
+  <defs>
+    <marker id="arrow4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <rect width="600" height="300" fill="#fafafa" rx="4"/>
+  <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Figure 6: Piecewise Inverse CDF — Single Random Draw</text>
+
+  <!-- U axis (input) -->
+  <line x1="60" y1="250" x2="560" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#arrow4)"/>
+  <text x="310" y="285" text-anchor="middle" font-size="11" fill="#555">Input: u ~ Uniform(0, 1)</text>
+  <text x="60" y="268" text-anchor="middle" font-size="10" fill="#666">0</text>
+  <text x="535" y="268" text-anchor="middle" font-size="10" fill="#666">1</text>
+
+  <!-- Split point u* -->
+  <line x1="468" y1="235" x2="468" y2="252" stroke="#cc0000" stroke-width="2"/>
+  <text x="468" y="228" text-anchor="middle" font-size="10" fill="#cc0000" font-weight="bold">u*</text>
+
+  <!-- Central zone bracket -->
+  <line x1="62" y1="242" x2="466" y2="242" stroke="#2266aa" stroke-width="2"/>
+  <line x1="62" y1="238" x2="62" y2="246" stroke="#2266aa" stroke-width="2"/>
+  <line x1="466" y1="238" x2="466" y2="246" stroke="#2266aa" stroke-width="2"/>
+  <text x="264" y="238" text-anchor="middle" font-size="10" fill="#2266aa" font-weight="bold">Central zone</text>
+
+  <!-- Edge zone bracket -->
+  <line x1="470" y1="242" x2="533" y2="242" stroke="#ff6b6b" stroke-width="2"/>
+  <line x1="470" y1="238" x2="470" y2="246" stroke="#ff6b6b" stroke-width="2"/>
+  <line x1="533" y1="238" x2="533" y2="246" stroke="#ff6b6b" stroke-width="2"/>
+  <text x="501" y="238" text-anchor="middle" font-size="9" fill="#ff6b6b" font-weight="bold">Edge</text>
+
+  <!-- Naive split — T line extends down to u-axis level, ending at u* height -->
+  <line x1="440" y1="194" x2="440" y2="254" stroke="#999" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="440" y="183" text-anchor="middle" font-size="9" fill="#999">naive: T=0.95</text>
+
+  <!-- Arrow showing the shift -->
+  <path d="M442,200 C450,200 458,200 466,200" fill="none" stroke="#cc0000" stroke-width="1" marker-end="url(#arrow4)"/>
+  <text x="453" y="214" text-anchor="middle" font-size="8" fill="#cc0000">shift</text>
+
+  <!-- Formulas -->
+  <rect x="60" y="50" width="250" height="110" rx="4" fill="#e3f2fd" stroke="#90caf9" stroke-width="0.8"/>
+  <text x="75" y="68" font-size="10" fill="#1565c0" font-weight="bold">Split point:</text>
+  <text x="75" y="84" font-size="10" fill="#333" font-family="Consolas, monospace">u* = T / (T + z · A)</text>
+  <text x="75" y="104" font-size="10" fill="#1565c0" font-weight="bold">If u &lt; u*: central zone</text>
+  <text x="75" y="118" font-size="10" fill="#333" font-family="Consolas, monospace">x = u / u* · T</text>
+  <text x="75" y="138" font-size="10" fill="#1565c0" font-weight="bold">If u ≥ u*: edge zone</text>
+  <text x="75" y="152" font-size="10" fill="#333" font-family="Consolas, monospace">w = (u-u*)/(1-u*); x = T + f(w)·z</text>
+
+  <!-- A values -->
+  <rect x="340" y="50" width="220" height="110" rx="4" fill="#fff3e0" stroke="#ffcc80" stroke-width="0.8"/>
+  <text x="355" y="68" font-size="10" fill="#e65100" font-weight="bold">Edge area fraction A:</text>
+  <text x="355" y="88" font-size="10" fill="#333">CapAtThreshold:  A = 0</text>
+  <text x="355" y="104" font-size="10" fill="#333">Unrestricted:    A = 1</text>
+  <text x="355" y="120" font-size="10" fill="#333">PowerLaw:  A = 1/(α+1)</text>
+  <text x="355" y="136" font-size="10" fill="#333">Exponential: A = (1−e^(−λ))/λ</text>
+  <text x="355" y="155" font-size="9" fill="#999" font-style="italic">f(w) = same Sample() formulas</text>
+</svg>

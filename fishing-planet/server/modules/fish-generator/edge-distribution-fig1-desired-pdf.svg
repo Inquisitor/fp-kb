@@ -37,19 +37,19 @@
   <!-- Density label for flat zone -->
   <text x="250" y="90" text-anchor="middle" font-size="11" fill="#2266aa" font-weight="bold">Uniform density = c</text>
 
-  <!-- Decay zone -->
+  <!-- Edge zone -->
   <path d="M440,100 C460,100 480,120 490,150 C500,185 510,220 520,245 C525,253 530,258 535,260" fill="none" stroke="#2266aa" stroke-width="2.5"/>
   <path d="M440,100 C460,100 480,120 490,150 C500,185 510,220 520,245 C525,253 530,258 535,260 L535,260 L440,260 Z" fill="#4488cc22" stroke="none"/>
 
-  <!-- Decay zone label -->
+  <!-- Edge zone label -->
   <text x="500" y="76" text-anchor="middle" font-size="10" fill="#2266aa">Smooth</text>
-  <text x="500" y="88" text-anchor="middle" font-size="10" fill="#2266aa">decay</text>
+  <text x="500" y="88" text-anchor="middle" font-size="10" fill="#2266aa">falloff</text>
   <text x="500" y="102" text-anchor="middle" font-size="8" fill="#999" font-style="italic">(not to scale)</text>
 
   <!-- Seamless transition annotation -->
   <circle cx="440" cy="100" r="4" fill="#cc0000" stroke="white" stroke-width="1.5"/>
   <line x1="442" y1="98" x2="475" y2="68" stroke="#cc0000" stroke-width="0.8"/>
-  <text x="478" y="64" font-size="9" fill="#cc0000">Seamless: c × p(threshold) = c × 1 = c</text>
+  <text x="444" y="64" font-size="9" fill="#cc0000">Seamless: c × p(threshold) = c × 1 = c</text>
 
   <!-- Y-axis c mark -->
   <line x1="55" y1="100" x2="60" y2="100" stroke="#555"/>

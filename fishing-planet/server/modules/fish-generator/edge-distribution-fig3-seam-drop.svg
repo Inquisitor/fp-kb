@@ -6,7 +6,7 @@
   </defs>
 
   <rect width="600" height="320" fill="#fafafa" rx="4"/>
-  <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Figure 2: Normal-First Approach — Seam Discontinuity</text>
+  <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Figure 3: Normal-First Approach — Seam Discontinuity</text>
 
   <!-- Axes -->
   <line x1="60" y1="260" x2="560" y2="260" stroke="#555" stroke-width="1.5" marker-end="url(#arrow2)"/>
@@ -27,7 +27,7 @@
   <rect x="60" y="95" width="380" height="165" fill="#ff6b6b22" stroke="none"/>
   <line x1="60" y1="95" x2="440" y2="95" stroke="#ff6b6b" stroke-width="2.5"/>
 
-  <!-- Normal tail (low) -->
+  <!-- Normal edge zone (low) -->
   <path d="M440,195 C460,200 480,215 500,235 C515,248 525,255 535,258" fill="none" stroke="#ff6b6b" stroke-width="2.5"/>
   <path d="M440,195 C460,200 480,215 500,235 C515,248 525,255 535,258 L535,260 L440,260 Z" fill="#ff6b6b15" stroke="none"/>
 
@@ -47,6 +47,6 @@
 
   <!-- ELI5 annotation -->
   <rect x="100" y="45" width="280" height="36" rx="4" fill="#fff8e0" stroke="#e0c040" stroke-width="0.8"/>
-  <text x="115" y="60" font-size="9" fill="#886600">Making the tail rare forces the flat zone high.</text>
-  <text x="115" y="73" font-size="9" fill="#886600">Making the seam smooth requires a fat tail. Can't have both.</text>
+  <text x="115" y="60" font-size="9" fill="#886600">Making the edge rare forces the flat zone high.</text>
+  <text x="115" y="73" font-size="9" fill="#886600">Making the seam smooth requires a wide edge. Can't have both.</text>
 </svg>

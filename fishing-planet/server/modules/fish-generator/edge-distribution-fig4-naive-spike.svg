@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" font-family="Segoe UI, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#555"/>
+    </marker>
+    <!-- Red hatching for excess (spike above uniform) -->
+    <pattern id="hatch-excess" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#cc0000" stroke-width="1.2" opacity="0.4"/>
+    </pattern>
+    <!-- Gray hatching for deficit (missing uniform mass) -->
+    <pattern id="hatch-deficit" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#888" stroke-width="0.8" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="600" height="340" fill="#fafafa" rx="4"/>
+  <text x="300" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Figure 4: Naive Edge Remap — Density Spike at Boundary</text>
+
+  <!-- Axes -->
+  <line x1="60" y1="280" x2="560" y2="280" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="60" y1="280" x2="60" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="310" y="315" text-anchor="middle" font-size="11" fill="#555">Normalized weight (fraction of form range)</text>
+  <text x="18" y="160" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90,18,160)">Probability density f(x)</text>
+
+  <!-- Ticks -->
+  <text x="60" y="298" text-anchor="middle" font-size="10" fill="#666">0%</text>
+  <text x="535" y="298" text-anchor="middle" font-size="10" fill="#666">100%</text>
+
+  <!-- Threshold line -->
+  <line x1="440" y1="45" x2="440" y2="280" stroke="#999" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="440" y="42" text-anchor="middle" font-size="10" fill="#999">threshold (95%)</text>
+
+  <!-- Y-axis marks -->
+  <line x1="55" y1="210" x2="65" y2="210" stroke="#555"/>
+  <text x="50" y="214" text-anchor="end" font-size="10" fill="#666">1</text>
+  <text x="50" y="284" text-anchor="end" font-size="10" fill="#666">0</text>
+
+  <!-- Desired shape (ghosted) -->
+  <line x1="60" y1="210" x2="440" y2="210" stroke="#2266aa" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.4"/>
+  <path d="M440,210 C455,210 470,225 480,245 C490,260 500,270 520,276 C528,278 533,279 535,280"
+        fill="none" stroke="#2266aa" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.4"/>
+  <text x="335" y="202" font-size="9" fill="#2266aa" opacity="0.5">desired (smooth falloff)</text>
+
+  <!-- Dashed lines: uniform continuation in edge zone (top + right sides only) -->
+  <line x1="440" y1="210" x2="535" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="535" y1="210" x2="535" y2="280" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Hatched excess: spike mass above PDF=1 (computed: alpha=2, crossing at x=480.2) -->
+  <path d="M440,210 L440,70
+    L442.4,80.4 L444.8,90.5 L447.1,100.3 L449.5,109.9
+    L451.9,119.2 L454.2,128.3 L456.6,137.1 L459.0,145.6
+    L461.4,153.9 L463.8,161.9 L466.1,169.6 L468.5,177.1
+    L470.9,184.3 L473.2,191.3 L475.6,198.0 L478.0,204.4
+    L480.2,210 Z"
+    fill="url(#hatch-excess)" stroke="none"/>
+
+  <!-- Hatched deficit: uniform mass taken from right side of edge zone -->
+  <path d="M480.2,210
+    L482.8,216.5 L485.1,222.1 L487.5,227.5 L489.9,232.6
+    L492.2,237.5 L494.6,242.1 L497.0,246.4 L499.4,250.5
+    L501.8,254.3 L504.1,257.8 L506.5,261.1 L508.9,264.1
+    L511.2,266.9 L513.6,269.4 L516.0,271.6 L518.4,273.6
+    L520.8,275.3 L523.1,276.7 L525.5,277.9 L527.9,278.8
+    L530.2,279.5 L532.6,279.9 L535.0,280.0
+    L535,210 Z"
+    fill="url(#hatch-deficit)" stroke="none"/>
+
+  <!-- Actual: flat zone -->
+  <rect x="60" y="210" width="380" height="70" fill="#ff6b6b12" stroke="none"/>
+  <line x1="60" y1="210" x2="440" y2="210" stroke="#ff6b6b" stroke-width="2.5"/>
+  <text x="250" y="246" text-anchor="middle" font-size="10" fill="#ff6b6b">Uniform zone: PDF = 1</text>
+
+  <!-- Actual: spike curve (computed: 3*(1-s)^2 for alpha=2) -->
+  <polyline points="
+    440.0,70.0 442.4,80.4 444.8,90.5 447.1,100.3 449.5,109.9
+    451.9,119.2 454.2,128.3 456.6,137.1 459.0,145.6 461.4,153.9
+    463.8,161.9 466.1,169.6 468.5,177.1 470.9,184.3 473.2,191.3
+    475.6,198.0 478.0,204.4 480.4,210.6 482.8,216.5 485.1,222.1
+    487.5,227.5 489.9,232.6 492.2,237.5 494.6,242.1 497.0,246.4
+    499.4,250.5 501.8,254.3 504.1,257.8 506.5,261.1 508.9,264.1
+    511.2,266.9 513.6,269.4 516.0,271.6 518.4,273.6 520.8,275.3
+    523.1,276.7 525.5,277.9 527.9,278.8 530.2,279.5 532.6,279.9
+    535.0,280.0"
+    fill="none" stroke="#ff6b6b" stroke-width="2.5"/>
+
+  <!-- Spike fill (light) -->
+  <path d="M440,70
+    L442.4,80.4 L444.8,90.5 L447.1,100.3 L449.5,109.9
+    L451.9,119.2 L454.2,128.3 L456.6,137.1 L459.0,145.6
+    L461.4,153.9 L463.8,161.9 L466.1,169.6 L468.5,177.1
+    L470.9,184.3 L473.2,191.3 L475.6,198.0 L478.0,204.4
+    L480.4,210.6 L482.8,216.5 L485.1,222.1 L487.5,227.5
+    L489.9,232.6 L492.2,237.5 L494.6,242.1 L497.0,246.4
+    L499.4,250.5 L501.8,254.3 L504.1,257.8 L506.5,261.1
+    L508.9,264.1 L511.2,266.9 L513.6,269.4 L516.0,271.6
+    L518.4,273.6 L520.8,275.3 L523.1,276.7 L525.5,277.9
+    L527.9,278.8 L530.2,279.5 L532.6,279.9 L535.0,280.0
+    L535,280 L440,280 Z"
+    fill="#ff6b6b10" stroke="none"/>
+
+  <!-- Vertical spike line at threshold -->
+  <line x1="440" y1="210" x2="440" y2="70" stroke="#ff6b6b" stroke-width="2.5"/>
+
+  <!-- Spike height annotation -->
+  <line x1="435" y1="210" x2="435" y2="70" stroke="#cc0000" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <line x1="431" y1="210" x2="439" y2="210" stroke="#cc0000" stroke-width="1.2"/>
+  <line x1="431" y1="70" x2="439" y2="70" stroke="#cc0000" stroke-width="1.2"/>
+
+  <!-- Spike label -->
+  <line x1="437" y1="140" x2="490" y2="120" stroke="#cc0000" stroke-width="0.8"/>
+  <text x="493" y="112" font-size="10" fill="#cc0000" font-weight="bold">(α+1)× spike</text>
+  <text x="493" y="124" font-size="9" fill="#cc0000">α=2 → 3×</text>
+  <text x="493" y="136" font-size="9" fill="#cc0000">α=5 → 6×</text>
+  <text x="493" y="148" font-size="9" fill="#cc0000">α=50 → 51× !</text>
+
+  <!-- ELI5 box -->
+  <rect x="80" y="50" width="310" height="36" rx="4" fill="#fff8e0" stroke="#e0c040" stroke-width="0.8"/>
+  <text x="95" y="64" font-size="9" fill="#886600">5% of uniform samples land in the edge zone.</text>
+  <text x="95" y="76" font-size="9" fill="#886600">Redistribution pushes them all toward the boundary → spike.</text>
+</svg>
