@@ -16,14 +16,14 @@ Default parameter values for PowerLaw/Exponential are intentionally aggressive (
 
 ## Naming Convention
 
-**Enum short names vs GlobalVariable long names.** The edge distribution enums live in their own namespace (`BiteSystem.ServerOnly.FishWeight.Edge`), so they use short names: `EdgeDistribution`, `EdgeDistributionScope`. The GlobalVariablesCache properties live in a flat class, so they use prefixed long names: `FishWeightEdgeDistribution`, `FishWeightEdgeScope`. The mapping:
+**Enum short names vs GlobalVariable long names.** The edge distribution enums live in their own namespace (`BiteSystem.ServerOnly.FishWeight.EdgeDistribution`), so they use short names: `EdgeDistributionType`, `EdgeDistributionScope`. The GlobalVariablesCache properties live in a flat class, so they use prefixed long names: `FishWeightEdgeDistribution`, `FishWeightEdgeScope`. The mapping:
 
-| Enum (short, in `Edge` namespace) | GV property (long, in `GlobalVariablesCache`) |
-|-----------------------------------|-----------------------------------------------|
-| `EdgeDistribution`                | `FishWeightEdgeDistribution`                  |
-| `EdgeDistributionScope`           | `FishWeightEdgeScope`                         |
+| Enum (short, in `EdgeDistribution` namespace) | GV property (long, in `GlobalVariablesCache`) |
+|-----------------------------------------------|-----------------------------------------------|
+| `EdgeDistributionType`                        | `FishWeightEdgeDistribution`                  |
+| `EdgeDistributionScope`                       | `FishWeightEdgeScope`                         |
 
-`Enum.TryParse<EdgeDistribution>(GlobalVariablesCache.FishWeightEdgeDistribution, ...)` bridges the two.
+`Enum.TryParse<EdgeDistributionType>(GlobalVariablesCache.FishWeightEdgeDistribution, ...)` bridges the two.
 
 **Zone fraction vs threshold.** External API uses zone fraction (0.05 = 5% of weight range is the edge zone). Internally, the zone fraction maps to an edge boundary: for the upper edge, `threshold = 1.0 - upperZoneFraction` (boundary from below); for the lower edge, the fraction is the boundary directly (`u <= lowerZoneFraction`). Zone fraction is directionally neutral — the same value (e.g. 0.05) means "5% of the range" regardless of which edge it's applied to.
 
@@ -83,23 +83,26 @@ IMPORTANT: All edge distribution code goes in `ServerOnly/`, NOT `Common/`. The 
 FishWeight/
 ├── FishWeightGenerator.cs           — static class: full generation pipeline (Commit 1 + 2)
 ├── FishWeightGeneratorConfig.cs     — immutable config with volatile static Current
-└── Edge/
-    ├── IEdgeDistributionStrategy.cs — interface: Sample(Random, double) → double
-    ├── CapAtThreshold.cs            — u → 0 (hard ceiling at edge zone boundary)
-    ├── Unrestricted.cs              — u → u (pass-through, current behavior)
-    ├── PowerLawEdge.cs              — inverse CDF: 1 - (1-u)^(1/(α+1))
-    ├── ExponentialEdge.cs           — inverse CDF: -ln(1 - u*(1-e^(-λ))) / λ
-    ├── EdgeDistribution.cs          — enum: None, Uniform, PowerLaw, Exponential
-    └── EdgeDistributionScope.cs     — [Flags] enum: form×edge bit flags with named presets
+└── EdgeDistribution/
+    ├── IEdgeDistributionStrategy.cs — interface: Sample(Random, double) → double; EdgeAreaFraction
+    ├── EdgeDistributionType.cs      — enum: None, Uniform, PowerLaw, Exponential
+    ├── EdgeDistributionScope.cs     — [Flags] enum: form×edge bit flags with named presets
+    └── Strategies/
+        ├── CapAtThreshold.cs        — u → 0 (hard ceiling); EdgeAreaFraction = 0
+        ├── Unrestricted.cs          — u → u (pass-through); EdgeAreaFraction = 1
+        ├── PowerLawEdge.cs          — inverse CDF: 1 - (1-u)^(1/(α+1)); EdgeAreaFraction = 1/(α+1)
+        └── ExponentialEdge.cs       — inverse CDF: -ln(1 - u*(1-e^(-λ))) / λ; EdgeAreaFraction = (1-e^(-λ))/λ
 ```
 
 Namespaces:
 - `BiteSystem.ServerOnly.FishWeight` — generator, config
-- `BiteSystem.ServerOnly.FishWeight.Edge` — strategies, enums
+- `BiteSystem.ServerOnly.FishWeight.EdgeDistribution` — interface, enums
+- `BiteSystem.ServerOnly.FishWeight.EdgeDistribution.Strategies` — four strategy implementations
 
 **FishWeightGeneratorConfig (immutable):**
 ```csharp
-using BiteSystem.ServerOnly.FishWeight.Edge;
+using BiteSystem.ServerOnly.FishWeight.EdgeDistribution;
+using BiteSystem.ServerOnly.FishWeight.EdgeDistribution.Strategies;
 
 namespace BiteSystem.ServerOnly.FishWeight
 {
@@ -142,7 +145,8 @@ All weight generation logic lives in `ServerOnly`. `FishDescription` (Common) is
 **FishWeightGenerator** has two methods:
 
 ```csharp
-using BiteSystem.ServerOnly.FishWeight.Edge;
+using BiteSystem.ServerOnly.FishWeight.EdgeDistribution;
+using BiteSystem.ServerOnly.FishWeight.EdgeDistribution.Strategies;
 
 namespace BiteSystem.ServerOnly.FishWeight
 {
@@ -153,7 +157,7 @@ namespace BiteSystem.ServerOnly.FishWeight
         internal static RandomWeight WeightFromNormalized(
             FishDescription fish, double u, FishForm form, float weightK) { ... }
 
-        // Commit 2: full pipeline — random → edge distribution → lerp → crossover
+        // Commit 2: full pipeline — random → normalized piecewise inverse CDF → lerp → crossover
         public static RandomWeight Generate(
             Random rnd, FishDescription fish, FishForm form, float weightK,
             FishWeightGeneratorConfig config)
@@ -161,30 +165,71 @@ namespace BiteSystem.ServerOnly.FishWeight
             var u = rnd.NextDouble();
             var (applyUpper, applyLower) = GetEdgeFlags(form, fish, config.EdgeScope);
 
-            // Upper edge distribution
             var upperZone = (double)config.UpperEdgeZoneFraction;
-            if (applyUpper && upperZone > 0)
+            var lowerZone = (double)config.LowerEdgeZoneFraction;
+            var areaFrac = config.EdgeStrategy.EdgeAreaFraction;
+
+            // Normalized piecewise inverse CDF sampling.
+            // The split point u* divides [0,1] proportionally to area under each PDF region.
+            // This ensures the density is continuous at the zone boundaries (no spike).
+            // See edge-distribution.md §5–6 for derivation.
+
+            if (applyUpper && applyLower && upperZone > 0 && lowerZone > 0)
             {
+                // Three-region split: lower edge + central + upper edge
                 var threshold = 1.0 - upperZone;
-                if (u >= threshold)
+                var centralWidth = threshold - lowerZone;
+                var lowerArea = lowerZone * areaFrac;
+                var upperArea = upperZone * areaFrac;
+                var totalArea = lowerArea + centralWidth + upperArea;
+                var u1 = lowerArea / totalArea;
+                var u2 = (lowerArea + centralWidth) / totalArea;
+
+                if (u < u1)
                 {
-                    var edgeU = (u - threshold) / upperZone;
-                    edgeU = Math.Min(edgeU, 1.0 - 1e-10);  // guard against u=1.0 → ln(0)
-                    var sampled = config.EdgeStrategy.Sample(rnd, edgeU);
-                    u = threshold + sampled * upperZone;
+                    var w = u / u1;
+                    u = lowerZone - config.EdgeStrategy.Sample(rnd, 1.0 - w) * lowerZone;
+                }
+                else if (u < u2)
+                {
+                    u = lowerZone + (u - u1) / (u2 - u1) * centralWidth;
+                }
+                else
+                {
+                    var w = (u - u2) / (1.0 - u2);
+                    u = threshold + config.EdgeStrategy.Sample(rnd, w) * upperZone;
                 }
             }
-
-            // Lower edge distribution (mirror of upper)
-            var lowerZone = (double)config.LowerEdgeZoneFraction;
-            if (applyLower && lowerZone > 0)
+            else if (applyUpper && upperZone > 0)
             {
-                if (u <= lowerZone)
+                // Two-region split: central + upper edge
+                var threshold = 1.0 - upperZone;
+                var splitPoint = threshold / (threshold + upperZone * areaFrac);
+
+                if (u < splitPoint)
                 {
-                    var edgeU = (lowerZone - u) / lowerZone;
-                    edgeU = Math.Min(edgeU, 1.0 - 1e-10);
-                    var sampled = config.EdgeStrategy.Sample(rnd, edgeU);
-                    u = lowerZone - sampled * lowerZone;
+                    u = u / splitPoint * threshold;
+                }
+                else
+                {
+                    var w = (u - splitPoint) / (1.0 - splitPoint);
+                    u = threshold + config.EdgeStrategy.Sample(rnd, w) * upperZone;
+                }
+            }
+            else if (applyLower && lowerZone > 0)
+            {
+                // Two-region split: lower edge + central
+                var centralStart = lowerZone;
+                var splitPoint = lowerZone * areaFrac / (lowerZone * areaFrac + (1.0 - lowerZone));
+
+                if (u < splitPoint)
+                {
+                    var w = u / splitPoint;
+                    u = lowerZone - config.EdgeStrategy.Sample(rnd, 1.0 - w) * lowerZone;
+                }
+                else
+                {
+                    u = lowerZone + (u - splitPoint) / (1.0 - splitPoint) * (1.0 - lowerZone);
                 }
             }
 
@@ -315,30 +360,33 @@ Note: GV property names use the `FishWeight` prefix (flat namespace), while enum
 
 ## Algorithms
 
-| Algorithm   | Inverse CDF: u∈[0,1] → t∈[0,1] | Density at max (t=1)  | Parameter     |
-|-------------|--------------------------------|-----------------------|---------------|
-| None        | `u → 0`                        | 0 (hard ceiling)      | —             |
-| Uniform     | `u → u`                        | 1 (no redistribution) | —             |
-| PowerLaw    | `u → 1-(1-u)^(1/(α+1))`        | 0 (zero density)      | α (steepness) |
-| Exponential | `u → -ln(1-u·(1-e⁻ᵞ))/λ`       | e⁻ᵞ > 0 (asymptotic)  | λ (rate)      |
+| Algorithm   | Inverse CDF: u∈[0,1] → t∈[0,1] | Density at max (t=1)    | Parameter     |
+|-------------|--------------------------------|-------------------------|---------------|
+| None        | `u → 0`                        | 0 (hard ceiling)        | —             |
+| Uniform     | `u → u`                        | 1 (no redistribution)   | —             |
+| PowerLaw    | `u → 1-(1-u)^(1/(α+1))`        | 0 (zero density)        | α (steepness) |
+| Exponential | `u → -ln(1-u·(1-e^(−λ)))/λ`    | e^(−λ) > 0 (asymptotic) | λ (rate)      |
 
 Where u is a uniform random sample, t is the resulting position in the edge zone.
 
-**Parameter validation (enforced in `UpdateStaticVariables()`):**
+**Parameter validation:**
 
-| Parameter      | Valid range   | Clamp behavior  |
-|----------------|---------------|-----------------|
-| Zone fraction  | [0.0, 1.0]    | Clamp to bounds |
-| α (steepness)  | [0.01, 200.0] | Clamp to bounds |
-| λ (rate)       | [0.01, 200.0] | Clamp to bounds |
+| Parameter     | Valid range | Where enforced        | Behavior                                 |
+|---------------|-------------|-----------------------|------------------------------------------|
+| Zone fraction | [0.0, 1.0]  | `FromSettings()`      | Clamp to bounds                          |
+| α (steepness) | any ≥ 0     | `Sample()` internally | `Math.Max(α, 1e-10)` at computation time |
+| λ (rate)      | any ≥ 0     | `Sample()` internally | `Math.Max(λ, 1e-10)` at computation time |
+
+Constructors store parameters as-is. Validation happens at the point of use, not at configuration time — this allows GD-set values to be inspected and diagnosed without silent modification.
 
 Overlap guard:
 - `upperZone + lowerZone > 0.8` → proportionally shrink both to fit within 80% (20% uniform zone guaranteed)
 
 Division-by-zero guards:
 - `zoneFraction = 0.0` → skip edge distribution entirely (no edge zone)
-- `edgeU` value clamped to `[0, 1-ε]` before passing to `Sample()` — prevents `ln(0)` in ExponentialEdge
-- `λ = 0` excluded by min bound — prevents `0/0` in formula
+- `EdgeAreaFraction = 0` (CapAtThreshold) → split point = 1.0, all draws go to central zone (no `Sample()` call)
+- `λ` and `α` clamped to `≥ 1e-10` inside `Sample()` at computation time — constructors store as-is
+- Normalized sampling eliminates the `edgeU = 1.0` edge case — `w` is derived from a proportional split, never reaches exactly 1.0
 
 ## Design Notes
 
@@ -348,7 +396,9 @@ Division-by-zero guards:
 
 **Naming:** `CapAtThreshold` (`u → 0`) — name reflects behavior (hard ceiling at edge zone boundary). `Unrestricted` (`u → u`) is the true pass-through (no modification).
 
-**IEdgeDistributionStrategy.Sample(Random, double):** The `Random` parameter is unused by current implementations (all four are pure inverse-CDF transforms of the `double` input). It is included for extensibility — future algorithms may need additional random draws. Note: consuming extra draws from `playerData.Rnd` changes the deterministic sequence for subsequent operations.
+**IEdgeDistributionStrategy interface:** Two members:
+- `Sample(Random, double) → double` — inverse CDF transform. The `Random` parameter is unused by current implementations (all four are pure transforms of the `double` input). Included for extensibility.
+- `EdgeAreaFraction { get; }` — integral of the edge function over [0,1]. Used by `Generate()` to compute the normalized split point. Values: CapAtThreshold=0, Unrestricted=1, PowerLaw=1/(α+1), Exponential=(1−e^(−λ))/λ. This property is what makes the piecewise inverse CDF seamless — see [edge-distribution.md](../../../server/modules/fish-generator/edge-distribution.md) §6.
 
 ## Extensibility
 
@@ -363,11 +413,13 @@ Division-by-zero guards:
 - `FishWeightGenerator.cs` — static class, full weight generation pipeline. Created via `svn copy` from `FishDescription.cs` to preserve blame history (Commit 1), extended with `Generate()` (Commit 2)
 - `FishWeightGeneratorConfig.cs` — immutable config with `volatile static Current` (Commit 2)
 
-### BiteSystem/ServerOnly/FishWeight/Edge/ (new — namespace `BiteSystem.ServerOnly.FishWeight.Edge`)
-- `IEdgeDistributionStrategy.cs` — interface: `Sample(Random, double) → double`
-- `CapAtThreshold.cs`, `Unrestricted.cs`, `PowerLawEdge.cs`, `ExponentialEdge.cs` — four strategy implementations
-- `EdgeDistribution.cs` — enum (short name): `None, Uniform, PowerLaw, Exponential`
+### BiteSystem/ServerOnly/FishWeight/EdgeDistribution/ (new — namespace `BiteSystem.ServerOnly.FishWeight.EdgeDistribution`)
+- `IEdgeDistributionStrategy.cs` — interface: `Sample(Random, double) → double`, `EdgeAreaFraction { get; }`
+- `EdgeDistributionType.cs` — enum: `None, Uniform, PowerLaw, Exponential`
 - `EdgeDistributionScope.cs` — `[Flags]` enum: form×edge bit flags with named presets (Heaviest, Extremes, All)
+
+### BiteSystem/ServerOnly/FishWeight/EdgeDistribution/Strategies/ (new — namespace `...EdgeDistribution.Strategies`)
+- `CapAtThreshold.cs`, `Unrestricted.cs`, `PowerLawEdge.cs`, `ExponentialEdge.cs` — four strategy implementations
 
 ### BiteSystem/Common/ObjectModel/ (modified)
 - `FishDescription.cs` — remove `_formToNorm` polynomials, remove `GenerateRandomWeight()` entirely. Pure data class.
