@@ -1,0 +1,91 @@
+     Baseline_OldApi_RecordWeights Success
+=== weightK = 1 ===
+  Form: Young
+    [0] weight=37,244550 form=Young orig=Young min=15 max=40
+    [1] weight=21,581360 form=Young orig=Young min=15 max=40
+    [2] weight=20,918470 form=Young orig=Young min=15 max=40
+    [3] weight=34,300970 form=Young orig=Young min=15 max=40
+    [4] weight=22,738200 form=Young orig=Young min=15 max=40
+    [5] weight=26,414450 form=Young orig=Young min=15 max=40
+    [6] weight=38,101400 form=Young orig=Young min=15 max=40
+    [7] weight=34,063640 form=Young orig=Young min=15 max=40
+    [8] weight=22,953270 form=Young orig=Young min=15 max=40
+    [9] weight=38,576160 form=Young orig=Young min=15 max=40
+  Form: Common
+    [0] weight=66,724260 form=Common orig=Common min=40 max=80
+    [1] weight=45,636290 form=Common orig=Common min=40 max=80
+    [2] weight=45,020730 form=Common orig=Common min=40 max=80
+    [3] weight=60,910570 form=Common orig=Common min=40 max=80
+    [4] weight=46,737370 form=Common orig=Common min=40 max=80
+    [5] weight=50,503710 form=Common orig=Common min=40 max=80
+    [6] weight=68,976330 form=Common orig=Common min=40 max=80
+    [7] weight=60,516910 form=Common orig=Common min=40 max=80
+    [8] weight=46,946040 form=Common orig=Common min=40 max=80
+    [9] weight=70,450020 form=Common orig=Common min=40 max=80
+  Form: Trophy
+    [0] weight=113,405300 form=Trophy orig=Trophy min=80 max=130
+    [1] weight=87,045360 form=Trophy orig=Trophy min=80 max=130
+    [2] weight=86,275920 form=Trophy orig=Trophy min=80 max=130
+    [3] weight=106,138200 form=Trophy orig=Trophy min=80 max=130
+    [4] weight=88,421710 form=Trophy orig=Trophy min=80 max=130
+    [5] weight=93,129630 form=Trophy orig=Trophy min=80 max=130
+    [6] weight=116,220400 form=Trophy orig=Trophy min=80 max=130
+    [7] weight=105,646100 form=Trophy orig=Trophy min=80 max=130
+    [8] weight=88,682560 form=Trophy orig=Trophy min=80 max=130
+    [9] weight=118,062500 form=Trophy orig=Trophy min=80 max=130
+  Form: Unique
+    [0] weight=166,116900 form=Unique orig=Unique min=130 max=204
+    [1] weight=171,112200 form=Unique orig=Unique min=130 max=204
+    [2] weight=167,835800 form=Unique orig=Unique min=130 max=204
+    [3] weight=176,279000 form=Unique orig=Unique min=130 max=204
+    [4] weight=176,114700 form=Unique orig=Unique min=130 max=204
+    [5] weight=185,899700 form=Unique orig=Unique min=130 max=204
+    [6] weight=164,578200 form=Unique orig=Unique min=130 max=204
+    [7] weight=177,085200 form=Unique orig=Unique min=130 max=204
+    [8] weight=176,944000 form=Unique orig=Unique min=130 max=204
+    [9] weight=164,814300 form=Unique orig=Unique min=130 max=204
+=== weightK = 1,2 ===
+  Form: Young
+    [0] weight=44,693460 form=Common orig=Young min=40 max=80
+    [1] weight=25,897630 form=Young orig=Young min=15 max=40
+    [2] weight=25,102170 form=Young orig=Young min=15 max=40
+    [3] weight=41,161160 form=Common orig=Young min=40 max=80
+    [4] weight=27,285840 form=Young orig=Young min=15 max=40
+    [5] weight=31,697350 form=Young orig=Young min=15 max=40
+    [6] weight=45,721680 form=Common orig=Young min=40 max=80
+    [7] weight=40,876370 form=Common orig=Young min=40 max=80
+    [8] weight=27,543920 form=Young orig=Young min=15 max=40
+    [9] weight=46,291390 form=Common orig=Young min=40 max=80
+  Form: Common
+    [0] weight=80,069110 form=Trophy orig=Common min=80 max=130
+    [1] weight=54,763550 form=Common orig=Common min=40 max=80
+    [2] weight=54,024880 form=Common orig=Common min=40 max=80
+    [3] weight=73,092690 form=Common orig=Common min=40 max=80
+    [4] weight=56,084850 form=Common orig=Common min=40 max=80
+    [5] weight=60,604450 form=Common orig=Common min=40 max=80
+    [6] weight=82,771610 form=Trophy orig=Common min=80 max=130
+    [7] weight=72,620290 form=Common orig=Common min=40 max=80
+    [8] weight=56,335250 form=Common orig=Common min=40 max=80
+    [9] weight=84,540020 form=Trophy orig=Common min=80 max=130
+  Form: Trophy
+    [0] weight=136,086400 form=Unique orig=Trophy min=130 max=204
+    [1] weight=104,454400 form=Trophy orig=Trophy min=80 max=130
+    [2] weight=103,531100 form=Trophy orig=Trophy min=80 max=130
+    [3] weight=127,365900 form=Trophy orig=Trophy min=80 max=130
+    [4] weight=106,106100 form=Trophy orig=Trophy min=80 max=130
+    [5] weight=111,755600 form=Trophy orig=Trophy min=80 max=130
+    [6] weight=139,464500 form=Unique orig=Trophy min=130 max=204
+    [7] weight=126,775400 form=Trophy orig=Trophy min=80 max=130
+    [8] weight=106,419100 form=Trophy orig=Trophy min=80 max=130
+    [9] weight=141,675000 form=Unique orig=Trophy min=130 max=204
+  Form: Unique
+    [0] weight=199,340200 form=Unique orig=Unique min=130 max=204
+    [1] weight=205,334600 form=Unique orig=Unique min=130 max=204
+    [2] weight=201,403000 form=Unique orig=Unique min=130 max=204
+    [3] weight=211,534900 form=Unique orig=Unique min=130 max=204
+    [4] weight=211,337700 form=Unique orig=Unique min=130 max=204
+    [5] weight=223,079700 form=Unique orig=Unique min=130 max=204
+    [6] weight=197,493800 form=Unique orig=Unique min=130 max=204
+    [7] weight=212,502200 form=Unique orig=Unique min=130 max=204
+    [8] weight=212,332800 form=Unique orig=Unique min=130 max=204
+    [9] weight=197,777200 form=Unique orig=Unique min=130 max=204

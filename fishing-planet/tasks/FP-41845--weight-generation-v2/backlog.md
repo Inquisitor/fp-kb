@@ -126,6 +126,9 @@ Chosen: `WebAdmin.Controllers.Settings` with partial controller pattern (`Settin
 
 Rationale: existing StatsController uses partial pattern. Settings pages should be organized, not dumped into flat Controllers/. Zero cost now, saves reorganization later.
 
+## Codebase improvements (separate commits)
+- [ ] `Clamp` helper — `Math.Clamp` unavailable in .NET 4.7.2, codebase uses `Math.Max(min, Math.Min(max, val))` pattern. Extract to utility method.
+
 ## Deferred / Questions
 - ~~Real ratio between forms (Young/Common/Trophy/Unique)~~ — investigated: proportions are emergent from FishSelector layer config, can be estimated from pond config or taken from FishFact. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md). Combined overall histogram = Σ(p_form × dist_form).
 - ~~Unique polynomial "double hump" phenomenon~~ — explained, understood
