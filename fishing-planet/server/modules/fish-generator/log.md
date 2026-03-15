@@ -159,12 +159,12 @@ Quantitative comparison of simulator output vs production FishFact histograms fo
 
 **Raw data:**
 
-|              | Production                                                                                                                                                  | Simulation                                                                                                                                                                                                    |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| File         | [FishStats-congo-nile-perch-2026-01-01-2months.tsv](../../tasks/FP-41845--weight-generation-v2/artifacts/FishStats-congo-nile-perch-2026-01-01-2months.tsv) | [WeightSim_NilePerch_AF_CD_CongoRiver_N1000000_wK1_t0.95_s0.55_step1.00.tsv](../../tasks/FP-41845--weight-generation-v2/artifacts/WeightSim_NilePerch_AF_CD_CongoRiver_N1000000_wK1_t0.95_s0.55_step1.00.tsv) |
-| Description  | FishFact histogram, Source='B'                                                                                                                              | Simulator output, N=1M/form                                                                                                                                                                                   |
-| Period/Date  | 2026-01-01 → 2026-03-01                                                                                                                                     | 2026-03-11, r15909                                                                                                                                                                                            |
-| Total sample | 1,887,028 (Y=947,776 C=524,745 T=238,135 U=176,372)                                                                                                         | 4,000,000 (1M × 4 forms)                                                                                                                                                                                      |
+|              | Production                                                                                                                                                     | Simulation                                                                                                                                                                                                       |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| File         | [FishStats-congo-nile-perch-2026-01-01-2months.tsv](../../../tasks/FP-41845--weight-generation-v2/artifacts/FishStats-congo-nile-perch-2026-01-01-2months.tsv) | [WeightSim_NilePerch_AF_CD_CongoRiver_N1000000_wK1_t0.95_s0.55_step1.00.tsv](../../../tasks/FP-41845--weight-generation-v2/artifacts/WeightSim_NilePerch_AF_CD_CongoRiver_N1000000_wK1_t0.95_s0.55_step1.00.tsv) |
+| Description  | FishFact histogram, Source='B'                                                                                                                                 | Simulator output, N=1M/form                                                                                                                                                                                      |
+| Period/Date  | 2026-01-01 → 2026-03-01                                                                                                                                        | 2026-03-11, r15909                                                                                                                                                                                               |
+| Total sample | 1,887,028 (Y=947,776 C=524,745 T=238,135 U=176,372)                                                                                                            | 4,000,000 (1M × 4 forms)                                                                                                                                                                                         |
 
 ### Per-form deviation summary
 
@@ -287,7 +287,7 @@ Total crossover fish: 23 out of ~1.9M (0.001%). Negligible — does not affect s
 
 **Rationale:** Normal-first has a fundamental discontinuity at the threshold seam. The flat uniform zone has density `Φ(threshold)/threshold`, while the normal tail starts at `φ(threshold)`. These values are coupled — making the seam smooth requires high tail probability (~39%), which contradicts the goal of making tail fish rare (~5%). Power-law and exponential are seamless by construction (`p(threshold) = 1`), have single intuitive tuning parameters, and support closed-form sampling (no rejection).
 
-**Analysis artifact:** [decay-comparison.html](../../tasks/FP-41845--weight-generation-v2/artifacts/decay-comparison.html) — interactive comparison with sliders, PDF plots, and simulated histograms.
+**Analysis artifact:** [decay-comparison.html](../../../tasks/FP-41845--weight-generation-v2/artifacts/decay-comparison.html) — interactive comparison with sliders, PDF plots, and simulated histograms.
 
 ## 2026-03-14: Edge distribution system design finalized (FP-41845 phase 2a design)
 
@@ -298,9 +298,9 @@ Total crossover fish: 23 out of ~1.9M (0.001%). Negligible — does not affect s
 - **Callback config pattern** — `FishWeightGeneratorConfig.UpdateFromGlobalVariables()` assembles config inside BiteSystem assembly, called from `GlobalVariablesCache.UpdateStaticVariables()` as one-liner. Enables `internal set` on `Config.Current` (writer and config in same assembly). Fixes architectural smell where SharedLib reached into subsystem internals.
 - **Fail-safe defaults** — Algorithm=None (CapAtThreshold), Scope=All, both zones=0.05. Maximally restrictive: no fish can reach extreme weights until GD explicitly configures.
 
-**Design artifacts:** [edge-distribution-design.md](../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md), [edge-distribution-impl-plan.md](../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-impl-plan.md).
+**Design artifacts:** [edge-distribution-design.md](../../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md), [edge-distribution-impl-plan.md](../../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-impl-plan.md).
 
 ## FP-33182: Fish generation improvements
-- Full task journal: [FP-33182--weight-generation](../../tasks/FP-33182--weight-generation/journal.md)
+- Full task journal: [FP-33182--weight-generation](../../../tasks/FP-33182--weight-generation/journal.md)
 - ~~System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path~~ — reverted in FP-41845 phase 2a.1
 - Mathematical model errors identified → FP-41845 in progress

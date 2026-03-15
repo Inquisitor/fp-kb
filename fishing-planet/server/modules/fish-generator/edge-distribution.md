@@ -2,7 +2,7 @@
 
 > How to make fish near maximum weight progressively rarer while keeping the rest of the distribution uniform — and how to implement it correctly.
 
-Related: [FP-41845](../../tasks/FP-41845--weight-generation-v2/journal.md) (Phase 2a) | [Interactive comparison tool](decay-comparison.html)
+Related: [FP-41845](../../../tasks/FP-41845--weight-generation-v2/journal.md) (Phase 2a) | [Interactive comparison tool](decay-comparison.html)
 
 ---
 

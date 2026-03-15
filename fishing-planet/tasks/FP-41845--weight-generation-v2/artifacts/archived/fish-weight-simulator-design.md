@@ -1,6 +1,6 @@
 # Fish Weight Simulator — Design Spec
 
-> Task: [FP-41845](../journal.md) Phase 1.3
+> Task: [FP-41845](../../journal.md) Phase 1.3
 > Date: 2026-03-10
 > Status: Approved
 
@@ -202,7 +202,7 @@ Algorithm:
 5. Normalize counts → percentages per form (denominator = N iterations for that form)
 6. Return `FishWeightSimulationResult`
 
-**Note on `weightK` behavior in the underlying code:** `GenerateRandomWeight()` applies `weightK` twice — once to `norm` (before `GetPossibleNormalFloat`, distorting distribution shape) and once to `weight` (after, but only used for form crossover check). Within-form fish receive weight WITHOUT the second `weightK` multiplication. This is a known bug (see [log.md](../../server/modules/fish-generator/log.md), entry "weightK bug confirmed via SVN diff"). The simulator faithfully reproduces this behavior since it calls the real code.
+**Note on `weightK` behavior in the underlying code:** `GenerateRandomWeight()` applies `weightK` twice — once to `norm` (before `GetPossibleNormalFloat`, distorting distribution shape) and once to `weight` (after, but only used for form crossover check). Within-form fish receive weight WITHOUT the second `weightK` multiplication. This is a known bug (see [log.md](../../../../server/modules/fish-generator/log.md), entry "weightK bug confirmed via SVN diff"). The simulator faithfully reproduces this behavior since it calls the real code.
 
 Thread safety: one `Random` per call, service is stateless.
 
@@ -308,6 +308,6 @@ No unit tests for View/JS/Controller — manual QA via browser.
 
 ## Future Extensions (designed for, not implemented)
 
-- **Form ratio integration:** service returns per-form results; combiner is external. API: `run per form → weight externally → combine`. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md).
+- **Form ratio integration:** service returns per-form results; combiner is external. API: `run per form → weight externally → combine`. See [fish-selector-form-ratio.md](../../../../server/modules/fish-generator/fish-selector-form-ratio.md).
 - **Production overlay:** add FishFact SQL endpoint later, chart JS already supports multiple data sources.
 - **Server endpoint reuse:** service lives in BiteSystem assembly, accessible from game server without WebAdmin dependency.
