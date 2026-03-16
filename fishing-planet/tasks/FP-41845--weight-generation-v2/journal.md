@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Commits 1–2 code complete (local, not committed to SVN). During review, discovered normalization trap: naive edge remap creates density spike at zone boundary. Design doc and deep dive article updated with the fix (normalized piecewise inverse CDF). Next: apply normalization fix to `Generate()`, add `EdgeAreaFraction` to interface, then commit to SVN.
+Phase 2a implementation committed (r15918–r15919). Edge distribution system live: 4 algorithms, normalized piecewise inverse CDF, `EdgeAreaFraction`, 44 tests. Next: Commit 3 — move simulator to Settings controller, full UI with all parameters.
 
 ## Summary
 
@@ -48,3 +48,4 @@ See [backlog.md](backlog.md) for action items.
 - 2026-03-14: Phase 2a design complete — edge distribution system spec and 5-commit implementation plan finalized. Key design decisions: "Edge Distribution" terminology (not decay/tail), zone fraction (not threshold), `[Flags]` EdgeDistributionScope (form×edge bit matrix), callback config pattern (`UpdateFromGlobalVariables` in BiteSystem), `internal set` on Config.Current. Deep review: 18 findings, all resolved.
 - 2026-03-14: Commits 1–2 code complete (local) — legacy cleanup (polynomial removal, `FishWeightGenerator` extraction) + edge distribution system (4 algorithms, config, scope, GlobalVariables, WebAdmin UI, 43 tests passing). Not committed to SVN — pending normalization fix.
 - 2026-03-15: Normalization trap discovered — naive edge remap gives edge zone a fixed probability budget, creating a density spike at the boundary ((α+1)× for PowerLaw). Same root cause as the r12950 seam problem. Fix: normalized piecewise inverse CDF with `EdgeAreaFraction` property. Design doc updated, deep dive article written ([edge-distribution.md](../../server/modules/fish-generator/edge-distribution.md)).
+- 2026-03-16: Phase 2a committed to SVN. r15918: `MathUtility` (Lerp, Clamp) in SharedLib. r15919: edge distribution system — legacy cleanup, 4 strategies, normalized `Generate()`, config, scope, GlobalVariables, WebAdmin, 44 tests green.
