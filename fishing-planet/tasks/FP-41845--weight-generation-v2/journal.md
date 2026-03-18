@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Commits 1–4 done (r15918–r15921). Next: Commit 5 — Preview modal with interactive edge distribution curves.
+Phase 2a complete (r15918–r15926). All 5 commits done: edge distribution system, simulator move, settings UI, UI polish, preview curves modal. Next: Phase 2b (crossover visualization) or Phase 3 (documentation FP-41844).
 
 ## Summary
 
@@ -51,3 +51,4 @@ See [backlog.md](backlog.md) for action items.
 - 2026-03-16: Phase 2a committed to SVN. r15918: `MathUtility` (Lerp, Clamp) in SharedLib. r15919: edge distribution system — legacy cleanup, 4 strategies, normalized `Generate()`, config, scope, GlobalVariables, WebAdmin, 44 tests green.
 - 2026-03-16: Commit 3 (r15920) — simulator moved from `StatsController` to `SettingsController` (namespace `WorldSettings`, avoids conflict with existing `Settings` static class). View → `Views/Settings/FishWeightGenerator.cshtml`. Navigation: Content > Fishing. Both files svn-moved for history. Wildcard csproj pattern for future partials.
 - 2026-03-16: Commit 4 (r15921) — Settings UI: Save to GlobalVariables with DataChanges audit trail, confirmation dialog (responsibility checkbox + comment), Reset per fieldset, Refresh Caches. Two-fieldset layout (CSS Grid). Kendo DropDownList for Algorithm/Scope. `AllUpper` and `ExtremesAndAllUpper` scope presets. SQL patch 035-v2: added missing `FishWeightUpperEdgeZoneFraction` insert.
+- 2026-03-17: Commits 5–6 (r15923, r15926) — Preview Curves modal: Canvas 2D curve explorer with dark mode, crosshair legend, sidebar with non-linear sliders, upper/lower toggle. UI restructured: CSS Grid fieldsets, Kendo widgets, zone fields in percentages. Chart fix: near-edge buckets with count>0 now visible. Save dialog: AJAX error handling, Kendo ComboBox commit message.
