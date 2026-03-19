@@ -6,9 +6,36 @@
 
 Fish weight is determined at template generation time and stays constant through the entire fish lifecycle (attack → fight → catch). Weight affects: force, length, hook size, experience, cost, pulling force multiplier, and "huge fish" display.
 
-## Weight Generation Algorithm
+## Weight Generation Algorithms
 
-### Core function: `GameUtils.RandomizeFishWeight()` (GameUtils.cs)
+Two independent weight generation algorithms exist. BiteSystem is the primary production path; GameUtils is legacy (FishBox, carousel, scripted).
+
+### BiteSystem path: `FishWeightGenerator` (BiteSystem/ServerOnly/FishWeight/)
+
+The primary weight generation pipeline on production. All fish from BiteSystem (Source='B') use this path.
+
+```
+Input:  FishDescription, FishForm, weightK (chum multiplier), FishWeightGeneratorConfig
+Output: RandomWeight { Form, Weight, OriginalForm, MinWeight, MaxWeight }
+```
+
+**Pipeline:** `Generate()` draws uniform `u ~ [0,1]`, applies normalized piecewise inverse CDF edge distribution, then maps to weight via `WeightFromNormalized()`:
+
+1. **Edge distribution** (optional, per config): splits `u` into central + edge zones. Central zone: uniform. Edge zones: algorithm-dependent (PowerLaw, Exponential, Unrestricted, CapAtThreshold). Normalization ensures density continuity at zone boundaries.
+2. **Weight mapping:** `weight = Lerp(minWeight, maxWeight, u) * weightK`
+3. **Crossover detection:** if `weight` falls outside form's [min, max] range (due to weightK), reassign to the correct form.
+4. **Rounding:** `FishGenerator.RoundTo3rdDigit()` rounds to grams via `Math.Round(decimal, 3, AwayFromZero)`. Rounding constants shared via `FishWeightRounding`.
+
+**Key types:**
+- `FishWeightGenerator` — static class with `Generate()` (full pipeline) and `WeightFromNormalized()` (deterministic u-to-weight)
+- `FishWeightGeneratorConfig` — immutable snapshot: algorithm, scope, zone fractions. Created from GlobalVariables via `FromSettings()`.
+- `IEdgeDistributionStrategy` — strategy interface (`Sample()` + `EdgeAreaFraction`). Implementations: `CapAtThreshold`, `Unrestricted`, `PowerLawEdge`, `ExponentialEdge`.
+- `EdgeDistributionScope` — `[Flags]` bit matrix: form role (Heaviest/Lightest/Others) x edge (Upper/Lower).
+- `FishWeightRounding` — shared constants (`DecimalPlaces=3`, `Mode=AwayFromZero`) + `Round()` helper. Used by both production `FishGenerator` and `FishWeightSimulationService`.
+
+See [edge-distribution.md](edge-distribution.md) for algorithm details and normalization math.
+
+### Legacy path: `GameUtils.RandomizeFishWeight()` (GameUtils.cs)
 
 ```
 Input:  minWeight, maxWeight (from LocalFish or FishCarouselItem), bias (FishWeightBias enum)
@@ -29,15 +56,15 @@ Output: decimal weight in [minWeight, maxWeight]
 
 ## Weight Sources by Generation Path
 
-| Path                       | Method                                        | Weight Origin                                        | Randomization                               |
-|----------------------------|-----------------------------------------------|------------------------------------------------------|---------------------------------------------|
-| Debug fish                 | `GenerateFishTemplate()` — debug branch       | `DebugFishWeight` or LocalFish range                 | `RandomizeFishWeight()` if no debug weight  |
-| Event fish                 | `GenerateFishTemplate()` — event branch       | `nextFishWeight` (pre-set via `SetFishToGenerate()`) | Already randomized at set time              |
-| Scripted fish              | `GenerateScriptedFishTemplate()`              | ScriptedFish min/max range                           | `RandomizeFishWeight()` with fish bias      |
-| Predefined (tutorial)      | `GenerateFishTemplate()` — predefined branch  | Hardcoded ranges (e.g. 0.35-0.4 kg)                  | `GetMinMaxValue()` with linear random       |
-| Carousel (absolute/active) | `GenerateCarouselFishTemplate()`              | FishCarouselItem min/max                             | `RandomizeFishWeight()` with item bias      |
-| FishBox (regular)          | `GenerateFishTemplate()` — box fish selection | LocalFish min/max from box condition                 | `RandomizeFishWeight()` with fish bias      |
-| BiteSystem                 | `GenerateAttackForBiteSystem()`               | `biteSystemResult.Weight` (from BiteEditor)          | Weight comes pre-calculated from BiteSystem |
+| Path                       | Method                                        | Weight Origin                                        | Randomization                                                    |
+|----------------------------|-----------------------------------------------|------------------------------------------------------|------------------------------------------------------------------|
+| Debug fish                 | `GenerateFishTemplate()` — debug branch       | `DebugFishWeight` or LocalFish range                 | `RandomizeFishWeight()` if no debug weight                       |
+| Event fish                 | `GenerateFishTemplate()` — event branch       | `nextFishWeight` (pre-set via `SetFishToGenerate()`) | Already randomized at set time                                   |
+| Scripted fish              | `GenerateScriptedFishTemplate()`              | ScriptedFish min/max range                           | `RandomizeFishWeight()` with fish bias                           |
+| Predefined (tutorial)      | `GenerateFishTemplate()` — predefined branch  | Hardcoded ranges (e.g. 0.35-0.4 kg)                  | `GetMinMaxValue()` with linear random                            |
+| Carousel (absolute/active) | `GenerateCarouselFishTemplate()`              | FishCarouselItem min/max                             | `RandomizeFishWeight()` with item bias                           |
+| FishBox (regular)          | `GenerateFishTemplate()` — box fish selection | LocalFish min/max from box condition                 | `RandomizeFishWeight()` with fish bias                           |
+| BiteSystem                 | `GenerateAttackForBiteSystem()`               | `biteSystemResult.Weight` (from BiteEditor)          | `FishWeightGenerator.Generate()` — edge distribution + crossover |
 
 Note: Carousel is attempted as a *replacement* within the FishBox selection path (inside the per-template loop), not as a separate higher-priority source.
 

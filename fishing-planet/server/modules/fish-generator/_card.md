@@ -6,15 +6,16 @@ module: fish-generator
 > Spawns fish, assigns weight via bias-aware randomization, determines hookability.
 
 ## Entry Points
-- `FishGenerator` — `Photon/src-server/GameModel/FishGenerator.cs` (2200 LOC, core generation & hooking)
-- `GameUtils.RandomizeFishWeight()` — `Photon/src-server/GameModel/Helpers/GameUtils.cs` (bias-aware weight)
+- `FishGenerator` — `Photon/src-server/GameModel/FishGenerator.cs` (core generation, hooking, rounding)
+- `FishWeightGenerator` — `Shared/BiteSystem/ServerOnly/FishWeight/FishWeightGenerator.cs` (BiteSystem weight pipeline)
 
 ## Key Types
 - `FishTemplate` — generated fish instance (weight, IdealHookSize, source, box)
+- `FishWeightGeneratorConfig` — immutable edge distribution config (algorithm, scope, zones)
+- `FishWeightRounding` — shared rounding constants for production/simulator sync
 - `Hooker` — hooking probability curve (piecewise: low wing / peak / high wing)
 - `NormalRandom` — Box-Muller RNG (linear, half-normal, full-normal distributions)
-- `LocalFish` — fish form config (MinWeight, MaxWeight, Bias)
-- `ServerFish` — fish species config (ForceWeight, HookSizeWeight, Status)
+- `LocalFish` / `ServerFish` — fish form and species config
 
 ## Dependencies
 → BiteSystem: `GenerateAttackForBiteSystem()` calls `Pond.GetFish()`
@@ -36,5 +37,6 @@ module: fish-generator
 - FP-41845: Implement new system of weight generation (in progress) → [task journal](../../../tasks/FP-41845--weight-generation-v2/journal.md)
   - Phase 1 complete: WebAdmin weight simulator built, deployed, validated vs production (all forms ≤0.13pp deviation)
   - Phase 2a design complete: edge distribution system (4 algorithms, [Flags] scope, zone fraction config) → [design](../../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md)
+  - Simulator polishing: decimal bucketing, shared `FishWeightRounding`, gram-precision tooltips, sentinel buckets, 22 tests
 
 See also: [backlog](backlog.md) | [log](log.md)

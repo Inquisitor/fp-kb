@@ -300,6 +300,18 @@ Total crossover fish: 23 out of ~1.9M (0.001%). Negligible — does not affect s
 
 **Design artifacts:** [edge-distribution-design.md](../../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md), [edge-distribution-impl-plan.md](../../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-impl-plan.md).
 
+## 2026-03-19: Simulator bucketing rewritten in decimal arithmetic (FP-41845 polishing)
+
+**Problem:** float arithmetic in bucket index computation (`(int)((weight - globalMin) / step)`) caused systematic off-by-one errors at gram resolution. `0.065f - 0.060f = 0.004999...`, `/0.001f = 4.999`, `(int) = 4` — fish at 65g placed in 64g bucket. Pattern: every ~3-4th gram value empty, neighbors doubled.
+
+**Decision:** All bucketing arithmetic (index computation, bucket count, bucket labels) uses `decimal`. Float grid parameters cleaned via `Math.Round((decimal)floatValue, 6)` before entering decimal pipeline. Weight rounded to grams via shared `FishWeightRounding.Round()` (matching production `RoundTo3rdDigit`).
+
+**Rationale:** Epsilon-based float compensation (adding 1e-6 before truncation) was considered and rejected — it masks the root cause and can fail for different value ranges. Decimal arithmetic eliminates the problem entirely. Performance impact: negligible (single decimal division per iteration in a ~2s simulation).
+
+**Shared rounding constants:** `FishWeightRounding.DecimalPlaces=3`, `FishWeightRounding.Mode=AwayFromZero` — used by both `FishGenerator` (production) and `FishWeightSimulationService`. If rounding changes, both sites update together.
+
+**Lesson learned:** Production stores fish weights as `decimal` and never does float÷float for bucketing. The simulator must use the same numeric type for index math to avoid distribution artifacts invisible in production.
+
 ## FP-33182: Fish generation improvements
 - Full task journal: [FP-33182--weight-generation](../../../tasks/FP-33182--weight-generation/journal.md)
 - ~~System on production (LBM20251201): hybrid uniform/Marsaglia distribution in BiteSystem path~~ — reverted in FP-41845 phase 2a.1

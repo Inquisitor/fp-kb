@@ -54,12 +54,24 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 - [x] Extended `globalMax *= weightMultiplier` when weightK > 1 — oversize fish now visible on chart
 
 ### 2a.3 Edge distribution system
-- [ ] Implement edge distribution algorithms — see [design spec](artifacts/edge-distribution-design.md)
+- [x] Implement edge distribution algorithms — see [design spec](artifacts/edge-distribution-design.md)
+
+### 2a.4 Simulator & UI polishing (r15937)
+- [x] Shared `FishWeightRounding` constants (production `FishGenerator` + simulator sync)
+- [x] Histogram bucketing rewritten in decimal arithmetic (fixes float off-by-one at gram resolution)
+- [x] Bucket count `(int)(range/step)+1` — maxWeight gets its own bucket
+- [x] Sentinel bucket at upper boundary for chart area closing
+- [x] Tooltips: gram-precision ranges, single value at step<=0.001, right-inclusive last bin
+- [x] `ToFileNameSlug` scope-aware; TSV/filename step precision F3
+- [x] NiceStep snap on MaxBucketCount overflow
+- [x] Percentages to 3dp
+- [x] Layout padding-right fix, empty tooltip suppression
 
 ## Phase 2b: Simulator Enhancements
 (parallel with 2a — GD feedback during active testing)
 
 - [ ] Crossover visualization — stacked area showing crossover fish as separate layer within each form
+- [ ] Replace Kendo area chart with Canvas 2D (Kendo 2013 lacks smooth/step styles)
 - (additional GD requests expected during testing)
 
 ## Phase 3: Documentation (FP-41844)
