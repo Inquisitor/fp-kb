@@ -1,0 +1,59 @@
+title: Fishing Planet
+page_id: 1146884
+url: https://fishingplanet.atlassian.net/wiki/spaces/FP
+indexed: 2026-03-23
+
+pages:
+  - id: 1146886
+    title: GDD
+    type: page
+    notes: Game design docs
+  - id: 208175348
+    title: TECH GUIDELINES
+    type: page
+    notes: Technical docs
+  - id: 208306645
+    title: TOOLS / WEBADMIN
+    type: page
+  - id: 1540168
+    title: QA department
+    type: page
+  - id: 28442650
+    title: RELEASES
+    type: page
+  - id: 1931313161
+    title: CONTENT
+    type: page
+  - id: 208077015
+    title: MARKETING
+    type: page
+  - id: 2949304
+    title: PLANS
+    type: page
+  - id: 11436034
+    title: ADMINISTRATION
+    type: page
+  - id: 23461890
+    title: Game Graphics and Art
+    type: page
+  - id: 208273782
+    title: PLATFORMS
+    type: page
+  - id: 103841814
+    title: BUSINESS DEVELOPMENT
+    type: page
+  - id: 59835303
+    title: COMMUNITY & SUPPORT
+    type: page
+  - id: 4661936133
+    title: Research
+    type: folder
+  - id: 4802904107
+    title: RETROSPECTIVES
+    type: folder
+
+subsections:
+  - slug: tech-guidelines
+    title: TECH GUIDELINES
+    id: 208175348
+    indexed: true

@@ -4,6 +4,7 @@
 - Start: Read `_index.md` — active tasks, reviews, confluence work
 - Server code map: `fishing-planet/server/_index.md`
 - Client code map: `fishing-planet/client/_index.md`
+- Confluence docs: `confluence/tree.md` → `confluence/sections/.../_pages.yml`
 - Glossary: `fishing-planet/glossary.md`
 
 ## Workflows
@@ -50,8 +51,14 @@
 8. Executor = commit author (not Jira assignee)
 9. Closure: set status `resolved`, remove from Active Reviews in `_index.md`
 
-### Other workflows
-- Confluence work: check `confluence/_index.md`, work in `confluence/workspace/`
+### Confluence work
+- Navigation: `confluence/tree.md` (section router) → `sections/.../_pages.yml` (page listings)
+- Drafting: create `confluence/workspace/FP-XXXXX--slug.md` with YAML frontmatter (task, target_parent_id, status)
+- After publishing: move draft to `confluence/archive/`, update `_pages.yml` with new page ID
+- `_pages.yml` = YAML index per section (page IDs, titles, freshness). NOT content — Confluence is SSoT
+- `tree.md` = section-level router with "what's inside" annotations. Does NOT list individual pages
+- Sections mirrored under `confluence/sections/<space>/` (e.g. `fishing-planet/`)
+- `confluence/archive/` exists for git blame navigation; agents do not index it
 
 ## Conventions
 
@@ -100,6 +107,9 @@
 Typical task:       server/_index.md → module/_card.md → code         (2 reads)
 Cross-module task:  + modules/_systems/<system>.md                    (3 reads)
 Need algorithm:     + deep dive linked from card                      (3-4 reads)
+Confluence page:    confluence/tree.md → sections/.../_pages.yml      (2 reads)
+Confluence content: + fetch via Confluence MCP API by page ID         (3 reads)
+Not in index:       search Confluence via MCP API — index is partial  (organic growth)
 ```
 
 ## Rules

@@ -1,0 +1,50 @@
+title: SERVER
+page_id: 71008272
+parent_id: 208175348
+indexed: 2026-03-23
+
+pages:
+  - id: 71139336
+    title: Server Architecture
+    freshness: unknown
+  - id: 1947140105
+    title: Analytics / Stats
+    freshness: unknown
+  - id: 11796486
+    title: Development Environment
+    freshness: unknown
+  - id: 46628932
+    title: Infrastructure
+    freshness: unknown
+  - id: 55148616
+    title: Monetization Guidelines
+    freshness: unknown
+  - id: 60588749
+    title: Platforms
+    freshness: unknown
+  - id: 3206119457
+    title: Twitch integration
+    freshness: unknown
+  - id: 3616899087
+    title: Modules
+    freshness: unknown
+  - id: 3829760001
+    title: Real prices
+    freshness: unknown
+  - id: 4784881665
+    title: Troubleshooting
+    type: folder
+    freshness: unknown
+  - id: 68616199
+    title: Environment and branch status
+    freshness: unknown
+
+subsections:
+  - slug: business-logic
+    title: Business logic
+    id: 3634397194
+    indexed: true
+  - slug: game-logic
+    title: Game logic / Core gameplay
+    id: 46628919
+    indexed: false

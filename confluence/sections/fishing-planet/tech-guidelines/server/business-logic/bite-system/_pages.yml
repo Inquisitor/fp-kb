@@ -1,0 +1,23 @@
+title: Bite System
+page_id: null
+parent_id: 3634397194
+indexed: 2026-03-23
+note: New section, does not exist in Confluence yet. Will be created when first page is published.
+
+pages:
+  - id: null
+    title: Fish Weight Edge Distribution
+    freshness: draft
+    task: FP-41844
+    workspace: workspace/FP-41844--fish-weight-edge-distribution.md
+
+related_kb_modules:
+  - fish-generator
+
+related_confluence_pages:
+  - id: 4219830273
+    title: "Leaderboards: Fish records and Improving the randomization"
+    location: TECH > SERVER > Business Logic
+  - id: 923500587
+    title: Алгоритм и формулы новой системы клева
+    location: GDD > Features > Fishing > Fishing logics

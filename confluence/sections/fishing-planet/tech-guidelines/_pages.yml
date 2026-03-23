@@ -1,0 +1,41 @@
+title: TECH GUIDELINES
+page_id: 208175348
+parent_id: 1146884
+indexed: 2026-03-23
+
+pages:
+  - id: 71008272
+    title: SERVER
+    notes: Primary focus
+  - id: 208109909
+    title: CLIENT
+  - id: 97943613
+    title: DESIGN NOTES
+  - id: 208273797
+    title: QA
+  - id: 649035781
+    title: Title Ratings (Copy from Xbox)
+  - id: 786169911
+    title: Настройка Глобуса
+  - id: 1011613717
+    title: PHYSICS
+  - id: 2640740373
+    title: Technical design
+  - id: 3787358215
+    title: New Platform Integration Pipeline
+  - id: 3822583898
+    title: Client Branching Strategy
+  - id: 3840737285
+    title: Server Branching Strategy
+  - id: 3843162162
+    title: Tech Notes
+  - id: 5382996075
+    title: FP2 Architecture
+  - id: 5313200130
+    title: GIT USER GUIDE
+
+subsections:
+  - slug: server
+    title: SERVER
+    id: 71008272
+    indexed: true
