@@ -9,7 +9,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Phase 2a complete (r15918–r15926). Phase 2a complete (r15918–r15926). Simulator polishing committed (r15937). Next: Phase 2b (crossover visualization) or Phase 3 (documentation FP-41844).
+Phase 2a complete (r15918–r15937, commits 1–7). Next: Phase 3 — Confluence documentation (FP-41844). Phase 2b (crossover visualization) deferred.
 
 ## Summary
 

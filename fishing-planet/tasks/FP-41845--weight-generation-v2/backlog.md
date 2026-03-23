@@ -75,7 +75,14 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 - (additional GD requests expected during testing)
 
 ## Phase 3: Documentation (FP-41844)
-(blocked until phase 2a complete — artifacts from phases 1-2 become source material)
+
+Confluence page describing the new weight generation system for GD, QA, and other developers.
+Source material: KB deep dives (weight-generation.md, edge-distribution.md), design spec, WebAdmin UI.
+
+- [ ] Define page structure and target audience
+- [ ] Draft content in KB workspace (`confluence/workspace/`)
+- [ ] Review with user
+- [ ] Publish to Confluence (API or manually)
 
 ## Reference Data
 
@@ -86,12 +93,16 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 | Saint-Croix Lake | 115    | Northern Pike | 104        | 108   | 109    | 110    | 111    |
 
 ### Production config
-| Parameter                                    | Value | Source               |
-|----------------------------------------------|-------|----------------------|
-| `CollectFishGenerationStats`                 | true  | EnvironmentVariables |
-| `FishGenerationStatsCleanupHorizonDays`      | 90    | EnvironmentVariables |
-| `UseNormalDistributionForFishGeneratingFrom` | 0.95  | GlobalVariables      |
-| `NormalDistributionForFishGeneratingSigma`   | 0.55  | GlobalVariables      |
+| Parameter                                    | Value    | Source               |
+|----------------------------------------------|----------|----------------------|
+| `CollectFishGenerationStats`                 | true     | EnvironmentVariables |
+| `FishGenerationStatsCleanupHorizonDays`      | 90       | EnvironmentVariables |
+| `FishWeightUpperEdgeZoneFraction`            | 0.05     | GlobalVariables      |
+| `FishWeightLowerEdgeZoneFraction`            | 0.05     | GlobalVariables      |
+| `FishWeightEdgeDistribution`                 | `"None"` | GlobalVariables      |
+| `FishWeightEdgeScope`                        | `"All"`  | GlobalVariables      |
+| `FishWeightEdgePowerLawSteepness`            | 2.00     | GlobalVariables      |
+| `FishWeightEdgeExponentialRate`              | 7.00     | GlobalVariables      |
 
 ## Decisions
 
