@@ -152,6 +152,7 @@ Rationale: existing StatsController uses partial pattern. Settings pages should 
 ## Codebase improvements (separate commits)
 - [ ] `Clamp` helper — `Math.Clamp` unavailable in .NET 4.7.2, codebase uses `Math.Max(min, Math.Min(max, val))` pattern. Extract to utility method.
 - [ ] **Crossover fallthrough** — when weightK pushes a fish's weight beyond MaxWeight of all forms, crossover keeps the original form instead of upgrading to the heaviest. Practical impact is low: only triggers when weightK is high enough for a Trophy to exceed Unique's MaxWeight. Fix: fall through to heaviest form on the pond instead of original.
+- [ ] **WebAdmin input validation** — clamp edge distribution parameters in the Settings UI to prevent invalid values. In particular, zone fractions should be non-negative, steepness/rate should be positive. QA have been known to enter negative values (e.g. negative weightK) — the UI should not allow this.
 
 ## Deferred / Questions
 - ~~Real ratio between forms (Young/Common/Trophy/Unique)~~ — investigated: proportions are emergent from FishSelector layer config, can be estimated from pond config or taken from FishFact. See [fish-selector-form-ratio.md](../../server/modules/fish-generator/fish-selector-form-ratio.md). Combined overall histogram = Σ(p_form × dist_form).
