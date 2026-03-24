@@ -1,0 +1,12 @@
+{
+  "name": "confluence-md",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "extended-markdown-adf-parser": "^2.4.0",
+    "js-yaml": "^4.1.0"
+  }
+}
