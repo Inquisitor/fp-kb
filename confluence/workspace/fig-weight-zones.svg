@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" font-family="Segoe UI, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="320" fill="#fafafa" rx="4"/>
+
+  <!-- Title -->
+  <text x="350" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Edge Distribution — Weight Range Zones</text>
+
+  <!-- Axes -->
+  <line x1="70" y1="260" x2="660" y2="260" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="70" y1="260" x2="70" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Axis labels -->
+  <text x="370" y="305" text-anchor="middle" font-size="11" fill="#555">Fish weight (fraction of form range)</text>
+  <text x="22" y="150" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90,22,150)">Generation probability</text>
+
+  <!-- Y-axis marks -->
+  <line x1="65" y1="100" x2="70" y2="100" stroke="#555"/>
+  <text x="60" y="104" text-anchor="end" font-size="10" fill="#666">c</text>
+  <text x="60" y="264" text-anchor="end" font-size="10" fill="#666">0</text>
+
+  <!-- X-axis ticks and labels -->
+  <line x1="80" y1="260" x2="80" y2="265" stroke="#555"/>
+  <text x="80" y="278" text-anchor="middle" font-size="10" fill="#666">0%</text>
+  <text x="80" y="292" text-anchor="middle" font-size="9" fill="#999">MinWeight</text>
+
+  <line x1="640" y1="260" x2="640" y2="265" stroke="#555"/>
+  <text x="640" y="278" text-anchor="middle" font-size="10" fill="#666">100%</text>
+  <text x="640" y="292" text-anchor="middle" font-size="9" fill="#999">MaxWeight</text>
+
+  <!-- Lower threshold line -->
+  <line x1="150" y1="50" x2="150" y2="260" stroke="#cc0000" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="150" y="42" text-anchor="middle" font-size="9" fill="#cc0000">zone_lo (5%)</text>
+
+  <!-- Upper threshold line -->
+  <line x1="570" y1="50" x2="570" y2="260" stroke="#cc0000" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="570" y="42" text-anchor="middle" font-size="9" fill="#cc0000">1 − zone_up (95%)</text>
+
+  <!-- Central zone fill -->
+  <rect x="150" y="100" width="420" height="160" fill="#4488cc" fill-opacity="0.12" stroke="none"/>
+
+  <!-- Central zone line -->
+  <line x1="150" y1="100" x2="570" y2="100" stroke="#2266aa" stroke-width="2.5"/>
+
+  <!-- Lower edge zone curve — power-law (1-s)^2 mirrored, 21 points -->
+  <path d="M80.0,260.0 L83.5,259.6 L87.0,258.4 L90.5,256.4 L94.0,253.6 L97.5,250.0 L101.0,245.6 L104.5,240.4 L108.0,234.4 L111.5,227.6 L115.0,220.0 L118.5,211.6 L122.0,202.4 L125.5,192.4 L129.0,181.6 L132.5,170.0 L136.0,157.6 L139.5,144.4 L143.0,130.4 L146.5,115.6 L150.0,100.0"
+        fill="none" stroke="#2266aa" stroke-width="2.5"/>
+  <path d="M80.0,260.0 L83.5,259.6 L87.0,258.4 L90.5,256.4 L94.0,253.6 L97.5,250.0 L101.0,245.6 L104.5,240.4 L108.0,234.4 L111.5,227.6 L115.0,220.0 L118.5,211.6 L122.0,202.4 L125.5,192.4 L129.0,181.6 L132.5,170.0 L136.0,157.6 L139.5,144.4 L143.0,130.4 L146.5,115.6 L150.0,100.0 L150,260 L80,260 Z"
+        fill="#4488cc" fill-opacity="0.12" stroke="none"/>
+
+  <!-- Upper edge zone curve — power-law (1-s)^2, 21 points -->
+  <path d="M570.0,100.0 L573.5,115.6 L577.0,130.4 L580.5,144.4 L584.0,157.6 L587.5,170.0 L591.0,181.6 L594.5,192.4 L598.0,202.4 L601.5,211.6 L605.0,220.0 L608.5,227.6 L612.0,234.4 L615.5,240.4 L619.0,245.6 L622.5,250.0 L626.0,253.6 L629.5,256.4 L633.0,258.4 L636.5,259.6 L640.0,260.0"
+        fill="none" stroke="#2266aa" stroke-width="2.5"/>
+  <path d="M570.0,100.0 L573.5,115.6 L577.0,130.4 L580.5,144.4 L584.0,157.6 L587.5,170.0 L591.0,181.6 L594.5,192.4 L598.0,202.4 L601.5,211.6 L605.0,220.0 L608.5,227.6 L612.0,234.4 L615.5,240.4 L619.0,245.6 L622.5,250.0 L626.0,253.6 L629.5,256.4 L633.0,258.4 L636.5,259.6 L640.0,260.0 L640,260 L570,260 Z"
+        fill="#4488cc" fill-opacity="0.12" stroke="none"/>
+
+  <!-- Zone labels -->
+  <text x="115" y="80" text-anchor="middle" font-size="10" fill="#cc6600">Lower edge</text>
+  <text x="115" y="92" text-anchor="middle" font-size="10" fill="#cc6600">falloff ↓</text>
+
+  <text x="360" y="78" text-anchor="middle" font-size="12" fill="#2266aa" font-weight="bold">Central zone</text>
+  <text x="360" y="92" text-anchor="middle" font-size="10" fill="#2266aa">(uniform density)</text>
+
+  <text x="605" y="80" text-anchor="middle" font-size="10" fill="#cc6600">Upper edge</text>
+  <text x="605" y="92" text-anchor="middle" font-size="10" fill="#cc6600">falloff ↓</text>
+
+  <!-- Seamless transition dots -->
+  <circle cx="150" cy="100" r="3.5" fill="#cc0000" stroke="white" stroke-width="1.5"/>
+  <circle cx="570" cy="100" r="3.5" fill="#cc0000" stroke="white" stroke-width="1.5"/>
+
+  <!-- Seamless annotation -->
+  <text x="360" y="120" text-anchor="middle" font-size="9" fill="#cc0000">← seamless transition — no spike or cliff →</text>
+</svg>

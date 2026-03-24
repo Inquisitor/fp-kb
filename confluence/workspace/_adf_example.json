@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "type": "doc",
+  "content": [
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            { "text": "Target audience:", "type": "text", "marks": [{ "type": "strong" }] },
+            { "text": " Server Developers, Technical Game Designers", "type": "text" },
+            { "type": "hardBreak" },
+            { "text": "Related:", "type": "text", "marks": [{ "type": "strong" }] },
+            { "text": " ", "type": "text" },
+            { "text": "Fish Weight Generation: Edge Distribution System", "type": "text", "marks": [{ "type": "link", "attrs": { "href": "TBD" } }] },
+            { "text": " — practical guide for GD", "type": "text" },
+            { "type": "hardBreak" },
+            { "text": "Implementation task:", "type": "text", "marks": [{ "type": "strong" }] },
+            { "text": " ", "type": "text" },
+            { "text": "FP-41845", "type": "text", "marks": [{ "type": "link", "attrs": { "href": "https://fishingplanet.atlassian.net/browse/FP-41845" } }] }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "text": "How to make fish near maximum weight progressively rarer while keeping the rest of the distribution uniform — and how to implement it correctly.", "type": "text" }
+      ]
+    },
+    { "type": "rule" },
+    {
+      "type": "heading",
+      "attrs": { "level": 2 },
+      "content": [{ "text": "Notation", "type": "text" }]
+    },
+    {
+      "type": "paragraph",
+      "content": [{ "text": "The following symbols are used throughout this article:", "type": "text" }]
+    },
+    {
+      "type": "table",
+      "attrs": { "layout": "default" },
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableHeader", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Symbol", "type": "text" }] }] },
+            { "type": "tableHeader", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Meaning", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "x", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Normalized weight position within the form range (0 = MinWeight, 1 = MaxWeight)", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "T", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Threshold — boundary between central and edge zones (e.g. 0.95)", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "z", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Edge zone width: z = 1 − T (e.g. 0.05)", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "s", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Position within edge zone, normalized to [0, 1]: s = (x − T) / z", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "p(s)", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Edge function — defines the density shape in the edge zone", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "c", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Normalization constant — ensures total probability = 1", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "A", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Edge area fraction", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "α", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Power-law steepness parameter", "type": "text" }] }] }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "λ", "type": "text" }] }] },
+            { "type": "tableCell", "attrs": { "colspan": 1, "rowspan": 1 }, "content": [{ "type": "paragraph", "content": [{ "text": "Exponential rate parameter", "type": "text" }] }] }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": { "level": 2 },
+      "content": [{ "text": "Problem Statement", "type": "text" }]
+    },
+    {
+      "type": "paragraph",
+      "content": [{ "text": "Fish weight within a form range (e.g., 80–130 kg for Trophy) is generated uniformly. Every weight in the range is equally likely, including values very close to the maximum. In practice this means:", "type": "text" }]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "text": "Players routinely catch fish at or near max weight", "type": "text" }] }] },
+        { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "text": "Leaderboard records are set and broken trivially — top entries cluster at the ceiling", "type": "text" }] }] },
+        { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "text": "The leaderboard feels \"synthetic\": no meaningful spread, no sense of rarity", "type": "text" }] }] }
+      ]
+    }
+  ]
+}
