@@ -8,7 +8,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41844: Fish Weight Generation — Create Documentation
 
 ## Status
-Two drafts written, reviewed, and partially published. Next: md→ADF converter for rich Confluence export (LaTeX, lozenges, panels, TOC).
+Two drafts written, reviewed, and partially published. confluence-md converter designed and planned (11 tasks). Next: implement converter, then republish drafts via ADF.
 
 ## Summary
 
@@ -47,14 +47,11 @@ Create Confluence documentation describing the new fish weight generation system
 - `FP-41844--edge-distribution-design-analysis.md` — developer deep dive (published as markdown baseline, needs ADF republish)
 - `fig-weight-zones.svg` — weight range zones diagram for first draft
 
-### Confluence formatting conventions (for converter)
-- `$...$` / `$$...$$` → mathinline / mathblock macros
-- `<span class="lozenge red|green|grey|blue">Name</span>` → status macro (colour=Red|Green|Grey|Blue)
-- `> [!NOTE]` / `> [!WARNING]` → info / warning macros
-- `<div class="panel blue|green">` → panel macro (bgColor=#deebff|#dffbe8)
-- `<!-- {toc} -->` → toc macro
-- `<details><summary>Title</summary>` → expand macro
-- `![alt](path.svg)` → upload as attachment + reference
-- ``` code blocks → code macro
+### Confluence formatting conventions (superseded)
+Old conventions replaced by native `extended-markdown-adf-parser` syntax. See [design spec](../../../tools/confluence-md/docs/design.md) § Markdown Convention.
+
+### Converter tool
+- **Location:** `D:\kb\tools\confluence-md\`
+- **Docs:** [design.md](../../../tools/confluence-md/docs/design.md), [plan.md](../../../tools/confluence-md/docs/plan.md)
 
 ## Milestones
