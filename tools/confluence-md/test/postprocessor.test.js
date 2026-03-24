@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { postprocessAdf } from '../lib/postprocessor.js';
+import { postprocessAdf, postprocessMd } from '../lib/postprocessor.js';
 import { PlaceholderMap } from '../lib/placeholder.js';
 
 describe('postprocessAdf — inline math', () => {
@@ -117,5 +117,32 @@ describe('postprocessAdf — no mutation', () => {
     const original = JSON.stringify(doc);
     postprocessAdf(doc, map);
     assert.equal(JSON.stringify(doc), original);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// postprocessMd — placeholder → Markdown syntax direction
+// ---------------------------------------------------------------------------
+
+describe('postprocessMd', () => {
+  it('restores inline math', () => {
+    const map = new PlaceholderMap();
+    const ph = map.add('mathinl', 'x + y');
+    const result = postprocessMd(`The value ${ph} is positive.`, map);
+    assert.equal(result, 'The value $x + y$ is positive.');
+  });
+
+  it('restores block math', () => {
+    const map = new PlaceholderMap();
+    const ph = map.add('mathblk', 'p(s) = (1-s)^\\alpha');
+    const result = postprocessMd(`Before.\n\n${ph}\n\nAfter.`, map);
+    assert.ok(result.includes('$$\np(s) = (1-s)^\\alpha\n$$'));
+  });
+
+  it('restores TOC', () => {
+    const map = new PlaceholderMap();
+    const ph = map.add('toc', '');
+    const result = postprocessMd(`# Title\n\n${ph}\n\n## Section`, map);
+    assert.ok(result.includes('<!-- {toc} -->'));
   });
 });

@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { preprocessMd } from '../lib/preprocessor.js';
+import { preprocessMd, preprocessAdf } from '../lib/preprocessor.js';
 
 describe('preprocessMd — inline math', () => {
   it('extracts single inline math', () => {
@@ -73,5 +73,82 @@ describe('preprocessMd — TOC', () => {
   it('handles TOC with extra whitespace', () => {
     const { text, map } = preprocessMd('<!--  {toc}  -->');
     assert.equal(map.size, 1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// preprocessAdf — ADF → placeholder direction
+// ---------------------------------------------------------------------------
+
+describe('preprocessAdf', () => {
+  it('replaces inlineExtension[mathinline] with text placeholder', () => {
+    const doc = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'paragraph',
+        content: [
+          { type: 'text', text: 'Value ' },
+          { type: 'inlineExtension', attrs: {
+            extensionType: 'com.atlassian.confluence.macro.core',
+            extensionKey: 'mathinline',
+            parameters: { body: 'x + y' }
+          }},
+          { type: 'text', text: ' is positive.' }
+        ]
+      }]
+    };
+    const { doc: result, map } = preprocessAdf(doc);
+    const para = result.content[0];
+    const texts = para.content.map(n => n.text || '').join('');
+    assert.ok(texts.includes('CFMD_MATHINL_0001'));
+    assert.equal(map.get('CFMD_MATHINL_0001').content, 'x + y');
+  });
+
+  it('replaces bodiedExtension[mathblock] with paragraph placeholder', () => {
+    const doc = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'bodiedExtension', attrs: {
+          extensionType: 'com.atlassian.confluence.macro.core',
+          extensionKey: 'mathblock'
+        },
+        content: [{ type: 'paragraph', content: [
+          { type: 'text', text: 'p(s) = (1-s)^\\alpha' }
+        ]}]
+      }]
+    };
+    const { doc: result, map } = preprocessAdf(doc);
+    assert.equal(result.content[0].type, 'paragraph');
+    assert.equal(map.get('CFMD_MATHBLK_0001').content, 'p(s) = (1-s)^\\alpha');
+  });
+
+  it('replaces extension[toc] with paragraph placeholder', () => {
+    const doc = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'extension', attrs: {
+          extensionType: 'com.atlassian.confluence.macro.core',
+          extensionKey: 'toc', parameters: {}
+        }
+      }]
+    };
+    const { doc: result, map } = preprocessAdf(doc);
+    assert.equal(map.get('CFMD_TOC_0001').type, 'toc');
+  });
+
+  it('passes through unrecognized extension nodes', () => {
+    const doc = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'extension', attrs: {
+          extensionType: 'com.atlassian.confluence.macro.core',
+          extensionKey: 'jira', parameters: { key: 'FP-41845' }
+        }
+      }]
+    };
+    const { doc: result, map } = preprocessAdf(doc);
+    assert.equal(result.content[0].type, 'extension');
+    assert.equal(result.content[0].attrs.extensionKey, 'jira');
+    assert.equal(map.size, 0);
   });
 });

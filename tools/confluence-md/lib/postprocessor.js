@@ -1,5 +1,7 @@
-// ADF post-processor: replaces CFMD_* placeholder text nodes
-// with Confluence extension ADF nodes (math, TOC).
+// Post-processors: replace CFMD_* placeholders with final output.
+//
+// postprocessAdf(doc, map) — placeholders → ADF extension nodes (MD→ADF direction)
+// postprocessMd(text, map)  — placeholders → LaTeX/TOC syntax   (ADF→MD direction)
 
 const MACRO_TYPE = 'com.atlassian.confluence.macro.core';
 
@@ -166,4 +168,41 @@ function makeTextNode(text, marks) {
   const node = { type: 'text', text };
   if (marks) node.marks = marks;
   return node;
+}
+
+// ---------------------------------------------------------------------------
+// Markdown post-processor (for ADF→MD pipeline)
+// ---------------------------------------------------------------------------
+
+/**
+ * Replaces CFMD_* placeholder tokens in Markdown text with the
+ * corresponding LaTeX math or TOC syntax.
+ *
+ * @param {string} text - Markdown text containing placeholders.
+ * @param {PlaceholderMap} map - The placeholder map from preprocessAdf.
+ * @returns {string}
+ */
+export function postprocessMd(text, map) {
+  for (const [id, entry] of map.entries()) {
+    if (!text.includes(id)) continue;
+
+    let replacement;
+    switch (entry.type) {
+      case 'mathinl':
+        replacement = '$' + entry.content + '$';
+        break;
+      case 'mathblk':
+        replacement = '$$\n' + entry.content + '\n$$';
+        break;
+      case 'toc':
+        replacement = '<!-- {toc} -->';
+        break;
+      default:
+        continue;
+    }
+    // Use a replacer function to avoid $-special-character interpretation
+    // in the replacement string (e.g. $$ → $ in String.replace).
+    text = text.replace(id, () => replacement);
+  }
+  return text;
 }

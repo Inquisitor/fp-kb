@@ -1,7 +1,12 @@
-// Pre-processor: extracts LaTeX math and TOC markers from Markdown,
-// replacing them with CFMD_* placeholders safe for the ADF parser.
+// Pre-processor: extracts LaTeX math and TOC markers from source,
+// replacing them with CFMD_* placeholders safe for the target parser.
+//
+// preprocessMd(text) — Markdown → placeholders (for MD→ADF direction)
+// preprocessAdf(doc)  — ADF JSON → placeholders (for ADF→MD direction)
 
 import { PlaceholderMap } from './placeholder.js';
+
+const MACRO_TYPE = 'com.atlassian.confluence.macro.core';
 
 /**
  * Identifies byte ranges occupied by code fences and inline code spans.
@@ -167,4 +172,79 @@ export function preprocessMd(text) {
   });
 
   return { text, map };
+}
+
+// ---------------------------------------------------------------------------
+// ADF → placeholder direction (for ADF→MD pipeline)
+// ---------------------------------------------------------------------------
+
+/**
+ * Pre-processes an ADF document: finds Confluence extension nodes
+ * (mathinline, mathblock, toc) and replaces them with plain text/paragraph
+ * placeholder nodes. Unrecognized extensions pass through unchanged.
+ *
+ * @param {object} doc - ADF document JSON.
+ * @returns {{ doc: object, map: PlaceholderMap }}
+ */
+export function preprocessAdf(doc) {
+  const map = new PlaceholderMap();
+  const result = JSON.parse(JSON.stringify(doc)); // deep clone
+  walkAdfExtract(result, map);
+  return { doc: result, map };
+}
+
+/**
+ * Recursively walks node.content[], replacing recognized extension nodes
+ * with placeholder text/paragraph nodes in place.
+ */
+function walkAdfExtract(node, map) {
+  if (!node.content) return;
+
+  for (let i = 0; i < node.content.length; i++) {
+    const child = node.content[i];
+
+    // inlineExtension → mathinline
+    if (
+      child.type === 'inlineExtension' &&
+      child.attrs?.extensionType === MACRO_TYPE &&
+      child.attrs?.extensionKey === 'mathinline'
+    ) {
+      const body = child.attrs.parameters?.body ?? '';
+      const token = map.add('mathinl', body);
+      node.content[i] = { type: 'text', text: token };
+      continue;
+    }
+
+    // bodiedExtension → mathblock
+    if (
+      child.type === 'bodiedExtension' &&
+      child.attrs?.extensionType === MACRO_TYPE &&
+      child.attrs?.extensionKey === 'mathblock'
+    ) {
+      const text = child.content?.[0]?.content?.[0]?.text ?? '';
+      const token = map.add('mathblk', text);
+      node.content[i] = {
+        type: 'paragraph',
+        content: [{ type: 'text', text: token }],
+      };
+      continue;
+    }
+
+    // extension → toc
+    if (
+      child.type === 'extension' &&
+      child.attrs?.extensionType === MACRO_TYPE &&
+      child.attrs?.extensionKey === 'toc'
+    ) {
+      const token = map.add('toc', '');
+      node.content[i] = {
+        type: 'paragraph',
+        content: [{ type: 'text', text: token }],
+      };
+      continue;
+    }
+
+    // Recurse into children (covers paragraphs, tables, etc.)
+    walkAdfExtract(child, map);
+  }
 }
