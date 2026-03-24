@@ -54,4 +54,9 @@ Old conventions replaced by native `extended-markdown-adf-parser` syntax. See [d
 - **Location:** `D:\kb\tools\confluence-md\`
 - **Docs:** [design.md](../../../tools/confluence-md/docs/design.md), [plan.md](../../../tools/confluence-md/docs/plan.md)
 
+### Known limitations
+- `{status:Text|color:red}` cannot be used inside markdown tables — the `|` conflicts with table cell delimiters. Use **bold** instead. Status works everywhere else (headings, paragraphs, list items).
+- Panel title roundtrips with slightly different syntax: `title="X"` → `attrs='{"title":"X"}'`. Functionally identical.
+- Block math style may change on roundtrip: `$$content$$` (inline form) → `$$\ncontent\n$$` (fenced form). Semantically identical.
+
 ## Milestones

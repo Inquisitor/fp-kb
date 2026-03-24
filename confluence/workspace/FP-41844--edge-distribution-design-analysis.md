@@ -56,11 +56,9 @@ The target probability density function (PDF) must satisfy two constraints:
 
 ![Figure 1: Desired PDF shape](../../fishing-planet/server/modules/fish-generator/edge-distribution-fig1-desired-pdf.svg)
 
-<div class="panel blue">
-
+~~~panel type=info
 **In simple terms:** Think of it as a plateau that smoothly transitions into a downhill slope. The flat part (central zone) is the plateau; the declining part (edge zone) is the slope. The transition point must be seamless — no sudden step.
-
-</div>
+~~~
 
 As it turns out, satisfying both constraints simultaneously is harder than it looks. The choice of the edge function matters (see [Why Normal Distribution Doesn't Work](#why-normal-distribution-doesnt-work) and [Candidate Edge Functions](#candidate-edge-functions)), but even with the right function, the sampling algorithm must be carefully designed (see [The Normalization Trap](#the-normalization-trap) and [The Fix](#the-fix-normalized-piecewise-inverse-cdf)).
 
@@ -88,7 +86,7 @@ Two function families satisfy all requirements: power-law and exponential. Both 
 
 ![Figure 2: Candidate edge functions](../../fishing-planet/server/modules/fish-generator/edge-distribution-fig2-candidates.svg)
 
-### <span class="lozenge red">PowerLaw</span>
+### {status:PowerLaw|color:red}
 
 **Edge function:**
 
@@ -114,15 +112,13 @@ else:
     weight = u
 ```
 
-<div class="panel blue">
-
+~~~panel type=info
 **In simple terms:** Think of it as a ramp that gets steeper as it approaches the edge: with $\alpha=2$, the first half of the edge zone still has reasonable density, but the last quarter drops off sharply. With $\alpha=5$, almost everything bunches near the start of the edge zone, and the upper end is practically empty.
-
-</div>
+~~~
 
 **Note on max weight:** Since $p(1) = 0$, a fish at exactly `MaxWeight` is mathematically impossible. In practice, with floating-point arithmetic and millions of samples, fish at 99.999...% of the range appear — effectively indistinguishable from max. The theoretical zero at the boundary is academic, not practical.
 
-### <span class="lozenge green">Exponential</span>
+### {status:Exponential|color:green}
 
 **Edge function:**
 
@@ -155,16 +151,16 @@ In game terms: the world record is always theoretically beatable. With power-law
 
 ### Comparison
 
-| Property              | <span class="lozenge red">PowerLaw</span> | <span class="lozenge green">Exponential</span> |
-|-----------------------|-------------------------------------------|------------------------------------------------|
-| Seam at threshold     | Continuous                                | Continuous                                     |
-| Density at 100%       | $= 0$ (hard zero)                         | $> 0$ (asymptotic)                             |
-| Parameter             | $\alpha$ (steepness)                      | $\lambda$ (rate)                               |
-| Parameter meaning     | "How steep the ramp"                      | "How fast the falloff"                         |
-| Sampling              | Closed-form, $O(1)$                       | Closed-form, $O(1)$                            |
-| Average weight shift  | ~1–3% lower                               | ~1–3% lower                                    |
-| Max weight achievable | No (exactly zero)                         | Yes (vanishingly rare)                         |
-| Tunability            | Easy (single slider)                      | Easy (single slider)                           |
+| Property              | **PowerLaw**         | **Exponential**        |
+|-----------------------|----------------------|------------------------|
+| Seam at threshold     | Continuous           | Continuous             |
+| Density at 100%       | $= 0$ (hard zero)    | $> 0$ (asymptotic)     |
+| Parameter             | $\alpha$ (steepness) | $\lambda$ (rate)       |
+| Parameter meaning     | "How steep the ramp" | "How fast the falloff" |
+| Sampling              | Closed-form, $O(1)$  | Closed-form, $O(1)$    |
+| Average weight shift  | ~1–3% lower          | ~1–3% lower            |
+| Max weight achievable | No (exactly zero)    | Yes (vanishingly rare) |
+| Tunability            | Easy (single slider) | Easy (single slider)   |
 
 ### `weightK` Interaction
 
@@ -178,7 +174,7 @@ Both edge functions operate on the **pre-`weightK`** normalized weight. The `wei
 
 Both functions are implemented with a `GlobalVariables` switch. Game designers can evaluate both in the WebAdmin simulator, then choose based on gameplay feel.
 
-The practical difference is philosophical: <span class="lozenge red">PowerLaw</span> says "there is a maximum, and it is unreachable." <span class="lozenge green">Exponential</span> says "the maximum is reachable, but astronomically unlikely." For leaderboard dynamics, the exponential may be more compelling — the theoretical possibility of a perfect fish creates aspiration, even if it never actually happens.
+The practical difference is philosophical: {status:PowerLaw|color:red} says "there is a maximum, and it is unreachable." {status:Exponential|color:green} says "the maximum is reachable, but astronomically unlikely." For leaderboard dynamics, the exponential may be more compelling — the theoretical possibility of a perfect fish creates aspiration, even if it never actually happens.
 
 ## Naive Implementations — Lessons from History
 
@@ -221,11 +217,9 @@ This reveals a fundamental tension:
 
 These goals pull the parameters in opposite directions. There is no $(\mu, \sigma)$ combination that simultaneously produces a rare edge AND a smooth seam.
 
-<div class="panel blue">
-
+~~~panel type=info
 **In simple terms:** The normal distribution was not designed for this job. It is like trying to join a flat road to a mountain slope by parking a car on the edge — the transition is not smooth.
-
-</div>
+~~~
 
 ### Marsaglia Re-Roll (r12950)
 
@@ -270,7 +264,7 @@ The central zone has $\text{PDF} = 1$ (pure uniform). The edge zone PDF is deriv
 
 $$\text{PDF}_\text{edge}(x) = (f^{-1})'(s) \quad\text{where } s = \frac{x - T}{z}$$
 
-For <span class="lozenge red">PowerLaw</span>: $f(v) = 1 - (1-v)^{\frac{1}{\alpha+1}}$, so $f^{-1}(s) = 1 - (1-s)^{\alpha+1}$.
+For {status:PowerLaw|color:red}: $f(v) = 1 - (1-v)^{\frac{1}{\alpha+1}}$, so $f^{-1}(s) = 1 - (1-s)^{\alpha+1}$.
 
 $$(f^{-1})'(s) = (\alpha + 1) \cdot (1 - s)^\alpha$$
 
@@ -280,21 +274,19 @@ The central zone density is $1$. The edge zone density at the boundary is $\alph
 
 ### Spike height
 
-| Strategy                                                      | Density at boundary                          | Spike height (vs uniform $= 1$) |
-|---------------------------------------------------------------|----------------------------------------------|---------------------------------|
-| <span class="lozenge red">PowerLaw</span> ($\alpha=2$)        | $\alpha + 1 = 3$                             | 3×                              |
-| <span class="lozenge red">PowerLaw</span> ($\alpha=5$)        | $\alpha + 1 = 6$                             | 6×                              |
-| <span class="lozenge red">PowerLaw</span> ($\alpha=50$)       | $\alpha + 1 = 51$                            | **51×**                         |
-| <span class="lozenge green">Exponential</span> ($\lambda=7$)  | $\frac{\lambda}{1 - e^{-\lambda}} \approx 7$ | 7×                              |
-| <span class="lozenge green">Exponential</span> ($\lambda=50$) | $\approx 50$                                 | **50×**                         |
+| Strategy                       | Density at boundary                          | Spike height (vs uniform $= 1$) |
+|--------------------------------|----------------------------------------------|---------------------------------|
+| **PowerLaw** ($\alpha=2$)      | $\alpha + 1 = 3$                             | 3×                              |
+| **PowerLaw** ($\alpha=5$)      | $\alpha + 1 = 6$                             | 6×                              |
+| **PowerLaw** ($\alpha=50$)     | $\alpha + 1 = 51$                            | **51×**                         |
+| **Exponential** ($\lambda=7$)  | $\frac{\lambda}{1 - e^{-\lambda}} \approx 7$ | 7×                              |
+| **Exponential** ($\lambda=50$) | $\approx 50$                                 | **50×**                         |
 
 With default parameters ($\alpha=50$ or $\lambda=50$), the spike is **50× the uniform density**. In a histogram, this appears as a sharp pillar at the 95% mark — the exact opposite of the smooth transition that was requested.
 
-<div class="panel blue">
-
+~~~panel type=info
 **In simple terms:** Think of it like pouring water through a funnel: 5% of the water (the probability mass in the edge zone) gets squeezed through a funnel that narrows toward the maximum. Most of the water backs up at the entrance of the funnel, creating a pile-up at the boundary.
-
-</div>
+~~~
 
 This is not a bug in the edge function formulas. The formulas correctly implement the inverse CDF of the desired shape. The bug is in how the sampling feeds them: it gives the edge zone exactly $z$ probability mass, when the correct amount is $z \cdot A$ (where $A < 1$ is the area under the edge function).
 
@@ -310,12 +302,12 @@ $$c = \frac{1}{T + z \cdot A}$$
 
 where $A = \int_0^1 p(s)\,ds$ is the **edge area fraction** — how much of the zone's width is "filled" by the edge function.
 
-| Strategy                                                   |      $p(s)$      |           $A = \int_0^1 p(s)\,ds$           | $c$ (for $T{=}0.95$, $z{=}0.05$) |
-|------------------------------------------------------------|:----------------:|:-------------------------------------------:|----------------------------------|
-| <span class="lozenge grey">None</span>                     |       $0$        |                     $0$                     | $\frac{1}{0.95} \approx 1.053$   |
-| <span class="lozenge blue">Uniform</span>                  |       $1$        |                     $1$                     | $\frac{1}{1} = 1.000$            |
-| <span class="lozenge red">PowerLaw</span> ($\alpha$)       |  $(1-s)^\alpha$  |       $\mathbf{\frac{1}{\alpha + 1}}$       | $1.002$ ($\alpha=2$)             |
-| <span class="lozenge green">Exponential</span> ($\lambda$) | $e^{-\lambda s}$ | $\mathbf{\frac{1 - e^{-\lambda}}{\lambda}}$ | $1.007$ ($\lambda=7$)            |
+| Strategy                    |      $p(s)$      |           $A = \int_0^1 p(s)\,ds$           | $c$ (for $T{=}0.95$, $z{=}0.05$) |
+|-----------------------------|:----------------:|:-------------------------------------------:|----------------------------------|
+| **None**                    |       $0$        |                     $0$                     | $\frac{1}{0.95} \approx 1.053$   |
+| **Uniform**                 |       $1$        |                     $1$                     | $\frac{1}{1} = 1.000$            |
+| **PowerLaw** ($\alpha$)     |  $(1-s)^\alpha$  |       $\mathbf{\frac{1}{\alpha + 1}}$       | $1.002$ ($\alpha=2$)             |
+| **Exponential** ($\lambda$) | $e^{-\lambda s}$ | $\mathbf{\frac{1 - e^{-\lambda}}{\lambda}}$ | $1.007$ ($\lambda=7$)            |
 
 Note how $c$ is always very close to $1.0$ — the density bump in the central zone is at most ~5%, negligible for game balance.
 
@@ -337,11 +329,9 @@ else:
 
 ![Figure 6: Single-draw piecewise inverse CDF](../../fishing-planet/server/modules/fish-generator/edge-distribution-fig6-split-point.svg)
 
-<div class="panel green">
-
+~~~panel type=success
 **Key insight:** The edge function formulas do not change at all. `PowerLaw.Sample(w)` still returns $1 - (1-w)^{\frac{1}{\alpha+1}}$. `Exponential.Sample(w)` still returns $\frac{-\ln(1 - w \cdot (1-e^{-\lambda}))}{\lambda}$. The only change is in how the sampling decides *which fraction of random draws* reach the edge function.
-
-</div>
+~~~
 
 ### Why it works
 
@@ -349,15 +339,15 @@ The split point $u^*$ divides the unit interval into two parts proportional to t
 
 $$P(\text{central}) : P(\text{edge}) = T : z \cdot A$$
 
-For <span class="lozenge red">PowerLaw</span> $\alpha=2$, $z=0.05$: $P(\text{edge}) = \frac{0.05/3}{0.95 + 0.05/3} \approx 1.7\%$ (not 5%!).
+For {status:PowerLaw|color:red} $\alpha=2$, $z=0.05$: $P(\text{edge}) = \frac{0.05/3}{0.95 + 0.05/3} \approx 1.7\%$ (not 5%!).
 
 The edge function then maps the edge zone's 1.7% of draws through the inverse CDF, producing the correct shape. At the boundary, the density from both sides equals $c$ — no spike.
 
 ### Degenerate cases
 
-**<span class="lozenge grey">None</span>** ($A = 0$): $u^* = \frac{T}{T} = 1$. Every draw goes to the central zone. Output is uniform in $[0, T]$. This is the hard ceiling — no fish above the threshold. Behavior is identical to the naive approach.
+**{status:None|color:neutral}** ($A = 0$): $u^* = \frac{T}{T} = 1$. Every draw goes to the central zone. Output is uniform in $[0, T]$. This is the hard ceiling — no fish above the threshold. Behavior is identical to the naive approach.
 
-**<span class="lozenge blue">Uniform</span>** ($A = 1$): $u^* = \frac{T}{T + z} = T$. For $u < T$: $x = u$. For $u \ge T$: $w = \frac{u - T}{z}$, $\text{Sample}(w) = w$, $x = T + w \cdot z = u$. Pure identity — uniform distribution over the full range. Also, identical.
+**{status:Uniform|color:blue}** ($A = 1$): $u^* = \frac{T}{T + z} = T$. For $u < T$: $x = u$. For $u \ge T$: $w = \frac{u - T}{z}$, $\text{Sample}(w) = w$, $x = T + w \cdot z = u$. Pure identity — uniform distribution over the full range. Also, identical.
 
 Both edge cases are mathematically consistent. The fix changes nothing for these two strategies.
 
@@ -392,11 +382,9 @@ The seam discontinuity problem has been encountered three times in this project:
 
 3. **Naive edge remap.** Even with the correct edge function (power-law or exponential), giving the edge zone a fixed probability budget of $z$ creates a density *spike* at the boundary. The seam manifests as a density jump of $(\alpha+1)\times$ or $\frac{\lambda}{1-e^{-\lambda}}\times$ — up to 51× with default parameters.
 
-<div class="panel green">
-
+~~~panel type=success
 **Root cause in all three cases:** treating the edge zone as an independent region with its own probability budget, rather than as part of a single normalized distribution. The piecewise inverse CDF approach eliminates this class of bug by construction — the normalization constant $c$ enforces continuity mathematically.
-
-</div>
+~~~
 
 ## See Also
 

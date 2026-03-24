@@ -73,16 +73,17 @@ Probability in the edge zone follows `(1 − s)^α`, where `s` is the position w
 
 Think of it as: the world record has a hard ceiling that can be approached but never reached.
 
-> [!NOTE]
-> **Rounding and `MaxWeight`.** While the density function is exactly zero at `MaxWeight`, the final rounding step (to grams) can theoretically round a weight just below the boundary up to `MaxWeight`. The probability depends on the **cardinality** of the weight range — the more distinct gram values in the range, the smaller the rounding catchment relative to the edge zone:
->
-> | Weight range     | Distinct grams | Chance per fish (α=2, zone=5%) |
-> |------------------|----------------|--------------------------------|
-> | 0.1–0.5 kg       | 400            | ~1:3,700,000                   |
-> | 80–130 kg        | 50,000         | ~1:7,000,000,000,000           |
-> | 40–620 kg        | 580,000        | ~1:11,000,000,000,000,000      |
->
-> For all practical purposes, `MaxWeight` is unreachable with PowerLaw.
+~~~panel type=note
+**Rounding and `MaxWeight`.** While the density function is exactly zero at `MaxWeight`, the final rounding step (to grams) can theoretically round a weight just below the boundary up to `MaxWeight`. The probability depends on the **cardinality** of the weight range — the more distinct gram values in the range, the smaller the rounding catchment relative to the edge zone:
+
+| Weight range     | Distinct grams | Chance per fish (α=2, zone=5%) |
+|------------------|----------------|--------------------------------|
+| 0.1–0.5 kg       | 400            | ~1:3,700,000                   |
+| 80–130 kg        | 50,000         | ~1:7,000,000,000,000           |
+| 40–620 kg        | 580,000        | ~1:11,000,000,000,000,000      |
+
+For all practical purposes, `MaxWeight` is unreachable with PowerLaw.
+~~~
 
 ### Exponential
 
@@ -122,8 +123,9 @@ Think of it as: the world record is always theoretically beatable, creating aspi
 
 These are **not intended for production use.** They exist as fail-safe defaults and debugging tools. Neither provides a smooth density falloff — they either cut off the edge zone entirely or leave it fully uniform.
 
-> [!WARNING]
-> Using either of these algorithms in production means **no edge rarity** — leaderboards will saturate or the edge zone will be completely inaccessible.
+~~~panel type=warning
+Using either of these algorithms in production means **no edge rarity** — leaderboards will saturate or the edge zone will be completely inaccessible.
+~~~
 
 #### None (CapAtThreshold) — default
 
@@ -191,9 +193,7 @@ Forms are classified by their position in the weight hierarchy **per species on 
 - **Lightest** — the form with the lowest `MinWeight`. Typically Young. Lower edge distribution here prevents generation of abnormally light fish.
 - **Others** — all forms in between. Typically Common and Trophy. Edge distribution on these forms provides consistent behavior but is less critical for leaderboard dynamics.
 
-<details>
-<summary>Role assignment with fewer than 4 forms</summary>
-
+~~~expand title="Role assignment with fewer than 4 forms"
 Not all species have all four forms on every pond. As the number of forms decreases, roles collapse:
 
 | Forms on pond | Heaviest      | Lightest      | Others                 | Implications                                                         |
@@ -204,8 +204,7 @@ Not all species have all four forms on every pond. As the number of forms decrea
 |       1       | the only form | the only form | —                      | Single form is **both Heaviest and Lightest** — both flag sets apply |
 
 Practical impact: presets like `Heaviest` and `Extremes` work correctly regardless of form count — they target roles, not specific forms. `Others`-based flags (`AllUpper`, `ExtremesAndAllUpper`) become partially or fully inert with fewer than 3 forms.
-
-</details>
+~~~
 
 ### Scope Presets
 
@@ -218,9 +217,7 @@ Practical impact: presets like `Heaviest` and `Extremes` work correctly regardle
 | `ExtremesAndAllUpper` | `u-ulu-`    | Extremes + upper edge on all others — balanced setting   |
 | `All`                 | `ululul`    | Both edges on all forms — most aggressive                |
 
-<details>
-<summary>Bit pattern reference</summary>
-
+~~~expand title="Bit pattern reference"
 Each position in the 6-character pattern corresponds to one (form role × edge side) flag:
 
 ```
@@ -244,14 +241,15 @@ AllUpper              u-u-u-    HeaviestUpper + LightestUpper + OthersUpper
 ExtremesAndAllUpper   u-ulu-    HeaviestUpper + LightestUpper + LightestLower + OthersUpper
 All                   ululul    all six flags
 ```
+~~~
 
-</details>
+~~~panel type=warning
+`Scope = None` disables edge distribution entirely, regardless of the selected algorithm. The heaviest form (typically Unique) will have no upper edge restriction — record weights will be generated at the same rate as average weights.
+~~~
 
-> [!WARNING]  
-> `Scope = None` disables edge distribution entirely, regardless of the selected algorithm. The heaviest form (typically Unique) will have no upper edge restriction — record weights will be generated at the same rate as average weights.
-
-> [!NOTE]  
-> `Scope = All` is the default fallback. It applies the same edge treatment to all forms on both sides. In most cases, a more targeted scope (e.g. `Heaviest` or `Extremes`) is preferred — it keeps the edge restriction where it matters most (heaviest form's upper edge) while leaving other forms unaffected.
+~~~panel type=note
+`Scope = All` is the default fallback. It applies the same edge treatment to all forms on both sides. In most cases, a more targeted scope (e.g. `Heaviest` or `Extremes`) is preferred — it keeps the edge restriction where it matters most (heaviest form's upper edge) while leaving other forms unaffected.
+~~~
 
 ### Custom Combinations
 
