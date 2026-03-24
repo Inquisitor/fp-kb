@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Candidate Edge Functions"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Two function families satisfy all requirements: power-law and exponential. Both are seamless at the boundary by construction, reach (near) zero at the maximum, and have a single tuning parameter."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "status",
+          "attrs": {
+            "text": "PowerLaw",
+            "color": "red"
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Edge function:",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bodiedExtension",
+      "attrs": {
+        "extensionType": "com.atlassian.confluence.macro.core",
+        "extensionKey": "mathblock"
+      },
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "p(s) = (1 - s)^\\alpha"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "where "
+        },
+        {
+          "type": "inlineExtension",
+          "attrs": {
+            "extensionType": "com.atlassian.confluence.macro.core",
+            "extensionKey": "mathinline",
+            "parameters": {
+              "body": "\\alpha > 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": " is the steepness parameter."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Properties:",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "inlineExtension",
+                  "attrs": {
+                    "extensionType": "com.atlassian.confluence.macro.core",
+                    "extensionKey": "mathinline",
+                    "parameters": {
+                      "body": "p(0) = 1"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " — seamless by construction"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "inlineExtension",
+                  "attrs": {
+                    "extensionType": "com.atlassian.confluence.macro.core",
+                    "extensionKey": "mathinline",
+                    "parameters": {
+                      "body": "p(1) = 0"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " — density is exactly zero at max weight (impossible to generate)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "inlineExtension",
+                  "attrs": {
+                    "extensionType": "com.atlassian.confluence.macro.core",
+                    "extensionKey": "mathinline",
+                    "parameters": {
+                      "body": "\\alpha"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " controls the curve shape:"
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "inlineExtension",
+                          "attrs": {
+                            "extensionType": "com.atlassian.confluence.macro.core",
+                            "extensionKey": "mathinline",
+                            "parameters": {
+                              "body": "\\alpha = 1"
+                            }
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "text": ": linear (straight line from boundary to max)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "inlineExtension",
+                          "attrs": {
+                            "extensionType": "com.atlassian.confluence.macro.core",
+                            "extensionKey": "mathinline",
+                            "parameters": {
+                              "body": "\\alpha = 2"
+                            }
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "text": ": quadratic (gentle start, then steeper)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "inlineExtension",
+                          "attrs": {
+                            "extensionType": "com.atlassian.confluence.macro.core",
+                            "extensionKey": "mathinline",
+                            "parameters": {
+                              "body": "\\alpha = 5+"
+                            }
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "text": ": very steep (most edge zone fish cluster near the boundary)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Naive sampling:",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {},
+      "content": [
+        {
+          "type": "text",
+          "text": "u = random()\nif u ≥ T:\n    weight = 1 − z × (1 − random())^(1/(α+1))\nelse:\n    weight = u"
+        }
+      ]
+    },
+    {
+      "type": "panel",
+      "attrs": {
+        "panelType": "info",
+        "title": "In simple terms"
+      },
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Think of it as a ramp that gets steeper as it approaches the edge: with "
+            },
+            {
+              "type": "inlineExtension",
+              "attrs": {
+                "extensionType": "com.atlassian.confluence.macro.core",
+                "extensionKey": "mathinline",
+                "parameters": {
+                  "body": "\\alpha=2"
+                }
+              }
+            },
+            {
+              "type": "text",
+              "text": ", the first half of the edge zone still has reasonable density, but the last quarter drops off sharply. With "
+            },
+            {
+              "type": "inlineExtension",
+              "attrs": {
+                "extensionType": "com.atlassian.confluence.macro.core",
+                "extensionKey": "mathinline",
+                "parameters": {
+                  "body": "\\alpha=5"
+                }
+              }
+            },
+            {
+              "type": "text",
+              "text": ", almost everything bunches near the start of the edge zone, and the upper end is practically empty."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "status",
+          "attrs": {
+            "text": "Exponential",
+            "color": "green"
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Edge function:",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bodiedExtension",
+      "attrs": {
+        "extensionType": "com.atlassian.confluence.macro.core",
+        "extensionKey": "mathblock"
+      },
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "p(s) = e^{-\\lambda \\cdot s}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "where "
+        },
+        {
+          "type": "inlineExtension",
+          "attrs": {
+            "extensionType": "com.atlassian.confluence.macro.core",
+            "extensionKey": "mathinline",
+            "parameters": {
+              "body": "\\lambda > 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": " is the rate parameter."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Comparison"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "| Property              | "
+        },
+        {
+          "type": "status",
+          "attrs": {
+            "text": "PowerLaw",
+            "color": "red"
+          }
+        },
+        {
+          "type": "text",
+          "text": " | "
+        },
+        {
+          "type": "status",
+          "attrs": {
+            "text": "Exponential",
+            "color": "green"
+          }
+        },
+        {
+          "type": "text",
+          "text": " |\n|-----------------------|-----------------------------|----------------------------------|\n| Density at 100%       | "
+        },
+        {
+          "type": "inlineExtension",
+          "attrs": {
+            "extensionType": "com.atlassian.confluence.macro.core",
+            "extensionKey": "mathinline",
+            "parameters": {
+              "body": "= 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": " (hard zero)          | "
+        },
+        {
+          "type": "inlineExtension",
+          "attrs": {
+            "extensionType": "com.atlassian.confluence.macro.core",
+            "extensionKey": "mathinline",
+            "parameters": {
+              "body": "> 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": " (asymptotic)              |\n| Parameter             | "
+        },
+        {
+          "type": "inlineExtension",
+          "attrs": {
+            "extensionType": "com.atlassian.confluence.macro.core",
+            "extensionKey": "mathinline",
+            "parameters": {
+              "body": "\\alpha"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": " (steepness)        | "
+        },
+        {
+          "type": "inlineExtension",
+          "attrs": {
+            "extensionType": "com.atlassian.confluence.macro.core",
+            "extensionKey": "mathinline",
+            "parameters": {
+              "body": "\\lambda"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": " (rate)                |"
+        }
+      ]
+    },
+    {
+      "type": "extension",
+      "attrs": {
+        "extensionType": "com.atlassian.confluence.macro.core",
+        "extensionKey": "toc",
+        "parameters": {}
+      }
+    }
+  ]
+}
