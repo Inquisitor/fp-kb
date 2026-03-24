@@ -10,6 +10,11 @@ pages:
     freshness: draft
     task: FP-41844
     workspace: workspace/FP-41844--fish-weight-edge-distribution.md
+  - id: null
+    title: Edge Distribution — Design Analysis
+    freshness: draft
+    task: FP-41844
+    workspace: workspace/FP-41844--edge-distribution-design-analysis.md
 
 related_kb_modules:
   - fish-generator

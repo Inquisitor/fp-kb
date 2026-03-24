@@ -13,6 +13,7 @@ Confluence space: FP | Homepage: 1146884 | [Web](https://fishingplanet.atlassian
 | Draft                                                                                 | Task     | Target Section                               | Status  |
 |---------------------------------------------------------------------------------------|----------|----------------------------------------------|---------|
 | [fish-weight-edge-distribution](workspace/FP-41844--fish-weight-edge-distribution.md) | FP-41844 | TECH > SERVER > Business Logic > Bite System | writing |
+| [edge-distribution-design-analysis](workspace/FP-41844--edge-distribution-design-analysis.md) | FP-41844 | TECH > SERVER > Business Logic > Bite System | writing |
 
 ## See Also
 - [Assessment backlog](backlog.md)
