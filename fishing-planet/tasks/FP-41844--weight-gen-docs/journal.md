@@ -8,7 +8,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41844: Fish Weight Generation — Create Documentation
 
 ## Status
-Two drafts written, reviewed, and partially published. confluence-md converter designed and planned (11 tasks). Next: implement converter, then republish drafts via ADF.
+confluence-md converter built and tested (73 tests). Design Analysis published via ADF (texblox LaTeX, panels, status). Tables adapted with bold italic Unicode fallback for simple formulas. Next: fix roundtrip backlog items, publish GD guide, polish both pages.
 
 ## Summary
 

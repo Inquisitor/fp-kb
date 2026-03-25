@@ -22,17 +22,17 @@ How to make fish near maximum weight progressively rarer while keeping the rest 
 
 The following symbols are used throughout this article:
 
-| Symbol    | Meaning                                                                                 |
-|-----------|-----------------------------------------------------------------------------------------|
-| $x$       | Normalized weight position within the form range ($0$ = `MinWeight`, $1$ = `MaxWeight`) |
-| $T$       | Threshold — boundary between central and edge zones (e.g. $0.95$)                       |
-| $z$       | Edge zone width: $z = 1 - T$ (e.g. $0.05$)                                              |
-| $s$       | Position within edge zone, normalized to $[0, 1]$: $s = \frac{x - T}{z}$                |
-| $p(s)$    | Edge function — defines the density shape in the edge zone                              |
-| $c$       | Normalization constant — ensures total probability $= 1$                                |
-| $A$       | Edge area fraction: $A = \int_0^1 p(s)\,ds$                                             |
-| $\alpha$  | Power-law steepness parameter                                                           |
-| $\lambda$ | Exponential rate parameter                                                              |
+| Symbol     | Meaning                                                                                         |
+|------------|-------------------------------------------------------------------------------------------------|
+| ***x***    | Normalized weight position within the form range (***0*** = `MinWeight`, ***1*** = `MaxWeight`) |
+| ***T***    | Threshold — boundary between central and edge zones (e.g. ***0.95***)                           |
+| ***z***    | Edge zone width: ***z = 1 − T*** (e.g. ***0.05***)                                              |
+| ***s***    | Position within edge zone, normalized to ***[0, 1]***: $s = \frac{x - T}{z}$                    |
+| ***p(s)*** | Edge function — defines the density shape in the edge zone                                      |
+| ***c***    | Normalization constant — ensures total probability ***= 1***                                    |
+| ***A***    | Edge area fraction: $A = \int_0^1 p(s)\,ds$                                                     |
+| ***α***    | Power-law steepness parameter                                                                   |
+| ***λ***    | Exponential rate parameter                                                                      |
 
 ## Problem Statement
 
@@ -151,16 +151,16 @@ In game terms: the world record is always theoretically beatable. With power-law
 
 ### Comparison
 
-| Property              | **PowerLaw**         | **Exponential**        |
-|-----------------------|----------------------|------------------------|
-| Seam at threshold     | Continuous           | Continuous             |
-| Density at 100%       | $= 0$ (hard zero)    | $> 0$ (asymptotic)     |
-| Parameter             | $\alpha$ (steepness) | $\lambda$ (rate)       |
-| Parameter meaning     | "How steep the ramp" | "How fast the falloff" |
-| Sampling              | Closed-form, $O(1)$  | Closed-form, $O(1)$    |
-| Average weight shift  | ~1–3% lower          | ~1–3% lower            |
-| Max weight achievable | No (exactly zero)    | Yes (vanishingly rare) |
-| Tunability            | Easy (single slider) | Easy (single slider)   |
+| Property              | **PowerLaw**            | **Exponential**         |
+|-----------------------|-------------------------|-------------------------|
+| Seam at threshold     | Continuous              | Continuous              |
+| Density at 100%       | ***= 0*** (hard zero)   | ***> 0*** (asymptotic)  |
+| Parameter             | ***α*** (steepness)     | ***λ*** (rate)          |
+| Parameter meaning     | "How steep the ramp"    | "How fast the falloff"  |
+| Sampling              | Closed-form, ***O(1)*** | Closed-form, ***O(1)*** |
+| Average weight shift  | ~1–3% lower             | ~1–3% lower             |
+| Max weight achievable | No (exactly zero)       | Yes (vanishingly rare)  |
+| Tunability            | Easy (single slider)    | Easy (single slider)    |
 
 ### `weightK` Interaction
 
@@ -204,11 +204,11 @@ At $x = T$, the density jumps from $\frac{\Phi(T)}{T}$ (left) to $\varphi(T)$ (r
 
 Concrete examples ($T = 0.95$):
 
-| $\mu$ | $\sigma$ | Left density | Right density | Ratio  | P(edge) |
-|-------|----------|--------------|---------------|--------|---------|
-| 0.50  | 0.20     | 1.040        | 0.159         | 6.5× ↓ | 1.2%    |
-| 0.50  | 0.55     | 0.835        | 0.515         | 1.6× ↓ | 20.7%   |
-| 0.80  | 0.55     | 0.640        | 0.700         | ~1.0   | 39.3%   |
+| ***μ*** | ***σ*** | Left density | Right density | Ratio  | P(edge) |
+|---------|---------|--------------|---------------|--------|---------|
+| 0.50    | 0.20    | 1.040        | 0.159         | 6.5× ↓ | 1.2%    |
+| 0.50    | 0.55    | 0.835        | 0.515         | 1.6× ↓ | 20.7%   |
+| 0.80    | 0.55    | 0.640        | 0.700         | ~1.0   | 39.3%   |
 
 This reveals a fundamental tension:
 
@@ -274,13 +274,13 @@ The central zone density is $1$. The edge zone density at the boundary is $\alph
 
 ### Spike height
 
-| Strategy                       | Density at boundary                          | Spike height (vs uniform $= 1$) |
-|--------------------------------|----------------------------------------------|---------------------------------|
-| **PowerLaw** ($\alpha=2$)      | $\alpha + 1 = 3$                             | 3×                              |
-| **PowerLaw** ($\alpha=5$)      | $\alpha + 1 = 6$                             | 6×                              |
-| **PowerLaw** ($\alpha=50$)     | $\alpha + 1 = 51$                            | **51×**                         |
-| **Exponential** ($\lambda=7$)  | $\frac{\lambda}{1 - e^{-\lambda}} \approx 7$ | 7×                              |
-| **Exponential** ($\lambda=50$) | $\approx 50$                                 | **50×**                         |
+| Strategy                     | Density at boundary                          | Spike height (vs uniform ***= 1***) |
+|------------------------------|----------------------------------------------|-------------------------------------|
+| **PowerLaw** (***α=2***)     | ***α + 1 = 3***                              | 3×                                  |
+| **PowerLaw** (***α=5***)     | ***α + 1 = 6***                              | 6×                                  |
+| **PowerLaw** (***α=50***)    | ***α + 1 = 51***                             | **51×**                             |
+| **Exponential** (***λ=7***)  | $\frac{\lambda}{1 - e^{-\lambda}} \approx 7$ | 7×                                  |
+| **Exponential** (***λ=50***) | ***≈ 50***                                   | **50×**                             |
 
 With default parameters ($\alpha=50$ or $\lambda=50$), the spike is **50× the uniform density**. In a histogram, this appears as a sharp pillar at the 95% mark — the exact opposite of the smooth transition that was requested.
 
@@ -302,12 +302,12 @@ $$c = \frac{1}{T + z \cdot A}$$
 
 where $A = \int_0^1 p(s)\,ds$ is the **edge area fraction** — how much of the zone's width is "filled" by the edge function.
 
-| Strategy                    |      $p(s)$      |           $A = \int_0^1 p(s)\,ds$           | $c$ (for $T{=}0.95$, $z{=}0.05$) |
-|-----------------------------|:----------------:|:-------------------------------------------:|----------------------------------|
-| **None**                    |       $0$        |                     $0$                     | $\frac{1}{0.95} \approx 1.053$   |
-| **Uniform**                 |       $1$        |                     $1$                     | $\frac{1}{1} = 1.000$            |
-| **PowerLaw** ($\alpha$)     |  $(1-s)^\alpha$  |       $\mathbf{\frac{1}{\alpha + 1}}$       | $1.002$ ($\alpha=2$)             |
-| **Exponential** ($\lambda$) | $e^{-\lambda s}$ | $\mathbf{\frac{1 - e^{-\lambda}}{\lambda}}$ | $1.007$ ($\lambda=7$)            |
+| Strategy                  |    ***p(s)***    |           $A = \int_0^1 p(s)\,ds$           | ***c*** (for ***T=0.95***, ***z=0.05***) |
+|---------------------------|:----------------:|:-------------------------------------------:|------------------------------------------|
+| **None**                  |     ***0***      |                   ***0***                   | $\frac{1}{0.95} \approx 1.053$           |
+| **Uniform**               |     ***1***      |                   ***1***                   | $\frac{1}{1} = 1.000$                    |
+| **PowerLaw** (***α***)    |  $(1-s)^\alpha$  |       $\mathbf{\frac{1}{\alpha + 1}}$       | ***1.002*** (***α=2***)                  |
+| **Exponential** (***λ***) | $e^{-\lambda s}$ | $\mathbf{\frac{1 - e^{-\lambda}}{\lambda}}$ | ***1.007*** (***λ=7***)                  |
 
 Note how $c$ is always very close to $1.0$ — the density bump in the central zone is at most ~5%, negligible for game balance.
 
