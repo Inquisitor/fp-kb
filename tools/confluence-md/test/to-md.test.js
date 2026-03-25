@@ -30,7 +30,7 @@ describe('toMd pipeline', () => {
       ]
     };
 
-    const md = toMd(adf);
+    const { md } = toMd(adf);
     assert.ok(md.includes('# Title'));
     assert.ok(md.includes('$x + y$'));
     assert.ok(md.includes('$$\nc = \\frac{1}{T}\n$$'));
@@ -61,7 +61,7 @@ describe('toMd pipeline', () => {
         }}
       ]
     };
-    const md = toMd(adf);
+    const { md } = toMd(adf);
     assert.ok(md.includes('$x^2$'), 'inline math');
     assert.ok(md.includes('$$\nE = mc^2\n$$'), 'block math');
     assert.ok(!md.includes('CFMD_'));
@@ -79,10 +79,28 @@ describe('toMd pipeline', () => {
         ],
       }],
     };
-    const md = toMd(adf);
+    const { md } = toMd(adf);
     assert.ok(md.includes('[FP-41844]'), 'should have issue key as link text');
     assert.ok(md.includes('(https://fishingplanet.atlassian.net/browse/FP-41844)'), 'should have full URL');
     assert.ok(!md.includes('card:'), 'should NOT have card: prefix');
     assert.ok(!md.includes('adf://'), 'should NOT have adf:// prefix');
+  });
+
+  it('converts mediaSingle to markdown image with fileId lookup', () => {
+    const adf = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'mediaSingle',
+        attrs: { layout: 'center' },
+        content: [
+          { type: 'media', attrs: { id: 'abc-123', type: 'file', alt: 'fig.svg', collection: 'contentId-999' } },
+          { type: 'caption', content: [{ type: 'text', text: 'Figure 1' }] },
+        ],
+      }],
+    };
+    const nameMap = new Map([['abc-123', 'fig.svg']]);
+    const { md, warnings } = toMd(adf, { fileIdToName: nameMap });
+    assert.ok(md.includes('![Figure 1](fig.svg)'), 'should have markdown image');
+    assert.equal(warnings.length, 0);
   });
 });

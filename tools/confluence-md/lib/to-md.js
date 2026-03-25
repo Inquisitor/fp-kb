@@ -4,17 +4,22 @@ import { Parser } from 'extended-markdown-adf-parser';
 import { preprocessAdf } from './preprocessor.js';
 import { postprocessMd } from './postprocessor.js';
 import { downgradeJiraLinks } from './jira-links.js';
+import { downgradeImages } from './image-downgrader.js';
 
 const parser = new Parser();
 
 /**
  * Convert ADF JSON to annotated Markdown.
  * @param {object} adf - ADF document JSON
- * @returns {string} Markdown text
+ * @param {object} [opts]
+ * @param {Map<string,string>} [opts.fileIdToName] - fileId → filename map for image resolution
+ * @returns {{ md: string, warnings: string[] }}
  */
-export function toMd(adf) {
-  const downgraded = downgradeJiraLinks(adf);
-  const { doc, map } = preprocessAdf(downgraded);
+export function toMd(adf, opts = {}) {
+  const { fileIdToName } = opts;
+  const { doc: imgDowngraded, warnings } = downgradeImages(adf, fileIdToName);
+  const jiraDowngraded = downgradeJiraLinks(imgDowngraded);
+  const { doc, map } = preprocessAdf(jiraDowngraded);
   const md = parser.adfToMarkdown(doc);
-  return postprocessMd(md, map);
+  return { md: postprocessMd(md, map), warnings };
 }
