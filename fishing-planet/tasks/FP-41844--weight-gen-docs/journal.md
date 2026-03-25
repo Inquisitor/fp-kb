@@ -52,7 +52,7 @@ Old conventions replaced by native `extended-markdown-adf-parser` syntax. See [d
 
 ### Converter tool
 - **Location:** `D:\kb\tools\confluence-md\`
-- **Docs:** [design.md](../../../tools/confluence-md/docs/design.md), [plan.md](../../../tools/confluence-md/docs/plan.md)
+- **Docs:** [design.md](../../../tools/confluence-md/docs/design.md), [plan.md](../../../tools/confluence-md/docs/plan.md), [backlog.md](../../../tools/confluence-md/docs/backlog.md)
 
 ### Known limitations
 - `{status:Text|color:red}` cannot be used inside markdown tables — the `|` conflicts with table cell delimiters. Use **bold** instead. Status works everywhere else (headings, paragraphs, list items).
