@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // confluence-md.js — CLI entry point
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { resolve, dirname, basename } from 'node:path';
 import { toAdf } from './lib/to-adf.js';
 import { toMd } from './lib/to-md.js';
+import { resolveImages } from './lib/image-resolver.js';
 
 const [,, command, inputPath, ...rest] = process.argv;
 
@@ -66,11 +68,39 @@ try {
       showUsage();
     }
     const md = readFileSync(inputPath, 'utf8');
-    const adf = toAdf(md, { stripH1: !keepH1 });
+    const { doc: adf, map } = toAdf(md, { stripH1: !keepH1, returnMap: true });
 
-    const { loadCredentials, updatePage } = await import('./lib/confluence-api.js');
+    const { loadCredentials, updatePage, uploadAttachment } = await import('./lib/confluence-api.js');
     const creds = loadCredentials();
-    const result = await updatePage(pageId, adf, creds, flags['message']);
+
+    // Upload images referenced in the document
+    const mdDir = dirname(resolve(inputPath));
+    const fileIdMap = new Map();
+    for (const [id, entry] of map.entries()) {
+      if (entry.type !== 'image') continue;
+      const imgPath = resolve(mdDir, entry.content.path);
+      const filename = basename(imgPath);
+      if (!existsSync(imgPath)) {
+        console.error(`Warning: image file not found: ${imgPath}`);
+        continue;
+      }
+      try {
+        const fileData = readFileSync(imgPath);
+        const att = await uploadAttachment(pageId, filename, fileData, creds);
+        fileIdMap.set(filename, att.fileId);
+        console.error(`  Uploaded: ${filename} → ${att.fileId}`);
+      } catch (err) {
+        console.error(`Warning: failed to upload ${filename}: ${err.message}`);
+      }
+    }
+
+    // Resolve image placeholders in ADF
+    const { doc: finalAdf, warnings } = resolveImages(adf, map, fileIdMap, pageId);
+    for (const w of warnings) {
+      console.error(`Warning: ${w}`);
+    }
+
+    const result = await updatePage(pageId, finalAdf, creds, flags['message']);
     console.error(`Published "${result.title}" (version ${result.version})`);
   } else if (command === 'download') {
     // For download, inputPath is the page ID (not a file)

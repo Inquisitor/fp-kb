@@ -76,6 +76,47 @@ describe('preprocessMd — TOC', () => {
   });
 });
 
+describe('preprocessMd — images', () => {
+  it('extracts image with alt and path', () => {
+    const { text, map } = preprocessMd('Before\n\n![Figure 1](images/fig1.svg)\n\nAfter');
+    assert.ok(text.includes('CFMD_IMAGE_0001'));
+    assert.ok(!text.includes('!['));
+    const entry = map.get('CFMD_IMAGE_0001');
+    assert.equal(entry.type, 'image');
+    assert.deepEqual(entry.content, { alt: 'Figure 1', path: 'images/fig1.svg' });
+  });
+
+  it('extracts multiple images', () => {
+    const input = '![a](x.svg)\n\ntext\n\n![b](y.svg)';
+    const { text, map } = preprocessMd(input);
+    assert.equal(map.get('CFMD_IMAGE_0001').content.alt, 'a');
+    assert.equal(map.get('CFMD_IMAGE_0002').content.alt, 'b');
+  });
+
+  it('extracts image with relative path', () => {
+    const { text, map } = preprocessMd('![Fig](../../modules/fish/fig.svg)');
+    assert.equal(map.get('CFMD_IMAGE_0001').content.path, '../../modules/fish/fig.svg');
+  });
+
+  it('extracts image with empty alt', () => {
+    const { text, map } = preprocessMd('![](diagram.svg)');
+    assert.equal(map.get('CFMD_IMAGE_0001').content.alt, '');
+  });
+
+  it('ignores image syntax inside code fence', () => {
+    const input = '```\n![not an image](fake.svg)\n```';
+    const { text, map } = preprocessMd(input);
+    const imageEntries = [...map.entries()].filter(([, e]) => e.type === 'image');
+    assert.equal(imageEntries.length, 0);
+  });
+
+  it('ignores image syntax inside inline code', () => {
+    const { text, map } = preprocessMd('Use `![alt](path)` syntax.');
+    const imageEntries = [...map.entries()].filter(([, e]) => e.type === 'image');
+    assert.equal(imageEntries.length, 0);
+  });
+});
+
 // ---------------------------------------------------------------------------
 // preprocessAdf — ADF → placeholder direction
 // ---------------------------------------------------------------------------

@@ -172,6 +172,15 @@ export function preprocessMd(text) {
     return map.add('toc', '');
   });
 
+  // Step 5: extract images ![alt](path)
+  // Package drops images entirely, so we extract and handle them ourselves.
+  protectedRanges = findProtectedRanges(text);
+  const imageRe = /!\[([^\]]*)\]\(([^)]+)\)/g;
+  text = text.replace(imageRe, (match, alt, path, offset) => {
+    if (isProtected(offset, protectedRanges)) return match;
+    return map.add('image', { alt, path });
+  });
+
   return { text, map };
 }
 

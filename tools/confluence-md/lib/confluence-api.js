@@ -62,6 +62,90 @@ export async function getPage(pageId, creds) {
 }
 
 /**
+ * List attachments on a Confluence page.
+ * @returns {Promise<Array<{id: string, filename: string, fileId: string}>>}
+ */
+export async function listAttachments(pageId, creds) {
+  const url = `https://${creds.site}/wiki/rest/api/content/${pageId}/child/attachment?limit=100`;
+  const res = await fetch(url, {
+    headers: {
+      'Authorization': authHeader(creds),
+      'Accept': 'application/json',
+    },
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`GET attachments for page ${pageId} failed (${res.status}): ${body}`);
+  }
+  const data = await res.json();
+  return (data.results || []).map(att => ({
+    id: att.id,
+    filename: att.title,
+    fileId: att.extensions?.fileId,
+  }));
+}
+
+/**
+ * Upload a file as an attachment to a Confluence page.
+ * Creates a new attachment, or updates existing if filename already exists.
+ * @param {string} pageId
+ * @param {string} filename - Name for the attachment in Confluence
+ * @param {Buffer} fileData - File contents
+ * @param {object} creds
+ * @returns {Promise<{fileId: string, filename: string}>}
+ */
+export async function uploadAttachment(pageId, filename, fileData, creds) {
+  const baseUrl = `https://${creds.site}/wiki/rest/api/content/${pageId}/child/attachment`;
+  const auth = authHeader(creds);
+
+  // Try creating new attachment
+  const createForm = new FormData();
+  createForm.append('file', new Blob([fileData]), filename);
+  createForm.append('minorEdit', 'true');
+
+  const createRes = await fetch(baseUrl, {
+    method: 'POST',
+    headers: { 'Authorization': auth, 'X-Atlassian-Token': 'nocheck' },
+    body: createForm,
+  });
+
+  if (createRes.ok) {
+    const data = await createRes.json();
+    const att = data.results[0];
+    return { fileId: att.extensions.fileId, filename: att.title };
+  }
+
+  // 400 = duplicate filename → find existing attachment and update it
+  if (createRes.status === 400) {
+    const attachments = await listAttachments(pageId, creds);
+    const existing = attachments.find(a => a.filename === filename);
+    if (!existing) {
+      throw new Error(`Upload failed (400) but no existing attachment named "${filename}" found`);
+    }
+
+    const updateUrl = `${baseUrl}/${existing.id}/data`;
+    const updateForm = new FormData();
+    updateForm.append('file', new Blob([fileData]), filename);
+    updateForm.append('minorEdit', 'true');
+
+    const updateRes = await fetch(updateUrl, {
+      method: 'POST',
+      headers: { 'Authorization': auth, 'X-Atlassian-Token': 'nocheck' },
+      body: updateForm,
+    });
+    if (!updateRes.ok) {
+      const body = await updateRes.text();
+      throw new Error(`Update attachment "${filename}" failed (${updateRes.status}): ${body}`);
+    }
+    const data = await updateRes.json();
+    return { fileId: data.extensions.fileId, filename: data.title };
+  }
+
+  const body = await createRes.text();
+  throw new Error(`Upload attachment "${filename}" failed (${createRes.status}): ${body}`);
+}
+
+/**
  * Update a Confluence page with new ADF content.
  * Automatically fetches current version and increments.
  * @param {string} pageId

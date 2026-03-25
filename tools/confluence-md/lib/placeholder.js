@@ -1,14 +1,15 @@
-// Manages CFMD_* placeholder tokens for LaTeX and TOC extraction.
+// Manages CFMD_* placeholder tokens for LaTeX, TOC, and image extraction.
 const PREFIX = 'CFMD';
 const TYPE_MAP = {
   mathinl: 'MATHINL',
   mathblk: 'MATHBLK',
   toc: 'TOC',
+  image: 'IMAGE',
 };
 
 export class PlaceholderMap {
   #entries = new Map();
-  #counters = { mathinl: 0, mathblk: 0, toc: 0 };
+  #counters = { mathinl: 0, mathblk: 0, toc: 0, image: 0 };
 
   /** Registers content under a new placeholder token and returns the token ID. */
   add(type, content) {

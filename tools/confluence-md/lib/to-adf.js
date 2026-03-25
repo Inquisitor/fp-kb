@@ -13,10 +13,12 @@ const parser = new Parser();
  * @param {object} [opts]
  * @param {boolean} [opts.stripH1=true] - Remove the first top-level H1 heading
  *   (Confluence uses the page title; a duplicate H1 in the body is unwanted).
- * @returns {object} ADF document
+ * @param {boolean} [opts.returnMap=false] - Also return the placeholder map
+ *   (needed by callers that perform image resolution as a separate step).
+ * @returns {object|{doc: object, map: PlaceholderMap}} ADF document, or {doc, map} if returnMap
  */
 export function toAdf(md, opts = {}) {
-  const { stripH1 = true } = opts;
+  const { stripH1 = true, returnMap = false } = opts;
   const { text, map } = preprocessMd(md);
   const adf = parser.markdownToAdf(text);
   let result = postprocessAdf(adf, map);
@@ -24,7 +26,7 @@ export function toAdf(md, opts = {}) {
   if (stripH1) {
     removeFirstH1(result);
   }
-  return result;
+  return returnMap ? { doc: result, map } : result;
 }
 
 /**
