@@ -146,6 +146,60 @@ export async function uploadAttachment(pageId, filename, fileData, creds) {
 }
 
 /**
+ * Create a new Confluence page under a given parent.
+ * Resolves spaceId automatically from the parent page.
+ * @param {string} parentId - Parent page ID
+ * @param {string} title - Page title
+ * @param {object} adf - ADF document object
+ * @param {object} creds
+ * @returns {Promise<{id: string, version: number, title: string}>}
+ */
+export async function createPage(parentId, title, adf, creds) {
+  // Resolve spaceId from parent
+  const parentUrl = `https://${creds.site}/wiki/api/v2/pages/${parentId}`;
+  const parentRes = await fetch(parentUrl, {
+    headers: {
+      'Authorization': authHeader(creds),
+      'Accept': 'application/json',
+    },
+  });
+  if (!parentRes.ok) {
+    const body = await parentRes.text();
+    throw new Error(`GET parent page ${parentId} failed (${parentRes.status}): ${body}`);
+  }
+  const parentData = await parentRes.json();
+  const spaceId = parentData.spaceId;
+
+  const url = `https://${creds.site}/wiki/api/v2/pages`;
+  const body = {
+    spaceId: String(spaceId),
+    status: 'current',
+    title,
+    parentId,
+    body: {
+      representation: 'atlas_doc_format',
+      value: JSON.stringify(adf),
+    },
+  };
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': authHeader(creds),
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const respBody = await res.text();
+    throw new Error(`POST create page failed (${res.status}): ${respBody}`);
+  }
+  const data = await res.json();
+  return { id: data.id, version: data.version.number, title: data.title };
+}
+
+/**
  * Update a Confluence page with new ADF content.
  * Automatically fetches current version and increments.
  * @param {string} pageId

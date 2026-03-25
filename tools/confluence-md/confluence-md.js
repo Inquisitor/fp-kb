@@ -13,6 +13,7 @@ function showUsage() {
   console.error('  confluence-md to-adf <file.md> [-o output.adf.json]');
   console.error('  confluence-md to-md <file.adf.json> [-o output.md]');
   console.error('  confluence-md publish <file.md> --page-id=ID [--message="version message"]');
+  console.error('  confluence-md create <file.md> --parent-id=ID --title="Page Title"');
   console.error('  confluence-md download <page-id> [-o output.md]');
   process.exit(1);
 }
@@ -146,6 +147,55 @@ try {
 
     const result = await updatePage(pageId, finalAdf, creds, flags['message']);
     console.error(`Published "${result.title}" (version ${result.version})`);
+  } else if (command === 'create') {
+    const parentId = flags['parent-id'];
+    const title = flags['title'];
+    if (!parentId || !title) {
+      console.error('Error: --parent-id=ID and --title="Page Title" are required for create');
+      showUsage();
+    }
+    const md = readFileSync(inputPath, 'utf8');
+    const { doc: adf, map } = toAdf(md, { stripH1: !keepH1, returnMap: true });
+
+    const { loadCredentials, createPage, uploadAttachment } = await import('./lib/confluence-api.js');
+    const creds = loadCredentials();
+
+    // Create page first (need page ID for attachment uploads)
+    const emptyAdf = { type: 'doc', version: 1, content: [] };
+    const created = await createPage(parentId, title, emptyAdf, creds);
+    const pageId = created.id;
+    console.error(`Created page "${created.title}" (id: ${pageId})`);
+
+    // Upload images
+    const mdDir = dirname(resolve(inputPath));
+    const fileIdMap = new Map();
+    for (const [id, entry] of map.entries()) {
+      if (entry.type !== 'image') continue;
+      const imgPath = resolve(mdDir, entry.content.path);
+      const filename = basename(imgPath);
+      if (!existsSync(imgPath)) {
+        console.error(`Warning: image file not found: ${imgPath}`);
+        continue;
+      }
+      try {
+        const fileData = readFileSync(imgPath);
+        const att = await uploadAttachment(pageId, filename, fileData, creds);
+        fileIdMap.set(filename, att.fileId);
+        console.error(`  Uploaded: ${filename} → ${att.fileId}`);
+      } catch (err) {
+        console.error(`Warning: failed to upload ${filename}: ${err.message}`);
+      }
+    }
+
+    // Resolve images and update the page with full content
+    const { doc: finalAdf, warnings } = resolveImages(adf, map, fileIdMap, pageId);
+    for (const w of warnings) {
+      console.error(`Warning: ${w}`);
+    }
+
+    const { updatePage } = await import('./lib/confluence-api.js');
+    const updated = await updatePage(pageId, finalAdf, creds, 'Initial content via confluence-md');
+    console.error(`Updated "${updated.title}" (version ${updated.version})`);
   } else if (command === 'download') {
     // For download, inputPath is the page ID (not a file)
     const pageId = inputPath;
