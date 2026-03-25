@@ -66,4 +66,23 @@ describe('toMd pipeline', () => {
     assert.ok(md.includes('$$\nE = mc^2\n$$'), 'block math');
     assert.ok(!md.includes('CFMD_'));
   });
+
+  it('converts Jira inlineCard to clean markdown link', () => {
+    const adf = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'paragraph',
+        content: [
+          { type: 'text', text: 'See ' },
+          { type: 'inlineCard', attrs: { url: 'https://fishingplanet.atlassian.net/browse/FP-41844' } },
+          { type: 'text', text: ' for details.' },
+        ],
+      }],
+    };
+    const md = toMd(adf);
+    assert.ok(md.includes('[FP-41844]'), 'should have issue key as link text');
+    assert.ok(md.includes('(https://fishingplanet.atlassian.net/browse/FP-41844)'), 'should have full URL');
+    assert.ok(!md.includes('card:'), 'should NOT have card: prefix');
+    assert.ok(!md.includes('adf://'), 'should NOT have adf:// prefix');
+  });
 });

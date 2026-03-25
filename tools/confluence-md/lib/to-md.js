@@ -3,6 +3,7 @@
 import { Parser } from 'extended-markdown-adf-parser';
 import { preprocessAdf } from './preprocessor.js';
 import { postprocessMd } from './postprocessor.js';
+import { downgradeJiraLinks } from './jira-links.js';
 
 const parser = new Parser();
 
@@ -12,7 +13,8 @@ const parser = new Parser();
  * @returns {string} Markdown text
  */
 export function toMd(adf) {
-  const { doc, map } = preprocessAdf(adf);
+  const downgraded = downgradeJiraLinks(adf);
+  const { doc, map } = preprocessAdf(downgraded);
   const md = parser.adfToMarkdown(doc);
   return postprocessMd(md, map);
 }

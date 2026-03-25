@@ -79,4 +79,27 @@ describe('toAdf pipeline', () => {
     const json = JSON.stringify(adf);
     assert.ok(json.includes('Only H2'), 'H2 should remain');
   });
+
+  it('upgrades Jira markdown link to inlineCard', () => {
+    const md = 'See [FP-41844](https://fishingplanet.atlassian.net/browse/FP-41844) here.';
+    const adf = toAdf(md);
+    const json = JSON.stringify(adf);
+    assert.ok(json.includes('"type":"inlineCard"'), 'should have inlineCard');
+    assert.ok(json.includes('FP-41844'), 'should have issue key in URL');
+  });
+
+  it('upgrades bare Jira URL to inlineCard', () => {
+    const md = 'Link: https://fishingplanet.atlassian.net/browse/FP-41844 done.';
+    const adf = toAdf(md);
+    const json = JSON.stringify(adf);
+    assert.ok(json.includes('"type":"inlineCard"'), 'should have inlineCard');
+  });
+
+  it('keeps Jira link with custom text as regular link', () => {
+    const md = 'See [the task](https://fishingplanet.atlassian.net/browse/FP-41844) here.';
+    const adf = toAdf(md);
+    const json = JSON.stringify(adf);
+    assert.ok(!json.includes('"type":"inlineCard"'), 'should NOT have inlineCard');
+    assert.ok(json.includes('the task'), 'custom text should remain');
+  });
 });

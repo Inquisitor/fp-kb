@@ -3,6 +3,7 @@
 import { Parser } from 'extended-markdown-adf-parser';
 import { preprocessMd } from './preprocessor.js';
 import { postprocessAdf } from './postprocessor.js';
+import { upgradeJiraLinks } from './jira-links.js';
 
 const parser = new Parser();
 
@@ -18,7 +19,8 @@ export function toAdf(md, opts = {}) {
   const { stripH1 = true } = opts;
   const { text, map } = preprocessMd(md);
   const adf = parser.markdownToAdf(text);
-  const result = postprocessAdf(adf, map);
+  let result = postprocessAdf(adf, map);
+  result = upgradeJiraLinks(result);
   if (stripH1) {
     removeFirstH1(result);
   }
