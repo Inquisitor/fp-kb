@@ -26,9 +26,24 @@ describe('texblox adapter — makeNode', () => {
     assert.equal(node.attrs.parameters.guestParams.formula, '{0}');
   });
 
-  it('does not wrap multi-char formula', () => {
+  it('wraps purely numeric formula in braces', () => {
+    const node = makeNode('0.95', 'inline');
+    assert.equal(node.attrs.parameters.guestParams.formula, '{0.95}');
+  });
+
+  it('wraps integer-like numeric formula in braces', () => {
+    const node = makeNode('1.0', 'inline');
+    assert.equal(node.attrs.parameters.guestParams.formula, '{1.0}');
+  });
+
+  it('does not wrap formula with letters', () => {
     const node = makeNode('\\alpha', 'inline');
     assert.equal(node.attrs.parameters.guestParams.formula, '\\alpha');
+  });
+
+  it('does not wrap formula with operators and letters', () => {
+    const node = makeNode('x + 1', 'inline');
+    assert.equal(node.attrs.parameters.guestParams.formula, 'x + 1');
   });
 
   it('does not wrap formula with spaces around single char', () => {
@@ -71,8 +86,14 @@ describe('texblox adapter — extract', () => {
     assert.equal(formula, 'x');
   });
 
-  it('does not strip braces from multi-char content', () => {
-    // {abc} should NOT be stripped — only single-char {x}
+  it('reverses numeric brace workaround', () => {
+    const node = makeNode('0.95', 'inline');
+    // makeNode produces {0.95}, extract should reverse to 0.95
+    const { formula } = extract(node);
+    assert.equal(formula, '0.95');
+  });
+
+  it('does not strip braces from multi-char non-numeric content', () => {
     const node = makeNode('test', 'inline');
     node.attrs.parameters.guestParams.formula = '{abc}';
     const { formula } = extract(node);

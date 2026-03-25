@@ -14,9 +14,18 @@ const EXT_KEY_MARKER = 'texblox-macro';
  * Wraps single-character formulas in braces to work around a texblox
  * rendering bug where very short formulas produce blank output.
  */
+/**
+ * Workaround for texblox rendering bugs:
+ * - Single-character formulas render as blank
+ * - Purely numeric formulas (e.g. "0.95", "1.0") render as blank
+ * Wrapping in braces {x} forces texblox to treat them as LaTeX content.
+ */
 function prepareFormula(formula) {
   const trimmed = formula.trim();
   if (trimmed.length === 1) {
+    return `{${trimmed}}`;
+  }
+  if (/^[\d.]+$/.test(trimmed)) {
     return `{${trimmed}}`;
   }
   return formula;
@@ -69,10 +78,14 @@ export function extract(node) {
   let formula = gp?.formula ?? '';
   const displayMode = gp?.displayMode ?? 'inline';
 
-  // Reverse single-char workaround: {x} → x
-  const braceMatch = formula.match(/^\{(.)\}$/);
+  // Reverse brace workaround: {x} → x, {0.95} → 0.95
+  const braceMatch = formula.match(/^\{(.+)\}$/);
   if (braceMatch) {
-    formula = braceMatch[1];
+    const inner = braceMatch[1];
+    // Only unwrap if it looks like our workaround (single char or pure number)
+    if (inner.length === 1 || /^[\d.]+$/.test(inner)) {
+      formula = inner;
+    }
   }
 
   return { formula, displayMode };
