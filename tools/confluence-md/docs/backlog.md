@@ -2,14 +2,15 @@
 
 ## Publish (MD → Confluence)
 
-- [ ] Strip first H1 from ADF — duplicates Confluence page title
-- [ ] Media registry integration — resolve `![alt](file.svg)` to `media:uuid` via registry
-- [ ] Automated image upload — upload attachments via REST API, update registry
+- [x] Strip first H1 from ADF — `toAdf()` strips by default, `--keep-h1` to disable
+- [x] Automated image upload — `publish` uploads attachments via REST API, resolves fileId in-memory
+- [x] Jira issue links → inlineCard widgets — `*.atlassian.net/browse/*` URLs auto-upgraded
 
 ## Download (Confluence → MD)
 
+- [x] Image resolution — mediaSingle → `![alt](filename)` via attachments API lookup
+- [x] Jira inlineCard → clean `[KEY](url)` markdown links
 - [ ] Preserve YAML frontmatter — restore from existing .md or template on download
-- [ ] Media registry integration — rewrite `media:uuid` to local filename
 - [ ] Strip default tableCell attrs — remove `<!-- adf:tableCell attrs='{"colspan":1,"rowspan":1}' -->` noise
 - [ ] Table column alignment — lost on roundtrip (package limitation, may need post-processing)
 - [ ] Bold-inside-backtick — `**pre-\`x\`**` roundtrips as `**pre-**\`x\`` (package limitation)
@@ -25,47 +26,15 @@
 - [x] Numeric formula workaround — `0.95` → `{0.95}`
 - [ ] Inline rendering in tables — `inlineExtension` renders as block inside `tableCell` (plugin limitation, no fix known)
 
-## Image workflow (discovered findings)
+## Offline mode
 
-### ADF structure for images
-SVG files render inline in Confluence Cloud. ADF structure (from real page):
-```json
-{"type": "mediaSingle", "attrs": {"layout": "center", "width": 760, "widthType": "pixel"},
- "content": [
-   {"type": "media", "attrs": {
-     "id": "<uuid>", "collection": "contentId-<pageId>",
-     "type": "file", "width": 600, "height": 320,
-     "alt": "filename.svg"}},
-   {"type": "caption", "content": [{"type": "text", "text": "Figure 1"}]}
-]}
-```
+- [x] `to-adf --page-id=ID` — lookups existing attachments to resolve images without upload
+- [x] `to-md` — auto-extracts pageId from `collection` attr, fetches attachments for filename resolution
+- [x] Graceful fallback — warning placeholders when API unavailable
 
-### Publish flow
-1. Page must exist first (to attach files to)
-2. Upload image as attachment (manual in Phase 1, REST API in Phase 2)
-3. Get media UUID from attachment response or page ADF
-4. `media-registry.yml` maps filename ↔ UUID ↔ page_id
-5. Converter resolves `![Caption](filename.svg)` → `mediaSingle` with `media:<uuid>` via registry
-6. If not in registry → placeholder text in ADF, warning to stderr
+## Removed
 
-### Download flow
-1. Package produces `![alt](media:uuid)`
-2. Lookup UUID in registry → rewrite to `![alt](filename.svg)`
-3. If not in registry (image added in Confluence) → download attachment, save locally, add to registry
-
-### File layout
-Each draft has a sibling folder for images:
-```
-confluence/workspace/
-├── article.md
-├── article/          ← images for this draft
-│   ├── fig1.svg
-│   └── fig2.svg
-```
-On archival, folder moves with the article.
-
-### Caption
-`![Caption text](media:id)` — alt text in `[]` maps to both `alt` attr on media node and optionally a `caption` child node in `mediaSingle`. Need to verify if the package generates `caption` or only `alt`.
+- ~~Media registry (`media-registry.yml`)~~ — replaced by direct API calls; fileId is ephemeral (changes on each upload), so caching it is unreliable. Attachments API provides filename↔fileId mapping on demand.
 
 ## Skill outline (publish-to-confluence)
 
@@ -83,29 +52,26 @@ User says "publish to confluence", "опубликуй в confluence", "запа
 ### Steps (draft)
 1. Identify target: which .md file, which page ID (from frontmatter `target_parent_id` or `--page-id`)
 2. Pre-flight checks:
-   - Are there images? Check media-registry.yml for all `![alt](file)` references
-   - Missing images → warn, ask whether to proceed without them
-3. Convert: `node confluence-md.js to-adf <file.md>`
-4. Review ADF (optional): show stats — mathinline count, mathblock count, panels, status, images
-5. Publish: `node confluence-md.js publish <file.md> --page-id=ID`
-6. Verify: open page URL, ask user to confirm rendering
-7. Post-publish:
+   - Are there images? Verify local files exist for all `![alt](path)` references
+   - Missing files → warn, ask whether to proceed
+3. Publish: `node confluence-md.js publish <file.md> --page-id=ID`
+   - Uploads images automatically
+   - Strips H1, upgrades Jira links, injects LaTeX nodes
+4. Verify: open page URL, ask user to confirm rendering
+5. Post-publish:
    - Update `_pages.yml` if new page
    - Move draft to `confluence/archive/` if finalized
-   - Save `.adf.json` alongside for drift tracking (optional)
 
 ### Table formatting rules (for LaTeX docs)
 Embed in skill instructions:
 - Simple formulas in tables → bold italic Unicode (`***α***`)
 - Complex formulas (fractions, integrals, superscripts) → keep as LaTeX (texblox)
 - Status in tables → bold text (pipe conflict)
-- First H1 → strip on publish (duplicates page title)
 
 ### Download variant
 1. `node confluence-md.js download <page-id> -o <file.md>`
 2. Restore frontmatter from existing .md if available
 3. Review diff if .md already exists
-4. Clean up tableCell attr noise
 
 ## Confluence formatting rules (for LaTeX-heavy documents)
 

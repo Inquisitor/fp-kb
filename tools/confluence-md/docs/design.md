@@ -179,19 +179,41 @@ node confluence-md.js to-adf workspace/article.md -o /tmp/preview.adf.json
 
 ```
 D:\kb\tools\confluence-md\
-├── confluence-md.js          # CLI entry point (arg parsing, dispatch)
+├── confluence-md.js              # CLI entry point (arg parsing, dispatch)
 ├── lib/
-│   ├── preprocessor.js       # LaTeX/TOC extraction & placeholder injection
-│   ├── postprocessor.js      # Placeholder → ADF extension nodes / MD syntax
-│   ├── to-adf.js             # MD→ADF pipeline orchestrator
-│   ├── to-md.js              # ADF→MD pipeline orchestrator
-│   └── media.js              # Image upload helpers (future)
+│   ├── preprocessor.js           # LaTeX/TOC/image extraction & placeholder injection
+│   ├── postprocessor.js          # Placeholder → ADF extension nodes / MD syntax
+│   ├── placeholder.js            # CFMD_* token management
+│   ├── math-adapter.js           # Math plugin adapter (delegates to adapters/)
+│   ├── adapters/
+│   │   └── texblox.js            # texblox-macro Forge app adapter
+│   ├── jira-links.js             # Jira link ↔ inlineCard conversion
+│   ├── image-resolver.js         # Image placeholder → mediaSingle ADF nodes (MD→ADF)
+│   ├── image-downgrader.js       # mediaSingle → ![alt](file) markdown (ADF→MD)
+│   ├── confluence-api.js         # REST API client (pages, attachments)
+│   ├── to-adf.js                 # MD→ADF pipeline orchestrator
+│   ├── to-md.js                  # ADF→MD pipeline orchestrator
+│   └── media.js                  # MediaRegistry (legacy, unused in pipeline)
 ├── package.json
+├── docs/
+│   ├── design.md                 # This file
+│   ├── plan.md                   # Implementation plan (completed)
+│   └── backlog.md                # Remaining work items
 └── test/
-    ├── preprocessor.test.js  # Extraction, escaping, edge cases
-    ├── postprocessor.test.js # ADF node injection / MD restoration
-    ├── roundtrip.test.js     # MD→ADF→MD identity tests
-    └── fixtures/             # Sample .md and .adf.json files
+    ├── preprocessor.test.js      # Extraction, escaping, edge cases
+    ├── postprocessor.test.js     # ADF node injection / MD restoration
+    ├── image-resolver.test.js    # Image → mediaSingle tests
+    ├── image-downgrader.test.js  # mediaSingle → markdown tests
+    ├── jira-links.test.js        # Jira link upgrade/downgrade tests
+    ├── texblox-adapter.test.js   # texblox adapter tests
+    ├── to-adf.test.js            # Full MD→ADF pipeline tests
+    ├── to-md.test.js             # Full ADF→MD pipeline tests
+    ├── integration.test.js       # MD→ADF→MD roundtrip tests
+    ├── smoke.test.js             # Package API smoke tests
+    ├── placeholder.test.js       # PlaceholderMap tests
+    ├── media.test.js             # MediaRegistry tests
+    ├── confluence-api.test.js    # API module load test
+    └── fixtures/                 # Sample .md and .adf.json files
 ```
 
 ## Dependencies
