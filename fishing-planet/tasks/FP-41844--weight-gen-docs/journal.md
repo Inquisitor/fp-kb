@@ -8,7 +8,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41844: Fish Weight Generation — Create Documentation
 
 ## Status
-confluence-md converter built and tested (73 tests). Design Analysis published via ADF (texblox LaTeX, panels, status). Tables adapted with bold italic Unicode fallback for simple formulas. Next: fix roundtrip backlog items, publish GD guide, polish both pages.
+confluence-md converter mature (112 tests). Design Analysis fully published with LaTeX, panels, status, Jira widgets, 6 SVG figures. Next: write publish-to-confluence skill, publish GD guide via skill, review both pages.
 
 ## Summary
 
@@ -31,20 +31,21 @@ Create Confluence documentation describing the new fish weight generation system
 - [x] Define page structure and target audience
 - [x] Draft content in KB workspace (`confluence/workspace/`)
 - [x] Review with user — both drafts reviewed and iteratively improved
-- [ ] Build md→ADF converter (separate session)
-- [ ] Republish via ADF with full formatting (LaTeX, lozenges, panels, TOC, expand, images)
+- [x] Build md→ADF converter — `D:\kb\tools\confluence-md\` (112 tests)
+- [x] Republish Design Analysis via ADF with full formatting (LaTeX, Jira widgets, panels, TOC, 6 SVG images)
+- [ ] Write publish-to-confluence skill
+- [ ] Publish GD guide (fish-weight-edge-distribution) via skill
 - [ ] Review published pages in Confluence
-- [ ] Apply same treatment to first draft (fish-weight-edge-distribution)
 
 ## Artifacts
 
 ### Confluence pages (created)
 - **Bite System** — 5450858521 (container page under Business Logic)
-- **Edge Distribution — Design Analysis** — 5449973771 (markdown baseline, needs ADF republish)
+- **Edge Distribution — Design Analysis** — 5449973771 (full ADF with LaTeX, panels, Jira widgets, 6 SVGs)
 
 ### Drafts in workspace
 - `FP-41844--fish-weight-edge-distribution.md` — GD-facing practical guide (needs LaTeX, lozenges, panels, TOC + first Confluence publish)
-- `FP-41844--edge-distribution-design-analysis.md` — developer deep dive (published as markdown baseline, needs ADF republish)
+- `FP-41844--edge-distribution-design-analysis.md` — developer deep dive (published as ADF)
 - `fig-weight-zones.svg` — weight range zones diagram for first draft
 
 ### Confluence formatting conventions (superseded)
@@ -60,3 +61,4 @@ Old conventions replaced by native `extended-markdown-adf-parser` syntax. See [d
 - Block math style may change on roundtrip: `$$content$$` (inline form) → `$$\ncontent\n$$` (fenced form). Semantically identical.
 
 ## Milestones
+- **2026-03-25:** confluence-md converter polished — strip H1, Jira inlineCard, automated image upload/download, offline image resolution. Design Analysis republished with full formatting and 6 SVG figures.
