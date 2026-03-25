@@ -37,4 +37,33 @@ describe('toMd pipeline', () => {
     assert.ok(md.includes('<!-- {toc} -->'));
     assert.ok(!md.includes('CFMD_'));
   });
+
+  it('converts ADF with texblox-macro nodes to markdown with $...$', () => {
+    const texbloxKey = '446c2bb7-9a68-48a6-83f6-38fc41031264/d02fb427-8edb-4057-9783-ef5e9d32b349/static/texblox-macro';
+    const adf = {
+      type: 'doc', version: 1,
+      content: [
+        { type: 'paragraph', content: [
+          { type: 'text', text: 'Value ' },
+          { type: 'inlineExtension', attrs: {
+            extensionType: 'com.atlassian.ecosystem',
+            extensionKey: texbloxKey,
+            text: 'LaTeX Formula',
+            parameters: { guestParams: { formula: 'x^2', displayMode: 'inline' } }
+          }},
+          { type: 'text', text: ' end.' }
+        ]},
+        { type: 'inlineExtension', attrs: {
+          extensionType: 'com.atlassian.ecosystem',
+          extensionKey: texbloxKey,
+          text: 'LaTeX Formula',
+          parameters: { guestParams: { formula: 'E = mc^2', displayMode: 'block' } }
+        }}
+      ]
+    };
+    const md = toMd(adf);
+    assert.ok(md.includes('$x^2$'), 'inline math');
+    assert.ok(md.includes('$$\nE = mc^2\n$$'), 'block math');
+    assert.ok(!md.includes('CFMD_'));
+  });
 });

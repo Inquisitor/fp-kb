@@ -20,8 +20,9 @@ describe('postprocessAdf — inline math', () => {
     const para = result.content[0];
     const ext = para.content.find(n => n.type === 'inlineExtension');
     assert.ok(ext, 'should contain inlineExtension');
-    assert.equal(ext.attrs.extensionKey, 'mathinline');
-    assert.equal(ext.attrs.parameters.body, 'x + y');
+    assert.ok(ext.attrs.extensionKey.includes('texblox-macro'));
+    assert.equal(ext.attrs.parameters.guestParams.formula, 'x + y');
+    assert.equal(ext.attrs.parameters.guestParams.displayMode, 'inline');
     // Should also have text nodes around it
     assert.ok(para.content.length >= 3, 'should split: text + ext + text');
   });
@@ -64,7 +65,7 @@ describe('postprocessAdf — inline math', () => {
 });
 
 describe('postprocessAdf — block math', () => {
-  it('replaces paragraph containing only block placeholder with bodiedExtension', () => {
+  it('replaces paragraph containing only block placeholder with texblox inlineExtension', () => {
     const map = new PlaceholderMap();
     const ph = map.add('mathblk', 'p(s) = (1-s)^\\alpha');
 
@@ -78,10 +79,10 @@ describe('postprocessAdf — block math', () => {
 
     const result = postprocessAdf(doc, map);
     const node = result.content[0];
-    assert.equal(node.type, 'bodiedExtension');
-    assert.equal(node.attrs.extensionKey, 'mathblock');
-    assert.equal(node.attrs.extensionType, 'com.atlassian.confluence.macro.core');
-    assert.equal(node.content[0].content[0].text, 'p(s) = (1-s)^\\alpha');
+    assert.equal(node.type, 'inlineExtension');
+    assert.ok(node.attrs.extensionKey.includes('texblox-macro'));
+    assert.equal(node.attrs.parameters.guestParams.formula, 'p(s) = (1-s)^\\alpha');
+    assert.equal(node.attrs.parameters.guestParams.displayMode, 'block');
   });
 });
 

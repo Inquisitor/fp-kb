@@ -11,9 +11,10 @@ describe('toAdf pipeline', () => {
     assert.equal(adf.type, 'doc');
     const json = JSON.stringify(adf);
 
-    // Math extension nodes present
-    assert.ok(json.includes('"extensionKey":"mathinline"'), 'should have mathinline');
-    assert.ok(json.includes('"extensionKey":"mathblock"'), 'should have mathblock');
+    // Math extension nodes present (texblox-macro format)
+    assert.ok(json.includes('texblox-macro'), 'should have texblox-macro nodes');
+    assert.ok(json.includes('"displayMode":"inline"'), 'should have inline math');
+    assert.ok(json.includes('"displayMode":"block"'), 'should have block math');
     assert.ok(json.includes('"extensionKey":"toc"'), 'should have toc');
 
     // No raw placeholders remaining
@@ -35,7 +36,8 @@ describe('toAdf pipeline', () => {
     const md = '$$\np(s) = (1-s)^\\alpha\n$$';
     const adf = toAdf(md);
     const json = JSON.stringify(adf);
-    assert.ok(json.includes('"extensionKey":"mathblock"'));
+    assert.ok(json.includes('texblox-macro'));
+    assert.ok(json.includes('"displayMode":"block"'));
     assert.ok(json.includes('p(s) = (1-s)^\\\\alpha'));
   });
 });

@@ -136,6 +136,46 @@ describe('preprocessAdf', () => {
     assert.equal(map.get('CFMD_TOC_0001').type, 'toc');
   });
 
+  it('extracts texblox inline math from ADF', () => {
+    const doc = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'paragraph',
+        content: [
+          { type: 'text', text: 'Value ' },
+          { type: 'inlineExtension', attrs: {
+            extensionType: 'com.atlassian.ecosystem',
+            extensionKey: '446c2bb7-9a68-48a6-83f6-38fc41031264/d02fb427-8edb-4057-9783-ef5e9d32b349/static/texblox-macro',
+            text: 'LaTeX Formula',
+            parameters: { guestParams: { formula: 'x^2', displayMode: 'inline' } }
+          }},
+          { type: 'text', text: ' end.' }
+        ]
+      }]
+    };
+    const { doc: result, map } = preprocessAdf(doc);
+    const texts = result.content[0].content.map(n => n.text || '').join('');
+    assert.ok(texts.includes('CFMD_MATHINL_0001'));
+    assert.equal(map.get('CFMD_MATHINL_0001').content, 'x^2');
+  });
+
+  it('extracts texblox block math from ADF', () => {
+    const doc = {
+      type: 'doc', version: 1,
+      content: [{
+        type: 'inlineExtension', attrs: {
+          extensionType: 'com.atlassian.ecosystem',
+          extensionKey: '446c2bb7-9a68-48a6-83f6-38fc41031264/d02fb427-8edb-4057-9783-ef5e9d32b349/static/texblox-macro',
+          text: 'LaTeX Formula',
+          parameters: { guestParams: { formula: 'E = mc^2', displayMode: 'block' } }
+        }
+      }]
+    };
+    const { doc: result, map } = preprocessAdf(doc);
+    assert.equal(map.get('CFMD_MATHBLK_0001').content, 'E = mc^2');
+    assert.equal(map.get('CFMD_MATHBLK_0001').type, 'mathblk');
+  });
+
   it('passes through unrecognized extension nodes', () => {
     const doc = {
       type: 'doc', version: 1,

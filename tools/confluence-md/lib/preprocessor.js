@@ -5,6 +5,7 @@
 // preprocessAdf(doc)  — ADF JSON → placeholders (for ADF→MD direction)
 
 import { PlaceholderMap } from './placeholder.js';
+import { isMatch as isMathNode, extract as extractMath } from './math-adapter.js';
 
 const MACRO_TYPE = 'com.atlassian.confluence.macro.core';
 
@@ -203,7 +204,23 @@ function walkAdfExtract(node, map) {
   for (let i = 0; i < node.content.length; i++) {
     const child = node.content[i];
 
-    // inlineExtension → mathinline
+    // Math adapter (texblox or other plugin) — both inline and block math
+    if (isMathNode(child)) {
+      const { formula, displayMode } = extractMath(child);
+      if (displayMode === 'block') {
+        const token = map.add('mathblk', formula);
+        node.content[i] = {
+          type: 'paragraph',
+          content: [{ type: 'text', text: token }],
+        };
+      } else {
+        const token = map.add('mathinl', formula);
+        node.content[i] = { type: 'text', text: token };
+      }
+      continue;
+    }
+
+    // Legacy: inlineExtension → mathinline (Appfire / old schema)
     if (
       child.type === 'inlineExtension' &&
       child.attrs?.extensionType === MACRO_TYPE &&
@@ -215,7 +232,7 @@ function walkAdfExtract(node, map) {
       continue;
     }
 
-    // bodiedExtension → mathblock
+    // Legacy: bodiedExtension → mathblock (Appfire / old schema)
     if (
       child.type === 'bodiedExtension' &&
       child.attrs?.extensionType === MACRO_TYPE &&

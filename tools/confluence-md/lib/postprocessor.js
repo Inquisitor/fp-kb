@@ -3,6 +3,8 @@
 // postprocessAdf(doc, map) — placeholders → ADF extension nodes (MD→ADF direction)
 // postprocessMd(text, map)  — placeholders → LaTeX/TOC syntax   (ADF→MD direction)
 
+import { makeNode as makeMathNode } from './math-adapter.js';
+
 const MACRO_TYPE = 'com.atlassian.confluence.macro.core';
 
 // Matches any CFMD placeholder token in text.
@@ -66,17 +68,7 @@ function isSolePlaceholderParagraph(para, map) {
  */
 function buildBlockNode(id, entry) {
   if (entry.type === 'mathblk') {
-    return {
-      type: 'bodiedExtension',
-      attrs: {
-        extensionType: MACRO_TYPE,
-        extensionKey: 'mathblock',
-      },
-      content: [{
-        type: 'paragraph',
-        content: [{ type: 'text', text: entry.content }],
-      }],
-    };
+    return makeMathNode(entry.content, 'block');
   }
   // toc
   return {
@@ -137,15 +129,8 @@ function splitTextByPlaceholders(textNode, map) {
       parts.push(makeTextNode(text.slice(lastEnd, match.index), marks));
     }
 
-    // The inline extension node.
-    parts.push({
-      type: 'inlineExtension',
-      attrs: {
-        extensionType: MACRO_TYPE,
-        extensionKey: 'mathinline',
-        parameters: { body: entry.content },
-      },
-    });
+    // The inline extension node (via math adapter).
+    parts.push(makeMathNode(entry.content, 'inline'));
 
     lastEnd = match.index + id.length;
   }
