@@ -19,13 +19,18 @@ if (!command || !inputPath) {
   showUsage();
 }
 
-/** Parse --key=value flags from an args array. */
+/** Parse --key=value and --flag (boolean) from an args array. */
 function parseFlags(args) {
   const flags = {};
   for (const arg of args) {
-    const m = arg.match(/^--([a-z][-a-z]*)=(.*)$/);
-    if (m) {
-      flags[m[1]] = m[2];
+    const kv = arg.match(/^--([a-z][-a-z]*)=(.*)$/);
+    if (kv) {
+      flags[kv[1]] = kv[2];
+      continue;
+    }
+    const bool = arg.match(/^--([a-z][-a-z]*)$/);
+    if (bool) {
+      flags[bool[1]] = true;
     }
   }
   return flags;
@@ -38,10 +43,13 @@ if (outputFlag !== -1 && rest[outputFlag + 1]) {
 }
 
 try {
+  const flags = parseFlags(rest);
+  const keepH1 = 'keep-h1' in flags;
+
   if (command === 'to-adf') {
     outputPath ??= inputPath.replace(/\.md$/, '.adf.json');
     const md = readFileSync(inputPath, 'utf8');
-    const adf = toAdf(md);
+    const adf = toAdf(md, { stripH1: !keepH1 });
     writeFileSync(outputPath, JSON.stringify(adf, null, 2) + '\n');
     console.error(`Written: ${outputPath}`);
   } else if (command === 'to-md') {
@@ -52,14 +60,13 @@ try {
     writeFileSync(outputPath, md.endsWith('\n') ? md : md + '\n');
     console.error(`Written: ${outputPath}`);
   } else if (command === 'publish') {
-    const flags = parseFlags(rest);
     const pageId = flags['page-id'];
     if (!pageId) {
       console.error('Error: --page-id=ID is required for publish');
       showUsage();
     }
     const md = readFileSync(inputPath, 'utf8');
-    const adf = toAdf(md);
+    const adf = toAdf(md, { stripH1: !keepH1 });
 
     const { loadCredentials, updatePage } = await import('./lib/confluence-api.js');
     const creds = loadCredentials();

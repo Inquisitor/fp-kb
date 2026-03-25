@@ -40,4 +40,43 @@ describe('toAdf pipeline', () => {
     assert.ok(json.includes('"displayMode":"block"'));
     assert.ok(json.includes('p(s) = (1-s)^\\\\alpha'));
   });
+
+  it('strips first H1 by default', () => {
+    const md = '# Page Title\n\nSome content.';
+    const adf = toAdf(md);
+    const headings = adf.content.filter(
+      n => n.type === 'heading' && n.attrs?.level === 1
+    );
+    assert.equal(headings.length, 0, 'H1 should be stripped');
+    // Content after H1 should survive
+    const json = JSON.stringify(adf);
+    assert.ok(json.includes('Some content'), 'body content should remain');
+  });
+
+  it('keeps H1 when stripH1 is false', () => {
+    const md = '# Page Title\n\nSome content.';
+    const adf = toAdf(md, { stripH1: false });
+    const headings = adf.content.filter(
+      n => n.type === 'heading' && n.attrs?.level === 1
+    );
+    assert.equal(headings.length, 1, 'H1 should be preserved');
+  });
+
+  it('only strips the first H1, not subsequent ones', () => {
+    const md = '# First Title\n\n## H2\n\n# Second H1\n\nText.';
+    const adf = toAdf(md);
+    const h1s = adf.content.filter(
+      n => n.type === 'heading' && n.attrs?.level === 1
+    );
+    assert.equal(h1s.length, 1, 'only the first H1 should be stripped');
+    const json = JSON.stringify(adf);
+    assert.ok(json.includes('Second H1'), 'second H1 should remain');
+  });
+
+  it('handles document with no H1 gracefully', () => {
+    const md = '## Only H2\n\nSome text.';
+    const adf = toAdf(md);
+    const json = JSON.stringify(adf);
+    assert.ok(json.includes('Only H2'), 'H2 should remain');
+  });
 });
