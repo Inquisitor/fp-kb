@@ -3,13 +3,13 @@ status: in-progress
 executor: Stanislav Samoilov
 jira: https://fishingplanet.atlassian.net/browse/FP-41845
 related: FP-33182, FP-41844, FP-42080
-blocked-tasks: FP-41844
+blocked-tasks:
 epic: FP-26788 (Leaderboards and ratings)
 ---
 # FP-41845: Implement New System of Weight Generation
 
 ## Status
-Phase 2a complete (r15918–r15937, commits 1–7). Next: Phase 3 — Confluence documentation (FP-41844). Phase 2b (crossover visualization) deferred.
+Phase 2a complete (r15918–r15937, commits 1–7). Phase 3 (documentation) complete — FP-41844 closed. Phase 2b (crossover visualization) deferred.
 
 ## Summary
 
@@ -32,7 +32,7 @@ See [backlog.md](backlog.md) for action items.
 
 ## Related
 - **FP-33182** — current system on production, known issues documented → [journal](../FP-33182--weight-generation/journal.md)
-- **FP-41844** — documentation task, **blocked by this task** → [JIRA](https://fishingplanet.atlassian.net/browse/FP-41844)
+- **FP-41844** — documentation task (completed) → [journal](../FP-41844--weight-gen-docs/journal.md)
 - **FP-42080** — game design support task (Andrii Maslov) → [JIRA](https://fishingplanet.atlassian.net/browse/FP-42080)
 - Module: [fish-generator](../../server/modules/fish-generator/_card.md)
 

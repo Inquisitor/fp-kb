@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: completed
 executor: Stanislav Samoilov
 jira: https://fishingplanet.atlassian.net/browse/FP-41844
 related: FP-41845, FP-33182
@@ -8,7 +8,7 @@ epic: FP-26788 (Leaderboards and ratings)
 # FP-41844: Fish Weight Generation — Create Documentation
 
 ## Status
-Both pages published. Converter mature (112 tests), publish-confluence skill tested. Next: review both pages in Confluence, close task.
+Complete. Both Confluence pages published, reviewed, and finalized with cross-links, TOC, and lede.
 
 ## Summary
 
@@ -35,7 +35,7 @@ Create Confluence documentation describing the new fish weight generation system
 - [x] Republish Design Analysis via ADF with full formatting (LaTeX, Jira widgets, panels, TOC, 6 SVG images)
 - [x] Write publish-to-confluence skill — tested on both update and create flows
 - [x] Publish GD guide (fish-weight-edge-distribution) via skill — page 5456625665
-- [ ] Review published pages in Confluence
+- [x] Review published pages in Confluence
 
 ## Artifacts
 
@@ -61,5 +61,6 @@ Old conventions replaced by native `extended-markdown-adf-parser` syntax. See [d
 - Block math style may change on roundtrip: `$$content$$` (inline form) → `$$\ncontent\n$$` (fenced form). Semantically identical.
 
 ## Milestones
+- **2026-03-26:** Task closed. Pages reviewed and finalized: removed metadata headers, added TOC and lede to GD guide, added cross-links between pages. Both republished (GD guide v4, Design Analysis v18).
 - **2026-03-26:** Both pages published. GD guide created via publish-confluence skill. Frontmatter simplified, `_pages.yml` migrated from `freshness` to `verified` dates.
 - **2026-03-25:** confluence-md converter polished — strip H1, Jira inlineCard, automated image upload/download, offline image resolution. Design Analysis republished with full formatting and 6 SVG figures.

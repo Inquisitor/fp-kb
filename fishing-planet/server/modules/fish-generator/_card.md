@@ -35,6 +35,7 @@ module: fish-generator
 ## Related Tasks
 - FP-33182: Improve random fish weight generation (reopened, on prod) → [task journal](../../../tasks/FP-33182--weight-generation/journal.md)
 - FP-41845: Implement new system of weight generation (in progress) → [task journal](../../../tasks/FP-41845--weight-generation-v2/journal.md)
+- FP-41844: Edge distribution Confluence documentation (completed) — [GD guide](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5456625665), [Design Analysis](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5449973771)
   - Phase 1 complete: WebAdmin weight simulator built, deployed, validated vs production (all forms ≤0.13pp deviation)
   - Phase 2a design complete: edge distribution system (4 algorithms, [Flags] scope, zone fraction config) → [design](../../../tasks/FP-41845--weight-generation-v2/artifacts/edge-distribution-design.md)
   - Simulator polishing: decimal bucketing, shared `FishWeightRounding`, gram-precision tooltips, sentinel buckets, 22 tests

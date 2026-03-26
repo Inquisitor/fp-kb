@@ -74,15 +74,11 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 - [ ] Replace Kendo area chart with Canvas 2D (Kendo 2013 lacks smooth/step styles)
 - (additional GD requests expected during testing)
 
-## Phase 3: Documentation (FP-41844)
+## Phase 3: Documentation (FP-41844) ✓
 
-Confluence page describing the new weight generation system for GD, QA, and other developers.
-Source material: KB deep dives (weight-generation.md, edge-distribution.md), design spec, WebAdmin UI.
-
-- [ ] Define page structure and target audience
-- [ ] Draft content in KB workspace (`confluence/workspace/`)
-- [ ] Review with user
-- [ ] Publish to Confluence (API or manually)
+Completed in FP-41844. Two Confluence pages published:
+- [Fish Weight Generation: Edge Distribution System](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5456625665) (GD guide)
+- [Edge Distribution — Design Analysis](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5449973771) (developer deep dive)
 
 ## Reference Data
 
