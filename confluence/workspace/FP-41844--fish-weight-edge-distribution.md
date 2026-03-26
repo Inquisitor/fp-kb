@@ -7,9 +7,9 @@ related_tasks:
 ---
 # Fish Weight Generation: Edge Distribution System
 
-> **Target audience:** Game Designers (primary), QA, Server Developers
-> **Related tasks:** [FP-41845](https://fishingplanet.atlassian.net/browse/FP-41845), [FP-41844](https://fishingplanet.atlassian.net/browse/FP-41844)
-> **Supersedes:** [Leaderboards: Fish records and Improving the randomization of fish weight generation](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4219830273)
+Configuration and tuning guide for the edge distribution system — making fish near maximum weight progressively rarer to create meaningful leaderboard competition.
+
+<!-- {toc} -->
 
 ---
 
@@ -374,7 +374,7 @@ Edge distribution and `weightK` are **independent mechanisms**:
 
 ## See Also
 
-- **[Edge Distribution — Design Analysis](TBD)** — deep dive: algorithm math, normalization, why naive approaches fail, historical context of three failed attempts. For developers and anyone wanting to understand the math behind the system.
+- **[Edge Distribution — Design Analysis](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5449973771)** — deep dive: algorithm math, normalization, why naive approaches fail, historical context of three failed attempts. For developers and anyone wanting to understand the math behind the system.
 - [Leaderboards: Fish records and Improving the randomization](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4219830273) — original problem analysis and statistics
 - [Алгоритм и формулы новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/923500587) — BiteSystem design (historical, includes `weightK` from particles)
 - [FP-41845](https://fishingplanet.atlassian.net/browse/FP-41845) — implementation task

@@ -7,10 +7,6 @@ related_tasks:
 ---
 # Edge Distribution — Design Analysis
 
-> **Target audience:** Server Developers, Technical Game Designers
-> **Related:** [Fish Weight Generation: Edge Distribution System](TBD) — practical guide for GD
-> **Implementation task:** [FP-41845](https://fishingplanet.atlassian.net/browse/FP-41845)
-
 How to make fish near maximum weight progressively rarer while keeping the rest of the distribution uniform — and how to implement it correctly.
 
 <!-- {toc} -->
@@ -387,7 +383,7 @@ The seam discontinuity problem has been encountered three times in this project:
 
 ## See Also
 
-- **[Fish Weight Generation: Edge Distribution System](TBD)** — practical guide: configuration, scope presets, WebAdmin tools. For Game Designers.
+- **[Fish Weight Generation: Edge Distribution System](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5456625665)** — practical guide: configuration, scope presets, WebAdmin tools. For Game Designers.
 - [Leaderboards: Fish records and Improving the randomization](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4219830273) — original problem analysis and statistics
 - [Алгоритм и формулы новой системы клева](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/923500587) — BiteSystem design (historical)
 - [FP-41845](https://fishingplanet.atlassian.net/browse/FP-41845) — implementation task
