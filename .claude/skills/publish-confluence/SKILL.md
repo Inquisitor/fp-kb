@@ -163,6 +163,7 @@ Output a commit message following KB conventions. Do NOT run git commands — wa
 - Do NOT skip steps because they seem obvious.
 - If a step says "Ask the user" — ask. Do not assume the answer.
 - Always verify the page exists (Step 5) before updating indexes (Steps 6-7).
+- **Multiple pages:** When publishing several pages in one session, run Steps 1–7 **independently for each page**. Do not batch approvals — the version check (Step 4) and user confirmation are per-page, not per-session.
 
 ## Rules
 
