@@ -1,10 +1,9 @@
 ---
-task: FP-41844
-target_parent_id: 3634397194
-target_section: tech-guidelines/server/business-logic/bite-system
-action: create
-status: writing
-created: 2026-03-23
+page_id: "5456625665"
+section: tech-guidelines/server/business-logic/bite-system
+related_tasks:
+  - FP-41844
+  - FP-41845
 ---
 # Fish Weight Generation: Edge Distribution System
 
