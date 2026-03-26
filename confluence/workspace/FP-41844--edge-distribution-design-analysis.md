@@ -86,7 +86,7 @@ Two function families satisfy all requirements: power-law and exponential. Both 
 
 ![Figure 2: Candidate edge functions](../../fishing-planet/server/modules/fish-generator/edge-distribution-fig2-candidates.svg)
 
-### {status:PowerLaw|color:red}
+### Power Law · {status:Power Law|color:red}
 
 **Edge function:**
 
@@ -118,7 +118,7 @@ else:
 
 **Note on max weight:** Since $p(1) = 0$, a fish at exactly `MaxWeight` is mathematically impossible. In practice, with floating-point arithmetic and millions of samples, fish at 99.999...% of the range appear — effectively indistinguishable from max. The theoretical zero at the boundary is academic, not practical.
 
-### {status:Exponential|color:green}
+### Exponential · {status:Exponential|color:green}
 
 **Edge function:**
 
@@ -174,7 +174,7 @@ Both edge functions operate on the **pre-`weightK`** normalized weight. The `wei
 
 Both functions are implemented with a `GlobalVariables` switch. Game designers can evaluate both in the WebAdmin simulator, then choose based on gameplay feel.
 
-The practical difference is philosophical: {status:PowerLaw|color:red} says "there is a maximum, and it is unreachable." {status:Exponential|color:green} says "the maximum is reachable, but astronomically unlikely." For leaderboard dynamics, the exponential may be more compelling — the theoretical possibility of a perfect fish creates aspiration, even if it never actually happens.
+The practical difference is philosophical: {status:Power Law|color:red} says "there is a maximum, and it is unreachable." {status:Exponential|color:green} says "the maximum is reachable, but astronomically unlikely." For leaderboard dynamics, the exponential may be more compelling — the theoretical possibility of a perfect fish creates aspiration, even if it never actually happens.
 
 ## Naive Implementations — Lessons from History
 
@@ -264,7 +264,7 @@ The central zone has $\text{PDF} = 1$ (pure uniform). The edge zone PDF is deriv
 
 $$\text{PDF}_\text{edge}(x) = (f^{-1})'(s) \quad\text{where } s = \frac{x - T}{z}$$
 
-For {status:PowerLaw|color:red}: $f(v) = 1 - (1-v)^{\frac{1}{\alpha+1}}$, so $f^{-1}(s) = 1 - (1-s)^{\alpha+1}$.
+For {status:Power Law|color:red}: $f(v) = 1 - (1-v)^{\frac{1}{\alpha+1}}$, so $f^{-1}(s) = 1 - (1-s)^{\alpha+1}$.
 
 $$(f^{-1})'(s) = (\alpha + 1) \cdot (1 - s)^\alpha$$
 
@@ -339,7 +339,7 @@ The split point $u^*$ divides the unit interval into two parts proportional to t
 
 $$P(\text{central}) : P(\text{edge}) = T : z \cdot A$$
 
-For {status:PowerLaw|color:red} $\alpha=2$, $z=0.05$: $P(\text{edge}) = \frac{0.05/3}{0.95 + 0.05/3} \approx 1.7\%$ (not 5%!).
+For {status:Power Law|color:red} $\alpha=2$, $z=0.05$: $P(\text{edge}) = \frac{0.05/3}{0.95 + 0.05/3} \approx 1.7\%$ (not 5%!).
 
 The edge function then maps the edge zone's 1.7% of draws through the inverse CDF, producing the correct shape. At the boundary, the density from both sides equals $c$ — no spike.
 
