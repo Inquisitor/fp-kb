@@ -15,7 +15,7 @@
 |-----------------------------------------------------|------------|-------|-------------------------------------------------------------------|
 | TECH > SERVER                                       | 71008272   | —     | All server-side documentation                                     |
 | TECH > SERVER > Business Logic                      | 3634397194 | 11    | TDDs: leaderboards, matchmaking, clubs, missions, bite system     |
-| TECH > SERVER > Business Logic > Bite System        | —          | —     | NEW section — fish weight generator, fish selector (planned)      |
+| TECH > SERVER > Business Logic > Bite System        | 5450858521 | 1     | Fish weight generator (edge distribution), fish selector (planned)|
 | TECH > SERVER > Game Logic                          | 46628919   | 9     | Balance, achievements, events, leveling, inventory items          |
 | TECH > SERVER > Server Architecture                 | 71139336   | —     | Server architecture docs                                          |
 | TECH > SERVER > Infrastructure                      | 46628932   | —     | Deployment, monitoring, DB                                        |

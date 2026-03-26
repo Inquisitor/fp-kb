@@ -1,5 +1,15 @@
 # Decision Log — Confluence
 
+## 2026-03-26: confluence-md converter, first publications, publish skill
+- Built `confluence-md` CLI tool (`D:\kb\tools\confluence-md\`, 112 tests): bidirectional MD↔ADF conversion with LaTeX (texblox), TOC, panels, status, expand, Jira inlineCard widgets, automated image upload
+- Published two pages under Bite System (5450858521):
+  - Edge Distribution — Design Analysis (5449973771, developer deep dive)
+  - Fish Weight Generation: Edge Distribution System (5456625665, GD practical guide)
+- Created `publish-confluence` skill for repeatable publish workflow (create/update, images, index registration)
+- Draft frontmatter simplified: `action`/`status`/`task` removed; routing via `page_id` (update) or `parent_id` (create)
+- `_pages.yml` field `freshness` replaced with `verified: YYYY-MM-DD` — freshness is a point-in-time judgment, not a storable fact; `verified` records when we last checked the page
+- Media registry (`media-registry.yml`) abandoned — `fileId` changes on every upload, making cached IDs unreliable; attachments API provides the mapping on demand
+
 ## 2026-03-23: Structure redesign — section router + nested _pages.yml
 - Expanded scope from "SERVER only" to full FP space
 - Adopted hybrid navigation: `tree.md` (section router, themes) + `sections/_pages.yml` (page listings)

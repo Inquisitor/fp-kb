@@ -1,20 +1,15 @@
 title: Bite System
-page_id: null
-parent_id: 3634397194
-indexed: 2026-03-23
-note: New section, does not exist in Confluence yet. Will be created when first page is published.
+page_id: "5450858521"
+parent_id: "3634397194"
+indexed: 2026-03-25
 
 pages:
-  - id: null
-    title: Fish Weight Edge Distribution
-    freshness: draft
-    task: FP-41844
-    workspace: workspace/FP-41844--fish-weight-edge-distribution.md
-  - id: null
+  - id: "5456625665"
+    title: "Fish Weight Generation: Edge Distribution System"
+    verified: 2026-03-26
+  - id: "5449973771"
     title: Edge Distribution — Design Analysis
-    freshness: draft
-    task: FP-41844
-    workspace: workspace/FP-41844--edge-distribution-design-analysis.md
+    verified: 2026-03-26
 
 related_kb_modules:
   - fish-generator

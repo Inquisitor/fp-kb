@@ -53,9 +53,9 @@
 
 ### Confluence work
 - Navigation: `confluence/tree.md` (section router) → `sections/.../_pages.yml` (page listings)
-- Drafting: create `confluence/workspace/FP-XXXXX--slug.md` with YAML frontmatter (task, target_parent_id, status)
-- After publishing: move draft to `confluence/archive/`, update `_pages.yml` with new page ID
-- `_pages.yml` = YAML index per section (page IDs, titles, freshness). NOT content — Confluence is SSoT
+- Drafting: create `confluence/workspace/FP-XXXXX--slug.md` with YAML frontmatter (`page_id`, `parent_id`, `section`, `related_tasks`)
+- After publishing: update `_pages.yml` with page ID and `verified` date. Use `/publish-confluence` skill for the full workflow
+- `_pages.yml` = YAML index per section (page IDs, titles, `verified` date, `last_pushed_version` for overwrite protection). NOT content — Confluence is SSoT
 - `tree.md` = section-level router with "what's inside" annotations. Does NOT list individual pages
 - Sections mirrored under `confluence/sections/<space>/` (e.g. `fishing-planet/`)
 - `confluence/archive/` exists for git blame navigation; agents do not index it
