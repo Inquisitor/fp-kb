@@ -18,6 +18,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 ## Infrastructure
 - [dal](modules/dal/_card.md) — repository-pattern DAL, reflection-based mapping (SQL Server + MongoDB)
 
+## Monetization
+- [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
+
 ## Key Paths
 - Game logic: `Photon/src-server/Loadbalancing/GameLogic/`
 - Shared libs: `Shared/`
