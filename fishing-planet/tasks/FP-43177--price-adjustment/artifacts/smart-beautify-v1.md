@@ -1,7 +1,13 @@
-# Smart Beautify Algorithm — v1 (First Approximation)
+---
+title: Smart Beautify Algorithm
+version: 1
+status: approved
+source: Google Sheets "Regional Pricing" + vibe-coded C# from task author
+approved_by: GD (Stanislav Rudakov)
+approved_date: 2026-04-02
+---
 
-Source: Google Sheets "Regional Pricing" + vibe-coded C# from task author.
-Status: **draft** — needs requirement refinement, possible additional features.
+# Smart Beautify Algorithm
 
 ## Core Formula
 
@@ -13,18 +19,19 @@ Where `baseRegionalPrice = originalUsdPrice × regionCoefficient`.
 
 ## Three-Tier Beautification
 
-| Tier     | Step (unit < 1) | Step (unit ≥ 1) | Produces prices like |
-|----------|-----------------|-----------------|----------------------|
-| Strong   | 10              | unit × 1000     | 9999, 999            |
-| Elite    | 1               | unit × 100      | 99, 199              |
-| Scale    | 0.1             | unit × 10       | 9.9, 19              |
+| Tier   | Step (unit < 1) | Step (unit ≥ 1) | Produces prices like |
+|--------|-----------------|-----------------|----------------------|
+| Strong | 10              | unit × 1000     | 9999, 999            |
+| Elite  | 1               | unit × 100      | 99, 199              |
+| Scale  | 0.1             | unit × 10       | 9.9, 19              |
 
 For each tier, two candidates: `ceil(raw / step) × step - unit` (up) and `floor(raw / step) × step - unit` (down).
 
 ## Rules
 
 1. **3% Snap Window** — a beauty candidate is valid only if `|candidate - raw| / raw ≤ 3%`
-2. **Scale-Dependent Priority** — Strong beats Elite only if extra deviation cost ≤ threshold (0.5% for raw < 100, 1.5% for raw ≥ 100)
+2. **Scale-Dependent Priority** — Strong beats Elite only if extra deviation cost ≤ threshold (0.5% for raw < 100, 1.5%
+   for raw ≥ 100)
 3. **Tier Priority** — Strong > Elite > Scale (within 3% window)
 4. **Direction by Coefficient** — coef ≥ 1 (premium) → prefer UP; coef < 1 (discount) → prefer DOWN
 5. **Grid Fallback** — if no beauty found and unit ≥ 1: use `round(raw / unit) × unit` if deviation < 5%
@@ -139,11 +146,25 @@ public static decimal CalculateRegionalPrice(
 | `Beautify` flag    | Explicit param                | Always on (beauty is the algorithm)        |
 | Fallback           | None                          | Grid → Scale step                          |
 
-Fields `RoundingAmount`, `RoundingType`, `Beautify` in `RegionalPriceRates` become unnecessary — all logic derives from `Rate` and `MinimalUnit`.
+Fields `RoundingAmount`, `RoundingType`, `Beautify` in `RegionalPriceRates` become unnecessary — all logic derives from
+`Rate` and `MinimalUnit`.
 
-## Open Questions
+## Deprecated Fields
 
-- Discount price: same algorithm or separate logic?
-- Should old fields (`RoundingAmount`, `RoundingType`, `Beautify`) be removed or kept for backward compat?
-- Additional features TBD per task author
-- Rule thresholds (3%, 5%, 0.5%/1.5%) — are these final or configurable?
+Three fields in `RegionalPriceRates` become logically unused: `RoundingAmount`, `RoundingType`, `Beautify`.
+Kept in DB schema during transition; removal deferred to a separate task after GD validates new logic.
+See [deprecated-fields.md](deprecated-fields.md) for full documentation.
+
+## Implementation Notes
+
+- Algorithm constants must be extracted as named constants with documentation explaining
+  what each one controls. Currently fixed values; extracted for code clarity and to simplify
+  making them configurable in the future if needed:
+  - `BeautySnapMaxDeviation` = 0.03 (3% — max allowed deviation for a beauty candidate)
+  - `CostThresholdLow` = 0.005 (0.5% — Strong vs Elite preference margin for raw < 100)
+  - `CostThresholdHigh` = 0.015 (1.5% — Strong vs Elite preference margin for raw ≥ 100)
+  - `CostThresholdBoundary` = 100 (raw price boundary between low/high thresholds)
+  - `GridFallbackMaxDeviation` = 0.05 (5% — max deviation for grid-aligned fallback)
+- Discount price uses the same algorithm (same formula, `baseDiscountPrice × rate` as input).
+- Direction by coefficient is intentional and confirmed by GD — regions with Rate=1.0 round UP.
+

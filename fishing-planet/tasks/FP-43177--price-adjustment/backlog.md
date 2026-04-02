@@ -6,8 +6,12 @@
 - [x] Study current VW_ProductLocalPrices table implementation in WebAdmin
 - [x] Create module card `product-local-prices`
 - [x] Review Google Sheets spec for price calculation logic
-- [ ] Consult with Stanislav Rudakov for detailed requirements
+- [x] Consult with Stanislav Rudakov for detailed requirements
+- [ ] Extract algorithm constants as named constants with documentation
+- [ ] Implement new algorithm in `LocalPriceCalculator`
+- [ ] Update WebAdmin UI (RegionalPriceRates page — hide deprecated columns)
+- [ ] Update WebAdmin UI (ProductLocalPrices page — new suggested price logic)
 
 ## Deferred
 
-(none)
+- [ ] Remove deprecated fields (`RoundingAmount`, `RoundingType`, `Beautify`) from DB, DTO, UI — separate task after GD validates new logic in production. See [deprecated-fields.md](artifacts/deprecated-fields.md)
