@@ -9,7 +9,7 @@
 | FP-41845 | FP/server | fish-weight-gen-v2 | in-progress   | fishing-planet/tasks/FP-41845--weight-generation-v2/          |
 | FP-41929 | FP/server | xbox-purchases     | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/      |
 | FP-42870 | FP/server | xbox-finances      | todo          | fishing-planet/tasks/FP-42870--xbox-financial-reconciliation/ |
-| FP-43177 | FP/server | price-adjustment   | investigating | fishing-planet/tasks/FP-43177--price-adjustment/              |
+| FP-43177 | FP/server | price-adjustment   | in-progress   | fishing-planet/tasks/FP-43177--price-adjustment/              |
 
 ## Active Reviews
 | Task     | Executor  | Path                                          |

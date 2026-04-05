@@ -1,7 +1,7 @@
 ---
 task: FP-43177
 title: "Refinement of the price adjustment tool"
-status: investigating
+status: in-progress
 assignee: Stanislav Samoilov
 area: product-local-prices
 created: 2026-04-01
@@ -9,7 +9,7 @@ created: 2026-04-01
 
 ## Status
 
-Google Sheets spec analyzed, draft algorithm documented. Awaiting requirement refinement and possible additional features.
+Algorithm approved by GD, implementation spec written. Next: implementation plan and coding.
 
 ## Summary
 
@@ -17,10 +17,12 @@ Enhance price calculation logic in WebAdmin tables "Editing table: RegionalPrice
 
 ## Artifacts
 
-- [Smart Beautify v1](artifacts/smart-beautify-v1.md) — draft algorithm: three-tier beautification with 3% deviation guard, auto-direction by coefficient. Replaces current single-tier `LocalPriceCalculator` logic.
+- [Smart Beautify v1](artifacts/smart-beautify-v1.md) — approved algorithm: three-tier beautification with 3% deviation guard, auto-direction by coefficient
+- [Deprecated Fields](artifacts/deprecated-fields.md) — RoundingAmount, RoundingType, Beautify: kept in schema, removal deferred
+- [Implementation Spec](artifacts/implementation-spec.md) — method signature, callers, UI changes, testing strategy
 
 ## Plan
 
-TBD — pending requirements refinement.
+See [implementation-spec.md](artifacts/implementation-spec.md).
 
 ## Milestones
