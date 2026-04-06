@@ -9,7 +9,7 @@ created: 2026-04-01
 
 ## Status
 
-Completed. Smart Beautify algorithm (Gold/Silver/Bronze tiers) implemented in `LocalPriceCalculator`, all callers updated, deprecated fields hidden, Deviation + Details columns added to RegionalPriceRates grid, locale fix applied. Committed r15959+r15961 (LBM), merged r15960+r15962 (MFT).
+Completed. Smart Beautify algorithm (Gold/Silver/Bronze tiers) implemented in `LocalPriceCalculator`, all callers updated, deprecated fields hidden, Deviation + Details columns added to RegionalPriceRates grid, locale fix applied, Select All + extended page sizes in ProductLocalPrices grid. Committed r15959+r15961+r15969 (LBM), merged r15960+r15962+r15970 (MFT).
 
 ## Summary
 
@@ -31,3 +31,4 @@ See [implementation-spec.md](artifacts/implementation-spec.md).
 - 2026-04-05: Core implementation — new algorithm, callers updated, UI columns hidden, tests green (53/53)
 - 2026-04-06: Committed r15959 (LBM), merged to MFT r15960, JIRA commented
 - 2026-04-06: UI improvements — Deviation column (signed %, red/bold >3%), Details trace, BaseAmount locale fix. Committed r15961, merged r15962
+- 2026-04-06: ProductLocalPrices UI — Select All checkbox, page sizes 200/500/1000, column styling. Committed r15969, merged r15970
