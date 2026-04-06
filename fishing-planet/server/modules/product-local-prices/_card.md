@@ -3,7 +3,7 @@ module: product-local-prices
 ---
 
 # Product Local Prices
-> Regional pricing engine: base USD price × rate × exchange rate → rounded & beautified local price.
+> Regional pricing engine: base USD price × rate × exchange rate → three-tier smart beautify → local price.
 
 ## Entry Points
 - `LocalPriceCalculator.CalculateRegionalPrice()` — `Shared/SharedLib/Monetization/LocalPriceCalculator.cs` (core formula)
@@ -13,7 +13,7 @@ module: product-local-prices
 
 ## Key Types
 - `ProductLocalPriceDto` — `Dal/Sql.Interface/Monetization/ProductLocalPriceDto.cs` (productId, currency, country, price, discountPrice)
-- `RegionalPriceRateDto` — `Dal/Sql.Interface/Monetization/RegionalPriceRateDto.cs` (rate, minimalUnit, roundingAmount, roundingType, beautify)
+- `RegionalPriceRateDto` — `Dal/Sql.Interface/Monetization/RegionalPriceRateDto.cs` (rate, minimalUnit; roundingAmount/roundingType/beautify deprecated)
 - `CurrencyExchangeRateDto` — `Dal/Sql.Interface/CurrencyExchange/CurrencyExchangeRateDto.cs` (targetCurrency, exchangeRate)
 - `ProductLocalPricesExt` — `WebAdmin/WebAdmin/Models/Entities.cs` (view model with suggested prices & validation)
 
@@ -25,10 +25,12 @@ module: product-local-prices
 ← WebAdmin — admin UI for editing rates and reviewing/applying suggested prices
 
 ## Deep Dives
+- [Smart Beautify algorithm](smart-beautify.md) — three-tier beautification: tiers, rules, constants, examples
 - Views: `WebAdmin/WebAdmin/Views/Home/VW_ProductLocalPrices.cshtml`, `RegionalPriceRates.cshtml`
 - Controller actions: `HomeController.ApplySuggestedPrices()`, `AddProductLocalPrices()` — `WebAdmin/WebAdmin/Controllers/HomeController.cs`
 - DB: tables `ProductLocalPrices`, `RegionalPriceRates`, `CurrencyExchangeRates`; view `VW_ProductLocalPrices`
 - Seed script: `SQL/PopulateRegionalPriceRates.sql`
+- Tests: `Shared/SharedLib.Tests/Monetization/LocalPriceCalculatorTests.cs` (38 acceptance + unit tests)
 
 ## Related Tasks
-- FP-43177: Refinement of the price adjustment tool (in progress)
+- FP-43177: Smart Beautify algorithm

@@ -9,7 +9,7 @@ created: 2026-04-01
 
 ## Status
 
-Algorithm approved by GD, implementation spec written. Next: implementation plan and coding.
+Core implementation committed (r15959) and merged to MFT (r15960). Next: GD validates on test server, then UI/UX features per task author.
 
 ## Summary
 
@@ -26,3 +26,7 @@ Enhance price calculation logic in WebAdmin tables "Editing table: RegionalPrice
 See [implementation-spec.md](artifacts/implementation-spec.md).
 
 ## Milestones
+
+- 2026-04-02: Algorithm design approved by GD (Smart Beautify v1)
+- 2026-04-05: Core implementation — new algorithm, callers updated, UI columns hidden, tests green (53/53)
+- 2026-04-06: Committed r15959 (LBM), merged to MFT r15960, JIRA commented

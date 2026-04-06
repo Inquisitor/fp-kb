@@ -22,7 +22,7 @@ for now; removal is deferred until GD validates the new logic in production.
 - In practice, almost always equaled MinimalUnit (see `PopulateRegionalPriceRates.sql` line 36)
 
 **Why it's replaced:** The new algorithm derives three step sizes directly from MinimalUnit:
-`unit×10` (scale), `unit×100` (elite), `unit×1000` (strength). No separate parameter needed.
+`unit×10` (bronze), `unit×100` (silver), `unit×1000` (gold). No separate parameter needed.
 
 **Code references:**
 - DTO: `RegionalPriceRateDto.RoundingAmount` — `Dal/Sql.Interface/Monetization/RegionalPriceRateDto.cs`

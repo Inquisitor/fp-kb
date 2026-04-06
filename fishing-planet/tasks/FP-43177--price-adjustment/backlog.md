@@ -7,10 +7,15 @@
 - [x] Create module card `product-local-prices`
 - [x] Review Google Sheets spec for price calculation logic
 - [x] Consult with Stanislav Rudakov for detailed requirements
-- [ ] Extract algorithm constants as named constants with documentation
-- [ ] Implement new algorithm in `LocalPriceCalculator`
-- [ ] Update WebAdmin UI (RegionalPriceRates page — hide deprecated columns)
-- [ ] Update WebAdmin UI (ProductLocalPrices page — new suggested price logic)
+- [x] Extract algorithm constants as named constants with documentation
+- [x] Implement new algorithm in `LocalPriceCalculator`
+- [x] Mark old API as `[Obsolete]`
+- [x] Update callers (ProductLocalPricesModel, RegionalPriceRatesModel, HomeController)
+- [x] Hide deprecated columns in RegionalPriceRates grid (`[Hidden]` attribute)
+- [x] Write acceptance tests (38 regions from GD spec)
+- [x] Write unit tests (direction, cost threshold, fallbacks, guards)
+- [ ] GD validation in browser
+- [ ] Additional UI/UX features (TBD per task author)
 
 ## Deferred
 

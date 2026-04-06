@@ -1,6 +1,6 @@
 ---
 title: "FP-43177 Implementation Spec: Smart Beautify"
-status: approved
+status: implemented
 date: 2026-04-05
 related:
   - smart-beautify-v1.md
@@ -46,10 +46,10 @@ Extracted as named constants with XML doc comments in `LocalPriceCalculator`:
 /// <summary>Max allowed deviation for a beauty snap candidate.</summary>
 private const decimal BeautySnapMaxDeviation = 0.03m;
 
-/// <summary>Max extra deviation cost to prefer Strong over Elite tier (raw price below threshold boundary).</summary>
+/// <summary>Max extra deviation cost to prefer Gold over Silver tier (raw price below threshold boundary).</summary>
 private const decimal CostThresholdLow = 0.005m;
 
-/// <summary>Max extra deviation cost to prefer Strong over Elite tier (raw price at or above threshold boundary).</summary>
+/// <summary>Max extra deviation cost to prefer Gold over Silver tier (raw price at or above threshold boundary).</summary>
 private const decimal CostThresholdHigh = 0.015m;
 
 /// <summary>Raw price boundary: below this value CostThresholdLow applies, at or above — CostThresholdHigh.</summary>
@@ -74,14 +74,14 @@ GD will use this to verify the algorithm in the admin UI.
 Contents:
 1. **Inputs**: basePrice, priceRate, exchangeRate, minimalUnit
 2. **Computed raw**: `baseRegionalPrice`, `rawPrice` (in local currency)
-3. **Three tiers** — for each (Strong, Elite, Scale):
+3. **Three tiers** — for each (Gold, Silver, Bronze):
    - Step size
    - Up/Down candidates (values)
    - Deviation % from raw for each candidate
    - Pass/fail of 3% check
 4. **Direction**: coefficient value, chosen direction (UP/DOWN)
 5. **Tier selection**: which tier was chosen and why
-   - If Strong vs Elite comparison: show cost threshold and margin
+   - If Gold vs Silver comparison: show cost threshold and margin
 6. **Fallback** (if no beauty found): grid value, grid deviation, which fallback used
 7. **Final result**: value, total deviation from raw %
 
@@ -161,13 +161,13 @@ that `CalculateRegionalPrice()` produces the exact same result as the spreadshee
 ### Unit Tests — Branch Coverage
 
 Individual tests for each algorithm branch:
-- **Tier selection**: Strong chosen, Elite chosen, Scale chosen
+- **Tier selection**: Gold chosen, Silver chosen, Bronze chosen
 - **Direction**: coefficient ≥ 1 picks UP candidate, coefficient < 1 picks DOWN
-- **Strong vs Elite comparison**: Strong wins within cost threshold, Elite wins when Strong is too expensive
+- **Gold vs Silver comparison**: Gold wins within cost threshold, Silver wins when Gold is too expensive
 - **Cost threshold boundary**: raw < 100 uses 0.005, raw ≥ 100 uses 0.015
 - **3% guard**: candidate just inside 3%, candidate just outside 3%
 - **Grid fallback**: unit ≥ 1, no beauty found, grid deviation < 5%
-- **Scale fallback**: no beauty, no grid, falls to scale step
+- **Bronze fallback**: no beauty, no grid, falls to bronze step
 - **Minimal unit guard**: result forced up to minimalUnit when calculated value is below
 - **Edge cases**: rate = 1.0 exactly, very small prices, very large prices, rate = 0 (should return 0)
 - **Report**: verify report string contains all expected trace sections
