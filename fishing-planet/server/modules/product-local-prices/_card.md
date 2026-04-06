@@ -33,4 +33,4 @@ module: product-local-prices
 - Tests: `Shared/SharedLib.Tests/Monetization/LocalPriceCalculatorTests.cs` (38 acceptance + unit tests)
 
 ## Related Tasks
-- FP-43177: Smart Beautify algorithm
+- FP-43177: Smart Beautify algorithm (completed) — r15959+r15961

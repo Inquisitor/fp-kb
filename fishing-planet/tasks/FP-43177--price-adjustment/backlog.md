@@ -14,8 +14,11 @@
 - [x] Hide deprecated columns in RegionalPriceRates grid (`[Hidden]` attribute)
 - [x] Write acceptance tests (38 regions from GD spec)
 - [x] Write unit tests (direction, cost threshold, fallbacks, guards)
-- [ ] GD validation in browser
-- [ ] Additional UI/UX features (TBD per task author)
+- [x] GD validation in browser
+- [x] Deviation column in RegionalPriceRates grid (signed %, red/bold >3%)
+- [x] Details column with Smart Beautify decision trace
+- [x] BaseAmount locale fix (`InvariantCulture` parsing + rendering)
+- [x] Additional UI/UX features
 
 ## Deferred
 
