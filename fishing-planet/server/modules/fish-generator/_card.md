@@ -12,6 +12,7 @@ module: fish-generator
 ## Key Types
 - `FishTemplate` — generated fish instance (weight, IdealHookSize, source, box)
 - `FishWeightGeneratorConfig` — immutable edge distribution config (algorithm, scope, zones)
+- `EdgeDistributionSettingsModel` — WebAdmin settings DB read/write via `DalFactory.GetSysProvider()` (no cache dependency)
 - `FishWeightRounding` — shared rounding constants for production/simulator sync
 - `Hooker` — hooking probability curve (piecewise: low wing / peak / high wing)
 - `NormalRandom` — Box-Muller RNG (linear, half-normal, full-normal distributions)

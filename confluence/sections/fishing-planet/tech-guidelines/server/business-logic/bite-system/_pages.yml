@@ -6,12 +6,12 @@ indexed: 2026-03-25
 pages:
   - id: "5456625665"
     title: "Fish Weight Generation: Edge Distribution System"
-    verified: 2026-03-26
-    last_pushed_version: 4
+    verified: 2026-04-08
+    last_pushed_version: 6
   - id: "5449973771"
     title: Edge Distribution — Design Analysis
-    verified: 2026-03-26
-    last_pushed_version: 18
+    verified: 2026-04-08
+    last_pushed_version: 19
 
 related_kb_modules:
   - fish-generator

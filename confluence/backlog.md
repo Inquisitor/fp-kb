@@ -21,6 +21,11 @@
 - [ ] TECH > SERVER > Environment and branch status
 - [ ] Remaining SERVER subsections (Twitch, Real prices, Troubleshooting)
 
+## Tooling: confluence-md improvements
+
+- [ ] **Anchor link auto-conversion** — workspace drafts should use standard markdown anchors (`#heading-title`), and the converter should transform them to Confluence TOC format (`#Heading-Title`) during publish. Currently requires manual formatting in the draft.
+- [ ] **Table column widths** — Confluence auto-width makes tables unreadable when columns have very different content lengths. Need a metadata format in markdown (HTML comment? frontmatter? custom syntax?) that the converter picks up and applies as ADF `colwidth` attributes. Experiment with what Confluence supports first.
+
 ## Consolidation Candidates
 Identified during assessment — pages that should be merged, split, or relocated.
 

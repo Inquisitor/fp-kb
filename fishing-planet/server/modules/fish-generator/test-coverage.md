@@ -127,6 +127,44 @@ Integration tests exercising FishGenerator through GameProcessor. Most are `[Ign
 - `RestoreFish()` — reconnection recovery — no tests
 - Weight generation flow end-to-end — no tests
 
+### Edge Distribution (FP-41845)
+
+**File:** `Shared/BiteSystem.Tests/FishWeight/EdgeDistributionTests.cs`
+
+| Test Method                                      | Assertions | What It Tests                                                    |
+|--------------------------------------------------|:----------:|------------------------------------------------------------------|
+| `CapAtThreshold_AlwaysReturnsZero`               | ✓          | Fail-safe strategy returns 0                                     |
+| `Unrestricted_ReturnsInput`                      | ✓          | Pass-through identity                                            |
+| `PowerLawEdge_OutputInRange`                     | ✓          | Output ∈ [0, 1]                                                  |
+| `PowerLawEdge_MonotonicallyIncreasing`           | ✓          | Monotonic inverse CDF                                            |
+| `PowerLawEdge_AtZero_ReturnsZero`                | ✓          | Boundary: f(0) = 0                                               |
+| `PowerLawEdge_HigherAlpha_StrongerRedistribution`| ✓          | Higher α → more redistribution                                   |
+| `ExponentialEdge_*` (4 tests)                    | ✓          | Same suite as PowerLaw                                           |
+| `FishWeightGeneratorConfig_DefaultsToHardCeiling`| ✓          | Default strategy = CapAtThreshold, scope = all role edges        |
+| `FishWeightGeneratorConfig_IsImmutable`          | ✓          | Properties match constructor args                                |
+| `ToFileNameSlug_*` (4 tests)                     | ✓          | Slug format for various configs                                  |
+| `Strategy_ToString_AllTypes`                     | ✓          | Display names for all 4 strategies                               |
+
+**File:** `Shared/BiteSystem.Tests/FishWeight/FishWeightGeneratorTests.cs`
+
+| Test Method                                                   | Assertions | What It Tests                                                      |
+|---------------------------------------------------------------|:----------:|--------------------------------------------------------------------|
+| `Generate_Unrestricted_WeightsWithinFormRange`                | ✓          | Uniform: all weights in [min, max]                                 |
+| `Generate_HardCeiling_CapsAtThreshold`                        | ✓          | CapAtThreshold: max weight ≤ ceiling                               |
+| `Generate_ScopeNone_NoEdgeDistributionApplied`                | ✓          | Scope=None disables edge distribution                              |
+| `Generate_ScopeHeaviest_OnlyAffectsHeaviestForm`             | ✓          | Role-based: only heaviest form capped                              |
+| `Generate_PowerLawEdge_ReducesNearMaxWeights`                 | ✓          | PowerLaw produces fewer near-max fish than uniform                 |
+| `Generate_LowerEdge_HardCeiling_CapsAtMinimum`               | ✓          | Lower edge: min weight ≥ floor                                     |
+| `Generate_ScopeExtremes_HeaviestUpperAndLightestLower`        | ✓          | Role combo: upper on heaviest + lower on lightest                  |
+| `Generate_ScopeYoungLower_OnlyAffectsYoungForm`              | ✓          | Form-specific: YoungLower applies to Young, not Common             |
+| `Generate_ScopeHeaviestUpperYoungLower_*`                     | ✓          | Combo: HeaviestUpper (role) + YoungLower (form-specific)           |
+| `Generate_ScopeYoungLower_SpeciesWithoutYoung_NoEdgeApplied` | ✓          | Form-specific: YoungLower on species without Young → no effect     |
+| `Generate_ScopeUniqueUpper_OnlyAffectsUniqueForm`            | ✓          | Form-specific: UniqueUpper applies to Unique, not Trophy           |
+| `Generate_ScopeUniqueUpper_SpeciesWithoutUnique_NoEdgeApplied`| ✓         | Form-specific ≠ role: UniqueUpper on species without Unique → none |
+| `Generate_NormalizedSampling_NoDensitySpikeAtBoundary`        | ✓          | Boundary density ratio < 1.5 (no spike from normalization bug)     |
+
+**60 total tests green** (includes simulation service tests in `FishWeightSimulationServiceTests.cs`).
+
 ### Adjacent Tests (not directly fish-generator but related)
 
 | File | Class | What It Tests |

@@ -59,6 +59,7 @@
 - `tree.md` = section-level router with "what's inside" annotations. Does NOT list individual pages
 - Sections mirrored under `confluence/sections/<space>/` (e.g. `fishing-planet/`)
 - `confluence/archive/` exists for git blame navigation; agents do not index it
+- Internal anchor links in workspace drafts: use Confluence TOC format `#Heading-Title` (title case, spaces → dashes, special chars URL-encoded), NOT markdown-style `#heading-title`
 
 ## Conventions
 

@@ -86,7 +86,7 @@ FishWeight/
 └── EdgeDistribution/
     ├── IEdgeDistributionStrategy.cs — interface: Sample(Random, double) → double; EdgeAreaFraction
     ├── EdgeDistributionType.cs      — enum: None, Uniform, PowerLaw, Exponential
-    ├── EdgeDistributionScope.cs     — [Flags] enum: form×edge bit flags with named presets
+    ├── EdgeDistributionScope.cs     — [Flags] enum: 14 bit flags (6 role-based + 8 form-specific). No presets in enum (JS-only)
     └── Strategies/
         ├── CapAtThreshold.cs        — u → 0 (hard ceiling); EdgeAreaFraction = 0
         ├── Unrestricted.cs          — u → u (pass-through); EdgeAreaFraction = 1
@@ -108,6 +108,12 @@ namespace BiteSystem.ServerOnly.FishWeight
 {
     public class FishWeightGeneratorConfig
     {
+        // All role-based edges enabled (6 flags). Safety default.
+        private const EdgeDistributionScope AllRoleEdges =
+            EdgeDistributionScope.HeaviestUpper | EdgeDistributionScope.HeaviestLower |
+            EdgeDistributionScope.LightestUpper | EdgeDistributionScope.LightestLower |
+            EdgeDistributionScope.OthersUpper   | EdgeDistributionScope.OthersLower;
+
         public float UpperEdgeZoneFraction { get; }
         public float LowerEdgeZoneFraction { get; }
         public EdgeDistributionScope EdgeScope { get; }
@@ -116,7 +122,7 @@ namespace BiteSystem.ServerOnly.FishWeight
         public FishWeightGeneratorConfig(
             float upperEdgeZoneFraction = 0.05f,
             float lowerEdgeZoneFraction = 0.05f,
-            EdgeDistributionScope edgeScope = EdgeDistributionScope.All,
+            EdgeDistributionScope edgeScope = AllRoleEdges,
             IEdgeDistributionStrategy edgeStrategy = null)
         {
             UpperEdgeZoneFraction = upperEdgeZoneFraction;
@@ -136,7 +142,7 @@ namespace BiteSystem.ServerOnly.FishWeight
     }
 }
 ```
-Immutable by design — properties are get-only. `UpdateStaticVariables()` creates new instance and assigns atomically to `Current`.
+Immutable by design — properties are get-only. `UpdateStaticVariables()` creates new instance and assigns atomically to `Current`. DB default `"All"` is resolved to individual flag names in `FromSettings()` before parsing.
 
 **Architecture: separation of concerns.**
 
@@ -241,6 +247,7 @@ namespace BiteSystem.ServerOnly.FishWeight
         {
             if (scope == EdgeDistributionScope.None) return (false, false);
 
+            // Layer 1: Role-based flags (Heaviest/Lightest/Others)
             FishForm heaviest = 0, lightest = FishForm.Unique;
             foreach (var f in fish.GetForms())
             {
@@ -259,6 +266,27 @@ namespace BiteSystem.ServerOnly.FishWeight
             bool lower = (isHeaviest && scope.HasFlag(EdgeDistributionScope.HeaviestLower))
                       || (isLightest && scope.HasFlag(EdgeDistributionScope.LightestLower))
                       || (isOther && scope.HasFlag(EdgeDistributionScope.OthersLower));
+
+            // Layer 2: Form-specific flags (Young/Common/Trophy/Unique) — OR into role results
+            switch (form)
+            {
+                case FishForm.Young:
+                    upper |= scope.HasFlag(EdgeDistributionScope.YoungUpper);
+                    lower |= scope.HasFlag(EdgeDistributionScope.YoungLower);
+                    break;
+                case FishForm.Common:
+                    upper |= scope.HasFlag(EdgeDistributionScope.CommonUpper);
+                    lower |= scope.HasFlag(EdgeDistributionScope.CommonLower);
+                    break;
+                case FishForm.Trophy:
+                    upper |= scope.HasFlag(EdgeDistributionScope.TrophyUpper);
+                    lower |= scope.HasFlag(EdgeDistributionScope.TrophyLower);
+                    break;
+                case FishForm.Unique:
+                    upper |= scope.HasFlag(EdgeDistributionScope.UniqueUpper);
+                    lower |= scope.HasFlag(EdgeDistributionScope.UniqueLower);
+                    break;
+            }
 
             return (upper, lower);
         }
@@ -322,14 +350,14 @@ Note: GV property names use the `FishWeight` prefix (flat namespace), while enum
 - Lower Edge Zone Fraction input (0–1)
 - PowerLaw Steepness: slider + numeric input
 - Exponential Rate: slider + numeric input
-- Scope dropdown: presets (None / Heaviest / Extremes / All), with custom mode for advanced bitwise combos
-- **Save** button (GameDesigner role only) — writes to GlobalVariables in DB
+- Scope: inline SVG preview + Edit Scope modal (Role/Form checkbox matrix, SVG bezier preview). No dropdown — presets are JS-only convenience in the modal
+- **Save** button (GameDesigner role only) — writes to GlobalVariables in DB via `EdgeDistributionSettingsModel` + `DalFactory.GetSysProvider()`
 - **Refresh Caches** button (GameDesigner role only) — pushes to game servers
 - **Reset** button — resets all fields (visible + hidden) to current DB values
 - Confirmation dialog before Save: warns that settings affect fish weight generation on all servers
 
 **Behavior:**
-- On load: fields populated from GlobalVariablesCache (current prod values)
+- On load: fields populated from DB via `EdgeDistributionSettingsModel` (reads directly, no GlobalVariablesCache dependency)
 - Algorithm-specific fields: visible only for selected algorithm
 - Hidden field values preserved in memory when switching algorithms
 - Reset clears everything: algorithm, all algorithm-specific params (visible and hidden)
@@ -390,7 +418,7 @@ Division-by-zero guards:
 
 ## Design Notes
 
-**Scope as [Flags] enum.** `EdgeDistributionScope` uses bit flags: form (Heaviest/Lightest/Others) × edge (Upper/Lower) = 6 bits. Named presets (`Heaviest`, `Extremes`, `All`) cover common cases. `HasFlag()` eliminates special-case logic in `GetEdgeFlags()`. GV stores as string — `Enum.TryParse` handles comma-separated flag names natively (`"HeaviestUpper, LightestLower"`).
+**Scope as [Flags] enum.** `EdgeDistributionScope` uses bit flags in two layers: 6 role-based flags (Heaviest/Lightest/Others × Upper/Lower, bits 0-5) + 8 form-specific flags (Young/Common/Trophy/Unique × Upper/Lower, bits 6-13) = 14 bits total. `GetEdgeFlags()` first evaluates the role-based flags, then ORs in form-specific flags for precise per-form control. Named presets were removed from the enum — they exist only as common configurations in the WebAdmin UI checkbox matrix. `ToString()` always returns individual flag names. DB stores comma-separated flag names (`"HeaviestUpper, YoungLower"`). `"All"` in DB is a safety fallback resolved to all 6 role flags in `FromSettings()`.
 
 **Scope vs Algorithm interaction:** `EdgeStrategy = CapAtThreshold` applies hard ceiling (NOT "no effect"). `EdgeScope = EdgeDistributionScope.None` disables edge distribution entirely. Two independent switches. UI should show warning when settings conflict (e.g. "Edge distribution inactive: Scope is None").
 
@@ -403,7 +431,7 @@ Division-by-zero guards:
 ## Extensibility
 
 - New algorithms: implement `IEdgeDistributionStrategy`, add `EdgeDistribution` enum value, add GlobalVariable for parameters
-- New scope combinations: add named preset to `[Flags]` enum, or set custom bit combos via GV string
+- New scope combinations: add form-specific or role-based flags to `[Flags]` enum, compose via comma-separated flag names in DB. Presets are JS-only (WebAdmin UI)
 - Cross-form edge distribution: future scope extension
 - `FishWeightGenerator.Generate()` is the full pipeline; new steps plug in naturally
 
@@ -416,7 +444,7 @@ Division-by-zero guards:
 ### BiteSystem/ServerOnly/FishWeight/EdgeDistribution/ (new — namespace `BiteSystem.ServerOnly.FishWeight.EdgeDistribution`)
 - `IEdgeDistributionStrategy.cs` — interface: `Sample(Random, double) → double`, `EdgeAreaFraction { get; }`
 - `EdgeDistributionType.cs` — enum: `None, Uniform, PowerLaw, Exponential`
-- `EdgeDistributionScope.cs` — `[Flags]` enum: form×edge bit flags with named presets (Heaviest, Extremes, All)
+- `EdgeDistributionScope.cs` — `[Flags]` enum: 14 bit flags (6 role-based + 8 form-specific). Presets removed from enum, JS-only for UI
 
 ### BiteSystem/ServerOnly/FishWeight/EdgeDistribution/Strategies/ (new — namespace `...EdgeDistribution.Strategies`)
 - `CapAtThreshold.cs`, `Unrestricted.cs`, `PowerLawEdge.cs`, `ExponentialEdge.cs` — four strategy implementations

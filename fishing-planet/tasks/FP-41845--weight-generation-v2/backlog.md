@@ -67,6 +67,17 @@ GD requirements source: [Confluence doc](artifacts/confluence-leaderboards-weigh
 - [x] Percentages to 3dp
 - [x] Layout padding-right fix, empty tooltip suppression
 
+## Phase 2c: Form-Specific Scope — Follow-up
+
+- [x] Update KB `edge-distribution-design.md` — form-specific flags, 14-bit enum, `GetEdgeFlags()` with OR layer, presets removed from enum
+- [x] WebAdmin UI: checkbox matrix (Role/Form × Upper/Lower), inline SVG preview, Edit Scope modal with SVG bezier preview
+- [x] WebAdmin: `EdgeDistributionSettingsModel` — DB read/write via `DalFactory.GetSysProvider()`, controller has no DAL/cache deps
+- [x] DAL: `ISysProvider.GetGlobalVariable(name)` / `SetGlobalVariable(name, value)` methods
+- [x] Presets removed from enum — JS-only for UI. Explicit preset check in `onScopeChange()` eliminated
+- [x] Update KB `test-coverage.md` — add form-specific scope tests to inventory
+- [x] Update Confluence GD guide — form-specific flags, restructure (Config first, Background last), scope editor, anchor links
+- [x] Update Confluence Design Analysis — polynomial intent (inverse CDF attempt), N-shaped curve explanation
+
 ## Phase 2b: Simulator Enhancements
 (parallel with 2a — GD feedback during active testing)
 
@@ -127,17 +138,26 @@ Rationale:
 
 SQL migration: `FishWeightUpperEdgeZoneFraction = 1.0 - OldThreshold` (0.05 = 1.0 - 0.95).
 
-### [Flags] EdgeDistributionScope (2026-03-14)
+### [Flags] EdgeDistributionScope (2026-03-14, updated 2026-04-07)
 
-Chosen: **Bit flags** for `EdgeDistributionScope` — form × edge matrix (Heaviest/Lightest/Others × Upper/Lower = 6 bits).
+Chosen: **Bit flags** for `EdgeDistributionScope` — two layers:
+- **Role-based** (original 6 bits): Heaviest/Lightest/Others × Upper/Lower
+- **Form-specific** (added 8 bits): Young/Common/Trophy/Unique × Upper/Lower
 
-Named presets: `Heaviest` (u-----), `Extremes` (u--l--), `All` (ululul). Custom combinations via bitwise OR in GV string: `"HeaviestUpper, LightestLower"`.
+Total: 14 bits. `GetEdgeFlags()` evaluates role-based flags first, then ORs in form-specific flags.
 
-Rationale:
+Named presets (`Heaviest`, `Extremes`, `YoungAndHeaviest`, `AllUpper`, `ExtremesAndAllUpper`, `All`) **removed from enum** — presets exist only in WebAdmin UI checkbox matrix as common configurations. `ToString()` always returns individual flag names. DB format: comma-separated flags (`"HeaviestUpper, YoungLower"`). `"All"` in DB is a safety fallback resolved to individual flags in `FromSettings()`.
+
+Rationale (original):
 - `Extremes` implies both edges: upper on heaviest + lower on lightest — requires flag granularity
-- Unix permissions analogy (h-l-o × u-l) — extensible without enum changes
+- Bit-flag matrix (form role × edge side) — extensible without enum changes
 - `HasFlag()` eliminates special-case logic in `GetEdgeFlags()`
 - `Enum.TryParse` with `[Flags]` handles comma-separated names natively
+
+Rationale (form-specific expansion):
+- Role-based flags alone cannot target a specific form without affecting other forms in the same role
+- Form-specific flags OR into role results — additive, never override
+- Presets removed from enum to keep `ToString()` unambiguous and DB values parseable
 
 ### Controller namespace: Settings (2026-03-14)
 

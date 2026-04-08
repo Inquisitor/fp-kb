@@ -7,29 +7,47 @@ related_tasks:
 ---
 # Fish Weight Generation: Edge Distribution System
 
-Configuration and tuning guide for the edge distribution system — making fish near maximum weight progressively rarer to create meaningful leaderboard competition.
+Configuration and tuning guide for the edge distribution system — making fish near maximum weight progressively rarer to create meaningful leaderboard competition. For background on the problem this solves, see [Background](#Background).
 
 <!-- {toc} -->
 
 ---
 
-## Problem
+## Configuration
 
-Fish weight within each form range (e.g. 80–130 kg for Trophy) was generated uniformly — every weight in the range was equally likely, including values at or near the maximum.
+All parameters are stored in the `GlobalVariables` table and can be changed at runtime via WebAdmin without server restart.
 
-This led to three observable effects:
+| GlobalVariable                               |  Type  | Default | Description                                                                                                   |
+|----------------------------------------------|:------:|:-------:|---------------------------------------------------------------------------------------------------------------|
+| `BiteSystem.FishWeightEdgeDistribution`      | string | `None`  | Active algorithm (see [Algorithms](#Algorithms)): `None`, `Uniform`, `PowerLaw`, `Exponential`                |
+| `BiteSystem.FishWeightEdgeScope`             | string |  `All`  | Which forms and edges are affected. Comma-separated flag names (see [Scope](#Scope%3A-Which-Forms-and-Edges)) |
+| `BiteSystem.FishWeightUpperEdgeZoneFraction` | float  | `0.05`  | Upper edge [zone size](#Zone-Fraction) as fraction of the weight range                                        |
+| `BiteSystem.FishWeightLowerEdgeZoneFraction` | float  | `0.05`  | Lower edge [zone size](#Zone-Fraction) as fraction of the weight range                                        |
+| `BiteSystem.FishWeightEdgePowerLawSteepness` | float  |  `2.0`  | α parameter for [PowerLaw](#PowerLaw)                                                                         |
+| `BiteSystem.FishWeightEdgeExponentialRate`   | float  |  `7.0`  | λ parameter for [Exponential](#Exponential)                                                                   |
 
-- **Leaderboard saturation.** Players routinely caught fish at maximum weight. Top leaderboard entries clustered at the ceiling with no meaningful spread.
-- **Synthetic feel.** Leaderboards looked artificial — records were set and broken trivially, reducing competitive motivation.
-- **No sense of rarity.** Catching a fish 1 gram below the maximum was as likely as catching one in the middle of the range.
+### Zone Fraction
 
-Statistical analysis over 5 weeks on Steam confirmed the problem: players set boundary records (fish at maximum weight) multiple weeks in a row. One player set 40 potential records in 5 weeks. Details: [Leaderboards statistics page](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4219830273).
+Zone fraction defines what portion of the weight range is the "edge zone":
 
-### Previous Attempt (FP-33182)
+- `0.05` (5%) — the top 5% of the weight range gets the falloff. For a fish with range 80–130 kg, the edge zone is 127.5–130 kg.
+- `0.10` (10%) — wider edge, more gradual rarity increase. Edge zone = 125–130 kg.
+- `0.00` — edge distribution disabled for that side (no edge zone).
 
-The first fix (r12950) replaced uniform generation in the top 5% of the weight range with a Marsaglia normal distribution. While the intent was correct, the implementation had a structural flaw: the edge zone received a fixed 5% probability budget regardless of the distribution shape, creating a visible density discontinuity (a "spike" or "seam") at the 95% boundary. This artifact was clearly visible in production FishFact data.
+Upper and lower zones are independent. Setting lower zone to 0 disables the lower edge entirely (fish near `MinWeight` stay uniformly distributed).
 
-The edge distribution system replaces this approach entirely.
+**Overlap guard:** if `upperZone + lowerZone > 0.80`, both are proportionally shrunk to ensure at least 20% of the range remains as the uniform central zone.
+
+### Activation Checklist
+
+To enable edge distribution on production:
+
+1. Set `FishWeightEdgeDistribution` to `PowerLaw` or `Exponential`
+2. Set `FishWeightEdgeScope` to the desired scope (e.g. `HeaviestUpper` for upper edge on the heaviest form only)
+3. Adjust zone fractions if needed (defaults are 5% per side)
+4. Adjust algorithm parameters (steepness / rate) — use the WebAdmin simulator to preview the effect
+5. **Save** settings in WebAdmin (writes to `GlobalVariables`)
+6. **Refresh Caches** in WebAdmin (pushes to game servers)
 
 ## How It Works
 
@@ -144,42 +162,6 @@ No edge distribution — pure uniform generation across the full range.
 - Use only to **temporarily disable the system** for debugging or A/B comparison.
 - This is close to the pre-FP-41845 behavior, but not identical: the old system also had form-specific polynomials that distorted the distribution for Young (skewed toward heavier) and Unique (bimodal double-hump). Those polynomials have been removed. Common and Trophy were unaffected by polynomials and were truly uniform.
 
-## Configuration
-
-All parameters are stored in the `GlobalVariables` table and can be changed at runtime via WebAdmin without server restart.
-
-| GlobalVariable                               |  Type  | Default | Description                                                                    |
-|----------------------------------------------|:------:|:-------:|--------------------------------------------------------------------------------|
-| `BiteSystem.FishWeightEdgeDistribution`      | string | `None`  | Active algorithm: `None`, `Uniform`, `PowerLaw`, `Exponential`                 |
-| `BiteSystem.FishWeightEdgeScope`             | string |  `All`  | Which forms and edges are affected (see [Scope](#scope-which-forms-and-edges)) |
-| `BiteSystem.FishWeightUpperEdgeZoneFraction` | float  | `0.05`  | Upper edge zone size as fraction of the weight range                           |
-| `BiteSystem.FishWeightLowerEdgeZoneFraction` | float  | `0.05`  | Lower edge zone size as fraction of the weight range                           |
-| `BiteSystem.FishWeightEdgePowerLawSteepness` | float  |  `2.0`  | α parameter for PowerLaw                                                       |
-| `BiteSystem.FishWeightEdgeExponentialRate`   | float  |  `7.0`  | λ parameter for Exponential                                                    |
-
-### Zone Fraction
-
-Zone fraction defines what portion of the weight range is the "edge zone":
-
-- `0.05` (5%) — the top 5% of the weight range gets the falloff. For a fish with range 80–130 kg, the edge zone is 127.5–130 kg.
-- `0.10` (10%) — wider edge, more gradual rarity increase. Edge zone = 125–130 kg.
-- `0.00` — edge distribution disabled for that side (no edge zone).
-
-Upper and lower zones are independent. Setting lower zone to 0 disables the lower edge entirely (fish near `MinWeight` stay uniformly distributed).
-
-**Overlap guard:** if `upperZone + lowerZone > 0.80`, both are proportionally shrunk to ensure at least 20% of the range remains as the uniform central zone.
-
-### Activation Checklist
-
-To enable edge distribution on production:
-
-1. Set `FishWeightEdgeDistribution` to `PowerLaw` or `Exponential`
-2. Set `FishWeightEdgeScope` to the desired scope (e.g. `Heaviest` for upper edge on the heaviest form only)
-3. Adjust zone fractions if needed (defaults are 5% per side)
-4. Adjust algorithm parameters (steepness / rate) — use the WebAdmin simulator to preview the effect
-5. **Save** settings in WebAdmin (writes to `GlobalVariables`)
-6. **Refresh Caches** in WebAdmin (pushes to game servers)
-
 ## Scope: Which Forms and Edges
 
 Edge distribution does not have to apply to all forms equally. The **scope** controls which (form × edge) combinations are active.
@@ -202,74 +184,51 @@ Not all species have all four forms on every pond. As the number of forms decrea
 |       2       | heavier form  | lighter form  | —                      | **`Others` is empty** — `OthersUpper`/`OthersLower` have no effect   |
 |       1       | the only form | the only form | —                      | Single form is **both Heaviest and Lightest** — both flag sets apply |
 
-Practical impact: presets like `Heaviest` and `Extremes` work correctly regardless of form count — they target roles, not specific forms. `Others`-based flags (`AllUpper`, `ExtremesAndAllUpper`) become partially or fully inert with fewer than 3 forms.
+Practical impact: role-based flags work correctly regardless of form count — they target roles, not specific forms. `Others`-based flags become partially or fully inert with fewer than 3 forms.
 ~~~
 
-### Scope Presets
+### Form-Specific Flags
 
-| Preset                | Bit pattern | Effect                                                   |
-|-----------------------|-------------|----------------------------------------------------------|
-| `None`                | `------`    | Edge distribution disabled entirely                      |
-| `Heaviest`            | `u-----`    | Upper edge on heaviest form only — most conservative     |
-| `Extremes`            | `u--l--`    | Upper on heaviest + Lower on lightest                    |
-| `AllUpper`            | `u-u-u-`    | Upper edge on all forms — every form gets decay near max |
-| `ExtremesAndAllUpper` | `u-ulu-`    | Extremes + upper edge on all others — balanced setting   |
-| `All`                 | `ululul`    | Both edges on all forms — most aggressive                |
+In addition to role-based flags, scope supports **form-specific flags** that target a concrete fish form regardless of its role in the species:
 
-~~~expand title="Bit pattern reference"
-Each position in the 6-character pattern corresponds to one (form role × edge side) flag:
+- `YoungUpper`, `YoungLower` — applies only when the form is Young
+- `CommonUpper`, `CommonLower` — applies only when the form is Common
+- `TrophyUpper`, `TrophyLower` — applies only when the form is Trophy
+- `UniqueUpper`, `UniqueLower` — applies only when the form is Unique
 
-```
-u  l  u  l  u  l        ← example: All
-│  │  │  │  │  │
-│  │  │  │  │  └─ Others Lower     (32)
-│  │  │  │  └──── Others Upper     (16)
-│  │  │  └─────── Lightest Lower    (8)
-│  │  └────────── Lightest Upper    (4)
-│  └───────────── Heaviest Lower    (2)
-└──────────────── Heaviest Upper    (1)
-```
+**Key difference from roles:** If a species has no Young form, `YoungLower` simply does not match any form — no edge is applied. In contrast, `LightestLower` would shift to Common (the lightest available form).
 
-`u` = upper edge on, `l` = lower edge on, `-` = off
+**Use case:** A game designer wants lower edge distribution on Young specifically (to make the smallest fish rarer), but does NOT want it on Common even if Common happens to be the lightest form on a pond without Young. Setting `YoungLower` instead of `LightestLower` achieves this.
 
-Examples:
-```
-Heaviest              u-----    HeaviestUpper
-Extremes              u--l--    HeaviestUpper + LightestLower
-AllUpper              u-u-u-    HeaviestUpper + LightestUpper + OthersUpper
-ExtremesAndAllUpper   u-ulu-    HeaviestUpper + LightestUpper + LightestLower + OthersUpper
-All                   ululul    all six flags
-```
-~~~
+Role-based and form-specific flags **combine via OR**: if either matches, the edge is applied. For example, `HeaviestUpper, YoungLower` applies upper edge to the heaviest form (via role) AND lower edge to Young (via form-specific).
+
+### Common Configurations
+
+| Configuration       | Flags                                       | Effect                                                                                                                   |
+|---------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Heaviest upper only | `HeaviestUpper`                             | Upper edge on the heaviest form only. Most conservative — minimal impact                                                 |
+| Role-based extremes | `HeaviestUpper, LightestLower`              | Upper on heaviest + lower on lightest. Roles shift with species form set                                                 |
+| Young + heaviest    | `HeaviestUpper, YoungLower`                 | Upper on heaviest + lower on Young specifically. If species has no Young — lower edge is skipped entirely                |
+| All forms upper     | `HeaviestUpper, LightestUpper, OthersUpper` | Upper edge on every form via roles                                                                                       |
+| All role edges      | all 6 role flags                            | Both edges on all forms. **Note:** adjacent forms share boundaries — both edges creates a double density dip at the seam |
+| Disabled            | (none)                                      | Edge distribution disabled entirely, regardless of the selected algorithm                                                |
 
 ~~~panel type=warning
-`Scope = None` disables edge distribution entirely, regardless of the selected algorithm. The heaviest form (typically Unique) will have no upper edge restriction — record weights will be generated at the same rate as average weights.
+An empty scope disables edge distribution entirely, regardless of the selected algorithm. The heaviest form (typically Unique) will have no upper edge restriction — record weights will be generated at the same rate as average weights.
 ~~~
 
-~~~panel type=note
-`Scope = All` is the default fallback. It applies the same edge treatment to all forms on both sides. In most cases, a more targeted scope (e.g. `Heaviest` or `Extremes`) is preferred — it keeps the edge restriction where it matters most (heaviest form's upper edge) while leaving other forms unaffected.
-~~~
+### Storage Format
 
-### Custom Combinations
-
-Custom scopes can be set via comma-separated flag names in `GlobalVariables`:
+Scope is stored in `GlobalVariables` as **comma-separated individual flag names**:
 
 ```
-"HeaviestUpper, LightestLower"        → upper on Unique + lower on Young
-"HeaviestUpper, OthersUpper"          → upper edge on Unique, Common, Trophy (but not Young)
-"HeaviestUpper, HeaviestLower"        → both edges on Unique only
+"HeaviestUpper, YoungLower"           → upper on heaviest (role) + lower on Young (form-specific)
+"HeaviestUpper, LightestLower"        → upper on heaviest + lower on lightest (both role-based)
+"HeaviestUpper, OthersUpper"          → upper edge on heaviest + all middle forms
+"HeaviestUpper, HeaviestLower"        → both edges on the heaviest form only
 ```
 
-These examples assume 4 forms. For species with fewer forms, see the role assignment table in [Form Roles](#form-roles) above.
-
-### Recommended Configurations
-
-| Goal                                          | Scope      | Rationale                                                                                                                                                                                                         |
-|-----------------------------------------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Leaderboard rarity (top records only)         | `Heaviest` | Only the heaviest form's upper edge is affected                                                                                                                                                                   |
-| Leaderboard rarity + protect lightest records | `Extremes` | Heavy forms can't reach max, light forms can't reach min                                                                                                                                                          |
-| Consistent behavior across all forms          | `All`      | Every form has the same edge treatment. **Note:** adjacent forms share boundaries (e.g. Trophy max ≈ Unique min) — applying both upper and lower edges creates a **double density dip** at the seam between forms |
-| Testing on one form before rollout            | `Heaviest` | Minimal blast radius                                                                                                                                                                                              |
+These examples assume 4 forms. For species with fewer forms, see the role assignment table in [Form Roles](#Form-Roles) above.
 
 ## WebAdmin Tools
 
@@ -307,13 +266,25 @@ Interactive canvas showing the edge distribution curve shape:
 
 Use this to visually compare how different parameter values affect the probability falloff before running a full simulation.
 
+### Scope Editor
+
+**Location:** ***Edit...*** button next to the scope preview on the ***Fish Weight Generator*** page
+
+A modal dialog for configuring which forms and edges receive edge distribution:
+
+- **Role checkboxes** — Lightest / Others / Heaviest × Upper / Lower. Roles are assigned dynamically per species based on available forms.
+- **Form checkboxes** — Young / Common / Trophy / Unique × Upper / Lower. Form-specific flags match by exact form, regardless of role.
+- **SVG Preview** — shows 4 rows (4-form, 3-form, 2-form, 1-form species) with colored blocks per form. Edge curves are drawn as bezier S-curves on the affected sides, visualizing how roles shift when forms are missing.
+
+The main page shows a compact inline SVG preview of the current scope (4-form row). Hovering shows a tooltip with the active flags grouped by edge.
+
 ### Settings Panel
 
 The same page provides controls to save edge distribution parameters to `GlobalVariables`:
 
 - ***Save*** — writes current settings to the database (requires ***Game Designer*** role). Includes a confirmation dialog with mandatory comment.
 - ***Refresh Caches*** — pushes updated `GlobalVariables` to all connected game servers.
-- ***Reset*** — reverts all fields to the currently saved values (from `GlobalVariablesCache`).
+- ***Reset*** — reverts all fields to the currently saved values (reads directly from the database).
 
 Changes are audited via the `DataChanges` system (who changed what, when, with what comment).
 
@@ -341,7 +312,27 @@ Edge distribution and `weightK` are **independent mechanisms**:
 
 **Key point for GD:** Edge distribution controls rarity within the natural weight range. `weightK` controls how far chum can push fish beyond that range. The two systems are tuned independently.
 
-## Migration from Old System
+## Background
+
+### Problem
+
+Fish weight within each form range (e.g. 80–130 kg for Trophy) was generated uniformly — every weight in the range was equally likely, including values at or near the maximum.
+
+This led to three observable effects:
+
+- **Leaderboard saturation.** Players routinely caught fish at maximum weight. Top leaderboard entries clustered at the ceiling with no meaningful spread.
+- **Synthetic feel.** Leaderboards looked artificial — records were set and broken trivially, reducing competitive motivation.
+- **No sense of rarity.** Catching a fish 1 gram below the maximum was as likely as catching one in the middle of the range.
+
+Statistical analysis over 5 weeks on Steam confirmed the problem: players set boundary records (fish at maximum weight) multiple weeks in a row. One player set 40 potential records in 5 weeks. Details: [Leaderboards statistics page](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4219830273).
+
+### Previous Attempt (FP-33182)
+
+The first fix (r12950) replaced uniform generation in the top 5% of the weight range with a Marsaglia normal distribution. While the intent was correct, the implementation had a structural flaw: the edge zone received a fixed 5% probability budget regardless of the distribution shape, creating a visible density discontinuity (a "spike" or "seam") at the 95% boundary. This artifact was clearly visible in production FishFact data.
+
+The edge distribution system replaces this approach entirely.
+
+### Migration from Old System
 
 ### What Was Removed
 
