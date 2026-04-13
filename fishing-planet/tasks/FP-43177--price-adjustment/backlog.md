@@ -22,4 +22,4 @@
 
 ## Deferred
 
-- [ ] Remove deprecated fields (`RoundingAmount`, `RoundingType`, `Beautify`) from DB, DTO, UI — separate task after GD validates new logic in production. See [deprecated-fields.md](artifacts/deprecated-fields.md)
+- [ ] Remove deprecated fields (`RoundingAmount`, `RoundingType`, `Beautify`) from DB, DTO, UI — bubbled up to module backlog

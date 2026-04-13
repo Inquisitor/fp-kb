@@ -9,6 +9,7 @@ module: product-local-prices
 - `LocalPriceCalculator.CalculateRegionalPrice()` — `Shared/SharedLib/Monetization/LocalPriceCalculator.cs` (core formula)
 - `ProductLocalPricesModel` — `WebAdmin/WebAdmin/Models/Monetization/ProductLocalPricesModel.cs` (admin UI logic)
 - `RegionalPriceRatesModel` — `WebAdmin/WebAdmin/Models/Monetization/RegionalPriceRatesModel.cs` (rate config UI)
+- `ExchangeRateUpdateModel` — `WebAdmin/WebAdmin/Models/Monetization/ExchangeRateUpdateModel.cs` (exchange rate snapshot UI)
 - `PaymentHelper.ApplyLocalPrice()` — `Shared/SharedLib/Payments/PaymentHelper.cs` (runtime application)
 
 ## Key Types
@@ -33,4 +34,5 @@ module: product-local-prices
 - Tests: `Shared/SharedLib.Tests/Monetization/LocalPriceCalculatorTests.cs` (38 acceptance + unit tests)
 
 ## Related Tasks
-- FP-43177: Smart Beautify algorithm (completed) — r15959+r15961+r15969
+- FP-43177 Phase 1: Smart Beautify algorithm (completed) — r15959+r15961+r15969
+- FP-43177 Phase 2: Exchange Rate Snapshot (completed) — r15997+r15999
