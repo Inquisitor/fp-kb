@@ -38,13 +38,13 @@ The issue is broader than just the B key: whenever `BreakLineLoseTackle` is call
 
 ## Affected call sites of `BreakLineLoseTackle`
 
-| Caller | Reason | Context |
-|--------|--------|---------|
-| `ApplyWearToLine()` | Wear | Line durability reached 0 |
-| `HandleFightFish()` | Fight | Line break during fight (critical wear) |
-| `HandleBreakLine()` | Cut | B key press |
-| `CheckLineBreaksOnCast()` | Cast | Line break on cast |
-| `HandleFightFish()` (×2) | Fight | Fish cuts line on slack / tension (fallback when `leader == null`) |
+| Caller                    | Reason | Context                                                            |
+|---------------------------|--------|--------------------------------------------------------------------|
+| `ApplyWearToLine()`       | Wear   | Line durability reached 0                                          |
+| `HandleFightFish()`       | Fight  | Line break during fight (critical wear)                            |
+| `HandleBreakLine()`       | Cut    | B key press                                                        |
+| `CheckLineBreaksOnCast()` | Cast   | Line break on cast                                                 |
+| `HandleFightFish()` (×2)  | Fight  | Fish cuts line on slack / tension (fallback when `leader == null`) |
 
 ## Testing plan
 
