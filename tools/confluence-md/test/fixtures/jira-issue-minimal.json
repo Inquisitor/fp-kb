@@ -1,0 +1,77 @@
+{
+  "issues": {
+    "totalCount": 1,
+    "nodes": [{
+      "key": "FP-99999",
+      "fields": {
+        "summary": "Test issue summary",
+        "status": {
+          "name": "In Progress",
+          "statusCategory": { "name": "In Progress" }
+        },
+        "assignee": { "displayName": "John Doe" },
+        "resolution": null,
+        "resolutiondate": null,
+        "description": {
+          "type": "doc", "version": 1,
+          "content": [{ "type": "paragraph", "content": [
+            { "type": "text", "text": "Issue description text." }
+          ]}]
+        },
+        "comment": {
+          "total": 2,
+          "comments": [
+            {
+              "id": "10001",
+              "author": { "displayName": "Alice" },
+              "created": "2026-03-01T10:00:00.000+0200",
+              "updated": "2026-03-01T10:00:00.000+0200",
+              "body": {
+                "type": "doc", "version": 1,
+                "content": [{ "type": "paragraph", "content": [
+                  { "type": "text", "text": "First comment." }
+                ]}]
+              }
+            },
+            {
+              "id": "10002",
+              "author": { "displayName": "Bob" },
+              "created": "2026-03-02T14:30:00.000+0200",
+              "updated": "2026-03-02T15:00:00.000+0200",
+              "body": {
+                "type": "doc", "version": 1,
+                "content": [{ "type": "paragraph", "content": [
+                  { "type": "text", "text": "Edited comment with " },
+                  { "type": "text", "text": "bold", "marks": [{ "type": "strong" }] },
+                  { "type": "text", "text": " and " },
+                  { "type": "text", "text": "code", "marks": [{ "type": "code" }] },
+                  { "type": "text", "text": "." }
+                ]}]
+              }
+            }
+          ]
+        }
+      },
+      "changelog": {
+        "histories": [
+          {
+            "created": "2026-03-01T09:00:00.000+0200",
+            "author": { "displayName": "Alice" },
+            "items": [
+              { "field": "status", "fromString": "To Do", "toString": "In Progress" },
+              { "field": "assignee", "fromString": null, "toString": "John Doe" }
+            ]
+          },
+          {
+            "created": "2026-03-02T16:00:00.000+0200",
+            "author": { "displayName": "Bob" },
+            "items": [
+              { "field": "status", "fromString": "In Progress", "toString": "Resolved" },
+              { "field": "priority", "fromString": "Medium", "toString": "High" }
+            ]
+          }
+        ]
+      }
+    }]
+  }
+}
