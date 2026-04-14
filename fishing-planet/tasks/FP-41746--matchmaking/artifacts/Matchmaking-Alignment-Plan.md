@@ -1,7 +1,7 @@
 # Matchmaking — Plan for Aligning Documentation and Code
 
 > **Date:** 2026-02-16 \
-> **Updated:** 2026-03-06 \
+> **Updated:** 2026-04-14 \
 > **Branch:** LBM20251201 \
 > **Related:**
 > - [Matchmaking-System-Current-State.md](archived/Matchmaking-System-Current-State.md)
@@ -53,14 +53,14 @@
 | CFG-007 | Remove MaxRating from spec, compute bracket boundaries on the fly | DEFERRED |
 | VAL-001 | Revisit validations in TDD and code (depends on CFG-007)          | DEFERRED |
 
-### Phase 6 — Feature Implementation (FP-41833) — DONE (code), TODO (docs)
+### Phase 6 — Feature Implementation (FP-41833) — Code DONE, GDD DONE, TDD TODO
 
-| ID      | Description                                                        | Status                  | Details                                                                          |
-|---------|--------------------------------------------------------------------|-------------------------|----------------------------------------------------------------------------------|
-| CFG-005 | Implement MaxGroupCount                                            | Code=DONE, GDD/TDD=TODO |
-| CFG-006 | Implement MaxGroupSize (rework GDD description)                    | Code=DONE, GDD/TDD=TODO |
-| TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE                    | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
-| SUB-001 | Implement new group parameters, update docs                        | Code=DONE, GDD/TDD=TODO |
+| ID      | Description                                                        | Status                        | Details                                                                          |
+|---------|--------------------------------------------------------------------|-------------------------------|----------------------------------------------------------------------------------|
+| CFG-005 | Implement MaxGroupCount                                            | Code=DONE, GDD=DONE, TDD=TODO |
+| CFG-006 | Implement MaxGroupSize (rework GDD description)                    | Code=DONE, GDD=DONE, TDD=TODO |
+| TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE                          | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
+| SUB-001 | Implement new group parameters, update docs                        | Code=DONE, GDD=DONE, TDD=TODO |
 
 ### Phase 7 — Documentation Cleanup — IN PROGRESS
 
@@ -76,7 +76,7 @@
 | ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | DONE               | [details](archived/subtasks/FP-41746--ALG-007--gdd-minsize-collapse.md), → Правка 10 in [editing instructions](GDD-Editing-Instructions.md)                   |
 | FTR-001 | Add multipliers note to TDD                                        | TODO               |                                                                                                                                                               |
 | DOC-001 | Fix typo in TDD validation rules (wrong array index)               | TODO               |                                                                                                                                                               |
-| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | GDD=DONE, TDD=TODO | GDD: ~40 typos fixed in ideal GDD + typo table in editing instructions                                                                                        |
+| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | GDD=DONE, TDD=TODO | GDD: all typos applied on Confluence (2026-04-14)                                                                                                             |
 
 ### Phase 8 — DB + Code Rename — DONE
 
@@ -114,7 +114,7 @@
 
 Each discrepancy is a numbered item with description, action table (GDD/TDD/Code), and priority.
 Item IDs use section prefix + sequential number (e.g. `ALG-001`).
-Statuses: `TODO`, `N/A`, `DONE`, `DEFERRED`.
+Statuses: `TODO`, `N/A`, `DONE`, `DRAFTED` (edit instructions ready, not yet on Confluence), `DEFERRED`.
 
 Completed items are collapsed to one-liners in the Summary above, with full details in
 `archived/subtasks/<ID>--<slug>.md`. Only active (TODO/partially-done) items appear in full below.
@@ -159,7 +159,7 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 
 | Action                                                                                             | Status |
 |----------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Update description to match final implementation.                                         | TODO   |
+| **GDD:** Update description to match final implementation.                                         | DONE   |
 | **TDD:** Add `MaxGroupCount` parameter description with implementation details.                    | TODO   |
 | **Code:** Implement `MaxGroupCount` in `TournamentGroupingRule` and `MatchmakingLogic` (FP-41833). | DONE   |
 
@@ -178,7 +178,7 @@ implementation.
 
 | Action                                                                                            | Status |
 |---------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Rework description (current wording unclear). Align with final implementation.           | TODO   |
+| **GDD:** Rework description (current wording unclear). Align with final implementation.           | DONE   |
 | **TDD:** Add `MaxGroupSize` parameter description with implementation details.                    | TODO   |
 | **Code:** Implement `MaxGroupSize` in `TournamentGroupingRule` and `MatchmakingLogic` (FP-41833). | DONE   |
 
@@ -251,7 +251,7 @@ code-side checks) to be revisited after CFG-007 refactoring.
 
 | Action                                                                                                                      | Status |
 |-----------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Update group creation section to describe final algorithm with new parameters (FP-41833).                          | TODO   |
+| **GDD:** Update group creation section to describe final algorithm with new parameters (FP-41833).                          | DONE   |
 | **TDD:** Replace "[TBD]" with full group creation algorithm description matching final implementation.                      | TODO   |
 | **Code:** Implement new group parameters per FP-41833. Update `CreateGroups` (was `CreateSubgroups`) in `MatchmakingLogic`. | DONE   |
 
