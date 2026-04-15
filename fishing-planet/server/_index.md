@@ -17,6 +17,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 
 ## Infrastructure
 - [dal](modules/dal/_card.md) — repository-pattern DAL, reflection-based mapping (SQL Server + MongoDB)
+- [cache](modules/cache/_card.md) — cache registry, refresh orchestration, dependency graph (stub)
 
 ## Monetization
 - [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
