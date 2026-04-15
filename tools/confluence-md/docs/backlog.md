@@ -19,6 +19,8 @@
 
 - [ ] Block math style — single-line `$$formula$$` when content is one line, fenced `$$\n...\n$$` when multi-line
 - [ ] Whitespace normalization — extra blank lines between list items, etc.
+- [ ] Anchor auto-conversion — convert markdown-style anchors (`#heading-text`) to Confluence TOC format (`#Heading-Text`, dots preserved, special chars URL-encoded) during MD→ADF conversion
+- [ ] Table column widths — generate `colwidth` attrs in `tableCell` ADF nodes. Support markdown syntax (e.g. comment hint or frontmatter) to specify column proportions
 
 ## texblox adapter
 

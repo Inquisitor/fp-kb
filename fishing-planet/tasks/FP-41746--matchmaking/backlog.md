@@ -2,10 +2,9 @@
 
 ## Task Workflow
 - [x] Investigate GDD/TDD/code misalignment → created [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
-- [ ] Execute plan → progress tracked in [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md) (§ Summary: Execution Order)
+- [x] Execute plan → all code phases done, GDD updated, new spec published
 
-## Task Housekeeping (current)
-- [x] Reconstruct timeline from SVN history
-- [x] Organize artifacts (active vs archived)
-- [ ] Actualize TODO/DONE statuses in Alignment Plan (cross-reference with SVN)
-- [ ] Clean up journal (remove duplication with plan)
+## Deferred
+- [ ] Phase 5 (CFG-007, VAL-001) — cosmetic refactoring, deferred
+- [ ] Phase 9 (DOC-002) — current-state doc. Code audit done as [artifact](artifacts/Matchmaking-Current-State.md), formal doc not needed (replaced by spec)
+- [ ] Phase 10 (RES-001, RES-002) — test case categorization research. Low priority, informational

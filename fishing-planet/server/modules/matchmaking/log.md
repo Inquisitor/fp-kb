@@ -1,5 +1,10 @@
 # Decision Log — Matchmaking
 
+## 2026-04-15
+- New matchmaking tech spec replaces obsolete TDD matchmaking section. Decision: write from-code spec instead of patching old TDD. Rationale: old TDD was a planning doc covering 4 areas (Rating, Leaderboards, Matchmaking, Scheduling) — patching one section leaves the rest inconsistent. Fresh spec from code audit is authoritative
+- Confluence Business Logic reorganized: Competitive as system landing page, Matchmaking + Leaderboards as child pages. Mirrors KB `_systems/` concept
+- FFS naming clarified: "Free-Fill-Swap" (origin: algorithm phases), "Fair Fill Strategy" (backronym for GDD/player-facing context)
+
 ## 2026-03-09
 - DB rename approach: full `sp_rename` + ConfigJson `REPLACE` instead of DAL mapper abstraction. Simpler, no runtime overhead, atomic with downtime
 - ConfigJson dead param removal: `REPLACE` (preserves formatting) over `JSON_MODIFY` (reformats entire JSON). Game designers rely on specific indentation/line breaks

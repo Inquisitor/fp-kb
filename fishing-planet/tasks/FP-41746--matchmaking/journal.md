@@ -7,8 +7,8 @@ related: FP-41833
 # FP-41746: Matchmaking Alignment
 
 ## Status
-Phase 7 in progress. **GDD fully done** — all правки (1–10) + typos applied on Confluence (2026-04-14).
-Next: TDD work — TRM-001, CFG-005/006/SUB-001, FTR-001, DOC-001, DOC-003 TDD proofreading.
+All documentation phases complete. GDD updated on Confluence (правки 1–10 + typos). New Matchmaking technical spec published to Confluence (page 5505613835) replacing obsolete TDD. Business Logic > Competitive section reorganized.
+Next: validate remaining plan items (Phase 9 DOC-002, Phase 10 research). Consider task closure.
 - [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary
@@ -40,3 +40,5 @@ Related task FP-41833 ("matchmaking algorithm rework: cases with 2 new parameter
 - 2026-03-09: Phase 7 GDD items completed: ALG-001..003 (ping-pong description, donor principle, Phase B merge), ALG-007 (MinSize×2 collapse), DOC-003 GDD proofreading (~40 typos fixed). Editing instructions 8-10 added
 - 2026-04-14: GDD Confluence page verified. Правки 1–7 confirmed applied (since 12 Mar). Plan statuses corrected: Phase 6 GDD→DONE, Phase 7 ALG/DOC-003 GDD→DRAFTED
 - 2026-04-14: Правки 8–10 applied on GDD Confluence by designer. Verified: all correct. ALG-001..003, ALG-007→DONE. Typos (DOC-003) remain pending
+- 2026-04-14: DOC-003 GDD typos applied on Confluence. All GDD work complete
+- 2026-04-15: [Code audit](artifacts/Matchmaking-Current-State.md) created (DOC-002). New [matchmaking spec](../../confluence/workspace/FP-41746--matchmaking-spec.md) published to [Confluence](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5505613835) (Business Logic > Competitive > Matchmaking). Replaces obsolete TDD matchmaking section. TRM-001, CFG-005/006, SUB-001, FTR-001, DOC-001, DOC-003 TDD — all covered by new spec

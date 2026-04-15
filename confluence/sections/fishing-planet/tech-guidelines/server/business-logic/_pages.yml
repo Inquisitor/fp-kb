@@ -4,15 +4,9 @@ parent_id: 71008272
 indexed: 2026-03-23
 
 pages:
-  - id: 4327276567
-    title: Leaderboards
-    notes: has child — Leaderboards Testing
-  - id: 4339925004
-    title: Matchmaking
-    verified: 2026-03-23
-    notes: TDD, rewritten FP-41746
   - id: 46628934
     title: Competitive
+    notes: system landing page — Matchmaking, Leaderboards, Rating
   - id: 3622567960
     title: Clubs
   - id: 361529369
@@ -36,4 +30,8 @@ subsections:
   - slug: bite-system
     title: Bite System
     id: 5450858521
+    indexed: true
+  - slug: competitive
+    title: Competitive
+    id: 46628934
     indexed: true

@@ -25,10 +25,10 @@ module: matchmaking
 ## Deep Dives
 Tests: `SharedLib.Tests/Tournaments/MatchmakingLogicTests.cs` + `MatchmakingTestCase.cs` (string-notation parser)
 Data: SQL `Tournaments`, `TournamentTemplates`, `TournamentSeries`, `TournamentGrid`; config via `TournamentGroupingRule` JSON in DB/WebAdmin
-Confluence: 4339925004 (Matchmaking, stale), 4339925014 (Matchmaking testing, current)
+Confluence: [Matchmaking spec](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5505613835) (Business Logic > Competitive), [Matchmaking testing](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4339925014)
 
 ## Related Tasks
-- FP-41746: Alignment plan — bug fixes, rename, algorithm, DB cleanup (active; phases 1-4,6,8 done; phase 7 GDD done, TDD in progress)
+- FP-41746: Alignment — bug fixes, rename, FFS algorithm, DB cleanup, GDD updated, new spec published to Confluence
 - FP-41833: Tests and test infrastructure
 
 See also: [backlog](backlog.md) | [log](log.md)

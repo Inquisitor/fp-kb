@@ -20,12 +20,12 @@
 | ALG-005 | Add empty bucket skip in Phase B            | DONE   | [details](archived/subtasks/FP-41746--ALG-005--phase-b-skip-empty-buckets.md)      |
 | ALG-006 | Add RefreshGroup() call after Phase B merge | DONE   | [details](archived/subtasks/FP-41746--ALG-006--phase-b-refresh-after-merge.md)     |
 
-### Phase 2 — Terminology Unification (High Priority) — PARTIAL
+### Phase 2 — Terminology Unification (High Priority) — DONE
 
-| ID      | Description                                                         | Status                                        | Details                                                                    |
-|---------|---------------------------------------------------------------------|-----------------------------------------------|----------------------------------------------------------------------------|
-| TRM-001 | Unify terminology in TDD + code XML doc comments                    | GDD=N/A, TDD=TODO, Code=Superseded by TRM-002 |
-| TRM-002 | Rename code identifiers to unified Bracket/Bucket/Group terminology | DONE                                          | [details](archived/subtasks/FP-41746--TRM-002--rename-code-identifiers.md) |
+| ID      | Description                                                         | Status | Details                                                                    |
+|---------|---------------------------------------------------------------------|--------|----------------------------------------------------------------------------|
+| TRM-001 | Unify terminology in TDD + code XML doc comments                    | DONE   |
+| TRM-002 | Rename code identifiers to unified Bracket/Bucket/Group terminology | DONE   | [details](archived/subtasks/FP-41746--TRM-002--rename-code-identifiers.md) |
 
 ### Phase 3 — Test Fixes (High Priority) — DONE
 
@@ -53,30 +53,30 @@
 | CFG-007 | Remove MaxRating from spec, compute bracket boundaries on the fly | DEFERRED |
 | VAL-001 | Revisit validations in TDD and code (depends on CFG-007)          | DEFERRED |
 
-### Phase 6 — Feature Implementation (FP-41833) — Code DONE, GDD DONE, TDD TODO
+### Phase 6 — Feature Implementation (FP-41833) — DONE
 
-| ID      | Description                                                        | Status                        | Details                                                                          |
-|---------|--------------------------------------------------------------------|-------------------------------|----------------------------------------------------------------------------------|
-| CFG-005 | Implement MaxGroupCount                                            | Code=DONE, GDD=DONE, TDD=TODO |
-| CFG-006 | Implement MaxGroupSize (rework GDD description)                    | Code=DONE, GDD=DONE, TDD=TODO |
-| TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE                          | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
-| SUB-001 | Implement new group parameters, update docs                        | Code=DONE, GDD=DONE, TDD=TODO |
+| ID      | Description                                                        | Status | Details                                                                          |
+|---------|--------------------------------------------------------------------|--------|----------------------------------------------------------------------------------|
+| CFG-005 | Implement MaxGroupCount                                            | DONE   | TDD → new spec (page 5505613835)                                                 |
+| CFG-006 | Implement MaxGroupSize (rework GDD description)                    | DONE   | TDD → new spec (page 5505613835)                                                 |
+| TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE   | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
+| SUB-001 | Implement new group parameters, update docs                        | DONE   | TDD → new spec (page 5505613835)                                                 |
 
-### Phase 7 — Documentation Cleanup — IN PROGRESS
+### Phase 7 — Documentation Cleanup — DONE
 
-| ID      | Description                                                        | Status             | Details                                                                                                                                                       |
-|---------|--------------------------------------------------------------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CFG-001 | Remove CrossMovesAllowed from GDD + TDD                            | DONE               | [details](archived/subtasks/FP-41746--CFG-001--remove-crossmovesallowed.md)                                                                                   |
-| CFG-002 | Remove CanceledIfIncomplete from TDD                               | DONE               | [details](archived/subtasks/FP-41746--CFG-002--remove-canceledifincomplete.md)                                                                                |
-| CFG-003 | Remove NotRatedIfIncomplete from TDD                               | DONE               | [details](archived/subtasks/FP-41746--CFG-003--remove-notratedifincomplete.md)                                                                                |
-| CFG-004 | Remove IsLowRatingGroupProtectionOn from TDD                       | DONE               | [details](archived/subtasks/FP-41746--CFG-004--remove-islowratinggroupprotectionon.md)                                                                        |
-| ALG-001 | Update GDD: ping-pong traversal instead of semantic priority       | DONE               | [details](archived/subtasks/FP-41746--ALG-001--gdd-ping-pong-traversal.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md)                 |
-| ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" | DONE               | [details](archived/subtasks/FP-41746--ALG-002--gdd-donor-principle.md), → Правка 9 in [editing instructions](GDD-Editing-Instructions.md)                     |
-| ALG-003 | Add Phase B brief note to GDD                                      | DONE               | [details](archived/subtasks/FP-41746--ALG-003--gdd-phase-b-merge.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md) (merged with ALG-001) |
-| ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | DONE               | [details](archived/subtasks/FP-41746--ALG-007--gdd-minsize-collapse.md), → Правка 10 in [editing instructions](GDD-Editing-Instructions.md)                   |
-| FTR-001 | Add multipliers note to TDD                                        | TODO               |                                                                                                                                                               |
-| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | TODO               |                                                                                                                                                               |
-| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | GDD=DONE, TDD=TODO | GDD: all typos applied on Confluence (2026-04-14)                                                                                                             |
+| ID      | Description                                                        | Status | Details                                                                                                                                                       |
+|---------|--------------------------------------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CFG-001 | Remove CrossMovesAllowed from GDD + TDD                            | DONE   | [details](archived/subtasks/FP-41746--CFG-001--remove-crossmovesallowed.md)                                                                                   |
+| CFG-002 | Remove CanceledIfIncomplete from TDD                               | DONE   | [details](archived/subtasks/FP-41746--CFG-002--remove-canceledifincomplete.md)                                                                                |
+| CFG-003 | Remove NotRatedIfIncomplete from TDD                               | DONE   | [details](archived/subtasks/FP-41746--CFG-003--remove-notratedifincomplete.md)                                                                                |
+| CFG-004 | Remove IsLowRatingGroupProtectionOn from TDD                       | DONE   | [details](archived/subtasks/FP-41746--CFG-004--remove-islowratinggroupprotectionon.md)                                                                        |
+| ALG-001 | Update GDD: ping-pong traversal instead of semantic priority       | DONE   | [details](archived/subtasks/FP-41746--ALG-001--gdd-ping-pong-traversal.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md)                 |
+| ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" | DONE   | [details](archived/subtasks/FP-41746--ALG-002--gdd-donor-principle.md), → Правка 9 in [editing instructions](GDD-Editing-Instructions.md)                     |
+| ALG-003 | Update GDD: Phase B brief note                                     | DONE   | [details](archived/subtasks/FP-41746--ALG-003--gdd-phase-b-merge.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md) (merged with ALG-001) |
+| ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | DONE   | [details](archived/subtasks/FP-41746--ALG-007--gdd-minsize-collapse.md), → Правка 10 in [editing instructions](GDD-Editing-Instructions.md)                   |
+| FTR-001 | Add multipliers note to TDD                                        | DONE   | → new spec (page 5505613835), Section 3.4                                                                                                                     |
+| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | DONE   | → new spec (page 5505613835), Section 7                                                                                                                       |
+| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | DONE   | GDD: typos applied on Confluence. TDD: new spec, no old typos                                                                                                 |
 
 ### Phase 8 — DB + Code Rename — DONE
 
@@ -138,7 +138,7 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 | Action                                                                                                                                                                      | Status                                   |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|
 | **GDD:** Already uses Bracket/Bucket/Group. No changes needed.                                                                                                              | N/A                                      |
-| **TDD:** Replace "Group" with "Bucket" and "Subgroup" with "Group" throughout the matchmaking section.                                                                      | TODO                                     |
+| **TDD:** Replace "Group" with "Bucket" and "Subgroup" with "Group" throughout the matchmaking section.                                                                      | DONE — new spec (page 5505613835)        |
 | **Code:** Code identifiers (`TournamentGroup`, `TournamentSubgroup`) stay as-is to avoid massive refactoring. Add XML doc comments explaining the mapping to unified terms. | Superseded by TRM-002 (full code rename) |
 
 **Priority:** High (blocks clear communication on everything else)
@@ -160,7 +160,7 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 | Action                                                                                             | Status |
 |----------------------------------------------------------------------------------------------------|--------|
 | **GDD:** Update description to match final implementation.                                         | DONE   |
-| **TDD:** Add `MaxGroupCount` parameter description with implementation details.                    | TODO   |
+| **TDD:** Add `MaxGroupCount` parameter description with implementation details.                    | DONE   |
 | **Code:** Implement `MaxGroupCount` in `TournamentGroupingRule` and `MatchmakingLogic` (FP-41833). | DONE   |
 
 **Priority:** Medium (feature implementation)
@@ -179,7 +179,7 @@ implementation.
 | Action                                                                                            | Status |
 |---------------------------------------------------------------------------------------------------|--------|
 | **GDD:** Rework description (current wording unclear). Align with final implementation.           | DONE   |
-| **TDD:** Add `MaxGroupSize` parameter description with implementation details.                    | TODO   |
+| **TDD:** Add `MaxGroupSize` parameter description with implementation details.                    | DONE   |
 | **Code:** Implement `MaxGroupSize` in `TournamentGroupingRule` and `MatchmakingLogic` (FP-41833). | DONE   |
 
 **Priority:** Medium (feature implementation)
@@ -252,7 +252,7 @@ code-side checks) to be revisited after CFG-007 refactoring.
 | Action                                                                                                                      | Status |
 |-----------------------------------------------------------------------------------------------------------------------------|--------|
 | **GDD:** Update group creation section to describe final algorithm with new parameters (FP-41833).                          | DONE   |
-| **TDD:** Replace "[TBD]" with full group creation algorithm description matching final implementation.                      | TODO   |
+| **TDD:** Replace "[TBD]" with full group creation algorithm description matching final implementation.                      | DONE   |
 | **Code:** Implement new group parameters per FP-41833. Update `CreateGroups` (was `CreateSubgroups`) in `MatchmakingLogic`. | DONE   |
 
 **Priority:** Medium (feature implementation, FP-41833)
@@ -279,7 +279,7 @@ code-side checks) to be revisited after CFG-007 refactoring.
 | Action                                                                                        | Status |
 |-----------------------------------------------------------------------------------------------|--------|
 | **GDD:** N/A                                                                                  | N/A    |
-| **TDD:** Fix `group[i-1].MinRating` → `group[i].MinRating` in validation rules on Confluence. | TODO   |
+| **TDD:** Fix `group[i-1].MinRating` → `group[i].MinRating` in validation rules on Confluence. | DONE   |
 | **Code:** N/A                                                                                 | N/A    |
 
 **Priority:** Low (documentation typo; may be superseded by CFG-007)
@@ -309,8 +309,8 @@ code-side checks) to be revisited after CFG-007 refactoring.
 
 | Action                                                                 | Status |
 |------------------------------------------------------------------------|--------|
-| **GDD:** Proofread and fix typos on Confluence. Sync local `.md` copy. | TODO   |
-| **TDD:** Proofread and fix typos on Confluence. Sync local `.md` copy. | TODO   |
+| **GDD:** Proofread and fix typos on Confluence. Sync local `.md` copy. | DONE   |
+| **TDD:** Proofread and fix typos on Confluence. Sync local `.md` copy. | DONE   |
 
 **Priority:** Low (documentation cleanup)
 
@@ -329,7 +329,7 @@ code-side checks) to be revisited after CFG-007 refactoring.
 | Action                                                                                                                                          | Status |
 |-------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | **GDD:** Already marked as future iteration. No changes.                                                                                        | N/A    |
-| **TDD:** Add note: "RatingMultiplier and RewardMultiplier are stored in config and applied during reward distribution, not during matchmaking." | TODO   |
+| **TDD:** Add note: "RatingMultiplier and RewardMultiplier are stored in config and applied during reward distribution, not during matchmaking." | DONE   |
 | **Code:** No changes needed.                                                                                                                    | N/A    |
 
 **Priority:** Low (documentation only)

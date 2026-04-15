@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#D32F2F">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <style>
+      .bucket { fill: #263238; stroke: #455A64; stroke-width: 2; rx: 8; }
+      .bucket-text { fill: #ECEFF1; font-size: 24px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .label { fill: #90A4AE; font-size: 13px; text-anchor: middle; }
+      .arc { fill: none; stroke: #D32F2F; stroke-width: 2.5; marker-end: url(#arrow); }
+      .step { fill: white; font-size: 11px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+      .step-bg { fill: #D32F2F; }
+      .title { fill: #37474F; font-size: 16px; font-weight: 600; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="840" height="340" fill="#FAFAFA" rx="8"/>
+  <text class="title" x="420" y="28">Ping-Pong Traversal Order (7 buckets)</text>
+
+  <!--
+    Bucket layout: x=50 w=64, spacing 110px
+    Bucket thirds (w=64): left=+11, mid=+32, right=+53
+
+    Buckets 1,4: untouched
+    Buckets 2,3 (left side): incoming lands at left third, outgoing departs from right third
+    Buckets 5,6,7 (right side): incoming lands at right third, outgoing departs from left third
+  -->
+  <g>
+    <rect class="bucket" x="50"  y="260" width="64" height="48"/>
+    <rect class="bucket" x="160" y="260" width="64" height="48"/>
+    <rect class="bucket" x="270" y="260" width="64" height="48"/>
+    <rect class="bucket" x="380" y="260" width="64" height="48"/>
+    <rect class="bucket" x="490" y="260" width="64" height="48"/>
+    <rect class="bucket" x="600" y="260" width="64" height="48"/>
+    <rect class="bucket" x="710" y="260" width="64" height="48"/>
+
+    <text class="bucket-text" x="82"  y="284">1</text>
+    <text class="bucket-text" x="192" y="284">2</text>
+    <text class="bucket-text" x="302" y="284">3</text>
+    <text class="bucket-text" x="412" y="284">4</text>
+    <text class="bucket-text" x="522" y="284">5</text>
+    <text class="bucket-text" x="632" y="284">6</text>
+    <text class="bucket-text" x="742" y="284">7</text>
+
+    <text class="label" x="82"  y="322">weakest</text>
+    <text class="label" x="742" y="322">strongest</text>
+  </g>
+
+  <!-- Step 1: entry → bucket 1  |  label at t=0.5 on curve -->
+  <text class="label" x="44" y="68">start</text>
+  <path class="arc" d="M 44,82 Q 55,180 78,256"/>
+  <circle class="step-bg" cx="58" cy="175" r="11"/>
+  <text class="step" x="58" y="175">1</text>
+
+  <!-- Step 2: bucket 1 → bucket 7  |  label at t≈0.12 -->
+  <path class="arc" d="M 82,256 Q 467,-160 753,256"/>
+  <circle class="step-bg" cx="173" cy="168" r="11"/>
+  <text class="step" x="173" y="168">2</text>
+
+  <!-- Step 3: bucket 7 → bucket 2  |  label at t≈0.12 -->
+  <path class="arc" d="M 731,256 Q 416,-82 181,256"/>
+  <circle class="step-bg" cx="656" cy="185" r="11"/>
+  <text class="step" x="656" y="185">3</text>
+
+  <!-- Step 4: bucket 2 → bucket 6  |  label at t≈0.12 -->
+  <path class="arc" d="M 203,256 Q 453,-4 643,256"/>
+  <circle class="step-bg" cx="262" cy="201" r="11"/>
+  <text class="step" x="262" y="201">4</text>
+
+  <!-- Step 5: bucket 6 → bucket 3  |  label at t≈0.12 -->
+  <path class="arc" d="M 621,256 Q 436,74 291,256"/>
+  <circle class="step-bg" cx="577" cy="218" r="11"/>
+  <text class="step" x="577" y="218">5</text>
+
+  <!-- Step 6: bucket 3 → bucket 5  |  label at t≈0.20 -->
+  <path class="arc" d="M 313,256 Q 433,152 533,256"/>
+  <circle class="step-bg" cx="360" cy="223" r="11"/>
+  <text class="step" x="360" y="223">6</text>
+
+  <!-- Step 7: bucket 5 → bucket 4  |  label at t≈0.35 -->
+  <path class="arc" d="M 511,256 Q 461,230 412,256"/>
+  <circle class="step-bg" cx="461" cy="243" r="11"/>
+  <text class="step" x="461" y="243">7</text>
+</svg>
