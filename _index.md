@@ -19,6 +19,16 @@
 
 > Completed tasks are removed from this table. History lives in task journals under `fishing-planet/tasks/`.
 
+## Branch Roles (current)
+| Branch       | Role      |
+|--------------|-----------|
+| MFT20260325  | Code      |
+| LBM20251201  | Content   |
+| KNW20250723  | Stable    |
+| IMV20250220  | OldStable |
+
+> Role definitions and colors: see project `CLAUDE.md` → Branch Roles
+
 ## Quick Links
 - [FP Server modules](fishing-planet/server/_index.md)
 - [FP Client modules](fishing-planet/client/_index.md)

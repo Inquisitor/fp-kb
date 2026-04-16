@@ -113,6 +113,20 @@ Confluence content: + fetch via Confluence MCP API by page ID         (3 reads)
 Not in index:       search Confluence via MCP API — index is partial  (organic growth)
 ```
 
+## Branch Roles
+
+Role definitions and merge direction. Current assignments are in `_index.md`.
+
+| Role      | Color  | Hex       | Merge rule                                      |
+|-----------|--------|-----------|-------------------------------------------------|
+| Code      | Blue   | `#0747a6` | Main development; receives merges from all      |
+| Content   | Orange | `#ff991f` | Content/balance work; merges into Code          |
+| Future    | Green  | `#36b37e` | Next major release; not yet active              |
+| Stable    | Red    | `#ff5630` | Live release; hotfixes only, merge into all     |
+| OldStable | Red    | `#ff5630` | Previous release; hotfixes only, merge into all |
+
+Merge direction: OldStable → Stable → Content → Code (each level merges into all levels above it).
+
 ## Rules
 - All content in English (artifacts from external sources may stay in original language)
 - log.md is append-only — never delete entries
