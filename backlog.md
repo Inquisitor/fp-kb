@@ -13,6 +13,7 @@
 - [ ] Create release-tracking file: task ↔ release mapping for daily routine ("which release shipped? → check those tasks")
 - [ ] Compose KB use cases and verify the structure supports them
 - [ ] Design review template and completion criteria
+- [ ] Workflow for unclosed items in plan files (`docs/plans/*.md`, task artifacts). Separate from backlog.md — plan items are scoped to task execution. Need: when to resume, how to surface stale plans, handoff between plan and backlog on task close.
 
 ## Confluence
 - [ ] Index SERVER section into confluence/_index.md
@@ -30,6 +31,7 @@
 - [x] Clean module matchmaking/log.md: remove non-decisions, keep only decisions with rationale
 - [x] Convert FP-41746 and FP-42033 journals to YAML frontmatter + `## Status`
 - [ ] Fix stale path in Alignment Plan (pre-KB migration reference to `Docs/Plans/Architecture/Matchmaking/`)
+- [ ] Add `module:` field to task/review frontmatter. Validate module relation on task open AND close, update frontmatter accordingly. Enables reverse lookup: "show all tasks/reviews related to module X" from module card. Blocked on: wider module coverage in KB.
 - [x] Retrospective: review task workflow after applying it to 1-2 fresh tasks. Validate conventions, fix pain points, then codify as skill
   - Done 2026-03-09: Phase 8 revealed satellite file update gap → kb-finalize-milestone skill planned
 

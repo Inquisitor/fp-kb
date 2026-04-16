@@ -12,6 +12,17 @@
 ### Starting a session
 - Read `_index.md` first
 
+### Reporting current status
+When asked "what's the current status?" / "what's in focus?" / "что сейчас в работе?" / "что в фокусе?" / "покажи статус" / "что по беклогу?" / "где остановились?" / "что у нас активного?" / "на чём сейчас?":
+1. Read `_index.md` — Active Tasks, Active Reviews, Active Confluence Work
+2. Grep unclosed items across all `backlog.md` files in KB: `grep -rn "^- \[ \]" --include="backlog.md" D:/kb/`
+   - Covers: KB-wide, per-project, per-module, per-task, per-area backlogs
+3. Present grouped by source (tasks / reviews / modules / project-level / KB-wide)
+
+Scope: **only `backlog.md` files**. Unclosed items in plan files belong to individual task execution, not overall status (handled separately by task/plan skills).
+
+Active items in `_index.md` cover current in-flight work. Backlog items cover everything deferred, queued, or noted for later. Both together = full picture.
+
 ### Starting a task
 1. Read JIRA issue
 2. Show what KB already knows (module card, related tasks) — user validates
