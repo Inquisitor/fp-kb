@@ -1,11 +1,11 @@
 ---
-task: FP-43334
-title: "Colored Buoys: Server - Enable Free Marker Buoy Coloring"
-executor: Yuriy Burda
 status: resolved
-started: 2026-04-15
-resolved: 2026-04-15
+executor: Yuriy Burda
+branch: LBM @ r16003+r16006+r16012, merged to MFT @ r16007+r16013, CodeBranch @ r53190
+jira: https://fishingplanet.atlassian.net/browse/FP-43334
 ---
+
+# Review: FP-43334 — Colored Buoys: Server - Enable Free Marker Buoy Coloring
 
 ## Summary
 
@@ -14,31 +14,17 @@ Per-pond boolean flag `UnlimitedBuoyRecolors` + audit enum `BuoyRecolorPricing`.
 
 ## Scope
 
-### Server commits (LBM)
-| Rev    | Description                                                              |
-|--------|--------------------------------------------------------------------------|
-| r16003 | Add `UnlimitedBuoyRecolors` per-pond flag in BaseConfigJson              |
-| r16006 | Add `LastRecolorPricing` enum on buoy for recolor audit                  |
-| r16012 | Move `UnlimitedBuoyRecolors` from JSON to column, extend Buoys in admin  |
+### LBM
+- **r16003** — Add `UnlimitedBuoyRecolors` per-pond flag in BaseConfigJson
+- **r16006** — Add `LastRecolorPricing` enum on buoy for recolor audit
+- **r16012** — Move `UnlimitedBuoyRecolors` from JSON to column, extend Buoys in admin
 
-### Client commits (CodeBranch)
-| Rev    | Description                                                          |
-|--------|----------------------------------------------------------------------|
-| r53190 | Add `UnlimitedBuoyRecolors` pond flag, temp guards for recolor UI    |
+### MFT (merged)
+- **r16007** — MFT merge (r16003+r16006)
+- **r16013** — MFT merge (r16012)
 
-### Merges
-| Rev    | Description               |
-|--------|---------------------------|
-| r16007 | MFT merge (r16003+r16006) |
-| r16013 | MFT merge (r16012)        |
-
-## Review comments (posted to JIRA)
-
-1. Move parameter from JSON config to the grid (after pond-associated prices and discounts)
-2. Add `BuoyRecolorPricing` to the Buoys table in Profile Card
-3. Add buoy color to the Buoys table
-
-All three addressed in r16012.
+### CodeBranch
+- **r53190** — Add `UnlimitedBuoyRecolors` pond flag, temp guards for recolor UI
 
 ## Findings
 

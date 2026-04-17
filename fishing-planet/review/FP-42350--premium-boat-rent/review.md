@@ -1,11 +1,11 @@
 ---
-task: FP-42350
-title: "FTUE. PremPromo. Server - Free Boat Rent for Prem.Acc"
-executor: Yevhenii Shust
 status: resolved
-started: 2026-04-15
-resolved: 2026-04-15
+executor: Yevhenii Shust
+branch: MFT @ r15985, CodeBranch @ r53061
+jira: https://fishingplanet.atlassian.net/browse/FP-42350
 ---
+
+# Review: FP-42350 — FTUE. PremPromo. Server - Free Boat Rent for Prem.Acc
 
 ## Summary
 
@@ -13,24 +13,11 @@ Free boat rent for Premium Account holders. Server multiplies rent price by 0 fo
 
 ## Scope
 
-### Server commits (MFT)
-| Rev    | Description                                                     |
-|--------|-----------------------------------------------------------------|
-| r15985 | Add premium multiplier for boat rent price; set to zero         |
+### MFT
+- **r15985** — Add premium multiplier for boat rent price; set to zero
 
-### Client commits (CodeBranch)
-| Rev    | Description                                                       |
-|--------|-------------------------------------------------------------------|
-| r53061 | Boat rent DiscountMultiplier is now calculated using SharedConsts |
-
-## Review comments (posted to JIRA)
-
-### Comment 1 — Server review resolution
-LGTM. Server logic correct: `daysCount` forced to 1 for premium (anti-exploit), `|| fullPrice == 0` allows zero-price transactions. Minor note: `(int)` cast truncates rather than rounds — not an issue with current multiplier (0).
-
-### Comment 2 — Notes for client lead (@Kyrylo Rovnyi)
-1. Server forces `daysCount = 1` for premium — client `BoatRentHandler` still shows day selector, should hide/lock it.
-2. Pre-existing: `BoatRentHandler.RentABoat()` always passes `PricePerDay × daysRequested` to `FullBuyFlow`, even in tournaments where actual price is `PricePerHour × InGameDuration`.
+### CodeBranch
+- **r53061** — Boat rent DiscountMultiplier is now calculated using SharedConsts
 
 ## Findings
 

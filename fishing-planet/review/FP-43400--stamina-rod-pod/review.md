@@ -1,11 +1,11 @@
 ---
-task: FP-43400
-title: "Fish.Behaviour: Stamina loss multiplier while using rod pod"
-executor: Yuriy Burda
 status: resolved
-started: 2026-04-15
-resolved: 2026-04-15
+executor: Yuriy Burda
+branch: LBM @ r16010, merged to MFT @ r16011
+jira: https://fishingplanet.atlassian.net/browse/FP-43400
 ---
+
+# Review: FP-43400 — Fish.Behaviour: Stamina loss multiplier while using rod pod
 
 ## Summary
 
@@ -15,15 +15,11 @@ Bonus: verbose logging cleanup in `FishTireModel` (Pause/Resume logs gated behin
 
 ## Scope
 
-### Server commits (LBM)
-| Rev    | Description                                                                    |
-|--------|--------------------------------------------------------------------------------|
-| r16010 | Add `staminaLoseMultiplierOnRodStand` to `FishTireModel`, wire in GameProcessor, SQL patch, 5 unit tests, verbose logging cleanup |
+### LBM
+- **r16010** — Add `staminaLoseMultiplierOnRodStand` to `FishTireModel`, wire in GameProcessor, SQL patch, 5 unit tests, verbose logging cleanup
 
-### Merges
-| Rev    | Description     |
-|--------|-----------------|
-| r16011 | MFT merge       |
+### MFT (merged)
+- **r16011** — MFT merge
 
 ## Findings
 
