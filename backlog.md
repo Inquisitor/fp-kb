@@ -9,7 +9,8 @@
 - [ ] Plan client/_index.md code map (requires codebase exploration)
 
 ## Workflows
-- [ ] Design flow for "waiting for release" tasks (code done, need post-release verification). Consider JIRA filter vs KB tracking
+- [x] Design flow for "waiting for release" tasks (code done, need post-release verification). Consider JIRA filter vs KB tracking
+  - Done 2026-04-17: design captured in `review-workflow-draft.md` → Waiting-for-release Workflow. Tracking via `_index.md` Active Reviews + `status: waiting-for-release` in card. Will be codified in `jira-review-close` skill.
 - [ ] Create release-tracking file: task ↔ release mapping for daily routine ("which release shipped? → check those tasks")
 - [ ] Compose KB use cases and verify the structure supports them
 - [ ] Design review template and completion criteria
