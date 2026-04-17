@@ -20,14 +20,16 @@
 > Completed tasks are removed from this table. History lives in task journals under `fishing-planet/tasks/`.
 
 ## Branch Roles (current)
-| Branch       | Role      |
-|--------------|-----------|
-| MFT20260325  | Code      |
-| LBM20251201  | Content   |
-| KNW20250723  | Stable    |
-| IMV20250220  | OldStable |
+| Role      | Server       | Client                |
+|-----------|--------------|-----------------------|
+| Code      | MFT20260325  | CodeBranch            |
+| Content   | LBM20251201  | MainClient            |
+| Stable    | KNW20250723  | MainClient @ r52058   |
+| OldStable | IMV20250220  | MainClient @ r47620   |
 
-> Role definitions and colors: see project `CLAUDE.md` → Branch Roles
+> Role definitions and colors: see [`CLAUDE.md` → Branch Roles](CLAUDE.md#branch-roles)
+> Authoritative source: Confluence "Environment and branch status" (page id 68616199)
+> Note: MainClient revisions newer than the Stable-pinned rev belong to Content.
 
 ## Quick Links
 - [FP Server modules](fishing-planet/server/_index.md)
