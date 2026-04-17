@@ -114,6 +114,17 @@ Active items in `_index.md` cover current in-flight work. Backlog items cover ev
 - Markdown tables: align columns with spaces (readability over token savings)
 - Large plans (>200 lines): completed items collapse to one-liner with link to `artifacts/archived/subtasks/<ID>--<slug>.md`
 
+### SVN merge commit format
+
+TortoiseSVN-style header followed by the original commit message verbatim:
+
+```
+Merged revision(s) <rev or list> from branches/<source>:
+<full original commit message — every line, not just the first>
+```
+
+The original message includes the JIRA ID prefix and bullets — keep verbatim.
+
 ## Navigation Protocol
 ```
 Typical task:       server/_index.md → module/_card.md → code         (2 reads)
