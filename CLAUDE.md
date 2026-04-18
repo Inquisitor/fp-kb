@@ -93,6 +93,17 @@ Active items in `_index.md` cover current in-flight work. Backlog items cover ev
   3. Dependencies (`→` consumes, `←` consumed by, `~` shared types)
   4. Deep Dives (links to permanent docs in same folder)
   5. Related Tasks
+- Module card frontmatter: minimum required fields:
+  ```yaml
+  ---
+  name: <module-name>
+  system: <system-name>       # scalar; one system per module. Cross-cutting handled via dependencies, not multi-membership
+  code_paths:
+    - <path/to/code/>
+    - <another/path/>
+  ---
+  ```
+  Additional fields (`db_tables`, `caches`, `external_deps`, `tests`) only when a concrete cross-module query use case justifies them — do not add preemptively
 - Module cards: 25-35 lines target, never exceed 40. If overflowing — extract into deep dive
 - Deep dives: permanent reference docs in module folder, no line limit
 - Module decision logs: `modules/<name>/log.md` — decisions with rationale + lessons learned. Prefix findings (unverified observations) with `Finding:` to distinguish from decisions. Unverified findings → card gets *(UNVERIFIED)* annotation, backlog gets verify item
@@ -148,6 +159,75 @@ Role definitions and merge direction. Current assignments are in `_index.md`.
 | OldStable | Red    | `#ff5630` | Previous release; hotfixes only, merge into all |
 
 Merge direction: OldStable → Stable → Content → Code (each level merges into all levels above it).
+
+### KB target
+
+KB describes the branch currently holding the **Code role** (not a specific named branch). When branch roles rotate — the Code branch becomes Content, a new branch takes the Code role — KB automatically continues describing the new Code branch (the new Code forks from the same snapshot as old Content, so no migration is needed).
+
+For `log.md` entries recording architectural changes, include `[branch r<rev>]` stamps (e.g. `2026-03-15 [MFT r12345] …`) so cross-branch drift is traceable.
+
+When working on a non-Code branch and observing divergence from KB, add a `Finding:` entry in the relevant module `log.md` with the branch stamp; do not rewrite the card — KB continues to reflect the Code branch.
+
+## What to Store in KB
+
+KB is a **navigation and context layer**, not a code copy. The agent can read code at any time; KB exists to answer what code cannot answer alone.
+
+### STORE if the knowledge is:
+
+| Category                     | Example                                                                                                         | Why not in code                       |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------|---------------------------------------|
+| **Why**                      | "Custom matchmaker instead of standard — needs asymmetric load between skill tiers"                             | Motivation / rejected alternatives    |
+| **Cross-file link**          | "BiteSystem reads PondConfig from CacheManager, refreshed via AdminBalance webhook"                             | Relationship scattered across files   |
+| **Invariant**                | "matchmaking_queue.user_id is unique within a 5-minute window after insert"                                     | Not declared, but assumed             |
+| **Gotcha**                   | "Kendo templates eat literal `+` — write `%2B`"                                                                 | Non-obvious pitfall                   |
+| **Entry-point**              | "To understand leaderboard closure — start at `LeaderboardScheduler.OnPeriodEnd`"                               | Navigation, "where to look"           |
+| **Decision**                 | "2026-02 [MFT r12345] per-region queue; sharding rejected due to Mongo lock contention"                         | History + alternatives                |
+| **Non-obvious optimization** | "FishSpawnPool uses array-of-structs for cache locality; measured +30%. Do not refactor to generic collections" | Guards against well-meaning "cleanup" |
+
+### DO NOT store if the knowledge is:
+
+| Category                      | Example                                           | Where it is                            |
+|-------------------------------|---------------------------------------------------|----------------------------------------|
+| **What** (describes function) | "GenerateWeight computes fish weight"             | Method name                            |
+| **Signature**                 | "`GenerateWeight(fishType, location) → float`"    | In code                                |
+| **Structure**                 | "`Player` contains Name, Level, Inventory"        | In code                                |
+| **Algorithm body**            | "First filter by depth, then sort by weight, ..." | In code (unless genuinely non-obvious) |
+| **Values**                    | "MaxPlayersPerGame = 50"                          | In config                              |
+| **Obvious dep**               | "UserController uses UserService"                 | Using-statement in same file           |
+
+### Three tests when on the borderline
+
+1. **Delete test:** "If I remove this line, can the agent still solve the task by reading code?" — if YES, delete.
+2. **Duplicate test:** "This fact is in code — why am I also writing it to KB?" — the answer must fall in one of the STORE categories. Otherwise delete.
+3. **Drift test:** "If the code changes, will this line need editing?" — high drift risk combined with low value = delete.
+
+### Edge cases where "if in code — don't write" does not apply
+
+1. **Code in another repo** (Unity client, third-party SDKs) — agent cannot Read it cheaply → store links and summaries.
+2. **Historical behavior** — only if it prevents recurring questions (evidence-based: someone actually asked, not hypothetical). Put in `log.md`, not `_card.md`.
+3. **Intentional "weirdness" in code** — reason is offstage (e.g. "using linear search because collection is always <10; don't optimize"). Without this note, agent will "improve" the code. Write it.
+4. **Team conventions not visible in code** — e.g. file naming patterns, commit tag format. Write them.
+5. **Cross-branch behavior** — e.g. feature rewritten in Code but rolled back in Stable. Neither branch alone holds full state → `log.md` with `[branch r<rev>]` stamps.
+
+### Example agent reasoning when writing to KB
+
+**Case 1.** Writing: `"GenerateWeight(fishType, location) returns float"`
+- Check: Signature. Delete test: yes, code makes it obvious. → **DELETE**
+
+**Case 2.** Writing: `"GenerateWeight is bounded below by minWeight from BalanceConfig to avoid discouraging early-game players"`
+- Check: Why (motivation) + cross-file (BalanceConfig) + invariant. → **KEEP**
+
+**Case 3.** Writing: `"Table matchmaking_queue has columns user_id, created_at, region_id"`
+- Check: Structure. Schema/migrations carry this. → **DELETE**
+- But separately: `"matchmaking_queue.user_id is unique within a 5-minute window after insert"` → Invariant. → **KEEP**
+
+**Case 4.** Writing: `"Module X uses Mongo instead of Redis"`
+- Check: no one asked about Redis, Redis is not in our stack → preemptive historical. → **DELETE**
+- Keep only with evidence of recurring questions: `"Redis was proposed 2026-03 for session cache; rejected — Mongo with TTL indices already covers the use case. No need to revisit."`
+
+### Evidence-based rule
+
+Do NOT document defensively "just in case". Document what actually came up — a real question, a real incident, a real ambiguity. Preemptive documentation inflates KB with noise.
 
 ## Rules
 - All content in English (artifacts from external sources may stay in original language)
