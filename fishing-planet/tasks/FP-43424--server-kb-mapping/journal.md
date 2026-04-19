@@ -10,7 +10,7 @@ created: 2026-04-18
 
 ## Status
 
-Pass 0 complete — policies written into KB `CLAUDE.md`, task structure created, Pass 1 runbook drafted. Decision (2026-04-18): Pass 1 walks LBM (Content) instead of MFT (Code); MFT took the Code role on 2026-04-06, so structural divergence is minimal. Next: execute Pass 1 in a separate session.
+Pass 1 execution complete; artifact at [artifacts/pass-1-inventory.md](artifacts/pass-1-inventory.md); pending reflection.
 
 ## Summary
 
@@ -24,4 +24,4 @@ See [plan.md](plan.md).
 
 ## Milestones
 
-(Appended bottom-up as passes complete.)
+- Pass 1 — inventory emitted at 2026-04-18 [LBM r16012]
