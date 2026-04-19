@@ -15,6 +15,17 @@ Scope: `.csproj` boundary only. Domain-cluster grouping (missions-as-one-module-
 
 ---
 
+## Naming caveats (do not trust paths/names blindly)
+
+Critical expert knowledge the system expert provided — agents reading KB must know these up front:
+
+- **"Photon tools"** is a misnomer. Most tools under `Photon\tools\` are **not related to Photon** at all. Historical naming because the project's base was the LoadBalancing sample from Photon 3.
+- **`Photon\src-server\`** is **not Photon core** — it's mostly game logic. Actual Photon lives in `Photon\deploy\` as a library.
+- **GameCarrier (GC)** is an in-house game server framework alongside Photon. Practically all `GC` in project / namespace / class / tool names refers to **GameCarrier**, NOT garbage collector. The one exception: `GcTest` (dead) is genuinely about garbage collector. GameCarrier source code is **not in this repo**.
+- **Dead code is common.** Inventory includes many half-dead `.csproj`. Section I lists abandoned top-levels; Section H.2 lists user-confirmed dead tools. "Last commit > 12mo" is a suspicion signal, not an autodelete rule — some untouched projects (e.g. `JsonVerificator`, `ProfileUtils`) are still live via compiled-EXE references from other projects.
+
+---
+
 ## A. Core runtime modules
 
 Substantial domain-carrying projects expected to become module cards.
@@ -104,11 +115,11 @@ Each is a runnable service — likely its own module or a small cluster.
 
 Smaller shared libs that don't fit cleanly above.
 
-- `Shared\Notifications\Notifications.csproj` — email sender (per user note)
-- `Shared\StandaloneClient\StandaloneClient.csproj` — inter-server client lib (per user: misnamed; used e.g. WebAdmin → Master)
-- `Shared\Lite\Lite\Lite.csproj` — modified Room/Actor logic, originally from Photon samples (per user)
+- `Shared\Notifications\Notifications.csproj` — email sender (per user)
+- `Shared\StandaloneClient\StandaloneClient.csproj` — **module per user**: Photon client for inter-server connections (e.g. WebAdmin → Master); misnamed — part of SharedLib despite the name
+- `Shared\Lite\Lite\Lite.csproj` — modified Room/Actor logic, originally from Photon samples
 - `Shared\Twitch\Twitch.csproj` — Twitch library (not to be confused with `Twitch\TwitchAccountLinking`)
-- `Shared\DataEditing\DataEditing.csproj` — data-editing helpers (marked `tool` in inventory; confirm)
+- `Shared\DataEditing\DataEditing.csproj` — **module per user**: WebAdmin module for editing data in tables (was `tool` in inventory — re-classified)
 
 ---
 
@@ -116,44 +127,45 @@ Smaller shared libs that don't fit cleanly above.
 
 Tools are **not module cards**. They go into a single `_systems/tools.md` overview, grouped by status and subtype.
 
+Classifications below are **per user annotations** in `pass-1-user-notes.md`.
+
 ### H.1 — Active
-- `Photon\tools\DataChangesImport\` — import data changes from DataChanges table
-- `Photon\tools\DataPump\` — world data copy between env DBs (actively maintained)
-- `Photon\tools\EnvironmentSwitcher\` — switch env profiles / branches via sys env vars
-- `Photon\tools\ReleaseTool\` — release pipeline
-- `Photon\tools\ServiceControl\` — start/stop services
-- `Photon\tools\TournamentAudit\` — tournament integrity audit
-- `Photon\tools\PondJsonExporter\` — pond JSON exporter
-- `Photon\tools\SqlCheck\` — SQL lint/check
-- `Photon\tools\XblApiTester\` — Xbox Live API tester
-- `Photon\tools\XstsTester\` — XSTS token tester
-- `Photon\tools\XBoxCertChecker\` — Xbox cert validation
-- `Photon\tools\TwitchApiTester\` — Twitch API manual tester
-- `Photon\tools\MaintenanceManager\` — maintenance manager
-- `Photon\tools\PhotonHelper\PhotonTool\` — photon helper
-- `Photon\tools\PerfCounterManager\` — perf counter CLI
-- `Photon\tools\OfflineChatMessagesImport\` — offline chat import
-- `Photon\tools\MongoExport\` — Mongo data export
-- `Photon\tools\ImageDumper\` — image extraction
-- `Photon\tools\GcTest\` — GC / perf test
-- `Photon\tools\ConfigTool\` — mass config edit (per user: deprecated — plans to retire; moving to H.2)
-- `WebAdmin\JsonVerificator\` — JSON validation utility
-- `WebAdmin\ProfileUtils\` — profile helper CLI
+- `Photon\tools\DataChangesImport\` — import data changes from `DataChanges` table (once used to repair DB corruption)
+- `Photon\tools\DataPump\` — world data copy between env DBs (actively maintained, part of data pipeline)
+- `Photon\tools\EnvironmentSwitcher\` — switch env profiles / branches via system env vars
+- `Photon\tools\ImageDumper\` — image extraction from DB (part of data pipeline)
+- `Photon\tools\MaintenanceManager\` — CLI setting maintenance messages shown to clients when servers offline
+- `Photon\tools\PerfCounterManager\` — setup Windows Performance Counters for custom apps
+- `Photon\tools\PhotonHelper\PhotonTool\` — console client connecting to master/game/chat; debug functionality (needs heavy rewrite)
+- `Photon\tools\ReleaseTool\` — release-time operations (e.g. profile conversions)
+- `Photon\tools\SqlCheck\` — DB migrations utility (check pending, run migrations)
+- `Photon\tools\XBoxCertChecker\` — validate certificates for Xbox server communication
 
-### H.2 — Dead / deprecated (per user or agent guess)
-- `Photon\tools\AlterIdentity\` — SQL IDENTITY generator (per user: probably dead)
-- `Photon\tools\Chat\` — unfinished standalone chat app (per user: almost no code)
-- `Photon\tools\ClubServiceTester\` — load tester (per user: deprecated along with Club service)
-- `Photon\tools\CountWords\` — word count (per user: once made, now unused)
-- `Photon\tools\DataDumper\` — DB dump to disk (per user: not used)
-- `Photon\tools\DbMergeTool\` — data pipeline (per user: now unused)
-- `Photon\tools\DbMergeToolGui\` — GUI version (per user: now unused)
-- `Photon\tools\EmailGenerator\` — email template editor (per user: unused)
-- `Photon\src-server\Loadbalancing\TestClient\` — console test client
-- `Photon\src-server\LoadBalancing.TestBot\` — load-generation bot
+### H.2 — Dead / deprecated
+- `Photon\tools\AlterIdentity\` — SQL IDENTITY column script generator (probably dead)
+- `Photon\tools\Chat\` — unfinished standalone private-chat app (almost no code)
+- `Photon\tools\ClubServiceTester\` — Clubs service load tester (deprecated; Club usage declined)
+- `Photon\tools\ConfigTool\` — mass config editor (deprecated; plans to retire)
+- `Photon\tools\CountWords\` — word count utility (once made, unused)
+- `Photon\tools\DataDumper\` — DB to disk dump (unused)
+- `Photon\tools\DbMergeTool\` — data pipeline merge (unused)
+- `Photon\tools\DbMergeToolGui\` — GUI for DbMergeTool (unused)
+- `Photon\tools\EmailGenerator\` — transactional email template editor (unused)
+- `Photon\tools\GcTest\` — C# garbage collector experiments (the one tool where `GC` actually means garbage collector)
+- `Photon\tools\MongoExport\` — export from Mongo logs (one-time task)
+- `Photon\tools\OfflineChatMessagesImport\` — import many messages to Chat server (one-time task)
+- `Photon\tools\PondJsonExporter\` — one-time pond JSON config export
+- `Photon\tools\ServiceControl\` — server-app control utility (abandoned)
+- `Photon\tools\TournamentAudit\` — tournament audit automation attempt (abandoned)
+- `Photon\tools\TwitchApiTester\` — Twitch API testing during Twitch Drops integration (unused)
+- `Photon\tools\XblApiTester\` — Xbox Live API testing (unused)
+- `Photon\tools\XstsTester\` — XSTS token verification testing (unused)
+- `Photon\src-server\Loadbalancing\TestClient\` — early-dev console test client (abandoned)
+- `Photon\src-server\LoadBalancing.TestBot\` — early-dev load-generation bot (abandoned)
 
-### H.3 — Unknown (user hasn't touched; agent doesn't know either)
-(empty — move entries here from H.1/H.2 if genuinely unknown)
+### H.3 — Unknown (may be live through compiled-EXE references; investigate before dismissing)
+- `WebAdmin\JsonVerificator\` — compiled `.exe` referenced from WebAdmin code; likely live despite untouched commit history
+- `WebAdmin\ProfileUtils\` — compiled `.exe` referenced from WebAdmin code; purpose seems to be CRUD for Profile JSON stored in DB
 
 ---
 
