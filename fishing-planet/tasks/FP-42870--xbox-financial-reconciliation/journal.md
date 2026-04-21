@@ -324,7 +324,47 @@ All figures relative to **MS Purchase royalty = 100%** (gross royalty MS records
 
 **Impact is negligible:** ARS + CLP + COP combined = 55 transactions out of 16,554 (0.33% of count, 0.046% of revenue) for Nov 2025. Low priority — file as a separate low-severity bug, not blocking for FP-42870.
 
-### 16. /Stats/Money already consumes bundle-aware data
+### 16. Bundle detection quality — measured against MS Nov 2025 (2026-04-21)
+
+Queried `Stats.TransactionFact` (+ `TransactionFactBundle`) for Nov 2025 XBox+Win10. Compared to known MS bundle sales.
+
+**Detection rates:**
+
+| Bundle (our ProductId)                                         | MS sales | Detected |                            Rate |
+|----------------------------------------------------------------|---------:|---------:|--------------------------------:|
+| Ultimate Sport Bundle (9010/9020)                              |      104 |      101 |                           97.1% |
+| Lucky Bundle (9560/9570)                                       |       40 |       40 |                            100% |
+| Christmas Bundle (13350/13360)                                 |       10 |        0 |           0% (Price=0 → filter) |
+| BIG HOLIDAY BUNDLE (8750/8760)                                 |        2 |        0 |        0% (empty InnerProducts) |
+| Starter Packs, Halloween (no components / not in Transactions) |       42 |        0 | N/A (architecturally invisible) |
+| **Configured bundles (detectable by design)**                  |  **144** |  **141** |                       **97.9%** |
+
+3 missed Ultimate Sport Bundles most likely hit the partial-purchase case (player already owned some components; SDK sent fewer than 10).
+
+**Cross-validation (Approach B):** simulating the exact `DetectBundlePurchasesJob` algorithm against raw `Transactions` CSV yields the same 141 bundles as the production `TransactionFactBundle` state — per-ProductId counts match exactly (90/11/36/4). Confirms the production ETL is lossless: no technical detection gaps, the 3 missed Ultimate Sport Bundles are a fundamental limitation of the algorithm (requires all components), not an infrastructure issue.
+
+**Effect of bundle collapse on count:**
+
+| Metric                      |    Raw |    Bundled |
+|-----------------------------|-------:|-----------:|
+| Rows                        | 16,554 |     15,605 |
+| Gap vs MS Purchase (15,558) |  +6.4% | **+0.30%** |
+
+Bundle detection eliminates ~95% of the count discrepancy. The residual +47 unit gap is small enough to be timezone edge cases + 3 undetected bundles + anomalies.
+
+**Effect on revenue (`EquivalentPrice` @38%):**
+
+| Metric           | % of MS Purchase royalty |
+|------------------|-------------------------:|
+| Raw sum          |                    95.8% |
+| Bundled sum      |                    94.5% |
+| (MS Net royalty) |                    97.9% |
+
+Bundled revenue is **structurally more accurate** (reflects real bundle prices, not component sums), but moves 1.3 p.p. away from MS Purchase because bundle collapse removes the inflation that was partly offsetting VAT and fee-diff effects. Vs MS Net, bundled is under by 3.4 p.p.
+
+**Conclusion:** the existing pipeline does its job well for configured bundles. Gaps are architectural (Price=0 bundles, empty InnerProducts, partial-purchase) and responsible for minor remaining error. No urgent fixes needed for FP-42870 scope — main recommendations for producer are in status/summary.
+
+### 17. /Stats/Money already consumes bundle-aware data
 
 Controller `StatsController.Money()` → `MoneyModel.Fill()` → `MonetizationProvider.GetStatsTransactions()` queries `VW_TransactionFact_Bundled`. So producer's money reports are **already** bundle-corrected for detected bundles.
 
