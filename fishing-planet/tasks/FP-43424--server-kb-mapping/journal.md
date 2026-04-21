@@ -10,7 +10,7 @@ created: 2026-04-18
 
 ## Status
 
-Pass 1 execution complete; artifact at [artifacts/pass-1-inventory.md](artifacts/pass-1-inventory.md); pending reflection.
+Pass 1 reflection and artefact split complete. Artefacts: `pass-1-inventory.md` (execution output), `pass-1-classification-review.md` (Pass 1.5 curated — classification + Naming caveats + uncertain), `pass-3-catalogue-draft.md` (Pass 3 agent-generated draft, needs curation), `folder-tree.md` (annotated reference tree), `pass-1-handover.md` (orchestrator summary). Security findings isolated to private out-of-repo audit file per KB policy. Next: Pass 2 + Pass 3 runbook drafting.
 
 ## Summary
 
@@ -25,3 +25,4 @@ See [plan.md](plan.md).
 ## Milestones
 
 - Pass 1 — inventory emitted at 2026-04-18 [LBM r16012]
+- Pass 1 reflection + artefact split complete at 2026-04-19 [LBM r16012]
