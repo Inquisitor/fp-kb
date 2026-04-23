@@ -12,3 +12,7 @@ New `CalculateRegionalPrice()` overload with 4 params (basePrice, priceRate, exc
 
 Exchange rates in `RegionalPriceRates` switched from volatile `MonetizationCache` to persistent DB column. LiveOps manually snapshots live rates via new `VW_ExchangeRateUpdates` page. Key decision: store rate per-row (not per-currency) to allow per-platform/country granularity. `ProductLocalPrices` also switched to saved rate via `VW_ProductLocalPrices` JOIN. Game server components (`MonetizationHelper`, `PaymentHelper`) remain on live cache — intentional scope boundary. See [exchange-rate-snapshot-spec](../../tasks/FP-43177--price-adjustment/artifacts/exchange-rate-snapshot-spec.md).
 
+## 2026-04-22 — Finding: ARS/CLP/COP price-recording bug (FP-42870)
+
+During Xbox revenue reconciliation, `Transactions.Price` for Argentine Peso, Chilean Peso, and Colombian Peso was observed to store a USD-scaled amount instead of the local-currency amount. Scaling factors (~1/1000 for ARS, ~1/840 for CLP/COP) don't match current exchange rates — suggests stale/hardcoded divisor or a code path that substitutes USD equivalent under the local currency code. Impact is negligible at aggregate level (55 transactions, 0.33% of Xbox count, 0.046% of Xbox revenue over Nov 2025). Consistent across all 5 months surveyed for ARS; intermittent for CLP/COP. Reason not yet traced in code. Low priority — reconciliation posted on FP-42870 recommends a separate low-severity ticket.
+

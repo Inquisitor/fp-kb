@@ -36,3 +36,4 @@ module: product-local-prices
 ## Related Tasks
 - FP-43177 Phase 1: Smart Beautify algorithm (completed) — r15959+r15961+r15969
 - FP-43177 Phase 2: Exchange Rate Snapshot (completed) — r15997+r15999
+- FP-42870 Xbox revenue reconciliation (report delivered, no code changes) — surfaced ARS/CLP/COP price-recording bug, see log.md 2026-04-22

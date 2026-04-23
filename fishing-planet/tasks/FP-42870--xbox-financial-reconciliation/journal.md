@@ -1,7 +1,7 @@
 ---
 task: FP-42870
 title: "Xbox. Compare financial indicators by platform"
-status: investigating
+status: completed
 executor: Stanislav Samoilov
 jira: https://fishingplanet.atlassian.net/browse/FP-42870
 related:
@@ -10,7 +10,7 @@ related:
 
 ## Status
 
-Brainstorming (2026-04-21). Data sources fully examined, ProductMappings validated against MS Nov 2025 data (100% match), bundle expansion confirmed as main count-inflation factor, bundle detection pipeline discovered in Stats DB, `/Stats/Money` already uses the bundled view. Prices cross-checked against MS royalty: **VAT (local tax stripped by MS before royalty calc) explains almost all per-currency ratio differences** and is the dominant factor in the 38%-vs-30% gap. Two currency data bugs identified (ARS, CLP/COP). Still to do: quantify detection gaps, investigate ARS/CLP/COP bugs, decide what to report to producer.
+Closed 2026-04-22. Investigation scope completed: 5-month reconciliation (Jul–Nov 2025) against Microsoft royalty, 5 gap factors identified and quantified, producer report posted as JIRA comment 115966 on FP-42870 with 7 ranked improvement proposals. No code changes under this task — any follow-up work will be scoped as separate tickets.
 
 ## Summary
 
@@ -405,3 +405,16 @@ Bundle detection already lives in Stats DB (Finding #12), so the task shifts fro
 - Why do Halloween/Advanced/Deluxe Starter Packs produce 0 Transactions while being sold on MS? Client-side SDK issue, or server-side handling via different path?
 
 ## Milestones
+
+### 2026-04-22 — Producer report published
+
+Delivered: comment on FP-42870 summarizing the 5-month reconciliation and 7 ranked improvement proposals.
+
+Source artifact: `artifacts/report.md`. Analyst query reference: `artifacts/analytic-queries-from-mary-k.sql`. JIRA comment ID: 115966.
+
+Key outcomes:
+- Xbox/Win10 revenue in `/Stats/Money` under-reports MS Net royalty by ~2% on average (range −4.3% to +4.2% across Jul–Nov 2025)
+- Bundle detection pipeline in Stats DB works losslessly (97.9% of configured bundles detected; 3 misses = partial-purchase architectural limit)
+- VAT identified as dominant contributor to the 38%-vs-30% fee gap
+- MS Store promotional sales identified as a separate revenue-inflation factor (cause of Oct 2025 over-report)
+- ARS/CLP/COP currency bugs quantified as negligible (~0.046% revenue) — low priority follow-up
