@@ -160,6 +160,14 @@ Role definitions and merge direction. Current assignments are in `_index.md`.
 
 Merge direction: OldStable → Stable → Content → Code (each level merges into all levels above it).
 
+### Before merging: check ancestry
+
+Before running `svn merge` from branch X into branch Y, check `_index.md` → Server Branch Ancestry:
+
+- If Y was created as a copy of X at rev `M` (directly or transitively), any commit on X at rev `≤ M` is already inherited in Y — **skip the merge**.
+- `svn mergeinfo` does NOT reflect branch-copy inheritance; it only tracks explicit merges. Relying on it alone misses this case.
+- Verify by running `svn log` on a file the commit touched in the target branch URL — the original revision should appear.
+
 ### KB target
 
 KB describes the branch currently holding the **Code role** (not a specific named branch). When branch roles rotate — the Code branch becomes Content, a new branch takes the Code role — KB automatically continues describing the new Code branch (the new Code forks from the same snapshot as old Content, so no migration is needed).
