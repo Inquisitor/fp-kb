@@ -15,3 +15,13 @@
 | Bracket      | `TournamentBracket`     | Rating range definition (was: GroupSettings)   |
 | Bucket       | `TournamentBucket`      | Group of players within a bracket (was: Group) |
 | Group Budget | `AllocateGroupBudget()` | How many groups per bucket                     |
+
+## Bait Types
+
+Two-level naming for silicone baits: **SoftBait** is the GDD/concept layer (missions, tournaments, rod templates, SQL); **JigBait** is the item-type implementation (inventory, classes). The same physical bait is "a SoftBait" in contracts and "a JigBait" in inventory model.
+
+| Term           | Meaning                                                                                                            | Notes                                                                                                                                                                                                   |
+|----------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SoftBait       | GDD-level concept for silicone baits — appears in mission requirements, rod templates, tournament rules, SQL terms | E.g. `MissionRequirementBaitLure.SoftBaits`, `MissionRequirementTackleTemplate.*SoftBaitRig`, `UserCompetitionRodEquipmentAllowed.*SoftBaits*`. Resolves to `ItemSubTypes.JigBait` via mission switches |
+| JigBait        | Item-type implementation: class `JigBait : Item`, `ItemTypes.JigBait`, `ItemSubTypes.JigBait`                      | What the player picks up in inventory. Concrete subtypes: `Shad`, `Worm`, `Grub`, `Tube`, `Craw`, `Slug`, plus saltwater variants (`SaltwaterTwister`, `SaltwaterSlug`, etc.)                           |
+| Lure (subtype) | Item subtype `ItemSubTypes.Lure` — distinct from `JigBait`                                                         | Mission requirement `MissionRequirementBaitLure.Lures` accepts both `Lure` and `JigBait` after FP-42371 (silicones count as lures); reverse direction (`SoftBaits ⊉ Lure`) intentional, see test        |
