@@ -15,6 +15,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 ## Tournaments
 - [matchmaking](modules/matchmaking/_card.md) — grouping algorithm, brackets, buckets
 
+## Shared Game Services
+- [rewards](modules/rewards/_card.md) — reward delivery pipeline (items, licenses, products, currency)
+
 ## Infrastructure
 - [dal](modules/dal/_card.md) — repository-pattern DAL, reflection-based mapping (SQL Server + MongoDB)
 - [cache](modules/cache/_card.md) — cache registry, refresh orchestration, dependency graph (stub)

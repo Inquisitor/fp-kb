@@ -1,4 +1,5 @@
 ---
+module: missions
 status: stub
 ---
 

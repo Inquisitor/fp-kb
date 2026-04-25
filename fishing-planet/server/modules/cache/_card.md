@@ -1,4 +1,5 @@
 ---
+module: cache
 status: stub
 ---
 
