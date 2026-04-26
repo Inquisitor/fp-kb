@@ -61,3 +61,7 @@ Goal: give game designers a tool to predict Y:C:T:U proportions from pond config
 - [ ] Document `FishValueModulator` — modulates XP and club points via Force (derived from weight)
 - [ ] Document `LicenseModel` weight range merging — licenses intersect MinWeight/MaxWeight ranges for legal catches
 - [ ] Document WebAdmin `FishWeightDistribution()` analytics in `StatsController`
+
+## WebAdmin Weight Simulator — UI polish
+
+- [ ] Revisit Kendo DropDownList normalization for `EdgeDistributionScope` — current `scope === "YoungAndHeaviest"` explicit check in `onScopeChange()` JS is a hack (Kendo doesn't handle commas in option values). Workaround chose enum normalization (`TryParse → ToString()`) in ViewModel/Controller; preferred local approach is pipe/slash separator conversion (`, ` ↔ `|`) contained within the cshtml view layer. Also eliminate the explicit preset name check in `onScopeChange()`. Defer to flexible-checkbox-matrix iteration for edge scope.
