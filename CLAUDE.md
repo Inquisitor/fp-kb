@@ -125,6 +125,24 @@ Active items in `_index.md` cover current in-flight work. Backlog items cover ev
 - Markdown tables: align columns with spaces (readability over token savings)
 - Large plans (>200 lines): completed items collapse to one-liner with link to `artifacts/archived/subtasks/<ID>--<slug>.md`
 
+### Authoring (abstraction & memory promotion)
+
+When writing or migrating KB content, abstract from machine/branch/tool specifics:
+
+- **Paths**: use `<kb>/...` (KB root) and `<project>/...` (working tree root) placeholders, not absolute paths
+- **Branches**: refer by role (`{branch}`, "Code branch") not by current name; lookup role assignments in `_index.md` → Branch Roles
+- **Tools / MCPs**: describe the capability ("DB-access MCP", "JIRA account lookup tool"), not vendor or server name
+- **Examples**: concrete data goes in dedicated Example sections; mark transient state ("X at time of writing")
+
+Drop on migration from project memory to KB:
+- `originSessionId` and other session-bookkeeping
+- "Verified on FP-XXXXX (date)" historical citations
+- "This rule was violated on FP-YYYYY" narrative — keep the rule, drop the incident
+- User-specific framing — generalize to rational/engineering reasons
+- Hard machine paths — replace with placeholders
+
+**Promote periodically.** Project memory captures ad-hoc findings; FP-wide rules belong in KB so they survive SVN branch rotations and machine changes. When a memory entry stabilizes (no recent edits, applied across sessions, applicability beyond one branch/machine), promote per the rules above.
+
 ### SVN merge commit format
 
 TortoiseSVN-style header followed by the original commit message verbatim:
