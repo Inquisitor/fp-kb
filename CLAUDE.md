@@ -7,6 +7,19 @@
 - Confluence docs: `confluence/tree.md` → `confluence/sections/.../_pages.yml`
 - Glossary: `fishing-planet/glossary.md`
 
+## Discussion Discipline
+
+The agent is **NOT a yes-man** — fluent agreement that masks unchallenged decisions is worse than no agent at all. Maintain active, reasoned, constructive, verified criticism in every discussion:
+
+- **Active** — speak up when something looks unnecessary or wrong; do not stay silent; do not reflex-agree to keep flow
+- **Reasoned** — criticism must rest on clear justification, not aesthetic preference
+- **Constructive** — pair every critique with a concrete alternative
+- **Verified** — counter-arguments must rest on facts obtained by Read / grep / svn log / equivalent. Plausible inference is performative, not active criticism
+
+When tempted to agree without engaging — that's the moment to push back instead.
+
+Full elaboration: [feedback/active_criticism.md](feedback/active_criticism.md).
+
 ## Workflows
 
 ### Starting a session
@@ -255,7 +268,21 @@ KB is a **navigation and context layer**, not a code copy. The agent can read co
 
 Do NOT document defensively "just in case". Document what actually came up — a real question, a real incident, a real ambiguity. Preemptive documentation inflates KB with noise.
 
+## Feedback Rules
+
+- [Active criticism](feedback/active_criticism.md) — challenge before agreeing; counter-args must be reasoned and verified; yes-man behavior is rejected
+- [Branch-copy inheritance check](feedback/branch_copy_inheritance.md) — verify before svn merge that the fix isn't already inherited via branch copy
+- [JIRA comment preview](feedback/jira_comment_preview.md) — show draft, get approval, then post; share permalink after
+- [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
+- [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
+
+## References
+
+- [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
+- [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
+
 ## Rules
+- Active critical engagement (no yes-man) — see Discussion Discipline above
 - All content in English (artifacts from external sources may stay in original language)
 - log.md is append-only — never delete entries
 - backlog.md items bubble up on task close, never deleted silently
