@@ -14,12 +14,22 @@ Per-ticket review discipline: read JIRA → create review card in KB → audit c
 - `рев'ю FP-XXXXX` / `рев'ю <JIRA-URL>` (UA)
 - Without ID: model picks active JIRA-ID from prior conversation context
 
-## Required reads
+## Step 0: Pre-flight reads (mandatory before any other action)
 
-These rules apply throughout the workflow. Load before Phase 1:
-- [`<kb>/feedback/active_criticism.md`](../../../feedback/active_criticism.md) — verified counter-arguments mandatory; no yes-man; no performative critique
-- [`<kb>/feedback/reference_recheck.md`](../../../feedback/reference_recheck.md) — re-read format references at draft-time
-- [`<kb>/feedback/verify_identifiers.md`](../../../feedback/verify_identifiers.md) — no placeholder URLs/IDs in audit commands
+Read these files using the Read tool — do NOT skip; do NOT rely on description summaries; do NOT assume "I remember the rules":
+
+1. [`<kb>/feedback/active_criticism.md`](../../../feedback/active_criticism.md) — verified counter-arguments mandatory; no yes-man
+2. [`<kb>/feedback/reference_recheck.md`](../../../feedback/reference_recheck.md) — re-read format references at draft-time
+3. [`<kb>/feedback/verify_identifiers.md`](../../../feedback/verify_identifiers.md) — no placeholder URLs/IDs in audit commands
+
+These rules apply throughout the workflow. Skipping this step means the skill cannot enforce its own discipline.
+
+After all three Read calls complete, output one line: `Pre-flight reads done.` Then proceed to Phase 1.
+
+**Closed loopholes:**
+- Small commit / "trivial review" → not a reason to skip
+- Repeat session, files Read earlier → re-Read; rules' application at draft-time depends on fresh context
+- "I'll Read if I need it" → no, the point is preventive load, not on-demand
 
 ## Phase 1: Intake (foundational invariant)
 
