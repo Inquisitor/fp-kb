@@ -10,10 +10,11 @@
 | FP-43424 | FP/server | kb-mapping         | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/             |
 
 ## Active Reviews
-| Task     | Executor  | Path                                                                  |
-|----------|-----------|-----------------------------------------------------------------------|
-| FP-41962 | Stanislav | fishing-planet/review/FP-41962--line-logging/                         |
-| FP-42476 | Yuriy     | fishing-planet/review/FP-42476--competition-reward-window-order/      |
+| Task     | Executor    | Path                                                                                       |
+|----------|-------------|--------------------------------------------------------------------------------------------|
+| FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
+| FP-42476 | Yuriy Burda | fishing-planet/review/FP-42476--competition-reward-window-order/                           |
+| FP-42372 | Yuriy Burda | fishing-planet/review/FP-42372--daily-missions-preserve-completed/                         |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)

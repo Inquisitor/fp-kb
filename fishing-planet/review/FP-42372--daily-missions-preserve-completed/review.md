@@ -1,5 +1,5 @@
 ---
-status: resolved
+status: in-progress
 executor: Yuriy Burda
 branch: LBM @ r15868, r15878
 jira: https://fishingplanet.atlassian.net/browse/FP-42372
@@ -45,7 +45,7 @@ Feature is pre-release (Test environment); `Fix Version = 2026.3 Leaderboards`, 
 - However, `Api_RemoveCompletedMission` (called for `IsMultiStart` missions on completion) re-registers monitoring and re-adds to `MissionsReadyToStart`. For a multi-start daily that then hits `Container_RefreshDailyMissions`, the raw `Remove` would orphan those entries.
 - `GlobalMissions` is populated in `Container_AddNewMission` for `IsGlobal` missions; the raw `Remove` leaves entries there.
 
-**Resolution:** Open — ask author: was `Container_RemoveMission` intentionally avoided (e.g., to suppress `MissionCancelled` event that it would fire via `Core_RemoveStartedMission`), or overlooked? If event suppression was the reason, a narrow helper `Container_RemoveCompletedMission` that cleans without firing cancel events would be cleaner.
+**Resolution:** Blocking — patch required. Replace `AllMissions.Remove` with `Container_RemoveMission`, or introduce a narrow `Container_RemoveCompletedMission` helper that skips the `MissionCancelled` event.
 
 **Discovered by:** skill recon + agent exploration.
 
@@ -105,3 +105,4 @@ Feature is pre-release (Test environment); `Fix Version = 2026.3 Leaderboards`, 
 - 2026-04-24: Explored lifecycle via agent + targeted reads. Initial hypothesis "fix creates dead zone" proven wrong — r15868 is two independent changes (client filter + server cleanup) that solve distinct problems. Findings F-1 through F-7 compiled.
 - 2026-04-24: F-2 moved to `modules/missions/triage-2026-04.md` (batch-triage mode) for Monday review with Yuriy. F-5 and F-6 moved to `modules/missions/backlog.md` as pre-existing module gaps. F-1, F-4, F-7 accepted inline.
 - 2026-04-24: Verified r15868 and r15878 are on LBM at revisions ≤ r15942 (MFT copy source) — both inherited into MFT via branch copy at r15943. No merge action needed. Confirmed by reading `svn log` on `MissionsManager.cs` in MFT — r15868 appears in history.
+- 2026-04-27: After release-triage discussion with author, F-2 escalated to Blocking. Patch expected — replace raw `AllMissions.Remove` in `Container_RefreshDailyMissions` with `Container_RemoveMission`, or introduce a narrow `Container_RemoveCompletedMission` helper that skips the `MissionCancelled` event. Rejection comment posted to JIRA; review back to in-progress until patch lands.
