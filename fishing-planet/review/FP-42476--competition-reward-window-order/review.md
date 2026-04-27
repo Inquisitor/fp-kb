@@ -1,7 +1,7 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
-branch: LBM20251201 @ r15965, merged to MFT20260325 @ r15966
+branch: LBM20251201 @ r15965+r16039, merged to MFT20260325 @ r15966+r16040
 jira: https://fishingplanet.atlassian.net/browse/FP-42476
 ---
 
@@ -89,17 +89,18 @@ Client (separate scope; reviewer: client team):
 - 2026-04-27: Verified F-3 — `LoadRewardViewData` rebuilds `ItemsBrief`, mitigates main UGC path. Other `CloneReward()` sites (TournamentEndAdapter, Leaderboards adapters, DailyMissions, Mission, RewardManager) lack the rebuild but are not regressions since `Storage` is a new field.
 - 2026-04-27: Re-traced F-3 through `TournamentEndAdapter.AssignTournamentReward` — confirmed Competition+RewardMultiplier path produces `tournamentFinalResult.CurrentPlayerResult.Reward` from `CloneReward()` without rebuild, feeding the same client-side reward window the fix targets. F-3 raised Low → Medium. Discussed offline with executor; reopen agreed.
 - 2026-04-27: Reject comment posted ([comment 116560](https://fishingplanet.atlassian.net/browse/FP-42476?focusedId=116560&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-116560)). Transition to reopen done by user out-of-band. Verified MainClient already received CodeBranch r52993 via `kr` at r53103.
+- 2026-04-27: Re-review of fix commits LBM r16039 + MFT r16040 (clean merge). `Reward.cs` selector symmetrized as proposed. Bonus: reflection-based regression test in new `RewardTests.cs` using AutoFixture — protects against future field-addition drift on `RewardInventoryItemBrief` (and structurally on the other selectors covered by similar future tests). Approved.
 
 ## Verdict
 
-**Reject — reopen for F-3 fix.** Author (Yuriy) agreed in offline discussion. F-3 is a one-line symmetry fix in `Reward.CloneReward()`; covers the same flow this task targets.
+**Approved.** Round 1 reject reopened on F-3; Round 2 fix lands at LBM r16039 (merged to MFT r16040) — `Reward.CloneReward()` selector symmetrized + reflection-based regression test added to guard against future field-addition drift.
 
-Other findings:
-- F-1 — accepted (hidden bug fix is correct; commit-message critique skipped).
-- F-2 — accepted (intentional, coordinated with FP-42448 client work).
+Findings closure:
+- F-1 — accepted (hidden bug fix is correct).
+- F-2 — accepted (intentional, coordinated with FP-42448).
+- F-3 — fixed in r16039 with bonus regression test.
 - F-4 — skipped (process noise).
 
-Cross-branch on existing commits:
-- LBM r15965 → MFT r15966 already merged ✓.
-- After F-3 fix lands on LBM, will need explicit merge to MFT (LBM=Content, MFT=Code; merge direction Content→Code).
-- Client `MainClient` still pending CodeBranch r52993 — Yuriy's own note; out of scope for this server review.
+Cross-branch:
+- LBM r15965 + r16039 → MFT r15966 + r16040 (all merges done by executor).
+- Client: CodeBranch r52993 → MainClient r53103 (both done; out of scope for server review).
