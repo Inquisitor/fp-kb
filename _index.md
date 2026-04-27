@@ -14,7 +14,6 @@
 |----------|-------------|--------------------------------------------------------------------------------------------|
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
 | FP-42476 | Yuriy Burda | fishing-planet/review/FP-42476--competition-reward-window-order/                           |
-| FP-42372 | Yuriy Burda | fishing-planet/review/FP-42372--daily-missions-preserve-completed/                         |
 | FP-41909 | Yuriy Burda | fishing-planet/review/FP-41909--daily-missions-debug-tools/                                |
 
 ## Active Confluence Work

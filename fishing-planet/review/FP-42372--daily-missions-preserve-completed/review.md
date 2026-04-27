@@ -1,7 +1,7 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
-branch: LBM @ r15868, r15878
+branch: LBM @ r15868, r15878, r16041, merged to MFT @ r16042
 jira: https://fishingplanet.atlassian.net/browse/FP-42372
 ---
 
@@ -23,6 +23,10 @@ Feature is pre-release (Test environment); `Fix Version = 2026.3 Leaderboards`, 
   - `MissionsManager_Client.cs`: removed `mission.MissionId < 0` filter from the completed-missions-in-profile projection
 - **LBM r15878** — Reorder mission regeneration to run before `InitMissionsManager`
   - `GameClientPeer_Missions.cs`: moved `DailyMissionAdapter.TryGenerateMissions()` call to before `InitMissionsManager()` / `ConnectMissionsManager()`
+- **LBM r16041** — Improve completed daily mission removal during rotation (post-triage patch addressing F-2)
+  - `MissionsManager.cs`: added private helper `RemoveCompletedDailyMission` cleaning `MissionsReadyToStart`/hints/`AllMissions`/`GlobalMissions` while skipping `Core_RemoveStartedMission` so no `MissionCancelled` event is fired; null-guard with `DebugMessage` in `Container_RefreshDailyMissions`
+  - `MissionsTest_RemoveCompletedMission.cs`: regression test for the no-`MissionCancelled` invariant
+- **MFT r16042** — Merge of LBM r16041
 
 ## Findings
 
@@ -45,7 +49,7 @@ Feature is pre-release (Test environment); `Fix Version = 2026.3 Leaderboards`, 
 - However, `Api_RemoveCompletedMission` (called for `IsMultiStart` missions on completion) re-registers monitoring and re-adds to `MissionsReadyToStart`. For a multi-start daily that then hits `Container_RefreshDailyMissions`, the raw `Remove` would orphan those entries.
 - `GlobalMissions` is populated in `Container_AddNewMission` for `IsGlobal` missions; the raw `Remove` leaves entries there.
 
-**Resolution:** Blocking — patch required. Replace `AllMissions.Remove` with `Container_RemoveMission`, or introduce a narrow `Container_RemoveCompletedMission` helper that skips the `MissionCancelled` event.
+**Resolution:** Resolved in LBM r16041 (merged to MFT r16042). Narrow private helper `RemoveCompletedDailyMission` introduced — cleans `MissionsReadyToStart`/hints/`AllMissions`/`GlobalMissions` without firing `MissionCancelled`. Regression test in `MissionsTest_RemoveCompletedMission.cs`.
 
 **Discovered by:** skill recon + agent exploration.
 
@@ -95,7 +99,7 @@ Feature is pre-release (Test environment); `Fix Version = 2026.3 Leaderboards`, 
 
 **Investigation:** File inspection of the method body before and after the diff.
 
-**Resolution:** Accepted. Likely covers benign cases (concurrent regen, already-removed mission). Could warrant a `Log.Debug` for observability but not actionable here.
+**Resolution:** Resolved by side effect of LBM r16041. Null-guard with `DebugMessage` added in `Container_RefreshDailyMissions` by the F-2 patch incidentally satisfies the `Log.Debug` observability noted as desirable; the original Accepted stance was "could warrant logging but not actionable here", and the patch made the action happen anyway.
 
 **Discovered by:** manual scan.
 
@@ -106,3 +110,4 @@ Feature is pre-release (Test environment); `Fix Version = 2026.3 Leaderboards`, 
 - 2026-04-24: F-2 moved to `modules/missions/triage-2026-04.md` (batch-triage mode) for Monday review with Yuriy. F-5 and F-6 moved to `modules/missions/backlog.md` as pre-existing module gaps. F-1, F-4, F-7 accepted inline.
 - 2026-04-24: Verified r15868 and r15878 are on LBM at revisions ≤ r15942 (MFT copy source) — both inherited into MFT via branch copy at r15943. No merge action needed. Confirmed by reading `svn log` on `MissionsManager.cs` in MFT — r15868 appears in history.
 - 2026-04-27: After release-triage discussion with author, F-2 escalated to Blocking. Patch expected — replace raw `AllMissions.Remove` in `Container_RefreshDailyMissions` with `Container_RemoveMission`, or introduce a narrow `Container_RemoveCompletedMission` helper that skips the `MissionCancelled` event. Rejection comment posted to JIRA; review back to in-progress until patch lands.
+- 2026-04-27: Patch verified — LBM r16041 + MFT merge r16042 (author already merged). F-2 closed via narrow helper `RemoveCompletedDailyMission` (option B). F-7 closed by side effect — null-guard in `Container_RefreshDailyMissions` now logs via `DebugMessage`. Regression test added (`Container_RefreshDailyMissions_completed_mission_does_not_fire_MissionCancelled_event`). Branch-copy check on r16041: LBM rev > MFT base r15942, so explicit merge was required — confirmed via r16042.
