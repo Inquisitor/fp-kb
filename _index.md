@@ -14,6 +14,8 @@
 | Task     | Executor    | Path                                                                                       |
 |----------|-------------|--------------------------------------------------------------------------------------------|
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
+| FP-40511 | Yuriy Burda | fishing-planet/review/FP-40511--pohub-show-only-new-offers/                                |
+| FP-42015 | Yuriy Burda | fishing-planet/review/FP-42015--pohub-restart-missing-product/                             |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
