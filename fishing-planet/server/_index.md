@@ -15,6 +15,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 ## Tournaments
 - [matchmaking](modules/matchmaking/_card.md) — grouping algorithm, brackets, buckets
 
+## Leaderboards
+- [leaderboards](modules/leaderboards/_card.md) — Competitive / Global / Fish boards; per-type Update / UI / Jobs / Rewards pipeline gates
+
 ## Shared Game Services
 - [rewards](modules/rewards/_card.md) — reward delivery pipeline (items, licenses, products, currency)
 
