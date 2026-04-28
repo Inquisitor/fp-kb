@@ -8,6 +8,7 @@
 | FP-41845 | FP/server | fish-weight-gen-v2 | in-progress   | fishing-planet/tasks/FP-41845--weight-generation-v2/          |
 | FP-41929 | FP/server | xbox-purchases     | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/      |
 | FP-43424 | FP/server | kb-mapping         | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/             |
+| FP-41595 | FP/server | lbm-release-support| in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/  |
 
 ## Active Reviews
 | Task     | Executor    | Path                                                                                       |
