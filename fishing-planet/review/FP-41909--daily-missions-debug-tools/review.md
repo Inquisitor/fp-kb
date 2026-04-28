@@ -1,7 +1,7 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
-branch: LBM @ r15738
+branch: LBM @ r15738, r16043, merged to MFT @ r16044
 jira: https://fishingplanet.atlassian.net/browse/FP-41909
 ---
 
@@ -33,6 +33,7 @@ Implementation routes WebAdmin actions through the Game Server via new `AdminAct
 - 2026-04-26 — Branch ancestry: r15738 ≤ MFT base-rev 15942 → already inherited via branch copy in MFT (Code). No `svn merge` is required; merge notation will be omitted from JIRA on closure.
 - 2026-04-26 — Module clarification (per user): the relevant module is **daily-missions** (generator of daily missions), distinct from `missions` (mission processing/conditions). KB has no `daily-missions/` folder yet; the triage-file `modules/missions/triage-2026-04.md` is mis-located (its H1 reads "Daily Missions"; the existing FP-42372 entry references daily-missions logic). Routing decision deferred to Phase 4 — if pre-existing gaps surface, we choose between creating a stub `modules/daily-missions/` or accepting the existing `missions/` location.
 - 2026-04-27 — Post-triage reopen. F-1 and F-2 verdicts came back as Reopen + patch expected; resolutions upgraded to Blocking, status reverts to `in-progress` until the patch lands. F-3 unchanged.
+- 2026-04-28 — Patch r16043 verified against both Blocking findings: F-1 split fix uses `Split(';')` (single-char overload, idiomatic) and restores `.Trim()` + `IsNullOrEmpty` filtering; F-2 deletes both private methods. Author committed merge to MFT @ r16044 directly and posted the merge comment in JIRA — no merge action needed from review side. Closing as resolved.
 
 ## Findings
 
@@ -52,7 +53,7 @@ The previous logic in r15737 lived inside `MissionsManager_Admin.cs` and split c
 
 **Discovered by.** Skill recon (pattern-spot on `new char[char]` syntax during diff read).
 
-**Resolution.** Blocking — patch required. Replace `new char[';']` with `new[] { ';' }`, and restore the previous `.Trim()` and `IsNullOrEmpty` filtering that was dropped when the split was relocated from `MissionsManager_Admin.cs` to the helper.
+**Resolution.** Patched at LBM r16043. Split now uses `Split(';')` (single-char overload), and `.Trim()` + `IsNullOrEmpty` filtering restored; semantics match the pre-r15738 logic exactly.
 
 ### F-2: Dead `Admin_ClearDailyMissions` and empty-stub `Admin_RegenerateDailyMissions` in `MissionsManager_Admin.cs` [Low]
 
@@ -68,7 +69,7 @@ The empty `Admin_RegenerateDailyMissions` is the more confusing of the two: a fu
 
 **Discovered by.** Skill recon (the empty stub stood out during diff read; grep confirmed zero callers).
 
-**Resolution.** Blocking — patch required. Delete both private methods (`Admin_ClearDailyMissions` and the empty-stub `Admin_RegenerateDailyMissions`) from `MissionsManager_Admin.cs`; the real Clear/Regenerate flow lives in `DailyMissionAdapter_Admin.cs`.
+**Resolution.** Patched at LBM r16043. Both `Admin_ClearDailyMissions` and `Admin_RegenerateDailyMissions` deleted.
 
 ### F-3: Trailing newline missing in `DailyMissions.cshtml` [Info]
 
