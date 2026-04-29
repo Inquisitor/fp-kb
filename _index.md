@@ -18,6 +18,7 @@
 | FP-42015 | Yuriy Burda | fishing-planet/review/FP-42015--pohub-restart-missing-product/                             |
 | FP-42016 | Yuriy Burda | fishing-planet/review/FP-42016--pond-pass-expired-on-globe-exit/                           |
 | FP-41507 | Dmytro K.   | fishing-planet/review/FP-41507--reel-of-fortune-premium/                                   |
+| FP-40921 | Yuriy Burda | fishing-planet/review/FP-40921--chums-form-change-detractor/                               |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
