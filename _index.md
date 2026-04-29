@@ -9,6 +9,7 @@
 | FP-41929 | FP/server | xbox-purchases     | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/      |
 | FP-43424 | FP/server | kb-mapping         | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/             |
 | FP-41595 | FP/server | lbm-release-support| in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/  |
+| FP-43553 | FP/server | configjson-fix     | in-progress   | fishing-planet/tasks/FP-43553--pre-release-configjson/        |
 
 ## Active Reviews
 | Task     | Executor    | Path                                                                                       |

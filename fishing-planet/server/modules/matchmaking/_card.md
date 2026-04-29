@@ -30,5 +30,6 @@ Confluence: [Matchmaking spec](https://fishingplanet.atlassian.net/wiki/spaces/F
 ## Related Tasks
 - FP-41746: Alignment — bug fixes, rename, FFS algorithm, DB cleanup, GDD updated, new spec published to Confluence
 - FP-41833: Tests and test infrastructure
+- FP-43553: [Competitions] Pre-release ConfigJson on prod-generated future tournaments after Leaderboards/Rating/Matchmaking deploy — Steam hot-patched 2026-04-29; remaining: PS / XB / MOB / NX
 
 See also: [backlog](backlog.md) | [log](log.md)
