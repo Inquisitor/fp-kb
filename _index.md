@@ -14,7 +14,6 @@
 | Task     | Executor    | Path                                                                                       |
 |----------|-------------|--------------------------------------------------------------------------------------------|
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
-| FP-42016 | Yuriy Burda | fishing-planet/review/FP-42016--pond-pass-expired-on-globe-exit/                           |
 | FP-41507 | Dmytro K.   | fishing-planet/review/FP-41507--reel-of-fortune-premium/                                   |
 | FP-40921 | Yuriy Burda | fishing-planet/review/FP-40921--chums-form-change-detractor/                               |
 | FP-41460 | Yuriy Burda | fishing-planet/review/FP-41460--flashlight-tpm-update/                                     |
