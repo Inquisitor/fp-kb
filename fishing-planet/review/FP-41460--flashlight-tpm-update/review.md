@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
 branch: LBM20251201 @ r15688, r15690
 jira: https://fishingplanet.atlassian.net/browse/FP-41460
