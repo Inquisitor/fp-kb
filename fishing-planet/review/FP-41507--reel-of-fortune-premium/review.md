@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: resolved
 executor: Dmytro Kurylovych
 branch: LBM20251201 @ r15625
 jira: https://fishingplanet.atlassian.net/browse/FP-41507
@@ -49,7 +49,7 @@ Bug fix: when a non-premium player receives a DLC bundle that includes a premium
 - Cross-checked `InitClubAdapter` (`ToolsModel_Clubs.cs`) — same pattern (`profile.Init(); adapter.Init();`), so this is the established WebAdmin convention, not a one-off mistake
 - Day-rollover impact on `GoldenSpinDayNumber` wraps modulo `daysInRotation` (`ValidateGoldenSpinDay`), so long-term variety isn't broken; only short-term skew
 
-**Resolution:** Author clarification, decision-affecting — was `adapter.Init()` intentional (mirrors `InitClubAdapter` pattern, future-proofing for any ROF op on offline profile) or unnecessary (fix works without it; would also remove the need for `FortuneCache.InitDefault()` at WebAdmin startup)? If intentional → Accepted; if not → consider trimming both the `Init()` call and the cache init.
+**Resolution:** Accepted for this fix — established WebAdmin pattern (mirrors `InitClubAdapter`), marginal user-visible impact (player may skip one golden-rotation day if admin-grant happens on day X and player next logs in day X+1). Author no longer on the team. Filed to module backlog: [`<kb>/fishing-planet/server/modules/reel-of-fortune/backlog.md`](../../server/modules/reel-of-fortune/backlog.md) for re-examination next time anything in `ToolsModel_Fortune.cs` or the ROF offline path is touched.
 
 **Discovered by:** code-reviewer agent (independent verification flagged the side-effect; I had marked it Info as a duplicate-Init pre-existing pattern — agent's framing is sharper).
 
@@ -75,4 +75,4 @@ Bug fix: when a non-premium player receives a DLC bundle that includes a premium
 
 ## Verdict
 
-**Approve with clarifications.** The fix is correct: the widened condition in `Profile_ProductAdded` plus the new offline adapter init in `ToolsModel_Products.GiveProduct` covers both reported reproducer paths (live promo-code grant via `Profile_ProductAdded` event, and admin-tool offline grant via the explicitly initialized adapter). No double-credit, no missing event listener, no incorrect ordering between subscription and event firing. F-2 is the only finding worth a JIRA comment — ask the executor whether `adapter.Init()` (and consequently `FortuneCache.InitDefault()` in WebAdmin startup) was intentional. F-1/F-3 are inline polish suggestions; F-4 is informational.
+**Approve.** The fix is correct: the widened condition in `Profile_ProductAdded` plus the new offline adapter init in `ToolsModel_Products.GiveProduct` covers both reported reproducer paths (live promo-code grant via `Profile_ProductAdded` event, and admin-tool offline grant via the explicitly initialized adapter). No double-credit, no missing event listener, no incorrect ordering between subscription and event firing. F-2 accepted as established pattern; remaining findings are polish/info only. JIRA comment: dry `LGTM.` (https://fishingplanet.atlassian.net/browse/FP-41507?focusedId=117083). No merge needed — fix inherited in MFT via branch copy.

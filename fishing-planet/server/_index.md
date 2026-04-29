@@ -20,6 +20,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 
 ## Shared Game Services
 - [rewards](modules/rewards/_card.md) — reward delivery pipeline (items, licenses, products, currency)
+- [reel-of-fortune](modules/reel-of-fortune/_card.md) — daily two-wheel mini-game; per-profile state, AB-test/country gating, premium-spin allocation on subscription grant (stub)
 
 ## Infrastructure
 - [dal](modules/dal/_card.md) — repository-pattern DAL, reflection-based mapping (SQL Server + MongoDB)

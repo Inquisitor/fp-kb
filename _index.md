@@ -14,7 +14,6 @@
 | Task     | Executor    | Path                                                                                       |
 |----------|-------------|--------------------------------------------------------------------------------------------|
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
-| FP-41507 | Dmytro K.   | fishing-planet/review/FP-41507--reel-of-fortune-premium/                                   |
 | FP-41460 | Yuriy Burda | fishing-planet/review/FP-41460--flashlight-tpm-update/                                     |
 
 ## Active Confluence Work
