@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
 branch: LBM @ r15889
 jira: https://fishingplanet.atlassian.net/browse/FP-40511
@@ -96,11 +96,11 @@ The actual fix path for FP-42015:
 - Initial offer creation (`TriggerPersonalOffer`, ~L69) sets `NotificationState = Scheduled` directly, bypassing the new InitializePersonalOffers gate. So a brand-new chain triggered while the player is online doesn't depend on the IsJustLoggedIn flag — it's already Scheduled and will show via the next NotifyClientAboutTargetedAds cycle. Consistent with spec.
 - Related JIRA: FP-42015 closes by virtue of this fix (downstream symptom). See [`../FP-42015--pohub-restart-missing-product/review.md`](../FP-42015--pohub-restart-missing-product/review.md).
 
-## Verdict (draft)
+## Verdict
 
 **Approve.** Fix correctly implements FP-40511 spec via three coordinated changes in a single file. The asymmetric `NotificationState` reset (only on `Expired → Active`) reads as intentional per spec. No regressions surfaced for the `ChainElementCooldown` and `ChainEndCooldown` paths beyond pre-existing behavior. The fix also closes FP-42015 via the reactivation reset path — that connection is sound and verifiable from the diff alone.
 
-Open decision (executor's): merge to KNW (Stable) given hotfix fix-version. Not a blocker for FP-40511 approval.
+Cross-branch: MFT (Code) inherits r15889 via branch copy (LBM r15889 ≤ MFT base r15942) — no merge needed. KNW (Stable) backport is a release-management decision (executor's open question, JIRA comment id 110191) — out of scope for code-review approval.
 
 ## Investigation Journal
 

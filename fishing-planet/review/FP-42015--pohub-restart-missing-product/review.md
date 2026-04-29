@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
 branch: LBM @ r15889
 jira: https://fishingplanet.atlassian.net/browse/FP-42015
@@ -17,14 +17,32 @@ Bug: an unpurchased Personal Offer (PO) product did not re-appear in the POHub w
 
 > Source-branch claim ("LBM") and revision ("r15889") taken at face value from JIRA — to be verified in Phase 2 via `svn log` against the LBM branch URL and against the FP-40511 commit content.
 
-## Open questions for Phase 2
+## Verification path
 
-- Confirm r15889 exists on LBM and references FP-40511 (not FP-42015) in the commit message.
-- Inspect r15889 diff: does it actually address the POHub re-show path for unpurchased PO after Globe transition? (i.e., is FP-42015 a true subset of FP-40511's fix, or just visually similar?)
-- Cross-branch: r15889 is on LBM (Content). LBM ancestry: MFT (Code) was forked from LBM r15942 → r15889 ≤ 15942 → **already inherited in MFT via branch copy** (no merge needed). KNW (Stable) was forked from JLM r14592 — r15889 is NOT inherited. Per executor's comment id 110191: open question whether to merge to KNW (Stable) given hotfix fix-version.
-- Data-transfer plan from comment id 103406 (Stanislav Rudakov, 2026-02-10): GD must reset PO "Reset Date" → QA validates → datatransfer to PROD with next ServerHotfix. Note for closure phase, not a code finding.
+Closes via FP-40511 r15889 — there is no FP-42015-specific commit. The fix path:
+
+1. During gameplay, `TimeoutDays` expires for the unpurchased PO chain.
+2. `UpdatePersonalOffers` ticks → chain transitions `Expired → Active` (inside `UpdatePersonalOfferState`, ~L580–597).
+3. r15889 adds `offer.NotificationState = PersonalOfferNotificationState.NotSent;` at L593, so the reactivated chain becomes "fresh" again.
+4. Same `UpdatePersonalOffers` then runs the switch at L249–268 — `case NotSent when offer.Active` fires, and (gated by `CanDisplayPersonalOffersOnCurrentScreen()` and `CanDisplayPersonalOfferPopup`) sets `NotificationState = Scheduled`.
+5. Going to Globe satisfies the screen check, popup fires.
+
+Pre-r15889: the reactivated chain stayed at `NotificationState = Sent` from prior popup, so neither switch case (`NotSent when Active` / `Sent when !Active`) fired — popup never re-triggered until next login.
+
+## Cross-branch propagation
+
+- LBM (Content) r15889 → MFT (Code): inherited via branch copy (LBM r15889 ≤ MFT base r15942). Verified by `svn log` on `TargetedAdsManager_PersonalOffers.cs` in MFT — r15889 appears in history.
+- KNW (Stable): NOT inherited. Backport decision is open per FP-40511 comment thread (executor asked whether hotfix fix-version warrants KNW merge). Out of scope for code-review approval — release-management call.
+- IMV (OldStable): NOT inherited; no merge intent.
+
+## Verdict
+
+**Approve.** Bug closes correctly via the FP-40511 fix path described above. No regressions for surrounding state-machine paths beyond what was reviewed in FP-40511.
+
+Data-transfer plan (per JIRA comment id 103406, Stanislav Rudakov 2026-02-10): GD must reset PO "Reset Date" → QA validates → datatransfer to PROD with next ServerHotfix. Tracked in JIRA, not in this review's scope.
 
 ## Investigation Journal
 
 - 2026-04-28 — Card opened. Executor confirmed via `customfield_11224` lookup = Yuriy Burda (matches commit-attribution comment author).
-- Phase 1 — no svn/code work yet; commit list and source branch taken from JIRA at face value pending Phase 2 verification.
+- 2026-04-28 — Phase 2 deferred to FP-40511 review (where the actual diff lives). Verification path traced through `UpdatePersonalOffers` switch and confirmed in FP-40511 review F-2.
+- 2026-04-29 — Closed: JIRA comment 117078, status → resolved.
