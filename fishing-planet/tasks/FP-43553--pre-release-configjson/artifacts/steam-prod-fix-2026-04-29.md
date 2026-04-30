@@ -231,3 +231,165 @@ After all patches above were applied, the diagnostic SQL `SQL/Releases/R202604-L
 (Live 318866 was already in `past` by the time of the final verification — its `Grouping`-missing state was therefore not visible in the live row.)
 
 Q3 (template content defects) and Q5 (malformed-JSON templates / tournaments) returned zero rows.
+
+---
+
+## D. Brackets[i].MaxRating backfill — follow-up to section A.4 (2026-04-29 evening)
+
+Section A.4 above (`Grouping` copy from each tournament's source template via `JSON_QUERY` + `JSON_MODIFY`) turned out to be incomplete: the resulting `Grouping` object lacked `Brackets[i].MaxRating` for every bracket, because templates never store `MaxRating` — it is auto-computed at runtime by `MatchmakingLogic.InitializeGrouping` during template deserialization. The defect surfaced as 318868, 318869, 318870 reached `StartDate` and `ProcessGrouping` ran on the half-initialized object, leaving roughly two-thirds of registered participants without a `BracketId` / `GroupName`. This section records the diagnosis, the second-round backfill applied to the two still-upcoming competitions, the rationale for leaving the three already-running competitions as-is, and a `MaxRating`-aware verification scan.
+
+### D.1 Why MaxRating ended up missing
+
+`MatchmakingLogic.cs` ➜ `CreateBuckets` filters participants by `p.CompetitionRating >= bucket.MinRating && p.CompetitionRating <= bucket.MaxRating`. `MaxRating` is auto-computed by `MatchmakingLogic.InitializeGrouping`, which is invoked only from `TournamentsHelper.FromDto(TournamentTemplateDto)` — the template-side deserializer. The companion `TournamentsHelper.FromDto(TournamentDto)` (used at competition start by `TournamentStartAdapter.StartTournamentAsync` ➜ `MatchmakingLogic.ProcessGrouping`) does **not** call `InitializeGrouping`. The regular generation pipeline (`ScheduleCompetitions` / `RandomizeCompetitions`) sidesteps the asymmetry by deserializing the source template first (which initializes `Grouping`), then re-serializing the now-initialized object into the Tournament's `ConfigJson` — so `MaxRating` ends up persisted on disk by the time `ProcessGrouping` reads the row back.
+
+Section A.4 broke that invariant: `JSON_QUERY(tt.ConfigJson, '$.Grouping')` returned the template's raw `Grouping` (no `MaxRating` — never stored there) and `JSON_MODIFY` placed it into `Tournaments.ConfigJson` verbatim. At competition start, `int MaxRating` defaulted to `0` for every bracket, so:
+
+- `Brackets[0]` (Newbies, `MinRating=0`): admitted only `CompetitionRating == 0` (including `NULL`, which maps to `0` in `int`).
+- `Brackets[1]` (Midles, `MinRating=101`): inverted range `[101..0]`, empty.
+- `Brackets[2]` (Tops, `MinRating=1001`): inverted range `[1001..0]`, empty.
+
+`BalanceBuckets` had nothing to redistribute; `BuildGroups` produced exactly one group `A` in bucket 1; `AssignGroupsToParticipants` updated only those participants, leaving the rest with `BracketId IS NULL`, `GroupName IS NULL`.
+
+### D.2 Observed defect (Steam prod, queried 2026-04-29 ~22:00 UTC)
+
+| TournamentId | TemplateId | Phase at observation | Total reg | Assigned | All assigned to | Unassigned |
+|--------------|------------|----------------------|-----------|----------|-----------------|------------|
+| 318868       | 157        | ended                | 222       | 78 (35%) | bracket 1, group A | 144 |
+| 318869       | 237        | ended                | 227       | 58 (26%) | bracket 1, group A | 169 |
+| 318870       | 11874      | live (StartDate 04-29 20:00 UTC) | 83 | 37 (45%) | bracket 1, group A | 46 |
+| 318871       | 1500       | reg-open (StartDate 04-29 22:00 UTC, 60 min ahead) | 84 | 0 | — | 84 |
+| 318872       | 11881      | reg-open (StartDate 04-30 00:00 UTC, 180 min ahead) | 22 | 0 | — | 22 |
+
+Cross-checked: in each of the three "already grouped" tournaments, the assigned cohort had `CompetitionRating` of `0` or `NULL` *at the time `ProcessGrouping` ran* (current `Profiles.CompetitionRating` for those users sits between `0` and `35`, the small spread reflecting rating earned during the very competition under inspection — i.e. post-grouping mutations). The unassigned cohort spans all three rating bands (`< 101`, `101..1000`, `>= 1001`), confirming the "MaxRating == 0" hypothesis: neither bucket 2 nor bucket 3 ever received a single participant, and even bracket-1-eligible participants with `rating > 0` were filtered out by the inverted range guard.
+
+### D.3 Scope of this patch
+
+Backfill applied to **318871 and 318872 only**. Rationale per ID:
+
+| TournamentId | At patch time              | Action | Why |
+|--------------|----------------------------|--------|-----|
+| 318868       | already ended              | none   | `ProcessGrouping` already ran; ConfigJson edit cannot retroactively redistribute participants. `RatingMultiplier = 1.0` on every bracket in the source template makes per-bracket rating math identical with or without the split — same calculus as the live exclusion in section A.4. |
+| 318869       | already ended              | none   | same |
+| 318870       | live (already past StartDate) | none | same — `ProcessGrouping` already ran. Editing the live ConfigJson would not reissue assignments. |
+| 318871       | reg-open, 60 min to StartDate | backfill | StartDate well outside the AsyncProcessor 5-minute "soon" window (`TournamentStartAdapter.SoonTimeout`), so `GetTournamentsToStartSoon` had not yet returned a DTO into a worker thread — a subsequent poll picks up the patched ConfigJson before `ProcessGrouping` runs. |
+| 318872       | reg-open, 180 min to StartDate | backfill | same |
+
+Verified independently that the AsyncProcessor path reads `ConfigJson` live from the SP `GetTournamentsToStartSoon` — no Tournament-DTO-level cache (`Shared/SharedLib/Config/TournamentsCache.cs` covers `TournamentSeries`, not `Tournaments`). The only "freezing" point is the local variable inside `StartTournamentAsync` for the duration of its `Thread.Sleep` poll until `StartDate`, which begins at most 5 minutes ahead.
+
+### D.4 Target values
+
+`MaxRating[i]` recomputed by hand using the same rule `InitializeGrouping` applies (brackets sorted ascending by `MinRating`; `MaxRating[i] = MinRating[i+1] - 1`; last bracket = `int.MaxValue`):
+
+| Bracket index (0-based) | BracketName | MinRating | MaxRating |
+|-------------------------|-------------|-----------|-----------|
+| 0                       | Newbies     | 0         | 100       |
+| 1                       | Midles      | 101       | 1000      |
+| 2                       | Tops        | 1001      | 2147483647 |
+
+These match exactly what every `far-future` competition (`TournamentId >= 320342`) already carries in its `ConfigJson` — the regular generation pipeline writes them via the path described in D.1.
+
+### D.5 SQL block (applied)
+
+```sql
+-- Pre-check: expect MaxRating=NULL for both rows, BracketName/MinRating shape sane
+SELECT
+    t.TournamentId,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[0].BracketName')  AS Br1_Name,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[0].MinRating')    AS Br1_Min,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[0].MaxRating')    AS Br1_Max,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[1].BracketName')  AS Br2_Name,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[1].MinRating')    AS Br2_Min,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[1].MaxRating')    AS Br2_Max,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[2].BracketName')  AS Br3_Name,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[2].MinRating')    AS Br3_Min,
+    JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[2].MaxRating')    AS Br3_Max,
+    LEN(t.ConfigJson) AS Len
+FROM dbo.Tournaments t WITH (NOLOCK)
+WHERE t.TournamentId IN (318871, 318872)
+ORDER BY t.TournamentId;
+
+BEGIN TRAN;
+
+UPDATE t
+SET ConfigJson =
+    JSON_MODIFY(
+    JSON_MODIFY(
+    JSON_MODIFY(
+        t.ConfigJson,
+        '$.Grouping.Brackets[0].MaxRating', 100),
+        '$.Grouping.Brackets[1].MaxRating', 1000),
+        '$.Grouping.Brackets[2].MaxRating', 2147483647)
+OUTPUT
+    inserted.TournamentId,
+    LEN(deleted.ConfigJson)  AS OldLen,
+    LEN(inserted.ConfigJson) AS NewLen,
+    JSON_VALUE(inserted.ConfigJson, '$.Grouping.Brackets[0].MaxRating') AS NewBr1_Max,
+    JSON_VALUE(inserted.ConfigJson, '$.Grouping.Brackets[1].MaxRating') AS NewBr2_Max,
+    JSON_VALUE(inserted.ConfigJson, '$.Grouping.Brackets[2].MaxRating') AS NewBr3_Max
+FROM dbo.Tournaments t
+WHERE t.TournamentId IN (318871, 318872)
+  AND t.KindId = 3
+  AND JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[0].MaxRating') IS NULL  -- idempotency guard
+  AND JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[0].MinRating') = '0'    -- shape sanity
+  AND JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[1].MinRating') = '101'
+  AND JSON_VALUE(t.ConfigJson, '$.Grouping.Brackets[2].MinRating') = '1001';
+
+-- Verify OUTPUT (2 rows; ~+56 bytes per row; NewBrN_Max = 100 / 1000 / 2147483647)
+COMMIT;
+```
+
+The 3-bracket layout is hard-coded — appropriate for Steam where every active Competition template happens to use the same Newbies/Midles/Tops shape. For cross-platform reuse, see "Open threads" — the unified release-time script must recompute `MaxRating` dynamically from `MinRating[i+1] - 1` to be schema-agnostic.
+
+### D.6 Post-patch row state
+
+| TournamentId | MinSize | Br1 (Newbies)              | Br2 (Midles)                 | Br3 (Tops)                          | Len  |
+|--------------|---------|----------------------------|------------------------------|-------------------------------------|------|
+| 318871       | 20      | MinRating=0, MaxRating=100 | MinRating=101, MaxRating=1000 | MinRating=1001, MaxRating=2147483647 | 2580 |
+| 318872       | 20      | MinRating=0, MaxRating=100 | MinRating=101, MaxRating=1000 | MinRating=1001, MaxRating=2147483647 | 2323 |
+
+Identical to the shape carried by every healthy `TournamentId >= 320342`.
+
+### D.7 Phase summary after the patch (MaxRating-aware)
+
+`R202604-...sql` Q1 (executed in the predecessor's "## Verification" above) reports `MissingGrouping` only — it does not yet check `Brackets[i].MaxRating`. A bespoke `MaxRating`-aware scan was run shortly after `COMMIT`:
+
+| Phase             | Total | NoGroupingObject | GroupingPresentButMaxMissing | Healthy |
+|-------------------|-------|------------------|------------------------------|---------|
+| 1-live            | 1     | 0                | **1**                        | 0       |
+| 2-reg-open        | 6     | 0                | 0                            | 6       |
+| 3-reg-opens-soon  | 1     | 0                | 0                            | 1       |
+| 4-far-future      | 138   | 0                | 0                            | 138     |
+
+The single `MaxMissing` row in the live phase is **318870**, deliberately left alone (see D.3). Drill-down query confirms `318870` is the only outlier and that `JSON_QUERY(t.ConfigJson, '$.Grouping') IS NOT NULL` for it (object is present, only the per-bracket `MaxRating` is missing — the exact pattern this section's defect class is about). Folding this dimension into `R202604-...sql` is one of the open threads below.
+
+---
+
+## Open threads (introduced by section D)
+
+### 1. Extend `R202604-...sql` to surface this defect dimension
+
+Diff drafted but not yet applied (recorded here so the unified release-script work can pull it in directly):
+
+- **Header field list**: add a fifth bullet for `Grouping.Brackets[i].MaxRating`, with a one-paragraph note that its source of truth is runtime code (`InitializeGrouping`), never the template.
+- **Background**: extend the "two classes of issues" prose to a third class — *runtime-only field gap* — describing the Grouping-copy-without-MaxRating failure mode and the recompute formula.
+- **Q1**: add column `MissingBracketMaxRating` derived from `JSON_QUERY('$.Grouping') IS NOT NULL AND EXISTS (SELECT 1 FROM OPENJSON('$.Grouping.Brackets') WITH (MaxRating int '$.MaxRating') WHERE MaxRating IS NULL)`. Guarded by `IS NOT NULL` so a missing-Grouping row is reported only by `MissingGrouping`, not double-counted.
+- **Q2**: add column `MaxRatingVerdict` returning `'runtime'` when Grouping is present but at least one bracket lacks `MaxRating`, `''` otherwise (including when Grouping is absent — `GroupingVerdict` already reports that). Extend the WHERE clause with the same `EXISTS` so affected rows surface.
+- **Q3 / Q4 / Q5**: untouched. `MaxRating` is not a template-content field (Q3 inapplicable), is nested rather than root-level (Q4 inapplicable), and is independent of JSON validity (Q5 unchanged).
+- **Expected interpretation**: bump "all four Missing\* columns" → "all five"; append a sentence about `'runtime'` verdict pointing at `JSON_MODIFY`-without-`InitializeGrouping` as the typical cause and per-bracket `JSON_MODIFY` as the fix.
+
+### 2. Code-side defensive fix candidates
+
+The asymmetry between the two `TournamentsHelper.FromDto` overloads is the structural cause. Two minimally invasive options:
+
+- **Local**: add `MatchmakingLogic.InitializeGrouping(tournament.Grouping)` at the top of `MatchmakingLogic.ProcessGroupingForTournament`, immediately after the `TournamentsHelper.FromDto(tournament)` call. Closes the gap exactly where it manifests; no other call site is affected.
+- **Symmetric**: add `MatchmakingLogic.InitializeGrouping(result.Grouping)` to `TournamentsHelper.FromDto(TournamentDto)`, mirroring `FromDto(TournamentTemplateDto)`. Closes the gap for any future caller as well, at the cost of touching a more central method.
+
+Either option turns the "MaxRating must be persisted in ConfigJson" implicit contract into a self-healing one — backfill scripts that copy `Grouping` from a template can stop worrying about `MaxRating`, and the runtime works correctly even if `MaxRating` was never written to disk. Strongly recommended to land this fix before the next platform deploy lands; otherwise every cross-platform repeat of section A.4 needs to remember to also apply section D.
+
+### 3. Cross-platform applicability
+
+When the rating release lands on PS / XB / MOB / NX, the same shape of defect will re-emerge if section A.4 is replayed on those platforms without a parallel D-section step:
+
+- run `R202604-...sql` Q1/Q2 (preferably the extended version — see thread 1) to enumerate affected `TournamentId`s on the platform;
+- include a `MaxRating` recomputation step alongside the `Grouping` copy. The unified release-time script the user is drafting will likely express it as a single transaction touching both: copy `Grouping` from template, then immediately patch `MaxRating[i]` per bracket to `Brackets[i+1].MinRating - 1` (last bracket = `2147483647`). The SQL is simpler than it sounds — `OPENJSON … WITH (MinRating int '$.MinRating')` lets the script enumerate brackets dynamically and avoid the 3-bracket hard-coding from D.5;
+- alternatively, if the code fix from thread 2 lands first and is deployed cross-platform before the next backfill, this whole step becomes unnecessary — the runtime will recover gracefully from raw-template `Grouping` in `Tournaments.ConfigJson`.
