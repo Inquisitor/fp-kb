@@ -1,5 +1,5 @@
 # Leaderboards — backlog
 
-- [ ] Verify whether the 3 per-type `…UIOn` flags declared on the client (`PhotonServerConnection_LeaderBoards.cs`) are reserved for future per-tab gating or are stale. See [log.md](log.md) 2026-04-28
-- [ ] Flesh out `_card.md` Key Types section as related work surfaces (period dimensions, query types, processing-status lifecycle)
-- [ ] Document the leaderboard period lifecycle (Running → Cleaning) — currently only entry-point methods are mapped
+- [x] 3 per-type `…UIOn` flags on client — verified empirically 2026-04-28: declared in `PhotonServerConnection_LeaderBoards.cs` / `IPhotonServerConnection_Leaderboards.cs`, no consumers in client C#. Per-type UI-gating effect achieved via empty server response (which client renders as empty tab). Intent (reserved vs stale boilerplate) is feature-ask territory, not a docs gap
+- [x] Flesh out `_card.md` Key Types section — done 2026-05-01: PeriodId encoding noted, `LeaderboardProcessingStatus` 9-state machine called out, `LeaderboardResultMessage<T>` added; AsyncProcessor cursor env-vars surfaced in Dependencies
+- [x] Document the leaderboard period lifecycle — done 2026-05-01 in [`lifecycle-and-jobs.md`](lifecycle-and-jobs.md): full state machine (Unknown → Upcoming → Current → Passed → HistorySaved → Processing → Processed → Cleaning → Cleaned), three FinalizationJobs with separate cursors, catch-up safety property, reset event triggering, reward delivery channel

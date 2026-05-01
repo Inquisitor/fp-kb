@@ -43,28 +43,11 @@ Naming: `Is{Type}Leaderboards{Stage}On` for `Type ∈ {Competitive, Global, Fish
 
 ## Push-to-static refresh
 
-The 12 subsystem flags are **static auto-properties** on `LeaderboardsAdapter`:
+The 12 subsystem flags are **static auto-properties** on `LeaderboardsAdapter`, populated by `EnvironmentVariableCache.UpdateStaticVariables` which is hooked to `EnvironmentVariables.OnRefreshPerformed`. So flipping a subsystem flag in DB needs an env-var cache refresh (WebAdmin "Refresh Server Caches" or periodic refresh tick) for the new value to reach the runtime.
 
-```csharp
-// Shared/SharedLib/Leaderboards/LeaderboardsAdapter_Competitive.cs (and analogues for Global, Fish)
-public static bool IsCompetitiveLeaderboardsUpdateOn { get; set; }
-public static bool IsCompetitiveLeaderboardsRewardsOn { get; set; }
-public static bool IsCompetitiveLeaderboardsJobsOn   { get; set; }
-public static bool IsCompetitiveLeaderboardsUIOn     { get; set; }
-```
+`IsLeaderboardsOn` (and most other env-vars) is a **computed property** — reads from cache on every access, no push needed. Flipping it takes effect on the next read after the cache refresh sees it.
 
-`EnvironmentVariableCache.UpdateStaticVariables` (`Shared/SharedLib/Config/EnvironmentVariableCache.cs`) writes them on every cache refresh:
-
-```csharp
-EnvironmentVariables.OnRefreshPerformed += UpdateStaticVariables;
-// ...
-LeaderboardsAdapter.IsCompetitiveLeaderboardsUpdateOn = IsCompetitiveLeaderboardsUpdateOn;
-// ... 11 more lines, one per subsystem flag
-```
-
-`IsLeaderboardsOn` (and most other env-vars) instead use **computed properties** (`=> EnvironmentVariables.Cache.GetBoolValue(...)`) that read fresh on every access.
-
-**Implication:** flipping any of the 12 subsystem flags **does not require a server restart** — it requires triggering an env-var cache refresh (WebAdmin "Refresh Server Caches" button, or wait for periodic refresh tick). The push happens via the `OnRefreshPerformed` event. `IsLeaderboardsOn` updates immediately on the next access (no refresh needed for it).
+Practical: a server restart is **not** needed for any flag flip; only the cache refresh is.
 
 ## Storage
 
