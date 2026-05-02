@@ -10,6 +10,7 @@
 | FP-43424 | FP/server | kb-mapping         | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/             |
 | FP-41595 | FP/server | lbm-release-support| in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/  |
 | FP-43553 | FP/server | configjson-fix     | in-progress   | fishing-planet/tasks/FP-43553--pre-release-configjson/        |
+| FP-43579 | FP/server | anticheat-tool     | planning      | fishing-planet/tasks/FP-43579--anticheat-session-analysis/    |
 
 ## Active Reviews
 | Task     | Executor    | Path                                                                                       |
