@@ -533,6 +533,68 @@ If a future schema bump is needed:
 - Moderator loses past calibrations on first load after deploy. Acceptable trade-off for v1; Phase 5 server-side persistence would carry through.
 - No active migration code — keeps the composable simple.
 
+## Physical Model — Coordinate Spaces
+
+Three distinct pixel spaces participate in rendering. Their relationships are explicit to avoid the «which size is which» class of bugs (mixing screenshot natural size, client window size, and on-page display size).
+
+### Spaces
+
+| Space                  | Origin                                                                                                                | Typical size                                | Notes                                                                              |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------|
+| **Client window**      | `Mouse.current.position.ReadValue()` at click time                                                                    | Calibrated (`1920×1080`, `1280×800`, ...)   | Coordinate space of `TakeClick` / `ReleaseClick` events. Y-up.                     |
+| **Screenshot natural** | Server-downscaled JPEG in `Stats.Screens.Screen` (verified 2026-05-03 via Id=60007)                                   | Always **800×H**, AR preserved              | Server downscales to fixed 800px width regardless of client window. Y-down.        |
+| **On-page display**    | `<canvas>` element CSS size                                                                                           | Browser viewport-bound (`max-width: 100%`)  | UA-side scaling for moderator visibility.                                          |
+
+**Verified**: a real screenshot (`Stats.Screens` Id=60007) is `800×449` JPEG, game-window only (no monitor chrome, no admin chrome). Click coords for the same session are in the original client-window space (e.g. `1920×1080`), not the downscaled space.
+
+### Canvas as the unifying space
+
+The `<canvas>` intrinsic size = **client window resolution** (= `calibration.resolution`). All overlays draw 1:1 in this space:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│ canvas: width=window.W, height=window.H                  │
+│                                                          │
+│  Layer 0  background:                                    │
+│    if screenshot   → ctx.drawImage(img, 0, 0, W, H)      │
+│                       (800×H_jpeg upsampled to W×H)      │
+│    else            → strokeRect(0, 0, W, H) — frame      │
+│                                                          │
+│  Layer 1  KEEP / RELEASE / catchPanel rects              │
+│    derived from uiGeometry.ts via Expand-mode scaling    │
+│    for current (W, H) — see UI Geometry Constants below  │
+│                                                          │
+│  Layer 2  click points                                   │
+│    drawn at (event.x, event.y) — 1:1, no transform       │
+│    Y-flip: draw at (x, H - y) since Y-up → canvas Y-down │
+└──────────────────────────────────────────────────────────┘
+                    ↓ CSS max-width: 100%
+            page rendered ~600-1200px wide
+            depending on viewport
+```
+
+**Why upsample the JPEG instead of canvas-resizing to 800×H**: clicks are in window space — sticking them on a 800×H canvas would require `(x*800/W, y*H_jpeg/H)` transform, accumulating rounding error and diverging when window AR differs from JPEG AR (server downscales preserving AR, but if calibration AR is wrong, divergence becomes visible — and that visible divergence is what the moderator uses to **detect** AR miscalibration).
+
+When the calibration is correct, screenshot AR == window AR, drawImage is a uniform upscale, everything overlays cleanly. When the calibration is wrong, the screenshot stretches/squashes against bounding rects — visible feedback for the moderator to fix the resolution.
+
+### Bounding-box-only mode (no screenshot selected)
+
+When `activeScreenshotId == null`, Layer 0 = empty stroked rect (`#888`, 1px) on the canvas border. Layers 1-2 unchanged. This gives the moderator a reference frame to interpret click positions even before picking a screenshot.
+
+### Aspect ratio parameterisation (CalibrationPanel manual mode)
+
+```ts
+// src/calibration/aspectRatios.ts
+export const STANDARD_ASPECT_RATIOS = {
+  '16:9':  { w: 16, h: 9  },
+  '16:10': { w: 16, h: 10 },
+  '4:3':   { w: 4,  h: 3  },
+} as const
+export type AspectRatioKey = keyof typeof STANDARD_ASPECT_RATIOS
+```
+
+Manual mode UI: width slider + radio for `STANDARD_ASPECT_RATIOS` keys → `height = width * ratio.h / ratio.w`. Adding a new standard AR is a single object key — UI iterates over `Object.keys(STANDARD_ASPECT_RATIOS)`. Custom (non-standard) AR support is deferred; schema (`CalibrationData.resolution.manual.aspectRatio: string`) accommodates a free-text future.
+
 ## UI Geometry Constants
 
 RES-002 closed 2026-05-03. Canonical values measured at runtime in Unity Editor play mode (not from prefab YAML — runtime layout differs because code overrides `RectTransform` properties on instantiation).
@@ -821,12 +883,12 @@ No Sentry or remote logging in v1.
 
 ## Performance Budgets
 
-| Resource | Cap | Rationale |
-|---|---|---|
-| Events per request | 10,000 (server-side, last by timestamp desc) | Active player at 14-day Mongo retention may have tens of thousands of clicks; rendering all on canvas is feasible but JSON payload + DOM construction grow linearly. 10k chosen as generous default. |
-| Screenshots per request | 20 (paged) | Thumbnail strip with paging is more usable than scroll-to-load for a few hundred screenshots. |
-| Total events client-side | Whatever server returned | No additional client-side cap. Client renders what it received. |
-| Initial state size | < 1 KB | Only `userId` + `dateRange` go through Razor data-attribute. Rest via AJAX. |
+| Resource                 | Cap                                          | Rationale                                                                                                                                                                                            |
+|--------------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Events per request       | 10,000 (server-side, last by timestamp desc) | Active player at 14-day Mongo retention may have tens of thousands of clicks; rendering all on canvas is feasible but JSON payload + DOM construction grow linearly. 10k chosen as generous default. |
+| Screenshots per request  | 20 (paged)                                   | Thumbnail strip with paging is more usable than scroll-to-load for a few hundred screenshots.                                                                                                        |
+| Total events client-side | Whatever server returned                     | No additional client-side cap. Client renders what it received.                                                                                                                                      |
+| Initial state size       | < 1 KB                                       | Only `userId` + `dateRange` go through Razor data-attribute. Rest via AJAX.                                                                                                                          |
 
 If `Events.totalAvailable > 10000`, UI banner: «Showing last 10000 of 24837 events. [Increase limit ↗]». The increase action is a v1 stub; if moderators ask, post-v1 refinement adds a query param `&limit=N` capped at, say, 50000.
 
@@ -834,15 +896,15 @@ If `Events.totalAvailable > 10000`, UI banner: «Showing last 10000 of 24837 eve
 
 The data sources have different retention windows. Moderators must be aware that a date range can extend beyond the retention horizon for some sources:
 
-| Source                  | Retention                                      | Behavior on out-of-range query                                                                |
-|-------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| Mongo `fishingLog`      | 14 days                                        | Older events silently absent — only the in-retention slice is returned                        |
-| Mongo `diagSysInfoLog`  | 14 days (assumed same Mongo log retention)     | Same — older entries absent                                                                   |
-| SQL `Stats.Screens`     | TBD (verify SQL purge job before v1 ships)     | Older screenshots may be archived / purged; tool may show fewer than expected for old ranges  |
+| Source                  | Retention                                | Source of truth                                                              | Behavior on out-of-range query                |
+|-------------------------|------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------|
+| Mongo `fishingLog`      | 14 days                                  | External (DBA scripts; not in repo)                                          | Older events silently absent                  |
+| Mongo `diagSysInfoLog`  | **unverified** (assume 14d as stopgap)   | No TTL index, no AsyncProcessor cleanup job in repo — retention out-of-band  | Older entries silently absent                 |
+| SQL `Stats.Screens`     | 14 days                                  | `SqlAnalyticsProvider.ScreenStorageHorizon` + `ScreensClearingJob` (daily)   | Older screenshots silently absent             |
 
-**UI behavior** when range > 14 days ago: server response includes `dataAvailability: { eventsFrom: <retentionStart>, screenshotsFrom: <screenshotsStart> }`. Vue displays a banner like «Events available only from 2026-04-19 onward (Mongo retention 14d). Query range starts 2026-04-01.» Banner closeable; explicit click on a thumbnail older than retention silently shows just-screenshot-no-clicks.
+Mongo retention is configured outside versioned code. `Stats.Screens` retention is in-repo. There is no retention manifest covering all logs — see [DOC-003 in backlog](../backlog.md) for KB module promotion.
 
-**TODO before v1**: confirm `Stats.Screens` retention via existing purge / archival job — DAT-related subtask in Phase 3.
+**UI behavior**: do **not** display a hardcoded retention banner. Empty data over a queried range is self-evident (heatmap empty, no events shown, no thumbnails). Adding a banner with a fixed «14 days» value risks misleading the moderator if the actual horizon drifts. A retention-aware banner is deferred until a verified source-of-truth manifest exists (post-v1).
 
 ## Browser & Security
 
