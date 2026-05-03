@@ -324,21 +324,13 @@ HTML_HEAD = """<!DOCTYPE html>
 
 
 def find_personal_bg(log_dir, name):
-    # exact match first
+    # Exact filename match only. Convention: <player_name>.<png|jpg|jpeg|webp>
+    # next to the log file. No prefix fuzz — that produced false positives
+    # when one player's name is a prefix of another's (e.g. Jangalor / JangalorFP).
     for ext in IMG_EXTS:
         p = log_dir / f"{name}{ext}"
         if p.is_file():
             return p
-    # prefix match (e.g. "Jangalor.jpg" -> "JangalorFP")
-    candidates = []
-    for ext in IMG_EXTS:
-        for p in log_dir.glob(f"*{ext}"):
-            stem = p.stem
-            if name.startswith(stem) or stem.startswith(name):
-                candidates.append((len(stem), p))  # prefer longer stem (more specific)
-    if candidates:
-        candidates.sort(key=lambda kv: -kv[0])
-        return candidates[0][1]
     return None
 
 

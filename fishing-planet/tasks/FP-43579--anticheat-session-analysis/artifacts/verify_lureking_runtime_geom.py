@@ -194,7 +194,7 @@ def _analyze_inner(name, take_pts, release_pts):
 
 if __name__ == "__main__":
     base = Path(sys.argv[1] if len(sys.argv) > 1 else r"D:/FishingPlanet/Temp/logs/cheaters/take-click")
-    for name in ("LUYA168", "W_CHUANQI", "rrsrewr", "Niepan.LD", "DFT_KennPF", "adidan", "JangalorFP"):
+    for name in ("LUYA168", "W_CHUANQI", "rrsrewr", "Niepan.LD", "DFT_KennPF", "adidan", "JangalorFP", "Jangalor"):
         t = base / f"_{name}_take.txt"
         r = base / f"_{name}_release.txt"
         h = base / f"{name}.htm"

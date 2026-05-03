@@ -36,7 +36,9 @@ Vue 3 island
   - Filter form submit intercepted by JS → AJAX refresh, history.pushState (no full reload)
 ```
 
-Filter form is **outside Vue** (Razor partial with Kendo DateTimePickers). Apply-button submit is intercepted by a JS handler that calls `window.AntiCheatTool.refresh()` (exported by Vue), which re-fetches AJAX data and updates state without page reload. URL is updated via `history.pushState` so the filter is shareable / bookmarkable.
+Filter form is **outside Vue** (Razor partial with Kendo DateTimePickers). Apply-button submit is intercepted by a JS handler that dispatches a `CustomEvent('anticheat:refresh', { detail: { userId, from, to } })` on the `#anti-cheat-app` mount element. Vue's `main.ts` registers an `addEventListener` for this event during mount and re-fetches AJAX data without page reload. URL is updated via `history.pushState` so the filter is shareable / bookmarkable.
+
+Why CustomEvent and not a global function (`window.AntiCheatTool.refresh()`)? No global namespace pollution; mount-order race is explicit (if the event fires before Vue mounts, the listener is not attached and the event is silently dropped — visible in DevTools as "no listeners" rather than a TypeError on undefined `window.AntiCheatTool`); idiomatic for the future SPA migration where refresh is triggered by router state, not a global call.
 
 ## Scaffold Spike Verification (RES-001)
 
@@ -146,6 +148,16 @@ WebAdmin/Components/AntiCheatTool/
 Chrome, Firefox, modern Edge (Chromium). Safari and IE11 explicitly out of scope.
 
 `vite.config.ts → build.target: 'esnext'`. No polyfills, no transpilation for legacy.
+
+### TypeScript strictness
+
+`tsconfig.json` enables `"strict": true` (which implies `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, `strictBindCallApply`, `alwaysStrict`, `strictPropertyInitialization`). Plus `forceConsistentCasingInFileNames` and `isolatedModules`.
+
+This is the **contract for typed JSON flowing from C# `JsonConvert.SerializeObject(model.Data)` into TypeScript interfaces** — null-vs-undefined boundaries are explicit, no implicit `any` in event handlers, no truthiness on possibly-null values without an explicit narrow.
+
+If a type assertion (`as`) seems necessary, prefer a narrowing function instead (e.g. `function isClickEvent(x: unknown): x is ClickEvent { ... }`). Reasons: assertion silently passes a wrong shape through to runtime; narrowing function does runtime verification.
+
+**Loosening strictness requires a comment explaining why and a corresponding TODO** — do not silently disable.
 
 ## Backend Layering (ARC-002)
 
@@ -281,9 +293,14 @@ Approximate shape (~50 lines):
 <script>
     document.getElementById('anticheat-filter').addEventListener('submit', function(e) {
         e.preventDefault();
-        var qs = new URLSearchParams(new FormData(e.target)).toString();
+        var fd = new FormData(e.target);
+        var qs = new URLSearchParams(fd).toString();
         history.pushState({}, '', '?' + qs);
-        window.AntiCheatTool.refresh();
+        document.getElementById('anti-cheat-app').dispatchEvent(
+            new CustomEvent('anticheat:refresh', {
+                detail: { userId: fd.get('userId'), from: fd.get('from'), to: fd.get('to') }
+            })
+        );
     });
     $(document).ready(function() {
         CreateKendoUtcDateTimePickerFor('#fromPicker', '#from');
@@ -595,26 +612,45 @@ Two complementary discriminative metrics emerged from the verification:
 
 The two metrics do not overlap: LureKing bots are far from any window-center, Pattern B clicks are far from button rects, honest players are far from both.
 
-Results across 7 real-world samples:
+Results across 8 real-world samples:
 
-| Player     | Take centroid | In KEEP rect | Window-center match   | Verdict                                                                                                                                                                                                                                                               |
-|------------|---------------|--------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| LUYA168    | (663, 89)     | **100.0%**   | NO (272 px off)       | **LureKing**                                                                                                                                                                                                                                                          |
-| rrsrewr    | (663, 92)     | **99.1%**    | NO (269 px off)       | **LureKing**                                                                                                                                                                                                                                                          |
-| W_CHUANQI  | (808, 575)    | 4.1%         | **1600×1200 (26 px)** | **Pattern B**                                                                                                                                                                                                                                                         |
-| Niepan.LD  | (810, 419)    | 8.6%         | **1600×900 (32 px)**  | **Pattern B**                                                                                                                                                                                                                                                         |
-| DFT_KennPF | (992, 537)    | n/a (6 take) | **1920×1080 (32 px)** | **Pattern B** (detected on sparse data via centroid)                                                                                                                                                                                                                  |
-| adidan     | (983, 470)    | 17.3%        | NO (73 px, marginal)  | **multi-cluster** — visual inspection reveals 3 clouds: window-center (release-heavy, bot-like) + two on actual buttons (looks human). Single-centroid metric averages them and gives misleading verdict — see [Multi-cluster limitation](#multi-cluster-limitation). |
-| JangalorFP | (2111, 438)   | n/a (no rel) | NO (482 px+)          | honest 4K player — no signature match                                                                                                                                                                                                                                 |
+| Player                    | Take centroid  | In KEEP rect | Window-center match   | Verdict                                                                                                                                                                                                                                                                                                                                                     |
+|---------------------------|----------------|--------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| LUYA168                   | (663, 89)      | **100.0%**   | NO (272 px off)       | **LureKing**                                                                                                                                                                                                                                                                                                                                                |
+| rrsrewr                   | (663, 92)      | **99.1%**    | NO (269 px off)       | **LureKing**                                                                                                                                                                                                                                                                                                                                                |
+| W_CHUANQI                 | (808, 575)     | 4.1%         | **1600×1200 (26 px)** | **Pattern B**                                                                                                                                                                                                                                                                                                                                               |
+| Niepan.LD                 | (810, 419)     | 8.6%         | **1600×900 (32 px)**  | **Pattern B**                                                                                                                                                                                                                                                                                                                                               |
+| DFT_KennPF                | (992, 537)     | n/a (6 take) | **1920×1080 (32 px)** | **Pattern B** (detected on sparse data via centroid)                                                                                                                                                                                                                                                                                                        |
+| adidan                    | (983, 470)     | 17.3%        | NO (73 px, marginal)  | **multi-cluster** — visual inspection reveals 3 clouds: window-center (release-heavy, bot-like) + two on actual buttons (looks human). Single-centroid metric averages them and gives misleading verdict — see [Multi-cluster limitation](#multi-cluster-limitation).                                                                                       |
+| JangalorFP (4K)           | (2111, 438)    | n/a (no rel) | NO (482 px+)          | honest 4K player — scattered click pattern, no signature match                                                                                                                                                                                                                                                                                              |
+| **Jangalor (Steam Deck)** | **(640, 399)** | n/a (no rel) | **1280×800 (1.0 px)** | **Known false-positive — honest controller-only Steam Deck player.** 17/17 TakeClicks at *exactly* (640, 399), variance 0 px, exactly window-center. Visually indistinguishable from a Pattern B bot signature by the window-center metric alone. See [Known false-positive: Steam Deck controller-only](#known-false-positive-steam-deck-controller-only). |
 
 **Verdict logic** (foundation for Phase 4 anomaly scoring):
 
 - Both metrics low (in-rect ≤ 20% AND centroid > 100 px from any window-center) → **honest** or insufficient signal.
 - Button-rect metric high (in-rect ≥ 80%) → **button-targeting bot** (LureKing-style).
-- Window-center metric matches (centroid within 50 px of standard W/2 H/2) → **cursor-parked-at-center bot** (Pattern B).
+- Window-center metric matches (centroid within 50 px of standard W/2 H/2) → **suspect Pattern B**, but **cannot conclude bot without additional signal** — see Known false-positive section. Possible refinements: cross-check with `diagSysInfoLog` for controller hardware (Steam Deck), check Releases distribution (controller honest player has few/no Releases at center; bot typically has many Take + Release at center).
 - Neither matches AND cluster is concentrated → **distinct signature** (rare, surface to moderator for manual attribution).
 
-Phase 4 anomaly scoring ports both metrics from this verification + `heatmap_gen.py` to server-side. The tool's discriminative power is validated empirically across all 7 samples, including correctly identifying the honest Jangalor case as not-suspicious.
+Phase 4 anomaly scoring ports both metrics from this verification + `heatmap_gen.py` to server-side. The tool's discriminative power is validated empirically across all 8 samples, but the **window-center metric alone is not sufficient** to call Pattern B verdict — it surfaces *suspects* for moderator review.
+
+#### Known false-positive: Steam Deck controller-only
+
+The same human player on two different setups produces dramatically different click patterns:
+
+- **JangalorFP** (4K monitor 3840×2160, mouse): 25 TakeClicks scattered across X 2131-3534, Y 227-2159 — typical honest pattern, far from any window-center.
+- **Jangalor** (Steam Deck 1280×800, controller-only): 17 TakeClicks at *exactly* (640, 399) — variance 0 px — exactly window-center, distance 1.0 px to standard 1280×800 center.
+
+Steam Deck's controller-only mode triggers Unity's auto-cursor-centering on focus / screen events, and there is no mouse to move the cursor away. Every controller-A press for KEEP fires the click handler at the cursor's current pixel, which is the same pixel every time. **Tightness alone does NOT discriminate this from a bot** — a bot with `SetCursorPos(W/2, H/2)` would produce identical output. The earlier hypothesis "tight cluster ≈ controller, loose cluster ≈ bot" is **falsified** — both produce tight clusters.
+
+Discriminator candidates that *do* work:
+
+1. **Hardware signature** — `diagSysInfoLog.Monitor` may identify Steam Deck (e.g. specific resolution + GPU string). If hardware indicates portable / controller-only device, treat window-center cluster as expected-honest until proven otherwise.
+2. **Releases distribution** — Jangalor has 0 ReleaseClicks (only Takes). LureKing-style bots have many Releases also at exact button-pixel. Pattern B bots usually have heavy Take dominance with few Releases (similar to Jangalor — ambiguous). If both Take AND Release clusters exist at exact same pixel = bot; only Take cluster + 0 Release = ambiguous (could be controller honest or partial bot).
+3. **Click rate** — 17 clicks total over a session is a normal human pace. A bot at the same pixel would accumulate hundreds. Phase 4 anomaly scoring should weight by clicks-per-hour / clicks-per-fish-encounter.
+4. **Visual review** — moderator has access to player's account history, ban records, IP timeline. The tool surfaces suspects; moderator confirms or dismisses.
+
+For v1: window-center match is treated as **suspect, surface to moderator**, not auto-verdict bot. Moderator's eye + account context decides. Phase 4 may incorporate (1)-(3) as automated discriminators once enough cases are accumulated.
 
 #### Multi-cluster limitation
 
@@ -630,23 +666,27 @@ Implications:
   4. Aggregate verdict over clusters: e.g. "one Pattern B cluster (60% of total, Release-heavy) + two human-on-button clusters (40% combined)".
 - `heatmap_gen.py` currently extracts only the densest cluster via `cluster_density` / `cluster_centroid`. The Phase 4 port must extend this to enumerate **all** dense clusters above a threshold weight.
 
-#### Open hypothesis: window-center cluster tightness as bot-vs-controller discriminator
+#### Window-center cluster: bot-vs-controller discrimination (status 2026-05-03)
 
 A cluster sitting at exact window-center has two competing explanations (per [requirements.md → Hypotheses Still Open](requirements.md#hypotheses-still-open)):
 
 - **(a)** Bot using `SetCursorPos`-style cursor placement before each handler invocation.
-- **(b)** Unity auto-centering the cursor on some event (screen change / focus loss) combined with controller-only play (notably observed on Steam Deck).
+- **(b)** Unity auto-centering the cursor on focus / screen-change events, combined with controller-only play (Steam Deck has no mouse, cursor stays where Unity put it).
 
-**Hypothesis (not yet verified)**: cluster *tightness* may discriminate (a) from (b):
+**Earlier hypothesis (FALSIFIED)**: cluster *tightness* would discriminate (a) from (b) — tight ±1-2 px = controller, loose 5-50 px = bot. This was tested against the Jangalor Steam Deck sample: 17/17 clicks at *exactly* (640, 399), variance 0 px. A confirmed honest controller player produces a tighter cluster than any LureKing bot in our sample. Tightness-as-discriminator is **dead**.
 
-- **Tight cluster (within ±1-2 px of exact window-center)** → likely (b), controller / Steam Deck. Honest.
-- **Loose cluster (5-50 px spread around window-center)** → likely (a), bot using `SetCursorPos` with some natural variance. Suspicious.
+**Working discriminator candidates** (replace tightness):
 
-Reasoning: Unity's auto-centering is deterministic — it positions cursor at a known anchor pixel; multiple events produce identical pixel coords. Bots calling `SetCursorPos(W/2, H/2)` could also be deterministic, but real-world bot writers often add intentional small jitter to evade detection, OR the bot computes window-center from a value that drifts slightly (e.g. window not exactly maximized).
+1. **Hardware signature** (`diagSysInfoLog.Monitor`, GPU string) → identify Steam Deck / portable / known controller-only devices. Treat their window-center clusters as expected-honest until other signal contradicts.
+2. **Releases on buttons** — confirmed LureKing bots produce ReleaseClicks at exact RELEASE-button-pixel matching the same scaling as TakeClicks. A controller-honest player has zero or scattered Releases (Jangalor: 0 Releases). If both Take AND Release clusters exist at exact same pixel = strong bot signal; if Release cluster at the actual button position (not center) AND Take cluster at center = weird mixed pattern, surface for review.
+3. **Click rate** — 17 takes per session is human pace; bot at same pixel accumulates hundreds in same period. Phase 4 should weight by clicks-per-hour and clicks-per-catch.
+4. **Account/IP context** — outside the click metrics: account history, ban records, IP timeline. Visible to moderator alongside the heatmap.
 
-**Status**: This is a hypothesis to validate during v1 deployment. The tool will surface tightness metrics (cluster bounding box / standard deviation around centroid) so moderators can develop intuition. Phase 4 anomaly scoring may incorporate the discriminator once the hypothesis is confirmed by enough cases.
+**v1 verdict logic** for window-center match:
 
-Until then, treat **all** window-center matches as Pattern B (suspect) — let the moderator review for case-by-case attribution.
+- **Suspect** (not auto-verdict bot). Surface to moderator with all 4 discriminator signals visible.
+- Moderator looks at: hardware info, Releases distribution, click rate, account context, and the heatmap visual itself.
+- Auto-verdict requires Phase 4 work + accumulated case data to confirm which discriminators reliably work.
 
 ## Visual Consistency Strategy
 
@@ -789,6 +829,20 @@ No Sentry or remote logging in v1.
 | Initial state size | < 1 KB | Only `userId` + `dateRange` go through Razor data-attribute. Rest via AJAX. |
 
 If `Events.totalAvailable > 10000`, UI banner: «Showing last 10000 of 24837 events. [Increase limit ↗]». The increase action is a v1 stub; if moderators ask, post-v1 refinement adds a query param `&limit=N` capped at, say, 50000.
+
+### Data availability constraints
+
+The data sources have different retention windows. Moderators must be aware that a date range can extend beyond the retention horizon for some sources:
+
+| Source                  | Retention                                      | Behavior on out-of-range query                                                                |
+|-------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Mongo `fishingLog`      | 14 days                                        | Older events silently absent — only the in-retention slice is returned                        |
+| Mongo `diagSysInfoLog`  | 14 days (assumed same Mongo log retention)     | Same — older entries absent                                                                   |
+| SQL `Stats.Screens`     | TBD (verify SQL purge job before v1 ships)     | Older screenshots may be archived / purged; tool may show fewer than expected for old ranges  |
+
+**UI behavior** when range > 14 days ago: server response includes `dataAvailability: { eventsFrom: <retentionStart>, screenshotsFrom: <screenshotsStart> }`. Vue displays a banner like «Events available only from 2026-04-19 onward (Mongo retention 14d). Query range starts 2026-04-01.» Banner closeable; explicit click on a thumbnail older than retention silently shows just-screenshot-no-clicks.
+
+**TODO before v1**: confirm `Stats.Screens` retention via existing purge / archival job — DAT-related subtask in Phase 3.
 
 ## Browser & Security
 

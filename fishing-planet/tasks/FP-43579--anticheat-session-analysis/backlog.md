@@ -13,7 +13,13 @@ Phase-level checkboxes; detailed phase content lives in [journal.md → Plan](jo
 - [ ] Phase 4+ — Implementation by subtask, vertical-slice approach
 
 ## Pending user tasks (out-of-band)
-- [x] **RES-002** — DONE 2026-05-03. Canonical UI geometry measured at runtime in Unity Editor play mode via `uloop` CLI (not prefab YAML). Values committed to `Components/AntiCheatTool/src/calibration/uiGeometry.ts`. Verified against LureKing empirical click coords.
+- [x] **RES-002** — DONE 2026-05-03. Canonical UI geometry measured at runtime in Unity Editor play mode via `uloop` CLI (not prefab YAML). Values committed to `Components/AntiCheatTool/src/calibration/uiGeometry.ts`. Verified against LureKing empirical click coords + Steam Deck controller-only false-positive case (Jangalor account).
+
+## DAT-001 acceptance preconditions (Phase 3 / 4)
+The DAL change extends `IAnalyticsProvider.GetPlayerScreens(Guid userId)` to `(Guid, DateTime?, DateTime?, int?, int?)` and adds `GetPlayerScreensCount`. Before merging:
+- [ ] Grep for all `IAnalyticsProvider` implementations and Moq mocks in `Dal/`, `WebAdmin/`, and any test projects. List every site and update to new signature.
+- [ ] Run existing test suites that touch `IAnalyticsProvider` — must pass (Dal/Sql.MsSql.Tests/ if exists, WebAdmin tests if any reference this provider).
+- [ ] Verify `Stats.Screens` retention/purge schedule (referenced from new "Data availability constraints" section in architecture). Confirm what TBD becomes.
 
 ## Strategic deliverables (R&D for SPA migration)
 - [ ] **DOC-001** — `WebAdmin/Components/AntiCheatTool/README.md` with embed pattern, build commands, dev workflow, Kendo bridge gotchas, explicit contrast with `TargetedAdsPlanningTool` setup. Created as part of Phase 4+, refined as patterns solidify.
