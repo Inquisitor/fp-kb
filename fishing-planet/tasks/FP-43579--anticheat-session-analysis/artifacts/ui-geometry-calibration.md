@@ -2,7 +2,9 @@
 
 ## Status
 
-**This is a stopgap, not a proper method.** The constants below were derived once empirically from screenshots; they will rot when the client UI is repositioned. The proper path is reading the catch-panel prefab in Unity Editor (see [Recommended approach](#recommended-approach)).
+**SUPERSEDED 2026-05-03.** Canonical values now live in `Components/AntiCheatTool/src/calibration/uiGeometry.ts` measured at runtime in Unity Editor play mode (RES-002 closed). See [architecture.md → UI Geometry Constants](architecture.md#ui-geometry-constants) for the values, scaling math, and LureKing-empirical verification.
+
+This document is kept as **historical context** for the empirical method that was used before runtime measurement was possible. Numbers below are within ~5-10px of the canonical values — close enough that they would have worked, but no longer authoritative.
 
 ## Current constants (as of 2026-05, Content branch LBM20251201)
 

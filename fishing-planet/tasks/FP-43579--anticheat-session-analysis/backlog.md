@@ -8,9 +8,16 @@ Phase-level checkboxes; detailed phase content lives in [journal.md → Plan](jo
 - [x] Copy prototype heatmap renderer to [artifacts/heatmap_gen.py](artifacts/heatmap_gen.py)
 - [x] Revert pre-task WebAdmin scaffolding (controller / model / view / DAL Find methods / link / csproj)
 - [x] Phase 1 — Requirements doc → [artifacts/requirements.md](artifacts/requirements.md)
-- [ ] Phase 2 — Architecture doc → `artifacts/architecture.md`
+- [x] Phase 2 — Architecture doc → [artifacts/architecture.md](artifacts/architecture.md). Includes scaffold spike verification (RES-001 closed) and DAL variant B decision.
 - [ ] Phase 3 — Subtask decomposition (DAT / BCK / BLD / FRT / DOC / TST)
 - [ ] Phase 4+ — Implementation by subtask, vertical-slice approach
+
+## Pending user tasks (out-of-band)
+- [x] **RES-002** — DONE 2026-05-03. Canonical UI geometry measured at runtime in Unity Editor play mode via `uloop` CLI (not prefab YAML). Values committed to `Components/AntiCheatTool/src/calibration/uiGeometry.ts`. Verified against LureKing empirical click coords.
+
+## Strategic deliverables (R&D for SPA migration)
+- [ ] **DOC-001** — `WebAdmin/Components/AntiCheatTool/README.md` with embed pattern, build commands, dev workflow, Kendo bridge gotchas, explicit contrast with `TargetedAdsPlanningTool` setup. Created as part of Phase 4+, refined as patterns solidify.
+- [ ] **DOC-002** (post-v1) — KB promotion: create `<kb>/.../web-admin/` module (currently no such module in KB) with `_card.md`, `log.md`, deep-dive `embedded-vue-pattern.md`. Add milestone with `[branch r<rev>]` stamp. Tag `TargetedAdsPlanningTool` in module card as legacy reference. Triggered when v1 is verified working in production.
 
 ## Captured investigation findings (index)
 - Pattern A — LureKing → [artifacts/lureking-notes.md](artifacts/lureking-notes.md). Sample accounts: LUYA168, rrsrewr
