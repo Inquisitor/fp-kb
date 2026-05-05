@@ -2,7 +2,7 @@
 id: DAT-001
 title: Extend GetPlayerScreens with date-range + paging; add Count
 slice: VS3
-status: todo
+status: done
 depends-on: []
 effort: S
 ---
@@ -47,7 +47,15 @@ int GetPlayerScreensCount(
 - Date predicates similarly conditional: append `AND Timestamp >= @from` / `AND Timestamp <= @to` only when each is non-null. Existing caller (`ScreensModel.cs:15`) passes neither → unchanged SQL.
 
 ## Exit criteria
-- [ ] Interface compiles, all consumers updated
-- [ ] `Sql.MsSql.Tests` green (`dotnet test --no-build`)
-- [ ] Existing `/Player/Screens?userId=...` still returns full list (verify in browser)
-- [ ] Manual SQL trace: query plan uses `IX_Screens_UserId` (or whichever index exists) without scan blow-up at large `skip`
+- [x] Interface compiles, all consumers updated — single caller `ScreensModel.cs:15` uses default args, no edit needed
+- [ ] `Sql.MsSql.Tests` green *(deferred to post-v1: TST-001 itself deferred — no AnalyticsProvider fixture)*
+- [x] Existing `/Player/Screens?userId=...` still returns full list
+- [ ] Manual SQL trace: query plan uses `IX_Screens_UserId` without scan blow-up at large `skip` *(deferred to Phase 4 perf review when production traffic justifies)*
+
+## Implementation notes (DONE 2026-05-03)
+- Interface signature exactly per architecture: `GetPlayerScreens(Guid, DateTime? = null, DateTime? = null, int? = null, int? = null)` + `GetPlayerScreensCount(Guid, DateTime? = null, DateTime? = null)`. Default args preserve existing call site behavior.
+- SQL built via `StringBuilder` — clauses appended only when each parameter is non-null (date predicates and `OFFSET/FETCH`). Existing caller passes nothing → identical SQL to pre-change. Paging requires `take.HasValue` (skip alone silently ignored — paging needs a window length).
+- `WITH (NOLOCK)` on every reference (per session feedback).
+- `GetPlayerScreensCount` separate small method (`SELECT COUNT(*)`) — row count for paging UI doesn't fit cleanly into a streaming `IEnumerable<ScreenDto>` return.
+- Added `using System.Text` for `StringBuilder`.
+- Verified: no Mock setups on `GetPlayerScreens` anywhere (Moq mock interface still satisfied without explicit setup).

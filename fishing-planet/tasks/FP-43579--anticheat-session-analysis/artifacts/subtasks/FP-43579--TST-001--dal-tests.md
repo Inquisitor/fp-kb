@@ -2,10 +2,23 @@
 id: TST-001
 title: DAL tests for date-range + paging
 slice: VS5
-status: todo
+status: deferred-post-v1
 depends-on: [DAT-001]
 effort: M
 ---
+
+## Deferred 2026-05-04
+
+`Sql.MsSql.Tests` has no `IAnalyticsProvider` fixture — scaffolding from
+scratch (DB connection, Stats.Screens seeding, ~7 cases) is ~2-4 h for one
+edge case. The single existing caller (`ScreensModel.cs:15`) uses defaults
+unchanged; the new optional parameters are only exercised by our endpoint,
+which is covered by manual smoke (TST-002). Architecture already deferred
+controller/model unit tests on the same blast-radius / scaffolding-cost
+argument; DAL is the symmetric case.
+
+Tracked in [backlog → DOC-001-tests](../backlog.md). Reconsider if Phase 4
+anomaly scoring lands testable business logic.
 
 ## Scope
 Add `Sql.MsSql.Tests` cases covering the new optional parameters of `GetPlayerScreens` and the new `GetPlayerScreensCount`.

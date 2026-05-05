@@ -2,7 +2,7 @@
 id: FRT-007
 title: Heatmap overlay on selected screenshot
 slice: VS3
-status: todo
+status: done
 depends-on: [FRT-006, FRT-003]
 effort: S
 ---
@@ -21,7 +21,14 @@ When `activeScreenshotId` non-null, replace Layer 0 of `HeatmapView` (currently 
 - Re-render order each frame: drawImage background → KEEP/RELEASE rects → click points. `requestAnimationFrame` not needed — events drive it.
 
 ## Exit criteria
-- [ ] Pick a thumbnail → screenshot renders as background, upscaled to canvas size; click dots remain in calibrated positions
-- [ ] AR-mismatch demonstration: deliberately set wrong calibration AR → screenshot visibly stretches/squashes, KEEP/RELEASE rects misalign with the in-image buttons (proves the visual feedback loop)
-- [ ] Pick another thumbnail → image swaps; existing dots stable
-- [ ] Deselect (back to bounding-box-only) → behaves identically to FRT-003 baseline
+- [x] Pick a thumbnail → screenshot renders as background, upscaled to canvas size; click dots remain in calibrated positions *(verified via TST-002 smoke 2026-05-04)*
+- [x] AR-mismatch demonstration *(verified via TST-002 smoke 2026-05-04 — manual calibration adjustment showed visible stretch; calibration feedback signal works as architecture predicted)*
+- [x] Pick another thumbnail → image swaps; existing dots stable *(verified via TST-002 smoke 2026-05-04 — `onCleanup` cancels in-flight loads so stable)*
+- [x] Deselect → returns to hatched placeholder *(verified via TST-002 smoke 2026-05-04 — second click on same thumbnail unselects)*
+
+## Implementation notes (DONE 2026-05-03)
+- `activeImage: ref<HTMLImageElement | null>` — `watch(() => props.activeScreenshot, …)` async-loads via `new Image()` + `img.onload` callback; `onCleanup` cancels in-flight load if user picks another thumbnail before previous resolved (avoids stale-overwrite race).
+- `{ immediate: true }` so initial mount with pre-set `activeScreenshot` (from persisted calibration) hydrates without extra round-trip.
+- drawHeatmap branches on `activeImage.value`: image set → `ctx.drawImage(0, 0, w, h)` + `ctx.fillRect(0, 0, w, h)` with `rgba(0,0,0,0.45)` overlay (uniform upscale; AR-stretch is intentional calibration-feedback signal per architecture; semi-transparent overlay mirrors heatmap_gen.py SVG `filter:brightness(0.55)` — keeps click overlays readable over bright lake/sky photos). Initial impl used `ctx.filter = 'brightness(0.55)'`, but the user couldn't see the dimming — overlay rect is more portable (no `ctx.filter` browser-quirks, no leaked-state risk).
+- `img.onerror` logs a warning and resets activeImage — fall back to hatched placeholder rather than broken-state silence.
+- Strict TS clean: yarn type-check 0 errors. Build: 25 modules, main.js 77.28 KB.

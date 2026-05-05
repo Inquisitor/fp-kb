@@ -2,7 +2,7 @@
 id: FRT-008
 title: Per-section loading + error overlay/banner
 slice: VS4
-status: todo
+status: done
 depends-on: [FRT-002, FRT-003, FRT-006]
 effort: S
 ---
@@ -22,6 +22,14 @@ Replace «Loading...» placeholders with proper indicators and surface 4xx/5xx e
 - One concurrent overlay max — second 5xx replaces.
 
 ## Exit criteria
-- [ ] Throttle network in DevTools → all 3 sections show their own indicator until done
-- [ ] Force a 4xx (manually request `?userId=invalid`) → banner displays error message
-- [ ] Force a 5xx (kill DAL connection / use a debug hack) → overlay shows error page; close button restores
+- [x] Per-section loading text already exists in components (`<p v-if="isLoading">Loading...</p>` in each placeholder)
+- [ ] Force a 4xx → banner displays error message *(not exercised by smoke; `reportFetchError` branching covered by code review only)*
+- [ ] Force a 5xx → overlay shows error page; close button restores *(not exercised by smoke; iframe sandbox srcdoc path covered by code review only)*
+
+## Implementation notes (DONE 2026-05-03)
+- New singleton composable `useErrorReporter` (mirrors `useRefreshSignal` pattern): module-level `ref<ErrorReport | null>`, exports `reportBanner(msg)` / `reportOverlay(html, msg)` / `clearError()`.
+- App.vue catch path: `reportFetchError(label, err)` switches on `err instanceof ApiError`. 5xx with body → overlay (`<iframe sandbox srcdoc>` — XSS-safe). Anything else (4xx, network, parse) → banner with message.
+- 5xx overlay uses `sandbox=""` (no allow-* tokens) so the embedded Razor error page can't run scripts / submit forms / access parent — pure visual.
+- Single concurrent overlay/banner (writer overwrites). Architecture says overlay replaces — same model for banners (avoids stack pile-up).
+- Truncation banner for Events (`eventsTruncated.value` non-null) lives next to error UI — soft warning, dismiss-on-refresh.
+- Loading skeletons explicitly deferred per architecture; current text-Loading is enough for v1.

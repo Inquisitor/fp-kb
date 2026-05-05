@@ -579,7 +579,9 @@ When the calibration is correct, screenshot AR == window AR, drawImage is a unif
 
 ### Bounding-box-only mode (no screenshot selected)
 
-When `activeScreenshotId == null`, Layer 0 = empty stroked rect (`#888`, 1px) on the canvas border. Layers 1-2 unchanged. This gives the moderator a reference frame to interpret click positions even before picking a screenshot.
+When `activeScreenshotId == null`, Layer 0 is a **diagonally-hatched placeholder** (45° lines, `#1c1c1c` on `#0d0d0d`, ~18 px step scaled with resolution). Layers 1-2 unchanged. This gives the moderator a reference frame to interpret click positions even before picking a screenshot, and signals «no screenshot here, by design» rather than a broken render.
+
+> v1 deviation from initial architecture (which proposed an empty stroked rect). Hatching emerged from VS2 smoke feedback — pure empty bbox left moderators unsure whether rendering had failed. FRT-007 (heatmap-on-screenshot) replaces the hatch with `ctx.drawImage(activeScreenshot)` in the same Layer 0 slot when activeScreenshotId is set.
 
 ### Aspect ratio parameterisation (CalibrationPanel manual mode)
 

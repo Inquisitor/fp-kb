@@ -2,7 +2,7 @@
 id: FRT-003
 title: HeatmapView canvas — points mode, fixed resolution
 slice: VS2
-status: todo
+status: done
 depends-on: [BCK-002]
 effort: M
 ---
@@ -24,7 +24,17 @@ Render `events` list as dots on `<canvas>` inside `HeatmapView`. Canvas size = c
 - Show `take` / `release` toggle (props `showTake / showRelease`); state owned by `App.vue`, mutated via FRT-004.
 
 ## Exit criteria
-- [ ] LureKing sample renders a dense dot in KEEP-rect area; honest sample shows scattered dots
-- [ ] Canvas redraws on `events` ref change (e.g., when filter form refreshes via BCK-004)
-- [ ] No off-by-one when click at (0, 0) or (W, H)
-- [ ] Resolution change (e.g. via DevTools manual swap of calibration ref) re-renders rects and dots in correct positions
+- [x] LureKing sample renders a dense dot in KEEP-rect area; honest sample shows scattered dots *(verified via TST-002 smoke 2026-05-04 — LureKing red hot-cluster on KEEP rect confirmed)*
+- [x] Canvas redraws on `events` ref change — `watchEffect` reads all reactive props (events, calibration, displayMode, showTake/Release)
+- [x] No off-by-one at corners — clicks drawn with simple `arc(x, h - y, ...)` math; rects use `+ 0.5` for crisp 1px strokes
+- [x] Resolution change re-renders — `watchEffect` re-fires on `calibration.resolution` mutation; canvas intrinsic size updated; UI rects rescaled via Expand math
+
+## Implementation notes (DONE 2026-05-03)
+- `resolutionToSize` inline helper in HeatmapView (preset = parse `'WxH'`, manual = width + 16:9 fallback). Will be replaced by `aspectRatios.ts` lookup in FRT-004.
+- Render order Layer 0 → Layer 1 → Layer 2 per architecture. Layer 0 is bbox stroke for now; FRT-007 swaps in `ctx.drawImage(activeScreenshot)`.
+- Visual style **adopted from `heatmap_gen.py`** (per smoke feedback): dark canvas (#0d0d0d), fine pixel grid with axis labels (`#444 stroke 0.5` lines + `#666 9px Consolas` labels), orange center-cross (`#ff8c00`), dashed UI rects with opacity 0.55 (KEEP=`#ff8c00`, RELEASE=`#7fb3d5`, panel=`#999`), dashed frame border. **Take = filled cyan-blue circle (`hsl(200,80%,55%)`) with thin white stroke**, **Release = no fill + dashed red ring (`#ff5252`, `setLineDash([2,2])`)** — visually distinct kinds without colour-blindness ambiguity. Density mode acknowledged in template but not implemented (Phase 4).
+- **Hatched placeholder background** when `activeScreenshot == null` (added per smoke feedback, not in original architecture): subtle 45° diagonal lines (`#1c1c1c` on `#0d0d0d`) cover the entire canvas at 18px-pixelScale step. Reads as «no screenshot here, by design» — empty bbox alone left moderators wondering if rendering broke. FRT-007 will skip this draw when activeScreenshot is set (`ctx.drawImage` takes its place).
+- Grid step picker mirrors heatmap_gen.py: `floor(span / 10 / base) * base` with min cap (X: base 80, min 100/160 below/above 800; Y: base 45, min 60/90 below/above 450). Round numbers on labels regardless of resolution.
+- Canvas intrinsic size = window resolution (1920×1080 default). CSS `max-width: 100%` shrinks for moderator visibility per architecture's three-coordinate-spaces model.
+- App.vue: passes new `calibration` prop to HeatmapView (was missing from FRT-001 wiring).
+- Strict TS clean: `yarn type-check` 0 errors.

@@ -2,7 +2,7 @@
 id: BCK-001
 title: MonitorInfo endpoint (cheapest end-to-end)
 slice: VS1
-status: todo
+status: done
 depends-on: []
 effort: M
 ---
@@ -23,6 +23,11 @@ Add `Action MonitorInfo(string userId, DateTime from, DateTime to)` to `GameSess
 - Date validation: if `from > to` or both default → return `JsonResponse(new { error = "Invalid date range" })` with HTTP 400. Same pattern in BCK-002, BCK-003. Default `DateTime` for unbound MVC params is `DateTime.MinValue` — guard at action entry.
 
 ## Exit criteria
-- [ ] `/Anticheat/GameSessionAnalysis/MonitorInfo?userId=...&from=...&to=...` returns valid JSON shape under `[CustomAuthorize(Roles="Abuse")]`
-- [ ] Manual call via browser with a known userId returns expected `distinctValues`
-- [ ] No regression in existing `Player/SysLog` (which also uses `MongoSysInfoProvider.Find`)
+- [x] `/Anticheat/GameSessionAnalysis/MonitorInfo?userId=...&from=...&to=...` returns valid JSON shape under `[CustomAuthorize(Roles="Abuse")]`
+- [x] Manual call via browser with a known userId returns expected `distinctValues` *(verified via TST-002 smoke 2026-05-04)*
+- [x] No regression in existing `Player/SysLog` (which also uses `MongoSysInfoProvider.Find`) — added new overload `Find(userId, start, end)`, existing `Find(userId)` untouched
+
+## Implementation notes (DONE 2026-05-03)
+- `MongoSysInfoProvider.Find(userId, start, end)`: mirrors `MongoErrorProvider.Find(userId, start, end)` semantics (UTC normalisation, `Query.And(EQ UserId, GTE Timestamp, LTE Timestamp)`). No `NoSqlStats.ExecuteWithStats` wrapping — matches `MongoSysInfoProvider`'s own `Find(userId)` convention (read methods unwrapped; only writes wrap stats).
+- `GameSessionAnalysisMonitorInfoModel`: anonymous projection with lowercase property names so `JsonApiResult` (which uses `DefaultContractResolver`, not `CamelCasePropertyNamesContractResolver`) emits the contract shape verbatim. `distinctValues` filters out null/empty `Monitor`. Items ordered by `Timestamp` ascending (matches `MongoLogModel` convention).
+- Controller: `ValidateInputs` factored out — same guards (userId, MinValue, from > to) will be reused by BCK-002 / BCK-003. Returns `ActionResult` (not `JsonResult`) because the validation path returns an `ActionResult`-wrapped `JsonApiResult` with status code mutation; both branches satisfy the supertype.
