@@ -50,3 +50,12 @@ Paragraph: "Merged → ", branch name (strong + textColor by role), " @ ", revis
 ### SVN-side commit message
 
 The svn commit producing this merge uses the TortoiseSVN-style format documented in `<kb>/CLAUDE.md` → SVN merge commit format.
+
+## Combined commit + merge in one workflow
+
+When a single change lands as a commit on the source branch immediately followed by a merge to the target branch (the usual flow), post **one** combined JIRA comment, not two:
+
+- The commit-comment paragraph + bullet list comes first.
+- The merge-comment paragraph follows as a trailing paragraph in the same ADF document.
+
+Two separate comments fragment the timeline and clutter the issue thread; one comment carries the same information with less noise.
