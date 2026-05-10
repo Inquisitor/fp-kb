@@ -1,0 +1,87 @@
+title: Infrastructure
+page_id: 46628932
+parent_id: 71008272
+indexed: 2026-05-10
+
+pages:
+  - id: 3745284135
+    title: DevOps team
+  - id: 357629956
+    title: Environment refresh protocol
+  - id: 83591169
+    title: Create New Environment
+  - id: 28049441
+    title: Environments and Release Process
+  - id: 62281809
+    title: Farm Server Deployment Checklist
+  - id: 46628927
+    title: Game Server Cache
+  - id: 73105409
+    title: Monitoring of infrastructure
+  - id: 61511858
+    title: Sync Time On Server Machines
+  - id: 62622111
+    title: Translation Management
+  - id: 630882310
+    title: Web Admin Role based Privileges
+  - id: 225476609
+    title: XBox One сertificate refresh
+  - id: 116523027
+    title: Хранение полей типа DateTime в MongoDb (mongocsharpdriver)
+  - id: 874414081
+    title: SQL backup
+  - id: 1336705025
+    title: Transparent Data Encryption
+  - id: 1460371507
+    title: Analytics Server (StatsDB)
+  - id: 1626832952
+    title: Server branching
+  - id: 2251194852
+    title: Server Maintenance Status
+  - id: 2198011927
+    title: Servers in office
+  - id: 2939551768
+    title: Administrate VPN server
+  - id: 3598417921
+    title: Chat server debug (message bus)
+  - id: 2882437155
+    title: Production incidents handling
+  - id: 3656286273
+    title: Production server domain names
+  - id: 3660906904
+    title: Replace servers farm
+  - id: 3670638651
+    title: For acceleration of loading WebAdmin page
+  - id: 3670540366
+    title: Refresh certificates Steam and PlayStation MAIN DB
+  - id: 3878518785
+    title: ELK Stack
+  - id: 3678240779
+    title: Relocate SVN to new server URL
+  - id: 3702784005
+    title: Photon Tool
+  - id: 3745251355
+    title: OBSOLETE
+    notes: container for obsolete pages
+  - id: 3824943121
+    title: Unity Cache Server
+  - id: 3892084737
+    title: Unity Cache Server in Portugal office
+  - id: 3840737316
+    title: Support multiple Unity instances
+  - id: 3860529195
+    title: Renew wildcard SSL FP certificate
+  - id: 3881533546
+    title: Improve server startup on developer machine
+  - id: 3915251791
+    title: Analyzing Garbage Collector (GC)
+  - id: 4029841413
+    title: Enabling dynamic content compression in IIS
+  - id: 4399693834
+    title: Enable SQL-CLR on Main database on DEV
+  - id: 4931092521
+    title: SQL Patches multiple apply
+  - id: "5579014145"
+    title: Server Transport Ports
+    verified: 2026-05-10
+    last_pushed_version: 2

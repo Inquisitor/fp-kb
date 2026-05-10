@@ -1,0 +1,154 @@
+{
+    "comment": "A configuration for Game Carrier Fishing Planet server",
+
+    "working_dir": ".",
+
+    "logging": {
+        "comment": "%p means PID",
+        "log_file": "logs/gcs.log",
+        "level": {
+            "gcs": "NORMAL",
+            "user": "NORMAL"
+        }
+    },
+
+    "transports": [
+        {
+            "name": "tcp",
+            "type": "gcs-tcp",
+            "counters": {
+                "prefix": "Tcp"
+            }
+        },
+        {
+            "name": "wss",
+            "type": "gcs-wss",
+            "counters": {
+                "prefix": "Wss"
+            }
+        },
+        {
+            "name": "quic",
+            "type": "gcs-quic",
+            "counters": {
+                "prefix": "Quic"
+            }
+        }
+    ],
+
+    "adapters": [
+        {
+            "comment": "C# FP server",
+            "type": "netframework",
+            "apps": [
+                {
+                    "name": "Chat",
+                    "args": "class=Photon.LoadBalancing.ChatServer.ChatApplication;file=LoadBalancing/Chat/bin/Photon.LoadBalancing.dll"
+                },
+                {
+                    "name": "Club",
+                    "args": "class=Photon.LoadBalancing.ClubServer.ClubApplication;file=LoadBalancing/Club/bin/Photon.LoadBalancing.dll"
+                },
+                {
+                    "name": "Game",
+                    "args": "class=Photon.LoadBalancing.GameServer.GameApplication;file=LoadBalancing/GameServer1/bin/Photon.LoadBalancing.dll"
+                },
+                {
+                    "name": "Master",
+                    "args": "class=Photon.LoadBalancing.MasterServer.MasterApplication;file=LoadBalancing/Master/bin/Photon.LoadBalancing.dll"
+                }
+            ]
+        }
+    ],
+
+    "vhosts": [
+        {
+            "comment": "Master S2S endpoint",
+            "ip": "0.0.0.0",
+            "port": 4520,
+            "app": "Master",
+            "transport": "tcp",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Chat endpoint",
+            "ip": "0.0.0.0",
+            "port": 4521,
+            "app": "Chat",
+            "transport": "tcp",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Club endpoint",
+            "ip": "0.0.0.0",
+            "port": 4522,
+            "app": "Club",
+            "transport": "tcp",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Master endpoint",
+            "ip": "0.0.0.0",
+            "port": 4530,
+            "app": "Master",
+            "transport": "tcp",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Game endpoint",
+            "ip": "0.0.0.0",
+            "port": 4531,
+            "app": "Game",
+            "transport": "tcp",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Master endpoint",
+            "ip": "0.0.0.0",
+            "port": 9090,
+            "app": "Master",
+            "transport": "wss",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Game endpoint",
+            "ip": "0.0.0.0",
+            "port": 9091,
+            "app": "Game",
+            "transport": "wss",
+            "protocol": "PHOTON"
+        },
+        {
+            "comment": "Master endpoint",
+            "ip": "0.0.0.0",
+            "port": 4550,
+            "app": "Master",
+            "transport": "wss",
+            "protocol": "GAME_CARRIER"
+        },
+        {
+            "comment": "Game endpoint",
+            "ip": "0.0.0.0",
+            "port": 4551,
+            "app": "Game",
+            "transport": "wss",
+            "protocol": "GAME_CARRIER"
+        },
+        {
+            "comment": "Master endpoint",
+            "ip": "0.0.0.0",
+            "port": 4540,
+            "app": "Master",
+            "transport": "quic",
+            "protocol": "GAME_CARRIER"
+        },
+        {
+            "comment": "Game endpoint",
+            "ip": "0.0.0.0",
+            "port": 4541,
+            "app": "Game",
+            "transport": "quic",
+            "protocol": "GAME_CARRIER"
+        }
+    ]
+}

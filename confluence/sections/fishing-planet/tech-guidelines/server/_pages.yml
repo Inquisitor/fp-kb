@@ -10,8 +10,6 @@ pages:
     title: Analytics / Stats
   - id: 11796486
     title: Development Environment
-  - id: 46628932
-    title: Infrastructure
   - id: 55148616
     title: Monetization Guidelines
   - id: 60588749
@@ -37,3 +35,7 @@ subsections:
     title: Game logic / Core gameplay
     id: 46628919
     indexed: false
+  - slug: infrastructure
+    title: Infrastructure
+    id: 46628932
+    indexed: true

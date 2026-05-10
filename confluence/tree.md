@@ -19,7 +19,7 @@
 | TECH > SERVER > Business Logic > Competitive        | 46628934   | 3     | System: matchmaking spec, leaderboards, competitive pipeline      |
 | TECH > SERVER > Game Logic                          | 46628919   | 9     | Balance, achievements, events, leveling, inventory items          |
 | TECH > SERVER > Server Architecture                 | 71139336   | —     | Server architecture docs                                          |
-| TECH > SERVER > Infrastructure                      | 46628932   | —     | Deployment, monitoring, DB                                        |
+| TECH > SERVER > Infrastructure                      | 46628932   | 39    | Deployment, monitoring, DB, server transport ports                |
 | TECH > SERVER > Analytics / Stats                   | 1947140105 | —     | Analytics and statistics                                          |
 | TECH > SERVER > Modules                             | 3616899087 | —     | Module-level docs                                                 |
 
