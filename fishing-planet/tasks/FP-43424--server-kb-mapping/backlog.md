@@ -13,7 +13,7 @@ Deferred items and parking lot for ideas that appear during planning/execution. 
 - [ ] Skill `kb-sync-on-review` — extend review workflow with a step: detect modules touched by diff; check if Entry Points / Key Types / Dependencies in their cards still match; prompt updates.
 - [ ] Skill `kb-sync-on-task-close` — analogous to above, at task closure.
 - [ ] Skill `resume-mapping-session` — bootstrap protocol for continuing mid-pass work across sessions. Write once the pattern is real (not preemptively).
-- [ ] Pilot modules to deepen after Pass 6 — candidates from active tasks: `matchmaking` (FP-41746), `fish-weight-gen` (FP-33182/FP-41845), `xbox-purchases` (FP-41929), `missions`. Aim 3-5.
+- [ ] Pilot modules to deepen after Pass 6 — candidates from active tasks: `matchmaking` (FP-41746), `fish-weight-generator` (FP-41845; FP-33182 closed), `xbox-purchases` (FP-41929), `missions`. Aim 3-5.
 - [ ] Dependency graph visualization — optional. Consider Mermaid in `_systems/dependencies.md` generated from frontmatter + using-statement grep.
 
 ## Deferred decisions (not blocking initial mapping)

@@ -1,5 +1,5 @@
 ---
-status: reopened
+status: completed
 executor: Stanislav Samoilov
 original-author: Max Komisarenko
 jira: https://fishingplanet.atlassian.net/browse/FP-33182
@@ -10,8 +10,7 @@ confluence: https://fishingplanet.atlassian.net/wiki/pages/viewpage.action?pageI
 # FP-33182: Improve Random Fish Weight Generation
 
 ## Status
-System is deployed on production (current branch LBM20251201). Mathematical model has known errors — fix planned in FP-41845.
-Reopened: the 20.11.2025 update specifies that boundary weight suppression must apply **only to the eldest fish form** at a pond, not to all forms.
+**Closed.** Original implementation (r12950) deployed to production via JLM → KNW → LBM20251201 lineage. Mathematical model errors and the 20.11.2025 "eldest-form-only" scope refinement are out of scope for this task — addressed by successor [FP-41845](../FP-41845--weight-generation-v2/journal.md), which has already partially reverted r12950 (phase 2a.1) and is designing a corrected replacement.
 
 ## Summary
 
@@ -254,4 +253,7 @@ Average is preserved for `GetNextFloat` (by symmetry of N(0,σ) around midpoint)
 - 2024-09-25: Original implementation (r12950, Max Komisarenko) — added `GetPossibleNormalFloat()`, modified `GenerateRandomWeight()`, added GlobalVariables + test
 - 2025-06-25: GlobalVariables defaults changed to 0.95/0.55 + SQL patch (Stanislav Samoilov)
 - 2025-09-03: Clean revert on IMV (release without feature); JLM lineage continued with feature intact
-- Current: System on production (LBM20251201), mathematical model errors identified → FP-41845
+- 2025-11-20: JIRA update — boundary suppression scope refined (eldest form only)
+- 2026-03-02: Reopened, linked to FP-41845
+- 2026-03-12: FP-41845 phase 2a.1 partially reverted r12950 — uniform generation restored, double-weightK bug eliminated
+- 2026-04-15: Closed. Remaining concerns (mathematical model, eldest-form scope) carried by FP-41845

@@ -34,7 +34,7 @@ module: fish-generator
 - [Edge distribution](edge-distribution.md) — edge distribution approaches, normalization, correct sampling; design rationale for FP-41845
 
 ## Related Tasks
-- FP-33182: Improve random fish weight generation (reopened, on prod) → [task journal](../../../tasks/FP-33182--weight-generation/journal.md)
+- FP-33182: Improve random fish weight generation (completed; system on prod, successor FP-41845 reworks it) → [task journal](../../../tasks/FP-33182--weight-generation/journal.md)
 - FP-41845: Implement new system of weight generation (in progress) → [task journal](../../../tasks/FP-41845--weight-generation-v2/journal.md)
 - FP-41844: Edge distribution Confluence documentation (completed) — [GD guide](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5456625665), [Design Analysis](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5449973771)
   - Phase 1 complete: WebAdmin weight simulator built, deployed, validated vs production (all forms ≤0.13pp deviation)
