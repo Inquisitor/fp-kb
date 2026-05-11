@@ -24,7 +24,7 @@
 
 | ID      | Description                                                         | Status | Details                                                                    |
 |---------|---------------------------------------------------------------------|--------|----------------------------------------------------------------------------|
-| TRM-001 | Unify terminology in TDD + code XML doc comments                    | DONE   |
+| TRM-001 | Unify terminology in TDD + code XML doc comments                    | DONE   | [details](archived/subtasks/FP-41746--TRM-001--terminology-tdd.md)         |
 | TRM-002 | Rename code identifiers to unified Bracket/Bucket/Group terminology | DONE   | [details](archived/subtasks/FP-41746--TRM-002--rename-code-identifiers.md) |
 
 ### Phase 3 — Test Fixes (High Priority) — DONE
@@ -48,19 +48,19 @@
 
 ### Phase 5 — Code Refactoring — MOVED OUT
 
-| ID      | Description                                                       | Status                              |
-|---------|-------------------------------------------------------------------|-------------------------------------|
-| CFG-007 | Remove MaxRating from spec, compute bracket boundaries on the fly | Moved to [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717) |
-| VAL-001 | Revisit validations in TDD and code (depends on CFG-007)          | Folded into [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717) acceptance criteria |
+| ID      | Description                                                       | Status                                                                          | Details                                                                 |
+|---------|-------------------------------------------------------------------|---------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| CFG-007 | Remove MaxRating from spec, compute bracket boundaries on the fly | Moved to [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717)        | [details](archived/subtasks/FP-41746--CFG-007--remove-maxrating.md)     |
+| VAL-001 | Revisit validations in TDD and code (depends on CFG-007)          | Folded into [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717) ACs | [details](archived/subtasks/FP-41746--VAL-001--revisit-validations.md)  |
 
 ### Phase 6 — Feature Implementation (FP-41833) — DONE
 
 | ID      | Description                                                        | Status | Details                                                                          |
 |---------|--------------------------------------------------------------------|--------|----------------------------------------------------------------------------------|
-| CFG-005 | Implement MaxGroupCount                                            | DONE   | TDD → new spec (page 5505613835)                                                 |
-| CFG-006 | Implement MaxGroupSize (rework GDD description)                    | DONE   | TDD → new spec (page 5505613835)                                                 |
+| CFG-005 | Implement MaxGroupCount                                            | DONE   | [details](archived/subtasks/FP-41746--CFG-005--maxgroupcount.md)                 |
+| CFG-006 | Implement MaxGroupSize (rework GDD description)                    | DONE   | [details](archived/subtasks/FP-41746--CFG-006--maxsize.md)                       |
 | TST-004 | Recalculate expected test outputs for MaxGroupCount / MaxGroupSize | DONE   | [details](archived/subtasks/FP-41746--TST-004--recalculate-new-param-outputs.md) |
-| SUB-001 | Implement new group parameters, update docs                        | DONE   | TDD → new spec (page 5505613835)                                                 |
+| SUB-001 | Implement new group parameters, update docs                        | DONE   | [details](archived/subtasks/FP-41746--SUB-001--group-creation-algorithm.md)      |
 
 ### Phase 7 — Documentation Cleanup — DONE
 
@@ -74,9 +74,9 @@
 | ALG-002 | Update GDD: "any bucket can donate" instead of "Middles as filler" | DONE   | [details](archived/subtasks/FP-41746--ALG-002--gdd-donor-principle.md), → Правка 9 in [editing instructions](GDD-Editing-Instructions.md)                     |
 | ALG-003 | Update GDD: Phase B brief note                                     | DONE   | [details](archived/subtasks/FP-41746--ALG-003--gdd-phase-b-merge.md), → Правка 8 in [editing instructions](GDD-Editing-Instructions.md) (merged with ALG-001) |
 | ALG-007 | Remove "MinSize*2 single group" statement from GDD                 | DONE   | [details](archived/subtasks/FP-41746--ALG-007--gdd-minsize-collapse.md), → Правка 10 in [editing instructions](GDD-Editing-Instructions.md)                   |
-| FTR-001 | Add multipliers note to TDD                                        | DONE   | → new spec (page 5505613835), Section 3.4                                                                                                                     |
-| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | DONE   | → new spec (page 5505613835), Section 7                                                                                                                       |
-| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | DONE   | GDD: typos applied on Confluence. TDD: new spec, no old typos                                                                                                 |
+| FTR-001 | Add multipliers note to TDD                                        | DONE   | [details](archived/subtasks/FP-41746--FTR-001--multipliers-note.md)                                                                                           |
+| DOC-001 | Fix typo in TDD validation rules (wrong array index)               | DONE   | [details](archived/subtasks/FP-41746--DOC-001--validation-rule-typo.md)                                                                                       |
+| DOC-003 | Proofread GDD and TDD — fix spelling errors                        | DONE   | [details](archived/subtasks/FP-41746--DOC-003--proofreading.md)                                                                                               |
 
 ### Phase 8 — DB + Code Rename — DONE
 
@@ -123,168 +123,7 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 
 ---
 
-## 1. Terminology
-
-### TRM-001. Terminology mismatch across all documents
-
-| Concept                | GDD     | TDD            | Code                      |
-|------------------------|---------|----------------|---------------------------|
-| Rating range config    | Bracket | (rating range) | `TournamentGroupSettings` |
-| Rating-based container | Bucket  | Group          | `TournamentGroup`         |
-| Final competition unit | Group   | Subgroup       | `TournamentSubgroup`      |
-
-**Decision:** Adopt unified terminology **Bracket / Bucket / Group** (from GDD).
-
-| Action                                                                                                                                                                      | Status                                   |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|
-| **GDD:** Already uses Bracket/Bucket/Group. No changes needed.                                                                                                              | N/A                                      |
-| **TDD:** Replace "Group" with "Bucket" and "Subgroup" with "Group" throughout the matchmaking section.                                                                      | DONE — new spec (page 5505613835)        |
-| **Code:** Code identifiers (`TournamentGroup`, `TournamentSubgroup`) stay as-is to avoid massive refactoring. Add XML doc comments explaining the mapping to unified terms. | Superseded by TRM-002 (full code rename) |
-
-**Priority:** High (blocks clear communication on everything else)
-
----
-
----
-
-## 2. Configuration Parameters
-
-### CFG-005. `MaxGroupCount` — in GDD, not in code
-
-- **GDD:** "Maximum number of groups the algorithm can split the quorum into." Example: `"GroupCount": 5`. Use case: "if
-  500 newbies registered, split into 3 newbie groups instead of one."
-- **Code:** Not in `TournamentGroupingRule`. Not implemented.
-
-**Decision:** Implement per FP-41833. Update documentation to match implementation.
-
-| Action                                                                                             | Status |
-|----------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Update description to match final implementation.                                         | DONE   |
-| **TDD:** Add `MaxGroupCount` parameter description with implementation details.                    | DONE   |
-| **Code:** Implement `MaxGroupCount` in `TournamentGroupingRule` and `MatchmakingLogic` (FP-41833). | DONE   |
-
-**Priority:** Medium (feature implementation)
-
----
-
-### CFG-006. `MaxGroupSize` — in GDD, not in code
-
-- **GDD:** "Desired max number of players per group. Unlike TargetSize which splits into many small subgroups, this
-  splits into fewer large groups."
-- **Code:** Not in `TournamentGroupingRule`. Not implemented.
-
-**Decision:** Implement per FP-41833. Rework GDD description — current wording unclear. Update documentation to match
-implementation.
-
-| Action                                                                                            | Status |
-|---------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Rework description (current wording unclear). Align with final implementation.           | DONE   |
-| **TDD:** Add `MaxGroupSize` parameter description with implementation details.                    | DONE   |
-| **Code:** Implement `MaxGroupSize` in `TournamentGroupingRule` and `MatchmakingLogic` (FP-41833). | DONE   |
-
-**Priority:** Medium (feature implementation)
-
----
-
-### CFG-007. `MaxRating` — TDD says explicitly per-bracket, code auto-calculates
-
-- **TDD:** `MaxRating` is explicitly specified per bracket in JSON config. Validation checks that brackets are
-  continuous (group[i-1].MaxRating == group[i].MinRating - 1).
-- **GDD:** Only `MinRating` shown in JSON examples. `MaxRating` is implied ("MinRating of group 2 is effectively
-  MaxRating of group 1 plus 1 point").
-- **Code:** `MaxRating` exists in `TournamentBracket` (was `TournamentGroupSettings`) but `InitializeGrouping()`
-  auto-fills it from `MinRating` values. Works with `MaxRating = 0` or absent.
-
-**Decision:** Remove `MaxRating` from spec. Rework code: eliminate `InitializeGrouping()` call, compute bracket
-boundaries on the fly from `MinRating` values. `MaxRating` should not be a persisted/configured field.
-
-| Action                                                                                                                                                                                                   | Status |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Already consistent (only shows MinRating). No changes.                                                                                                                                          | N/A    |
-| **TDD:** Remove `MaxRating` from parameter spec. Describe that brackets are defined by `MinRating` only; upper bound is derived on the fly (next bracket's MinRating - 1).                               | TODO   |
-| **Code:** Remove `InitializeGrouping()`. Compute bracket boundaries on the fly from sorted `MinRating` values. Remove or deprecate `MaxRating` from `TournamentBracket` (was `TournamentGroupSettings`). | TODO   |
-
-**Priority:** Medium (code refactoring)
-
----
-
-## 3. Algorithm Discrepancies
-
----
-
-## 4. Validation
-
-### VAL-001. TDD describes extensive validation, code has minimal
-
-- **TDD:** Lists these validation checks:
-    - `MinSize < TargetSize < MaxSize`
-    - `CanceledIfIncomplete` and `NotRatedIfIncomplete` can't both be true
-    - `TargetSize` and `MaxSize` both null or both not null
-    - Rating overlap checks (continuous brackets)
-- **Code:** Only `TargetSize` range validation exists (`CreateGroups` (was `CreateSubgroups`) throws
-  `ArgumentException` if `TargetSize < MinSize` or `TargetSize > MaxSize`). No rating overlap validation.
-
-**Decision:** Remove validations for deleted parameters from TDD. Remaining validations (TargetSize, rating ranges,
-code-side checks) to be revisited after CFG-007 refactoring.
-
-| Action                                                                                                                                       | Status |
-|----------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** N/A                                                                                                                                 | N/A    |
-| **TDD:** Remove validation rules for `CanceledIfIncomplete`/`NotRatedIfIncomplete`. Revisit remaining validations after CFG-007.             | TODO   |
-| **Code:** Revisit code-side validations after CFG-007 (existing checks have issues). Consider adding `MinSize > 0`, `Groups.Count > 0`, etc. | TODO   |
-
-**Priority:** Medium (depends on CFG-007)
-
----
-
-## 5. Group Formation (formerly, "subgroups")
-
-### SUB-001. TDD says "[TBD]"; code fully implements group creation
-
-- **TDD:** "Creating subgroups — [TBD]"
-- **Code:** `CreateGroups` (was `CreateSubgroups`) fully implemented with TargetSize-based splitting, group count
-  selection (projected/increased/decreased), even distribution.
-- **GDD:** "Logic for creating subgroups" section describes the concept and says "in first iteration TargetSize won't be
-  used."
-
-**Decision:** Implement new group parameters per FP-41833. Update documentation everywhere to describe final algorithm.
-
-| Action                                                                                                                      | Status |
-|-----------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Update group creation section to describe final algorithm with new parameters (FP-41833).                          | DONE   |
-| **TDD:** Replace "[TBD]" with full group creation algorithm description matching final implementation.                      | DONE   |
-| **Code:** Implement new group parameters per FP-41833. Update `CreateGroups` (was `CreateSubgroups`) in `MatchmakingLogic`. | DONE   |
-
-**Priority:** Medium (feature implementation, FP-41833)
-
----
-
-## 6. Obsolete / Dead Code
-
----
-
-## 7. Documentation Errors
-
-### DOC-001. Typo in TDD validation rules — wrong array index
-
-- **TDD:** In "Competetive Activity Breaks" validation section, the rating overlap check reads:
-  `group[i-1].MaxRating == group[i-1].MinRating - 1`
-  Should be:
-  `group[i-1].MaxRating == group[i].MinRating - 1`
-  (right-hand side must reference the **next** group's MinRating, not the same group)
-- **Confluence page:** Same typo (page ID 4009033759, last modified 11 Jan 2026).
-
-**Decision:** Fix in TDD on Confluence. May become moot if validation section is rewritten per CFG-007.
-
-| Action                                                                                        | Status |
-|-----------------------------------------------------------------------------------------------|--------|
-| **GDD:** N/A                                                                                  | N/A    |
-| **TDD:** Fix `group[i-1].MinRating` → `group[i].MinRating` in validation rules on Confluence. | DONE   |
-| **Code:** N/A                                                                                 | N/A    |
-
-**Priority:** Low (documentation typo; may be superseded by CFG-007)
-
----
+## Active items
 
 ### DOC-002. Recreate `Matchmaking-System-Current-State.md`
 
@@ -300,43 +139,6 @@ code-side checks) to be revisited after CFG-007 refactoring.
 **Priority:** Low (final step)
 
 ---
-
-### DOC-003. Proofreading — fix typos in GDD and TDD
-
-- **GDD + TDD:** Multiple spelling errors across both documents, e.g. "Competetive" → "Competitive", and similar.
-
-**Decision:** Do a full proofreading pass on both GDD and TDD on Confluence. Sync local `.md` copies afterward.
-
-| Action                                                                 | Status |
-|------------------------------------------------------------------------|--------|
-| **GDD:** Proofread and fix typos on Confluence. Sync local `.md` copy. | DONE   |
-| **TDD:** Proofread and fix typos on Confluence. Sync local `.md` copy. | DONE   |
-
-**Priority:** Low (documentation cleanup)
-
----
-
-## 8. Features Planned but Not Implemented
-
-### FTR-001. Separate rewards per group
-
-- **GDD:** "In next iterations, rewards of different value per group."
-- **Code:** `RatingMultiplier` and `RewardMultiplier` exist in `TournamentGroupSettings` but are not applied in
-  matchmaking (applied during reward distribution separately).
-
-**Decision:** No action needed now. Document status.
-
-| Action                                                                                                                                          | Status |
-|-------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| **GDD:** Already marked as future iteration. No changes.                                                                                        | N/A    |
-| **TDD:** Add note: "RatingMultiplier and RewardMultiplier are stored in config and applied during reward distribution, not during matchmaking." | DONE   |
-| **Code:** No changes needed.                                                                                                                    | N/A    |
-
-**Priority:** Low (documentation only)
-
----
-
-## 9. Test Case Analysis
 
 ### RES-001. Categorize 4-bracket test cases
 
