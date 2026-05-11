@@ -86,11 +86,11 @@
 | DCD-004 | Remove `IsRated` from DB + code (alongside TRM-003)         | DONE   | [details](archived/subtasks/FP-41746--DCD-004--remove-participant-isnotrated.md), [design](TRM-003-DB-Rename-Design.md#dcd-004-remove-israted)    |
 | DCD-005 | Remove participant `IsCanceled` chain from DB + code        | DONE   | [details](archived/subtasks/FP-41746--DCD-005--remove-participant-iscanceled.md), [design](TRM-003-DB-Rename-Design.md#dcd-005-remove-iscanceled) |
 
-### Phase 9 — Final Documentation (after all code changes)
+### Phase 9 — Final Documentation — DONE
 
-| ID      | Description                                                  |
-|---------|--------------------------------------------------------------|
-| DOC-002 | Recreate Matchmaking-System-Current-State.md from final code |
+| ID      | Description                                                  | Status | Details                                                                       |
+|---------|--------------------------------------------------------------|--------|-------------------------------------------------------------------------------|
+| DOC-002 | Recreate Matchmaking-System-Current-State.md from final code | DONE   | [details](archived/subtasks/FP-41746--DOC-002--recreate-current-state-doc.md) |
 
 ### Phase 10 — Test Case Analysis (after all test fixes)
 
@@ -124,21 +124,6 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 ---
 
 ## Active items
-
-### DOC-002. Recreate `Matchmaking-System-Current-State.md`
-
-- **Doc:** The current-state architecture document was created as an analysis artifact before this plan. After all code
-  and documentation changes are complete, it will be outdated (bugs fixed, dead code removed, features added).
-
-**Decision:** Recreate from scratch after all phases are done to reflect the final state.
-
-| Action                                                                                     | Status |
-|--------------------------------------------------------------------------------------------|--------|
-| Regenerate `Matchmaking-System-Current-State.md` from final code after all fixes are done. | TODO   |
-
-**Priority:** Low (final step)
-
----
 
 ### RES-001. Categorize 4-bracket test cases
 
