@@ -46,12 +46,12 @@
 | DCD-005 | Remove TournamentGroupParticipant.IsCanceled + DB cleanup   | DONE   | → Phase 8                                                                    |
 | CFG-003 | Investigate IsRated DB columns (alongside DCD-001, DCD-004) | DONE   | → Phase 8                                                                    |
 
-### Phase 5 — Code Refactoring — DEFERRED
+### Phase 5 — Code Refactoring — MOVED OUT
 
-| ID      | Description                                                       | Status   |
-|---------|-------------------------------------------------------------------|----------|
-| CFG-007 | Remove MaxRating from spec, compute bracket boundaries on the fly | DEFERRED |
-| VAL-001 | Revisit validations in TDD and code (depends on CFG-007)          | DEFERRED |
+| ID      | Description                                                       | Status                              |
+|---------|-------------------------------------------------------------------|-------------------------------------|
+| CFG-007 | Remove MaxRating from spec, compute bracket boundaries on the fly | Moved to [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717) |
+| VAL-001 | Revisit validations in TDD and code (depends on CFG-007)          | Folded into [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717) acceptance criteria |
 
 ### Phase 6 — Feature Implementation (FP-41833) — DONE
 
