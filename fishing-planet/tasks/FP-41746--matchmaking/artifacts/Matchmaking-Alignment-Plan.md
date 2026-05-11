@@ -92,12 +92,12 @@
 |---------|--------------------------------------------------------------|--------|-------------------------------------------------------------------------------|
 | DOC-002 | Recreate Matchmaking-System-Current-State.md from final code | DONE   | [details](archived/subtasks/FP-41746--DOC-002--recreate-current-state-doc.md) |
 
-### Phase 10 — Test Case Analysis (after all test fixes)
+### Phase 10 — Test Case Analysis — BUBBLED UP
 
-| ID      | Description                                                                              |
-|---------|------------------------------------------------------------------------------------------|
-| RES-001 | Analyze and categorize 4-bracket test cases (TST-002), compare with 3-bracket categories |
-| RES-002 | Investigate if additional edge-case categories exist beyond the 5 identified in TST-001  |
+| ID      | Description                                                                              | Status                                                                       | Details                                                                            |
+|---------|------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| RES-001 | Analyze and categorize 4-bracket test cases (TST-002), compare with 3-bracket categories | Bubbled to [matchmaking module backlog](../../../server/modules/matchmaking/backlog.md) | [details](archived/subtasks/FP-41746--RES-001--categorize-4-bracket-tests.md)      |
+| RES-002 | Investigate if additional edge-case categories exist beyond the 5 identified in TST-001  | Bubbled to [matchmaking module backlog](../../../server/modules/matchmaking/backlog.md) | [details](archived/subtasks/FP-41746--RES-002--investigate-edge-categories.md)     |
 
 ### No Action Required
 
@@ -123,33 +123,4 @@ Completed items are collapsed to one-liners in the Summary above, with full deta
 
 ---
 
-## Active items
-
-### RES-001. Categorize 4-bracket test cases
-
-- After TST-002 (uncomment and fix 4-bracket test cases), analyze all test cases and categorize them into
-  scenario types — similar to the 5 categories identified for 3 brackets in TST-001.
-- Compare: do the same 5 categories cover 4 brackets, or do new patterns emerge (e.g. multi-hop pulls across
-  3+ adjacents, multiple Phase B merges)?
-- **Depends on:** TST-002 (DONE).
-
-| Action                                                                                   | Status |
-|------------------------------------------------------------------------------------------|--------|
-| Categorize all 4-bracket test cases. Document categories and compare with 3-bracket set. | TODO   |
-
-**Priority:** Low (research — useful for GDD documentation)
-
----
-
-### RES-002. Investigate additional edge-case categories
-
-- After RES-001, review if the combined 3-bracket + 4-bracket category list is exhaustive.
-- Consider: are there scenarios only possible with 5+ brackets? Degenerate inputs (all zeros, all equal,
-  exactly MinSize)? Can we derive a general category taxonomy independent of bracket count?
-- **Depends on:** RES-001.
-
-| Action                                                                                                   | Status |
-|----------------------------------------------------------------------------------------------------------|--------|
-| Research if more scenario categories exist beyond those found in TST-001 and RES-001. Document findings. | TODO   |
-
-**Priority:** Low (research)
+_All items resolved or bubbled up — see Summary above for the full execution record._

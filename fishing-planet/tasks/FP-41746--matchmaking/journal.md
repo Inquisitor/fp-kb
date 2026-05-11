@@ -7,8 +7,8 @@ related: FP-41833
 # FP-41746: Matchmaking Alignment
 
 ## Status
-All phases done except Phase 10 (research items RES-001/002). GDD updated on Confluence; new Matchmaking spec published (page 5505613835); Business Logic > Competitive reorganized; Phase 5 (CFG-007 + VAL-001) moved to [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717); Phase 9 (DOC-002) closed via [code audit artifact](artifacts/Matchmaking-Current-State.md).
-Next: decide whether to keep RES-001/002 as active or bubble up to module backlog. Task closure pending.
+All plan items resolved. GDD updated on Confluence; new Matchmaking spec published (page 5505613835); Business Logic > Competitive reorganized; Phase 5 (CFG-007 + VAL-001) moved to [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717); Phase 9 (DOC-002) closed via [code audit artifact](artifacts/Matchmaking-Current-State.md); Phase 10 research items (RES-001/002) bubbled to [matchmaking module backlog](../../server/modules/matchmaking/backlog.md).
+Next: task closure (`/kb-close-task`).
 - [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary
@@ -44,3 +44,4 @@ Related task FP-41833 ("matchmaking algorithm rework: cases with 2 new parameter
 - 2026-04-15: [Code audit](artifacts/Matchmaking-Current-State.md) created (closes DOC-002). New [matchmaking spec](../../confluence/workspace/FP-41746--matchmaking-spec.md) published to [Confluence](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5505613835) (Business Logic > Competitive > Matchmaking). Replaces obsolete TDD matchmaking section. TRM-001, CFG-005/006, SUB-001, FTR-001, DOC-001, DOC-003 TDD — all covered by new spec
 - 2026-04-15: Phase 5 (CFG-007 + VAL-001) moved out into [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717), motivated by FP-43553 prod incident
 - 2026-04-15: Alignment plan cleanup — DONE subtasks extracted to archived/subtasks/ via git-extract; only RES-001/002 remain active
+- 2026-04-15: Phase 9 DOC-002 closed (current-state doc recreated as code audit artifact). Phase 10 RES-001/002 bubbled to matchmaking module backlog with quick-scan analysis; revisit after upcoming bucket-evaluation change
