@@ -1,14 +1,13 @@
 ---
-status: in-progress
+status: completed
 executor: Stanislav Samoilov
 jira: https://fishingplanet.atlassian.net/browse/FP-41746
-related: FP-41833
+related: FP-41833, FP-43553, FP-43717
 ---
 # FP-41746: Matchmaking Alignment
 
 ## Status
-All plan items resolved. GDD updated on Confluence; new Matchmaking spec published (page 5505613835); Business Logic > Competitive reorganized; Phase 5 (CFG-007 + VAL-001) moved to [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717); Phase 9 (DOC-002) closed via [code audit artifact](artifacts/Matchmaking-Current-State.md); Phase 10 research items (RES-001/002) bubbled to [matchmaking module backlog](../../server/modules/matchmaking/backlog.md).
-Next: task closure (`/kb-close-task`).
+**Closed.** Originally "add 2 parameters to competition JSON"; expanded into full alignment across GDD, TDD, and code. Delivered: 8 of 10 phases completed (bug fixes, terminology rename, test fixes, dead code removal, MaxGroupCount/MaxSize implementation with FFS algorithm, GDD edits on Confluence, DB rename `GroupId`→`BracketId` with ConfigJson migration). Documentation: new [Matchmaking spec](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5505613835) published to Confluence (Business Logic > Competitive); old TDD's matchmaking section retired; [code audit artifact](artifacts/Matchmaking-Current-State.md) preserved as input. Out-of-scope: Phase 5 (CFG-007/VAL-001) → [FP-43717](https://fishingplanet.atlassian.net/browse/FP-43717) successor (motivated by FP-43553 prod incident). Research follow-ups (Phase 10 RES-001/002) bubbled to matchmaking module backlog with quick-scan analysis.
 - [Alignment Plan](artifacts/Matchmaking-Alignment-Plan.md)
 
 ## Summary
