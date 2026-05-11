@@ -1,5 +1,14 @@
 # Leaderboards — log
 
+## 2026-05-11
+FP-43631 (matchmaking abuse detection) exercised the leaderboard ban + finalization path under live conditions. Findings about leaderboard mechanics captured here:
+
+Finding: **`CompetitiveRatingsCurrent.IsBanned` is the ephemeral surgical ban hook**. Setting `IsBanned = 1` for `(PeriodTypeId, PeriodId, UserId)` causes `SaveCompetitiveLeaderboardHistory` to skip that row during the finalization MERGE (filter `WHERE [r].[IsBanned] = 0`). Result: the user gets no row in `CompetitiveRating*History`, no `RewardId` assignment, no `OfflineChatMessages` reward push. Verified empirically across STEAM/PS/Xbox for period 20260504: 29 banned users absent from winners' lists post-finalize, while clean top-10 received `RewardId 75066–75075` as expected.
+
+Finding: **post-cleanup data loss for banned cohort**. The hourly job at `MM:07` UTC finalizes the period (MERGE to History) and the subsequent cleanup pass at `~MM:20` UTC DELETEs all rows for that period from `*RatingsCurrent`. Result: banned users vanish from both Current (deleted) and History (never inserted). Audit-trail for the ban operation lives outside the DB — must be kept externally (we used `bans-<date>.md`). Architectural note: if reproducible ban audit becomes a requirement, the candidates are (a) a dedicated `CompetitiveLeaderboardBans` history table populated at finalization, or (b) durable marking via `Users.IsBanned` / `Profiles.IsCompetitionsBanned` — the latter is too heavy for a per-period ban scoped only to reward exclusion.
+
+Finding: **`UpdateLeaderboardsBanned` SP is NOT a substitute for direct UPDATE**. The SP computes the flag from `Users.IsBanned` (default 0 for normal accounts) plus `Profiles.Role NOT IN ('-', 'I', 'D')` then SETs `*RatingsCurrent.IsBanned` accordingly. Calling it for a normal account RESETS `IsBanned` to 0 — overriding any manual UPDATE. For surgical per-period leaderboard bans without account-level consequences, direct `UPDATE CompetitiveRatingsCurrent SET IsBanned = 1 WHERE ...` is the only correct path. Documented this caveat in the operational SQL artifact (`weekly-leaderboard-ban.sql` header).
+
 ## 2026-04-28
 Module created during FP-41595 release-support investigation. Deep dive [Control variables](control-variables.md) added — durable runtime semantics for the 13 leaderboards env-var flags (1 master + 12 subsystem), push-to-static refresh mechanics via `EnvironmentVariableCache.UpdateStaticVariables`, and client mirror map.
 

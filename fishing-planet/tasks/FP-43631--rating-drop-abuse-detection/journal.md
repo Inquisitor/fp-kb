@@ -1,0 +1,61 @@
+---
+status: completed
+executor: Stanislav Samoilov
+jira: https://fishingplanet.atlassian.net/browse/FP-43631
+related: FP-41746, FP-41595
+---
+# FP-43631: Find PCR-drop abusers in new Matchmaking
+
+## Status
+Delivered. Detection heuristic for PCR-drop abuse calibrated against 4 ground-truth abusers and applied across STEAM/PS/Xbox. Pre-finalization surgical leaderboard ban (29 abusers) on weekly period 20260504 verified 100% successful via post-finalize check — none reached the reward list. Wider sweep with 30% threshold yielded 107 candidates total, handed to Support for durable account bans. Deferred ideas (consecutive-no-show penalty, per-bracket prize caps, twink detection by IP/MAC, zero-score pivot watch, threshold drift, Mobile/NX passes) are owned by Community team or planned in separate tickets — see `backlog.md`.
+
+## Summary
+Players exploit the new matchmaking system (launched 2026-04-29) by registering for Competition-kind tournaments and not showing up, accruing `NoShowRatingPenalty` to deflate their `CompetitionRating` and drop into the lower (Nub `[0-100]`) bracket where they farm easy wins. Task: identify the cohort, estimate population size, distinguish abusers from honest losers. Output: a candidate ban-list to be applied via `Profiles.IsCompetitionsBanned` / `CompetitionsBanEndDate` while a more abuse-resistant bracket split (PCR + MaxWins / trophies cap per bracket) is designed.
+
+## Key Findings
+- `TournamentKinds.Competition = 3` (NOT 2 — confirmed in `Shared/Photon.Interfaces/Tournaments/TournamentKinds.cs`). Matchmaking grouping logic applies only to this kind.
+- Rating delta is written for every participant including no-shows (`TournamentEndAdapter.CalculateTournamentRatingsGained` saves `result.Rating` regardless of `IsStarted`).
+- Rating semantics: `tournament.Places` is a piecewise step-config — top places have positive `Rating`, mid/bottom places have **negative** `Rating` (smaller in magnitude than `NoShowRatingPenalty` but still negative). Sign of `r.Rating` alone does NOT distinguish no-show from honest bad finish.
+- **Reliable discriminator** for no-show: `p.IsStarted = 0 OR p.IsDisqualified = 1` (penalty path `-NoShowRatingPenalty`). For zero-score: `p.IsStarted = 1 AND p.IsDisqualified = 0 AND r.Score = 0 AND r.SecondaryScore = 0` (penalty path `-ZeroScoreRatingPenalty`). For honest loss: `IsStarted = 1` and a placed-out-of-money row — `r.Rating` is whatever `tournament.Places` configured for that place (often negative).
+- Cumulative PCR: `Profiles.CompetitionRating` (int). Ban hooks already present: `Profiles.IsCompetitionsBanned` (bit), `Profiles.CompetitionsBanEndDate` (datetime).
+- Window start: 2026-04-29 (matchmaking enabled on Steam per FP-41595 milestone — write-pipeline pre-flight Apr 29). Leaderboards UI/rewards came up 2026-05-01 across all 5 streams.
+- Abuse-signal heuristic: ratio, not absolute net rating. Abuser → `|RatingFromNoShow_DQ| ≫ |RatingFromRealPlay|`. Honest bad player → `RatingFromNoShow_DQ ≈ 0` and `RatingFromRealPlay < 0`.
+
+## Ground Truth (provided by GD)
+- `bafa56a3-af75-443c-b3d3-dee191015189` — already banned by GD; "look first" / strongest case
+- `f139316b-bd01-42ba-bf31-aba105bc9bd0`
+- `dab0b476-4ba7-483c-adcc-dd380df05a9d`
+
+All confirmed by GD as 100% abusing the system. Use as validation set — any candidate detection heuristic must surface them in its top-N.
+
+## Win Counters (gold/silver/bronze) — Storage
+Lifetime counters live in `Profiles.StatsJson` (compressed JSON blob) under `$.GenericStats.<Type>.Count`. The three counters are `CompWon` (1st), `Comp2nd` (2nd), `Comp3rd` (3rd) — defined in `StatsCounterType` enum, incremented at tournament-end in `GameClientPeer_Tournaments.cs:956-964` per `tournamentFinalResult.CurrentPlayerResult.Place`. Read with `JSON_VALUE(StatsJson, '$.GenericStats.CompWon.Count')` etc. — value is string, wrap in `TRY_CAST(... AS int)`. Verified on local DB (top profile: `00872a54-...`, 16 golds).
+
+Two views on win count, both useful:
+- **Lifetime** from `StatsJson` — establishes baseline "is this player generally strong"; abuser pattern: high lifetime totals + currently low PCR is suspicious.
+- **Window** (since 2026-04-29) from `TournamentIndividualResults.Place` — confirms recent farming in low bracket.
+
+Separate signal in `CompetitiveLeaderboards*RatingsCurrent.CompetitionsWon` exists but tracks only 1st place (`Place == 1 ? 1 : 0` in `LeaderboardsAdapter.UpdateCompetitiveLeaderboards`) and is per-period; for our purposes `StatsJson` lifetime totals + window aggregation are sufficient.
+
+## Plan
+1. Draft discovery SQL: per-user counts (registrations, no-shows, DQ, zero-score, honest losses, prizes), rating split (sum of negative from no-show vs sum from real participation), latest bracket assignment, current PCR.
+2. Submit to DBA for prod run (local dev DB has 5 participants total — no data here).
+3. Validate: both ground-truth UserIds must appear in the no-show-skewed cohort.
+4. Inspect distribution; pick threshold (absolute count, share, or net no-show penalty).
+5. Produce ban-list; route to GD for action.
+
+## Milestones
+- 2026-05-10: Task created. JIRA read, Slack context absorbed. Data path mapped via code (`TournamentsHelper.CalculateTournamentRatingGained`, `TournamentEndAdapter.CalculateTournamentRatingsGained`, `LeaderboardsAdapter.UpdateCompetitiveLeaderboards`) and schema (`TournamentParticipants`, `TournamentIndividualResults`, `Tournaments`, `Profiles`). Date correction from GD: matchmaking on 2026-04-29, leaderboards on 2026-05-01. Kind correction from GD: only `KindId = 3` is in scope.
+- 2026-05-10: Confirmed `TournamentKinds.Competition = 3` in `Shared/Photon.Interfaces/Tournaments/TournamentKinds.cs` (`Sport = 1`, `Competition = 3`, `UserGenerated = 4` — no `2`). Confirmed PCR lives in `Profiles.CompetitionRating` (int). Per-place win counters not stored as columns (see Win Counters section); derive from `TIR.Place`. Per-platform launch dates from GD: Steam/EGS 2026-04-29; PlayStation 2026-05-06; Xbox 2026-05-07 — out-of-scope for v1 query, address in follow-up pass once Steam abusers handled.
+- 2026-05-10: GD correction — `tournament.Places` is piecewise step-config, bottom-tier places have negative configured `Rating` (smaller magnitude than `NoShowRatingPenalty` but still <0). Sign of `r.Rating` alone does NOT prove no-show; reliable discriminator is `p.IsStarted = 0`. SQL unchanged (already used `IsStarted`); interpretation note updated in journal/SQL header.
+- 2026-05-10: GD correction — three lifetime per-place counters DO exist: `StatsCounterType.{CompWon, Comp2nd, Comp3rd}` in `Shared/ObjectModel/Stats/PlayerStats.cs`, incremented in `GameClientPeer_Tournaments.cs:956-964` at tournament-end. Stored in `Profiles.StatsJson` under `$.GenericStats.{CompWon|Comp2nd|Comp3rd}.Count`. Verified JSON path on local (`00872a54-...`: 16 golds). Added to Query A as `LifetimeGold/Silver/Bronze`.
+- 2026-05-10: Query A run on prod, all 3 ground-truth users confirmed abuse pattern: `NoShowShare` 61–78%, `NoShows` 26–50, `RatingFromNoShow_DQ` −377 to −695, `RatingFromRealPlay` +15 to +102 (all positive — abusers stay active). BAFA56A3 is the textbook tank-and-farm case (`PCR=20`, lifetime 79/63/48, +2 gold +1 bronze in window). F139316B and DAB0B476 were banned at `PCR` 926/770 respectively — GD's ban trigger fires on the no-show pattern early, before the user reaches Nub bracket. Calibration zone for threshold: `NoShows ≥ 15 AND NoShowShare ≥ 0.5 AND RatingFromNoShow_DQ ≤ -150`. Apply on full prod cohort next.
+- 2026-05-10: User feedback — every `.sql` query needs leading single-line comment (becomes DataGrip tab title). Applied to both Query A and Query B. Saved as `feedback_datagrip_tab_title_comment.md` for future SQL deliverables.
+- 2026-05-11: Surgical pre-finalization leaderboard ban executed across STEAM/PS/Xbox for weekly period `20260504`. Mechanism: `CompetitiveRatingsCurrent.IsBanned = 1` only — `Users.IsBanned` and `Profiles.IsCompetitionsBanned` untouched (Monday full-ban policy applies separately). Total **29** banned: STEAM 13, PS 6, Xbox 10. Threshold: `NoShowSharePct > 30%` against analysis window since matchmaking-launch per platform. Banned UserIds + per-user evidence snapshot in `artifacts/bans-2026-05-11.md`. Operational queries: D (top-N decision view), E (UPDATE under BEGIN TRAN), F (post-ban sanity), G (Community report with abuse evidence) — all in `artifacts/weekly-leaderboard-ban.sql`. Steam was the dirtiest (13/30 top dirty); proportional rot decreased on PS (6/30) and Xbox (10/30) due to shorter abuse windows.
+- 2026-05-11: Investigation toolkit simplified — old Queries A and B (hardcoded ground-truth lists) dropped from `discovery-sql.sql`; redundant after threshold calibration. Canonical investigation set: **Query A** (single-user verification timeline, formerly "Query 0") + **Query B** (cohort finder with HAVING thresholds, formerly "Query C"). Workflow: B finds suspects, A verifies individual cases. Ground-truth UserIds preserved in `bans-2026-05-11.md` and journal headers for historical reference.
+- 2026-05-11: Discovered post-finalize gotcha — the hourly job around `00:07-00:20 UTC` finalizes Weekly leaderboard, MERGEs eligible rows into `CompetitiveRating{Weekly|Monthly|Yearly}History` (filtering `IsBanned=0`), then **DELETEs** all rows for that period from `CompetitiveRatingsCurrent`. Result: banned users are absent from both Current AND History (Current → cleaned; History → never inserted). Audit-trail for ban operations lives **only** in our local `bans-<date>.md`.
+- 2026-05-11: Operational toolkit pruned — Community report was actually produced from `Query B` output (full-cohort scan exported to Sheets with `HYPERLINK` formula for player links), not from the planned "report by hardcoded UserId list" query. That intermediate query was redundant and dropped. Final operational set in `weekly-leaderboard-ban.sql`: **D** (top-N decision view), **E** (UPDATE under BEGIN TRAN), **F** (post-ban sanity check), **G** (post-finalize verification reading from `CompetitiveRatingWeeklyHistory` — `PeriodId + TournamentKindId + DimensionTypeId + UserId` is the PK; `CompetitiveLeaderboardDimensionType` enum: `Played=1, Won=2, Rating=3`).
+- 2026-05-11: Post-finalize verification confirmed **100% ban success** across all 3 platforms. Query G run on STEAM/PS/Xbox `CompetitiveRatingWeeklyHistory` for `PeriodId=20260504, TournamentKindId=3, DimensionTypeId=2`: none of the 29 banned UserIds appear in winners top-30. Reward distribution (RewardId 75066–75075) went strictly to the top-10 clean players on each platform. The PS ground-truth suspect `babasss27` (placed #3 with 3 wins and 0% NoShow) collected his reward legitimately — confirming our discriminator (`IsStarted=0`) correctly distinguishes deliberate tanking from genuine play.
+- 2026-05-11: Wider residual sweep performed by lowering `NoShowSharePct` threshold to 30% (other gates unchanged). Result: **107 candidates** across STEAM/PS/XB. Full cohort handed off to Support via the shared Google Sheet for durable account bans. Operational delivery of FP-43631 complete — detection + surgical leaderboard ban (us) + durable account ban (Support).
+- 2026-05-11: Reviewed deferred items with user; see `backlog.md` for the resolved state of each. Notable parked ideas worth re-examining in ~1 month: (a) consecutive-no-show penalty server-side; (b) per-bracket prize caps `MaxWins / Max2nd / Max3rd` (GDD-level, the structural fix that should make no-show abuse pointless); (c) twink/multi-account detection by IP/MAC (separate planned ticket); (d) zero-score pivot monitoring (Community-side). FP-43631 stays scoped to detection + reactive ban — these are independent follow-ups.
+- 2026-05-11: Task closed. JIRA moved to Resolved by user. All deferred items routed (Community / future tickets / trigger-based watch). Final artifact set: `discovery-sql.sql` (Query A single-user verification, Query B full-cohort finder), `weekly-leaderboard-ban.sql` (Queries D/E/F/G — decision view → UPDATE → sanity → post-finalize verification), `bans-2026-05-11.md` (29-user audit snapshot).

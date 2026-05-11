@@ -41,5 +41,6 @@ module: leaderboards
 ## Related Tasks
 - FP-26788 — feature umbrella (original spec)
 - FP-41595 — LBM release support: prod launch on 5 streams (2026-05-01), flag-flip checklist, DB load baseline
+- FP-43631 (completed 2026-05-11): used the leaderboard ban surface (`CompetitiveRatingsCurrent.IsBanned`) for per-period surgical exclusion of matchmaking abusers. Findings about `UpdateLeaderboardsBanned` SP gotcha, post-cleanup audit loss, and History PK shape captured in `log.md`
 
 See also: [backlog](backlog.md) | [log](log.md)

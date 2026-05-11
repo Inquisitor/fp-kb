@@ -8,9 +8,9 @@ How a leaderboard period evolves through its lifetime, who advances it, and how 
 
 ```
                    ┌──────────────────────────────────────────────────────┐
-(no row, Unknown)─┤ Initialize → Upcoming → Current → Passed             │→ HistorySaved → Processing → Processed → Cleaning → Cleaned
+(no row, Unknown)──┤ Initialize → Upcoming → Current → Passed             │→ HistorySaved → Processing → Processed → Cleaning → Cleaned
                    │                                                      │
-                   └ Unknown ────────────── Passed (catch-up shortcut) ──┘
+                   └ Unknown ────────────── Passed (catch-up shortcut) ───┘
 ```
 
 Transition driver per arc — all in `LeaderboardsAdapter_{Competitive,Global,Fish}.cs`:
