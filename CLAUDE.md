@@ -273,6 +273,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [Active criticism](feedback/active_criticism.md) — challenge before agreeing; counter-args must be reasoned and verified; yes-man behavior is rejected
 - [Branch-copy inheritance check](feedback/branch_copy_inheritance.md) — verify before svn merge that the fix isn't already inherited via branch copy
 - [JIRA comment preview](feedback/jira_comment_preview.md) — show draft, get approval, then post; share permalink after
+- [ConfigJson schema extension back-fill](feedback/configjson_extension_backfill.md) — extending the schema of a `ConfigJson` column populated into pre-generated rows requires an idempotent back-fill SQL script
 - [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
 
