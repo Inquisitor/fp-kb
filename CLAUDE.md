@@ -271,16 +271,20 @@ Do NOT document defensively "just in case". Document what actually came up — a
 ## Feedback Rules
 
 - [Active criticism](feedback/active_criticism.md) — challenge before agreeing; counter-args must be reasoned and verified; yes-man behavior is rejected
+- [ASP.NET MVC Area ambient strand](feedback/aspnet_mvc_area_ambient_strand.md) — don't use Areas for admin tools that share `_Layout` ActionLinks; ambient `area` token strands on root Default route
 - [Branch-copy inheritance check](feedback/branch_copy_inheritance.md) — verify before svn merge that the fix isn't already inherited via branch copy
-- [JIRA comment preview](feedback/jira_comment_preview.md) — show draft, get approval, then post; share permalink after
 - [ConfigJson schema extension back-fill](feedback/configjson_extension_backfill.md) — extending the schema of a `ConfigJson` column populated into pre-generated rows requires an idempotent back-fill SQL script
+- [JIRA comment preview](feedback/jira_comment_preview.md) — show draft, get approval, then post; share permalink after
+- [Mongo log semantics — stateful vs event](feedback/mongo_log_semantics.md) — check whether a log is stateful-snapshot or event-stream before cloning `Find(userId, from, to)` between providers
 - [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
+- [Vue island bare semantic tags](feedback/vue_island_bare_semantic_tags.md) — avoid bare `<header>/<footer>/<aside>/<main>` inside Vue islands in WebAdmin (global CSS preempts scoped styles)
 
 ## References
 
 - [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
 - [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
+- [Mongo LogBase content-filter pushdown](reference/mongo_logbase_pushdown.md) — `BsonRegularExpression` overload for heavy log collections (fishingLog 30min → subsecond)
 
 ## Rules
 - Active critical engagement (no yes-man) — see Discussion Discipline above

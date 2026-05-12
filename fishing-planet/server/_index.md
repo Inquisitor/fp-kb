@@ -26,6 +26,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 - [dal](modules/dal/_card.md) — repository-pattern DAL, reflection-based mapping (SQL Server + MongoDB)
 - [cache](modules/cache/_card.md) — cache registry, refresh orchestration, dependency graph (stub)
 
+## Operations & Admin
+- [web-admin](modules/web-admin/_card.md) — ASP.NET MVC admin panel; **umbrella stub** with patterns, gotchas, deep-dive: [embedded-vue-pattern.md](modules/web-admin/embedded-vue-pattern.md) (Vue 3 + TS island for new tools). Per-controller sub-modules TBD (FP-43424 Pass 2/3).
+
 ## Monetization
 - [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
 

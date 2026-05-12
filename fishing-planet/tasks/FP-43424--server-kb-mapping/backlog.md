@@ -14,6 +14,10 @@ Deferred items and parking lot for ideas that appear during planning/execution. 
 - [ ] Skill `kb-sync-on-task-close` — analogous to above, at task closure.
 - [ ] Skill `resume-mapping-session` — bootstrap protocol for continuing mid-pass work across sessions. Write once the pattern is real (not preemptively).
 - [ ] Pilot modules to deepen after Pass 6 — candidates from active tasks: `matchmaking` (FP-41746), `fish-weight-generator` (FP-41845; FP-33182 closed), `xbox-purchases` (FP-41929), `missions`. Aim 3-5.
+- [ ] When `logging` module is mapped (Pass 1/2/3) and later pilot-deepened — fold the following FP-wide KB items into the module card / deep-dive:
+  - [`feedback/mongo_log_semantics.md`](../../../feedback/mongo_log_semantics.md) — stateful-vs-event semantics; module card should list which collection is which (currently best-guess based on FP-43579 findings)
+  - [`reference/mongo_logbase_pushdown.md`](../../../reference/mongo_logbase_pushdown.md) — `BsonRegularExpression` overload for heavy log queries; module's deep-dive should host this performance pattern
+  - Surfaced by FP-43579 VS1/VS4 smoke. Cross-ref also `FP-43579 backlog → DOC-003` (the KB logging module promotion is its post-v1 follow-up).
 - [ ] Dependency graph visualization — optional. Consider Mermaid in `_systems/dependencies.md` generated from frontmatter + using-statement grep.
 
 ## Deferred decisions (not blocking initial mapping)
