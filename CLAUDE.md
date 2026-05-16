@@ -271,11 +271,15 @@ Do NOT document defensively "just in case". Document what actually came up — a
 ## Feedback Rules
 
 - [Active criticism](feedback/active_criticism.md) — challenge before agreeing; counter-args must be reasoned and verified; yes-man behavior is rejected
+- [ASCII-only in code and commits](feedback/ascii_only_in_code.md) — replace em-dashes, Unicode arrows, smart quotes with ASCII equivalents in source files and commit messages
 - [ASP.NET MVC Area ambient strand](feedback/aspnet_mvc_area_ambient_strand.md) — don't use Areas for admin tools that share `_Layout` ActionLinks; ambient `area` token strands on root Default route
 - [Branch-copy inheritance check](feedback/branch_copy_inheritance.md) — verify before svn merge that the fix isn't already inherited via branch copy
 - [ConfigJson schema extension back-fill](feedback/configjson_extension_backfill.md) — extending the schema of a `ConfigJson` column populated into pre-generated rows requires an idempotent back-fill SQL script
+- [Don't track other teams' bugs in our backlog](feedback/dont_track_others_team_bugs.md) — when review surfaces bugs in code owned by another team, flag or drop; don't pollute our backlog
+- [FP client IPhotonServerConnection sync](feedback/fp_client_iphotonserverconnection_sync.md) — public additions to `PhotonServerConnection_*.cs` partials must also be declared in `IPhotonServerConnection.cs`; the factory exposes the interface
 - [JIRA comment preview](feedback/jira_comment_preview.md) — show draft, get approval, then post; share permalink after
 - [Mongo log semantics — stateful vs event](feedback/mongo_log_semantics.md) — check whether a log is stateful-snapshot or event-stream before cloning `Find(userId, from, to)` between providers
+- [New C# files need explicit UTF-8 BOM](feedback/new_csharp_file_bom.md) — Write tool doesn't add BOM; prepend U+FEFF when creating .cs files; `.editorconfig` mandates BOM
 - [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
 - [Vue island bare semantic tags](feedback/vue_island_bare_semantic_tags.md) — avoid bare `<header>/<footer>/<aside>/<main>` inside Vue islands in WebAdmin (global CSS preempts scoped styles)
@@ -285,6 +289,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
 - [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
 - [Mongo LogBase content-filter pushdown](reference/mongo_logbase_pushdown.md) — `BsonRegularExpression` overload for heavy log collections (fishingLog 30min → subsecond)
+- [Photon.Interfaces DLL distribution](reference/photon_interfaces_dll_distribution.md) — server-built DLL copied to client via `Refresh.cmd`; ObjectModel source-duplicated with sensitive code stripped
 
 ## Rules
 - Active critical engagement (no yes-man) — see Discussion Discipline above
