@@ -1,0 +1,87 @@
+---
+status: in-progress
+executor: Stanislav Samoilov
+jira: https://fishingplanet.atlassian.net/browse/FP-43625
+related: FP-43631, FP-43717, FP-41746, FP-41595, FP-43815, FP-43816, FP-43817
+---
+# FP-43625: Add MaxWins gate to matchmaking system
+
+## Status
+Discovery complete; design fixed. Code touch points: `MatchmakingLogic.CreateBuckets` (gate), `RefreshBucket` (sort comparator), `ProcessGroupingForTournament` (config overlay + entry log), `AssignGroupsToParticipants` (per-participant assignment log), new `Shared/SharedLib/Config/JsonVariablesCache_Tournaments.cs`. Deployment via single `JsonVariables` row plus `JSON_MODIFY(..., NULL)` over 103 active competition templates and 454 future tournament rows across three launched platforms. Snapshot of player parameters at registration/start is out of scope for this ticket and tracked separately.
+
+## Summary
+Structural counterpart to FP-43631 (PCR-drop abuse detection). Adds a per-bracket promotion gate based on lifetime podium counters: a player whose podium counts exceed the bracket's `MaxWins / Max2nd / Max3rd` thresholds is filtered out of that bracket regardless of `CompetitionRating`, and falls through to the next bracket up. GD spec thresholds: Newbies `MaxWins=3 / Max2nd=4 / Max3rd=5`; Middles `12 / 15 / 20`; Tops unrestricted. Counters live in `Profiles.StatsJson.$.GenericStats.{CompWon|Comp2nd|Comp3rd}.Count`, incremented only inside the `KindId == Competition` branch, so Sport tournaments do not contaminate the signal.
+
+## Key Findings
+
+### Code path
+- Single chokepoint in `MatchmakingLogic.CreateBuckets` (`Shared/SharedLib/Tournaments/MatchmakingLogic.cs`): the rating filter `p.CompetitionRating >= bucket.MinRating && p.CompetitionRating <= bucket.MaxRating` is the only place bracket assignment happens. MaxWins gate plugs into the same `Where` clause; no other change to the bracket-assignment algorithm needed.
+- Brackets are iterated weakest-first; a player rejected by the MaxWins gate of bracket N naturally becomes a candidate for bracket N+1 in the next iteration. Cascading promotion is implicit (Newbies -> Middles -> Tops); no extra branching required. Tops with no `MaxWins` config absorbs all overflow.
+- Hot-relax property: gate is evaluated at runtime against the live `Brackets[i].MaxWins` config. Lowering or raising thresholds in the `JsonVariable` takes effect on the next `ProcessGrouping` invocation without redeploy. Promotion is not persisted on the player — it is a one-way ratchet from a counters perspective only (counters only grow).
+
+### Counter semantics
+- `StatsCounterType.{CompWon, Comp2nd, Comp3rd}` increments are inside `else if (tournamentFinalResult.KindId == (int)TournamentKinds.Competition)` (`GameClientPeer_Tournaments.cs`). Sport tournaments never bump these counters.
+- Storage: `Profiles.StatsJson` blob, path `$.GenericStats.{CompWon|Comp2nd|Comp3rd}.Count`. Read with `JSON_VALUE(StatsJson, '$.GenericStats.CompWon.Count')` and cast through `TRY_CAST(... AS int)` — value is string in storage.
+- Counters are lifetime since their introduction. Older accounts may carry years of accumulated wins; a veteran whose `CompetitionRating` has decayed back to the Newbies range will still be promoted out — by design. Lifetime accomplishment is the intended signal.
+
+### DB inventory (Steam/PS/Xbox prod)
+
+| Source                                        | Steam |   PS | Xbox | Notes                                                  |
+|-----------------------------------------------|------:|-----:|-----:|--------------------------------------------------------|
+| TournamentTemplates total                     |   276 |  276 |  276 | Identical across platforms (single source-of-truth deploy) |
+| TournamentTemplates KindId=3                  |   132 |  132 |  132 |                                                        |
+| TournamentTemplates with Grouping             |   103 |  103 |  103 | All `IsActive=true`; the other 29 are deactivated      |
+| Tournaments all-time                          |  6455 | 7624 | 2924 |                                                        |
+| Tournaments KindId=3 all-time                 |   863 |  863 |  864 | Most are historical (pre-matchmaking-launch)           |
+| Tournaments KindId=3 with Grouping            |   362 |  280 |  268 | Generated since matchmaking launch per platform        |
+| Future Tournaments (EndDate > now)            |   168 |  160 |  158 |                                                        |
+| Future Tournaments KindId=3 with Grouping     |   151 |  151 |  152 | Migration target                                       |
+
+Total migration target: **103 active templates per platform** plus **454 future tournament rows** across three launched platforms.
+
+Distinct `Grouping` shapes across all active templates and all future tournaments per platform: **exactly one semantic config** (three whitespace-only variants in templates collapse to identical structure; future tournaments carry one shape including the computed `MaxRating` filled in by `InitializeGrouping` at generation). **Zero per-row overrides** in production — `JsonVariables`-default strategy is empirically safe.
+
+`BracketName` distribution: 100% prevalence of the `Midles` typo (Newbies/Midles/Tops trio across both templates and tournaments). No bracket in any template carries `MaxRating` (templates store `MinRating` only). Confirms FP-43717 Option A (drop `MaxRating` field) is safe — templates are already free of it; tournaments carry the runtime-computed value that downstream code does not need.
+
+### Existing infrastructure
+- `JsonVariablesCache` (`Shared/SharedLib/Config/`) uses a partial-class pattern: each domain adds a nested static class with strongly-typed accessors backed by `JsonVariables.Cache.GetJsonValue<T>(key)`. Storage: `dbo.JsonVariables(Name VARCHAR PK, Json VARCHAR(MAX), OrderId INT)`, loaded via `SqlSysProvider.GetJsonVariables`. Auto-refresh on cache invalidate via `OnRefreshPerformed`.
+- Reference consumer: `JsonVariablesCache_DailyMissions.cs`. New `JsonVariablesCache_Tournaments.cs` with a `GroupingDefault` key follows the same mechanical shape.
+- `TournamentParticipantDto` already pulls `Profiles.Level / Rank / CompetitionRating` via JOIN in `SqlTournamentProvider.GetTournamentParticipants`. Adding three `JSON_VALUE` projections for the lifetime counters extends the existing query without a second round-trip.
+
+## Plan
+
+1. **JsonVariables wire-up.** New `Shared/SharedLib/Config/JsonVariablesCache_Tournaments.cs` with `GroupingDefaultKey = "Tournaments.GroupingDefault"` and a `TournamentGroupingRule GroupingDefault` accessor. Wire into top-level `JsonVariablesCache.UpdateStaticVariables`. Pattern mirrors `JsonVariablesCache_DailyMissions`.
+2. **MaxWins gate.** Extend `TournamentBracket` with nullable `MaxWins / Max2nd / Max3rd`. Extend `TournamentGroupParticipant` with `LifetimeGold / LifetimeSilver / LifetimeBronze` and an `IsPromoted` flag. Extend `SqlTournamentProvider.GetTournamentParticipants` JOIN with three `JSON_VALUE` projections from `Profiles.StatsJson`. Plug `ExceedsBracketLimits` filter into `MatchmakingLogic.CreateBuckets`; mark `IsPromoted = true` on participants admitted to a bracket whose `MinRating` exceeds their `CompetitionRating`.
+3. **Promotion-aware sort in `RefreshBucket`.** Replace the single-key `OrderBy(p => p.CompetitionRating)` with a two-section sort: non-promoted first (ASC by `CompetitionRating`), promoted last (ASC by total wins `LifetimeGold + LifetimeSilver + LifetimeBronze`). Donor selection in `BalanceBuckets` continues to pick the extreme element (`[0]` for donation to a weaker neighbour, `[N-1]` for donation to a stronger neighbour); the sort ensures the extreme picks have the right semantics — non-promoted at the weak end (first to demote down), most-promoted at the strong end (first to promote up). No change to `BalanceBuckets` itself.
+4. **Config overlay at matchmaking entry (bake-at-start with persistence).** In `MatchmakingLogic.ProcessGroupingForTournament`: `var grouping = tournament.Grouping ?? JsonVariablesCache.Tournaments.GroupingDefault;` followed by `InitializeGrouping(grouping)`. After a successful matchmaking pass, if `tournament.Grouping` was null at entry, persist the resolved `grouping` back into `Tournament.ConfigJson` via a new `ITournamentProvider.PersistTournamentGrouping` call — the row then carries an audit snapshot of what governed the matchmaking that ran. New tournaments generated without per-row `Grouping` fall through to the default and bake the snapshot on start; per-row overrides (if any future template sets one) win against the default via the `??` short-circuit.
+5. **Defensive fallback for misconfigured top bracket.** If a participant is filtered by `MaxWins` on every bracket their `CompetitionRating` could reach (Tops has a `MaxWins` config in `JsonVariables` by mistake), keep them in the original bracket (the one their `CompetitionRating` points to), set `IsPromoted = false`, and emit a Warning log naming the bracket and the triggering counter. No crash; no fall-out-of-all-buckets.
+6. **Tournament logging on every matchmaking action.** Currently the matchmaking path is silent. Add `TournamentLog` entries at:
+   - `ProcessGrouping` entry: tournament ID, participant count, resolved Grouping source (per-row vs default).
+   - `CreateBuckets`: bracket-assignment line per participant — user ID, `CompetitionRating`, `(Gold/Silver/Bronze)`, assigned `BracketId`, `IsPromoted` flag and triggering counter when applicable.
+   - `BalanceBuckets`: bucket-change line per move — user ID, from-bucket, to-bucket, reason (donation-fill vs merge).
+   - `AssignGroupsToParticipants`: final group line per participant — user ID, `BracketId`, bracket name, group name.
+7. **WebAdmin Tools counter setters for QA.** Extend `ToolsModel_Profile` / `ToolsModel_Competitions` with three input fields and write-paths into `Profiles.StatsJson.$.GenericStats.{CompWon|Comp2nd|Comp3rd}.Count`. Without this the new logic cannot be exercised on DEV without running real tournaments to completion.
+8. **Tests.**
+   - Existing `MatchmakingLogicTests` string-notation cases stay untouched. They target `BalanceBuckets / BuildGroups / AllocateGroupBudget` semantics in terms of bucket counts and group sizes; they are agnostic to participant ordering within a bucket and do not need to know about wins.
+   - New focused unit tests on `CreateBuckets` covering MaxWins promotion: given `(CompetitionRating, gold, silver, bronze)` per participant and a brackets+thresholds set, assert the resulting `BracketId` and `IsPromoted` flag. Cases: threshold-on-the-edge, cascade promotion (Newbies -> Middles -> Tops in one step), `MaxWins=null` no-gate regression, defensive Tops-MaxWins fallback.
+   - New focused unit tests on `RefreshBucket` ordering: given a mixed set of non-promoted and promoted participants, assert the final order is `[non-promoted ASC by rating, promoted ASC by wins]`. Trivial without the new sort; non-trivial with it.
+   - Integration tests on `BalanceBuckets` extension: when a bucket donates to a weaker neighbour, the donated participant is the lowest-rating non-promoted; when donating to a stronger neighbour, the donated participant is the highest-wins promoted. Symmetry: promoted players are last to demote, first to promote.
+   - Integration test on downstream invisibility: a promoted player carries the same `BracketId` as the promoted bracket, contributes to `ReassignGroupsToBuckets` median computation identically to a regular Middles/Tops player, and receives the corresponding bracket's rewards.
+9. **Deployment SQL.** One transaction per platform, idempotent:
+   - `MERGE` insert into `dbo.JsonVariables` the `Tournaments.GroupingDefault` row with `MinSize=20`, three brackets at 0/101/1001, `Middles` spelling (not `Midles`), and the new `MaxWins/Max2nd/Max3rd` fields per the GD spec.
+   - `JSON_MODIFY(ConfigJson, '$.Grouping', NULL)` on all `KindId=3` templates that currently carry `Grouping` (103 rows per platform, all `IsActive=true`).
+   - `JSON_MODIFY(ConfigJson, '$.Grouping', NULL)` on all `KindId=3` future tournaments (`EndDate > SYSUTCDATETIME()`, 151/151/152 rows). On start, the overlay resolves to the JsonVariable and bakes the snapshot back into `ConfigJson`.
+   - Already-played tournaments are not touched — their `ConfigJson` is the audit trail of what they actually ran on.
+10. **Per-platform rollout.** Steam/EGS first, then PlayStation, then Xbox (Mobile and Nintendo have not yet launched matchmaking). MS-side patches applied before each platform binary deploy. Same choreography as FP-41595 / FP-41746.
+11. **Post-deploy verification.** Pick a real upcoming Competition per platform; confirm overlay resolution, `ConfigJson` bake-back, and that `TournamentLog` shows expected bracket / bucket / promotion entries. Cross-check against the FP-43631 candidate cohort that the promotion gate now catches known abusers.
+
+## Milestones
+
+- 2026-05-16: Discovery. Read GD spec (Confluence 5561024534) and KB context (`matchmaking` module card+log, FP-43631 journal, FP-41746 GDD). Surveyed `MatchmakingLogic`, `TournamentBracket`, `TournamentGroupingRule`, `TournamentBucket`, `TournamentGroupParticipant`, `SqlTournamentProvider.GetTournamentParticipants`, `GameClientPeer_Tournaments` (CompWon/2nd/3rd increment site), `JsonVariablesCache_DailyMissions` pattern. Local DB inspection: 103 templates, identical `Grouping` modulo whitespace, no `MaxRating` in any template config, no `MaxSize/TargetSize/MaxGroupCount`, 100% `Midles` typo.
+- 2026-05-17: Prod inventory across Steam/PS/Xbox via DataGrip MCP — 103 active templates per platform, 454 future Competitions, zero per-row Grouping overrides; validates the JsonVariables-default strategy on real data. Plan structured around bake-at-start overlay (Option C) with single-row JsonVariable plus per-row `JSON_MODIFY(..., NULL)` migration. Donor selection refined to a two-section sort in `RefreshBucket` (non-promoted ASC by rating, promoted ASC by wins) so the extreme picks in `BalanceBuckets` get the right semantics without algorithm changes. Tournament-logging scope expanded to every matchmaking action (bracket-assignment, bucket-change, final-group), with entry-line in `ProcessGrouping`. Tests split into a layer that does not change (counts/sizes) and new layers covering MaxWins gate, within-bucket ordering, and downstream invisibility. Out-of-scope items moved to `backlog.md` for separate tickets: per-row snapshot of player params in `TournamentParticipants` (`...AtReg / ...AtStart` suffix naming, JOIN audit required), AsyncProcessor matchmaking-ops summary, admin Support visibility (CompWon on PlayerCard, Competitions tab, per-player history), result-page snapshotting, calibration dashboard, log-level hygiene for tournament start. Inactive (deactivated) templates without Grouping (132 - 103 = 29 per platform) confirmed not relevant — `IsActive=false`, never generate.
+- 2026-05-18: Spin-off JIRA tickets created for the Out of Scope items: FP-43815 (admin/Support visibility), FP-43816 (TournamentParticipants snapshot at registration/start), FP-43817 (tournament-start log-level hygiene). All under parent FP-26788, Scrum Team = Other.
+- 2026-05-18: Data-driven calibration of MaxWins thresholds. Q1 scatter exported per platform from prod (Steam 343K, PS 460K, Xbox 193K profiles with Competition history). Two calibration methodologies compared on the prod data, plus the FP-43631 cohort (200 known abusers) as ground truth.
+  - Method A (precision/recall on cohort): sweep of `(N_g, N_s, N_b)` triples, max F1 wins. Newbies max-F1 = `(4/3/6)` -- strictly dominates GD-spec `(3/4/5)` (precision 68.9% vs 62.5%; recall 53.2% vs 50.6%). Middles max-F1 = `(13/25/20)` but cohort precision_LB capped at ~16% across all triples because the cohort is sparse in Middles (most suspects are Newbies-style no-show abusers).
+  - Method B (Kolmogorov-Smirnov distribution match): for each triple, compute KS distance between promoted-cohort wins distribution and target bracket distribution. Aggregate via max() across medals (worst-medal-wins). For Middles, target = Tops. Best `(12/13/14)`: KS_max = 0.15, KS_mean = 0.13. GD-spec at KS_max = 0.24 (top 10% but not optimum). Recommendation flips silver and bronze thresholds DOWN from GD-spec, not up -- counter to Method A's Middles result, because the cohort overrepresents medal-rich long-playing Middles that Method B correctly identifies as Tops-equivalent.
+  - Per-bracket wins distribution exploration surfaced the key insight: the 244 Middles passing GD-spec gate have median Gold/Silver/Bronze = 16/17/18 -- statistically identical to Tops bracket median (16/16/16). Confirms promoted-Middles are Tops-equivalent, vindicating the gate concept even where cohort precision is low.
+  - Final hybrid recommendation: Newbies via Method A (cohort signal reliable, ~70% precision_LB), Middles via Method B (cohort signal unreliable, distribution-match is principled for matchmaking quality). Triple: Newbies `4/3/6`, Middles `12/13/14`. Calibration cadence: monthly re-export and re-run; push updates to `dbo.JsonVariables.Tournaments.GroupingDefault` without code change. All calibration scripts, intermediate CSVs and visualisations frozen in `artifacts/` with rerun procedure in `artifacts/README.md`. Calibration report at `artifacts/calibration-report.md`; presentable to GD as-is.

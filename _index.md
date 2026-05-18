@@ -8,6 +8,7 @@
 | FP-43424 | FP/server | kb-mapping          | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/                       |
 | FP-41595 | FP/server | lbm-release-support | in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/            |
 | FP-43632 | FP/server | gc-migration        | in-progress   | fishing-planet/tasks/FP-43632--game-carrier-on-steam-ps-mobile-support/ |
+| FP-43625 | FP/server | matchmaking-maxwins | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
 
 ## Active Reviews
 | Task     | Executor    | Path                                                                                       |
