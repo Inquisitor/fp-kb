@@ -28,7 +28,7 @@ BEGIN
     DECLARE @WindowStart datetime         = '2026-04-29'; -- STEAM
     --DECLARE @WindowStart datetime         = '2026-05-06'; -- PS
     --DECLARE @WindowStart datetime         = '2026-05-07'; -- Xbox
-    DECLARE @UserId      uniqueidentifier = CAST('75FDC8B5-45E5-476D-9F25-DC8BC5342923' AS uniqueidentifier);
+    DECLARE @UserId      uniqueidentifier = CAST('09daa0c8-856a-4328-8001-9cc1b2683fab' AS uniqueidentifier);
     DECLARE @LanguageId  int              = 3;
 
 
@@ -73,9 +73,9 @@ END;
 -- FP-43631 Query B — full-cohort PCR-drop abuse detection (HAVING-filtered, parametrized window + thresholds)
 -- ============================================================================
 BEGIN
-    --DECLARE @WindowStart          datetime       = '2026-04-29'; -- STEAM
+    DECLARE @WindowStart          datetime       = '2026-04-29'; -- STEAM
     --DECLARE @WindowStart          datetime       = '2026-05-06'; -- PS
-    DECLARE @WindowStart          datetime       = '2026-05-07'; -- Xbox
+    --DECLARE @WindowStart          datetime       = '2026-05-07'; -- Xbox
     DECLARE @MinNoShows           int            = 10;
     DECLARE @MinNoShowSharePct    decimal(6,2)   = 30.00;
     DECLARE @MaxRatingFromNoShow  int            = -150; -- threshold is ≤ this (i.e. -150 or more negative)
