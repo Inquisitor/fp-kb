@@ -286,3 +286,14 @@ After Profile bans were applied above, `leaderboard-ban-sync.sql` was run to pro
 | **Total** | **150**              | **227 / 240 / 240** = **707 rows**                                          | **300**                                                   |
 
 Sync rows are not enumerated by name — the sync is set-driven over the join of `Profiles.IsCompetitionsBanned=1` ∩ `CompetitiveRatingsCurrent.IsBanned=0`, covering arbitrary historical Profile bans (some pre-FP-43631). If a per-user list of synced rows is needed for audit, the same query without UPDATE — `SELECT r.UserId, r.PeriodTypeId, r.PeriodId FROM CompetitiveRatingsCurrent r JOIN Profiles p ON p.UserId=r.UserId WHERE p.IsCompetitionsBanned=1 AND (p.CompetitionsBanEndDate IS NULL OR p.CompetitionsBanEndDate > GETUTCDATE()) AND r.IsBanned=1` — produces it any time.
+
+## Mongo ban-log backfill — 2026-05-18
+
+Retroactive `banLog` entries were posted to Mongo on all three platforms to give Support a proper audit trail (the bulk SQL bypass did not write to Mongo automatically — that's wired into `PlayerModel.SetCompetitionsBanned` in WebAdmin only). Scripts: `ban-log-backfill-2026-05-17-{steam,ps,xbox}.js`. Format mimics WebAdmin (BanSource.WebAdmin):
+
+```
+User banned with Competition ban via WebAdmin by Stanislav Samoilov with reason 'FP-43631 follow-up — no-show abuse (week-2 comparison)' until 2026-06-17 00:00:00
+```
+(`2026-06-01 00:00:00` for STARTED.) Timestamp: `2026-05-17T23:30:00Z`. UserId lowercased to match WebAdmin behaviour. RequestId left null.
+
+Verified counts per platform: Steam 75, PS 84, Xbox 26 → all match the Profile-bans applied earlier in this artifact. Total ban-log docs inserted: 185.
