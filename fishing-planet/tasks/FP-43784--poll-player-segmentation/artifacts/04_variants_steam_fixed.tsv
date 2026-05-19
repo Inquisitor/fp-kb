@@ -1,0 +1,266 @@
+original_nickname	variant_1	variant_2	variant_3	email	category	notes
+𝖘𝖑𝖆𝖘𝖍𝖞	slashy				special_chars_normalized	mathematical bold fraktur fold to ASCII
+.					free_form_no_nick	single dot, no nick
+[PwPro]Andy	Andy	PwProAndy	PwPro_Andy		brackets_removed	clan-tag prefix in brackets
+__PILOT__ON__BOARD__	__PILOT__ON__BOARD__	PILOT_ON_BOARD	PILOTONBOARD		other	keep verbatim plus underscore variants
+=Niszczycielswiatow123	Niszczycielswiatow123				trimmed_suffix	leading equals sign stripped
+>>Tom<<	Tom				trimmed_suffix	angle bracket decoration stripped
+00rey	00rey				other	verbatim, looks like normal nick
+57566	57566				other	numeric only, try verbatim
+97	97				other	numeric only, try verbatim
+abhimax68@gmail.com	abhimax68		abhimax68@gmail.com	abhimax68@gmail.com	email_extracted	full email, local part as variant
+AdaLynnKaos	AdaLynnKaos				other	verbatim, likely typo on platform
+Adasoro	Adasoro				other	verbatim
+Ads_80	Ads_80				other	verbatim
+AffableScallopldol	AffableScallopldol	AffableScallopIdol			other	maybe lowercase L vs uppercase I
+affinettyy	affinettyy				other	verbatim
+Aic Fih	AicFih	Aic_Fih	Aic Fih		multi_word_compacted	two words compacted
+AkumatheOG	AkumatheOG				other	verbatim
+alepabdo00	alepabdo00				other	verbatim
+anchall	anchall				other	verbatim
+Andyyyz	Andyyyz				other	verbatim
+AquaticTowel	AquaticTowel				other	verbatim
+AussieSenpai	AussieSenpai				other	verbatim
+Avalenting20	Avalenting20				other	verbatim
+beefytender69	beefytender69				other	verbatim
+Bennett Hamilton	BennettHamilton	Bennett_Hamilton	Bennett Hamilton		possible_real_name	looks like real name
+bgc616	bgc616				other	verbatim
+Big T	BigT	Big_T	Big T		multi_word_compacted	two-word compaction
+bjorn.oremus	bjorn.oremus	bjorn_oremus	bjornoremus		other	dot may be underscore or removed
+Boesergolf	Boesergolf				other	verbatim
+BottleDogerBandit.gg	BottleDogerBandit	BottleDogerBanditgg			trimmed_suffix	dot-gg suffix stripped
+brado_serrano3	brado_serrano3				other	verbatim
+Briekmerk	Briekmerk				other	verbatim
+BuLdoZA	BuLdoZA				other	verbatim
+bussssss777	bussssss777				other	verbatim
+Captain West	CaptainWest	Captain_West	Captain West		multi_word_compacted	two-word compaction
+captain45	captain45				other	verbatim
+cardi cardi	cardicardi	cardi_cardi	cardi cardi		multi_word_compacted	repeated word
+cbone3	cbone3				other	verbatim
+CGH_Pakiko	CGH_Pakiko				other	verbatim, clan-tag prefix kept
+Chingizcan	Chingizcan				other	verbatim
+chroniccloud	chroniccloud				other	verbatim
+corpse115	corpse115				other	verbatim
+cortex456	cortex456				other	verbatim
+CountryCutieTV	CountryCutieTV				other	verbatim
+Cpt Cod Eye	CptCodEye	Cpt_Cod_Eye	Cpt Cod Eye		multi_word_compacted	multi-word compaction
+Daniel_Pescador2	Daniel_Pescador2				other	verbatim
+dav45200	dav45200				other	verbatim
+Daxxes	Daxxes				other	verbatim
+DeathMachineUA _gaming	DeathMachineUA	DeathMachineUA_gaming	DeathMachineUAgaming		trimmed_suffix	trailing _gaming with space removed
+Delayala	Delayala				other	verbatim
+DeniseSantos_007	DeniseSantos_007				other	verbatim
+dillonator610	dillonator610				other	verbatim
+Disc-manfromthesouth3 fp MrTroyMan	MrTroyMan	Disc-manfromthesouth3			free_form_extracted	"fp" tag points to MrTroyMan as FP nick
+DJ Truck Driver	DJTruckDriver	DJ_Truck_Driver	DJ Truck Driver		multi_word_compacted	multi-word compaction
+Djrudz	Djrudz				other	verbatim
+Doctor-Law	Doctor-Law	DoctorLaw			other	hyphen may be removed
+dope guy	dopeguy	dope_guy	dope guy		multi_word_compacted	two-word compaction
+Đuka99	Duka99	Djuka99	Đuka99		unicode_normalized	D-with-stroke ASCII fold
+dunghihi	dunghihi				other	verbatim
+DwhiteG	DwhiteG				other	verbatim
+DXLUSIXNAL Skettyjr	DXLUSIXNAL	Skettyjr			free_form_extracted	two candidate nicks separated by space
+elcirulo69	elcirulo69				other	verbatim
+EnlightedWhitefishPrince	EnlightedWhitefishPrince	EnlightenedWhitefishPrince			other	maybe typo missing "en"
+EnourmosGarHunter	EnourmosGarHunter	EnormousGarHunter			other	common spelling fix
+F	F				other	single letter
+FantasicPerchDaddy62	FantasicPerchDaddy62	FantasticPerchDaddy62			other	common spelling fix
+far5915 in fishing planet game, Galaxia90 on steam	far5915	Galaxia90			free_form_extracted	"in fishing planet game" tags far5915
+fascagat	fascagat				other	verbatim
+fedupconsumer	fedupconsumer				other	verbatim
+Fermekatul	Fermekatul				other	verbatim
+fireimages93	fireimages93				other	verbatim
+fisherman serbia					location_only	location + country, not a nick
+fishersvalley123	fishersvalley123				other	verbatim
+Fishing planaet (Edupu) Steam (R.D.A)	Edupu	R.D.A	RDA		parens_extracted	in-game nick in first parens
+Fishing planet nickname: Prost_Plovs  Steam nickname: Pizza_slice	Prost_Plovs	Pizza_slice			free_form_extracted	explicit FP nickname labeled
+Fishing Planet username is Toyotaguy	Toyotaguy				free_form_extracted	explicit username given
+Fishing planet: D4B0mb        Discord: d4bomb	D4B0mb	d4bomb			free_form_extracted	FP nick explicitly labeled
+fishsthick123	fishsthick123	fishstick123			other	likely typo: missing letter
+FIxieIsMonk (Fishing Planet) ourguiltandregret (discord)	FIxieIsMonk	FixieIsMonk			parens_extracted	FP-tagged parens identifies nick
+FixieIsMonk (if fishing planet account) Fixie (if discord)	FixieIsMonk				parens_extracted	FP-tagged conditional identifies nick
+FlamingSunspot	FlamingSunspot				other	verbatim
+foesleitner.roland	foesleitner.roland	foesleitner_roland	foesleitnerroland		other	dot may be underscore
+FranTron	FranTron				other	verbatim
+Frederick23k7	Frederick23k7				other	verbatim
+ftp_ryne	ftp_ryne				other	verbatim
+gamosom	gamosom				other	verbatim
+geoff311	geoff311				other	verbatim
+Georgie3333	Georgie3333				other	verbatim
+Ginja30	Ginja30				other	verbatim
+Gkuba1999@gmail.com	Gkuba1999		Gkuba1999@gmail.com	Gkuba1999@gmail.com	email_extracted	full email, local part as variant
+gldavis77	gldavis77				other	verbatim
+gparrow	gparrow				other	verbatim
+Great Bear Lake N.W. Territories Canada					location_only	canadian lake location
+greedydevsstopmakingpaidDLC's	greedydevsstopmakingpaidDLC	greedydevsstopmakingpaidDLCs			trimmed_suffix	trailing apostrophe-s stripped
+grot13	grot13				other	verbatim
+Guillaume C 3D	GuillaumeC3D	Guillaume_C_3D	Guillaume C 3D		multi_word_compacted	multi-word compaction
+GutaVaralica	GutaVaralica				other	verbatim
+GypsyJester	GypsyJester				other	verbatim
+Ha_Pozetiv4ike	Ha_Pozetiv4ike				other	verbatim
+howmuchwasthatfish	howmuchwasthatfish				other	verbatim
+Hubert Urbański	HubertUrbanski	Hubert_Urbanski	Hubert Urbański		unicode_normalized	Polish n-with-acute ASCII fold
+Hunter Billings	HunterBillings	Hunter_Billings	Hunter Billings		possible_real_name	looks like real name
+hyltonn_ttv	hyltonn_ttv				other	verbatim
+i don't really care about the giveaway, someone else might appreciate the reward more					free_form_no_nick	no nick provided
+I0_ol	I0_ol				other	verbatim
+iamquinzilla	iamquinzilla				other	verbatim
+igetdabigfish	igetdabigfish				other	verbatim
+IMark89	IMark89				other	verbatim
+Indra Kurnia	IndraKurnia	Indra_Kurnia	Indra Kurnia		possible_real_name	looks like real name
+Ivakis Solo	IvakisSolo	Ivakis_Solo	Ivakis Solo		multi_word_compacted	two-word compaction
+jaa00	jaa00				other	verbatim
+Jack Mcerlaine	JackMcerlaine	Jack_Mcerlaine	Jack Mcerlaine		possible_real_name	looks like real name
+jackallbros	jackallbros				other	verbatim
+jagkarlsson	jagkarlsson				other	verbatim
+japagamer	japagamer				other	verbatim
+Jekyll&Hyde	Jekyll&Hyde	JekyllHyde	Jekyll_Hyde		special_chars_normalized	ampersand handling
+Jeremie kasspied	Jeremiekasspied	Jeremie_kasspied	Jeremie kasspied		multi_word_compacted	two-word compaction
+John Carl	JohnCarl	John_Carl	John Carl		multi_word_compacted	two-word compaction
+joseiba10	joseiba10				other	verbatim
+Jossdu7754	Jossdu7754				other	verbatim
+Juampi_judo	Juampi_judo				other	verbatim
+JustAlgo	JustAlgo				other	verbatim
+Justmadeyoulook	Justmadeyoulook				other	verbatim
+JustMisho	JustMisho				other	verbatim
+Jwxy8502	Jwxy8502				other	verbatim
+Kabeljouking	Kabeljouking				other	verbatim
+kamciolskins.army CS2.ME	kamciolskins.army	kamciolskins			trimmed_suffix	CS2.ME looks like trailing site tag
+Kennyclan01	Kennyclan01				other	verbatim
+Kidnapper224	Kidnapper224				other	verbatim
+Kiiukamber	Kiiukamber				other	verbatim
+King_Tokay	King_Tokay				other	verbatim
+kingsleymo	kingsleymo				other	verbatim
+kiwiparents0f5	kiwiparents0f5	kiwiparentsof5			other	0 may be o
+Klopfgotit	Klopfgotit				other	verbatim
+Knot_me_Not or O.Azeitona in game.	O.Azeitona	OAzeitona	Knot_me_Not		free_form_extracted	"in game" tags O.Azeitona as FP nick
+kolibrie07	kolibrie07				other	verbatim
+kopinmuli	kopinmuli				other	verbatim
+korrr9	korrr9				other	verbatim
+kreyk666	kreyk666				other	verbatim
+Krismaloni	Krismaloni				other	verbatim
+KTMO on Discord (KTMO88 on game)	KTMO88				parens_extracted	"on game" tags KTMO88 as FP nick
+Laquicazzz	Laquicazzz				other	verbatim
+liamspctest	liamspctest				other	verbatim
+Lil_gabe_1tch	Lil_gabe_1tch				other	verbatim
+LKR |·calvin cordobé	calvincordobe	calvin_cordobe	calvincordobé		trimmed_suffix	pipe-prefix LKR clan tag plus unicode fold
+losse2745	losse2745				other	verbatim
+Lucidnights	Lucidnights				other	verbatim
+M_Gumby	M_Gumby				other	verbatim
+madasik	madasik				other	verbatim
+MAJOR DOWNY BROWN	MAJORDOWNYBROWN	MAJOR_DOWNY_BROWN	MAJOR DOWNY BROWN		multi_word_compacted	multi-word compaction
+mandomarine	mandomarine				other	verbatim
+Manufishincarp	Manufishincarp				other	verbatim
+Marvellousninja	Marvellousninja				other	verbatim
+Meateater28  or outstndingpaladin	Meateater28	outstndingpaladin			free_form_extracted	two candidate nicks listed
+Menticekcz25	Menticekcz25				other	verbatim
+MF_Pajio14	MF_Pajio14				other	verbatim
+miguel26731	miguel26731				other	verbatim
+Mike4791	Mike4791				other	verbatim
+Mikelmenchaca42	Mikelmenchaca42				other	verbatim
+mollezzz	mollezzz				other	verbatim
+monkettv	monkettv				other	verbatim
+Mototasma Funkeiro	MototasmaFunkeiro	Mototasma_Funkeiro	Mototasma Funkeiro		multi_word_compacted	two-word compaction
+Mpmento_Mori_UA	Mpmento_Mori_UA	Memento_Mori_UA			other	likely typo Mp→Me
+My discord name is Prxme or p.r.x.m.e my steam is Br00ther7	Br00ther7	Prxme	p.r.x.m.e		free_form_extracted	"my steam is" points to Br00ther7
+My nickname is Bargearse: In North Queensland, Australia we have the Great Barrier Reef which has great bottom fishing as well as world class Sport and Game fishing along with big sharks and groper. As well as this we have several rivers, both salt and fresh, that contain Barramundi, Catfish, Bull Sharks, etc so I think it would be a great addition to the game. Whatever map you decide to add no doubt we will be heavily restricted by a pay wall so I mightn't even fish it.	Bargearse				free_form_extracted	"My nickname is Bargearse" explicit
+my steamid is palmtreeman	palmtreeman				free_form_extracted	"my steamid is" explicit
+N.A					free_form_no_nick	N.A. means none
+NgChill-Ya-Mancing	NgChill-Ya-Mancing	NgChillYaMancing			other	hyphen variant
+Nicolas MOENCH	NicolasMOENCH	Nicolas_MOENCH	Nicolas MOENCH		possible_real_name	looks like real name
+nigher69	nigher69				other	verbatim
+nilson-nakamura	nilson-nakamura	nilsonnakamura	nilson_nakamura		other	hyphen variants
+Noahtheproangler	Noahtheproangler				other	verbatim
+notoalex77	notoalex77				other	verbatim
+Ntpntnx2	Ntpntnx2				other	verbatim
+Nuno Henrique Justo Frazão	NunoHenriqueJustoFrazao	NunoFrazao	Nuno Henrique Justo Frazão		possible_real_name	Portuguese full name with diacritic
+Nyoraco‗Twitch	Nyoraco	Nyoraco_Twitch	NyoracoTwitch		trimmed_suffix	"_Twitch" suffix stripped
+OCJohnT95	OCJohnT95				other	verbatim
+Ockert 69	Ockert69	Ockert_69	Ockert 69		multi_word_compacted	word + number
+PACO BARBA	PACOBARBA	PACO_BARBA	PACO BARBA		multi_word_compacted	two-word compaction
+pasiek (with cat on profil)	pasiek				trimmed_suffix	parenthetical description stripped
+peppiazzorpardi	peppiazzorpardi				other	verbatim
+Physcko corndog	Physckocorndog	Physcko_corndog	Physcko corndog		multi_word_compacted	two-word compaction
+pirat patryk	piratpatryk	pirat_patryk	pirat patryk		multi_word_compacted	two-word compaction
+Planxty1969	Planxty1969				other	verbatim
+PowerfulCastingMystic   (I clicked and changed my username)	PowerfulCastingMystic				trimmed_suffix	parenthetical note stripped
+Przejman2	Przejman2				other	verbatim
+Psn_b__e_z	Psn_b__e_z				other	verbatim
+Rafciu77	Rafciu77				other	verbatim
+RainbowNyash	RainbowNyash				other	verbatim
+Raj7	Raj7				other	verbatim
+RANGER_HITAM-Casadei	RANGER_HITAM-Casadei	Casadei	RANGER_HITAM		other	hyphen-separated parts, unclear which is FP
+raptorlorient56 niv 96	raptorlorient56				trimmed_suffix	"niv 96" is level info
+red river					location_only	river location
+Reggie Carter	ReggieCarter	Reggie_Carter	Reggie Carter		possible_real_name	looks like real name
+RenedageChewToy	RenedageChewToy				other	verbatim
+richardmr	richardmr				other	verbatim
+robuletzzz	robuletzzz				other	verbatim
+ScpDeuce	ScpDeuce				other	verbatim
+SCSBABY2000	SCSBABY2000				other	verbatim
+serfuje pl CYGBUD	CYGBUD	serfuje			free_form_extracted	"pl" tag separator, CYGBUD looks like FP nick
+SharkyElSharquale	SharkyElSharquale				other	verbatim
+sheloveviolence	sheloveviolence				other	verbatim
+shtellins	shtellins				other	verbatim
+shyyy98	shyyy98				other	verbatim
+siddoru	siddoru				other	verbatim
+siskotrincia	siskotrincia				other	verbatim
+Slartibarfastest	Slartibarfastest				other	verbatim
+soko559	soko559				other	verbatim
+Spazlux (steam)	Spazlux				trimmed_suffix	"(steam)" suffix stripped
+Speedy_0005	Speedy_0005				other	verbatim
+Spitzkop89	Spitzkop89				other	verbatim
+Splendedcarpmercenary	Splendedcarpmercenary	Splendidcarpmercenary			other	likely typo splended→splendid
+Sr-Puff	Sr-Puff	SrPuff	Sr_Puff		other	hyphen variants
+steviejohn	steviejohn				other	verbatim
+super_gun_75	super_gun_75				other	verbatim
+Suqmahpipih	Suqmahpipih				other	verbatim
+SWAPPED_MARLIN	SWAPPED_MARLIN				other	verbatim
+Szczupakowylony	Szczupakowylony				other	verbatim
+tankfishyworm	tankfishyworm				other	verbatim
+TH_DjjackyGaming	TH_DjjackyGaming				other	verbatim
+TheGreat_3911	TheGreat_3911				other	verbatim
+THEOOFISH	THEOOFISH				other	verbatim
+TheRealSven1	TheRealSven1				other	verbatim
+thomasfrancisnadolski	thomasfrancisnadolski				other	verbatim
+ThomPhel	ThomPhel				other	verbatim
+TiagoUrnano85	TiagoUrnano85				other	verbatim
+TokeTokeCast	TokeTokeCast				other	verbatim
+Topwater01	Topwater01				other	verbatim
+TPassive Killer	TPassiveKiller	TPassive_Killer	TPassive Killer		multi_word_compacted	two-word compaction
+twitch_b0rreg0chan nivel 100	twitch_b0rreg0chan	b0rreg0chan			trimmed_suffix	"nivel 100" is level info
+tycoon0013	tycoon0013				other	verbatim
+Undeadarcher420	Undeadarcher420				other	verbatim
+username Spyder_tj nickname Mr. Bones	Mr.Bones	MrBones	Mr_Bones		free_form_extracted	"nickname" tag points to Mr. Bones
+van-62	van-62	van_62	van62		other	hyphen variants
+vanthanh_	vanthanh_	vanthanh			trimmed_suffix	trailing underscore stripped
+vbarbam	vbarbam				other	verbatim
+vBrucie	vBrucie				other	verbatim
+vee_doesnt_lie	vee_doesnt_lie				other	verbatim
+venomkink1986	venomkink1986				other	verbatim
+VGB_Blue62	VGB_Blue62				other	verbatim
+VgbSeccaccio	VgbSeccaccio				other	verbatim
+vidas8888	vidas8888				other	verbatim
+Villfer1	Villfer1				other	verbatim
+Vinny Deepwater	VinnyDeepwater	Vinny_Deepwater	Vinny Deepwater		multi_word_compacted	two-word compaction
+Vivionaire	Vivionaire				other	verbatim
+WALCZ! | Djabeu	Djabeu	WALCZ			free_form_extracted	pipe-separator, Djabeu likely FP nick
+washed.	washed				trimmed_suffix	trailing dot stripped
+water(steam name)	water				parens_extracted	"steam name" labels the nick
+wildhorse49	wildhorse49				other	verbatim
+Wildpilot	Wildpilot				other	verbatim
+Willie_Wortel	Willie_Wortel				other	verbatim
+withering	withering				other	verbatim
+wongghemblungg	wongghemblungg				other	verbatim
+xintus58	xintus58				other	verbatim
+xSuRGeOnx	xSuRGeOnx				other	verbatim
+X-Wali	X-Wali	XWali	X_Wali		other	hyphen variants
+Xx420LAO420xX	Xx420LAO420xX				other	verbatim
+xXLaytoXx	xXLaytoXx				other	verbatim
+XxsaulsuxX	XxsaulsuxX				other	verbatim
+xzst0rmyz	xzst0rmyz				other	verbatim
+yami06	yami06				other	verbatim
+Yargar PL	YargarPL	Yargar_PL	Yargar PL		multi_word_compacted	two-word compaction
+YSoSeriouse3Ruh	YSoSeriouse3Ruh				other	verbatim
+Бойка	Бойка	Boyka	Boika		cjk_or_cyrillic	Cyrillic with Latin romanization
+白嫖骑士	白嫖骑士	BaiPiaoQiShi	FreeloaderKnight		cjk_or_cyrillic	Chinese with pinyin romanization

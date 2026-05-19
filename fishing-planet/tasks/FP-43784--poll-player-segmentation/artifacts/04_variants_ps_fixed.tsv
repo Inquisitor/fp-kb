@@ -1,0 +1,90 @@
+original_nickname	variant_1	variant_2	variant_3	email	category	notes
+2Wally	2Wally	TwoWally			other	Normal nick verbatim; numeric-to-word alt
+76	76				other	Two-digit only; verbatim
+adas.snaj	adas.snaj	adas_snaj	adassnaj		special_chars_normalized	Dot may be underscore/removed in DB
+Alkestylebiches	Alkestylebiches				other	Normal nick verbatim
+Andy Cavalera	AndyCavalera	Andy_Cavalera	Andy Cavalera		multi_word_compacted	Two-word name; try compacted forms
+Anonim56	Anonim56				other	Normal nick verbatim
+Argiris - dio	Argiris	Argiris-dio	Argirisdio		trimmed_suffix	Dash-separated suffix; strip it
+Auréle	Auréle	Aurele	Aurèle		unicode_normalized	Diacritic e; ASCII fold and grave-accent variant
+Australia.  Outgoing_ape	Outgoing_ape	Outgoingape			free_form_extracted	Took token after location prefix
+Big e	Bige	Big_e	Big e		multi_word_compacted	Short two-word; compact variants
+Billybats1981	Billybats1981				other	Normal nick verbatim
+Blackychann79	Blackychann79				other	Normal nick verbatim
+C_J_ 92	C_J_92	CJ_92	C_J_ 92		trimmed_suffix	Trailing space+digits; compact
+Caesar	Caesar				possible_real_name	Common name; verbatim
+CAPO DEI CAPI	CAPODEICAPI	CAPO_DEI_CAPI	CAPO DEI CAPI		multi_word_compacted	Multi-word; try compacted
+Cardy	Cardy				other	Normal nick verbatim
+Chgufyfowoyce	Chgufyfowoyce				other	Normal nick verbatim
+CJGoal1	CJGoal1				other	Normal nick verbatim
+Conker	Conker				other	Normal nick verbatim
+Domidom1990	Domidom1990				other	Normal nick verbatim
+Dudu007	Dudu007				other	Normal nick verbatim
+Ekffazr	Ekffazr				other	Normal nick verbatim
+Elzbeth	Elzbeth	Elizbeth	Elsbeth		other	Normal nick; common-name alts
+Eu adoro pescar	Eu adoro pescar			 	free_form_no_nick	Portuguese: I love fishing; no nick
+Fatboy-1954	Fatboy-1954	Fatboy_1954	Fatboy1954		special_chars_normalized	Dash may be underscore/removed
+Fishiestudios	Fishiestudios				other	Normal nick verbatim
+FISHINPLANTEBRUH	FISHINPLANTEBRUH				other	Normal nick verbatim
+FISSSSHHH	FISSSSHHH				other	Normal nick verbatim
+FPI FIT_Clavale61	FIT_Clavale61	Clavale61	FPI_FIT_Clavale61		trimmed_suffix	Likely clan prefix FPI; try without
+freccia_metodica	freccia_metodica				other	Normal nick verbatim
+Fuma_On_Mk	Fuma_On_Mk				other	Normal nick verbatim
+gabytucho	gabytucho				other	Normal nick verbatim
+Geto	Geto				other	Normal nick verbatim
+Gravitaxe-x8	Gravitaxe-x8	Gravitaxe_x8	Gravitaxex8		special_chars_normalized	Dash may differ
+guto15928	guto15928				other	Normal nick verbatim
+hawai	hawai	hawaii			location_only	Place name; also try verbatim
+HectorCross	HectorCross				other	Normal nick verbatim
+Henshow	Henshow				other	Normal nick verbatim
+Herby_verstinx2	Herby_verstinx2				other	Normal nick verbatim
+HirimMaxim	HirimMaxim				other	Normal nick verbatim
+HOTDOGY	HOTDOGY				other	Normal nick verbatim
+ice	ice				other	Short common word; verbatim
+Jamminwelch	Jamminwelch				other	Normal nick verbatim
+Jedin68	Jedin68				other	Normal nick verbatim
+Jellied_zany4	Jellied_zany4				other	Normal nick verbatim
+jj	jj				other	Two-letter; verbatim
+jm costarica	jm	jmcostarica	jm_costarica		multi_word_compacted	Initials+country; try forms
+JMJ	JMJ				other	Initials; verbatim
+JPHW81_x	JPHW81_x				other	Normal nick verbatim
+Kmullins87	Kmullins87				other	Normal nick verbatim
+Lt_major_laser	Lt_major_laser	Ltmajorlaser	Lt.major.laser		other	Normal nick verbatim
+Majiiiii_420000	Majiiiii_420000				other	Normal nick verbatim
+Malachi Bey (inchiwetrust PS5)	inchiwetrust	Malachi Bey	MalachiBey		parens_extracted	Parens contains PSN nick
+Martink_76	Martink_76				other	Normal nick verbatim
+Melo70	Melo70				other	Normal nick verbatim
+Milokhan7	Milokhan7				other	Normal nick verbatim
+Mind_Hacker	Mind_Hacker				other	Normal nick verbatim
+MMT	MMT				other	Initials; verbatim
+namu	namu				other	Normal nick verbatim
+newish - ferry 1234	newish	ferry1234	newish-ferry1234		trimmed_suffix	Dash-separated; try parts
+NismoBDS	NismoBDS				other	Normal nick verbatim
+No ty	Noty	No_ty	No ty		multi_word_compacted	Two-word; try compacted
+Nrizzel	Nrizzel				other	Normal nick verbatim
+Nscrgrl	Nscrgrl				other	Normal nick verbatim
+Olivier59164	Olivier59164				possible_real_name	Real name plus postcode; verbatim
+Pahu80	Pahu80				other	Normal nick verbatim
+Panda Man Jack	PandaManJack	Panda_Man_Jack	Panda Man Jack		multi_word_compacted	Three-word; compact variants
+Quentin71	Quentin71				possible_real_name	First name plus digits; verbatim
+Quiberon 1958	Quiberon1958	Quiberon_1958	Quiberon 1958		multi_word_compacted	Place+year; compact
+Red99fan	Red99fan				other	Normal nick verbatim
+rucu_narelo	rucu_narelo				other	Normal nick verbatim
+s	s				other	Single letter; verbatim
+Sandman	Sandman				other	Normal nick verbatim
+SHOGUN 77	SHOGUN77	SHOGUN_77	SHOGUN 77		multi_word_compacted	Word+digits; compact
+strict88 [test]	strict88				brackets_removed	Strip [test] bracket suffix
+Sully	Sully				other	Normal nick verbatim
+Sunshinebard	Sunshinebard				other	Normal nick verbatim
+Tak	Tak				other	Short nick; verbatim
+Tamasannttamigayu 90	Tamasannttamigayu	Tamasannttamigayu90	Tamasannttamigayu_90		trimmed_suffix	Trailing level number; strip/compact
+The goon man	Thegoonman	The_goon_man	The goon man		multi_word_compacted	Three-word phrase; compact
+TheHappyLoaf_74	TheHappyLoaf_74				other	Normal nick verbatim
+TOBACCOspit	TOBACCOspit				other	Normal nick verbatim
+ToddCommish	ToddCommish				other	Normal nick verbatim
+Tru2dis	Tru2dis				other	Normal nick verbatim
+TypsyGrasshopper....	TypsyGrasshopper				trimmed_suffix	Trailing dots; strip
+unnamed_voyager0	unnamed_voyager0				other	Normal nick verbatim
+Veroneze	Veroneze				other	Normal nick verbatim
+W7w7	W7w7				other	Short nick; verbatim
+WreckedHellsboy	WreckedHellsboy				other	Normal nick verbatim

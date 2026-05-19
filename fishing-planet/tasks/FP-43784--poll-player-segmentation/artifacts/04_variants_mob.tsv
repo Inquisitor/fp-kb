@@ -1,0 +1,20 @@
+original_nickname	variant_1	variant_2	variant_3	email	category	notes
+@Quack-Attack83	Quack-Attack83	QuackAttack83	Quack_Attack83		trimmed_suffix	stripped leading @ social-handle marker
+16_denver	16_denver	16denver			other	looks like valid nick; retry verbatim
+AFC-SpingX7	AFC-SpingX7	AFC-SpringX7	AFCSpingX7		other	likely typo of Spring; try both
+Caneli_sfishingplanet	Caneli_s	Caneli	Caneli_sfishingplanet		trimmed_suffix	suspected "sfishingplanet" suffix appended
+DaenerysTargaryen-VIl	DaenerysTargaryen-VIl	DaenerysTargaryen-VII	DaenerysTargaryen		other	VIl may be Roman VII misread
+FurryNetTheif1	FurryNetThief1	FurryNetTheif1	FurryNetThief		other	likely typo Theif->Thief
+GiganticBarnclekozak	GiganticBarnclekozak	GiganticBarnaclekozak	GiganticBarnacle_kozak		other	possible missing 'a' in Barnacle
+IDN-Jacob	IDN-Jacob	IDN_Jacob	Jacob		other	IDN likely Indonesia clan tag
+IwakUcengHunter	IwakUcengHunter				other	looks like valid nick; retry verbatim
+Jesus712018	Jesus712018				other	looks like valid nick; retry verbatim
+Jf-fishing	Jf-fishing	Jf_fishing	JfFishing		other	looks valid; try separator variants
+Minhaz Shakil	MinhazShakil	Minhaz_Shakil	Minhaz Shakil		multi_word_compacted	real-name pair; compacted variants
+Name: omarxd       level:86	omarxd				trimmed_suffix	extracted "omarxd" after "Name:"; dropped level
+Rajil Afwa	RajilAfwa	Rajil_Afwa	Rajil Afwa		multi_word_compacted	real-name pair; compacted variants
+Santinooooo	Santinooooo	Santino			other	verbatim plus shorter form
+Seanbet	Seanbet				other	looks like valid nick; retry verbatim
+Sumthingfishy420	Sumthingfishy420	SumthingFishy420			other	looks valid; case variant
+X-Daiwa	X-Daiwa	X_Daiwa	XDaiwa		other	looks valid; separator variants
+zliouba	zliouba				other	looks like valid nick; retry verbatim

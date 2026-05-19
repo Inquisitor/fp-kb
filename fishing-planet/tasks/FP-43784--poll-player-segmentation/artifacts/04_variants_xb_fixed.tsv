@@ -1,0 +1,48 @@
+original_nickname	variant_1	variant_2	variant_3	email	category	notes
+Ash	Ash				possible_real_name	Short common name; try verbatim
+BEYOND xxHELP	BEYONDxxHELP	BEYOND_xxHELP	BEYOND xxHELP		multi_word_compacted	Gamertag with space; try compacted
+Bionoc Bark	BionocBark	Bionoc_Bark	Bionoc Bark		multi_word_compacted	Two-word gamertag; try compacted
+Bradmanjr	Bradmanjr				other	Verbatim; plain handle
+Brazenleader#641	Brazenleader	Brazenleader641			discriminator_stripped	Xbox gamertags have no discriminator
+Courtney benning	Courtneybenning	Courtney_benning	Courtney benning		multi_word_compacted	Looks like real name; try compacted
+deathbybellyrub	deathbybellyrub				other	Verbatim; plain handle
+Dinonuggies1215	Dinonuggies1215				other	Verbatim; plain handle
+diogo	diogo				possible_real_name	Portuguese name; try verbatim
+DuMbDoNuT	DuMbDoNuT	dumbdonut			other	Verbatim plus lowercase
+Elpachino99	Elpachino99				other	Verbatim; plain handle
+Flourylmp	Flourylmp	FlouryImp			other	Possibly "Imp" misread as "lmp"
+Fluro78	Fluro78				other	Verbatim; plain handle
+gregorian_andy	gregorian_andy				other	Verbatim; plain handle
+Hi	Hi				free_form_no_nick	Just a greeting; no nick
+Jwooly22	Jwooly22				other	Verbatim; plain handle
+KGE SNEAKY ME	KGESNEAKYME	KGE_SNEAKY_ME	KGE SNEAKY ME		multi_word_compacted	Gamertag with spaces
+kikotheWplayer	kikotheWplayer	kikotheplayer			other	Possibly stray W
+kiwiis#9694	kiwiis				discriminator_stripped	Discord-style discriminator
+LegendaryFishing	LegendaryFishing				other	Verbatim; plain handle
+Liam051198	Liam051198				other	Verbatim; plain handle
+Lilstumpy328 aka Ayden	Lilstumpy328	Ayden			free_form_extracted	Took "Lilstumpy328" before "aka"
+M00N1IGHT420	M00N1IGHT420	MOONlIGHT420	MOONLIGHT420		other	Leetspeak; also try plain
+Mikus#1994	Mikus				discriminator_stripped	Discord-style discriminator
+minimooi	minimooi				other	Verbatim; plain handle
+Mortalstomper	Mortalstomper				other	Verbatim; plain handle
+Mustang25#701	Mustang25	Mustang25701			discriminator_stripped	Xbox gamertags have no discriminator
+my account is not level 10 or higher	 				free_form_no_nick	No nick provided
+MysticalClaw516	MysticalClaw516				other	Verbatim; plain handle
+NoahDestroyer18. (xbox gamertag)	NoahDestroyer18				parens_extracted	Stripped trailing punctuation and parens note
+Parchedgecko	Parchedgecko				other	Verbatim; plain handle
+pedrofp38	pedrofp38				other	Verbatim; plain handle
+PhoenixFire	PhoenixFire				other	Verbatim; plain handle
+PooToe27	PooToe27				other	Verbatim; plain handle
+Pop	Pop				other	Short; try verbatim
+Prstonrobinson	Prstonrobinson	Prestonrobinson			other	Possible missing "e" typo
+rubio88	rubio88				other	Verbatim; plain handle
+Rutt2010	Rutt2010				other	Verbatim; plain handle
+Silverwolf#1887	Silverwolf	Silverwolf1887			discriminator_stripped	Xbox gamertags have no discriminator
+Stealth	Stealth				other	Verbatim; common handle
+Taz( tasmanian devil )	Taz				trimmed_suffix	Stripped parenthetical explanation
+TheShadows#4966	TheShadows	TheShadows4966			discriminator_stripped	Discord-style discriminator
+Vo	Vo				other	Very short; try verbatim
+Wantedtheme3372	Wantedtheme3372				other	Verbatim; plain handle
+Williams	Williams				possible_real_name	Surname; try verbatim
+Zack	Zack				possible_real_name	First name; try verbatim
+ZeroRitualTheFisher	ZeroRitualTheFisher				other	Verbatim; plain handle

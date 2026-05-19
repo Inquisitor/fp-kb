@@ -1,0 +1,6 @@
+-- FP-43784 LastActivityDate lookup for pass-2 matched users — bucket: steam (62 users)
+SELECT u.Username AS MatchedUsername, u.LastActivityDate
+FROM (VALUES (N'AffableScallopIdol'),(N'Andy'),(N'Bargearse'),(N'BigT'),(N'Big_T'),(N'BoyKa'),(N'Br00ther7'),(N'BrightPerchBreaker36'),(N'Casadei'),(N'CptCodeye'),(N'D4B0mb'),(N'DUKA99'),(N'DeathMachineUA_gaming'),(N'DjabeU'),(N'Djuka99'),(N'DoctorLaw'),(N'Edupu'),(N'EnlightenedWhitefishPrince'),(N'EnormousGarHunter'),(N'FIxieIsMonk'),(N'FantasticPerchDaddy62'),(N'Ivakis_Solo'),(N'JekyllHyde'),(N'Jekyll_Hyde'),(N'JohnCarl'),(N'KTMO88'),(N'MototasmaFunkeiro'),(N'Mr.Bones'),(N'MrTroyMan'),(N'Mr_Bones'),(N'Niszczycielswiatow123'),(N'Nyoraco'),(N'Nyoraco_Twitch'),(N'O.Azeitona'),(N'PILOT_ON_BOARD'),(N'PacoBarba'),(N'Paco_Barba'),(N'Pasiek'),(N'Pizza_slice'),(N'PowerfulCastingMystic'),(N'Prost_Plovs'),(N'PrxmE'),(N'Ranger_Hitam'),(N'ReggieCarter'),(N'SERFUJE'),(N'Slashy'),(N'SplendidCarpMercenary'),(N'SrPuff'),(N'TOYOTAGUY'),(N'Tom'),(N'Washed'),(N'boika'),(N'captainwest'),(N'far5915'),(N'fishstick123'),(N'mrbones'),(N'nunofrazao'),(N'rda'),(N'twitch_b0rreg0chan'),(N'vanthanh'),(N'water'),(N'xVectoRx')) AS v(Name)
+INNER JOIN dbo.Users u WITH (NOLOCK)
+    ON u.Username = v.Name COLLATE SQL_Latin1_General_CP1_CI_AS
+ORDER BY u.Username;

@@ -1,0 +1,54 @@
+bucket,original,best_variant,source,matched,level,country,ispayer,last_activity,time_ago,category
+mob,@Quack-Attack83,Quack-Attack83,username,Quack-Attack83,100,us,1,2026-05-19,2h,trimmed_suffix
+mob,DaenerysTargaryen-VIl,DaenerysTargaryen-VII,username,DaenerysTargaryen-VII,100,id,1,2026-05-19,18h,other
+mob,GiganticBarnclekozak,GiganticBarnaclekozak,username,GiganticBarnacleKozak,98,tr,1,2026-05-19,4h,other
+mob,Name: omarxd       level:86,omarxd,username,omarxd,86,gt,1,2026-05-14,5d,trimmed_suffix
+xb,BEYOND xxHELP,BEYONDxxHELP,username,BEYONDxxHELP,100,UNITED STATES,1,2026-05-19,16h,multi_word_compacted
+xb,Brazenleader#641,Brazenleader641,username,Brazenleader641,49,AUSTRALIA,0,2026-05-19,15h,discriminator_stripped
+xb,Flourylmp,FlouryImp,username,FlouryImp,76,UNITED KINGDOM,1,2026-05-18,20h,other
+xb,Lilstumpy328 aka Ayden,Lilstumpy328,username,Lilstumpy328,49,UNITED STATES,1,2026-05-19,36m,free_form_extracted
+xb,NoahDestroyer18. (xbox gamertag),NoahDestroyer18,username,NoahDestroyer18,63,UNITED STATES,1,2026-05-19,2h,parens_extracted
+xb,Silverwolf#1887,Silverwolf1887,username,Silverwolf1887,95,UNITED STATES,1,2026-05-16,3d,discriminator_stripped
+xb,TheShadows#4966,TheShadows4966,username,TheShadows4966,36,UNITED KINGDOM,1,2026-05-17,2d,discriminator_stripped
+ps,adas.snaj,adas_snaj,username,Adas_snaj,21,pl,1,2026-04-19,1mo,special_chars_normalized
+ps,Argiris - dio,Argiris-dio,username,argiris-dio,66,gr,1,2026-05-19,2h,trimmed_suffix
+ps,C_J_ 92,C_J_92,username,C_J_92,27,gb,1,2026-05-15,4d,trimmed_suffix
+ps,Fatboy-1954,Fatboy_1954,username,fatboy_1954,72,us,1,2026-05-18,20h,special_chars_normalized
+ps,FPI FIT_Clavale61,FIT_Clavale61,username,FIT_Clavale61,107,it,1,2026-05-19,1h,trimmed_suffix
+ps,jm costarica,jmcostarica,username,jmcostarica,103,cr,0,2026-05-18,20h,multi_word_compacted
+ps,Malachi Bey (inchiwetrust PS5),inchiwetrust,username,InCHIweTrust,95,us,1,2026-05-18,1d,parens_extracted
+ps,newish - ferry 1234,newish-ferry1234,username,newish-ferry1234,18,gb,0,2026-05-19,16h,trimmed_suffix
+ps,Quiberon 1958,Quiberon1958,username,quiberon1958,110,fr,1,2026-05-19,4h,multi_word_compacted
+steam,__PILOT__ON__BOARD__,PILOT_ON_BOARD,username,PILOT_ON_BOARD,96,UA,1,2026-05-16,3d,other
+steam,=Niszczycielswiatow123,Niszczycielswiatow123,username,Niszczycielswiatow123,61,PL,1,2026-05-19,1h,trimmed_suffix
+steam,abhimax68@gmail.com,abhimax68@gmail.com,email,xVectoRx,75,IN,1,2026-05-16,3d,email_extracted
+steam,AffableScallopldol,AffableScallopIdol,username,AffableScallopIdol,28,HU,0,2026-05-19,7h,other
+steam,Cpt Cod Eye,CptCodEye,username,CptCodeye,32,GB,0,2026-05-19,13h,multi_word_compacted
+steam,DeathMachineUA _gaming,DeathMachineUA_gaming,username,DeathMachineUA_gaming,95,UA,1,2026-05-19,4h,trimmed_suffix
+steam,Disc-manfromthesouth3 fp MrTroyMan,MrTroyMan,username,MrTroyMan,90,ZA,1,2026-05-08,11d,free_form_extracted
+steam,Đuka99,Djuka99,username,Djuka99,66,AT,1,2026-05-08,11d,unicode_normalized
+steam,EnlightedWhitefishPrince,EnlightenedWhitefishPrince,username,EnlightenedWhitefishPrince,19,US,0,2026-05-19,16h,other
+steam,EnourmosGarHunter,EnormousGarHunter,username,EnormousGarHunter,21,ZA,0,2026-05-19,4h,other
+steam,FantasicPerchDaddy62,FantasticPerchDaddy62,username,FantasticPerchDaddy62,29,US,1,2026-05-10,9d,other
+steam,"far5915 in fishing planet game, Galaxia90 on steam",far5915,username,far5915,90,CA,1,2026-05-08,10d,free_form_extracted
+steam,Fishing planaet (Edupu) Steam (R.D.A),Edupu,username,Edupu,47,LV,1,2026-05-18,1d,parens_extracted
+steam,Fishing planet nickname: Prost_Plovs  Steam nickname: Pizza_slice,Prost_Plovs,username,Prost_Plovs,62,LV,1,2026-05-19,53m,free_form_extracted
+steam,Fishing planet: D4B0mb        Discord: d4bomb,D4B0mb,username,D4B0mb,79,US,1,2026-05-10,9d,free_form_extracted
+steam,fishsthick123,fishstick123,username,fishstick123,108,MY,1,2026-05-19,4h,other
+steam,FIxieIsMonk (Fishing Planet) ourguiltandregret (discord),FIxieIsMonk,username,FIxieIsMonk,65,AU,1,2026-05-19,7h,parens_extracted
+steam,FixieIsMonk (if fishing planet account) Fixie (if discord),FixieIsMonk,username,FIxieIsMonk,65,AU,1,2026-05-19,7h,parens_extracted
+steam,John Carl,JohnCarl,username,JohnCarl,95,US,1,2026-05-19,5h,multi_word_compacted
+steam,Knot_me_Not or O.Azeitona in game.,O.Azeitona,username,O.Azeitona,110,CH,1,2026-05-19,28m,free_form_extracted
+steam,KTMO on Discord (KTMO88 on game),KTMO88,username,KTMO88,81,US,1,2026-05-19,16h,parens_extracted
+steam,Mototasma Funkeiro,MototasmaFunkeiro,username,MototasmaFunkeiro,23,BR,1,2026-05-18,22h,multi_word_compacted
+steam,"My nickname is Bargearse: In North Queensland, Australia we have the Great Barrier Reef which has great bottom fishing as well as world class Sport and Game fishing along with big sharks and groper. As well as this we have several rivers, both salt and fresh, that contain Barramundi, Catfish, Bull Sharks, etc so I think it would be a great addition to the game. Whatever map you decide to add no doubt we will be heavily restricted by a pay wall so I mightn't even fish it.",Bargearse,username,Bargearse,106,AU,1,2026-05-11,8d,free_form_extracted
+steam,Nuno Henrique Justo Frazão,NunoFrazao,username,nunofrazao,67,,1,2026-05-16,3d,possible_real_name
+steam,Nyoraco‗Twitch,Nyoraco_Twitch,username,Nyoraco_Twitch,69,JP,1,2026-05-16,3d,trimmed_suffix
+steam,PACO BARBA,PACO_BARBA,username,Paco_Barba,110,ES,1,2026-05-19,9h,multi_word_compacted
+steam,PowerfulCastingMystic   (I clicked and changed my username),PowerfulCastingMystic,username,PowerfulCastingMystic,29,FR,0,2026-05-19,14h,trimmed_suffix
+steam,RANGER_HITAM-Casadei,Casadei,username,Casadei,110,ID,1,2026-05-19,2h,other
+steam,Reggie Carter,ReggieCarter,username,ReggieCarter,90,RU,1,2026-05-19,1h,possible_real_name
+steam,serfuje pl CYGBUD,serfuje,username,SERFUJE,32,PL,1,2026-05-08,11d,free_form_extracted
+steam,Splendedcarpmercenary,Splendidcarpmercenary,username,SplendidCarpMercenary,105,CA,0,2026-05-19,14h,other
+steam,Sr-Puff,SrPuff,username,SrPuff,101,BR,1,2026-05-19,16h,other
+steam,twitch_b0rreg0chan nivel 100,twitch_b0rreg0chan,username,twitch_b0rreg0chan,100,MX,1,2026-05-19,13h,trimmed_suffix
