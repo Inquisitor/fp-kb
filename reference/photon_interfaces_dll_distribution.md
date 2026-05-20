@@ -30,6 +30,30 @@ type: reference
   client source copy.
 - Server-only logic (action handlers, persistence, anti-cheat) lives only on the server and has no mirror.
 
+## IL2CPP managed stripping -- reflection-only members
+
+UnityLinker (Conservative ruleset, the project default for Standalone IL2CPP -- `managedStrippingLevel: 1`
+in `ProjectSettings.asset`) strips members that have no statically resolvable call-site. Public
+ctors/methods/fields reached only through reflection are removed. The typical runtime symptom is
+`JsonSerializationException: Unable to find a default constructor` (Newtonsoft.Json hitting a stripped
+parameterless ctor) or `MissingMethodException` (Activator.CreateInstance, similar). Editor (Mono) does
+no stripping -- Editor smoke tests cannot catch this class of regression.
+
+Two preserve strategies coexist in this codebase, chosen by distribution mechanism, not by taste:
+
+- **Source-copy types in `ObjectModel/`** (Radar, Leaderboards, etc.) use `[JsonConstructor]` on a
+  parameterized ctor (immutable DTO pattern -- no default ctor at all). Works because the source-copied
+  files reach the client as user code with `Newtonsoft.Json` already on the reference graph; the
+  parameterized ctor is statically reachable from Newtonsoft's serializer infrastructure, which keeps it.
+- **Shared-DLL types in `Photon.Interfaces/`** use a local `[Preserve]`-by-name attribute (an internal
+  `PreserveAttribute` declared in the same assembly). UnityLinker matches the attribute by short type
+  name regardless of namespace, so the assembly can guard reflection-only members without depending on
+  `UnityEngine` or `Newtonsoft.Json`. Same trick is used by `Newtonsoft.Json.Utilities.PreserveAttribute`.
+
+Apply only when a member is reached **solely** through reflection. If at least one static `new T(...)`
+exists anywhere in client code, the linker's reachability graph already keeps the ctor and the
+annotation is noise. Do not pre-emptively decorate types "just in case" -- the rule is evidence-based.
+
 ## When making a change
 
 1. Edit in the server SVN (Code-role branch).
