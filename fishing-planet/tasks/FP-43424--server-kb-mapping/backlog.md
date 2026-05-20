@@ -20,6 +20,10 @@ Deferred items and parking lot for ideas that appear during planning/execution. 
   - Surfaced by FP-43579 VS1/VS4 smoke. Cross-ref also `FP-43579 backlog → DOC-003` (the KB logging module promotion is its post-v1 follow-up).
 - [ ] Dependency graph visualization — optional. Consider Mermaid in `_systems/dependencies.md` generated from frontmatter + using-statement grep.
 
+## Module candidates emerged ad-hoc from real tasks
+
+- 2026-05-18: `equipment-rules` -- created during FP-43502 (extending `SpinLeaders` with `MonoLeader`). Pass 3 catalogue line 30 stated "No new module candidates emerged from inventory walk", but the FP-43502 deep review surfaced enough structure to justify a narrow module: rod template catalog (`RodTemplates.cs`), subtype groups (`Inventory_Groups.cs`), runtime equip validation (`Inventory_Can.cs`), and a parallel client-only UI compatibility dictionary (`ListOfCompatibility.cs`) that has to be hand-synced. Suggests the "walk yielded no candidates" verdict is more reliable as "no candidates without a driving task" -- real work tends to expose them. Worth re-reading the catalogue draft with this lens on the next pass.
+
 ## Deferred decisions (not blocking initial mapping)
 
 - [ ] Test projects in cards — user prefers describing inline in the module card (with a mention of non-trivial test infrastructure) over a separate `-tests` module. Record in KB `CLAUDE.md` conventions after Pass 2, when actual test project patterns are visible.
