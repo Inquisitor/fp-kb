@@ -17,7 +17,7 @@
 - [x] **Zero-score policy** — handed off to Community team monitoring; they will raise a separate ticket if abuse pivots from no-show to zero-score.
 - [x] **Future no-shows** — Community monitors abuse manually; no proactive detection on our side. Planned mitigations are out-of-scope here:
   - Server-side "consecutive no-show penalty" (idea, no ticket yet) — Community will spawn a ticket if recidivism becomes a pattern.
-  - GDD-level: per-bracket prize caps (MaxWins / Max2nd / Max3rd) — natural progression pushes successful tankers out of NOOBS, removing the incentive entirely.
+  - GDD-level: per-bracket prize caps (MaxWins / Max2nd / Max3rd) — natural progression pushes successful abusers out of NOOBS, removing the incentive entirely.
   - Twink/multi-account detection by IP / MAC — separate planned ticket.
 - [x] **Mobile / Nintendo passes** — no action until matchmaking ships on those platforms. If structural mitigations (per-bracket prize caps, twink detection) land first, this may never be needed. Otherwise: re-use `discovery-sql.sql` + `weekly-leaderboard-ban.sql` from this task with the appropriate `@WindowStart` per platform launch date.
 - [x] **Threshold drift** — Community monitors complaint volume; they will spawn a new ticket (or reopen this one) if the 30% gate stops separating signal from noise.
