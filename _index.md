@@ -9,6 +9,7 @@
 | FP-41595 | FP/server | lbm-release-support | in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/            |
 | FP-43632 | FP/server | gc-migration        | in-progress   | fishing-planet/tasks/FP-43632--game-carrier-on-steam-ps-mobile-support/ |
 | FP-43625 | FP/server | matchmaking-maxwins | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
+| FP-32370 | FP/server | po-test-coverage    | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
 
 ## Active Reviews
 | Task     | Executor    | Path                                                                                       |
