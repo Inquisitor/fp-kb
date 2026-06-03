@@ -45,3 +45,4 @@ Composition rules for what tackle items can be equipped on which rods, and what 
 ## Related Tasks
 
 - FP-43502 (2026-05) -- Extended `SpinLeaders` to include `MonoLeader`; mirrored on client; updated `ListOfCompatibility` entries for six rods covered by the task. See `tasks/FP-43502--ftue-equipment-rules-mono-leader/journal.md`.
+- FP-43981 (2026-06) -- Investigation of the *Feeder Carp Fishing* tutorial sinker highlight surfaced the `IT.X == IST.X` numeric collision combined with the OR-merge category matcher in `AssembleRodHint` / `MissionInventoryContext`. GD applied a temporary item-ID mitigation on the mission; tech-debt split into follow-up stories [FP-44228](https://fishingplanet.atlassian.net/browse/FP-44228) (server), [FP-44229](https://fishingplanet.atlassian.net/browse/FP-44229) (client), [FP-44230](https://fishingplanet.atlassian.net/browse/FP-44230) (GD revert). See `tasks/FP-43981--ftue-sinker-subtype/journal.md` and `log.md` Finding 2026-06-03.
