@@ -24,9 +24,10 @@
 ## Branch Roles (current)
 | Role      | Server       | Client              |
 |-----------|--------------|---------------------|
-| Code      | MFT20260325  | CodeBranch          |
-| Content   | LBM20251201  | MainClient          |
-| Stable    | KNW20250723  | MainClient @ r52058 |
+| Code      | NPN20260602  | CodeBranch          |
+| Content   | MFT20260325  | MainClient          |
+| Stable    | LBM20251201  | MainClient @ r52058 |
+| OldStable | KNW20250723  | MainClient @ r47620 |
 | OldStable | IMV20250220  | MainClient @ r47620 |
 
 > Role definitions and colors: see [`CLAUDE.md` → Branch Roles](CLAUDE.md#branch-roles)
@@ -39,6 +40,7 @@ Minimal ancestry for active branches — used to decide whether a commit is alre
 
 | Branch       | Base Rev | Based on          |
 |--------------|----------|-------------------|
+| NPN20260602  | r16131   | MFT20260325:16130 |
 | MFT20260325  | r15943   | LBM20251201:15942 |
 | LBM20251201  | r15396   | KNW20250723:15394 |
 | KNW20250723  | r14593   | JLM20250520:14592 |
