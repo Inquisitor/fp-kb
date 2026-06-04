@@ -1,7 +1,7 @@
 ---
-status: in-progress
+status: resolved
 executor: Yuriy Burda
-branch: LBM @ r15935, MFT @ r16112
+branch: LBM @ r15935, MFT @ r16112, MFT @ r16127
 jira: https://fishingplanet.atlassian.net/browse/FP-42016
 ---
 
@@ -24,11 +24,14 @@ New approach — **MFT r16112**: rather than chasing every exit path to force se
 ## Scope
 
 - **LBM r15935** — Fix expired pond pass records not removed from profile on exit to Globe
-- **MFT r16112** — Hide expired unlocks from WebAdmin Active Level Unlocks page (reopen fix; diff bullets pending Phase 2)
+- **MFT r16112** — Hide expired unlocks from WebAdmin Active Level Unlocks page (reopen #1; superseded by r16127's revert of the unconditional filter)
+- **MFT r16127** — Mark expired unlocks in WebAdmin, prune at SetProfile (reopen #2 — replaces r16112's hide with EXPIRED marker + opt-in checkbox + data-hygiene fix at `ProfileAdapter.SetProfile`)
 
-> Branch-copy inheritance: MFT (Code) was created at r15943 from LBM:15942. r15935 ≤ 15942 → already inherited in MFT. No merge to MFT needed.
-> Stable / OldStable: not in scope. Bug originally reported on test/qa with client r52059 (above Stable's r52058 pin) — Content-level fix.
-> r16112 was committed directly on MFT (Code) — Code receives merges but does not merge down; cross-branch reach for the reopen fix to assess in close phase.
+> Branch-copy inheritance:
+> - r15935 (LBM) ≤ MFT's source-rev 15942 → inherited in MFT via branch copy (relevant when LBM was Content and MFT was Code at round 1).
+> - r16127 (MFT) ≤ NPN's source-rev 16130 → inherited in NPN (current Code) via branch copy. No merge to Code needed.
+> - Stable / OldStable: not in scope. Bug reported on test/qa with client r52059 (above Stable's r52058 pin) — Content-level fix.
+> - Maintainer intent: keep fix on the fishing-pond-trip branch line (was MFT-as-Code at round 1; now MFT-as-Content with auto-inheritance up to NPN). No down-merge to LBM/KNW/IMV.
 
 ## Findings — first review (r15935)
 
@@ -129,11 +132,38 @@ Either way the DB carries the expired record while the client is live — exactl
 
 **Correction to first review:** the first-review verdict claimed r15935 "closes the reported admin-display bug." That was wrong — r15935's cleanup at `InternalHandleArriveToBase` is in-memory only (save commented out) and the admin reads the DB, so the symptom survived on this path. This is why QA reopened. Lesson: verify that an in-memory mutation is actually persisted before crediting it with fixing a DB-backed admin view.
 
-## Draft reopen comment (for close phase — not yet posted)
+## Reopen comment — round 1 r16112 (posted as comment 121609)
 
 > Reopening. The fix hides expired unlocks at the WebAdmin display layer, but the record is genuinely still present in the live profile on the server (the expired Pond Pass persists in the profile/DB until the client disconnects or the player re-logs / switches pond). WebAdmin is a diagnostic tool, so it should show the real profile state, not hide it. Please instead mark expired passes (a separate `EXPIRED` column / color highlight) so they're identifiable at a glance, and optionally add a "hide expired" checkbox like `HideIncompleteTransactions` on the Payments page.
 >
 > It would also be worth assessing how problematic this dirty state actually is on a live game server — the natural place to clean expired passes is the profile-save paths themselves, where the processing belongs. The end-of-trip path (`RequestMissionResult`) currently saves the profile without running the cleanup, and the arrive-to-base path used to persist the profile (`ProfileAdapter.SetProfile`) but that call is now commented out — worth understanding why before settling for display-only filtering. Game logic is unaffected (expired passes are already filtered by date), so this is about admin visibility and data hygiene, not gameplay.
+
+## Findings — re-review (r16127)
+
+r16127 rewires the fix to address every reopen point head-on:
+
+- `WebAdmin/Models/Players/LevelLockRemovalsModel.cs` — removes r16112's unconditional `Where` filter (`Init` no longer filters). Adds `HideExpired` flag with `[Display(Name = "Hide Expired Unlocks")]` and per-row computed `IsExpired => EndDate != null && EndDate <= DT.Helper.UtcNow`.
+- `WebAdmin/Views/Player/Unlocks.cshtml` — GET form with `Hide Expired Unlocks` checkbox (submit-on-click, default off, Payments `HideIncompleteTransactions` pattern); main POST form preserves the choice via `@Html.HiddenFor(m => m.HideExpired)`; foreach filters via `Model.Where(r => !Model.HideExpired || !r.IsExpired)`; expired rows get `class="expired"` (gray text) and a red `EXPIRED` badge next to `EndDate`.
+- `WebAdmin/Controllers/PlayerController.cs` — `Unlocks` GET/POST take `Guid userId` (binder) + `bool hideExpired = false`; POST→GET state preserved via `RedirectToAction(nameof(Unlocks), new { userId, hideExpired })`.
+- `Photon/.../DalAdapters/ProfileAdapter.cs` — new line at the top of private `SetProfile(Profile profile)`: `profile.OutdateLockRemovalAndLog("SetProfile")`. Cleanup is now part of the persistence boundary itself, before `InvalidateFlags()` and `GetDtoOutOfProfile(profile)`.
+
+**Root-cause coverage — verified.** `SaveProfileWithLog` (`Common/IGenericPeer.cs:46`) chains `peer → ProfileAdapter.SetProfile(peer.Profile, peer.Session) → private SetProfile(profile) → OutdateLockRemovalAndLog("SetProfile")`. So Path B (`RequestMissionResult` → `SaveProfileWithLog("RequestMissionResult")`) — the most likely repro path for QA — now persists a cleaned profile. F-1 / F-7 from earlier rounds resolved structurally at the persistence boundary, not by adding a call at every exit path. Path A (`InternalHandleArriveToBase`) keeps its in-memory cleanup; its `SetProfile` save stays commented out (deliberate DB-write-reduction decision per executor's PS), but any subsequent save anywhere — even a much later one — now prunes via this same hook. The executor's framing ("won't increase DB writes back; cleanup before save instead") is sound.
+
+**UX coverage.** Default behaviour shows everything (transparency preserved for tech staff). EXPIRED rows are visually distinct (gray + red badge) for at-a-glance identification. QA can opt-in to hide via the checkbox — state survives POST redirects. Admin actions `changeDate` / `deletePass` on expired Pond Passes are reachable again when the checkbox is unchecked (closing first-review F-4 too).
+
+### Notes
+
+- `SetProfile` now has a small side effect (it may set `LevelLockRemovals = null` when the list becomes empty, and triggers `OnDependencyChanged("UnlockedPonds", ...)` + `OnLevelLockRemovalRemoved` per removal). All save-adjacent callers already trigger these via existing `OutdateLockRemovalAndLog` sites, so the event-firing pattern is consistent — but it does broaden `SetProfile`'s contract from "pure persist" to "prune + persist". Worth being aware of; not raising as a finding.
+- Inline `<style>` in `Unlocks.cshtml` for the EXPIRED styling. Minor cosmetics.
+- No new tests added — consistent with the project convention (same as first-review F-2).
+
+## Verdict — re-review (r16127)
+
+**LGTM (Approve).** Substantively addresses every reopen point: EXPIRED marker + opt-in `Hide Expired Unlocks` checkbox preserves diagnostic transparency by default; cleanup hook at `ProfileAdapter.SetProfile` fixes the root-cause "clean/save misalignment" at the persistence boundary (not by patching every exit path), so `SaveProfileWithLog`-using paths (incl. EOM `RequestMissionResult`) now persist a cleaned profile while Path A's commented `SetProfile` — deliberate DB-write-reduction decision per executor's PS — is left intact. No merge needed: r16127 (MFT, now Content) ≤ NPN's source-rev 16130, inherited in NPN (current Code) via branch copy.
+
+## Draft re-review comment (for close phase — not yet posted)
+
+> LGTM. Addresses every reopen point cleanly: EXPIRED marker (gray row + red badge) with the opt-in `Hide Expired Unlocks` checkbox keeps the default view honest about real profile state, and the prune at `ProfileAdapter.SetProfile` is the right place to fix the data hygiene — `SaveProfileWithLog` chains into it, so the EOM `RequestMissionResult` save now persists a cleaned profile without needing a per-exit-path patch. PS on the commented-out `SetProfile` at arrive-to-base also makes sense — keeping the DB-write reduction intact while letting any downstream save catch up.
 
 ## Investigation Journal
 
@@ -144,3 +174,6 @@ Either way the DB carries the expired record while the client is live — exactl
 - 2026-05-26 — Reopen intake. QA (Dmytro Sova) reopened 2026-04-30: in-session expiry + return to Globe without client restart still shows expired record in admin. Executor delivered new fix MFT r16112 (WebAdmin display-layer filter, different approach from r15935 server cleanup). Executor field now filled (Yuriy Burda) — was empty at first review. Card reopened; scope extended with r16112; first-review Findings/Verdict relabeled.
 - 2026-05-26 — Phase 2 audit: `svn log | Select-String` confirmed r16112 is the only FP-42016 commit on MFT and r15935 the only one on LBM — WebAdmin fix is Code-only (→ F-5). Diff read: one-line `Where` filter in `LevelLockRemovalsModel.Init`. Verified predicate is byte-identical to `Profile.UnlockedPonds` getter and `LevelLockRemoval.EndDate` is `DateTime?`. Recon over `Unlocks.cshtml` + `PlayerController.Unlocks` POST showed `changeDate`/`deletePass` are reachable only via rendered rows → F-4. code-reviewer delegation declined (one-line change, recon conclusive).
 - 2026-05-26 — Maintainer raised the masking concern. Investigated root cause: enumerated `OutdateLockRemoval(AndLog)` call sites (cleanup is plentiful, not absent), then found the clean/save misalignment — `InternalHandleArriveToBase` cleans in-memory but its profile save is commented out; `RequestMissionResult` saves without cleanup. This explains the open-client-window persistence and matches QA's lifecycle → F-7. Reframed verdict from "approve" to **reopen**: r16112 masks a live-profile dirty state in a diagnostic tool → F-6. Confirmed the opt-in precedent (`Payments.cshtml` `HideIncompleteTransactions` checkbox). F-5 resolved (MFT-only by maintainer). Recorded correction: first-review credit to r15935 for closing the admin symptom was wrong (in-memory-only, admin reads DB). Draft reopen comment added for close phase.
+- 2026-05-27 — Close phase round 1: posted reopen comment (id 121609); user transitioned JIRA → Reopened, assignee → Yuriy.
+- 2026-05-29 — Re-review intake for MFT r16127 ("Mark expired unlocks in WebAdmin, prune at SetProfile"). Diff: removed r16112's unconditional filter; added `HideExpired` model flag + `IsExpired` computed; view filters conditionally + adds gray-row class and red `EXPIRED` badge; `Hide Expired Unlocks` checkbox in GET form (Payments-style); `OutdateLockRemovalAndLog("SetProfile")` injected at top of private `SetProfile`. Verified the chain: `peer.SaveProfileWithLog → ProfileAdapter.LogProfileSave(() => SetProfile(peer.Profile, peer.Session) → private SetProfile → OutdateLockRemovalAndLog)` — Path B (`RequestMissionResult` save) now persists a cleaned profile. Executor's PS on the commented-out `SetProfile` at arrive-to-base explained as deliberate DB-write reduction; new approach preserves that intent. Verdict: **Approve**.
+- 2026-05-29 — Branch-role rotation noticed at close: `_index.md` now shows Code=NPN20260602 (created 2026-06-02 @ r16131 from MFT:16130), Content=MFT20260325, Stable=LBM20251201. r16127 ≤ NPN source-rev 16130 → already inherited in NPN via branch copy → no merge needed. Round 1 findings/verdict referring to "MFT (Code)" reflect the point-in-time role assignment then; current role is Content.

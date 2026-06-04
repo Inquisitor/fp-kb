@@ -15,7 +15,6 @@
 | Task     | Executor    | Path                                                                                       |
 |----------|-------------|--------------------------------------------------------------------------------------------|
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
-| FP-42016 | Yuriy Burda | fishing-planet/review/FP-42016--pond-pass-expired-on-globe-exit/                           |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
