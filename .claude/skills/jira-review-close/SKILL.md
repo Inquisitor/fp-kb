@@ -150,6 +150,8 @@ Examples:
 - Finalize after waiting-for-release: `[Review] FP-41962: Line break logging (resolved)` + `+ Logs verified post-release; behavior confirmed`
 - Reopen: `[Review] FP-XXXXX: Title (in-progress)` + `+ Reopened — F-1 turned out blocking after retest`
 
+Do NOT list the `_index.md` Active Reviews row add/remove as a bullet — it is housekeeping implied by the status (resolved drops the row, reopen keeps/returns it). The row change is bundled into this `[Review]` commit by design — it keeps the review's active/reopen state in focus — and does not get a separate commit. Describe only real content.
+
 The commit message describes what changed in KB, not what's in the review card. The card itself is the state; the commit message is the diff.
 
 ### Step 9 — Reflection (post-commit, lightweight)

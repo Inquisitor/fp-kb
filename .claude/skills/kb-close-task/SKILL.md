@@ -12,6 +12,8 @@ argument-hint: "[task-slug, e.g. FP-41844--weight-gen-docs]"
 
 Close KB task `$ARGUMENTS` — finalize the last milestone, clean up all references, and archive.
 
+> **Resolve the task folder first.** `$ARGUMENTS` may be just the task key (e.g. `FP-44184`) or the full slug (`FP-44184--po-unlimited-timer`). The folder is always `tasks/<key>--<slug>/`, never `tasks/<key>/`. If `$ARGUMENTS` has no `--`, glob `D:\kb\fishing-planet\tasks\<key>--*/` to find the actual folder and use that resolved path in every step below.
+
 ## Steps
 
 ### 1. Read task journal
@@ -59,15 +61,21 @@ Close KB task `$ARGUMENTS` — finalize the last milestone, clean up all referen
 - Remove task row from `D:\kb\_index.md` Active Tasks table
 
 ### 8. Update memory
-- Update Current Focus in MEMORY.md — mark task as closed or remove
+- If MEMORY.md has a Current Focus / Active Tasks section that names this task, mark it closed or remove the entry.
+- Skip if MEMORY.md has no such section (e.g. it is a pure memory index) — do not invent one.
 
 ### 9. JIRA reminder
 - Extract task key from the slug (everything before the first `--`)
 - Remind user to transition the task to Resolved, including the key and `jira:` URL from journal frontmatter
 
 ### 10. Commit KB changes
-- Show list of all changed files
-- Output commit message following KB conventions. Do NOT run git commands.
+- Run `git -C D:\kb status` to see what changed.
+- Stage ONLY the closing task's files (its `tasks/<folder>/`) plus the cross-reference edits made in Steps 4-7. Never `git add -A`.
+- Explicitly exclude unrelated or parallel-session changes (other tasks' folders/journals, untracked folders, `_index.md` hunks owned by another session) — they are not part of this close.
+- The closing task's own `_index.md` row removal (Step 7) is **bundled into this commit** with the content — it does NOT get a separate commit. Exception: if the row was added and removed in the same session (net-zero, empty diff vs `HEAD`), there is nothing to commit for it.
+- Do NOT add a commit-message bullet for the `_index.md` Active Tasks row removal — it is housekeeping, already implied by the close (status flip / removal). Describe only real content (journal status transition, module log/card/backlog, Confluence, artifacts).
+- Standalone `_index.md` changes (branch roles, ancestry, Quick Links) are NOT part of a task close — they get their own dedicated commit.
+- Show the list of files to be staged, then output the commit message following KB conventions. Do NOT run git commands.
 
 ### 11. Reflection (maturity: draft)
 - Was anything missed that required manual cleanup after the skill ran?
