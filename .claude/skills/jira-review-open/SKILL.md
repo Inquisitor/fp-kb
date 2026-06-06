@@ -44,8 +44,8 @@ Size of the change is irrelevant. Small commit is NOT grounds to compress this p
 3. Identify executor = commit author per JIRA comment (NOT JIRA assignee).
 4. Collect commits as listed in JIRA comments — at face value. Do NOT verify via `svn log` here (that's Phase 2).
 5. Determine source branch from JIRA comment as-is. If executor wrote it ambiguously or wrong, capture as Phase 2 finding — do not block intake, do not override.
-6. Create review card: `<kb>/fishing-planet/review/<JIRA-ID>--<slug>/review.md` with frontmatter, H1, Summary, Scope (placeholder if no commits in JIRA — capture as Phase 2 finding). See [card-format.md](references/card-format.md).
-7. Add to Active Reviews in `<kb>/_index.md`.
+6. **Existing-card check (re-review guard)** — before creating any folder, glob `<kb>/fishing-planet/review/<JIRA-ID>--*/`. The Active Reviews table in `_index.md` is NOT authoritative for this: resolved reviews are removed from that table but their folder stays. If a folder exists, this is a **re-review** (reopen / second-round fix): reuse that folder, keep the original content, and append a new `## Round N` section (Scope / Investigation / Findings / Verdict) for the new commits. Do NOT create a second folder. If none exists, create new card: `<kb>/fishing-planet/review/<JIRA-ID>--<slug>/review.md` with frontmatter, H1, Summary, Scope (placeholder if no commits in JIRA — capture as Phase 2 finding). See [card-format.md](references/card-format.md).
+7. Add to (or refresh) the Active Reviews entry in `<kb>/_index.md` — point to the existing folder on a re-review; list all round executors.
 
 ### Blocking checkpoint (BEFORE Phase 2)
 
