@@ -15,6 +15,7 @@
 | Task     | Executor    | Path                                                                                       |
 |----------|-------------|--------------------------------------------------------------------------------------------|
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
+| FP-41377 | Yuriy Burda | fishing-planet/review/FP-41377--po-chat-claim-qa-error/                                    |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
