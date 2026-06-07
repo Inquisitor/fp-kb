@@ -5,9 +5,11 @@
 - [x] Prod fix: RetailXBox WebAdmin + AsyncProcessor `XBox,Win10` → `XBox` (match Photon side; retail not on Win10).
 - [x] CBT normalized to `Steam,Epic` across all 6 components (Photon Master/GameServer1/GameServer2/Chat + WebAdmin + Async; Club has no `Source`). Narrowed Master/Game from all-7 → `Steam,Epic` after DB confirmed CBT is Steam-only (see log).
 
-## Source normalization (cross-component, cross-environment) — ticket
+## Source normalization (cross-component, cross-environment) -> FP-44289
 
-- [ ] File a dedicated ticket: normalize `Source` to be uniform per environment across all components (Master / Game / GameOnMaster / Chat / Club / WebAdmin / Async).
+Tracked by FP-44289 (Story, epic Technical Debt 2026 Q2, team Other, Low). Items below are its working checklist.
+
+- [x] Dedicated ticket filed: FP-44289.
 - [ ] Build the full matrix `env × component × current → target` for staging envs (Photon `Config/<env>/…` + `Build/Configs/{Async,WebAdmin}`). Prod (SoftwareDistributor) is the reference.
 - [ ] Staging PC envs: remove stray `Apple` (QA, STEAMDEV, TEST2 WebAdmin; TEST Photon) → `Steam,Epic`.
 - [ ] Add `Epic` to PC staging that still lacks it (auto-testing WebAdmin+Async; Test/TEST2/OceanTest/DEV Async).
@@ -20,9 +22,10 @@
 
 CBT was internally non-uniform (Master/Game = all 7, Chat/WebAdmin/Async = `Steam`). DB evidence confirmed CBT is Steam-only (zero non-Steam logins since the 2024 all-platform commit). Narrowed all components to `Steam,Epic`. See log "CBT environment internally non-uniform".
 
-## Dead-environment cleanup (separate, do first)
+## Dead/legacy-environment cleanup (separate, careful)
 
-- [ ] Identify and remove dead staging envs (config folders + Build/Configs files) before normalizing — shrinks the matrix. Candidates to confirm: OceanTest, GC/GCTEST, TESTvova, personal `stan-*` Photon folders.
+- [ ] Inspect personal/legacy env config folders individually before removing - check what is notable in each config; do NOT blanket-delete (some are still live).
+- [ ] Confirm liveness of `OceanTest`, `GC`/`GCTEST` before changing or removing.
 
 ## Verification gaps
 
