@@ -35,6 +35,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 ## Monetization
 - [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
 
+## Configuration & Deployment
+- [configuration](modules/configuration/_card.md) — per-env / per-component server config; `Source` platform-list semantics, deployment topology, prod reference matrix, canonical `Source` rules
+
 ## Key Paths
 - Game logic: `Photon/src-server/Loadbalancing/GameLogic/`
 - Shared libs: `Shared/`
