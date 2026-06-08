@@ -18,7 +18,7 @@
 -- Gate: no-show (NoShows>=6, NoShowSharePct>=30, RatingFromNoShow_DQ<=-90) AND prize (total prizes > 3).
 -- Already-banned players are NOT excluded — Verdict (trailing) classifies them so Support sees recidivism.
 BEGIN
-    DECLARE @WindowStart        datetime     = '2026-05-25';
+    DECLARE @WindowStart        datetime     = '2026-06-01';
     DECLARE @MinNoShows         int          = 6;
     DECLARE @MinNoShowSharePct  decimal(6,2) = 30.00;
     DECLARE @MaxRatingFromNoShow int         = -90;
