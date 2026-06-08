@@ -42,4 +42,4 @@ Not caught at the time because UWP volume is low and exotic-locale buyers rarely
 
 **LGTM-in-context.** A net improvement that didn't fully account for locale-driven separators; the gap is inherent to string-parsing a locale-formatted price without locale data, and was closed incrementally (FP-39539 → FP-43192). No action on FP-40470 itself.
 
-The deferred "verify on Prod after the Norway release" check (LGTM comment) was effectively carried out under **FP-43192** — prod `tradeLog`/`Transactions` analysis (Feb–May 2026, post-Norway-release): the parser runs as intended, but the analysis surfaced the broader separator-regression class this card describes.
+The deferred "verify on Prod after the Norway release" check (LGTM comment) was effectively carried out under **FP-43192** — prod `tradeLog`/`Transactions` analysis (Feb–May 2026, post-Norway-release): the parser runs as intended, but the analysis surfaced the broader separator-regression class this card describes. BGN confirmed correct on prod (stotinki preserved, ratios ~0.70, no inflation/zeroing); **FP-40470 transitioned Resolved → Closed 2026-06-08** with a verification comment.
