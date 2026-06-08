@@ -3,9 +3,15 @@
 > Investigation started under the FP-43192 branch (2026-06-08), follow-up to FP-42870 finding #15.
 > Data: XB PROD MAIN, `PaymentSystemId IN ('XBox','Win10')`, snapshot 2026-06-08. Not yet a JIRA ticket.
 
+## Root cause (confirmed 2026-06-08 with liveops): a misconfigured discount, now fixed
+
+ARS/TRY regional discounts on Xb+UWP were set **~10x too deep** — ARS ~98–99% off (capture ~0.01), TRY ~92–95% off (~0.05) — instead of the intended ~70%. It ran from at least **mid-2024 to ~Sep-2025**, was corrected **~Sep–Oct 2025**, and normalized to the intended ~70% off by **~Mar-2026**. Confirmed it is a **pricing-config** issue, **not the price parser**: Xbox and Win10 capture move in lockstep month-by-month (the parser is Win10-only; if it were parsing, Xbox wouldn't dip). After the fix the cheap-buying volume collapsed (ARS ~700→~30/mo, TRY ~250→~20/mo) — the broken price was what drew the buyers.
+
+Full evidence (monthly time series + ladder + country split + hunters): [FP-42870 artifacts/crashed-currency-region-switching-2026-06](../../../tasks/FP-42870--xbox-financial-reconciliation/artifacts/crashed-currency-region-switching-2026-06.md).
+
 ## What this is
 
-Not a recording bug. Some Microsoft Store **currencies have crashed** (hyperinflation) so their local prices, converted to USD, are worth almost nothing — and purchases still flow through them, including from **accounts physically outside that region** (region-switching). We record the real (tiny) revenue; the catalog value walks out the door for cents.
+Not a recording bug — the data is correct. The weak currencies (ARS/TRY) made the misconfig possible; **region-switching** (accounts outside the region buying at the broken price) was the **amplifying symptom, not the cause**. We recorded the real (tiny) revenue; the catalog value walked out the door for cents — until the discount was fixed.
 
 This largely explains FP-42870 #15 ("ARS/CLP/COP store a USD-scaled amount … needs investigation"): the **bulk** of the ARS/CLP/COP low values are **not** a USD-substitution code bug — they are real, crashed regional prices (capture ~2–7%).
 
@@ -70,7 +76,7 @@ Contrast — legitimate Argentine heavy buyers (real local price, not abuse): `F
 
 ## Why it matters / business framing
 
-Not fixable in code — the data is correct. This is **liveops / MS Partner Center pricing**:
+**Already fixed** — the misconfigured discount was corrected ~Sep–Oct 2025 (ARS/TRY now ~70% off, intended), so the forward-looking leak is closed. Remaining decisions are narrow: (a) whether to **restate** the historically underpriced rows (correctly-recorded-wrong-price; revenue reports for 2024-mid…2025-09 understate); (b) **monitor** that ARS/TRY (and the gray tier) stay at the intended discount; (c) the residual `/1000` parser subset (separate). The options below are kept for reference / if it recurs — this is liveops / MS Partner Center pricing, not code:
 
 - **Raise ARS/TRY catalog prices** in Partner Center to track current FX (so they aren't 2–7% of value). Cleanest, but hits legit locals too.
 - **Delist / stop offering** products in crashed-currency regions. Blunt; collateral on locals.
