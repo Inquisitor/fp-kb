@@ -1,7 +1,7 @@
 ---
 task: FP-43192
 title: "[Win10/UWP] Incorrect currency price parsing"
-status: in-progress
+status: completed
 executor: Stanislav Samoilov
 jira: https://fishingplanet.atlassian.net/browse/FP-43192
 related:
@@ -13,7 +13,7 @@ related:
 
 ## Status
 
-Investigation **complete**, root cause confirmed via Mongo `tradeLog` (production input→output proof). Rescoped from "KWD" to general incorrect UWP price parsing. **Root cause: `UwpManager` parser only recognises ASCII `,`/`.` as separators; any other separator the device locale emits (Arabic `٫`/`٬`, dash `-`, etc.) survives `NormalizeSeparators`, then `CleanupPriceStr` strips it, fusing the fractional part → price inflated ×100/×1000.** Axis is device locale, not currency. JIRA reformulated. Full prod separator inventory captured (708k events) — fix strategy validated against real data. **Parser fix implemented** in both copies (client `UwpManager.cs` + server mirror) and **tests green (37/0)**. Next: SVN-commit on CodeBranch before the **2026.4 FTUE rework** release cut; then data-fix historical rows by magnitude signature post-release (incl. one-off device rows).
+**Completed.** UWP price parser generalised to handle any locale separator (Arabic `٫`/`٬`, cifrão `$`, dash, NBSP, apostrophe) via role-based `NormalizeSeparatorChars` + N-occurrence `NormalizeSeparators`, keeping the 3-decimal-currency disambiguation. Root cause: the old parser recognised only ASCII `,`/`.`; any other locale separator was stripped by `CleanupPriceStr`, fusing the fraction → price inflated ×100/×1000 (axis is device locale, not currency). Shipped to client `UwpManager.cs` (CLN r55148) + server test mirror (MFT r16148); tests 37/0. Historical prod data corrected by inflation signature on XB PROD — Main 64 rows, Stats `TransactionFact` 78 + `TransactionFactBundle` 2 (verified 0 remaining; `/Stats/Money` spike resolved). JIRA Resolved (assigned to client lead for merge + Win10/UWP build); FP-40470 verified on prod (BGN) and Closed. Root cause, release-cut and Main+Stats data-fix lessons recorded in `product-local-prices/log.md`; FP-40470 retrospective in `review/FP-40470--win10-currency-parser/`. Follow-ups bubbled to the product-local-prices backlog (re-run data-fix after the 2026.4 release; `MFT→NPN` merge; confirm DKK; under-direction — ARS/TRY under-direction now tracked in `crashed-currency-region-switching.md`).
 
 ## Summary
 

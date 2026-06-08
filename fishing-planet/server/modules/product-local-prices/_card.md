@@ -38,3 +38,4 @@ module: product-local-prices
 - FP-43177 Phase 1: Smart Beautify algorithm (completed) — r15959+r15961+r15969
 - FP-43177 Phase 2: Exchange Rate Snapshot (completed) — r15997+r15999
 - FP-42870 Xbox revenue reconciliation (report delivered, no code changes) — surfaced ARS/CLP/COP price-recording bug, see log.md 2026-04-22
+- FP-43192 [Win10/UWP] price-parser locale fix (completed) — CLN r55148 + MFT r16148; prod data-fix Main+Stats; see [log 2026-06-06](log.md) and [review/FP-40470](../../review/FP-40470--win10-currency-parser/review.md)
