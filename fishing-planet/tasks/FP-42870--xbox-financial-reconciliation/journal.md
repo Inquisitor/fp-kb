@@ -324,6 +324,8 @@ All figures relative to **MS Purchase royalty = 100%** (gross royalty MS records
 
 **Impact is negligible:** ARS + CLP + COP combined = 55 transactions out of 16,554 (0.33% of count, 0.046% of revenue) for Nov 2025. Low priority — file as a separate low-severity bug, not blocking for FP-42870.
 
+> **Follow-up (2026-06-08):** investigated. Mostly **not** a code bug — the low ARS/CLP/COP values are real **crashed-currency** prices, and a large share of ARS/TRY purchases are **region-switching** from outside the region (Country = IP geo; ARS 17% non-Argentine, TRY 61% non-Turkish; concrete "hunter" UserIds captured). A residual near-zero `/1000` subset (this finding's literal `1.60` vs `1599`) is likely **old-parser under-direction** (Win10, fixed forward by FP-40470, data uncorrected) — still open. Full analysis: [crashed-currency-region-switching](../../server/modules/product-local-prices/crashed-currency-region-switching.md). Warrants a separate liveops ticket.
+
 ### 16. Bundle detection quality — measured against MS Nov 2025 (2026-04-21)
 
 Queried `Stats.TransactionFact` (+ `TransactionFactBundle`) for Nov 2025 XBox+Win10. Compared to known MS bundle sales.

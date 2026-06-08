@@ -27,6 +27,7 @@ module: product-local-prices
 
 ## Deep Dives
 - [Smart Beautify algorithm](smart-beautify.md) — three-tier beautification: tiers, rules, constants, examples
+- [Crashed-currency region-switching](crashed-currency-region-switching.md) — ARS/TRY crashed-currency leak + region-switching "hunters" on Xb+UWP (FP-42870 #15 follow-up)
 - Views: `WebAdmin/WebAdmin/Views/Home/VW_ProductLocalPrices.cshtml`, `RegionalPriceRates.cshtml`
 - Controller actions: `HomeController.ApplySuggestedPrices()`, `AddProductLocalPrices()` — `WebAdmin/WebAdmin/Controllers/HomeController.cs`
 - DB: tables `ProductLocalPrices`, `RegionalPriceRates`, `CurrencyExchangeRates`; view `VW_ProductLocalPrices`
