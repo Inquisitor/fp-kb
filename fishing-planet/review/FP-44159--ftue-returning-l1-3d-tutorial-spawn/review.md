@@ -65,9 +65,9 @@ The change also touches the one-time profile conversion machinery (since the imp
 - Verified **r16135 ↔ r16136 interaction is correct**: `RegisterUser` = brand-new account creation (`CreateProfile`); migrants are existing profiles that hit the logon path (`RunPendingProfileConversions`), so their pending `ResetLevel1SpawnPoint` runs. `MarkAllEnabledConversionsComplete` only stamps genuinely-new accounts, which are born compliant (new LoneStar L1 players get `IsIn3D=true` via `NewPlayerProfileFactory`, so they'd be ineligible anyway).
 - Conventions respected: WebAdmin csproj `Compile`+`Content` includes both added; `AdminActionLog` on both admin actions; SQL patch idempotent with `AppliedPatches` guard; unit tests for converter eligibility and spawn helper.
 
-## Verdict (draft — not yet published)
+## Verdict
 
-**Approve.** The change is well-structured, tested, and follows project conventions; the core migration logic and the new-account/migrant interaction are correct. F-1 (config-absent commit/no-retry) was discussed with the executor and accepted as an intentional, sound design choice — the single safe no-op is preferable to a retry that could surprise-reset an active player on a later logon. F-2/F-3 are Low and optional. No blocking issues. Residual: one trivial cosmetic log-message nit (F-1), non-blocking.
+**Approve** — published to JIRA (comment id 123092, 2026-06-04) and review closed (`status: resolved`). The change is well-structured, tested, and follows project conventions; the core migration logic and the new-account/migrant interaction are correct. F-1 (config-absent commit/no-retry) was discussed with the executor and accepted as an intentional, sound design choice — the single safe no-op is preferable to a retry that could surprise-reset an active player on a later logon. F-2/F-3 are Low and optional. No blocking issues. Residual: one trivial cosmetic log-message nit (F-1), non-blocking.
 
 ## Investigation Journal
 
