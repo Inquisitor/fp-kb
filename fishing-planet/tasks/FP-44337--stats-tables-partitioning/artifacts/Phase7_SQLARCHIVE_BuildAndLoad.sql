@@ -72,10 +72,14 @@ BEGIN
     END
 
     -- 3) Partition function + scheme (all partitions on ARCHIVE_DATA).
-    IF EXISTS (SELECT 1 FROM sys.partition_schemes   WHERE name = @ps) EXEC (N'DROP PARTITION SCHEME '   + QUOTENAME(@ps));
-    IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = @pf) EXEC (N'DROP PARTITION FUNCTION ' + QUOTENAME(@pf));
-    EXEC (N'CREATE PARTITION FUNCTION ' + QUOTENAME(@pf) + N' (DATETIME) AS RANGE RIGHT FOR VALUES (' + @vals + N');');
-    EXEC (N'CREATE PARTITION SCHEME '   + QUOTENAME(@ps) + N' AS PARTITION ' + QUOTENAME(@pf) + N' ALL TO ([ARCHIVE_DATA]);');
+    IF EXISTS (SELECT 1 FROM sys.partition_schemes   WHERE name = @ps)
+    BEGIN SET @sql = N'DROP PARTITION SCHEME '   + QUOTENAME(@ps) + N';'; EXEC sp_executesql @sql; END
+    IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = @pf)
+    BEGIN SET @sql = N'DROP PARTITION FUNCTION ' + QUOTENAME(@pf) + N';'; EXEC sp_executesql @sql; END
+    SET @sql = N'CREATE PARTITION FUNCTION ' + QUOTENAME(@pf) + N' (DATETIME) AS RANGE RIGHT FOR VALUES (' + @vals + N');';
+    EXEC sp_executesql @sql;
+    SET @sql = N'CREATE PARTITION SCHEME '   + QUOTENAME(@ps) + N' AS PARTITION ' + QUOTENAME(@pf) + N' ALL TO ([ARCHIVE_DATA]);';
+    EXEC sp_executesql @sql;
 
     -- 4) Build the new partitioned+compressed table by copying the import table's
     --    definition. SELECT INTO cannot target a partition scheme, so we create
@@ -110,12 +114,14 @@ BEGIN
 
     -- 5) Clustered PK on the partition scheme (this physically partitions the heap),
     --    PAGE compressed, then aligned NCI on (UserId, Timestamp).
-    EXEC (N'ALTER TABLE dbo.' + QUOTENAME(@t) + N' ADD CONSTRAINT ' + QUOTENAME(N'PK_' + @t)
+    SET @sql = N'ALTER TABLE dbo.' + QUOTENAME(@t) + N' ADD CONSTRAINT ' + QUOTENAME(N'PK_' + @t)
         + N' PRIMARY KEY CLUSTERED (EntityId, [Timestamp]) WITH (DATA_COMPRESSION = PAGE) ON '
-        + QUOTENAME(@ps) + N'([Timestamp]);');
-    EXEC (N'CREATE NONCLUSTERED INDEX ' + QUOTENAME(N'IX_' + @t + N'_UserId_Aligned')
+        + QUOTENAME(@ps) + N'([Timestamp]);';
+    EXEC sp_executesql @sql;
+    SET @sql = N'CREATE NONCLUSTERED INDEX ' + QUOTENAME(N'IX_' + @t + N'_UserId_Aligned')
         + N' ON dbo.' + QUOTENAME(@t) + N' (UserId, [Timestamp]) WITH (DATA_COMPRESSION = PAGE) ON '
-        + QUOTENAME(@ps) + N'([Timestamp]);');
+        + QUOTENAME(@ps) + N'([Timestamp]);';
+    EXEC sp_executesql @sql;
 
     -- 6) Verify row counts match, then drop the import copy.
     --    (Build the statement into @sql first — sp_executesql's first argument cannot be
@@ -126,7 +132,7 @@ BEGIN
     SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@imp) + N';';
     EXEC sp_executesql @sql, N'@c BIGINT OUTPUT', @cImp OUTPUT;
     PRINT @t + ': new=' + CAST(@cNew AS VARCHAR(20)) + ' import=' + CAST(@cImp AS VARCHAR(20));
-    IF @cNew = @cImp EXEC (N'DROP TABLE dbo.' + QUOTENAME(@imp) + N';');
+    IF @cNew = @cImp BEGIN SET @sql = N'DROP TABLE dbo.' + QUOTENAME(@imp) + N';'; EXEC sp_executesql @sql; END
     ELSE PRINT '*** COUNT MISMATCH for ' + @t + ' — investigate before dropping ' + @imp;
 
     FETCH NEXT FROM cur INTO @t;

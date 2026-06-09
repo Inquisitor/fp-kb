@@ -50,6 +50,7 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
 ## Plan / artifacts
 
 - `artifacts/Runbook_PS_Stats_Partitioning.md` — master PS runbook (phases, scripts, rollback, risks).
+- `artifacts/Operator_Checklist.md` — step-by-step operator playbook over the scripts (pre-flight, values ledger, per-phase what/where/paste/verify, stuck-shrink sub-procedure, rollback).
 - Execution scripts (canonical, corrected, MissionsFact included), run order 1-8:
   - `artifacts/Phase1_PROD_ShrinkLog.sql` — log shrink (PROD, online).
   - `artifacts/Phase2_PROD_Swap.sql` — rename + create partitioned StatsFact & MissionsFact (PROD, downtime).
@@ -150,3 +151,11 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   [#2] permissions: app login is a role member (db_owner/db_datawriter) per user, so new tables inherit -
   moot, noted in backlog. [#5] job owner sa is the ops account here - comment softened. Codex's own verdict
   matched: staging-rehearsal-ready after #1-#4. Convergence holds; next step is the rehearsal.
+- 2026-06-09 — Staging rehearsal started; devops copied the scripts to a test box (mapped `T:\STATS_MIGRATION`).
+  First real execution caught a parse error static review (6 rounds + Codex) all missed: the parenthesized
+  `EXEC (N'...' + QUOTENAME(@x) + ...)` form does NOT allow function calls in its concatenation -> "Incorrect
+  syntax near 'QUOTENAME'". Fixed Phase 3 (TRUNCATE) and Phase 7 (DROP/CREATE PF+PS, ADD CONSTRAINT, CREATE NCI,
+  DROP _import) by building into a variable then `EXEC sp_executesql @var`. Remaining `EXEC (...)` (Phase 2 FG
+  adds, Phase 7 ARCHIVE_DATA FG) are variable+literal only -> valid. Lesson: N rounds of static LLM review != a
+  parse/compile; actual execution is the validator. Also authored `Operator_Checklist.md` (step-by-step playbook
+  over the scripts). Going forward: edit locally -> robocopy to `T:` -> devops re-run phase by phase.

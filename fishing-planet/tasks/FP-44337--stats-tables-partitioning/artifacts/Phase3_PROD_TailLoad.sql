@@ -65,7 +65,8 @@ BEGIN
 
     -- Idempotent re-run: clear any partial load from a prior aborted attempt (pre-START, no live data).
     -- TRUNCATE also resets identity to the seed.
-    EXEC (N'TRUNCATE TABLE dbo.' + QUOTENAME(@t) + N';');
+    SET @chk = N'TRUNCATE TABLE dbo.' + QUOTENAME(@t) + N';';
+    EXEC sp_executesql @chk;
 
     -- Tail-start EntityId boundary in *_old (binary search over the clustered PK).
     DECLARE @lo BIGINT, @hi BIGINT, @mid BIGINT, @midTs DATETIME, @jStart BIGINT;
