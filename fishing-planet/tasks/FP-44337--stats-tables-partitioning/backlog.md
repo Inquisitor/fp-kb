@@ -16,31 +16,28 @@
 - STOP PROD fences ALL writers (global write-fence) — no late rows into `*_old` after the snapshot.
 - `MissionsFact.Rank` is NOT NULL with no default; the app always supplies Rank (0 when empty).
 - `FishingRateStatUpdateJob` cursor = `WHERE EntityId > @stored` range-scan; survives cutover and re-reads the preloaded tail.
-- Safety model **A+B**: `@tailFrom` fixed at 2026-06-01 (never narrowed); Phase 5 delta on SQLSTAGING is a **drop prerequisite**.
+- Safety model (simplified 2026-06-09): `@tailFrom` fixed at 2026-06-01 (never narrowed) makes **{backup} U {new June tail}** gap-free (EntityId monotonic with Timestamp), so the Phase 4/5 SQLSTAGING delta was redundant and is **removed**. Drop gate = backup restorable + Phase 3 tail count-verified + `*_old` unchanged; take a fresh full backup after the drop.
+- Refined 2026-06-09 (Codex review): PROD partition boundaries now **2026-06-01 / -07-01 / -08-01** (4 partitions: empty `<Jun1` catch-all + June + July + Aug buffer) so **June is its own bounded, switchable partition**; Phase 3 loads only `Timestamp >= 2026-06-01` (clean June, late-May stays in `*_old`→backup→archive); **pre-drop full backup is now a HARD gate** (STEP 0 in Phase 6) + the post-shrink backup is the new baseline; Phase 7 boundaries align with prod's calendar; cross-server PROD↔SQLARCHIVE movement is **`SWITCH OUT` local + transfer**, not a direct SWITCH (impossible across instances).
 - Permissions: app login connects as a **role member (db_owner / db_datawriter)**, so the new `StatsFact`/`MissionsFact` inherit access automatically after `sp_rename` — no object-level GRANT to carry over. (Cheap pre-flight: confirm `sys.database_permissions` has no object-level grants on the old tables.)
 
 ## Open questions for team (from DBA review)
 - [ ] Is `Timestamp` server-assigned (`GETDATE()` at insert) or ever client-set/back-dated? (bounds the out-of-order tail edge)
-- [ ] Is there a linked server / cross-instance path PROD -> SQLSTAGING? (would let the Phase 6 gate (c) auto-query staging instead of operator-paste)
 - [ ] Any other writer to `*_old` after STOP PROD — replication / CDC / ETL / triggers? (gate asserts `*_old` unchanged, but confirm)
-- [ ] `E:\Temp` (or chosen path) capacity on PROD and SQLSTAGING for the delta `.dat` files
 - [ ] Is `Stats_log` physically on `Z:`? (Phase 1's ~290 GB reclaim and the Z: headroom math depend on it)
-- [ ] Measure the real max IDENTITY-assignment gap under load (sizes the Phase 3/4 margins; gate (c) COUNT is the hard backstop regardless)
+- [ ] Measure the real max IDENTITY-assignment gap under load (sizes the Phase 3 tail margin = `@tailFrom - 100000`)
 - [ ] Commit to running Phase 6 (DROP + start shrink) the SAME maintenance day — not deferred (Z: exhaustion risk)
 - [ ] Rehearse the full Phase 2->3 sequence on staging INCLUDING a forced mid-load failure + idempotent re-run
 - [x] Is `tempdb` on `Z:`? **YES** — 8 data files + log all on `Z:`, no other volume. Mitigation (pre-flight): pre-size + cap `MAXSIZE` so it can't grow into the shrink headroom; index builds use `SORT_IN_TEMPDB OFF` so the NCI sort hits the `Stats` data files, not tempdb. See Operator_Checklist pre-flight.
-- [ ] Confirm prod and SQLSTAGING are the SAME SQL Server major version (native `bcp -n` format is version-sensitive)
-- [ ] Confirm no job/proc references these tables by a hardcoded 3-part / `*_old`-style name that survives the rename (gate (b) assumes `*_old` is untouched after STOP)
-- [ ] Confirm whether `MissionsFact.[Message]` ever exceeds 255 chars (drives whether the Phase 5 SHA2_256 `msg_chk` is load-bearing)
+- [x] Confirm prod and SQLSTAGING/archive are the SAME SQL Server major version (backup restore for the archive needs same-or-higher) — both Standard 15.0.2000.5
+- [x] Confirm no job/proc references these tables by a hardcoded 3-part / `*_old`-style name (gate (b) assumes `*_old` is untouched after STOP) — 0 rows
 - [ ] Confirm `DATA_COMPRESSION=PAGE` on a partitioned table works on build 15.0.2000.5 (cheap throwaway test) + measure compressed month size
 
 ## Execution (PS)
 - [ ] Phase 1: shrink `Stats_log` (~+314 GB)
 - [ ] Phase 2: rename + create partitioned tables (path/file-size/IDENTITY fixes baked in)
 - [ ] Phase 3: pre-load June tail (records control counts), then START PROD
-- [ ] Phase 4: delta bcp out (PROD)
-- [ ] Phase 5: delta bcp in + verify on SQLSTAGING
-- [ ] Phase 6: gated drop (requires Phase 5 verified) + **stepped `SHRINKFILE` as a multi-hour off-peak grind** + index maintenance
+- ~~Phase 4: delta bcp out~~ / ~~Phase 5: delta bcp in~~ — **REMOVED** (redundant; preservation = {backup} U {June tail})
+- [ ] Phase 6: gated drop (gate = backup + Phase 3 tail verified + `*_old` unchanged) + **stepped `SHRINKFILE` off-peak grind** + index maintenance, then a **fresh full backup**
 - [ ] Phase 7 (deferrable): build partitioned archive on SQLARCHIVE
 - [ ] Phase 8: enable monthly sliding-window Agent job
 

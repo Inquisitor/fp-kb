@@ -24,18 +24,21 @@ in run order. Raw DevOps drafts are kept under `original-plan/` for reference.
 | 1     | `Phase1_PROD_ShrinkLog.sql`          | PROD       | before window, online                   |
 | 2     | `Phase2_PROD_Swap.sql`               | PROD       | window (downtime)                       |
 | 3     | `Phase3_PROD_TailLoad.sql`           | PROD       | window (downtime), then START PROD      |
-| 4     | `Phase4_PROD_DeltaExport.sql`        | PROD       | after START, online                     |
-| 5     | `Phase5_STAGING_DeltaImport.sql`     | SQLSTAGING | online — completes the restored copy    |
 | 6     | `Phase6_PROD_Drop_Shrink.sql`        | PROD       | online, only after the drop gate is met |
-| 7     | `Phase7_SQLARCHIVE_BuildAndLoad.sql` | SQLARCHIVE | **DEFERRABLE** — later, when HW ready   |
+| 7     | `Phase7_SQLARCHIVE_BuildAndLoad.sql` | SQLARCHIVE | **DEFERRABLE** — later, from the backup  |
 | 8     | `Phase8_PROD_SlidingWindowJob.sql`   | PROD       | after cutover                           |
 
-> Phase 7 (building the optimized analyst archive on SQLARCHIVE) does **not** block prod. But Phase 5
-> (delta import to SQLSTAGING) **IS a prerequisite for the Phase 6 drop**: the gate requires SQLSTAGING
-> to be complete (`MAX(EntityId)` **and** full `COUNT` == `*_old`), which needs the delta imported.
-> The only irreversible step is the DROP in Phase 6; its gate is *preservation verified* — full backup
-> restorable & retained (>= 2 copies) **+** Phase 3 preload count-verified **+** SQLSTAGING complete
-> (Phase 5). See the Phase 6 drop gate.
+> Phase numbers 4 and 5 (the SQLSTAGING delta export/import) were **removed** as redundant — see the
+> note below and the journal. The sequence is now 1, 2, 3, 6, 7, 8 (numbers kept to avoid churn).
+
+> The only irreversible step is the DROP in Phase 6. Its gate is *preservation verified*: full backup
+> restorable & retained (>= 2 copies) **+** Phase 3 preload count-verified **+** `*_old` unchanged since
+> Phase 3. Preservation = **{backup} U {new June tail}** — gap-free because `@tailFrom` (2026-06-01) <=
+> the backup point and EntityId is monotonic with Timestamp on prod. No separate "complete SQLSTAGING
+> copy" is required: the prod tail already holds the post-backup rows, so the former Phase 4/5
+> delta-to-staging was redundant and is removed. Phase 7 (analyst archive on SQLARCHIVE) does **not**
+> block prod — build it later from the backup. **After the drop + shrink, take a fresh full backup** so
+> the post-backup tail (which until then lives only in the live June partition) has an independent copy.
 
 ---
 
@@ -75,9 +78,11 @@ baked into `Phase2_PROD_Swap.sql`:
 - Partition scheme `ps_<Table>_Timestamp` — **one filegroup + one file per month**
   (`FG_<Table>_YYYY_MM` → `<Table>_YYYY_MM.ndf`). This is what lets a drained month's file be
   **deleted** later to return OS space without `SHRINKFILE`.
-- **Always keep an EMPTY trailing partition.** Seed three months at cutover (June current, July next,
-  **August empty buffer**) so the monthly SPLIT (Phase 8) only ever splits an empty partition — no
-  data movement / heavy logging on the live table.
+- **Boundaries 2026-06-01 / -07-01 / -08-01 → four partitions:** an empty `< 2026-06-01` **catch-all**
+  (its own small FG), **June** (its OWN bounded partition, so it can be SWITCHed OUT cleanly when it
+  ages into the archive), **July**, and an empty **August** trailing buffer (so the monthly SPLIT in
+  Phase 8 only ever splits an empty partition — no data movement). The catch-all stays empty because
+  Phase 3 loads only `Timestamp >= 2026-06-01`; it is never SWITCHed out.
 - PK `PRIMARY KEY CLUSTERED (EntityId, [Timestamp]) WITH (DATA_COMPRESSION = PAGE)` on the scheme.
   - Leading `EntityId` preserves clustered seeks for `WHERE EntityId > @cursor` consumers.
   - Partition elimination on `Timestamp` still works (depends on the partition column, not key order).
@@ -109,19 +114,22 @@ If the log refuses to shrink, check `log_reuse_wait_desc` in `sys.databases` and
 > Metadata-only changes; the bounded tail pre-load is Phase 3 (also in the window).
 
 1. **STOP PROD** — stop the writers so no new rows land during the swap.
-2. **Rename** existing objects (`Phase2_PROD_Swap.sql`), for **both** tables:
-   `StatsFact → StatsFact_old` (+ `PK_StatsFact`, `DF_StatsFact_Rank`); same for `MissionsFact`
-   (no Rank default on MissionsFact).
-3. **Create** partition function / scheme / per-month filegroups+files (**June, July, August** — August
-   stays empty as the sliding-window buffer) and the new partitioned tables (**clustered PK only — the
-   NCI is built in Phase 3**). Corrections baked in: real `Z:` path; small initial files (`SIZE = 8192MB`);
-   IDENTITY seed `MAX(*_old)+1,000,000`; PAGE compression. Confirm Instant File Initialization is enabled.
-   Run the strict column-match verification (name + ordinal + type + nullability + collation) — must be 0.
+2. **Rename** existing objects (`Phase2_PROD_Swap.sql`), for **both** tables: `StatsFact → StatsFact_old`
+   (+ its PK and the Rank default — the default is renamed by its **ACTUAL catalog name**, since prod
+   auto-names it `DF__StatsFact__Rank__…`, not the canonical name); same for `MissionsFact` (no default).
+3. **Create** the FGs/files (**catch-all + June + July + August**), the partition function/scheme
+   (boundaries **2026-06-01 / -07-01 / -08-01** → 4 partitions; June is its OWN bounded partition), and
+   the new partitioned tables **by structural clone**: `SELECT * INTO … WHERE 1=0` from `*_old`, then add
+   the clustered PK on the scheme, `DBCC CHECKIDENT RESEED` to `MAX(*_old)+1,000,000`, re-add the Rank
+   default. Real `Z:` path; small initial files (months `SIZE=8192MB`, catch-all small); PAGE; IFI on.
+   Run the column-match verification (sanity — passes by construction since the new table is a clone) — must be 0.
 
 ### Phase 3 — Tail pre-load + START PROD (PROD, DOWNTIME)
 
 1. **Pre-load the June tail** (`Phase3_PROD_TailLoad.sql`) old → new, with `IDENTITY_INSERT`
-   (old ids `< MAX(old)+1,000,000` → no collision). Done IN the window, before START, so incremental
+   (old ids `< MAX(old)+1,000,000` → no collision). The insert filters **`Timestamp >= 2026-06-01`**
+   (loads only June+ → the June partition is clean and SWITCH-able; the id-range margin only sets the
+   scan floor so no June row is missed). Done IN the window, before START, so incremental
    consumers see continuous recent history — especially `FishingRateStatUpdateJob`, whose cursor
    lags ~1h; without this its unprocessed recent rows are stranded in `*_old` and the job skips
    them (gap in fishing-rate stats). Records per-table counts in `FP44337_TailLoadControl` for the
@@ -134,34 +142,29 @@ If the log refuses to shrink, check `log_reuse_wait_desc` in `sys.databases` and
 3. **START PROD** — writers resume, inserting into the new same-named tables (no app change).
    **Downtime ends here.**
 
-### Phase 4 — Delta export (PROD, online)
+### Phases 4-5 — REMOVED (were: SQLSTAGING delta export/import)
 
-`Phase4_PROD_DeltaExport.sql` — export by **EntityId boundary = `MAX(EntityId)` on SQLSTAGING minus a
-safety margin** (covers an in-flight transaction at backup time; no Timestamp dependency, so no
-boundary edge). `bcp` the superset out for both tables; copy the `.dat` files to SQLSTAGING.
-
-### Phase 5 — Delta import to SQLSTAGING (online) — **drop prerequisite (A+B)**
-
-`Phase5_STAGING_DeltaImport.sql` — `bcp` the superset into a temp table, then `INSERT ... WHERE NOT
-EXISTS` by `EntityId` (dedups the margin overlap — no duplicate-key failures). Verify staging
-`MAX(EntityId)` now equals prod `*_old` MAX, plus a **mandatory value spot-check** on sample ids
-(counts alone can't catch a positional/column mismatch). Completes the SQLSTAGING copy; per the A+B
-model this is an **independent backstop and a prerequisite for the Phase 6 drop**.
+The former delta-to-SQLSTAGING sync was **redundant** and is removed. Reason: Phase 3 loads the June
+tail (from `@tailFrom` = 2026-06-01) into the new prod table, so the **post-backup rows are already
+preserved on prod**. With `@tailFrom` <= the backup point and EntityId monotonic with Timestamp,
+**{backup} ∪ {new June tail}** already covers every `*_old` row gap-free. The SQLSTAGING delta only
+duplicated the post-backup rows. (Independent off-prod copy of those rows is restored by the
+post-cutover full backup — see Phase 6.) This also removes the only `bcp` step in the plan.
 
 ### Phase 6 — Drop + shrink (PROD, online) — **gated**
 
-`Phase6_PROD_Drop_Shrink.sql`. **Drop gate (lossless when ALL hold):**
-- (a) full backup retained in **>= 2 copies** & proven restorable — satisfied: backup file on the
-  backup server **+** restored copy on SQLSTAGING. (Manual confirmation.)
-- (b) Phase 3 preload **verified complete** (prod hot copy) — **enforced**: re-reads
-  `FP44337_TailLoadControl`, re-counts, `THROW`s on mismatch, and asserts `*_old` is unchanged since
-  Phase 3.
-- (c) **SQLSTAGING complete to the cutover** — the copy that survives the drop; the **load-bearing
-  data-safety gate**. **Enforced**: paste the SQLSTAGING `MAX(EntityId)` **and `COUNT_BIG(*)`** per
-  table; the script `THROW`s unless both equal `*_old` (COUNT equality catches a missing row *anywhere*,
-  not just the top). The heavy `*_old` count is computed once in a separate **Step 0** (recorded), so
-  the irreversible drop batch stays fast and a retry never re-scans. (`{backup} ∪ {SQLSTAGING delta}`
-  is the complete copy of `*_old` — staging is a subset of `*_old`, so equal COUNTs ⟺ complete.)
+`Phase6_PROD_Drop_Shrink.sql`. **Drop gate (lossless when BOTH hold):**
+- (a) **STEP 0 — a FRESH pre-drop full backup** taken after STOP PROD (so it contains `*_old` in full,
+  incl. the post-backup tail), proven restorable (`RESTORE VERIFYONLY`), retained in **>= 2 copies**.
+  HARD gate, manual. This makes the irreversible DROP bulletproof even against an undetected id/time-skew
+  edge. ~3.2 TB online backup (backup-server space + a few hours).
+- (b) Phase 3 preload **verified complete** AND `*_old` **unchanged since Phase 3** — **enforced**:
+  re-reads `FP44337_TailLoadControl`, re-counts the tail id-range old-vs-new (with the same
+  `Timestamp >= 2026-06-01` filter as the load), and checks live `*_old` MAX == the recorded MAX;
+  `THROW`s on any mismatch. (No SQLSTAGING gate, no full-table count — preservation is {backup} ∪ {prod tail}.)
+
+**After the drop + shrink, take ANOTHER full backup** as the new small baseline (it no longer contains
+`*_old`, so it does NOT replace the pre-drop backup for history).
 
 Then: `DROP TABLE *_old` (each its own statement; deferred-drop, fast) → `DBCC SHRINKFILE(N'Stats',
 TRUNCATEONLY)` (reclaims little — freed space is interior) → **stepped** `SHRINKFILE` (~50 GB/step,
@@ -181,9 +184,11 @@ fragmented tables (Stmt, FishFact, …; bare `REBUILD` preserves their compressi
 
 ### Phase 7 — Archive build (SQLARCHIVE, **DEFERRABLE**)
 
-`Phase7_SQLARCHIVE_BuildAndLoad.sql` — build the monthly-partitioned + PAGE-compressed analyst
-archive on **SQLARCHIVE** and load all history from a complete copy (the SQLSTAGING copy or a fresh
-backup of it). Build it whenever SQLARCHIVE hardware (disks / box) is ready; it does not block prod.
+`Phase7_SQLARCHIVE_BuildAndLoad.sql` — build the monthly-partitioned + PAGE-compressed analyst archive
+on **SQLARCHIVE** and load history **< 2026-06-01** (the dropped bulk) from the **restored backup**
+(SQLSTAGING's copy or a fresh restore). June and later stay on prod and arrive in the archive later via
+partition **SWITCH** as they age out — so align the archive's monthly RANGE RIGHT boundaries with prod's.
+Build it whenever SQLARCHIVE hardware is ready; it does not block prod.
 
 ### Phase 8 — Sliding-window job (PROD, after cutover)
 
@@ -197,12 +202,16 @@ log (wire a mail operator if available) and should be owned by a service account
 
 ### Later — steady state (separate doc, not this window)
 
-Backfill 11-12 months from the archive into prod partitions (`SWITCH IN`), grow to 24-month
-retention, and add aged-out-month archiving (`SWITCH OUT` + export + drop file).
+Backfill 11-12 months from the archive into prod, grow to 24-month retention, and add aged-out-month
+archiving. **Cross-server caveat:** PROD and SQLARCHIVE are separate instances, so a direct
+`ALTER TABLE … SWITCH` between them is **impossible** (SWITCH is metadata-only within one DB). The real
+flows are: archive→prod backfill = bulk-load/restore into a staging table then `SWITCH IN`; prod→archive
+aging = `SWITCH OUT` the aged month locally into a staging table, then transfer (backup/restore or
+bulk-load) to the archive and `SWITCH IN` there.
 
-> Note: P1 (`< 2026-07-01`) is an **unbounded left catch-all**. Aged-out-month archiving must
-> `SWITCH OUT` from partition **2 onward**, never P1; and the partitioned table must never be loaded
-> with pre-boundary rows (else they pollute the June file and break the drain-and-delete premise).
+> Note: P1 (`< 2026-06-01`) is an **unbounded left catch-all** and stays EMPTY (Phase 3 loads only
+> `Timestamp >= 2026-06-01`). Aged-out-month archiving `SWITCH OUT`s from the **bounded month partitions
+> (June onward)**, never P1. June is its own bounded partition specifically so it can be switched cleanly.
 
 ---
 
@@ -235,9 +244,10 @@ retention, and add aged-out-month archiving (`SWITCH OUT` + export + drop file).
 
 - **Before DROP (Phase 6):** fully reversible. Stop prod, drop the new tables (only the June tail),
   `sp_rename StatsFact_old → StatsFact` (restore PK/DF names), start prod. Old data intact.
-- **After DROP:** prod history is gone from prod but preserved as the full backup + the SQLSTAGING
-  copy (and, once built, the archive). Recovery is restore/backfill from those — not an in-window
-  rollback. Therefore **do not run Phase 6 until the drop gate is met.**
+- **After DROP:** prod history is gone from prod but preserved as the full backup (and, once built, the
+  archive); the June+ tail is in the new prod partition. Recovery is restore/backfill from those — not an
+  in-window rollback. **Take a fresh full backup right after the drop + shrink.** Therefore **do not run
+  Phase 6 until the drop gate is met.**
 
 ## Risk register
 
@@ -249,23 +259,21 @@ retention, and add aged-out-month archiving (`SWITCH OUT` + export + drop file).
 | Log too small for NCI build → mid-window autogrow stall     | Shrink log to ~32 GB (NOT 8); log growth is zero-init (not IFI); SIMPLE bounds steady-state                                                                                                      |
 | PK collision on tail load                                   | New IDENTITY seeds at `MAX(old)+1,000,000`; tail uses `IDENTITY_INSERT` with old ids `< base`                                                                                                    |
 | Incremental consumer gap at cutover (FishingRate)           | Phase 3 pre-loads the recent tail BEFORE START so the job's cursor stays continuous                                                                                                              |
-| Drop before preservation verified → data loss               | Gate: (a) backup >=2 copies manual; (b) enforced — preload counts + `*_old` unchanged; (c) **enforced** — SQLSTAGING `MAX(EntityId)` AND `COUNT` both == `*_old` (count catches a hole anywhere) |
-| In-flight txn at backup leaves a mid-range hole             | Gate (c) full `COUNT(*)` equality `*_old` vs SQLSTAGING (not just MAX); delta margin + dedup                                                                                                     |
+| Drop before preservation verified → data loss               | Gate: (a) backup >=2 copies manual; (b) enforced — preload counts + `*_old` unchanged. Preservation = {backup} U {prod June tail}, gap-free (`@tailFrom` <= backup point). Fresh full backup after the drop |
+| Post-backup rows (backup point..STOP) lost on drop          | They are in the new prod June tail — Phase 3 loads from `@tailFrom` <= backup point, count-verified; the post-drop full backup then gives an independent copy                                     |
 | Z: exhausted between DROP and shrink completion → outage    | Don't defer Phase 6; `Z:` alert < 50 GB during the (multi-hour) shrink; size month-file autogrowth; measure insert GB/day                                                                        |
 | Phase 3 re-run after a partial failure duplicates the tail  | Phase 3 is idempotent: `TRUNCATE` new table at start + `DROP INDEX IF EXISTS`; mismatch `THROW`s (not `RAISERROR`)                                                                               |
 | Stray writer touches `*_old` after STOP PROD                | Gate (b) asserts `*_old` MAX(EntityId) still equals the value recorded in Phase 3                                                                                                                |
 | Tail-load start after the backup point → gap → loss         | `@tailFrom` fixed at 2026-06-01 (≤ backup point) — never narrowed                                                                                                                                |
-| Pre-tail history lives only in backup/staging until archive | Keep >= 2 copies; do not tear down the SQLSTAGING copy until Phase 7 is built                                                                                                                    |
+| Pre-June history lives only in the backup until archived    | Keep >= 2 backup copies; build the Phase 7 archive (< 2026-06-01) from the backup; don't discard the backup until the archive is verified                                                        |
 | Monthly SPLIT moves data (non-empty catch-all)              | 2-month empty buffer (Jul+Aug) + catch-up loop; proc **THROWs** if the split target isn't empty; alert on job failure                                                                            |
-| bcp native positional / column drift prod vs staging        | Staging = restored backup (same schema by construction) + col-count check + **mandatory value spot-check**; import via temp + NOT EXISTS dedup                                                   |
 | Shrink target wrong / multi-hour grind under live I/O       | Target `SpaceUsed*1.15` **recomputed each step**; stepped ~50 GB/step with `WAITFOR` throttle; off-peak, expect hours                                                                            |
-| Delta boundary edge (in-flight txn at backup)               | Export by `MAX(EntityId)` on staging **minus margin** (superset); Phase 5 dedups via NOT EXISTS                                                                                                  |
 | Shrink fragments remaining tables                           | Phase 6 index maintenance (bare `REBUILD`, preserves compression)                                                                                                                                |
 | Schema drift new vs old                                     | Strict column-match verification at the end of `Phase2_PROD_Swap.sql` — must be 0                                                                                                                |
 
 ## Referenced DevOps artifacts (in `original-plan/`)
 
 - `original-plan/01_Create_Partitioned_Tables_And_Job.sql` — rename, PF/PS/FG, new table DDL, `usp_..AddNextMonth`, Agent job.
-- `original-plan/02_Delta_Sync_BCP.sql` — delta export/import + verification (now Phases 4/5).
+- `original-plan/02_Delta_Sync_BCP.sql` — original delta export/import (was Phases 4/5; **REMOVED** as redundant — preservation is {backup} U {prod tail}).
 - `original-plan/03_Drop_Old_Tables_And_Shrink.sql` — drop old + `SHRINKFILE` (now Phase 6).
 - `original-plan/DevOps_Original_Plan.md` — original high-level sequence (superseded by the phasing here).

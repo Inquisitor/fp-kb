@@ -84,10 +84,12 @@ BEGIN
     END
 
     -- Lower the start by a margin to also pull in any out-of-order June rows whose EntityId
-    -- sits just below the boundary (identity-reseed / late-commit skew). This is for FishingRate
-    -- continuity ONLY — data-safety does NOT depend on the tail: the complete copy of *_old is
-    -- {backup} U {Phase 5 delta on SQLSTAGING}. (A few late-May rows pulled in is harmless; they
-    -- land in P1, the documented left catch-all, and are also in the backup.)
+    -- sits just below the boundary (identity-reseed / late-commit skew).
+    -- DATA-SAFETY: the tail IS load-bearing now. {backup} (rows <= the ~2026-06-08 backup point)
+    -- U {this tail} (from @tailFrom=2026-06-01 <= the backup point) covers every *_old row
+    -- gap-free — that is exactly what the Phase 6 drop relies on. (The former Phase 4/5 SQLSTAGING
+    -- delta was redundant and is removed.) A few late-May rows pulled in by the margin are harmless:
+    -- they land in P1 (the left catch-all) and are also in the backup.
     SET @jStart = @jStart - 100000;
     IF @jStart < @minId SET @jStart = @minId;   -- clamp: never below the table's MIN(EntityId)
 
@@ -104,9 +106,12 @@ BEGIN
             N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' ON;' +
             N'INSERT INTO dbo.' + QUOTENAME(@t) + N' (' + @cols + N') ' +
             N'SELECT ' + @cols + N' FROM dbo.' + QUOTENAME(@old) + N' WITH (NOLOCK) ' +
-            N'WHERE EntityId BETWEEN @f AND @tt;' +
+            -- Load ONLY June+ (Timestamp >= @tailFrom). The id-range floor (@jStart, margin-lowered)
+            -- guarantees no June row is missed even with id<->time skew; this filter drops the
+            -- late-May collateral so the June partition is clean and SWITCH-able later.
+            N'WHERE EntityId BETWEEN @f AND @tt AND [Timestamp] >= @tf;' +
             N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' OFF;';
-        EXEC sp_executesql @ins, N'@f BIGINT,@tt BIGINT', @from, @to;
+        EXEC sp_executesql @ins, N'@f BIGINT,@tt BIGINT,@tf DATE', @from, @to, @tailFrom;
         SET @from = @to + 1;
     END
     PRINT 'Tail loaded: ' + @t + ' from id ' + CAST(@jStart AS VARCHAR(20));
@@ -115,8 +120,10 @@ BEGIN
     -- Phase 6 drop gate. The id range [@jStart, @maxId] is the OLD-id space; live inserts
     -- (ids >= MAX(old)+1,000,000) fall outside it, so this stays comparable even after START.
     DECLARE @oldCnt BIGINT, @newCnt BIGINT;
-    SET @sqlb = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@old) + N' WITH (NOLOCK) WHERE EntityId BETWEEN @a AND @b;';
-    EXEC sp_executesql @sqlb, N'@a BIGINT,@b BIGINT,@c BIGINT OUTPUT', @jStart, @maxId, @oldCnt OUTPUT;
+    -- old-count uses the SAME Timestamp filter as the load so it matches the new-count (new holds
+    -- only the >= @tailFrom rows in the id range). Keeps this check — and the Phase 6 gate — honest.
+    SET @sqlb = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@old) + N' WITH (NOLOCK) WHERE EntityId BETWEEN @a AND @b AND [Timestamp] >= @tf;';
+    EXEC sp_executesql @sqlb, N'@a BIGINT,@b BIGINT,@tf DATE,@c BIGINT OUTPUT', @jStart, @maxId, @tailFrom, @oldCnt OUTPUT;
     SET @sqlb = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t) + N' WHERE EntityId BETWEEN @a AND @b;';
     EXEC sp_executesql @sqlb, N'@a BIGINT,@b BIGINT,@c BIGINT OUTPUT', @jStart, @maxId, @newCnt OUTPUT;
 
@@ -161,4 +168,4 @@ UNION ALL
 SELECT 'MissionsFact',        COUNT_BIG(*),          MIN([Timestamp]),        MAX([Timestamp])         FROM dbo.MissionsFact WITH (NOLOCK);
 GO
 
--- >>> Tail present, NCI built, counts verified: START PROD. Then proceed to Phase 4 (online). <<<
+-- >>> Tail present, NCI built, counts verified: START PROD. Then proceed to Phase 6 (online). <<<

@@ -5,10 +5,20 @@
    the SQLARCHIVE hardware (disks / box) is ready. Does NOT block prod.
 
    Assumptions:
-     - A complete copy (restored backup + Phase 5 delta) is available to load from
-       — e.g. the SQLSTAGING copy, or a fresh backup taken from it — as a database
-       with non-partitioned dbo.StatsFact and dbo.MissionsFact.
+     - The restored FULL BACKUP is available to load from (SQLSTAGING's restored copy, or a
+       fresh restore on this box) as a database with non-partitioned dbo.StatsFact and
+       dbo.MissionsFact. No Phase 4/5 delta is needed: this archives the DROPPED history,
+       and the backup (point ~2026-06-08) covers everything < 2026-06-01.
      - Run this ON SQLARCHIVE, in that restored database.
+
+   SCOPE: load ONLY history < 2026-06-01 (the bulk dropped from prod in Phase 6). June and later
+   stay on prod as live partitions and move to the archive LATER as they age out. NOTE: a direct
+   cross-server `ALTER TABLE ... SWITCH` PROD->SQLARCHIVE is NOT possible (SWITCH is metadata-only
+   within one DB/instance). The real later-flow is: on prod, SWITCH OUT the aged month into a local
+   staging table (metadata-only), then transfer it here (backup/restore or bulk-load) and SWITCH it
+   into the matching empty archive partition. So the archive's monthly RANGE RIGHT boundaries must
+   ALIGN with prod's calendar and keep an EMPTY [Jun1,Jul1) (and later) partition as the landing
+   slot. (Finalize the exact boundary set when the archive is actually built.)
 
    PARAMETERS:
      - @ArchiveDataPath : data directory for the archive filegroup file.
@@ -61,8 +71,12 @@ BEGIN
     SET @sql = N'SELECT @a=MIN([Timestamp]), @b=MAX([Timestamp]) FROM dbo.' + QUOTENAME(@imp) + N';';
     EXEC sp_executesql @sql, N'@a DATETIME OUTPUT,@b DATETIME OUTPUT', @minTs OUTPUT, @maxTs OUTPUT;
 
+    -- Boundaries from the first data month through 2026-08-01 (aligned with prod's calendar), so the
+    -- last LOADED partition is May 2026 and [Jun1,Jul1), [Jul1,Aug1), [Aug1,...) stay EMPTY — the
+    -- landing slots that prod's aged June+ months are transferred into later. (@maxTs unused; the
+    -- loaded scope is < Jun 1, but we still seed the empty future boundaries for the calendar.)
     DECLARE @cursor DATETIME = DATEFROMPARTS(YEAR(@minTs), MONTH(@minTs), 1);
-    DECLARE @stop   DATETIME = DATEADD(MONTH, 2, DATEFROMPARTS(YEAR(@maxTs), MONTH(@maxTs), 1)); -- one buffer month past max
+    DECLARE @stop   DATETIME = '2026-09-01';   -- loop adds boundaries while < @stop -> last = 2026-08-01 (Jun1/Jul1/Aug1 included)
     DECLARE @vals NVARCHAR(MAX) = N'';
     WHILE @cursor < @stop
     BEGIN
@@ -96,7 +110,9 @@ BEGIN
     FROM sys.columns WHERE object_id = OBJECT_ID('dbo.' + @imp);
 
     DECLARE @lo BIGINT, @hi BIGINT;
-    SET @sql = N'SELECT @x=MIN(EntityId),@y=MAX(EntityId) FROM dbo.' + QUOTENAME(@imp) + N';';
+    -- Bound the id range to the ARCHIVED scope (< 2026-06-01) so the batch loop doesn't iterate
+    -- the whole post-June id space with empty-result batches (hours of pointless I/O on a 3.2 TB box).
+    SET @sql = N'SELECT @x=MIN(EntityId),@y=MAX(EntityId) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-06-01'';';
     EXEC sp_executesql @sql, N'@x BIGINT OUTPUT,@y BIGINT OUTPUT', @lo OUTPUT, @hi OUTPUT;
 
     DECLARE @batch BIGINT = 5000000, @from BIGINT = @lo, @to BIGINT;
@@ -106,7 +122,8 @@ BEGIN
         -- SELECT * INTO preserved the IDENTITY property on EntityId, so IDENTITY_INSERT is required.
         SET @sql = N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' ON;'
                  + N'INSERT INTO dbo.' + QUOTENAME(@t) + N' (' + @cols + N') SELECT ' + @cols
-                 + N' FROM dbo.' + QUOTENAME(@imp) + N' WHERE EntityId BETWEEN @f AND @tt;'
+                 + N' FROM dbo.' + QUOTENAME(@imp) + N' WHERE EntityId BETWEEN @f AND @tt'
+                 + N'   AND [Timestamp] < ''2026-06-01'';'   -- archive only the dropped history; June+ via SWITCH later
                  + N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' OFF;';
         EXEC sp_executesql @sql, N'@f BIGINT,@tt BIGINT', @from, @to;
         SET @from = @to + 1;
@@ -129,11 +146,12 @@ BEGIN
     DECLARE @cNew BIGINT, @cImp BIGINT;
     SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t) + N';';
     EXEC sp_executesql @sql, N'@c BIGINT OUTPUT', @cNew OUTPUT;
-    SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@imp) + N';';
+    -- Compare against the import count FOR THE SAME SCOPE (< 2026-06-01), since the load is filtered.
+    SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-06-01'';';
     EXEC sp_executesql @sql, N'@c BIGINT OUTPUT', @cImp OUTPUT;
-    PRINT @t + ': new=' + CAST(@cNew AS VARCHAR(20)) + ' import=' + CAST(@cImp AS VARCHAR(20));
+    PRINT @t + ': archived(<Jun1)=' + CAST(@cNew AS VARCHAR(20)) + ' import(<Jun1)=' + CAST(@cImp AS VARCHAR(20));
     IF @cNew = @cImp BEGIN SET @sql = N'DROP TABLE dbo.' + QUOTENAME(@imp) + N';'; EXEC sp_executesql @sql; END
-    ELSE PRINT '*** COUNT MISMATCH for ' + @t + ' — investigate before dropping ' + @imp;
+    ELSE PRINT '*** COUNT MISMATCH for ' + @t + ' (< 2026-06-01) — investigate before dropping ' + @imp;
 
     FETCH NEXT FROM cur INTO @t;
 END

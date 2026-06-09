@@ -198,3 +198,39 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   idempotency. NOT validated here (Test2 inversions / scope): tail row-selection semantics (-> synthetic
   monotonic Rehearsal0 run), Phases 4/5/6/8, and P2/P3 RANGE RIGHT routing (no future-dated rows; cover by
   a post-START insert micro-test). Test2 [Stats] is backed up -> restore to clean up.
+- 2026-06-09 — **Plan simplified: removed Phase 4/5 (SQLSTAGING delta) as redundant.** User's insight:
+  the post-backup rows are ALREADY in the new June tail (Phase 3 loads from `@tailFrom`=2026-06-01 <= the
+  backup point), and with EntityId monotonic-with-Timestamp on prod, **{backup} U {new June tail} is
+  already gap-free** — the delta-to-staging only duplicated those rows. Root cause it overlapped: once
+  `@tailFrom` was fixed at June 1, the prod tail subsumed the post-backup delta. Changes applied:
+  (1) deleted `Phase4_PROD_DeltaExport.sql` + `Phase5_STAGING_DeltaImport.sql` (+ their Test2 rehearsal
+  copies); numbers 4/5 retired, sequence is now 1/2/3/6/7/8. (2) Phase 6 gate simplified to (a) backup
+  restorable + (b) Phase 3 preload verified AND `*_old` unchanged — removed gate (c) (SQLSTAGING MAX/COUNT
+  paste-ins) and STEP 0 (heavy full count). (3) Phase 7 now loads `< 2026-06-01` from the restored backup
+  (not staging+delta); June+ stays on prod and SWITCHes into the archive later (align boundaries). (4) New
+  step: take a FRESH full backup right after the drop+shrink (independent copy of the post-backup tail).
+  Net: one fewer cross-server phase, no `bcp` anywhere, simpler irreversible gate. Updated Phase 6/7 scripts,
+  Runbook (table, phase sections, gate, rollback, risk register), Operator_Checklist (E section, Ledger),
+  backlog. The only residual vs the old A+B model: the post-backup ~1 day lives only on prod until that
+  fresh backup — the normal since-last-backup risk, now explicitly closed by the post-drop backup step.
+- 2026-06-09 — External review (Codex) on the simplified plan: found the model was only HALF-migrated -
+  declared "prod >= Jun1, June switches later" but the artifacts didn't implement it. Applied all 5 points
+  (3 blocks): **(A) clean June** - PROD boundaries 2026-06-01/-07-01/-08-01 (4 partitions: empty `<Jun1`
+  catch-all FG + June + July + Aug buffer) so June is its own bounded/switchable partition; Phase 3 insert
+  now filters `Timestamp >= 2026-06-01` (late-May no longer loaded - stays in `*_old`->backup->archive);
+  knock-on: Phase 3 verify + Phase 6 gate old-count carry the same Timestamp filter so counts stay
+  consistent; Phase 7 boundary calendar extended to Aug1 (empty Jun/Jul/Aug landing slots) aligned with
+  prod. **(B) drop hardening** - fresh PRE-drop full backup is now a HARD gate (Phase 6 STEP 0; contains
+  `*_old` in full -> bulletproof vs id/time-skew edge); post-shrink backup is the new baseline. **(C)
+  cross-server** - corrected "June SWITCHes into archive" to the real flow (cross-instance SWITCH is
+  impossible: `SWITCH OUT` locally + backup/restore/bulk transfer), in Phase 7 + runbook steady-state.
+  Updated Phase 2/3/6/7 + rehearsal Phase 2 + Runbook + Checklist + backlog. Next: re-run Phase 2->3 on
+  Test2 to confirm the 4-partition scheme + Timestamp-filtered tail (clean June in P2, P1/P3/P4 empty).
+- 2026-06-09 — Clean Test2 re-run (backup restored to pristine first) PASSED the refined model end-to-end.
+  MCP-verified: column-compare 0; 4 partitions per table; June tail loaded ONLY by Timestamp filter
+  (StatsFact 4068, MissionsFact 36218 — vs ~104K/136K id-range before) all in P2; P1 catch-all + P3/P4
+  EMPTY; min/max_ts clean June (06-01..06-09, no 2024 inversions); control old==new under the filter;
+  NCIs aligned (on scheme) + PAGE over 4 partitions; identity seeded +1,000,000. This validates Block A
+  (clean June) SEMANTICALLY on the real inverted Test2 data — what synthetic data was previously needed
+  for. Blocks B (pre-drop backup hard gate) and C (cross-server SWITCH-OUT+transfer wording) are doc/gate
+  changes, not exercised by Phase 2/3. In-window critical path (Phase 2->3) under the final model: GREEN.

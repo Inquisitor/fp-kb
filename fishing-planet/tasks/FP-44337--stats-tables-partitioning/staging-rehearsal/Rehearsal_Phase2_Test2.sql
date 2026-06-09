@@ -68,16 +68,23 @@ IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = 'pf_StatsFact_Time
     DROP PARTITION FUNCTION pf_StatsFact_Timestamp;
 GO
 
--- Step 3 — filegroups + files: June (current), July (next), August (empty buffer).
--- SIZE 8 GB / GROWTH 8 GB is a starting point; before the window raise the CURRENT-month
--- (2026_06) file SIZE to the measured compressed June-tail size to avoid autogrow churn.
--- July/August stay small (they hold no rows until those months).
+-- Step 3 — filegroups + files: catch-all (empty) + June + July + August (empty buffer).
+-- Rehearsal sizes 64 MB (prod uses 8 GB for months, 1 GB catch-all).
 DECLARE @DataPath NVARCHAR(260) = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA\';
 DECLARE @db SYSNAME = DB_NAME();
 DECLARE @sql NVARCHAR(MAX);
+
+IF NOT EXISTS (SELECT 1 FROM sys.filegroups WHERE name = 'FG_StatsFact_catchall')
+BEGIN
+    EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_StatsFact_catchall];');
+    SET @sql = N'ALTER DATABASE [' + @db + N'] ADD FILE (NAME=N''StatsFact_catchall'','
+             + N'FILENAME=N''' + @DataPath + N'StatsFact_catchall.ndf'','
+             + N'SIZE=64MB, FILEGROWTH=64MB) TO FILEGROUP [FG_StatsFact_catchall];';
+    EXEC sp_executesql @sql;
+END
+
 DECLARE @m TABLE (suffix CHAR(7));
 INSERT INTO @m VALUES ('2026_06'), ('2026_07'), ('2026_08');
-
 DECLARE @s CHAR(7);
 DECLARE fg CURSOR LOCAL FAST_FORWARD FOR SELECT suffix FROM @m;
 OPEN fg; FETCH NEXT FROM fg INTO @s;
@@ -96,14 +103,14 @@ END
 CLOSE fg; DEALLOCATE fg;
 GO
 
--- Step 4 — partition function + scheme. Two boundaries -> three partitions:
---   P1 (< 2026-07-01) = June ; P2 [Jul,Aug) = July ; P3 (>= 2026-08-01) = EMPTY buffer.
+-- Step 4 — partition function + scheme. THREE boundaries -> FOUR partitions:
+--   P1 (< 2026-06-01) EMPTY catch-all ; P2 June ; P3 July ; P4 (>= 2026-08-01) EMPTY buffer.
 CREATE PARTITION FUNCTION pf_StatsFact_Timestamp (DATETIME)
-AS RANGE RIGHT FOR VALUES ('2026-07-01T00:00:00', '2026-08-01T00:00:00');
+AS RANGE RIGHT FOR VALUES ('2026-06-01T00:00:00', '2026-07-01T00:00:00', '2026-08-01T00:00:00');
 GO
 CREATE PARTITION SCHEME ps_StatsFact_Timestamp
 AS PARTITION pf_StatsFact_Timestamp
-TO ([FG_StatsFact_2026_06], [FG_StatsFact_2026_07], [FG_StatsFact_2026_08]);
+TO ([FG_StatsFact_catchall], [FG_StatsFact_2026_06], [FG_StatsFact_2026_07], [FG_StatsFact_2026_08]);
 GO
 
 -- Step 5 + 6 — IDENTITY start from old table, then create the new partitioned table
@@ -157,13 +164,22 @@ IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = 'pf_MissionsFact_T
     DROP PARTITION FUNCTION pf_MissionsFact_Timestamp;
 GO
 
--- Step 3 — filegroups + files: June, July, August (empty buffer).
+-- Step 3 — filegroups + files: catch-all (empty) + June + July + August (empty buffer).
 DECLARE @DataPath NVARCHAR(260) = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA\';
 DECLARE @db SYSNAME = DB_NAME();
 DECLARE @sql NVARCHAR(MAX);
+
+IF NOT EXISTS (SELECT 1 FROM sys.filegroups WHERE name = 'FG_MissionsFact_catchall')
+BEGIN
+    EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_MissionsFact_catchall];');
+    SET @sql = N'ALTER DATABASE [' + @db + N'] ADD FILE (NAME=N''MissionsFact_catchall'','
+             + N'FILENAME=N''' + @DataPath + N'MissionsFact_catchall.ndf'','
+             + N'SIZE=64MB, FILEGROWTH=64MB) TO FILEGROUP [FG_MissionsFact_catchall];';
+    EXEC sp_executesql @sql;
+END
+
 DECLARE @m TABLE (suffix CHAR(7));
 INSERT INTO @m VALUES ('2026_06'), ('2026_07'), ('2026_08');
-
 DECLARE @s CHAR(7);
 DECLARE fg CURSOR LOCAL FAST_FORWARD FOR SELECT suffix FROM @m;
 OPEN fg; FETCH NEXT FROM fg INTO @s;
@@ -182,13 +198,14 @@ END
 CLOSE fg; DEALLOCATE fg;
 GO
 
--- Step 4 — partition function + scheme (June / July / August-buffer).
+-- Step 4 — partition function + scheme. THREE boundaries -> FOUR partitions:
+--   P1 (< 2026-06-01) EMPTY catch-all ; P2 June ; P3 July ; P4 (>= 2026-08-01) EMPTY buffer.
 CREATE PARTITION FUNCTION pf_MissionsFact_Timestamp (DATETIME)
-AS RANGE RIGHT FOR VALUES ('2026-07-01T00:00:00', '2026-08-01T00:00:00');
+AS RANGE RIGHT FOR VALUES ('2026-06-01T00:00:00', '2026-07-01T00:00:00', '2026-08-01T00:00:00');
 GO
 CREATE PARTITION SCHEME ps_MissionsFact_Timestamp
 AS PARTITION pf_MissionsFact_Timestamp
-TO ([FG_MissionsFact_2026_06], [FG_MissionsFact_2026_07], [FG_MissionsFact_2026_08]);
+TO ([FG_MissionsFact_catchall], [FG_MissionsFact_2026_06], [FG_MissionsFact_2026_07], [FG_MissionsFact_2026_08]);
 GO
 
 -- Step 5 + 6 — IDENTITY start + create new partitioned table (clustered PK only).
@@ -210,7 +227,10 @@ GO
 /* ============================================================================
    VERIFICATION (run before proceeding) — strict old-vs-new column compare:
    name, ordinal position, type+length, nullability, collation. Expect 0 rows.
-   bcp (Phases 4/5) is positional, so ordinal drift must be caught here.
+   Since the new table is built by SELECT * INTO from *_old, this is a sanity check that
+   the clone + ADD PK is faithful (it passes by construction). Column ORDER is no longer a
+   correctness requirement (no positional bcp anymore — Phases 4/5 removed); all loads are
+   by explicit column name. Keep the check cheap-and-green.
    ============================================================================ */
 ;WITH oldc AS (
     SELECT CASE OBJECT_NAME(c.object_id) WHEN 'StatsFact_old' THEN 'StatsFact'
@@ -240,8 +260,8 @@ WHERE o.name IS NULL OR n.name IS NULL
 -- Expect 0 rows. Any row = a mismatch to resolve before the tail load / bcp.
 GO
 
--- IDENTITY seeds + partition layout (expect 3 partitions each: 06/07/08 filegroups,
--- the 08 partition empty).
+-- IDENTITY seeds + partition layout (expect 4 partitions each: catch-all / 06 / 07 / 08 filegroups,
+-- ALL empty at this point — the June tail loads in Phase 3).
 SELECT 'StatsFact' AS tbl, IDENT_CURRENT('dbo.StatsFact') AS curr
 UNION ALL SELECT 'MissionsFact', IDENT_CURRENT('dbo.MissionsFact');
 

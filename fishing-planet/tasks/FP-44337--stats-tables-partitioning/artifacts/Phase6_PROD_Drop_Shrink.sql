@@ -5,72 +5,55 @@
      2. SHRINKFILE to return that space to the OS.
      3. Index maintenance on the remaining tables (shrink fragments them).
 
-   >>> DROP GATE — lossless when ALL hold (this is irreversible): <<<
-       (a) the full backup is retained in >= 2 copies and proven RESTORABLE
-           (backup file on the backup server + the restored copy on SQLSTAGING), AND
-       (b) the Phase 3 preload is verified complete — every post-backup row is in
-           the new tables (enforced programmatically below), AND
-       (c) SQLSTAGING is complete to the cutover (backup + Phase 5 delta) — this is
-           the copy that survives the drop, so it is the load-bearing safety gate.
-   (a) is a manual confirmation; (b) AND (c) are enforced in the script — for (c) you
-   paste the SQLSTAGING MAX(EntityId) per table and the script asserts it equals *_old.
-   The optimized analyst archive (Phase 7) does NOT have to exist yet — build it
-   later on SQLARCHIVE.
+   >>> DROP GATE — lossless when BOTH hold (this is irreversible): <<<
+       (a) a FRESH full backup taken AFTER STOP PROD — so it contains *_old IN FULL, including
+           the post-backup tail — is completed & proven RESTORABLE and retained in >= 2 copies.
+           This is STEP 0 below and is a HARD gate. (The older ~2026-06-08 backup also still exists.)
+       (b) the Phase 3 preload is verified complete AND *_old is unchanged since Phase 3
+           (both enforced programmatically in STEP 1).
+   WHY {backup} U {new June tail} is gap-free: @tailFrom (2026-06-01) <= the backup point, and
+   EntityId is monotonic with Timestamp on prod, so every *_old row is either < June 1 (in the
+   backup -> archive) or >= June 1 (in the new June partition, count-verified by Phase 3). The
+   Jun-1..backup overlap is in both; no gap. The fresh pre-drop backup (a) makes the irreversible
+   DROP bulletproof even against an undetected id/time-skew edge — *_old is captured in full first.
+   There is NO "complete SQLSTAGING copy" gate; the former Phase 4/5 delta-to-staging was redundant
+   and has been removed.
+   AFTER the drop + shrink, take ANOTHER full backup as the new small baseline (it no longer
+   contains *_old, so it does NOT replace the pre-drop backup for history).
+   The analyst archive (Phase 7) does NOT have to exist yet — build it later from a backup.
    ============================================================================ */
 
 USE [Stats];
 GO
 
 /* ----------------------------------------------------------------------------
-   STEP 1 — Drop the historical bulk. Frees ~2.5 TB INSIDE the data file.
-
-   Programmatic gate: re-verify (from FP44337_TailLoadControl written by Phase 3)
-   that every preloaded row is present in the new tables; THROW and abort if not,
-   so the DROP cannot run on an incomplete preload. The id range [TailStartId,
-   MaxOldId] is the OLD-id space — live inserts have higher ids, so the counts
-   stay comparable even though prod is live.
-
-   MANUAL gate (cannot be asserted in SQL — confirm before running):
-     (a) full backup retained in >= 2 copies and proven restorable.
-   Gate (c) is enforced below: paste the SQLSTAGING MAX(EntityId) per table (from
-   Phase 5) into @stagingMax_S/@stagingMax_M; the script aborts unless they match *_old.
+   STEP 0 — PRE-DROP FULL BACKUP (HARD GATE). Run + verify BEFORE STEP 1.
+   Online full backup of the whole DB while *_old still exists -> the irreversible DROP is
+   safe even if an id/time-skew edge slipped past the tail load (*_old is captured in full
+   here). ~3.2 TB: ensure backup-server space + a few hours; it runs online (no downtime).
+   ----------------------------------------------------------------------------
+   BACKUP DATABASE [Stats] TO DISK = N'<backup-server path>\Stats_predrop_YYYYMMDD.bak'
+       WITH COMPRESSION, CHECKSUM, STATS = 5;
+   RESTORE VERIFYONLY FROM DISK = N'<...>\Stats_predrop_YYYYMMDD.bak' WITH CHECKSUM;
+   -- Confirm success + a >= 2nd retained copy, THEN proceed to STEP 1.
    ---------------------------------------------------------------------------- */
 
 /* ----------------------------------------------------------------------------
-   STEP 0 — Heavy, RESTARTABLE: record the full row count (and MAX) of *_old, so the
-   irreversible Step 1 (gate + DROP) stays fast and a Step-1 retry never re-scans
-   5.8B/2B rows. Multi-hour clustered scan — run off-peak, SEPARATELY from Step 1.
-   ---------------------------------------------------------------------------- */
-IF OBJECT_ID('dbo.FP44337_DropGate') IS NULL
-    CREATE TABLE dbo.FP44337_DropGate (
-        TableName  SYSNAME   NOT NULL PRIMARY KEY,
-        OldCount   BIGINT    NOT NULL,
-        OldMax     BIGINT    NOT NULL,
-        RecordedAt DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME());
-GO
-;WITH src AS (SELECT 'StatsFact' AS t, COUNT_BIG(*) AS c, MAX(EntityId) AS m FROM dbo.StatsFact_old)
-MERGE dbo.FP44337_DropGate d USING src s ON d.TableName = s.t
-WHEN MATCHED THEN UPDATE SET OldCount = s.c, OldMax = s.m, RecordedAt = SYSUTCDATETIME()
-WHEN NOT MATCHED THEN INSERT (TableName, OldCount, OldMax) VALUES (s.t, s.c, s.m);
-GO
-;WITH src AS (SELECT 'MissionsFact' AS t, COUNT_BIG(*) AS c, MAX(EntityId) AS m FROM dbo.MissionsFact_old)
-MERGE dbo.FP44337_DropGate d USING src s ON d.TableName = s.t
-WHEN MATCHED THEN UPDATE SET OldCount = s.c, OldMax = s.m, RecordedAt = SYSUTCDATETIME()
-WHEN NOT MATCHED THEN INSERT (TableName, OldCount, OldMax) VALUES (s.t, s.c, s.m);
-GO
-SELECT * FROM dbo.FP44337_DropGate;
-GO
+   STEP 1 — Gate + irreversible DROP of the historical bulk (frees ~2.5 TB INSIDE the
+   data file). The gate re-verifies (from FP44337_TailLoadControl, written by Phase 3)
+   that every preloaded row is present in the new tables, and that *_old is unchanged
+   since Phase 3; THROW and abort otherwise. The id range [TailStartId, MaxOldId] is the
+   OLD-id space — live inserts have higher ids, so the counts stay comparable even though
+   prod is live. No full-table COUNT and no SQLSTAGING gate (the old gate (c) and heavy
+   full-count are gone): preservation is {backup} U {Phase 3 tail}, see the header.
 
-/* ----------------------------------------------------------------------------
-   STEP 1 — Gate + irreversible DROP. Fast: reuses STEP 0's recorded *_old counts.
+   MANUAL gate (a) — confirm before running: STEP 0 pre-drop backup completed & verified
+   (and retained in >= 2 copies).
    ---------------------------------------------------------------------------- */
 SET XACT_ABORT ON;
 BEGIN TRY
     IF OBJECT_ID('dbo.FP44337_TailLoadControl') IS NULL
         THROW 50010, 'FP44337_TailLoadControl missing - Phase 3 did not record the preload. DROP aborted.', 1;
-
-    IF OBJECT_ID('dbo.FP44337_DropGate') IS NULL
-        THROW 50018, 'FP44337_DropGate missing - run STEP 0 (record *_old counts) first. DROP aborted.', 1;
 
     IF (SELECT COUNT(*) FROM dbo.FP44337_TailLoadControl WHERE TableName IN ('StatsFact','MissionsFact')) < 2
         THROW 50011, 'Control set incomplete - expected StatsFact and MissionsFact. DROP aborted.', 1;
@@ -84,7 +67,10 @@ BEGIN TRY
     OPEN v; FETCH NEXT FROM v INTO @t, @start, @maxOld, @recNew;
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t + '_old') + N' WHERE EntityId BETWEEN @a AND @b;';
+        -- old-count carries the SAME Timestamp >= '2026-06-01' filter as Phase 3's load, so it
+        -- matches the new table (which holds only June+ rows in this id range). Without it the
+        -- late-May rows still in *_old would inflate @oldNow and the gate would falsely THROW.
+        SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t + '_old') + N' WHERE EntityId BETWEEN @a AND @b AND [Timestamp] >= ''2026-06-01'';';
         EXEC sp_executesql @sql, N'@a BIGINT,@b BIGINT,@c BIGINT OUTPUT', @start, @maxOld, @oldNow OUTPUT;
         SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t) + N' WHERE EntityId BETWEEN @a AND @b;';
         EXEC sp_executesql @sql, N'@a BIGINT,@b BIGINT,@c BIGINT OUTPUT', @start, @maxOld, @newNow OUTPUT;
@@ -104,52 +90,20 @@ BEGIN TRY
     IF @bad > 0
         THROW 50012, 'Preload verification FAILED - at least one table mismatched. DROP aborted.', 1;
 
-    /* Gate (c): SQLSTAGING completeness — the copy that survives the drop. Paste the
-       MAX(EntityId) read on SQLSTAGING after Phase 5 (SELECT MAX(EntityId) FROM dbo.StatsFact /
-       dbo.MissionsFact on SQLSTAGING). The script aborts unless staging reaches *_old's max. */
-    DECLARE @stagingMax_S BIGINT = /* <MAX(EntityId) on SQLSTAGING.StatsFact> */ NULL;
-    DECLARE @stagingMax_M BIGINT = /* <MAX(EntityId) on SQLSTAGING.MissionsFact> */ NULL;
-    IF @stagingMax_S IS NULL OR @stagingMax_M IS NULL
-        THROW 50013, 'SQLSTAGING MAX(EntityId) not provided (gate c). DROP aborted.', 1;
-
+    -- Gate (b) cont.: *_old must be UNCHANGED since Phase 3 (no stray writer after STOP PROD).
+    -- Compare the live *_old MAX(EntityId) to the value Phase 3 recorded in the control table.
     DECLARE @oldMaxS BIGINT = (SELECT MAX(EntityId) FROM dbo.StatsFact_old   );
     DECLARE @oldMaxM BIGINT = (SELECT MAX(EntityId) FROM dbo.MissionsFact_old);
     DECLARE @recMaxS BIGINT = (SELECT MaxOldId FROM dbo.FP44337_TailLoadControl WHERE TableName = 'StatsFact');
     DECLARE @recMaxM BIGINT = (SELECT MaxOldId FROM dbo.FP44337_TailLoadControl WHERE TableName = 'MissionsFact');
-
-    -- _old must be unchanged since Phase 3 (no stray writer touched it post-STOP).
     IF @oldMaxS <> @recMaxS OR @oldMaxM <> @recMaxM
-        THROW 50014, '*_old MAX(EntityId) changed since Phase 3 - investigate before dropping. DROP aborted.', 1;
-    -- SQLSTAGING must reach the cutover (its max == *_old max) for both tables.
-    IF @stagingMax_S <> @oldMaxS OR @stagingMax_M <> @oldMaxM
-        THROW 50015, 'SQLSTAGING is NOT complete to cutover (staging max <> *_old max). DROP aborted.', 1;
+        THROW 50014, '*_old MAX(EntityId) changed since Phase 3 - a writer touched it after STOP. DROP aborted.', 1;
 
-    /* Stronger than MAX: full row-count equality catches a missing row ANYWHERE (a middle hole),
-       not just the top. *_old counts come from STEP 0 (recorded) so this batch stays fast. Paste
-       COUNT_BIG(*) read on SQLSTAGING per table (after Phase 5). */
-    DECLARE @stagingCnt_S BIGINT = /* <COUNT_BIG(*) on SQLSTAGING.StatsFact> */ NULL;
-    DECLARE @stagingCnt_M BIGINT = /* <COUNT_BIG(*) on SQLSTAGING.MissionsFact> */ NULL;
-    IF @stagingCnt_S IS NULL OR @stagingCnt_M IS NULL
-        THROW 50016, 'SQLSTAGING COUNT not provided (gate c). DROP aborted.', 1;
-    IF NOT EXISTS (SELECT 1 FROM dbo.FP44337_DropGate WHERE TableName = 'StatsFact')
-       OR NOT EXISTS (SELECT 1 FROM dbo.FP44337_DropGate WHERE TableName = 'MissionsFact')
-        THROW 50018, 'STEP 0 *_old counts not recorded (dbo.FP44337_DropGate) - run STEP 0 first. DROP aborted.', 1;
-    DECLARE @oldCntS BIGINT = (SELECT OldCount FROM dbo.FP44337_DropGate WHERE TableName = 'StatsFact');
-    DECLARE @oldCntM BIGINT = (SELECT OldCount FROM dbo.FP44337_DropGate WHERE TableName = 'MissionsFact');
-    DECLARE @gMaxS   BIGINT = (SELECT OldMax   FROM dbo.FP44337_DropGate WHERE TableName = 'StatsFact');
-    DECLARE @gMaxM   BIGINT = (SELECT OldMax   FROM dbo.FP44337_DropGate WHERE TableName = 'MissionsFact');
-    -- STEP 0's recorded MAX must still equal live *_old MAX (i.e. *_old unchanged since the count).
-    IF @gMaxS <> @oldMaxS OR @gMaxM <> @oldMaxM
-        THROW 50019, '*_old changed since STEP 0 count - re-run STEP 0. DROP aborted.', 1;
-    IF @stagingCnt_S <> @oldCntS OR @stagingCnt_M <> @oldCntM
-        THROW 50017, 'SQLSTAGING row count <> *_old row count - copy incomplete (a row is missing). DROP aborted.', 1;
-
-    PRINT 'Gate (c) OK: SQLSTAGING matches *_old on MAX(EntityId) AND COUNT for both tables.';
-
-    -- Verified (b)+(c): every row of *_old is preserved (new tables + SQLSTAGING). Safe to drop.
+    -- Verified (b): every *_old row is preserved in {backup} U {the new June tail}. Safe to drop.
+    -- (Manual gate (a) - backup retained & restorable - must also be confirmed; see header.)
     DROP TABLE dbo.StatsFact_old;
     DROP TABLE dbo.MissionsFact_old;
-    PRINT 'Verification passed. Old tables dropped.';
+    PRINT 'Verification passed (preload complete + *_old unchanged). Old tables dropped.';
 END TRY
 BEGIN CATCH
     IF CURSOR_STATUS('local','v') >= 0 BEGIN CLOSE v; DEALLOCATE v; END
