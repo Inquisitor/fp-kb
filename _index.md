@@ -13,11 +13,11 @@
 | FP-44337 | FP/server | stats-tables-partitioning | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
 
 ## Active Reviews
-| Task     | Executor    | Path                                                                                       |
-|----------|-------------|--------------------------------------------------------------------------------------------|
-| FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
-| FP-43705 | Yuriy Burda | fishing-planet/review/FP-43705--bait-negative-values/                                      |
-| FP-43185 | Yevhenii Shust | fishing-planet/review/FP-43185--giveitem-inventoryitem-init/       |
+| Task     | Executor       | Path                                                                                    |
+|----------|----------------|-----------------------------------------------------------------------------------------|
+| FP-41962 | Stanislav      | fishing-planet/review/FP-41962--line-logging/                                           |
+| FP-43705 | Yuriy Burda    | fishing-planet/review/FP-43705--bait-negative-values/                                   |
+| FP-43185 | Yevhenii Shust | fishing-planet/review/FP-43185--giveitem-inventoryitem-init/                            |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
