@@ -18,6 +18,7 @@
 | FP-41962 | Stanislav   | fishing-planet/review/FP-41962--line-logging/                                              |
 | FP-43705 | Yuriy Burda | fishing-planet/review/FP-43705--bait-negative-values/                                      |
 | FP-41377 | Yuriy Burda | fishing-planet/review/FP-41377--po-chat-claim-qa-error/                                    |
+| FP-43185 | Yevhenii Shust | fishing-planet/review/FP-43185--giveitem-inventoryitem-init/       |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
