@@ -8,7 +8,7 @@ type: reference
 
 After every SVN commit (or merge) to an FP-##### task: propose a JIRA comment in plain text for user review. Post only after user approves the text.
 
-**Review-closure comments lead with the verdict.** When the comment closes a review with an approve verdict, the FIRST line is **LGTM** (bold), then the commit/merge notes, then any context. Do not bury the verdict below the changelog.
+**Review-closure comments lead with the verdict.** When the comment closes a review with an approve verdict, the FIRST line is "LGTM.", then the commit/merge notes, then any context. Do not bury the verdict below the changelog.
 
 **Always post via ADF (`contentFormat: adf`), never markdown.** The role colors on branch labels are `textColor` marks — markdown cannot render them, so a markdown post silently drops the colors. The Jira instance supports `textColor` (confirmed in use). Build the ADF: branch label = `{"type":"text","text":"MFT","marks":[{"type":"strong"},{"type":"textColor","attrs":{"color":"<role hex>"}}]}`, revisions = `link` marks, code identifiers / `Source` values = `code` marks. Role hex values: see `<kb>/CLAUDE.md` -> Branch Roles (Content `#ff991f`, Code `#0747a6`, etc.).
 
@@ -18,10 +18,10 @@ Note: the MCP comment API has no edit/delete for Jira comments - get the format 
 
 Two SVN repos, two URL segments. The Code-role branch in each repo uses the role color from `<kb>/CLAUDE.md` → Branch Roles.
 
-| Repo   | URL segment | Branch label                                                                                                                                                                |
-|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Repo   | URL segment | Branch label                                                                                                                                                                                   |
+|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Server | `#SRV`      | 3-letter SVN release branch name (e.g. `MFT`, `LBM`); first letter advances through the alphabet with each release so names self-sort. Current Code branch in `<kb>/_index.md` → Branch Roles. |
-| Client | `#CLN`      | `CodeBranch` (working tree `Win64_CodeBranch`).                                                                                                                              |
+| Client | `#CLN`      | `CodeBranch` (working tree `Win64_CodeBranch`).                                                                                                                                                |
 
 Throughout this reference, `{branch}` and `{url-segment}` are the row values for the repo the commit was made on.
 
