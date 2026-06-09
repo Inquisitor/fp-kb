@@ -234,3 +234,19 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   (clean June) SEMANTICALLY on the real inverted Test2 data — what synthetic data was previously needed
   for. Blocks B (pre-drop backup hard gate) and C (cross-server SWITCH-OUT+transfer wording) are doc/gate
   changes, not exercised by Phase 2/3. In-window critical path (Phase 2->3) under the final model: GREEN.
+- 2026-06-09 — Phase 6 rehearsed on Test2 (continuing the clean run). STEP 1 gate passed (simplified:
+  preload counts verified + *_old unchanged; "rows preserved" 4068/36218), *_old DROPPED. MCP-confirmed:
+  *_old gone, new tables intact (4068/36218). STEP 2 stepped shrink returned space (Stats file ~6 GB ->
+  ~928 MB, ~5 GB to OS); the no-progress guard fired correctly at the shrink-only limit (used*1.15) -
+  expected, not an error (on prod that's the cue to REBUILD remaining PRIMARY tables to lower the HWM).
+  STEP 3 fragmentation query listed the offenders. Whole irreversible PROD path (Phase 2->3->6) now
+  rehearsed end-to-end under the final model. NOTE: STEP 0 pre-drop backup is a manual op (not script
+  logic) - skipped on Test2 (externally backed up). Remaining staging: Phase 7 (archive on TESTVova),
+  Phase 8 dry-run; prod pre-flight: tempdb pre-size, compression/June-size measurements, pre-drop backup space.
+- 2026-06-09 — Phase 8 dry-run rehearsed on Test2 (`Rehearsal_Phase8_Test2.sql`: proc only, Agent job
+  omitted, Test2 path/64 MB). `usp_Fact_AddNextMonth` reads the new 4-partition scheme correctly:
+  @MonthsAhead=2 -> "buffer OK through 2026-08" (no-op, Aug buffer present); @MonthsAhead=3 -> printed the
+  full ADD path (ADD FILEGROUP/FILE + NEXT USED + emptiness check + SPLIT RANGE '2026-09-01'), no THROW
+  (rightmost Aug partition empty). MCP-confirmed @Debug=1 committed nothing (FG_2026_09 absent, PF still 3
+  boundaries, proc created). Staging rehearsal of the full PROD path (Phase 2->3->6->8) under the final
+  model is COMPLETE & green. Only Phase 7 (archive on TESTVova) remains — needs a restored-backup source.
