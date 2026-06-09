@@ -74,6 +74,12 @@ Cross-check found commits against intake. Findings:
 
 Update card Scope with audited commit list. See [commit-discovery.md](references/commit-discovery.md) for fallback strategies.
 
+**WC freshness check (do this before reading any changed file from disk).** After collecting the revisions, run `svn info --show-item revision` on the WC and compare against the lowest revision under review. If the WC is behind:
+1. Run `svn status`. If the WC is clean, **ask the user for permission** and `svn update` to HEAD; after that the disk is trustworthy — read files normally.
+2. If the WC is dirty, the user declines, or the review targets a pinned older revision — fall back: treat `svn diff -c` / `svn cat -r` as the sole source of truth, do NOT read the changed files from disk, and (Step 6) include this stale-WC warning plus the exact commands in the delegated agent's prompt.
+
+Why this matters: a stale WC silently shows pre-fix file state, which has twice caused a changed file to look absent/reverted (once propagated into a delegated agent as a false "fix not present" alarm).
+
 ### Step 2 — Diff reading
 
 `svn diff -c <rev>` for each commit. Read the DIFF, not the current file state.
@@ -100,6 +106,8 @@ Use `AskUserQuestion`:
 > 2. No — recon sufficient"
 
 Spawn the question even when recon found nothing. The question's purpose is to validate "absence-of-issues" claim from outside — clean-LGTM territory is the highest skip-risk for this step.
+
+**Stale-WC propagation (per Step 1 fallback):** if the WC was not updated (dirty / declined / pinned old rev), the delegated agent will read pre-fix disk state unless warned. Include in the agent prompt: an explicit warning that the WC is behind the reviewed revision, plus the exact `svn diff -c <rev>` and `svn cat -r <rev> <branch-URL>/<path>` commands to use as the source of truth instead of disk reads.
 
 ## Phase 3: Verification
 
