@@ -1,15 +1,16 @@
 # Knowledge Base
 
 ## Active Tasks
-| Task     | Project   | Topic               | Status        | Path                                                                    |
-|----------|-----------|---------------------|---------------|-------------------------------------------------------------------------|
-| FP-41845 | FP/server | fish-weight-gen-v2  | in-progress   | fishing-planet/tasks/FP-41845--weight-generation-v2/                    |
-| FP-41929 | FP/server | xbox-purchases      | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/                |
-| FP-43424 | FP/server | kb-mapping          | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/                       |
-| FP-41595 | FP/server | lbm-release-support | in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/            |
-| FP-43632 | FP/server | gc-migration        | in-progress   | fishing-planet/tasks/FP-43632--game-carrier-on-steam-ps-mobile-support/ |
-| FP-43625 | FP/server | matchmaking-maxwins | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
-| FP-32370 | FP/server | po-test-coverage    | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
+| Task     | Project   | Topic                     | Status        | Path                                                                    |
+|----------|-----------|---------------------------|---------------|-------------------------------------------------------------------------|
+| FP-41845 | FP/server | fish-weight-gen-v2        | in-progress   | fishing-planet/tasks/FP-41845--weight-generation-v2/                    |
+| FP-41929 | FP/server | xbox-purchases            | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/                |
+| FP-43424 | FP/server | kb-mapping                | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/                       |
+| FP-41595 | FP/server | lbm-release-support       | in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/            |
+| FP-43632 | FP/server | gc-migration              | in-progress   | fishing-planet/tasks/FP-43632--game-carrier-on-steam-ps-mobile-support/ |
+| FP-43625 | FP/server | matchmaking-maxwins       | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
+| FP-32370 | FP/server | po-test-coverage          | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
+| FP-44337 | FP/server | stats-tables-partitioning | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
 
 ## Active Reviews
 | Task     | Executor    | Path                                                                                       |
