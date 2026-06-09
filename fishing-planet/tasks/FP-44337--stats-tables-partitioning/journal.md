@@ -159,3 +159,42 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   adds, Phase 7 ARCHIVE_DATA FG) are variable+literal only -> valid. Lesson: N rounds of static LLM review != a
   parse/compile; actual execution is the validator. Also authored `Operator_Checklist.md` (step-by-step playbook
   over the scripts). Going forward: edit locally -> robocopy to `T:` -> devops re-run phase by phase.
+- 2026-06-09 — Staging prep + cross-server schema audit (DataGrip). Mapped envs: SQLSTAGING = full 3.2 TB
+  restored copy (Standard 15.0.2000.5, == prod); Test2 = `[F2P] TEST [2]` (Enterprise, live shared tester
+  `Stats`); TESTVova = `[F2P] SQL TESTVova` (archive stand-in for Phase 7). Compared `StatsFact`/`MissionsFact`
+  DDL fingerprints across PROD/STAGING/Test2/TESTVova: **all identical** (StatsFact 89 cols, MissionsFact 19),
+  no `*_old` leftovers -> confirmed Phase 2's hardcoded DDL matches prod (latent drift risk closed). **Found a
+  real prod bug the rehearsal alone would have missed:** the `Rank` DEFAULT is auto-named on PROD
+  (`DF__StatsFact__Rank__14B10FFA`), not the canonical `DF_StatsFact_Rank` (which Test2/staging/TESTVova have),
+  so Phase 2 Step 1's hardcoded `sp_rename 'DF_StatsFact_Rank'` would fail in the window. Fixed Phase 2 (canonical
+  + rehearsal copy) to resolve the default-constraint name dynamically from the catalog and rename whatever it is.
+  Pre-flight pre-run checks closed: tempdb on `Z:` (pre-size+MAXSIZE deferred to PROD), `farm` access is role-based
+  (no object grants), no job/proc references the tables (0 rows). Staging plan: run Phase 2 (rehearsal copy:
+  Test2 data path + 64 MB files) then Phase 3 (as-is) directly on Test2 `Stats` (backed up; restore after). NOTE:
+  Test2 tester data has ~21.5% EntityId<->Timestamp inversions (backdated test inserts) vs prod's monotonic order,
+  so this run validates runtime/parse/idempotency/NCI-build, NOT tail-load row-selection semantics (that needs the
+  monotonic synthetic `Rehearsal0_Setup_Test2.sql` run). Rehearsal scripts live in `staging-rehearsal/`.
+- 2026-06-09 — Test2 rehearsal of Phase 2 caught TWO real prod issues + drove a design change:
+  (1) `Rank` DEFAULT is auto-named on real PS prod (`DF__StatsFact__Rank__14B10FFA`), canonical on
+  Test2 -> Step 1 now resolves the default-constraint name dynamically. (2) **StatsFact column order
+  differs by platform**: `EntityId` is column **1** on PS/Steam/XB (2017 patch "PROD ENV recreate"
+  path) but column **58** on Mob/Nx/Test2 ("non-prod ALTER ADD" path via QA<-Xbox-QA lineage; root
+  cause traced to `SQL/Patches/UgcOld/2017.10.02-222.sql` which has both procedures). MissionsFact is
+  column-1 everywhere (not in that patch). My hardcoded CREATE TABLE assumed EntityId-first, so the
+  Phase 2 column-compare correctly flagged ~58 ordinal mismatches on Test2. **Direct ordinal query is
+  authoritative; my earlier CHECKSUM_AGG "fingerprint" falsely reported all 4 servers identical -
+  CHECKSUM_AGG is order-independent and masks reordering, do not use it for schema compare.** Verified
+  direct: PS prod (STATSGOLD\PSSTATS) & SQLSTAGING both EntityId@1 + same auto DF name -> SQLSTAGING is
+  a faithful restore, positional bcp (Phase 5) will line up. **Fix (user-approved): Phase 2 no longer
+  hardcodes the schema** - it `SELECT * INTO new FROM *_old WHERE 1=0` (exact order/types/identity),
+  then adds the clustered PK on the partition scheme (PAGE), `DBCC CHECKIDENT RESEED` above old max,
+  and re-adds the `Rank` default. One script now correct on every platform; positional bcp guaranteed
+  to align (new = structural clone of old). Applied to canonical Phase 2 + the Test2 rehearsal copy.
+- 2026-06-09 — Test2 rehearsal Phase 2->3 PASSED clean (re-run after the dynamic fix). MCP-verified:
+  column-compare 0 rows; new tables reproduce the real order (EntityId@58 == old on this box); clustered
+  PK CLUSTERED+PAGE, 3 partitions; tail loaded (Stats 104109, Missions 136509) all routed to P1 (P2/P3
+  empty buffers); NCIs partition-ALIGNED (on scheme) + PAGE; identity seeded exactly +1,000,000 above old
+  max; FP44337_TailLoadControl populated (old==new). Validates the in-window critical path runtime +
+  idempotency. NOT validated here (Test2 inversions / scope): tail row-selection semantics (-> synthetic
+  monotonic Rehearsal0 run), Phases 4/5/6/8, and P2/P3 RANGE RIGHT routing (no future-dated rows; cover by
+  a post-START insert micro-test). Test2 [Stats] is backed up -> restore to clean up.

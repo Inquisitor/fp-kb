@@ -1,5 +1,12 @@
 /* ============================================================================
-   FP-44337  Phase 2  |  SERVER: PS PROD (MSSQL15.PSSTATS)
+   FP-44337  Phase 2  |  *** REHEARSAL COPY for TEST2 (Enterprise 15.0.2000.5) ***
+   Identical to artifacts/Phase2_PROD_Swap.sql EXCEPT two rehearsal deltas:
+     - @DataPath -> the Test2 instance data dir (C:\...\MSSQL15.MSSQLSERVER2019\...).
+     - Partition files SIZE/FILEGROWTH 8192MB -> 64MB (Test2 C: has ~78 GB free and
+       the test data is tiny; do NOT carry these sizes back to prod).
+   Run directly on the tester-made Test2 [Stats] (backed up; restore after the run).
+   Everything else (logic, DDL, verification) is the prod script verbatim.
+   ----------------------------------------------------------------------------
    Structural swap during the maintenance window (DOWNTIME). Metadata only:
    rename old + create the new partitioned StatsFact & MissionsFact (clustered PK
    only). The aligned NCI is built in Phase 3 AFTER the tail load (faster than
@@ -34,11 +41,9 @@ IF OBJECT_ID('dbo.StatsFact') IS NOT NULL AND OBJECT_ID('dbo.StatsFact_old') IS 
 BEGIN
     EXEC sp_rename 'dbo.StatsFact', 'StatsFact_old';
     EXEC sp_rename 'PK_StatsFact',  'PK_StatsFact_old', 'OBJECT';
-    -- Rank DEFAULT: rename by its ACTUAL name. PROD has an auto-generated name
-    -- (e.g. DF__StatsFact__Rank__14B10FFA), NOT the canonical 'DF_StatsFact_Rank', so a
-    -- hardcoded rename would fail in the window. Look the constraint up on the now-renamed
-    -- table and rename whatever it is, so the new table's DF_StatsFact_Rank cannot collide.
-    -- (Verified 2026-06-09: PROD = DF__StatsFact__Rank__14B10FFA; staging/Test2/TESTVova = DF_StatsFact_Rank.)
+    -- Rank DEFAULT: rename by its ACTUAL name (prod auto-names it; some envs use the
+    -- canonical DF_StatsFact_Rank). Rename whatever it is so the new table's
+    -- DF_StatsFact_Rank cannot collide.
     DECLARE @dfRank SYSNAME = (
         SELECT dc.name FROM sys.default_constraints dc
         JOIN sys.columns c ON c.object_id = dc.parent_object_id AND c.column_id = dc.parent_column_id
@@ -67,7 +72,7 @@ GO
 -- SIZE 8 GB / GROWTH 8 GB is a starting point; before the window raise the CURRENT-month
 -- (2026_06) file SIZE to the measured compressed June-tail size to avoid autogrow churn.
 -- July/August stay small (they hold no rows until those months).
-DECLARE @DataPath NVARCHAR(260) = N'Z:\Microsoft SQL Server\MSSQL15.PSSTATS\MSSQL\DATA\';
+DECLARE @DataPath NVARCHAR(260) = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA\';
 DECLARE @db SYSNAME = DB_NAME();
 DECLARE @sql NVARCHAR(MAX);
 DECLARE @m TABLE (suffix CHAR(7));
@@ -83,7 +88,7 @@ BEGIN
         EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_StatsFact_' + @s + N'];');
         SET @sql = N'ALTER DATABASE [' + @db + N'] ADD FILE (NAME=N''StatsFact_' + @s + N''','
                  + N'FILENAME=N''' + @DataPath + N'StatsFact_' + @s + N'.ndf'','
-                 + N'SIZE=8192MB, FILEGROWTH=8192MB) TO FILEGROUP [FG_StatsFact_' + @s + N'];';
+                 + N'SIZE=64MB, FILEGROWTH=64MB) TO FILEGROUP [FG_StatsFact_' + @s + N'];';
         EXEC sp_executesql @sql;
     END
     FETCH NEXT FROM fg INTO @s;
@@ -109,19 +114,16 @@ SELECT @startFrom = CASE WHEN MAX(EntityId) > CAST(IDENT_CURRENT('dbo.StatsFact_
 FROM dbo.StatsFact_old WITH (NOLOCK);
 PRINT 'StatsFact IDENTITY start = ' + CAST(@startFrom AS VARCHAR(20));
 
--- Build the new partitioned table by STRUCTURE-COPYING the old one. SELECT INTO reproduces
--- the EXACT column order/types/nullability/identity, so it is immune to per-platform schema
--- drift (EntityId is column 1 on PS/Steam/XB but column 58 on Mob/Nx; verified 2026-06-09).
--- Then add the clustered PK on the partition scheme (PAGE -> partitions the empty table),
--- reseed identity above the old max, and re-create the Rank DEFAULT (SELECT INTO does not copy
--- constraints). Positional native bcp in Phases 4/5 is then guaranteed to line up, since the
--- new table is a structural clone of *_old.
-SELECT * INTO dbo.StatsFact FROM dbo.StatsFact_old WHERE 1 = 0;   -- heap, 0 rows; preserves identity/order/types/collation
+-- Build the new partitioned table by STRUCTURE-COPYING the old one (SELECT INTO reproduces
+-- the exact column order/types/nullability/identity -> immune to per-platform schema drift:
+-- EntityId is column 1 on PS/Steam/XB but column 58 on Mob/Nx & this Test2 box). Then add the
+-- clustered PK on the scheme (PAGE), reseed identity, re-create the Rank DEFAULT.
+SELECT * INTO dbo.StatsFact FROM dbo.StatsFact_old WHERE 1 = 0;
 ALTER TABLE dbo.StatsFact ADD CONSTRAINT PK_StatsFact
     PRIMARY KEY CLUSTERED (EntityId, [Timestamp])
     WITH (DATA_COMPRESSION = PAGE)
     ON ps_StatsFact_Timestamp([Timestamp]);
-DBCC CHECKIDENT('dbo.StatsFact', RESEED, @startFrom);             -- next ids ~1,000,000 above old max
+DBCC CHECKIDENT('dbo.StatsFact', RESEED, @startFrom);
 IF NOT EXISTS (SELECT 1 FROM sys.default_constraints
                WHERE name = 'DF_StatsFact_Rank' AND parent_object_id = OBJECT_ID('dbo.StatsFact'))
     ALTER TABLE dbo.StatsFact ADD CONSTRAINT DF_StatsFact_Rank DEFAULT (0) FOR [Rank];
@@ -156,7 +158,7 @@ IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = 'pf_MissionsFact_T
 GO
 
 -- Step 3 — filegroups + files: June, July, August (empty buffer).
-DECLARE @DataPath NVARCHAR(260) = N'Z:\Microsoft SQL Server\MSSQL15.PSSTATS\MSSQL\DATA\';
+DECLARE @DataPath NVARCHAR(260) = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA\';
 DECLARE @db SYSNAME = DB_NAME();
 DECLARE @sql NVARCHAR(MAX);
 DECLARE @m TABLE (suffix CHAR(7));
@@ -172,7 +174,7 @@ BEGIN
         EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_MissionsFact_' + @s + N'];');
         SET @sql = N'ALTER DATABASE [' + @db + N'] ADD FILE (NAME=N''MissionsFact_' + @s + N''','
                  + N'FILENAME=N''' + @DataPath + N'MissionsFact_' + @s + N'.ndf'','
-                 + N'SIZE=8192MB, FILEGROWTH=8192MB) TO FILEGROUP [FG_MissionsFact_' + @s + N'];';
+                 + N'SIZE=64MB, FILEGROWTH=64MB) TO FILEGROUP [FG_MissionsFact_' + @s + N'];';
         EXEC sp_executesql @sql;
     END
     FETCH NEXT FROM fg INTO @s;
@@ -196,9 +198,7 @@ SELECT @startFrom = CASE WHEN MAX(EntityId) > CAST(IDENT_CURRENT('dbo.MissionsFa
 FROM dbo.MissionsFact_old WITH (NOLOCK);
 PRINT 'MissionsFact IDENTITY start = ' + CAST(@startFrom AS VARCHAR(20));
 
--- Structure-copy from old (exact order/types/identity), then clustered PK on the scheme +
--- reseed. MissionsFact has no Rank default to recreate. (EntityId is column 1 here on all
--- platforms, but SELECT INTO makes that irrelevant - it reproduces whatever the live order is.)
+-- Structure-copy from old, clustered PK on scheme, reseed. No Rank default on MissionsFact.
 SELECT * INTO dbo.MissionsFact FROM dbo.MissionsFact_old WHERE 1 = 0;
 ALTER TABLE dbo.MissionsFact ADD CONSTRAINT PK_MissionsFact
     PRIMARY KEY CLUSTERED (EntityId, [Timestamp])

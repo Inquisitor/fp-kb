@@ -10,13 +10,14 @@ Scripts live next to this file. The master narrative is `Runbook_PS_Stats_Partit
 ---
 
 ## A. Pre-flight (days before — NOT in the window)
-- [ ] Confirm SQL Agent service is running on PROD (needed for Phase 8 later).
-- [ ] Confirm Instant File Initialization (perform-volume-maintenance-tasks) is granted to the SQL service account.
-- [ ] Confirm `Stats_log` is physically on `Z:` (else Phase 1 reclaim doesn't help the shrink headroom).
-- [ ] Confirm `tempdb` location (if on `Z:`, the Phase 3 NCI build + Phase 6 shrink contend for the same volume).
-- [ ] Confirm PROD and SQLSTAGING are the **same SQL major version** (native `bcp -n` is version-sensitive).
-- [ ] Confirm no object-level GRANTs on `dbo.StatsFact`/`MissionsFact` (app login is role member db_owner/db_datawriter → new tables inherit; nothing to carry over).
-- [ ] Confirm no job/proc references these tables by a hardcoded `*_old`-style or 3-part name.
+- [x] Confirm SQL Agent service is running on PROD (needed for Phase 8 later).
+- [x] Confirm Instant File Initialization (perform-volume-maintenance-tasks) is granted to the SQL service account.
+- [x] Confirm `Stats_log` is physically on `Z:` (else Phase 1 reclaim doesn't help the shrink headroom).
+- [x] Confirm `tempdb` location. **On `Z:`** (8 data files + log, all under `Z:\...\MSSQL15.PSSTATS\MSSQL\DATA\`); no other volume available. Not a blocker: our index builds run with `SORT_IN_TEMPDB OFF` (sort space comes from the `Stats` data files, not tempdb), so tempdb's load in the window is mainly incidental prod-query spills during the online Phase 4/6.
+- [ ] **Pre-size tempdb + cap `MAXSIZE` (before the window — needs an instance restart).** Current config is runaway-prone: each of the 8 data files is 8 MB initial, autogrow **+8 MB, no max** — on a near-full `Z:` a big spill could grow tempdb into the shrink headroom and derail Phase 6. Set a fixed initial `SIZE`, a larger `FILEGROWTH` (e.g. 512 MB, log 256 MB), and a per-file `MAXSIZE` so total tempdb cannot exceed its budget. The cap converts a silent "tempdb fills `Z:` → shrink/window derails" into a contained "a query fails with tempdb-full". Exact MB come from the staging `Z:`-budget measurement (compressed June-tail + NCI-build peak). Apply at the next planned restart **before** the window — the initial `SIZE` only takes effect on restart (`MAXSIZE`/growth apply live but won't shrink the file below its current runtime size). Per-file: `ALTER DATABASE tempdb MODIFY FILE (NAME=N'tempdev', SIZE=<N>MB, FILEGROWTH=512MB, MAXSIZE=<M>MB);` (repeat for `temp2..temp8` with the same N/M; `templog` separately).
+- [x] Confirm PROD and SQLSTAGING are the **same SQL major version** (native `bcp -n` is version-sensitive).
+- [x] Confirm no object-level GRANTs on `dbo.StatsFact`/`MissionsFact`. **Clean** — app login `farm` is a member of `db_datareader`+`db_datawriter`(+`db_ddladmin`), all DB-level roles → new tables inherit INSERT/SELECT automatically; `sys.database_permissions class=1` returned 0 rows, so nothing to carry over (no `GRANT` needed in Phase 2).
+- [x] Confirm no job/proc references these tables by a hardcoded `*_old`-style or 3-part name. **Clean** — searched `sys.sql_modules` + `sys.synonyms` across all online DBs and `msdb.dbo.sysjobsteps`: 0 rows. No DB-side consumer; the one `EntityId`-cursor reader (`FishingRateStatUpdateJob`) is app-side (not an Agent job), handled by the Phase 3 tail pre-load. (Cross-instance linked-server paths from Main remain a separate backlog item.)
 - [ ] Throwaway test on staging: `DATA_COMPRESSION=PAGE` on a partitioned table works on build 15.0.2000.5.
 - [ ] **Measure on staging:** compressed June-tail size + NCI-build peak (sort) space → confirm `Z:` headroom covers it; size the Phase-2 June file accordingly.
 - [ ] Confirm `>= 2` preserved copies exist: backup file on backup server **+** restored copy on SQLSTAGING; `RESTORE VERIFYONLY` + `DBCC CHECKDB` the SQLSTAGING copy.
@@ -29,14 +30,17 @@ Scripts live next to this file. The master narrative is `Runbook_PS_Stats_Partit
 |---------------------------------------------------------|------------------|--------------|-----------------------|
 | Backup point (cutoff)                                   | 2026-06-08 00:45 | (same)       | fixed                 |
 | `@tailFrom`                                             | 2026-06-01       | 2026-06-01   | fixed (do NOT narrow) |
-| IDENTITY seed (printed by Phase 2)                      |                  |              | Phase 2               |
-| MaxOldId (printed by Phase 3)                           |                  |              | Phase 3               |
+| IDENTITY seed (printed by Phase 2)                      | 1830751          | 1973685      | Phase 2 *(Test2)*     |
+| MaxOldId (printed by Phase 3)                           | 830751           | 973685       | Phase 3 *(Test2)*     |
 | **SQLSTAGING MAX(EntityId)** (one-shot, BEFORE Phase 5) |                  |              | Phase 4 STEP A        |
 | delta export-after id (= stagingMax − margin)           |                  |              | Phase 4               |
 | **SQLSTAGING COUNT_BIG(*)** (after Phase 5 import)      |                  |              | Phase 6 prep          |
 
 > The SQLSTAGING MAX is captured ONCE before Phase 5 and reused everywhere. Re-reading it after the
 > import moves the export floor forward and would skip rows.
+>
+> ⚠️ Values tagged *(Test2)* are from the staging rehearsal, NOT prod. **Clear this Ledger before the
+> real PROD run** — prod ids differ and must be re-captured live (Ledger is per-run, not portable).
 
 ---
 

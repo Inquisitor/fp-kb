@@ -28,7 +28,7 @@
 - [ ] Measure the real max IDENTITY-assignment gap under load (sizes the Phase 3/4 margins; gate (c) COUNT is the hard backstop regardless)
 - [ ] Commit to running Phase 6 (DROP + start shrink) the SAME maintenance day — not deferred (Z: exhaustion risk)
 - [ ] Rehearse the full Phase 2->3 sequence on staging INCLUDING a forced mid-load failure + idempotent re-run
-- [ ] Is `tempdb` on `Z:`? (the Phase 3 NCI build sort + Phase 6 shrink would then contend for the same near-full volume)
+- [x] Is `tempdb` on `Z:`? **YES** — 8 data files + log all on `Z:`, no other volume. Mitigation (pre-flight): pre-size + cap `MAXSIZE` so it can't grow into the shrink headroom; index builds use `SORT_IN_TEMPDB OFF` so the NCI sort hits the `Stats` data files, not tempdb. See Operator_Checklist pre-flight.
 - [ ] Confirm prod and SQLSTAGING are the SAME SQL Server major version (native `bcp -n` format is version-sensitive)
 - [ ] Confirm no job/proc references these tables by a hardcoded 3-part / `*_old`-style name that survives the rename (gate (b) assumes `*_old` is untouched after STOP)
 - [ ] Confirm whether `MissionsFact.[Message]` ever exceeds 255 chars (drives whether the Phase 5 SHA2_256 `msg_chk` is load-bearing)

@@ -164,7 +164,7 @@ model this is an **independent backstop and a prerequisite for the Phase 6 drop*
   is the complete copy of `*_old` — staging is a subset of `*_old`, so equal COUNTs ⟺ complete.)
 
 Then: `DROP TABLE *_old` (each its own statement; deferred-drop, fast) → `DBCC SHRINKFILE(N'Stats',
-TRUNCATEONLY)` (reclaims little — freed space is interior) → **stepped** `SHRINKFILE` (~200 GB/step,
+TRUNCATEONLY)` (reclaims little — freed space is interior) → **stepped** `SHRINKFILE` (~50 GB/step,
 target recomputed from `SpaceUsed*1.15` each step, `WAITFOR DELAY` between steps to spare live I/O).
 **Expect HOURS; run off-peak** — restartable, so step it. Then index maintenance on the remaining
 fragmented tables (Stmt, FishFact, …; bare `REBUILD` preserves their compression).
@@ -258,7 +258,7 @@ retention, and add aged-out-month archiving (`SWITCH OUT` + export + drop file).
 | Pre-tail history lives only in backup/staging until archive | Keep >= 2 copies; do not tear down the SQLSTAGING copy until Phase 7 is built                                                                                                                    |
 | Monthly SPLIT moves data (non-empty catch-all)              | 2-month empty buffer (Jul+Aug) + catch-up loop; proc **THROWs** if the split target isn't empty; alert on job failure                                                                            |
 | bcp native positional / column drift prod vs staging        | Staging = restored backup (same schema by construction) + col-count check + **mandatory value spot-check**; import via temp + NOT EXISTS dedup                                                   |
-| Shrink target wrong / multi-hour grind under live I/O       | Target `SpaceUsed*1.15` **recomputed each step**; stepped ~200 GB/step with `WAITFOR` throttle; off-peak, expect hours                                                                           |
+| Shrink target wrong / multi-hour grind under live I/O       | Target `SpaceUsed*1.15` **recomputed each step**; stepped ~50 GB/step with `WAITFOR` throttle; off-peak, expect hours                                                                            |
 | Delta boundary edge (in-flight txn at backup)               | Export by `MAX(EntityId)` on staging **minus margin** (superset); Phase 5 dedups via NOT EXISTS                                                                                                  |
 | Shrink fragments remaining tables                           | Phase 6 index maintenance (bare `REBUILD`, preserves compression)                                                                                                                                |
 | Schema drift new vs old                                     | Strict column-match verification at the end of `Phase2_PROD_Swap.sql` — must be 0                                                                                                                |
