@@ -19,6 +19,7 @@
 | FP-43705 | Yuriy Burda    | fishing-planet/review/FP-43705--bait-negative-values/                                   |
 | FP-43185 | Yevhenii Shust | fishing-planet/review/FP-43185--giveitem-inventoryitem-init/                            |
 | FP-43817 | Yevhenii Shust | fishing-planet/review/FP-43817--tournament-log-levels/                                   |
+| FP-43756 | Yevhenii Shust | fishing-planet/review/FP-43756--cancel-scheduled-competitions/                          |
 
 ## Active Confluence Work
 (none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
