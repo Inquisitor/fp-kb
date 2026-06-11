@@ -4,7 +4,7 @@
 
 ```yaml
 ---
-status: resolved | waiting-for-release | in-progress
+status: resolved | waiting-for-release | in-progress | reopened
 executor: <Commit author>          # point-in-time fact from SVN, stable
 branch: <source> @ r<rev>[, merged to <target> @ r<rev>]
 jira: <URL>                         # convenience link
@@ -19,6 +19,13 @@ Rules:
 - Include a field if it is (a) unique to KB — not in JIRA, or (b) a point-in-time fact about the artifact (review status, commit branch)
 - Do not include fields that live in JIRA and drift (assignee, epic, related, labels) — fetch via MCP on demand
 - `branch:` field is a strict contract — only `<source> @ r<rev>[, merged to <target> @ r<rev>]`. Do not stuff inheritance notes, parenthetical annotations, or other prose into it. Such facts belong in Investigation Journal.
+
+### `status` values
+
+- `in-progress` — review underway (card created, analysis/findings not yet finalized). Listed in Active Reviews.
+- `reopened` — review finished a round and the task was returned to the executor for rework (blocking rejection, or non-blocking cleanup while the change still ships). Stays listed in Active Reviews; closes via `jira-review-close` once the executor's next round lands and is verified.
+- `waiting-for-release` — verdict reached, but behavior needs post-deploy verification (logging/telemetry/race fixes). Stays listed in Active Reviews until verified.
+- `resolved` — review closed. Row removed from Active Reviews in `_index.md`.
 
 ## Required H1 heading
 
