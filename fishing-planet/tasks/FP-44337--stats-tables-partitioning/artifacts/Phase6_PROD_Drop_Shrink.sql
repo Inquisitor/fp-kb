@@ -11,10 +11,12 @@
            This is STEP 0 below and is a HARD gate. (The older ~2026-06-08 backup also still exists.)
        (b) the Phase 3 preload is verified complete AND *_old is unchanged since Phase 3
            (both enforced programmatically in STEP 1).
-   WHY {backup} U {new June tail} is gap-free: @tailFrom (2026-06-01) <= the backup point, and
-   EntityId is monotonic with Timestamp on prod, so every *_old row is either < June 1 (in the
-   backup -> archive) or >= June 1 (in the new June partition, count-verified by Phase 3). The
-   Jun-1..backup overlap is in both; no gap. The fresh pre-drop backup (a) makes the irreversible
+   WHY {backup} U {new June tail} is gap-free, BY TIMESTAMP (not EntityId order): Phase 3 loads every
+   *_old row with Timestamp >= 2026-06-01 into the new June partition (count-verified), and the backup
+   (point ~2026-06-08) holds everything with Timestamp < 2026-06-01. Every *_old row is in one or both;
+   the Jun-1..backup overlap is in both, no gap. EntityId is only COARSELY monotonic with Timestamp on
+   prod (FP-43469 measured ~21.6% row-level skew, 1-2 id interleave at date boundaries) - the Phase 3
+   100k-id scan-floor margin absorbs that, and it does NOT affect this guarantee. The fresh pre-drop backup (a) makes the irreversible
    DROP bulletproof even against an undetected id/time-skew edge — *_old is captured in full first.
    There is NO "complete SQLSTAGING copy" gate; the former Phase 4/5 delta-to-staging was redundant
    and has been removed.

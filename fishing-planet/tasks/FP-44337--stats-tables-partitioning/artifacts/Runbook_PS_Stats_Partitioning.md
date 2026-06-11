@@ -33,8 +33,10 @@ in run order. Raw DevOps drafts are kept under `original-plan/` for reference.
 
 > The only irreversible step is the DROP in Phase 6. Its gate is *preservation verified*: full backup
 > restorable & retained (>= 2 copies) **+** Phase 3 preload count-verified **+** `*_old` unchanged since
-> Phase 3. Preservation = **{backup} U {new June tail}** — gap-free because `@tailFrom` (2026-06-01) <=
-> the backup point and EntityId is monotonic with Timestamp on prod. No separate "complete SQLSTAGING
+> Phase 3. Preservation = **{backup} U {new June tail}** — gap-free **by Timestamp**: Phase 3 loads all
+> `Timestamp >= 2026-06-01` and the backup (point ~2026-06-08) holds all `< 2026-06-01`. Not dependent on
+> EntityId order (only coarsely monotonic on prod — FP-43469: ~21.6% row-level skew, 1-2 id boundary
+> interleave — absorbed by the Phase 3 100k-id margin). No separate "complete SQLSTAGING
 > copy" is required: the prod tail already holds the post-backup rows, so the former Phase 4/5
 > delta-to-staging was redundant and is removed. Phase 7 (analyst archive on SQLARCHIVE) does **not**
 > block prod — build it later from the backup. **After the drop + shrink, take a fresh full backup** so
@@ -53,7 +55,7 @@ in run order. Raw DevOps drafts are kept under `original-plan/` for reference.
 | Free on `Z:` volume      | **~62.4 GB** (critical)                                                                         |
 | `StatsFact`              | 1728 GB, ~5.80 B rows, clustered PK on `EntityId` (bigint IDENTITY), no secondary indexes       |
 | `MissionsFact`           | 829 GB, ~1.99 B rows, clustered PK on `EntityId`, no secondary indexes                          |
-| `EntityId` ↔ `Timestamp` | monotonic non-decreasing (id 10B→2024-09, 12.0B→2026-01, max→2026-06-08)                        |
+| `EntityId` ↔ `Timestamp` | **coarsely** monotonic (id 10B→2024-09, 12.0B→2026-01); fine skew per FP-43469: ~21.6% row-level, 1-2 id interleave at date boundaries (absorbed by Phase 3 Timestamp filter + 100k margin) |
 | Full backup              | Today's full backup (2026-06-08 ~00:45): file on the backup server + **restored on SQLSTAGING** |
 
 **Key facts driving the plan:**
@@ -146,8 +148,9 @@ If the log refuses to shrink, check `log_reuse_wait_desc` in `sys.databases` and
 
 The former delta-to-SQLSTAGING sync was **redundant** and is removed. Reason: Phase 3 loads the June
 tail (from `@tailFrom` = 2026-06-01) into the new prod table, so the **post-backup rows are already
-preserved on prod**. With `@tailFrom` <= the backup point and EntityId monotonic with Timestamp,
-**{backup} ∪ {new June tail}** already covers every `*_old` row gap-free. The SQLSTAGING delta only
+preserved on prod**. The cut is **by Timestamp** (Phase 3 loads `>= 2026-06-01`) and the backup holds
+`< 2026-06-01`, so **{backup} ∪ {new June tail}** covers every `*_old` row gap-free — independent of
+EntityId order (coarsely monotonic only; the 100k-id margin absorbs the fine skew). The SQLSTAGING delta only
 duplicated the post-backup rows. (Independent off-prod copy of those rows is restored by the
 post-cutover full backup — see Phase 6.) This also removes the only `bcp` step in the plan.
 

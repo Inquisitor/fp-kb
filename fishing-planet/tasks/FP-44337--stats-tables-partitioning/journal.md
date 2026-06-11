@@ -250,3 +250,15 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   (rightmost Aug partition empty). MCP-confirmed @Debug=1 committed nothing (FG_2026_09 absent, PF still 3
   boundaries, proc created). Staging rehearsal of the full PROD path (Phase 2->3->6->8) under the final
   model is COMPLETE & green. Only Phase 7 (archive on TESTVova) remains — needs a restored-backup source.
+- 2026-06-11 — Cross-checked FP-43469 review (its F-1 empirically measured StatsFact on Steam PROD):
+  EntityId is only COARSELY monotonic with Timestamp - ~21.6% row-level inversions (max ~41 min backward),
+  and at DATE boundaries usually-clean but interleaves by 1-2 ids (q50 +1, q75 +2). Impact on FP-44337:
+  NONE on the design — (1) partition routing is by Timestamp, not EntityId, so unaffected; (2) Phase 3
+  tail-load is robust via the Timestamp >= 2026-06-01 filter (Block A) + the 100k-id scan-floor margin
+  (~50,000x the observed 1-2 id boundary interleave); (3) the gap-free drop argument is by Timestamp +
+  backup completeness, NOT id-monotonicity. Also: we are immune to F-1's actual bug (PK collision from
+  GROUP BY date into a strict-PK temp) — Phase 3 copies rows 1:1 via IDENTITY_INSERT into a Timestamp-
+  partitioned table, no date aggregation. ACTION TAKEN: tightened the "EntityId monotonic" wording in
+  Phase 6 + Runbook (3 spots) to "coarsely monotonic; fine skew absorbed by Timestamp filter + 100k margin"
+  so the justification matches the prod measurements. PENDING: re-measure the id interleave at the actual
+  2026-06-01 boundary on PS prod (MCP/DataGrip was disconnected this session) as a final margin sanity.
