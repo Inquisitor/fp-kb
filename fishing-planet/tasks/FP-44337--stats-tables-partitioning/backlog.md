@@ -32,14 +32,14 @@
 - [x] Confirm no job/proc references these tables by a hardcoded 3-part / `*_old`-style name (gate (b) assumes `*_old` is untouched after STOP) — 0 rows
 - [ ] Confirm `DATA_COMPRESSION=PAGE` on a partitioned table works on build 15.0.2000.5 (cheap throwaway test) + measure compressed month size
 
-## Execution (PS)
-- [ ] Phase 1: shrink `Stats_log` (~+314 GB)
-- [ ] Phase 2: rename + create partitioned tables (path/file-size/IDENTITY fixes baked in)
-- [ ] Phase 3: pre-load June tail (records control counts), then START PROD
+## Execution (PS) — cutover done 2026-06-12..14
+- [x] Phase 1: shrink `Stats_log` (freed ~290 GB; Z: 62 -> ~352)
+- [x] Phase 2: rename + create partitioned tables (4-partition + catch-all, dynamic clone); column-compare 0
+- [x] Phase 3: tail load (StatsFact 58,057,797 / MissionsFact 24,811,278, clean June in P2), then START PROD
 - ~~Phase 4: delta bcp out~~ / ~~Phase 5: delta bcp in~~ — **REMOVED** (redundant; preservation = {backup} U {June tail})
-- [ ] Phase 6: gated drop (gate = backup + Phase 3 tail verified + `*_old` unchanged) + **stepped `SHRINKFILE` off-peak grind** + index maintenance, then a **fresh full backup**
-- [ ] Phase 7 (deferrable): build partitioned archive on SQLARCHIVE
-- [ ] Phase 8: enable monthly sliding-window Agent job
+- [~] Phase 6: pre-drop backup + gate + DROP done; stepped shrink done (Stats 3205.6 GB -> ~740 GB, Z: -> ~2.67 TB). **PENDING: STEP 3 index REBUILD of fragmented remaining tables (in an upcoming maintenance downtime) + post-shrink baseline backup**
+- [ ] Phase 7 (deferrable): build partitioned archive on SQLARCHIVE (TESTVova) from a restored backup, `< 2026-06-01`
+- [ ] Phase 8: enable monthly sliding-window Agent job (proc dry-run validated on Test2)
 
 ## Follow-ups (after PS stabilized)
 - [ ] Decide whether to rewrite `FishingRateStatUpdateJob` cursor to `Timestamp` (or keep EntityId seek)

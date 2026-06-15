@@ -262,3 +262,18 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   Phase 6 + Runbook (3 spots) to "coarsely monotonic; fine skew absorbed by Timestamp filter + 100k margin"
   so the justification matches the prod measurements. PENDING: re-measure the id interleave at the actual
   2026-06-01 boundary on PS prod (MCP/DataGrip was disconnected this session) as a final margin sanity.
+- 2026-06-12..14 — **PS PROD CUTOVER EXECUTED.** Phase 1 log shrink freed ~290 GB (Z: 62 -> ~352).
+  In-window: tempdb MAXSIZE capped LIVE (no restart; ~118 GB ceiling) instead of the deferred pre-size.
+  Phase 2 swap (4-partition + catch-all, dynamic clone) + Phase 3 tail load -> StatsFact 58,057,797 /
+  MissionsFact 24,811,278 rows, ALL in P2 (June); catch-all/July/Aug = 0 (clean June via the Timestamp
+  filter even on real-prod id skew); OldCount==NewCount verified; IDENTITY seeds 12,642,058,222 /
+  2,811,230,981 (MaxOldId 12,641,058,222 / 2,810,230,981). START PROD. Pre-drop full backup (contains
+  *_old) + RESTORE VERIFYONLY WITH CHECKSUM passed. Phase 6 STEP 1 gate passed (preload verified, *_old
+  unchanged) -> *_old DROPPED; deferred-drop freed ~2.5 TB in-file over minutes (used 3190 -> 637 GB).
+  STEP 2 stepped shrink (off-peak, 12->14 Jun): Stats file 3205.6 GB -> ~740 GB, exited via CLEAN target
+  BREAK (no-progress guard NOT triggered; no rebuild-resume iteration needed). **Z: free 62 GB -> ~2.67 TB.**
+  The disk crisis is resolved. REMAINING: STEP 3 index REBUILD of the fragmented remaining (non-partitioned)
+  tables - planned for an upcoming maintenance DOWNTIME (offline rebuild on Standard, ideal in a window);
+  + a post-shrink baseline full backup; + optional DROP of FP44337_TailLoadControl. Phase 7 archive
+  (TESTVova) still deferred. New fact tables are freshly built - they do NOT need rebuilding (STEP 3 is
+  remaining tables only).
