@@ -58,7 +58,7 @@ This is a regression introduced by **FP-43576 r16119** (Yevhenii Shust, 2026-05-
 - Independently corroborated by a code-reviewer agent (same conclusion).
 - **Severity downgrade Medium -> Low after tracing the mitigations:** (a) `GetProfile` normalizes `LanguageId == 0 -> DefaultLanguageId` on load (ProfileAdapter line 830), so no permanent `0` in displayed data; (b) own-profile load always runs with `translateProfile: true`, so stale stored strings self-heal on read; (c) the dominant language-change path is the direct `SetAddProps(platformId, languageId, ...)` calls in `GameClientPeer:2553` / `MasterClientPeer:1107` (real language from the request, guard works), NOT this `UpdateProfile` branch — so the broken force is largely latent. Worst realistic effect: a language change routed through `UpdateProfile` would not stick (saved 0 -> reverts to Default on reload). Contrast: the registration site (ProfileAdapter:307-310) uses the same idiom CORRECTLY — zeroes one object's field but passes a *different* object's real language as the arg.
 
-**Resolution:** Pre-existing — out of scope for r16165. Route to module backlog; recommend a separate Low-priority ticket. Trivial fix: capture the target language before zeroing and pass it (as the registration site does).
+**Resolution:** `Filed → FP-44378` (Story, Low, epic "Technical Debt - 2026 Q2", relates to FP-44341 + FP-43576). Pre-existing — out of scope for r16165. Trivial fix: capture the target language before zeroing and pass it (as the registration site does).
 
 **Discovered by:** skill recon; corroborated by code-reviewer agent
 
@@ -66,12 +66,13 @@ This is a regression introduced by **FP-43576 r16119** (Yevhenii Shust, 2026-05-
 
 **APPROVE r16165 + r16166.**
 
-The fix is correct, minimal, and complete for FP-44341: dropping the language guard in `ObfuscateOtherPlayerProfile` makes the populate step run unconditionally, rebuilding the non-persisted `RodSetup.Items` (DB-verified: persistence stores only `RodSetup.ItemIDs`) that the same-language case was dropping. The rename is consistent across all 4 call sites (no stale references, compiles), the affected read path is the only other-player profile path, and there is no correctness regression from always running translate+populate on a transient, already-filtered profile object (idempotent, no persistence, no shared-state mutation). F-1 accepted as-is. F-2 is a genuine but pre-existing, out-of-scope defect to be filed separately.
+The fix is correct, minimal, and complete for FP-44341: dropping the language guard in `ObfuscateOtherPlayerProfile` makes the populate step run unconditionally, rebuilding the non-persisted `RodSetup.Items` (DB-verified: persistence stores only `RodSetup.ItemIDs`) that the same-language case was dropping. The rename is consistent across all 4 call sites (no stale references, compiles), the affected read path is the only other-player profile path, and there is no correctness regression from always running translate+populate on a transient, already-filtered profile object (idempotent, no persistence, no shared-state mutation). F-1 accepted as-is. F-2 is a genuine but pre-existing, out-of-scope defect, filed as FP-44378.
 
 ## Investigation Journal
 
 - Phase 1 intake: executor field populated (Yuriy Burda), commits taken from JIRA comment at face value.
 - Phase 2 VCS audit: confirmed MFT r16165 (`svn log | grep`) and NPN20260602 r16166 (merge of r16165). Matches JIRA exactly; no executor-quality discrepancy.
 - WC at r16168 >= reviewed r16165 — disk reflects post-fix state; diff read via `svn diff -c 16165`.
-- Verified `TranslateAndPopulateProfile` populates Doll/Hands item config props -> confirms root cause.
 - Grepped all `TranslateProfile`/`TranslateAndPopulateProfile` refs: all 4 sites renamed, no stale references -> compiles.
+- Root-cause mechanism corrected mid-review after user challenge ("profile is stored already-translated, not raw"): initial "item config not persisted" hypothesis (skill recon + code-reviewer agent) was DB-refuted — stored Doll items carry full config (`Asset`/`DollThumbnailBID`/etc.). The true populate-only output is `RodSetup.Items` (persistence stores only `ItemIDs`), verified via `Main.dbo.Profiles` reads (`UserId 1ac2b37e…` complete item; `4acec0a2…` rod setup with `ItemIDs` only). Logged to [[review-process-observations]] + [[verify-persistence-before-translation-only-claim]].
+- F-2 filed as FP-44378 (Story / Low / epic Technical Debt 2026 Q2), linked relates-to FP-44341 + FP-43576.
