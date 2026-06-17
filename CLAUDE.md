@@ -89,7 +89,7 @@ Active items in `_index.md` cover current in-flight work. Backlog items cover ev
 
 ### Tasks
 - Task artifacts: `tasks/FP-XXXXX--slug/artifacts/`
-- Task journals: `tasks/FP-XXXXX--slug/journal.md` — structure top-to-bottom: YAML frontmatter → Status (1-3 sentences) → Summary → Plan (link or inline) → Milestones (append-only, bottom)
+- Task journals: `tasks/FP-XXXXX--slug/journal.md` — frontmatter fields: `jira`, `title`, `status`, `executor`, `created`, `type` (JIRA issue type: bug/story/epic/proposal) (+ optional `platforms`). Structure top-to-bottom: frontmatter → Status (1-3 sentences) → Summary → (optional Design decisions) → Plan / artifacts (link or inline) → Milestones (append-only, bottom)
 - Task backlogs: `tasks/FP-XXXXX--slug/backlog.md` — immediate TODOs, deferred items; bubble up to module on task close
 - Subtask files: `artifacts/archived/subtasks/<jira-task-id>--<subtask-id>--<slug>.md` (e.g. `FP-41746--TRM-003--db-rename.md`)
 - Temporary work products (audits, investigations) live under `tasks/`, not in `modules/`
@@ -106,17 +106,14 @@ Active items in `_index.md` cover current in-flight work. Backlog items cover ev
   3. Dependencies (`→` consumes, `←` consumed by, `~` shared types)
   4. Deep Dives (links to permanent docs in same folder)
   5. Related Tasks
-- Module card frontmatter: minimum required fields:
+- Module card frontmatter: minimal — just the module slug:
   ```yaml
   ---
-  name: <module-name>
-  system: <system-name>       # scalar; one system per module. Cross-cutting handled via dependencies, not multi-membership
-  code_paths:
-    - <path/to/code/>
-    - <another/path/>
+  module: <module-name>
+  system: <system-name>       # optional; scalar; one system per module. Cross-cutting handled via dependencies, not multi-membership
   ---
   ```
-  Additional fields (`db_tables`, `caches`, `external_deps`, `tests`) only when a concrete cross-module query use case justifies them — do not add preemptively
+  Optional fields only when actually useful: `status: stub` (incomplete cards), `system: <system-name>` (scalar; one system per module, cross-cutting handled via dependencies). Do not add `code_paths`/`db_tables`/`caches`/etc. preemptively — code paths belong in the body (Entry Points), and the rest only when a concrete cross-module query use case justifies them
 - Module cards: 25-35 lines target, never exceed 40. If overflowing — extract into deep dive
 - Deep dives: permanent reference docs in module folder, no line limit
 - Module decision logs: `modules/<name>/log.md` — decisions with rationale + lessons learned. Prefix findings (unverified observations) with `Finding:` to distinguish from decisions. Unverified findings → card gets *(UNVERIFIED)* annotation, backlog gets verify item
