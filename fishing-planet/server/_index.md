@@ -31,9 +31,11 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 
 ## Operations & Admin
 - [web-admin](modules/web-admin/_card.md) — ASP.NET MVC admin panel; **umbrella stub** with patterns, gotchas, deep-dive: [embedded-vue-pattern.md](modules/web-admin/embedded-vue-pattern.md) (Vue 3 + TS island for new tools). Per-controller sub-modules TBD (FP-43424 Pass 2/3).
+- [data-editing](modules/data-editing/_card.md) — admin table-edit + DataChanges commit-log (audit / replay / restore); read-only-join leak gotcha
 
 ## Monetization
 - [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
+- [local-shop](modules/local-shop/_card.md) — per-pond item shop; LocalShop stores only Price (level/rarity/currency from InventoryItems); Premium ×1.0 / Common ×1.5; pond 119 (FTUE) ×1.0
 
 ## Configuration & Deployment
 - [configuration](modules/configuration/_card.md) — per-env / per-component server config; `Source` platform-list semantics, deployment topology, prod reference matrix, canonical `Source` rules
