@@ -73,6 +73,10 @@ If neither signals match nor user explicitly requests post-release verification 
    - Close and file new task — different issue surfaced during verification
 5. Execute the chosen action through the rest of this skill
 
+### Step 2b — Release-step field gate (mandatory; approve path)
+
+On `approve` / `approve-with-waiting-for-release`, apply the gate from [`<kb>/reference/release_checklist_field.md`](../../../reference/release_checklist_field.md) -> "Closure / review gate", using the reviewed diff (or `svn diff --summarize` on the carded revs) to derive the required options. If `customfield_11323` misses any, convey the release impact concretely and drive the field to set (propose value + set via `editJiraIssue` on approval, or have the executor/user set it) **before posting the verdict comment (Step 5)**. The only bypass is an explicit user waiver with a stated reason. On `reject`, skip.
+
 ### Step 3 — Cross-branch merge (only if approve)
 
 Look up [`<kb>/_index.md`](../../../_index.md) → Branch Roles for current role assignments. Per [`<kb>/CLAUDE.md`](../../../CLAUDE.md) → Branch Roles, merge direction is `OldStable → Stable → Content → Code` — each level merges into all levels above it. Determine the target list from the source branch role:

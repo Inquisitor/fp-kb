@@ -1,6 +1,6 @@
 ---
 name: Server Release Checklist Steps field
-description: customfield_11323 = "Server Release Checklist Steps" (multi-select) in FP — vocabulary of release actions, option->template-step mapping, the SQL-sweep blind-zone cross-check, the env-var/A/B-test rollout audit method, and a release-mechanics cheat-sheet (DataPump denylist, profile conversions, env-var create-vs-enable, destructive regenerate)
+description: customfield_11323 = "Server Release Checklist Steps" (multi-select) in FP — vocabulary of release actions, option->template-step mapping, the SQL-sweep blind-zone cross-check, the env-var/A/B-test rollout audit method, the mandatory closure/review field gate, and a release-mechanics cheat-sheet (DataPump denylist, profile conversions, env-var create-vs-enable, destructive regenerate)
 type: reference
 ---
 JIRA field that tags a task with the release actions it requires. It is the canonical vocabulary of
@@ -116,6 +116,52 @@ dotted prefix from the DB key — `Prefix.Name` resolves to code-side `Name`, so
 `Name` collide on the same lookup. A name with **two or more dots throws** (`InvalidOperationException`)
 at cache load (`EnvironmentVariableCache.RemovePrefix` / `GlobalVariablesCache.RemovePrefix`). Keep DB
 variable names to at most one dot.
+
+## Closure / review gate (mandatory)
+
+When closing a task (`kb-close-task`) or finalizing an approving review (`jira-review-close`), the
+agent is responsible for ensuring release-relevant work is tagged -- not merely flagging it. The
+SQL-sweep at release time is a backstop, not a substitute: an untagged task is a release-day miss.
+
+1. Derive the required options from the change's commits (the reviewed diff for review; `svn log` /
+   `svn diff --summarize` on the task's revs for close):
+   - `SQL/Patches/**`            -> DB Migrations
+   - `SQL/Releases/**`           -> Custom DB scripts
+   - `NoSql/**`                  -> NoSQL scripts
+   - patch tagged `[EnvironmentVariables]` -> candidate Environment Variables (creation-in-default is
+     only a DB Migration; an enable/disable decision is the EV tag -- user decides)
+   - patch tagged `[ABTests]`    -> candidate A/B Tests (same: user decides)
+   - profile-conversion code / `dbo.ProfileConversions` row -> Online Profile Conversion
+     (or Offline for a copy-table conversion)
+   - WebHooks project -> Webhooks Service; Twitch project -> Twitch Service
+   - content rows for QA->PROD   -> DataPump
+   - a resolved / waiting-for-release post-release action -> Post-Release Checks
+2. Read `customfield_11323` explicitly (custom fields are dropped by the default view).
+3. If the field misses any derived option, this BLOCKS closure. The agent must:
+   - Convey the release impact concretely: name the artifact (patch / script / value / service), what
+     runs at release (auto SQLCheck / manual script / hand-set value / service deploy), and which
+     option is missing.
+   - Drive it to set:
+     - Mechanical options (DB Migrations, NoSQL scripts, Custom DB scripts, Webhooks/Twitch Service,
+       Profile Conversion, DataPump): propose the exact value; on user approval set it via
+       `editJiraIssue` (`customfield_11323` = array of option ids below) and verify, or have the user
+       set it.
+     - Judgment options (Environment Variables, A/B Tests, Post-Release Checks, Server Configuration):
+       present the candidate; the agent cannot decide enable/scope -- require the user's explicit
+       confirmation before it goes in.
+   - The only way past an unset field is an explicit user waiver with a stated reason (recorded in the
+     close / review).
+4. Mandatory, not advisory. Closure is not complete until the field reflects the change's release
+   steps or the user has explicitly waived.
+
+Why here and not in `jira-review-open`: open finalizes nothing (it drafts a local verdict, writes no
+JIRA, runs no merge), so an enforcing gate there would block a consequence-free step. The gate sits at
+the points of consequence -- the JIRA post / merge (close) and the task resolve (kb-close-task).
+
+Option IDs (for `editJiraIssue` `customfield_11323`): DB Migrations `10526`, Environment Variables
+`10527`, A/B Tests `10528`, Custom DB scripts `10529`, DataPump `10530`, NoSQL scripts `10531`,
+Post-Release Checks `10532`, Offline Profile Conversion `10533`, Online Profile Conversion `10534`,
+Webhooks Service `10535`, Twitch Service `10536`, Server Configuration `10559`.
 
 ## Related
 

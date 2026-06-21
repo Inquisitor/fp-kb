@@ -64,9 +64,9 @@ Close KB task `$ARGUMENTS` — finalize the last milestone, clean up all referen
 - If MEMORY.md has a Current Focus / Active Tasks section that names this task, mark it closed or remove the entry.
 - Skip if MEMORY.md has no such section (e.g. it is a pure memory index) — do not invent one.
 
-### 9. JIRA reminder
-- Extract task key from the slug (everything before the first `--`)
-- Remind user to transition the task to Resolved, including the key and `jira:` URL from journal frontmatter
+### 9. JIRA closure actions
+- **Release-step field gate (mandatory)** — apply the gate from `D:\kb\reference\release_checklist_field.md` -> "Closure / review gate". Derive the required `Server Release Checklist Steps` options from the task's commits (`svn log` / `svn diff --summarize` on its revs), read `customfield_11323`, and if it misses any: convey the release impact concretely and drive the field to set (propose value + set via `editJiraIssue` on user approval, or have the user set it). The close is NOT complete until the field reflects the change or the user explicitly waives with a stated reason.
+- **Transition reminder** — extract the task key (everything before the first `--`); remind the user to transition the task to Resolved, including the key and `jira:` URL from journal frontmatter.
 
 ### 10. Commit KB changes
 - Run `git -C D:\kb status` to see what changed.
