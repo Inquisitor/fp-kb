@@ -4,7 +4,7 @@ title: Partition StatsFact/MissionsFact and reclaim disk space
 status: in-progress
 executor: Stanislav Samoilov
 created: 2026-06-08
-type: project
+type: story
 platforms: [PS, Steam, XB, MOB, NX]
 ---
 
