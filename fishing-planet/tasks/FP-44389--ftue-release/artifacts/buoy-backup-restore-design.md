@@ -25,46 +25,40 @@ recomputable from `LastRecolorPricing`) are the complete set the conversion touc
 (not in `ProfileJson`, not pond-keyed) and capacity fields (`BoughtBuoyCapacity` etc.) are global and
 untouched — both correctly out of scope.
 
-## Two artifacts per stream
+## Artifacts: one set per pond, per stream
 
-Streams are separate DBs (Steam/PS/XB/MOB/NX); UserIds are per-stream. Run once per stream ->
-five file pairs. Base name shared so the pair is obvious: `buoys_<stream>_<yyyymmdd>.*`.
+Streams are separate DBs (Steam/PS/XB/MOB/NX); UserIds are per-stream. A single `--export-buoys` run
+makes ONE pass over the stream's DB and writes **one set per pond** — ponds differ in value (some pure
+historical backup, some may be restored immediately), so each is a self-contained, independently-
+restorable set; adding another pond later yields a homogeneous set. Per pond:
+`buoys_<stream>_<PondName>_<date>.{jsonl,csv,meta.json}`.
 
-### 1) JSONL payload — `buoys_<stream>_<yyyymmdd>.jsonl`
-One line per player that has any buoy on the 3 ponds; arrays/dicts serialized with
+### 1) JSONL payload — `buoys_<stream>_<PondName>_<date>.jsonl`
+One line per player that has any buoy on **that pond**; arrays/dicts serialized with
 `SerializationHelper.JsonSkipInventorySerializerSettings` — the same settings the live profile writer
 uses in `GetDtoOutOfProfile`, so the dump matches the on-disk shape and drops straight back into
 `Profile.*` on restore. (Plain `JsonSerializerSettings` also round-trips but emits `BuoySetting` noise:
 `Update`/`Tracking` have no `[JsonIgnore]` on the class; the skip resolver drops them.)
 ```json
-{"UserId":"<guid>","Buoys":[{…BuoySetting…}],"NavBuoys":[{…}],"BuoyShareRequests":[{…}],"BuoyRecolorCount":{"119":2},"FreeBuoyRecolorCount":{"150":1}}
+{"UserId":"<guid>","Buoys":[{…BuoySetting…}],"NavBuoys":[{…}],"BuoyShareRequests":[{…}],"BuoyRecolorCount":{"119":2},"FreeBuoyRecolorCount":{"119":1}}
 ```
-Fragments filtered to `PondId in (119,150,160)`; recolor dicts filtered to those keys. Players with
-nothing on these ponds are skipped (no line). Sidecar `buoys_<stream>_<yyyymmdd>.meta.json`:
-stream, extracted-UTC, source server/rev, `pondIds`, schema version, totals, and the buoy-recolor
-prices (`BuoyRecolorPriceGc` / `BuoyRecolorPricePremiumRatio`) read from the backup's `GlobalVariables`
-(or the code defaults `2` / `0.5` if there's no explicit row — so a faithful GC recompute stays possible)
-— keeps the JSONL homogeneous (every line is a user record).
+Fragments filtered to the file's single pond; recolor dicts filtered to that key. Players with nothing
+on that pond are skipped (no line). Per-pond sidecar `buoys_<stream>_<PondName>_<date>.meta.json`:
+stream, `pondId`, `pondName`, extracted-UTC, source server, schema version, totals (users, marker buoys),
+and the buoy-recolor prices (`BuoyRecolorPriceGc` / `BuoyRecolorPricePremiumRatio`) read from the backup's
+`GlobalVariables` (or code defaults `2` / `0.5` if no explicit row — so a faithful GC recompute stays
+possible). The meta is written last, only on success → its absence = that pond's run is incomplete.
 
-### 2) CSV index — `buoys_<stream>_<yyyymmdd>.csv`
-Long format, one row per (user × pond) with counts; a human-readable index and the source for the
-import temp table:
+### 2) CSV index — `buoys_<stream>_<PondName>_<date>.csv`
+The pond's index — one row per user on that pond; human-readable + the source for the import temp table:
 ```
 UserId,PondId,PondName,MarkerBuoys,NavBuoys,ShareRequests
 3fa8…,119,LoneStar,4,1,0
-3fa8…,150,LesniVila,2,0,1
+9bc1…,119,LoneStar,2,0,1
 ```
-- `PondName` from `SharedConsts` (`LoneStar` / `LesniVila` / `Zeekanaal`) for readability; `PondId`
-  stays for machine use.
-- per-pond counts let support say "you had N buoys on Lone Star" and let ops pick opt-in by threshold.
-- long > wide (`UserId,PondLoneStar,…`): survives a changed pond set, keeps marker/nav/share breakdown.
-
-**The visitor's temp table needs UNIQUE UserId.** The CSV is per (user × pond) -> duplicate UserIds;
-the visitor enumerates and runs multiple worker threads, so a duplicate UserId could be processed
-twice concurrently -> double-merge race. So `BULK INSERT` the CSV into a staging table, then build the
-visitor table deduped: `INSERT INTO dbo.TempBuoyRestore_<yyyyMMdd>(UserId) SELECT DISTINCT UserId FROM
-<staging> WHERE <opt-in>` (dated name, universal like the finalizer's temp tables). The per-buoy
-idempotency (below) is the second safety net against any double-process.
+- `PondName` from `SharedConsts` for readability; `PondId` stays for machine use.
+- counts let support say "you had N buoys on Lone Star" and let ops pick opt-in by threshold.
+- one row per user (per-pond file) -> `UserId` is unique within the file (no dedup needed at import).
 
 ## Extraction flow (reserve DB, read-only)
 
@@ -72,12 +66,12 @@ idempotency (below) is the second safety net against any double-process.
 - visits all real players (the visitor enumerates internally, Role NOT IN T/M/C) — **no manual temp
   table, no WHERE prefilter** (visit-all; skip-in-code when empty; pond 119 is near-universal so a
   prefilter would not prune and risks false negatives);
-- per profile: deserialize `ProfileJson` -> `Profile`, collect the 3-pond fragments, append one JSONL
-  line + the CSV rows (streamed, low memory, resumable). **Thread-safe writers required**: `VisitProfiles`
-  runs the callback concurrently (`PerformOfflineConvert` thread pool) — lock the file writers or buffer
-  per-thread, else lines interleave/corrupt;
+- per profile: deserialize `ProfileJson` -> `Profile`; for each requested pond, extract that pond's
+  fragment and append the user's line to **that pond's** JSONL + CSV (streamed, low memory). **Thread-safe
+  writers required**: `VisitProfiles` runs the callback concurrently (`PerformOfflineConvert` thread pool)
+  — lock the per-pond writers, else lines interleave/corrupt;
 - malformed/old `ProfileJson` -> skip + log, never abort;
-- on finish: write `.meta.json` + log totals (profiles seen, users with buoys, per-pond buoy totals).
+- on finish: write each pond's `.meta.json` last (completion marker) + log per-pond totals.
 
 New `ReleaseTool` command `--export-buoys --ponds 119,150,160` — pond IDs are a comma-separated
 **option, not hardcoded**, so the tool is reusable for future deprecations (`--import-buoys` takes the
@@ -86,24 +80,26 @@ same `--ponds`). The IDs can also be read from the `RemoveDeprecatedBuoys` conve
 `--ponds` is parsed to ints and used for **in-code** filtering only — never interpolated into a SQL
 predicate (the only thing the predicate carries is the import's `UserId IN (SELECT … FROM <temp>)`).
 
-Output: the file pairs are written into the ReleaseTool (converter) folder. Ops collects them, keeps
-them locally, and copies them to the DB server. Retention is ops-side (local + DB server).
+Output: the per-pond file sets are written into the ReleaseTool (converter) folder. Ops collects them,
+keeps them locally, and copies them to the DB server. Retention is ops-side (local + DB server).
 
-## Restore flow (prod DB) — sketch; merge policy deferred
+## Restore flow (prod DB) — sketch; LOWER PRIORITY than the backup, merge policy deferred
 
-1. ops loads the opt-in subset per the CSV section above: `BULK INSERT` the CSV into a **wide staging
-   table** (`UserId, PondId, PondName, MarkerBuoys, NavBuoys, ShareRequests`; index `(PondId, UserId)` for
-   pond/user lookup), then build the **UserId-only visitor table** `INSERT INTO dbo.TempBuoyRestore_<yyyyMMdd>(UserId)
-   SELECT DISTINCT UserId FROM <staging> WHERE <opt-in>` (index `(UserId)`). The per-pond counts stay on
-   staging; `TempBuoyRestore_<yyyyMMdd>` is deduped UserId only (what the visitor predicate references).
-2. `--import-buoys` loads the JSONL into `Dictionary<Guid, BuoyBackupRecord>`.
+> Priority: the **backup (`--export-buoys`) is the active, high-priority piece** — get the data off the
+> reserve server while it exists. Restore (`--import-buoys`) is intentionally a sketch and lower priority.
+
+Restore is **per pond** (matching the per-pond files):
+1. ops `BULK INSERT`s the opt-in subset of that pond's CSV into
+   `dbo.TempBuoyRestore_<PondName>_<date>(UserId, MarkerBuoys, NavBuoys, ShareRequests)` — already one row
+   per user, no DISTINCT needed; index `(UserId)`.
+2. `--import-buoys` loads **that pond's** JSONL into `Dictionary<Guid, BuoyBackupRecord>`.
 3. `--import-buoys` uses the **load-mutate-save** path (the `ProfileConversionFinalizer.ConvertUser`
    pattern): per opt-in user `LoadPlayerProfile` -> `GetProfileOutOfDto` -> add the backup buoys into the
    LIVE `Profile` (`Buoys.Add(...)` etc.) -> `GetDtoOutOfProfile` -> `SavePlayerProfile`. Drive it via the
-   **single-threaded** `ConvertProfiles(prodConn, Action<Guid>, predicate: "AND UserId IN (SELECT UserId FROM TempBuoyRestore_<yyyyMMdd>)")`.
+   **single-threaded** `ConvertProfiles(prodConn, Action<Guid>, predicate: "AND UserId IN (SELECT UserId FROM TempBuoyRestore_<PondName>_<date>)")`.
    Do NOT write the backup's `ProfileJson` wholesale — that clobbers everything changed since the backup
-   (stats/inventory/balances); only ADD buoys to the current live profile. Single-threaded +
-   DISTINCT-UserId table prevents the double-merge race.
+   (stats/inventory/balances); only ADD buoys to the current live profile. Single-threaded + the
+   unique-UserId per-pond table prevents the double-merge race.
 
 **Deferred (design later), but the format already carries what these need:**
 - dedup + idempotency + authentic restore in one rule — **never lose a buoy** (the goal is the catch at
