@@ -11,6 +11,7 @@
 | FP-43625 | FP/server | matchmaking-maxwins       | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
 | FP-32370 | FP/server | po-test-coverage          | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
 | FP-44337 | FP/server | stats-tables-partitioning | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
+| FP-44591 | FP/server | twitch-no-email-linking   | planned       | fishing-planet/tasks/FP-44591--twitch-no-email-linking/                 |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
@@ -22,7 +23,11 @@
 | FP-43756 | Yevhenii Shust | fishing-planet/review/FP-43756--cancel-scheduled-competitions/                          |
 
 ## Active Confluence Work
-(none yet — see [confluence backlog](confluence/backlog.md) for assessment plan)
+| Draft                    | Task     | Target                                                                        |
+|--------------------------|----------|-------------------------------------------------------------------------------|
+| twitch-no-email-handling | FP-44591 | TECH > SERVER > Twitch integration (child) — published v2 (5696978945)        |
+
+> See [confluence backlog](confluence/backlog.md) for the broader assessment plan.
 
 > Completed tasks are removed from this table. History lives in task journals under `fishing-planet/tasks/`.
 

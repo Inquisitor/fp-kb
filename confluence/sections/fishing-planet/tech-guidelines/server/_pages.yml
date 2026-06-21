@@ -16,6 +16,11 @@ pages:
     title: Platforms
   - id: 3206119457
     title: Twitch integration
+  - id: "5696978945"
+    title: "Twitch Account Linking: No-Email Handling & Reward Gating"
+    parent: 3206119457
+    verified: 2026-06-21
+    last_pushed_version: 2
   - id: 3616899087
     title: Modules
   - id: 3829760001

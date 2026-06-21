@@ -36,6 +36,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 ## Monetization
 - [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
 - [local-shop](modules/local-shop/_card.md) — per-pond item shop; LocalShop stores only Price (level/rarity/currency from InventoryItems); Premium ×1.0 / Common ×1.5; pond 119 (FTUE) ×1.0
+- [twitch-drops](modules/twitch-drops/_card.md) — Twitch account linking + Drop entitlement delivery; spans linking site / Photon delivery / AsyncProcessor token refresh; no-email capture/backfill + reward gate (epic FP-44593)
 
 ## Configuration & Deployment
 - [configuration](modules/configuration/_card.md) — per-env / per-component server config; `Source` platform-list semantics, deployment topology, prod reference matrix, canonical `Source` rules

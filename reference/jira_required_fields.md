@@ -1,0 +1,18 @@
+---
+name: JIRA required fields on issue create
+description: FP project requires the Scrum Team field on create; customfield_11001 option ids + create cheat-sheet
+type: reference
+---
+Creating an issue in the **FP** project via the JIRA API fails with `"The Scrum Team field must be set"` unless **Scrum Team** is supplied. It is a single-select custom field, separate from any agile board team.
+
+- **Scrum Team:** `customfield_11001` — pass `{"customfield_11001": {"id": "<optionId>"}}` in the create fields.
+  - Option ids: Other=`10203`, LiveOps=`10384`, Community&Support=`10301`, Leaderboards=`10637`, FTUE=`10636`, Tournaments&Events=`10200`, UI/UX=`10204`, Norway=`10427`, General Activity=`10703`, Tech Dept=`10783`, Fathers Day=`10816`.
+- **Components** are a fixed select (valid names incl. Server, Web, Photon, WebAdmin, Infrastructure, QA, Client, Game Design, Localization, ...).
+- **Priority** uses standard names (Highest / High / Medium / Low / Lowest).
+- **Issue types:** FP has **no "Task" type** (passing it → `"Specify a valid issue type"`). Standard (hierarchyLevel 0) types: `Story`, `Bug`, `Proposal`, `Activity`; plus `Epic` (level 1). Use **Story** as the Task equivalent.
+- **Epic ← Story** linkage: set the story's `parent` field to the epic key (`editJiraIssue` with `{"parent": {"key": "FP-XXXXX"}}`). Blocks/Relates between issues use issue links (`Blocks` / `Relates`), not the parent field.
+- fishingplanet **cloudId:** `21c52b88-9777-4cde-bbe9-78e4dde647ab`.
+
+**Related custom fields:** Executor `customfield_11224` (see [JIRA Executor field](jira_executor_field.md)); Server Release Checklist Steps `customfield_11323` (see [release checklist field](release_checklist_field.md)).
+
+**How to discover:** `getJiraIssueTypeMetaWithFields(project, issueTypeId)` lists required fields and their `allowedValues`; the create error message names the missing field.

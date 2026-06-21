@@ -14,6 +14,7 @@ Confluence space: FP | Homepage: 1146884 | [Web](https://fishingplanet.atlassian
 |-----------------------------------------------------------------------------------------------|----------|----------------------------------------------|
 | [fish-weight-edge-distribution](workspace/FP-41844--fish-weight-edge-distribution.md)         | FP-41844 | TECH > SERVER > Business Logic > Bite System |
 | [edge-distribution-design-analysis](workspace/FP-41844--edge-distribution-design-analysis.md) | FP-41844 | TECH > SERVER > Business Logic > Bite System |
+| [twitch-no-email-handling](workspace/FP-44591--twitch-no-email-handling.md)                   | FP-44591 | TECH > SERVER > Twitch integration (child)   |
 
 ## See Also
 - [Assessment backlog](backlog.md)

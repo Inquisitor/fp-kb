@@ -285,6 +285,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 
 - [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
 - [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
+- [JIRA required fields on create](reference/jira_required_fields.md) — Scrum Team `customfield_11001` required (Other=`10203`); option ids, components, no "Task" type (use Story), epic-link via `parent`, cloudId
 - [Mongo LogBase content-filter pushdown](reference/mongo_logbase_pushdown.md) — `BsonRegularExpression` overload for heavy log collections (fishingLog 30min → subsecond)
 - [Photon.Interfaces DLL distribution](reference/photon_interfaces_dll_distribution.md) — server-built DLL copied to client via `Refresh.cmd`; ObjectModel source-duplicated with sensitive code stripped
 - [Server Release Checklist Steps field](reference/release_checklist_field.md) — `customfield_11323` vocabulary, option→template-step mapping, SQL-sweep blind-zone check, release-mechanics cheat-sheet (DataPump denylist, profile conversions, env-var create-vs-enable, destructive regenerate)
