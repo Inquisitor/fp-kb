@@ -12,6 +12,7 @@
 | FP-32370 | FP/server | po-test-coverage          | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
 | FP-44337 | FP/server | stats-tables-partitioning | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
 | FP-44591 | FP/server | twitch-no-email-linking   | planned       | fishing-planet/tasks/FP-44591--twitch-no-email-linking/                 |
+| FP-44594 | FP/server | cpu-memory-map            | planning      | fishing-planet/tasks/FP-44594--server-cpu-memory-map/                   |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
