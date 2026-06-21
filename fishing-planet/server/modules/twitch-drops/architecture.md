@@ -46,6 +46,8 @@ Invoked from `GameClientPeer_Travel`. Steps:
 
 Already-`FULFILLED` entitlements are skipped; `CLAIMED` ones not delivered in a pass stay claimable on Twitch and are picked up on a later travel — **deferring delivery never loses a drop.**
 
+The per-entitlement loop sits inside a single outer try/catch, so a reward that throws aborts the rest of that pass (no crash; the undelivered entitlements retry on the next travel). Per-entitlement isolation is tracked in FP-44597 (low priority) — same class of unguarded `ProcessReward` sites as the [rewards](../rewards/_card.md) design debt (FP-41492).
+
 ## No-email handling (design — FP-44591)
 Twitch's `/helix/users` returns `email` only when `user:read:email` is granted **and** the e-mail is verified; otherwise it is absent. The `TwitchEmail` column is nullable. Capturing the verified e-mail is an explicit integration goal (Confluence; FP-28678), but delivery does not need it.
 

@@ -29,7 +29,7 @@ module: twitch-drops
 - Tests: `Dal/Sql.MsSql.Tests/SqlMonetizationProviderTest.cs` (drop dedup) · `Shared/Twitch.Tests/TwitchApiUtilsTest.cs`
 
 ## Related Tasks
-- **FP-44593** — epic "[Twitch] Integration maintenance" (umbrella). Children (planned): **FP-44590** unify client → netstandard2.0 · **FP-44591** no-email linking (capture/backfill + reward gate) · **FP-44592** OAuth errors + DataProtection keys
+- **FP-44593** — epic "[Twitch] Integration maintenance" (umbrella). Children (planned): **FP-44590** unify client → netstandard2.0 · **FP-44591** no-email linking (capture/backfill + reward gate) · **FP-44592** OAuth errors + DataProtection keys · **FP-44597** DeliverDrops per-entitlement reward isolation (low)
 - FP-34340 (closed) earlier link-exception fixes · FP-28678 (closed) persist Twitch e-mail · FP-21080 (closed) original integration
 
 See also: [backlog](backlog.md) | [log](log.md)

@@ -111,6 +111,9 @@ The reward **gate** lives in `DeliverDrops`, applied **after** the inline backfi
 - Consolidate the Twitch HTTP API into a **single modern HttpClient-based client** in
   `Shared/Twitch`, exposing `ValidateToken`, `RefreshToken`, `GetDropEntitlements`,
   `FulfillDropEntitlements`, and a **new `GetUserInfo(token)`** (`GET /helix/users` → id/login/email).
+- **Cleanup while consolidating:** replace `WebRequest` + `dynamic` with `HttpClient` + typed
+  models; add `IsSuccessStatusCode` checks in `GetDropEntitlements` / `FulfillDropEntitlements`
+  (they currently throw on non-2xx).
 - Reference the shared client from net472 (server, AsyncProcessor) **and** the net8 site;
   remove the duplicate `TwitchAccountLinking.Utils.TwitchApiClient`.
 - Verify all three consumer solutions build (LoadBalancing, AsyncProcessor, TwitchAccountLinking).
