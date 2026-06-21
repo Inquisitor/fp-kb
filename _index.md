@@ -15,6 +15,7 @@
 | FP-44594 | FP/server | cpu-memory-map            | planning      | fishing-planet/tasks/FP-44594--server-cpu-memory-map/                   |
 | FP-44598 | FP/server | buoy-backup-restore       | in-progress   | fishing-planet/tasks/FP-44598--buoy-backup-restore/                     |
 | FP-44596 | FP/server | node-load-observability   | in-progress   | fishing-planet/tasks/FP-44596--node-load-observability/                 |
+| FP-42677 | FP/server | rating-abuse-prevention   | in-discussion | fishing-planet/tasks/FP-42677--rating-abuse-prevention/                 |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
@@ -22,7 +23,7 @@
 | FP-41962 | Stanislav      | fishing-planet/review/FP-41962--line-logging/                                           |
 | FP-43705 | Yuriy Burda    | fishing-planet/review/FP-43705--bait-negative-values/                                   |
 | FP-43185 | Yevhenii Shust | fishing-planet/review/FP-43185--giveitem-inventoryitem-init/                            |
-| FP-43817 | Yevhenii Shust | fishing-planet/review/FP-43817--tournament-log-levels/                                   |
+| FP-43817 | Yevhenii Shust | fishing-planet/review/FP-43817--tournament-log-levels/                                  |
 | FP-43756 | Yevhenii Shust | fishing-planet/review/FP-43756--cancel-scheduled-competitions/                          |
 
 ## Active Confluence Work
