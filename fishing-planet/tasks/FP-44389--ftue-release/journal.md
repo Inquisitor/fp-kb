@@ -68,4 +68,5 @@ No formal multi-phase plan — driven by the checklist. All directions complete:
   `reference/release_checklist_field.md` (committed `93c7596`) wired into kb-close-task Step 9 +
   jira-review-close Step 2b; deliberately NOT in jira-review-open (it finalizes nothing). Committed `41f9f5c`.
 - 2026-06-21: Card scoped to release-prep; buoy export/backup work split out to a dedicated task
-  (`artifacts/buoy-*.md` to be relocated there).
+  **FP-44598** (`tasks/FP-44598--buoy-backup-restore/`); `buoy-backup-restore-design.md` and
+  `buoy-export-plan.md` relocated there. `release-steps-mapping.md` stays here (release work).

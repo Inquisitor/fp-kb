@@ -13,6 +13,7 @@
 | FP-44337 | FP/server | stats-tables-partitioning | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
 | FP-44591 | FP/server | twitch-no-email-linking   | planned       | fishing-planet/tasks/FP-44591--twitch-no-email-linking/                 |
 | FP-44594 | FP/server | cpu-memory-map            | planning      | fishing-planet/tasks/FP-44594--server-cpu-memory-map/                   |
+| FP-44598 | FP/server | buoy-backup-restore       | in-progress   | fishing-planet/tasks/FP-44598--buoy-backup-restore/                     |
 | FP-44596 | FP/server | node-load-observability   | in-progress   | fishing-planet/tasks/FP-44596--node-load-observability/                 |
 
 ## Active Reviews
