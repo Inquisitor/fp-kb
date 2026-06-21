@@ -1,7 +1,7 @@
 ---
 status: resolved
 executor: Yuriy Burda
-branch: MFT @ r16089
+branch: MFT @ r16089; r16177 merged to NPN @ r16178
 jira: https://fishingplanet.atlassian.net/browse/FP-43469
 ---
 
@@ -60,6 +60,8 @@ The half-open `FindStatsFactIdByTimestamp` boundaries make the *range scan* tole
 
 **Resolution:** `Filed → FP-44568`. The failed release run confirmed the defect live ("сильно навернулось"). Scope outgrew a one-line script fix — the historical backfill now also requires cross-platform data archaeology (PS pre-2026-06 StatsFact dropped in FP-44337 cutover, lives only in pre-drop backup/archive; Steam 2022-2024 on a separate .107 Stats server; XB/MOB/NX partially wiped). Split into a dedicated Story **FP-44568** (assignee Yuriy Burda, resumes after vacation). Fix = Step 1 `MERGE` with MIN/MAX (as Step 2) or `IGNORE_DUP_KEY` + clean the failed run's residue (preserve correct post-release live rows). Not urgent: live hooks capture forward data correctly. Code merged/inherited — not a code blocker for FP-43469.
 
+**Update (2026-06-20):** the script fix actually landed under FP-43469 on 2026-06-11 — MFT r16177, merged to NPN (Code) r16178 — applying the recommended option (a): Step 1 now `MERGE`s with MIN/MAX into the intermediate table, so EntityId↔Timestamp skew folds in instead of aborting on a duplicate key (verified correct; non-NULL src makes the absent NULL-guard safe; `OPTION (LOOP JOIN, MAXDOP 1)` for plan stability). FP-44568 thus retains only the residue cleanup + cross-platform historical data assembly.
+
 **Discovered by:** code-reviewer agent; empirically confirmed by skill against Steam prod Stats.
 
 ### F-2: FindStatsFactIdByTimestamp — `@midTs` not reset before per-iteration SELECT [Info]
@@ -93,3 +95,38 @@ The half-open `FindStatsFactIdByTimestamp` boundaries make the *range scan* tole
 **APPROVE.** Shipped code is sound: the table, the `RegisterPlayerDailyActivity` SP (CTE/dual-MERGE/HOLDLOCK/MIN-MAX idempotency verified against tests), the binary-search boundary function, the `DailyActivityManager` and its three hook sites, and the WebAdmin UI all check out. Conventions followed (NOLOCK on append-only StatsFact, BOM, csproj includes, `SqlAnalyticsConnectionString`). Defensive design: stat writes swallow exceptions and never break gameplay. Already inherited in Code branch (NPN) via branch copy — no merge needed.
 
 **F-1** (Medium) — the backfill script defect — is descoped into **FP-44568** (filed; assignee Yuriy Burda): empirically confirmed when the release backfill run failed, and the historical reconstruction needs cross-platform data assembly beyond a script fix. F-2/F-3/F-4 are optional polish. FP-43469's own deliverable (table + SP + hooks + WebAdmin + live capture) is complete and correct → approve.
+
+---
+
+## Round 2 — r16177 backfill duplicate-key fix (re-review)
+
+Re-review of the F-1 fix. The script fix landed under FP-43469 (not FP-44568) on 2026-06-11, before FP-44568 was filed; the task was already Closed at Round-1 close. Triggered by spotting r16177 a week later.
+
+**Executor:** Yuriy Burda — JIRA comment 124172 (2026-06-11): MFT r16177, merged to NPN r16178.
+
+### Scope (Round 2)
+
+- **MFT r16177** — FP-43469 Fix duplicate-key abort in the StatsFact PlayerDailyActivity backfill
+  - Step 1: plain `INSERT ... GROUP BY date` into the intermediate table replaced with a `MERGE` (MIN/MAX on MATCHED, INSERT on NOT MATCHED) — the recommended option (a) from F-1
+  - `OPTION (LOOP JOIN, MAXDOP 1)` + comment on plan stability; `SYSUTCDATETIME()` timestamps added to PRINTs
+- **NPN r16178** — merge of r16177 into Code branch (by executor)
+
+### Investigation (Round 2)
+
+- Intake: fix posted as JIRA comment 124172 with merge note; executor field matches commit author. Task status = Closed (closed at Round-1 close 2026-06-18).
+- VCS audit (WC at r16168 < r16177 — stale, read via `svn diff -c`/`svn cat`, not disk): MFT has exactly one FP-43469 commit after r16089 (r16177); NPN r16178 is a clean TortoiseSVN merge of r16177 (mergeinfo + the one file). `svn cat -r16177` (MFT) and `svn cat -r16178` (NPN) are **byte-identical** — merge faithful.
+- Fix resolves F-1: a strayed `(UserId, ActivityDate)` from an adjacent EntityId-range iteration now hits `WHEN MATCHED` -> MIN/MAX UPDATE instead of a duplicate-key INSERT. No 2627, no abort.
+- Data-faithful, not just collision-avoiding: MIN/MAX are associative, so folding partial per-iteration MIN/MAX across iterations yields the correct global MIN/MAX for the split `(user, date)`. Strictly better than `IGNORE_DUP_KEY` (which would drop the strayed row's contribution).
+- Safety checks: (a) absent NULL-guard on MATCHED is safe — src is always non-NULL (`MIN(Level)` under `Level IS NOT NULL`, rank via `COALESCE`), and the intermediate is written only by this MERGE, so tgt is never NULL; (b) no "MERGE source duplicate key" error — join key `(UserId, ActivityDate)` equals the `GROUP BY`, src keys unique; (c) HOLDLOCK correctly omitted (private freshly-created intermediate, no concurrent writers — unlike Step 2 on the live table); (d) `LOOP JOIN`/`MAXDOP 1` are plan hints, results unaffected.
+- Step 2 and the DROP/CREATE-intermediate block are untouched; full re-run idempotency preserved.
+- code-reviewer agent (independent, stale-WC warned + given `svn diff`/`svn cat` + the dumped fixed file) confirmed all 7 checks with no material findings: 2627 eliminated; MIN/MAX fold associatively correct; NULL-guard asymmetry justified (scratch table, src non-NULL); no source-dup/HOLDLOCK/trigger hazard; LOOP JOIN/MAXDOP appropriate; Step 2 + idempotency intact; `@@ROWCOUNT` shift benign (now counts insert+update — an improvement). Matched skill recon.
+
+### Findings (Round 2)
+
+None. The fix is correct, data-faithful, and applies exactly the recommended approach (option a).
+
+### Verdict (Round 2)
+
+**APPROVE.** r16177 resolves F-1's script defect: Step 1 `INSERT`->`MERGE` (MIN/MAX) eliminates the duplicate-key abort and folds EntityId↔Timestamp-skewed rows correctly rather than dropping them. Merge to Code (NPN r16178) already done by the executor and verified byte-identical — close phase has no merge to perform. F-1 (Round 1) is now resolved in code; FP-44568 retains only the residue cleanup + cross-platform historical data assembly.
+
+No JIRA comment posted for Round 2: the task is already Closed, the fix carries the executor's own commit/merge note (124172), and the Round-1 LGTM (125074) is already on the thread — a third comment on a closed ticket would be noise. The Round-2 sign-off lives here in KB.
