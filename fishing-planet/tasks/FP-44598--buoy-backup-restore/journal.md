@@ -54,3 +54,8 @@ the restore work is done. Committed to SVN under FP-44598 once the gates pass.
     final newline), BOM intact, EntryPoint line-endings normalized (svn diff content-clean), **6/6 tests
     pass, build green**.
   - Remaining (needs user): manual smoke on a dev/QA DB; single atomic `svn commit` under FP-44598.
+- 2026-06-23: Fix `.cmd` placement — moved `export-buoys.example.cmd` from `BuoyBackup/` to `Cmd/`
+  (with the existing run scripts), matched their convention (UTF-8 BOM, `echo off`, `..\ReleaseTool.exe`),
+  and added the required `<None Include="Cmd\export-buoys.example.cmd"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>`
+  to `ReleaseTool.csproj` (`.cmd` is not auto-copied — `EnableDefaultNoneItems` is off). Build confirms
+  it now copies to the output `Cmd\` folder. Plan corrected accordingly.

@@ -18,13 +18,13 @@
 - Create `Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/BuoyBackupExtractor.cs` — `Extract(userId, profile, pondIds)` + `PondName(pondId)`.
 - Create `Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/BuoyBackupCsv.cs` — CSV header + per-(user×pond) rows.
 - Create `Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/BuoyExportRunner.cs` — orchestration + meta + price read.
-- Create `Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/export-buoys.example.cmd` — runnable example with commented parameters.
+- Create `Photon/tools/ReleaseTool/ReleaseTool/Cmd/export-buoys.example.cmd` — runnable example with commented parameters (lives in `Cmd/` with the other run scripts; needs a `.csproj` `<None Include>` entry, see below).
 - Create `Photon/tools/ReleaseTool.Tests/BuoyBackup/BuoyBackupTests.cs` — unit tests for the three logic classes.
 - Modify `Photon/tools/ReleaseTool/ReleaseTool/EntryPoint.cs` — add the `--export-buoys` case + a small `GetOption` arg helper.
 
 Namespace for all new code classes: **`ReleaseTool.BuoyBackup`** (specific, not a generic `Buoys`).
 
-Project facts: `ReleaseTool` and `ReleaseTool.Tests` are SDK-style (`<Project Sdk="Microsoft.NET.Sdk">`) — new `.cs` files auto-compile; **no `.csproj` edits**. `ReleaseTool.Tests` already references `ReleaseTool`; `ReleaseTool` has no `InternalsVisibleTo`, so the tested classes (`BuoyBackupRecord`/`BuoyBackupExtractor`/`BuoyBackupCsv`) are **`public`**; `BuoyExportRunner` stays `internal`.
+Project facts: `ReleaseTool` and `ReleaseTool.Tests` are SDK-style (`<Project Sdk="Microsoft.NET.Sdk">`) — new `.cs` files auto-compile (no `.csproj` edit). **Exception — the `.cmd`:** the shared props disable `EnableDefaultNoneItems`, so non-`.cs` files are NOT auto-copied to output; the `.cmd` lives in `Cmd/` (with the existing run scripts, e.g. `R201905TruncateMissionsProgress.cmd`) and MUST be added to `ReleaseTool.csproj` as a `<None Include="Cmd\export-buoys.example.cmd"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>`, else it won't appear in the build output. `ReleaseTool.Tests` already references `ReleaseTool`; `ReleaseTool` has no `InternalsVisibleTo`, so the tested classes (`BuoyBackupRecord`/`BuoyBackupExtractor`/`BuoyBackupCsv`) are **`public`**; `BuoyExportRunner` stays `internal`.
 
 **Style (enforced):** repo `.editorconfig` requires **UTF-8 BOM**, CRLF, 4-space indent, and **braces on all `if`/`for` bodies** (`csharp_prefer_braces`). All code below already uses braces. New `.cs` files must be saved **with a UTF-8 BOM** (the editor/Write tool may omit it — prepend U+FEFF). Task 8 runs a formatter/linter pass to catch any deviation before the commit.
 
@@ -639,35 +639,47 @@ Expected: Build succeeded. **No commit.**
 ## Task 7: Example `.cmd`
 
 **Files:**
-- Create: `Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/export-buoys.example.cmd`
+- Create: `Photon/tools/ReleaseTool/ReleaseTool/Cmd/export-buoys.example.cmd`
+- Modify: `Photon/tools/ReleaseTool/ReleaseTool/ReleaseTool.csproj` (add the copy-to-output `<None Include>` entry)
 
-- [ ] **Step 1: Create the example command file**
+The `.cmd` goes in `Cmd/` next to the existing run scripts (`R201905TruncateMissionsProgress.cmd`), matching their convention: **UTF-8 BOM**, `echo off`, and it calls `..\ReleaseTool.exe` (in the build output the exe is one level up from `Cmd\`).
 
-`Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/export-buoys.example.cmd`:
+- [ ] **Step 1: Create the example command file** (UTF-8 BOM, CRLF)
+
+`Photon/tools/ReleaseTool/ReleaseTool/Cmd/export-buoys.example.cmd`:
 ```bat
-@echo off
+echo off
 REM ============================================================================
-REM  Export deprecated-pond buoys from a (reserve-backup) DB.
-REM  Run this from the ReleaseTool build output folder (where ReleaseTool.exe is).
-REM  The DB is taken from the "sql" connection string in ReleaseTool.exe.config.
+REM  Export deprecated-pond buoys from the configured "sql" DB
+REM  (set in ..\ReleaseTool.exe.config). Run from this Cmd folder.
 REM
-REM  Parameters:
-REM    --ponds   comma-separated pond ids to export (REQUIRED). 2026.4 deprecated
-REM              ponds: 119 (LoneStar), 150 (LesniVila), 160 (Zeekanaal).
-REM    --stream  label for the output file names, e.g. steam / ps / xb / mob / nx
-REM              (just naming; defaults to "unknown").
-REM    --out     output folder for the 3 files (defaults to the exe folder).
+REM  Params:
+REM    --ponds   comma-separated pond ids (REQUIRED). 2026.4 deprecated ponds:
+REM              119 (LoneStar), 150 (LesniVila), 160 (Zeekanaal).
+REM    --stream  label for output filenames, e.g. steam / ps / xb / mob / nx
+REM              (naming only; default "unknown").
+REM    --out     output folder (default the exe folder).
 REM
-REM  Output: ONE file set PER POND in a single run -> buoys_<stream>_<PondName>_<yyyymmdd>.jsonl / .csv / .meta.json
-REM  (so --ponds 119,150,160 yields three sets: LoneStar, LesniVila, Zeekanaal).
+REM  Output: ONE set PER POND in a single run ->
+REM    buoys_<stream>_<PondName>_<yyyymmdd>.jsonl / .csv / .meta.json
 REM ============================================================================
-
-ReleaseTool.exe --export-buoys --ponds 119,150,160 --stream steam --out .\buoy-export-out
-
+..\ReleaseTool.exe --export-buoys --ponds 119,150,160 --stream steam --out ..\buoy-export-out
 pause
 ```
 
-- [ ] **Step 2: (no test, no build) — verify the file reads correctly.** **No commit.**
+- [ ] **Step 2: Register the `.cmd` in the csproj** (non-`.cs` files are NOT auto-copied — `EnableDefaultNoneItems` is off)
+
+In `ReleaseTool.csproj`, in the `ItemGroup` holding the other `Cmd\*.cmd` entries, add:
+```xml
+<None Include="Cmd\export-buoys.example.cmd">
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+```
+
+- [ ] **Step 3: Build and verify it lands in the output `Cmd\` folder**
+
+Run: `dotnet build Photon\tools\ReleaseTool\ReleaseTool\ReleaseTool.csproj -c Debug`
+Expected: 0 errors, and `export-buoys.example.cmd` present in the build output `Cmd\` folder (next to the sibling scripts). **No commit.**
 
 ---
 
