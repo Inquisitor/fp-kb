@@ -1,7 +1,7 @@
 ---
-status: in-progress
+status: resolved
 executor: Yevhenii Shust
-branch: MFT @ r16048
+branch: NPN @ r16183 (Round 2 fix), merged to MFT @ r16232; MFT @ r16048 (Round 1, superseded)
 jira: https://fishingplanet.atlassian.net/browse/FP-43185
 ---
 
@@ -83,3 +83,49 @@ JIRA rejection comment posted 2026-06-09 (comment 123690). Status transition bac
 - Spawned code-reviewer agent; it rated F-3 Critical (fix fails) by tracing the mission reward path, and rated F-2 latent (assumed base Count=0). Both corrected here: F-3 refuted via the correct product path; F-2 escalated to High via DB scan proving base Count > 1 is widespread.
 - F-2 verified through the full chain: ConfigJson Count key -> default JSON deserialization in `GetTypedItem` -> `Multiply` multiply-vs-assign semantics -> nullable `ItemCount` UI. One residual hop (gift receive-side re-clamping) left unverified, noted in the finding.
 - Findings routing: F-1 accepted inline; F-2 blocking (verdict reject/reopen); F-3 info.
+
+---
+
+# Round 2 — rework after reopen (NPN r16183)
+
+> Everything above is Round 1 (MFT r16048, rejected for the F-2 regression). This round reviews the executor's rework.
+
+## Round 2 Scope
+
+- **NPN r16183** — Reworked: split `IsStockableByAmount` handling in both WebAdmin and ReleaseTool grant paths — `Multiply` (with `Init`) for amount-stackable items to preserve sell-price parity with the pack path, absolute `Count` assignment for count-stackable to fix the quantity regression. `GiveItemInteraction` inline block left as-is (deferred to FP-43540).
+  - (intent per JIRA comment id:124465 — diff to be audited in Phase 2)
+
+## Round 2 Investigation
+
+- Phase 1 intake: re-review on existing card; executor still Yevhenii Shust; status In Review.
+- **Branch change between rounds:** Round 1 landed on MFT (Content) as r16048; Round 2 rework is on NPN (Code) as r16183. Per `_index.md` ancestry, NPN was branched from MFT:16130, so r16048 is inherited into NPN; r16183 reworks on top. The rework direction (Multiply for amount-stackable, absolute Count for count-stackable) matches the rejection comment's suggested fix.
+- **Backport (resolved in close phase):** r16183 backported NPN -> MFT as r16232 (clean merge). r16048 exists only on MFT + NPN (NPN inherited it via branch copy, reworked by r16183; MFT now superseded by r16232) — no other active branch carries it.
+- VCS audit on NPN: `svn log | grep FP-43185` returned r16183 only for FP-43185. r16184 is a FP-43540 commit (tech-debt) that touches the same paths — extracts `Inventory.ApplyCount` and routes all three sites through it; behavior-identical to r16183 for the two grant paths. NPN WC at r16227 (ahead of both) — disk reads trustworthy; verified HEAD matches diffs.
+- Spawned code-reviewer agent. It confirmed F-2 fixed, F-3 preserved, ApplyCount behavior-identical, and (correctly) flagged that r16184 fixes the same line-price bug in the `GiveItemInteraction` reward path. It raised ONE false alarm: a claimed count-stackable regression in `GiveItemInteraction` ("catalog Count -> 1, needs mission-config check"). REFUTED — the agent misread the old `item.Count = Count` (assignment from the interaction's `int Count` field) as `item.Count = item.Count` (no-op). Verified `InventoryItemInteraction.Count` is non-nullable `int`, so `ApplyCount`'s `Count ?? item.Count` == `Count` == old behavior. No mission-config check needed. (Recurring pattern: delegated agent confident misread — third instance, see review-process-observations.)
+
+## Round 2 Findings
+
+### F-2 (Round 1 blocker): RESOLVED
+
+Both grant paths now use `Inventory.ApplyCount(item, count)` which assigns `item.Count = count ?? item.Count` (absolute) for count-stackable items. WebAdmin giving a base-50 bait with an empty count field now yields Count=50 (was 2500); explicit N yields N. Restores the correct pre-bug (pre-r16048) behavior. Verified by recon + code-reviewer agent.
+
+### F-3 (line price parity): PRESERVED
+
+Amount-stockable items go through `Multiply(item, count ?? 1)` -> `Init()` -> for Line `Length = Count` -> ratio 1. Parity with the product path holds. Bonus: the amount-branch fallback changed from r16048's `?? item.Count` to `?? 1`, which also fixes the `BoatFuel`/`Chum` Weight/Capacity inflation that r16048 would have caused on an empty count field (e.g. Capacity 100 -> 10000). Net improvement over both the original buggy state and the rejected r16048.
+
+### F-1 (amount-stockable count>1 nullified by Init): UNCHANGED [Low / Accepted]
+
+Still present and now uniform across all three sites via `ApplyCount`. Low impact; consistent with the product path; not a real workflow. Accepted.
+
+### Note (FP-43540 scope, not FP-43185): GiveItemInteraction re-routing
+
+r16184 routed the player-facing `GiveItemInteraction` reward path through `ApplyCount` too. Effect: count-stackable rewards unchanged (`item.Count = Count`, identical); amount-stockable rewards (Line/Chum/BoatFuel) now normalize via `Multiply`+`Init`, which fixes the same inflated-sell-price bug in that path (old: `Count=1` + no `Init` -> ratio = catalog). This is a genuine improvement but belongs to FP-43540's review, not this card.
+
+## Round 2 Verdict
+
+**APPROVE.** The rework correctly resolves the Round-1 blocker (F-2) via absolute `Count` assignment for count-stackable items, preserves line price parity (F-3), additionally fixes the `BoatFuel`/`Chum` amount-inflation latent in r16048, and resolves the Round-1 call-site inconsistency. The `Inventory.ApplyCount` extraction (r16184/FP-43540) is behavior-identical to r16183's inline fix for the two grant paths. The fix direction matches the Round-1 rejection guidance exactly.
+
+Cross-branch: the rework lives on NPN (Code) as r16183 (executor commit). Backported down to MFT (Content) as r16232 (`svn merge -c 16183`, clean — the GiveItem block was untouched by MFT's later r16134/r16201). r16184/FP-43540 (ApplyCount extraction) intentionally NOT backported — separate ticket. Approve comment posted (125988). Closed resolved.
+
+> Note: r16048 (Round 1 regression) is inherited into NPN via branch copy but reworked there by r16183; on MFT it is superseded by the r16232 backport. No other active branch carries r16048 (LBM/KNW/IMV predate it).
+
