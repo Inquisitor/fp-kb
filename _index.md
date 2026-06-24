@@ -25,6 +25,7 @@
 | FP-43185 | Yevhenii Shust | fishing-planet/review/FP-43185--giveitem-inventoryitem-init/                            |
 | FP-43817 | Yevhenii Shust | fishing-planet/review/FP-43817--tournament-log-levels/                                  |
 | FP-43756 | Yevhenii Shust | fishing-planet/review/FP-43756--cancel-scheduled-competitions/                          |
+| FP-44564 | Yevhenii Shust | fishing-planet/review/FP-44564--weather-seed-window-days/                               |
 
 ## Active Confluence Work
 | Draft                    | Task     | Target                                                                        |
