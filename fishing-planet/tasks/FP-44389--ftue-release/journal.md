@@ -15,6 +15,8 @@ and its template (page 4395597825) are fully validated; every branch-specific re
 collected (JIRA field + SQL-sweep), applied, and verified; the release-step field gate was codified
 into the close skills. Remaining deliverable is the release execution itself (per the checklist).
 Buoy export/backup tooling that briefly lived under this folder is being split to a dedicated task.
+Now also driving the post-release **server patch 2026.4.1.1 FTUE Server Hotfix** (id 16439) — recon in
+[patch-2026.4.1.1-recon.md](artifacts/patch-2026.4.1.1-recon.md).
 
 ## Summary
 Drive the 2026.4 FTUE release: build the executable checklist from the template, validate every
@@ -70,3 +72,12 @@ No formal multi-phase plan — driven by the checklist. All directions complete:
 - 2026-06-21: Card scoped to release-prep; buoy export/backup work split out to a dedicated task
   **FP-44598** (`tasks/FP-44598--buoy-backup-restore/`); `buoy-backup-restore-design.md` and
   `buoy-export-plan.md` relocated there. `release-steps-mapping.md` stays here (release work).
+- 2026-06-24: Started the post-release **server patch** prep. Boundary = MFT r16171 (minor protocol
+  increment after the 2026.4 Steam release). Recon of r16172..HEAD: classified 14 post-release tasks
+  transfer-vs-add, confirmed client-decoupled (only FP-43192 client-coupled -> stays consoles 2026.4.2).
+  Created version `2026.4.1.1 FTUE Server Hotfix` (id 16439); assembled 13 in-MFT tasks into it
+  (transfer/add applied + verified). Owner re-tagged the 5 commitless 2026.4.1 server tasks to where
+  their code shipped. Captured the FP release-versions/process model in
+  [`reference/release_versions_and_process.md`](../../../reference/release_versions_and_process.md).
+  Recon + assembled set: [patch-2026.4.1.1-recon.md](artifacts/patch-2026.4.1.1-recon.md). NEXT: groom
+  the 11 Next-Server-Hotfix tasks not yet in MFT.
