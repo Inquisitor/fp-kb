@@ -89,6 +89,7 @@ Look up [`<kb>/_index.md`](../../../_index.md) → Branch Roles for current role
 **For each target branch, apply branch-copy inheritance check** (see required reads). If the commit revision is ≤ the target's creation revision from its source, the fix is already inherited via branch copy — skip merge for that target.
 
 For each remaining target:
+- `svn update` the target branch working copy to HEAD first — a stale target root fails the merge commit with `svn: E170004: ... out of date`, forcing an update + re-commit round-trip
 - `svn merge -c <rev>` into target branch working copy
 - Verify result (no unexpected files, no conflicts); on conflict — STOP, do not post any JIRA comment yet
 - Commit using SVN merge commit format from [`<kb>/CLAUDE.md`](../../../CLAUDE.md) → SVN merge commit format
@@ -158,7 +159,41 @@ Do NOT list the `_index.md` Active Reviews row add/remove as a bullet — it is 
 
 The commit message describes what changed in KB, not what's in the review card. The card itself is the state; the commit message is the diff.
 
-### Step 9 — Reflection (post-commit, lightweight)
+### Step 9 — Closure summary
+
+Before composing the table, re-read the review card's key points (Scope, verdict,
+findings) and re-confirm the intake-established facts. Live JIRA fields (executor
+field `customfield_11224`, status) must be re-fetched via MCP at close — they drift
+after intake — not read back from the card. The card must be then updated accordingly.
+
+Present a compact status table so the user sees the whole close at a glance. One
+row per closure action or re-verified fact, with its concrete result/identifier;
+mark anything still pending (user-side action or post-release verification) distinctly.
+
+| Step / Fact                              | Status                                                          |
+|------------------------------------------|-----------------------------------------------------------------|
+| Executor                                 | <commit author>                                                 |
+| Executor field (`customfield_11224`)     | filled / still empty -> re-flag (intake nudge still unactioned) |
+| Reviewed commit(s)                       | <source branch> r<rev>[, ...]                                   |
+| Verdict                                  | approve / reject / approve-with-waiting-for-release             |
+| Cross-branch merge                       | r<rev> per target, or "inherited - skipped", or "n/a (reject)"  |
+| JIRA comment                             | permalink, or "rejection posted"                                |
+| Release-step field (`customfield_11323`) | options set, or "n/a"                                           |
+| Review card                              | resolved / waiting-for-release                                  |
+| KB commit                                | <hash>                                                          |
+| Pending                                  | user-side JIRA transition / post-release check due-date, or "-" |
+
+Adapt rows to the actual close: add a row per merged target when there are several,
+and keep the result column to a concrete value (a revision, a link, a hash) rather
+than a bare checkmark. If the executor field is still empty, the row doubles as a
+re-nudge - do not silently mark it done.
+
+Never silently omit a step. A step that does not apply is either kept inline with
+`n/a (<reason>)` or, if dropped from the table, named in one trailing line so it
+reads as considered-and-excluded, not forgotten - e.g. `N/A: cross-branch merge
+(source = Code, no upward targets); release-step field (binary-only change).`
+
+### Step 10 — Reflection (post-commit, lightweight)
 
 After commit, briefly reflect on the review cycle as a whole — both `jira-review-open` and `jira-review-close` — and ask: did anything reveal something worth feeding back into the review workflow?
 
