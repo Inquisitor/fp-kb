@@ -170,23 +170,28 @@ Present a compact status table so the user sees the whole close at a glance. One
 row per closure action or re-verified fact, with its concrete result/identifier;
 mark anything still pending (user-side action or post-release verification) distinctly.
 
-| Step / Fact                              | Status                                                          |
-|------------------------------------------|-----------------------------------------------------------------|
-| Executor                                 | <commit author>                                                 |
-| Executor field (`customfield_11224`)     | filled / still empty -> re-flag (intake nudge still unactioned) |
-| Reviewed commit(s)                       | <source branch> r<rev>[, ...]                                   |
-| Verdict                                  | approve / reject / approve-with-waiting-for-release             |
-| Cross-branch merge                       | r<rev> per target, or "inherited - skipped", or "n/a (reject)"  |
-| JIRA comment                             | permalink, or "rejection posted"                                |
-| Release-step field (`customfield_11323`) | options set, or "n/a"                                           |
-| Review card                              | resolved / waiting-for-release                                  |
-| KB commit                                | <hash>                                                          |
-| Pending                                  | user-side JIRA transition / post-release check due-date, or "-" |
+| Step / Fact                              | Status                                                           |
+|------------------------------------------|------------------------------------------------------------------|
+| Executor                                 | ✅ <commit author>                                                |
+| Executor field (`customfield_11224`)     | ✅ filled  /  ⚠ still empty -> re-flag (intake nudge unactioned)  |
+| Reviewed commit(s)                       | ✅ <source branch> r<rev>[, ...]                                  |
+| Verdict                                  | ✅ <approve / reject / approve-with-waiting-for-release>          |
+| Cross-branch merge                       | ✅ r<rev> per target  /  ➖ inherited-skipped  /  ➖ n/a (reject)   |
+| JIRA comment                             | ✅ <permalink>  /  ✅ rejection posted                             |
+| Release-step field (`customfield_11323`) | ✅ <options set>  /  ➖ n/a                                        |
+| Review card                              | ✅ resolved  /  ✅ waiting-for-release                             |
+| KB commit                                | ✅ <hash>                                                         |
+| Pending                                  | ⏳ <user-side JIRA transition / post-release due-date>  /  ➖ none |
 
-Adapt rows to the actual close: add a row per merged target when there are several,
-and keep the result column to a concrete value (a revision, a link, a hash) rather
-than a bare checkmark. If the executor field is still empty, the row doubles as a
-re-nudge - do not silently mark it done.
+Lead each Status cell with a state glyph — ✅ done/confirmed, ⏳ pending (user-side or
+post-release), ⚠ needs attention (e.g. executor field still empty), ➖ n/a — then the
+concrete value (a revision, a link, a hash, a field value). The glyph is the
+at-a-glance read; the value is the audit trail. Never a bare glyph with no value, and
+never a value without its state glyph.
+
+Adapt rows to the actual close: add a row per merged target when there are several. If
+the executor field is still empty, the row doubles as a re-nudge (⚠) - do not silently
+mark it done.
 
 Never silently omit a step. A step that does not apply is either kept inline with
 `n/a (<reason>)` or, if dropped from the table, named in one trailing line so it
