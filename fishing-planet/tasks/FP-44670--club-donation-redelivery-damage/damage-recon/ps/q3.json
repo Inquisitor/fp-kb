@@ -1,0 +1,3914 @@
+[
+  {
+    "Message": "Received ClubToken count 1 for request '14f3f4d4-9fcf-4edd-949c-d1cfe7144439' from CFC-SirJohnOliv 'cad16e4e-73bd-49c7-a072-06e6f3872019'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T13:02:44.606Z"},
+    "last": {"$date": "2026-06-22T11:18:18.656Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '5f73eee2-0090-4f14-91b9-fa82419014f9' from matiti-feio 'f60119f7-f1cd-4524-b648-4a1db37bcbd9'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T03:24:48.017Z"},
+    "last": {"$date": "2026-06-22T11:18:18.703Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '2833d931-05dc-4095-87a9-e3ca9c0492d3' from CFC-Picero-x__ '5f1e5f25-154d-4fd1-9f7e-07b8cea0dc6f'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-16T23:33:04.735Z"},
+    "last": {"$date": "2026-06-22T11:18:18.688Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '42c47ddf-233a-4987-91ee-eb04959e4e1d' from edy-diesel '4d63d5d2-a635-416a-a451-e7ef620468ab'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T23:06:16.299Z"},
+    "last": {"$date": "2026-06-22T11:18:18.672Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '9af8ffb4-f690-4d40-b7e2-747532f4a432' from CFC-San1972 '870edad3-1019-45c0-b803-70ac3108b8ac'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T22:08:03.258Z"},
+    "last": {"$date": "2026-06-22T11:18:18.719Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '79d60d12-1d8d-4814-aa17-215bff699575' from CFC-San1972 '870edad3-1019-45c0-b803-70ac3108b8ac'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T22:48:01.832Z"},
+    "last": {"$date": "2026-06-22T11:18:18.672Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '9b367c1f-61c0-4158-ad78-ff61551b8577' from CFC-mari_bnt 'c4bd6b5d-845b-4252-90bb-73025476ddc6'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-16T21:57:57.142Z"},
+    "last": {"$date": "2026-06-22T11:18:18.688Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'd1d60136-66d4-4bd4-8cf8-9d95b8bfb024' from CFC-Katarina '490502d8-d5d1-4348-98cc-bbd002abb3ed'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T23:05:17.839Z"},
+    "last": {"$date": "2026-06-22T11:18:18.735Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '3a5012fc-3a2b-4296-aa0f-534615fb02ca' from CFC-mari_bnt 'c4bd6b5d-845b-4252-90bb-73025476ddc6'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T22:16:22.200Z"},
+    "last": {"$date": "2026-06-22T11:18:18.719Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '55b14c64-0869-4f22-9c18-a6deab16fad0' from CFC-TAKASH1_ll 'a6d0aff0-633a-4734-947b-feb87b14db6e'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T12:55:38.139Z"},
+    "last": {"$date": "2026-06-22T11:18:18.719Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '2aa10dea-ab65-4953-bdce-a69e58560b9a' from CFC-ronaldo 'baa60c90-cd67-4f25-87f6-4bfcd01f28d7'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T21:26:33.915Z"},
+    "last": {"$date": "2026-06-22T11:18:18.656Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '54cade94-61ae-4e00-80fe-8b55ef04621d' from CFC-TAKASH1_ll 'a6d0aff0-633a-4734-947b-feb87b14db6e'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-16T11:48:31.274Z"},
+    "last": {"$date": "2026-06-22T11:18:18.688Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'c7f21215-5ff5-40d5-8948-bcf31f0cd113' from CFC-ANGELLIXbr '5ba0490e-8900-465e-ba66-2710a746b766'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T23:36:31.640Z"},
+    "last": {"$date": "2026-06-22T11:18:18.735Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'd41911ff-0368-459d-b7ad-e05af247f2dc' from CFC-Picero-x__ '5f1e5f25-154d-4fd1-9f7e-07b8cea0dc6f'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T23:48:11.328Z"},
+    "last": {"$date": "2026-06-22T11:18:18.672Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '5e7bd5f9-09df-41d1-9add-7217a0cf5b60' from CFC-Katarina '490502d8-d5d1-4348-98cc-bbd002abb3ed'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T03:24:48.017Z"},
+    "last": {"$date": "2026-06-22T11:18:18.703Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '21a19612-07f2-4524-9f6d-cd057b2df616' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T10:48:25.446Z"},
+    "last": {"$date": "2026-06-22T11:18:18.703Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '92b87b8c-62e8-40cd-a8dc-1514beb3125c' from CFC-ANGELLIXbr '5ba0490e-8900-465e-ba66-2710a746b766'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T23:37:01.095Z"},
+    "last": {"$date": "2026-06-22T11:18:18.735Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'a1a74d30-7bf4-496e-898a-e123e7977530' from CFC-ronaldo 'baa60c90-cd67-4f25-87f6-4bfcd01f28d7'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-16T21:57:57.142Z"},
+    "last": {"$date": "2026-06-22T11:18:18.688Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '01a284b4-08b1-4ed5-b5bc-d7660ee6e4ff' from CFC-ANGELLIXbr '5ba0490e-8900-465e-ba66-2710a746b766'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T23:36:50.255Z"},
+    "last": {"$date": "2026-06-22T11:18:18.735Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '3b29bc28-62aa-45a0-a22a-5eba25674fe0' from CFC-San1972 '870edad3-1019-45c0-b803-70ac3108b8ac'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T03:24:48.017Z"},
+    "last": {"$date": "2026-06-22T11:18:18.703Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '88bb9ab8-26fb-45f3-8d81-003d96e51817' from CFC-TAKASH1_ll 'a6d0aff0-633a-4734-947b-feb87b14db6e'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T13:02:44.606Z"},
+    "last": {"$date": "2026-06-22T11:18:18.656Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '3e8f4f26-4ad0-4bf7-b4b8-9486ee5da603' from CFC-SirJohnOliv 'cad16e4e-73bd-49c7-a072-06e6f3872019'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T20:18:52.795Z"},
+    "last": {"$date": "2026-06-22T11:18:18.719Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'd1f3ab76-1b9b-4741-9876-51ec6a8b9848' from CFC-Katarina '490502d8-d5d1-4348-98cc-bbd002abb3ed'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-15T23:59:31.768Z"},
+    "last": {"$date": "2026-06-22T11:18:18.672Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '662b1318-da2a-4ef8-ae16-e9ac60632115' from CFC-ronaldo 'baa60c90-cd67-4f25-87f6-4bfcd01f28d7'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-17T20:44:40.315Z"},
+    "last": {"$date": "2026-06-22T11:18:18.719Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'e69b89dc-ed39-44e1-8de9-a7e60171f57c' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 33,
+    "first": {"$date": "2026-06-16T10:22:46.043Z"},
+    "last": {"$date": "2026-06-22T11:18:18.672Z"},
+    "surplus": 32
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'e4b2c9cc-bc7d-44ff-ac86-30766c080ad0' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 23,
+    "first": {"$date": "2026-06-15T08:51:54.611Z"},
+    "last": {"$date": "2026-06-22T03:18:35.378Z"},
+    "surplus": 22
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '67ecb789-f73b-4d2d-9f5c-651c852ab32f' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "c75e06ad-d2d9-42e2-a522-c369e670c328",
+    "deliveries": 20,
+    "first": {"$date": "2026-05-16T12:15:07.357Z"},
+    "last": {"$date": "2026-05-23T08:58:55.820Z"},
+    "surplus": 19
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '0c3b42a0-8ba4-44ee-82e1-7b8b20f3d061' from idyllic_aside4 '10c9793a-263a-4225-a90b-2a71762785a5'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 20,
+    "first": {"$date": "2026-05-18T19:28:11.835Z"},
+    "last": {"$date": "2026-05-25T04:14:29.378Z"},
+    "surplus": 19
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '8ae7f80d-480f-4ad6-b4c3-37baa18bf224' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 18,
+    "first": {"$date": "2026-05-01T10:14:42.069Z"},
+    "last": {"$date": "2026-05-08T02:22:42.664Z"},
+    "surplus": 17
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '9037644d-8400-498e-863f-cfe9c62b8ad1' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 17,
+    "first": {"$date": "2026-05-17T13:44:14.550Z"},
+    "last": {"$date": "2026-05-23T21:19:45.831Z"},
+    "surplus": 16
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '35edb8ce-3aa8-4119-a802-0ec819e1f70c' from xena1977-2025 '43d54ab1-2ee8-43c3-b98b-8416e941fca0'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 17,
+    "first": {"$date": "2026-05-17T13:44:14.554Z"},
+    "last": {"$date": "2026-05-23T21:19:45.834Z"},
+    "surplus": 16
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '6cf122ee-d300-428a-a55d-08ad4e38d258' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 17,
+    "first": {"$date": "2026-05-01T21:56:51.899Z"},
+    "last": {"$date": "2026-05-08T00:25:02.865Z"},
+    "surplus": 16
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'a56a7a04-ac25-4b75-8e89-47eb9104b905' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 17,
+    "first": {"$date": "2026-05-01T21:56:51.899Z"},
+    "last": {"$date": "2026-05-08T00:25:02.865Z"},
+    "surplus": 16
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '5c017a82-09b6-40f9-b8b1-f99624a91470' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 17,
+    "first": {"$date": "2026-05-17T13:44:14.547Z"},
+    "last": {"$date": "2026-05-23T21:19:45.829Z"},
+    "surplus": 16
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '042ea2e1-d30a-4d95-ac9d-0acb2cfb9064' from BuffPlaya '25a76fbd-13e2-4ea1-99b7-5f2195773462'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 17,
+    "first": {"$date": "2026-05-01T21:56:51.915Z"},
+    "last": {"$date": "2026-05-08T00:25:02.881Z"},
+    "surplus": 16
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'f2de6cb4-2b29-4e48-b00b-bbc0d91ef659' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 16,
+    "first": {"$date": "2026-06-08T19:58:59.745Z"},
+    "last": {"$date": "2026-06-14T05:34:48.196Z"},
+    "surplus": 15
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '5025aff1-b1bf-4866-9325-5f76f8e75447' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 16,
+    "first": {"$date": "2026-04-29T18:03:25.433Z"},
+    "last": {"$date": "2026-05-06T05:49:11.309Z"},
+    "surplus": 15
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '17e34b39-26f5-4b9b-928c-c20e3de95009' from JAMAICAN_BWOY5 '9bd493b7-744c-4ecb-b1f0-864e71977462'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 16,
+    "first": {"$date": "2026-05-16T19:05:47.959Z"},
+    "last": {"$date": "2026-05-23T17:00:56.717Z"},
+    "surplus": 15
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '0c6b7e24-d76b-4c5e-b35a-cdbe0d50d981' from JAMAICAN_BWOY5 '9bd493b7-744c-4ecb-b1f0-864e71977462'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 16,
+    "first": {"$date": "2026-05-16T19:05:47.959Z"},
+    "last": {"$date": "2026-05-23T17:00:56.717Z"},
+    "surplus": 15
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '7c71294c-046a-402a-acf5-004a005cb596' from Sushant2326 '17df0b19-e1d9-4397-bdab-537e357e510f'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 16,
+    "first": {"$date": "2026-05-16T19:05:47.959Z"},
+    "last": {"$date": "2026-05-23T17:00:56.717Z"},
+    "surplus": 15
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '3404ce29-723d-4a47-9cb5-dd4c41628754' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-01T21:56:51.899Z"},
+    "last": {"$date": "2026-05-07T02:05:48.460Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '3c91feca-15fd-4d9b-98c3-7ab3ac09703b' from edy-diesel '4d63d5d2-a635-416a-a451-e7ef620468ab'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T00:07:03.705Z"},
+    "last": {"$date": "2026-06-20T14:24:18.082Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '61998822-e684-4b92-9c88-b283dcb4b348' from CFC-Picero-x__ '5f1e5f25-154d-4fd1-9f7e-07b8cea0dc6f'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T00:48:26.917Z"},
+    "last": {"$date": "2026-06-20T14:24:18.082Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '0d2457cb-47d2-4461-ae55-1433b932696c' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-10T18:18:52.467Z"},
+    "last": {"$date": "2026-05-17T05:54:52.645Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '29a7008e-147e-418b-a576-f82903223039' from CFC-Picero-x__ '5f1e5f25-154d-4fd1-9f7e-07b8cea0dc6f'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-15T02:49:11.550Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '26421e8c-5423-4496-9d46-0ab332051922' from edy-diesel '4d63d5d2-a635-416a-a451-e7ef620468ab'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T18:51:20.432Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '22ad8f01-cf92-4c66-b0d0-f4b14c9de1fc' from CFC-Katarina '490502d8-d5d1-4348-98cc-bbd002abb3ed'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T00:07:03.705Z"},
+    "last": {"$date": "2026-06-20T14:24:18.082Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '305fb90d-416d-4ed2-a98e-170fb8597760' from Belteshazzar_D17 '8997d1fd-79dc-4b43-b643-7280ad8bb276'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-01T21:56:51.883Z"},
+    "last": {"$date": "2026-05-07T02:05:48.460Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '632970c8-3c73-4733-8a09-a045364f6212' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T10:40:00.673Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '86ad4f4e-8b7d-4e6f-a5c5-f9576b4a8a8c' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-10T18:18:52.451Z"},
+    "last": {"$date": "2026-05-17T05:54:52.645Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'bcaf080e-49a1-401a-94a6-f0ea0482303c' from Belteshazzar_D17 '8997d1fd-79dc-4b43-b643-7280ad8bb276'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-01T21:56:51.883Z"},
+    "last": {"$date": "2026-05-07T02:05:48.460Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '78301a87-2eb7-415c-afac-eb79a8e07ceb' from vaughn25688 'd5606f7c-1b5b-4c2b-bedd-460efb969313'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-10T18:18:52.451Z"},
+    "last": {"$date": "2026-05-17T05:54:52.645Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '27287620-c298-44ad-8e5e-4109825b85df' from CFC-San1972 '870edad3-1019-45c0-b803-70ac3108b8ac'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T19:19:37.567Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '38e01c3f-7a7b-4678-8ffc-a85dd4e6174b' from CFC-Katarina '490502d8-d5d1-4348-98cc-bbd002abb3ed'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-15T02:49:11.550Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'f192783c-792b-428e-9dce-6772b89d5e29' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-01T21:56:51.899Z"},
+    "last": {"$date": "2026-05-07T02:05:48.476Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'd34b17da-9190-49f2-abd1-782e97522a77' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T10:40:00.657Z"},
+    "last": {"$date": "2026-06-20T14:24:18.082Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request '57ccdb2a-3e31-4025-84dc-242ef9865218' from BuffPlaya '25a76fbd-13e2-4ea1-99b7-5f2195773462'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-01T21:39:27.971Z"},
+    "last": {"$date": "2026-05-07T15:42:40.196Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'c3c9a83b-0d6f-4b13-9370-39f7964335fe' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 14,
+    "first": {"$date": "2026-04-30T04:20:29.718Z"},
+    "last": {"$date": "2026-05-07T02:05:48.460Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '8ce60fd9-e5df-4b5d-a409-2cbad217250d' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-23T20:32:16.736Z"},
+    "last": {"$date": "2026-05-30T05:20:40.326Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request 'd5e9663a-2e7a-427f-916d-cfb251c9a9f5' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 14,
+    "first": {"$date": "2026-05-01T10:14:45.916Z"},
+    "last": {"$date": "2026-05-07T15:42:40.180Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '742dcb53-3977-41b1-bb02-176acf4c373c' from CFC-TAKASH1_ll 'a6d0aff0-633a-4734-947b-feb87b14db6e'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T14:09:39.626Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'f90b27cd-4a62-44c3-b20c-1a878441658c' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T10:40:00.657Z"},
+    "last": {"$date": "2026-06-20T14:24:18.082Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '09b0cb60-7336-4a64-b1a7-f779928ee787' from CFC-rennais 'b829a743-9011-4375-84ab-b53d64154640'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T10:40:00.673Z"},
+    "last": {"$date": "2026-06-20T14:24:18.098Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'a912aee6-1e67-4320-b5c7-2ab394e2ae36' from CFC-ronaldo 'baa60c90-cd67-4f25-87f6-4bfcd01f28d7'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 14,
+    "first": {"$date": "2026-06-14T00:07:03.705Z"},
+    "last": {"$date": "2026-06-20T14:24:18.082Z"},
+    "surplus": 13
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '904ea47c-6a42-4995-84ca-d2adff1f83af' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-09T13:11:28.461Z"},
+    "last": {"$date": "2026-05-15T14:48:48.199Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'e9ae16d3-8042-4868-b6fb-af5458782463' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T04:56:23.954Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'd3beef8c-0cd7-48f1-807a-aabdf48b6a06' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-09T23:43:51.142Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #700 count 1 for request 'a85eebf3-34ee-48ef-9d53-c6cde80aff1c' from fraenelmfamous19 '5062376a-d4f3-48f1-911d-483428ad4935'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T00:42:44.706Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '3581a7a4-b928-4217-af5e-7e370e65adf2' from fraenelmfamous19 '5062376a-d4f3-48f1-911d-483428ad4935'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-09T13:09:39.576Z"},
+    "last": {"$date": "2026-05-15T14:48:48.199Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '66b15199-9448-4a68-9c20-3d894e8a2def' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T00:29:39.880Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'e3d70b15-7768-478c-adcb-c46168bd517e' from xXMadMOonkeyXx 'd876a34b-04ba-485a-98e8-7c6ba77500e5'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-09T23:43:51.142Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #700 count 1 for request 'b364b3ce-8e69-451a-bdaf-5ec473ccbd8e' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T00:40:08.854Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request 'a75f7061-07df-46da-8ab8-64b3456b37ca' from esperanza23_ '88eaad98-61a4-4d46-93fe-e1af11e5f3aa'",
+    "UserId": "9de78aeb-238e-4c60-89d8-35fb75c8010f",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-21T15:25:55.842Z"},
+    "last": {"$date": "2026-05-27T15:48:30.724Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '10799ef0-52e6-4665-8448-6ab0416896ee' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T00:21:59.151Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '377db7cf-7672-428b-a261-7d20977ddc85' from NHz_Benny '77eea733-4ba3-4170-9594-1c79f82d5e58'",
+    "UserId": "a43d3e6a-ec44-462b-b477-37a5ec4b54a5",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-14T14:53:56.944Z"},
+    "last": {"$date": "2026-05-21T11:37:18.148Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '40bde85a-c8a6-4bc2-ad30-299d2f232af6' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "a51fd3c5-e745-4cda-ab83-91de7fd5b467",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T01:40:34.684Z"},
+    "last": {"$date": "2026-05-15T14:48:48.261Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #434 count 1 for request '6e120067-0435-4c0a-b6bc-3939911bf258' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 13,
+    "first": {"$date": "2026-05-10T23:25:38.551Z"},
+    "last": {"$date": "2026-05-17T22:19:19.611Z"},
+    "surplus": 12
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '4c4642b0-78a5-4419-90bd-ca42088e1265' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-10T01:40:30.399Z"},
+    "last": {"$date": "2026-05-15T12:35:41.215Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '666364ff-cbb4-44ec-a158-e0f782907189' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-10T00:22:31.850Z"},
+    "last": {"$date": "2026-05-15T12:35:40.684Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #31908 count 1 for request '9816f6db-05af-47b3-9085-fb0a87645842' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 12,
+    "first": {"$date": "2026-04-26T09:41:45.959Z"},
+    "last": {"$date": "2026-05-02T21:38:29.887Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '56dbc324-6b0d-4c2a-9806-2d15fb5fed0f' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-09T13:39:07.472Z"},
+    "last": {"$date": "2026-05-15T12:35:40.668Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '8e85e89d-bd4e-4eb9-b54b-e0e28fd612b5' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 12,
+    "first": {"$date": "2026-04-29T23:09:06.210Z"},
+    "last": {"$date": "2026-05-06T21:29:01.666Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '017d7f11-1129-42dd-8060-c7d3f2374c74' from King-DRAKE-TTv '344eb726-9d2a-4d16-b5d6-9da4ee55741c'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-15T17:33:41.538Z"},
+    "last": {"$date": "2026-05-21T22:42:58.458Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '8f9c4845-c6b3-46c2-b607-04e3cf85c6c3' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-09T21:03:02.882Z"},
+    "last": {"$date": "2026-05-15T12:35:40.668Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '64929f35-d7f2-4137-a683-5db1f56d6773' from xXMadMOonkeyXx 'd876a34b-04ba-485a-98e8-7c6ba77500e5'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-09T21:03:02.882Z"},
+    "last": {"$date": "2026-05-15T12:35:40.668Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '7a03c852-af79-41d0-9bfe-65b2a656b3e8' from fraenelmfamous19 '5062376a-d4f3-48f1-911d-483428ad4935'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-10T00:42:38.128Z"},
+    "last": {"$date": "2026-05-15T12:35:41.215Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '8f729020-f100-41d6-9602-904ad5adc6af' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 12,
+    "first": {"$date": "2026-04-29T23:45:18.100Z"},
+    "last": {"$date": "2026-05-06T21:29:01.681Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request 'c85f3f08-ccc8-4294-b81d-fb613dc8b58e' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-10T00:40:14.685Z"},
+    "last": {"$date": "2026-05-15T12:35:41.215Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '54960134-cadf-4d50-b4ec-bd3a19a32058' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 12,
+    "first": {"$date": "2026-04-29T23:43:26.124Z"},
+    "last": {"$date": "2026-05-06T21:29:01.666Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '2b192546-9370-4362-b32e-f18efac48272' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-10T00:22:02.574Z"},
+    "last": {"$date": "2026-05-15T12:35:40.684Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #718 count 1 for request 'dbe94917-14e1-45d7-a14b-1e0a64cc70a6' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-10T00:22:21.420Z"},
+    "last": {"$date": "2026-05-15T12:35:40.684Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #31908 count 1 for request '262dd959-c2f7-43ad-a281-9098a7d6fdc1' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 12,
+    "first": {"$date": "2026-04-25T22:55:08.001Z"},
+    "last": {"$date": "2026-05-02T21:38:29.887Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'e0094b80-811d-4a3e-b52f-ea82f381738d' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 12,
+    "first": {"$date": "2026-04-29T23:42:10.304Z"},
+    "last": {"$date": "2026-05-06T21:29:01.666Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #718 count 1 for request 'c57f653c-c8bd-4032-a71b-54bd21716811' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "f2935b5a-8813-4c73-a2ab-20c7a5ab971c",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-09T23:47:25.861Z"},
+    "last": {"$date": "2026-05-15T12:35:40.668Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #31161 count 1 for request 'c8f24233-650c-4d0f-a704-43d94beceb0f' from NHz_Benny '77eea733-4ba3-4170-9594-1c79f82d5e58'",
+    "UserId": "53f65696-cea1-47f0-9a03-3b6c43157bad",
+    "deliveries": 12,
+    "first": {"$date": "2026-05-14T15:45:27.632Z"},
+    "last": {"$date": "2026-05-20T22:27:26.347Z"},
+    "surplus": 11
+  },
+  {
+    "Message": "Received bait #469 count 1 for request '3ee4e552-10d6-417f-873e-218870d07eff' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 11,
+    "first": {"$date": "2026-04-26T19:12:14.120Z"},
+    "last": {"$date": "2026-05-02T19:43:40.578Z"},
+    "surplus": 10
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '50047d35-3aa7-409c-9165-980276e6e795' from idyllic_aside4 '10c9793a-263a-4225-a90b-2a71762785a5'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 11,
+    "first": {"$date": "2026-05-15T17:33:41.538Z"},
+    "last": {"$date": "2026-05-21T20:05:33.037Z"},
+    "surplus": 10
+  },
+  {
+    "Message": "Received bait #27560 count 1 for request '168eecb3-8d81-4963-ab24-1bf336a22085' from Pefranz64 'bd4ba5ee-1481-4bed-b892-20a2b8e71ce2'",
+    "UserId": "5d9d0b49-5886-40bb-873e-a5ca0fc1bc03",
+    "deliveries": 11,
+    "first": {"$date": "2026-06-01T15:40:55.446Z"},
+    "last": {"$date": "2026-06-07T12:12:13.956Z"},
+    "surplus": 10
+  },
+  {
+    "Message": "Received bait #31908 count 1 for request '16febda7-5120-4e1e-b275-ca983fe339ce' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 11,
+    "first": {"$date": "2026-04-25T21:38:44.717Z"},
+    "last": {"$date": "2026-05-02T19:24:57.446Z"},
+    "surplus": 10
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '53eab345-493f-4c1a-a7e0-4b9c2bf02557' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 10,
+    "first": {"$date": "2026-04-29T03:38:58.072Z"},
+    "last": {"$date": "2026-05-06T02:55:58.985Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #713 count 1 for request '09841dc3-cbe7-4975-ac42-c541c69a0a06' from Wildesie '23144089-c7de-4517-9ab6-b4a739871d01'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 10,
+    "first": {"$date": "2026-05-13T16:00:55.591Z"},
+    "last": {"$date": "2026-05-19T18:07:26.083Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #713 count 1 for request '2d3d5638-fb07-4350-8cbc-163877f5b549' from Natasha_Hunter '158ab4db-219e-4e86-b7b3-578065eda216'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 10,
+    "first": {"$date": "2026-05-13T16:00:55.607Z"},
+    "last": {"$date": "2026-05-19T18:07:26.083Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #713 count 1 for request 'f7a4ca09-a02c-4b4c-84c5-ce701d3a0388' from BillaBullet666 '482e7229-8821-474e-a418-df06341f5d53'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 10,
+    "first": {"$date": "2026-05-13T16:00:55.607Z"},
+    "last": {"$date": "2026-05-19T18:07:26.083Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #713 count 1 for request 'b8a41c9f-1c6c-4197-9fcb-8b7241cf2f22' from kgboomersie 'a802ebd3-e707-42cd-b792-f717b3ffb54c'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 10,
+    "first": {"$date": "2026-05-13T16:00:55.607Z"},
+    "last": {"$date": "2026-05-19T18:07:26.098Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'e0f3236d-d86d-4d8f-9106-9f1c922becc5' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 10,
+    "first": {"$date": "2026-04-25T16:51:24.714Z"},
+    "last": {"$date": "2026-05-02T05:48:47.598Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '0f0c611f-cabf-4d32-b97f-566628aa7d3d' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 10,
+    "first": {"$date": "2026-04-25T16:51:24.714Z"},
+    "last": {"$date": "2026-05-02T05:48:47.614Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #713 count 1 for request '7e12079d-830c-49d7-8086-702451e91b19' from RogueShootta '8fad0a24-f0d2-46d1-b383-c178c7ebb62e'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 10,
+    "first": {"$date": "2026-05-13T16:00:55.607Z"},
+    "last": {"$date": "2026-05-19T18:07:26.083Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '1bc5b5b4-5e61-4129-a5d5-fb50d66ed312' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 10,
+    "first": {"$date": "2026-04-25T16:51:24.698Z"},
+    "last": {"$date": "2026-05-02T05:48:47.598Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received bait #713 count 1 for request 'ebfbfbbe-4cb8-4fa3-b755-9cb605c18fb7' from Nancy_Wilde 'e8bad883-5c91-45c3-b8dc-f13aef2a8ffc'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 10,
+    "first": {"$date": "2026-05-13T16:00:55.607Z"},
+    "last": {"$date": "2026-05-19T18:07:26.098Z"},
+    "surplus": 9
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '69e2f500-dc8a-432e-980e-e459aabe340a' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 9,
+    "first": {"$date": "2026-04-27T21:54:59.053Z"},
+    "last": {"$date": "2026-05-04T06:49:43.598Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '3ad53d5f-fc3d-44b8-a761-f2b9348ca444' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 9,
+    "first": {"$date": "2026-05-15T17:33:41.538Z"},
+    "last": {"$date": "2026-05-21T19:20:59.707Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #294 count 1 for request '0b0ce901-ed14-46b0-8666-6305c8f2c8b0' from DMG-2912 'a6241ec5-35ad-42c9-bcc0-5cd68a4b62e2'",
+    "UserId": "653bf7f4-7ad9-47d9-8a0f-4870e7552668",
+    "deliveries": 9,
+    "first": {"$date": "2026-06-07T13:11:52.482Z"},
+    "last": {"$date": "2026-06-14T09:50:26.504Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #434 count 1 for request '518f4caa-0849-46f4-8dfc-3c80b988ff63' from Gerson-Motores '0f66d4e2-ae9c-4b77-99a8-a9f997615b44'",
+    "UserId": "d77c540d-2576-4147-82cc-a1712cba350f",
+    "deliveries": 9,
+    "first": {"$date": "2026-04-29T21:33:11.752Z"},
+    "last": {"$date": "2026-05-05T21:48:13.239Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '9b14e39b-9c5c-4e0d-953c-9c020c31a072' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 9,
+    "first": {"$date": "2026-04-27T21:54:59.053Z"},
+    "last": {"$date": "2026-05-04T06:49:43.598Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'da67d649-3328-4732-8fe7-03e3d4863561' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 9,
+    "first": {"$date": "2026-05-19T19:13:38.312Z"},
+    "last": {"$date": "2026-05-26T02:03:27.763Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #431 count 1 for request 'a83cd685-5772-47fd-bc7e-877a1ca516ba' from beastcb '371a1ff7-2c19-4210-ac1e-0cd9a77a2f62'",
+    "UserId": "feb77dfd-5a2e-44b7-be68-bb0c39663825",
+    "deliveries": 9,
+    "first": {"$date": "2026-05-23T22:26:20.729Z"},
+    "last": {"$date": "2026-05-29T20:44:25.436Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #15530 count 1 for request '24426c32-a2ce-4814-874e-b348b08188ee' from miller2244 'e06a21b5-764c-4c37-836f-62bc8d196cdb'",
+    "UserId": "7d72f323-3cf9-4990-89ed-fdb1f12b166f",
+    "deliveries": 9,
+    "first": {"$date": "2026-06-03T00:59:00.235Z"},
+    "last": {"$date": "2026-06-09T06:47:47.646Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #294 count 1 for request '68314d01-48b8-49c9-80a6-57283f2733fc' from Buried_N_The_Bog '78ada22a-678c-483d-8fed-226f10cf7275'",
+    "UserId": "653bf7f4-7ad9-47d9-8a0f-4870e7552668",
+    "deliveries": 9,
+    "first": {"$date": "2026-06-07T15:07:11.285Z"},
+    "last": {"$date": "2026-06-14T09:50:26.504Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #717 count 1 for request 'fdec53e6-a46b-460d-aa52-71fa7e8baae8' from NHz_Benny '77eea733-4ba3-4170-9594-1c79f82d5e58'",
+    "UserId": "e003deb0-336f-4050-bb5c-e4a492af6b4b",
+    "deliveries": 9,
+    "first": {"$date": "2026-05-16T00:43:18.371Z"},
+    "last": {"$date": "2026-05-22T20:00:22.952Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #717 count 1 for request 'f266fdb1-6d69-4c3b-be5c-f9e9bc2e8682' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "e003deb0-336f-4050-bb5c-e4a492af6b4b",
+    "deliveries": 9,
+    "first": {"$date": "2026-05-16T00:00:36.505Z"},
+    "last": {"$date": "2026-05-22T20:00:22.952Z"},
+    "surplus": 8
+  },
+  {
+    "Message": "Received bait #31907 count 1 for request '485f5e44-2745-43fb-9fb2-fac6770d463f' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 8,
+    "first": {"$date": "2026-04-25T17:50:00.701Z"},
+    "last": {"$date": "2026-05-02T12:06:58.772Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #431 count 1 for request 'f3ab8749-6532-49f6-9d95-4453ba1dcec9' from sm1975sch '61d636f3-c05e-4e87-a7b6-b8f688d991f0'",
+    "UserId": "feb77dfd-5a2e-44b7-be68-bb0c39663825",
+    "deliveries": 8,
+    "first": {"$date": "2026-05-22T16:34:47.880Z"},
+    "last": {"$date": "2026-05-29T11:10:24.648Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'd27dca3d-be16-4398-8881-654c14c0f282' from idyllic_aside4 '10c9793a-263a-4225-a90b-2a71762785a5'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 8,
+    "first": {"$date": "2026-05-20T06:57:24.769Z"},
+    "last": {"$date": "2026-05-27T04:33:58.933Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '85b7095d-a53c-4f55-98e3-35e629647cdc' from NHz_Benny '77eea733-4ba3-4170-9594-1c79f82d5e58'",
+    "UserId": "1ab93ab1-865f-457c-8502-c8433f2d2c1c",
+    "deliveries": 8,
+    "first": {"$date": "2026-05-16T13:43:39.693Z"},
+    "last": {"$date": "2026-05-22T16:32:18.640Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '260859fa-20dc-49b1-a9d8-2902442d0259' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "1ab93ab1-865f-457c-8502-c8433f2d2c1c",
+    "deliveries": 8,
+    "first": {"$date": "2026-05-16T12:14:12.868Z"},
+    "last": {"$date": "2026-05-22T16:32:18.640Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #31161 count 1 for request 'ec83051d-3c50-4875-8fcb-fc68f1f7a147' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "53f65696-cea1-47f0-9a03-3b6c43157bad",
+    "deliveries": 8,
+    "first": {"$date": "2026-05-13T11:24:44.530Z"},
+    "last": {"$date": "2026-05-20T10:38:02.721Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #31907 count 1 for request 'bc57fd51-59a9-411e-afff-f0fc25953700' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 8,
+    "first": {"$date": "2026-04-25T17:50:00.701Z"},
+    "last": {"$date": "2026-05-02T12:06:58.787Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '41822fc5-2bc8-4ee4-b5c0-5b823192fc17' from KINGZARAKI87TV 'c75e06ad-d2d9-42e2-a522-c369e670c328'",
+    "UserId": "1ab93ab1-865f-457c-8502-c8433f2d2c1c",
+    "deliveries": 8,
+    "first": {"$date": "2026-05-16T12:14:55.203Z"},
+    "last": {"$date": "2026-05-22T16:32:18.640Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '951bef80-0355-4097-a80c-545f085c196c' from xXMadMOonkeyXx 'd876a34b-04ba-485a-98e8-7c6ba77500e5'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 8,
+    "first": {"$date": "2026-04-28T13:45:14.734Z"},
+    "last": {"$date": "2026-05-04T14:11:40.269Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #511 count 1 for request '3fdd253b-8f73-480f-b571-9d4b355122c6' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 8,
+    "first": {"$date": "2026-06-02T13:34:24.223Z"},
+    "last": {"$date": "2026-06-09T12:37:43.429Z"},
+    "surplus": 7
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '24601d1d-58e9-46f2-b6c4-c0e611242277' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-25T17:38:31.383Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'db1066ed-0484-4f01-89d7-d70f43a6cfc5' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-20T05:02:02.697Z"},
+    "last": {"$date": "2026-05-26T19:56:41.410Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '5f8a621e-06a6-4aef-ae46-eefb2ffad36a' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T04:19:43.468Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #294 count 1 for request 'aa2e9053-c22f-4e34-b366-7e215730f1ba' from TooF30 '3ff3f039-6479-48e4-be77-13dd0ad15d21'",
+    "UserId": "8a196725-939f-48e3-b1d8-132abe688fe2",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-12T23:17:12.127Z"},
+    "last": {"$date": "2026-06-19T13:19:05.232Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '8c6b6d54-97d2-4747-9218-49702831e320' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T23:52:51.018Z"},
+    "last": {"$date": "2026-06-01T09:38:19.605Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'c34205e7-7210-4b63-a776-d826616dc068' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T23:52:51.010Z"},
+    "last": {"$date": "2026-06-01T09:38:19.605Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '86a3d28a-3908-4b2a-a8b7-18c9947817de' from BBW_Lover_420 '7d7772b8-c058-4f48-8d77-c16f56e63eb9'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-29T02:47:16.600Z"},
+    "last": {"$date": "2026-06-03T23:35:38.571Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #30566 count 1 for request 'edea1089-10fa-4416-a9c3-0b301fdad856' from jacksternater_ '28615734-eb01-4a67-9710-82f8626f47ca'",
+    "UserId": "b2e22027-6714-4b95-b750-a258cfe750a8",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-07T21:59:24.624Z"},
+    "last": {"$date": "2026-06-14T17:18:11.065Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #31081 count 1 for request 'a5ac73d3-2a92-48af-a7fd-1b3b838445f8' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-09T13:11:25.749Z"},
+    "last": {"$date": "2026-05-16T05:24:16.450Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'd8ce2041-73b6-4ccf-9b05-af7a707fe69b' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T05:31:09.389Z"},
+    "last": {"$date": "2026-06-01T09:38:19.605Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #712 count 1 for request 'ae7c2a81-582b-44d6-a026-797b86141499' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "4997690e-5c70-4f5d-834c-af01d8637fa4",
+    "deliveries": 7,
+    "first": {"$date": "2026-04-25T04:04:58.050Z"},
+    "last": {"$date": "2026-04-30T01:48:14.576Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '259a0f3f-5dd4-46d5-9f56-ecada085a42e' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T23:52:51.013Z"},
+    "last": {"$date": "2026-06-01T09:38:19.605Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'e7029266-37dc-499b-9f05-910737f952eb' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T12:09:24.386Z"},
+    "last": {"$date": "2026-06-01T11:35:29.611Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #708 count 1 for request 'c24f8d25-3c81-4dba-bf96-a9cd4290b650' from TankedDemon '27aa2a91-748b-4ef5-bf46-3d2dad615982'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T23:43:16.250Z"},
+    "last": {"$date": "2026-06-03T23:35:38.556Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '3bc28f60-8351-4531-9766-47a8ed8bd381' from NBW-Uncanny '09a7dead-f0aa-44e6-8f28-46db9cc4659f'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T04:19:09.246Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #712 count 1 for request '9230454f-1fd5-4c87-acd5-24aefd4ac03f' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "4997690e-5c70-4f5d-834c-af01d8637fa4",
+    "deliveries": 7,
+    "first": {"$date": "2026-04-25T04:04:58.050Z"},
+    "last": {"$date": "2026-04-30T01:48:14.576Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '030d5d6e-7234-4486-8d3f-d9fd2f07be96' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T12:09:34.096Z"},
+    "last": {"$date": "2026-06-01T11:35:29.611Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #15550 count 1 for request '8a4b7b03-3941-4817-a6ec-5c9b4d0dde8c' from Pefranz64 'bd4ba5ee-1481-4bed-b892-20a2b8e71ce2'",
+    "UserId": "5d9d0b49-5886-40bb-873e-a5ca0fc1bc03",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-03T16:55:02.895Z"},
+    "last": {"$date": "2026-06-08T15:29:00.056Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #31557 count 1 for request 'e9c98dec-11a0-40a1-b84a-75fbfa25c15a' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "8997d1fd-79dc-4b43-b643-7280ad8bb276",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-01T04:53:13.479Z"},
+    "last": {"$date": "2026-05-05T10:40:28.996Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #1454 count 1 for request '727953c7-6869-43ad-b6db-7d71dd32ab42' from BubbaBear42081 'fd387b34-a79c-4134-b905-694eb4026df3'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-28T02:15:44.716Z"},
+    "last": {"$date": "2026-06-03T23:35:38.571Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '73d173c6-6683-4875-ab8b-6f6c297e77b5' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-25T07:29:09.101Z"},
+    "last": {"$date": "2026-06-01T01:41:31.472Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #14310 count 1 for request '612f0423-150a-40e4-bfc3-7fa588c15625' from lIlllIll-IllIlIl 'ed86e98c-b308-40b8-9972-114e89e69f5a'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-02T13:00:29.721Z"},
+    "last": {"$date": "2026-06-07T18:45:16.211Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'f7863477-a3e4-4d6f-8c9a-c72f698718f6' from BB_KING_14 'f4a127e6-23a1-46a6-a31c-705ec0182e79'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T23:42:20.968Z"},
+    "last": {"$date": "2026-06-03T23:35:38.556Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '2ba60bc5-846d-405b-bf7c-ffa0d0c0ba3b' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-25T23:44:12.134Z"},
+    "last": {"$date": "2026-06-01T09:38:19.589Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '8ef768c2-2fa0-4a5e-96ea-5c4a354155e0' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T04:19:38.544Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #31081 count 1 for request '9fe33d2a-cbce-47ff-b02a-1be56aa8875a' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-09T16:36:56.160Z"},
+    "last": {"$date": "2026-05-16T05:24:16.454Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '9deb46b4-a5fc-4a69-95f5-8e0e429e0776' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T04:19:46.004Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #31907 count 1 for request '02e6874c-c68a-4069-9802-f781f3f35a81' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 7,
+    "first": {"$date": "2026-04-25T17:50:00.685Z"},
+    "last": {"$date": "2026-05-01T23:40:58.973Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '59cfa243-b3d2-477c-a7f6-308f16eec273' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T04:19:09.241Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '1762b204-7629-43b9-a14f-13fa0340a960' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T17:07:34.264Z"},
+    "last": {"$date": "2026-06-01T09:38:19.605Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #14310 count 1 for request '6dc94e99-061d-4378-953e-fe59451ad61f' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-02T13:00:29.721Z"},
+    "last": {"$date": "2026-06-07T18:45:16.211Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #30566 count 1 for request 'eabe64bb-79f5-4477-b69c-042d28fa4be0' from sneagalmaker 'a60b8085-ccea-410b-9865-6e24925f7dd5'",
+    "UserId": "b2e22027-6714-4b95-b750-a258cfe750a8",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-07T21:48:53.233Z"},
+    "last": {"$date": "2026-06-14T17:18:11.065Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #1454 count 1 for request '68f1f6ae-c43a-4258-bdd1-67061bfb98be' from BBW_Lover_420 '7d7772b8-c058-4f48-8d77-c16f56e63eb9'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-29T02:47:16.616Z"},
+    "last": {"$date": "2026-06-03T23:35:38.571Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'c7529dcb-bc77-486f-81a3-8f696e706894' from NBW-Uncanny '09a7dead-f0aa-44e6-8f28-46db9cc4659f'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-26T04:19:09.243Z"},
+    "last": {"$date": "2026-06-01T11:35:29.596Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '979b2d40-9664-4d9a-b67e-016734288e3a' from BB_KING_14 'f4a127e6-23a1-46a6-a31c-705ec0182e79'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-29T02:47:16.616Z"},
+    "last": {"$date": "2026-06-03T23:35:38.571Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '578d4b4f-d521-43c3-879f-5599c9bab567' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-25T07:29:09.101Z"},
+    "last": {"$date": "2026-06-01T01:41:31.470Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #31557 count 1 for request 'c1a248d7-845b-4b09-a5cd-e161d81ea8b2' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "8997d1fd-79dc-4b43-b643-7280ad8bb276",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-01T17:00:35.900Z"},
+    "last": {"$date": "2026-05-05T10:40:29.011Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #31557 count 1 for request '9f42fb7a-09de-4109-be80-08209001740d' from BuffPlaya '25a76fbd-13e2-4ea1-99b7-5f2195773462'",
+    "UserId": "8997d1fd-79dc-4b43-b643-7280ad8bb276",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-02T06:04:25.655Z"},
+    "last": {"$date": "2026-05-05T10:40:29.011Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #30566 count 1 for request '327351ae-85f2-4325-b6e7-e74e9eb3ed38' from Oaloff64 '86c39ccf-5007-49d1-a05e-9222f7c5b1af'",
+    "UserId": "b2e22027-6714-4b95-b750-a258cfe750a8",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-07T21:48:31.552Z"},
+    "last": {"$date": "2026-06-14T17:18:11.050Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '33fef674-f8b5-40f8-a044-31cc037d9b46' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-25T07:29:09.116Z"},
+    "last": {"$date": "2026-06-01T01:41:31.474Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'd1c8287a-c76d-4a52-9948-f7439265b933' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 7,
+    "first": {"$date": "2026-04-27T12:34:44.105Z"},
+    "last": {"$date": "2026-05-01T18:50:01.486Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '392fe187-713b-4a2b-ad6f-a87ae6e55a15' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-25T07:29:09.101Z"},
+    "last": {"$date": "2026-06-01T01:41:31.468Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #712 count 1 for request '64d60cf8-07d0-42dc-bd5f-4548a1e91f79' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "4997690e-5c70-4f5d-834c-af01d8637fa4",
+    "deliveries": 7,
+    "first": {"$date": "2026-04-25T04:04:58.066Z"},
+    "last": {"$date": "2026-04-30T01:48:14.576Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '93f98ef0-c0f2-4d4b-b117-87b203604c6b' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 7,
+    "first": {"$date": "2026-05-27T23:52:51.015Z"},
+    "last": {"$date": "2026-06-01T09:38:19.605Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #469 count 1 for request '771a8f1a-b05e-4790-b16a-06fbb208b55c' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "4997690e-5c70-4f5d-834c-af01d8637fa4",
+    "deliveries": 7,
+    "first": {"$date": "2026-04-25T04:04:58.050Z"},
+    "last": {"$date": "2026-04-30T01:48:14.576Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #14310 count 1 for request 'e9da47f9-c3bd-4fd6-ba43-0cb9a6564fee' from million_tea45 '35a634cb-bdca-4b2c-a1a0-08ac1215ff8e'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 7,
+    "first": {"$date": "2026-06-01T14:21:53.398Z"},
+    "last": {"$date": "2026-06-07T18:45:16.196Z"},
+    "surplus": 6
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '77511bde-da4e-40fb-9f98-e5ca53489fc6' from BB_KING_14 'f4a127e6-23a1-46a6-a31c-705ec0182e79'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-30T21:55:40.816Z"},
+    "last": {"$date": "2026-06-05T18:15:41.961Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request 'fce8d7b1-2155-449c-9226-7f4c031fbf3e' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "77eea733-4ba3-4170-9594-1c79f82d5e58",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-14T18:34:40.993Z"},
+    "last": {"$date": "2026-05-20T10:03:28.240Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '474de083-5fa5-405d-8688-27f0b4c962d5' from Ale__Grs '7be14a1d-19c3-4c9a-964e-e8a55fa2de3f'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-30T05:20:09.584Z"},
+    "last": {"$date": "2026-06-05T18:15:41.950Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14270 count 1 for request '2aa09aa9-3cbc-4164-8283-8d883e55333f' from ARROWfrance02001 'dea64cac-d207-4e40-b6be-63d7ed440639'",
+    "UserId": "6a91c6ab-91c5-4598-b16e-89553dfb90bc",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-04T20:03:42.909Z"},
+    "last": {"$date": "2026-06-11T09:06:17.529Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #31911 count 1 for request 'cae2cbe5-6af1-443a-a937-27cf2c236695' from Oaloff64 '86c39ccf-5007-49d1-a05e-9222f7c5b1af'",
+    "UserId": "b2e22027-6714-4b95-b750-a258cfe750a8",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-07T03:59:17.961Z"},
+    "last": {"$date": "2026-06-14T03:30:28.393Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '62929bb6-d993-4152-844c-03042ec91213' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-02T00:07:59.325Z"},
+    "last": {"$date": "2026-05-07T23:48:38.925Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '1f70a9f0-0943-4ab4-918d-fcefe141ec41' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-05T18:15:52.692Z"},
+    "last": {"$date": "2026-06-11T19:10:41.294Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '03522190-90a7-415d-978d-07a5819f5663' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-24T21:49:24.614Z"},
+    "last": {"$date": "2026-05-31T07:28:12.425Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '39f83eb3-523e-4500-99f1-cffe3dfcb5dd' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-08T16:31:45.945Z"},
+    "last": {"$date": "2026-05-14T21:41:52.578Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #469 count 1 for request 'b2aa1d2c-f005-4f2f-8785-a9af454f00ad' from ARROWfrance02001 'dea64cac-d207-4e40-b6be-63d7ed440639'",
+    "UserId": "a644fbcc-4aec-40f1-add1-b32e9ca8e884",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-05T17:20:54.008Z"},
+    "last": {"$date": "2026-06-11T09:59:48.782Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #469 count 1 for request 'acefe1cb-b8ed-4b74-81e4-ef992dad1bea' from barbedor54 'abb4dcf5-bb9a-44a2-8775-9ec958617951'",
+    "UserId": "a9e37323-efed-45ce-afb6-a09d01de2f16",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-22T23:16:42.912Z"},
+    "last": {"$date": "2026-05-27T19:01:27.405Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14270 count 1 for request '6b169be9-58b1-45d7-b310-8875d9a64112' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "77eea733-4ba3-4170-9594-1c79f82d5e58",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-16T10:15:51.943Z"},
+    "last": {"$date": "2026-05-20T10:03:28.255Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #435 count 1 for request '77872069-72cc-4753-bff6-2a0cf2a5e826' from NGVL-_-80 'ad758966-0a2a-432e-9ca4-13ebc548d9a6'",
+    "UserId": "a644fbcc-4aec-40f1-add1-b32e9ca8e884",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-05T13:34:57.673Z"},
+    "last": {"$date": "2026-06-11T09:59:48.766Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #717 count 1 for request '90208792-847f-4606-ac16-8bc6ba896424' from mocny_maxim555 '133f09ac-0125-4c10-bcbd-1ddf0ad7d665'",
+    "UserId": "1d9083cd-72b0-49f7-9b13-37136888d7e1",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-02T19:29:42.726Z"},
+    "last": {"$date": "2026-06-09T14:11:21.238Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14270 count 1 for request 'bb7a1918-2014-4667-a7d3-b36f239d4ac2' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "77eea733-4ba3-4170-9594-1c79f82d5e58",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-15T23:46:40.507Z"},
+    "last": {"$date": "2026-05-20T10:03:28.255Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #700 count 1 for request '353b3233-b305-4cd6-98ad-38a1d7a2cd98' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-24T12:07:44.579Z"},
+    "last": {"$date": "2026-05-31T07:28:12.425Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request '3d301909-a060-4263-81fe-00141771ee81' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "bc076258-b74e-4b10-a179-6649a14f9d5e",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-02T07:58:39.041Z"},
+    "last": {"$date": "2026-05-07T15:42:40.196Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'd9ebc4f3-9f2b-4745-8709-ec2042948ea4' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-24T12:08:01.767Z"},
+    "last": {"$date": "2026-05-31T07:28:12.425Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #717 count 1 for request '5966c3ff-e868-4aca-a251-5ff9fade714e' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "1d9083cd-72b0-49f7-9b13-37136888d7e1",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-02T16:32:58.908Z"},
+    "last": {"$date": "2026-06-09T14:11:21.222Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '221d6297-2022-4018-9979-ae870f88ffcc' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "1d9083cd-72b0-49f7-9b13-37136888d7e1",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-03T14:40:26.170Z"},
+    "last": {"$date": "2026-06-09T14:11:21.253Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '1114e698-30e0-4c0d-8112-ab98ada7a4b1' from BubbaBear42081 'fd387b34-a79c-4134-b905-694eb4026df3'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-27T23:31:07.538Z"},
+    "last": {"$date": "2026-06-03T02:00:13.681Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #31911 count 1 for request 'c0871a88-2089-45ee-b39a-b81139eb8f1a' from sneagalmaker 'a60b8085-ccea-410b-9865-6e24925f7dd5'",
+    "UserId": "b2e22027-6714-4b95-b750-a258cfe750a8",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-07T17:18:33.444Z"},
+    "last": {"$date": "2026-06-14T03:30:28.393Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #717 count 1 for request '0c43c444-44ee-47f7-80ba-677736b652d2' from lIlllIll-IllIlIl 'ed86e98c-b308-40b8-9972-114e89e69f5a'",
+    "UserId": "1d9083cd-72b0-49f7-9b13-37136888d7e1",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-02T19:29:42.726Z"},
+    "last": {"$date": "2026-06-09T14:11:21.238Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request 'f4abe3cb-7d12-4c11-9d0a-e7070886d684' from Dragons_horde '6cf0e941-c78f-4793-a7e8-85b724b0902a'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-02T00:09:24.405Z"},
+    "last": {"$date": "2026-05-07T23:48:38.927Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '1b888245-5ee2-468c-bf01-a1590a4c0711' from zampa_cerata 'e776722c-ee27-4ff4-b6bd-d8719611617a'",
+    "UserId": "90afe1ac-a05e-4727-b49a-e03892124385",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-22T23:00:46.060Z"},
+    "last": {"$date": "2026-05-29T17:20:15.428Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '091f2930-4ccd-4560-a3d8-f7b15c30220d' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "3b4df704-2ea0-4030-987b-590666d10d4c",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-23T20:32:18.611Z"},
+    "last": {"$date": "2026-05-30T14:27:46.924Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #15530 count 1 for request 'b7246b61-ad13-4330-8bc8-dd4d792a3849' from BeardedNdica '8db699d2-45c4-48ce-892d-945017bee79c'",
+    "UserId": "7d72f323-3cf9-4990-89ed-fdb1f12b166f",
+    "deliveries": 6,
+    "first": {"$date": "2026-06-01T22:47:33.811Z"},
+    "last": {"$date": "2026-06-08T11:00:16.268Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #15580 count 1 for request '6ea7bb6a-72d5-42de-9feb-f6cbe3e22175' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "3b4df704-2ea0-4030-987b-590666d10d4c",
+    "deliveries": 6,
+    "first": {"$date": "2026-05-23T19:14:21.439Z"},
+    "last": {"$date": "2026-05-30T14:27:46.924Z"},
+    "surplus": 5
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '4d378a93-fe13-46e8-9e03-3e506fc3cd40' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T00:18:06.990Z"},
+    "last": {"$date": "2026-05-28T07:32:29.878Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #294 count 1 for request '817efd46-d0d2-443a-98a8-0943b8fbdf31' from kgboomersie 'a802ebd3-e707-42cd-b792-f717b3ffb54c'",
+    "UserId": "bd8f9048-47af-49b7-bda7-4f1c9b9d9a3a",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-13T15:24:43.191Z"},
+    "last": {"$date": "2026-05-20T00:14:43.233Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #5610 count 1 for request '5f2e5e87-92ce-4bf8-a738-bf2c53f26439' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-01T10:54:17.559Z"},
+    "last": {"$date": "2026-06-07T11:52:09.118Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #711 count 1 for request '8b06dc38-692e-4110-be72-6e39e6ea76be' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T04:06:47.632Z"},
+    "last": {"$date": "2026-05-17T05:21:42.737Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '7c52df00-4d6b-4727-bf19-7a31a40fc5f6' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T12:24:03.722Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #711 count 1 for request 'd3bbdcb6-0fc1-4bad-90b4-14db2647c3a7' from vaughn25688 'd5606f7c-1b5b-4c2b-bedd-460efb969313'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T04:06:47.616Z"},
+    "last": {"$date": "2026-05-17T05:21:42.737Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '903897db-5436-44c4-bb78-ff084e2121a6' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-24T07:45:51.395Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #718 count 1 for request '9af296d1-a1b8-45d3-807b-5f3a923cb4c6' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "4997690e-5c70-4f5d-834c-af01d8637fa4",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T01:29:16.115Z"},
+    "last": {"$date": "2026-05-17T03:23:39.425Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #30566 count 1 for request '5d0874cf-0bdd-4342-bcb0-bb3e79ec8dca' from oifdad 'ba463fb5-e51c-49bf-a0fb-9b9c1e001917'",
+    "UserId": "b2e22027-6714-4b95-b750-a258cfe750a8",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-07T23:20:06.627Z"},
+    "last": {"$date": "2026-06-14T03:30:28.454Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'ef509c87-9e7d-4777-a189-8f7f4e8cd6f4' from eepybear_42 'ac725d7c-547e-4d80-9870-988f613feebf'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T00:19:28.337Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #718 count 1 for request 'ec5793b4-105e-4d34-9cad-f41201f9ed24' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T04:06:47.632Z"},
+    "last": {"$date": "2026-05-17T05:21:42.753Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #718 count 1 for request '35c1de34-ebb4-434b-966b-32748025a2d5' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "4997690e-5c70-4f5d-834c-af01d8637fa4",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T01:29:16.119Z"},
+    "last": {"$date": "2026-05-17T03:23:39.425Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '1e16de32-9855-431e-acb4-8dfb4228ae03' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-24T07:45:51.395Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '05d44f47-c437-44c5-97f2-634bd488508f' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-24T07:45:51.379Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'b5a3b673-f883-4f88-bcb5-5f46d92ceb88' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T00:19:28.337Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '05b4a7ac-72fb-4e3f-9f52-1e8101666fc5' from quintin_c67 '7b1e38ad-97d7-4bf3-9489-db88d2346ac2'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-24T07:45:51.379Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #718 count 1 for request 'adbd9af5-96a3-45f7-8fdf-45a5f14c9534' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T04:06:47.632Z"},
+    "last": {"$date": "2026-05-17T05:21:42.737Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'caccd86f-bb22-45d1-9ac2-8b263e2ca523' from Flo-GrayFOX '76b5f7f3-346a-46b1-9c70-4fe0743572c3'",
+    "UserId": "d6d85199-4a4b-45c1-b53a-67b1ee81a95f",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-21T10:45:26.671Z"},
+    "last": {"$date": "2026-05-27T19:10:03.322Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #30568 count 1 for request 'c6278cd1-c466-499e-b060-7a55e24a20d6' from kogari23 '83afb0e7-9279-4a9a-9498-5be4c2232a85'",
+    "UserId": "4afea628-cb68-4bcb-8b04-4a0b5639cecb",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-05T19:02:22.275Z"},
+    "last": {"$date": "2026-06-11T20:57:44.167Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '8ca984db-0c4c-488c-a468-39582d3ea734' from quintin_c67 '7b1e38ad-97d7-4bf3-9489-db88d2346ac2'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-24T07:45:51.379Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '0f426ffd-c228-4ca0-adef-aef96b123c3f' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T03:55:05.809Z"},
+    "last": {"$date": "2026-05-28T07:32:29.878Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '12604f16-cb6e-4684-9aae-235c8b296aa1' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T00:40:33.439Z"},
+    "last": {"$date": "2026-05-28T07:32:29.878Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #30568 count 1 for request '3f0a1082-9693-4a26-a4d7-c2aa296f1dd9' from Shooktheboy620 'a305b454-cdc3-4b48-b101-4cef44b0e397'",
+    "UserId": "4afea628-cb68-4bcb-8b04-4a0b5639cecb",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-05T23:44:12.020Z"},
+    "last": {"$date": "2026-06-11T20:57:44.182Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #30562 count 1 for request '7bd1ab00-484a-46c4-8a1d-2bf1303b7fe1' from TankedDemon '27aa2a91-748b-4ef5-bf46-3d2dad615982'",
+    "UserId": "fd387b34-a79c-4134-b905-694eb4026df3",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-19T00:08:49.631Z"},
+    "last": {"$date": "2026-06-24T00:13:46.775Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'd26ef230-1f6c-43e9-9461-3d2aa68b4dc1' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T12:24:29.519Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '7a6e3c50-4862-437c-8cdf-a67cc3ebd5bc' from RealArgii 'e003deb0-336f-4050-bb5c-e4a492af6b4b'",
+    "UserId": "cd54d1cf-d5c1-4f95-8623-aabe58a6a12c",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T00:32:11.333Z"},
+    "last": {"$date": "2026-05-27T15:51:52.045Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '1005a483-1e79-48a7-b373-638b593f1914' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T00:45:13.183Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '2c17b738-d804-40d7-a2fa-a4b9cf6f6a20' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T05:01:43.990Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '2d642d3f-9dac-494b-9223-bfa17197bc6b' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T03:55:12.324Z"},
+    "last": {"$date": "2026-05-28T07:32:29.878Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '9910359e-0f34-4d68-b397-b6ea50a6f19f' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T05:01:45.536Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '858809ba-f38d-4ca1-b2be-b6a5e235880e' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "cd54d1cf-d5c1-4f95-8623-aabe58a6a12c",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T00:32:39.991Z"},
+    "last": {"$date": "2026-05-27T15:51:52.060Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #711 count 1 for request 'e763f9c4-5342-4282-9364-4a70f4dd2561' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-11T04:06:47.632Z"},
+    "last": {"$date": "2026-05-17T05:21:42.753Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'a79d1022-b876-4c38-9178-be47cda7b765' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T12:24:15.398Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #30562 count 1 for request '1b43ff31-a0e0-4dd6-8a72-4365d93ebd62' from AlphaKing__X 'fef4d155-c7a0-4da8-82b2-87ff35322339'",
+    "UserId": "32c9ea2f-42ca-4d91-a0f3-d96cc5bde9f3",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-10T05:34:01.582Z"},
+    "last": {"$date": "2026-06-13T19:45:45.324Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #712 count 1 for request 'd8262ca3-0acc-449a-8245-69776d10646b' from stieviewonder69 '70beedb9-21e2-466a-bf9a-02ec82aecc2b'",
+    "UserId": "14d3d4f1-e276-48e9-aab3-3edcac128c4f",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-31T17:42:57.125Z"},
+    "last": {"$date": "2026-06-07T06:52:44.428Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'a548eb8d-d1ef-417d-9d69-4ed216fa348b' from KINGZARAKI87TV 'c75e06ad-d2d9-42e2-a522-c369e670c328'",
+    "UserId": "cd54d1cf-d5c1-4f95-8623-aabe58a6a12c",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T00:31:47.234Z"},
+    "last": {"$date": "2026-05-27T15:51:52.045Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '168efe55-074f-47c8-bfca-9e155c9b5dd1' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-22T03:55:14.372Z"},
+    "last": {"$date": "2026-05-28T07:32:29.878Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'fecf8d99-1db4-4ed4-a038-48990aa5803e' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "82a4172e-9acd-41b4-8072-6e68114ced62",
+    "deliveries": 5,
+    "first": {"$date": "2026-04-25T07:05:32.193Z"},
+    "last": {"$date": "2026-04-29T01:23:56.418Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'bead36c0-ee16-4610-9ab0-5cbbae2ec7d4' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T15:16:38.190Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #15530 count 1 for request 'd8d3b3da-9ec5-47f3-b179-85068999a543' from BOOMDATRUTH2 '30f95ada-24fa-4fa1-8671-48f73d804156'",
+    "UserId": "7d72f323-3cf9-4990-89ed-fdb1f12b166f",
+    "deliveries": 5,
+    "first": {"$date": "2026-06-01T05:46:38.916Z"},
+    "last": {"$date": "2026-06-07T08:24:06.343Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'bea2956a-f838-48eb-989c-047b436558e4' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 5,
+    "first": {"$date": "2026-05-23T05:01:47.302Z"},
+    "last": {"$date": "2026-05-28T07:32:29.894Z"},
+    "surplus": 4
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '91832564-2a1c-4f0e-8850-f803d83e6140' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T17:54:59.526Z"},
+    "last": {"$date": "2026-05-02T01:39:30.031Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request '0db8193a-2755-4353-b64c-933f8d56a3bf' from HoonDaDDy477 '94d3bbe4-aa28-44d8-9144-41697a73a6e9'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-01T02:40:51.582Z"},
+    "last": {"$date": "2026-06-07T03:49:56.544Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #713 count 1 for request 'dc666e73-9fb7-4582-a06c-9899bd3941a0' from Wildesie '23144089-c7de-4517-9ab6-b4a739871d01'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-16T21:25:38.765Z"},
+    "last": {"$date": "2026-05-19T18:07:26.161Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '93332532-db44-4248-be3f-c6a1e191e801' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "fb5f89f5-988d-4c10-8bdd-dd19c80da22d",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-20T05:58:41.182Z"},
+    "last": {"$date": "2026-06-24T13:44:37.102Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '90b6a985-afbd-4479-a6b3-3009bbec8da6' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-02T01:51:28.762Z"},
+    "last": {"$date": "2026-05-07T23:48:38.930Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'fadb7862-0c82-469d-befa-1d5a6dfc2660' from Nancy_Wilde 'e8bad883-5c91-45c3-b8dc-f13aef2a8ffc'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-18T14:36:41.361Z"},
+    "last": {"$date": "2026-05-19T18:07:26.177Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #431 count 1 for request '00d4e17b-85e0-4190-8a94-838daae376d3' from Tuffkille77 '7826941f-0903-47f6-9e69-c89d4055f135'",
+    "UserId": "feb77dfd-5a2e-44b7-be68-bb0c39663825",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-21T05:01:23.375Z"},
+    "last": {"$date": "2026-05-27T18:58:26.506Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #27550 count 1 for request 'de303cf3-06c8-4f4f-8c0a-9739834e092a' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-03T16:05:19.453Z"},
+    "last": {"$date": "2026-06-09T12:37:43.460Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #699 count 1 for request '6faa8901-5d2f-4bd4-99ed-d3128fcb4126' from Coool-71 '3a3abc23-392b-4599-9d4b-8ac447885c5d'",
+    "UserId": "ad758966-0a2a-432e-9ca4-13ebc548d9a6",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-29T10:16:50.450Z"},
+    "last": {"$date": "2026-06-03T08:43:42.708Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '84416ebc-b6e4-4f82-9ca7-18e32ca96281' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T16:54:54.354Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '25b51923-36d6-40bd-ab7e-bdb112eada29' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-02T01:52:24.437Z"},
+    "last": {"$date": "2026-05-07T23:48:38.932Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #707 count 1 for request 'fce83bb8-d5ad-495a-9b4b-ca82478138e0' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-09T03:58:59.359Z"},
+    "last": {"$date": "2026-05-14T23:01:59.103Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '527c8314-9825-46ba-93f9-ded28c5401aa' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-28T12:35:49.856Z"},
+    "last": {"$date": "2026-05-04T01:19:04.915Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '311f9b76-8749-43b8-a971-0b083d9f3f08' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T06:53:26.147Z"},
+    "last": {"$date": "2026-05-22T21:16:39.330Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #699 count 1 for request '8be346b4-7485-4b7f-8e1d-f78fb6987029' from resSAWA-NR '3ff20907-dda9-435c-929c-427890cb7af2'",
+    "UserId": "249a2e82-7a55-4f2d-a187-cdb8209e83a3",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-06T16:13:14.834Z"},
+    "last": {"$date": "2026-06-12T13:27:04.627Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '6ed2e955-e829-46e8-ab9a-a3724f57b6ed' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T12:02:49.243Z"},
+    "last": {"$date": "2026-05-02T01:39:30.000Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '3ca854dd-fcb8-4689-b43b-da70ee02b994' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "fb5f89f5-988d-4c10-8bdd-dd19c80da22d",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-19T17:37:08.733Z"},
+    "last": {"$date": "2026-06-24T13:44:37.070Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'afe28320-eb3b-4469-b3c3-f2ed486c420a' from fatty713patty '7d618ab9-c35b-4a2d-b5e0-508a222f8384'",
+    "UserId": "fb5f89f5-988d-4c10-8bdd-dd19c80da22d",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-21T07:33:17.436Z"},
+    "last": {"$date": "2026-06-24T13:44:37.117Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '5b9c23df-eb64-4a24-9c8b-f23c5be2018e' from Cowboys4357 'ef72f6ad-3b4b-4a21-b53e-0988c48b980b'",
+    "UserId": "fb5f89f5-988d-4c10-8bdd-dd19c80da22d",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-20T05:58:41.166Z"},
+    "last": {"$date": "2026-06-24T13:44:37.086Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #14220 count 1 for request '03f9e98f-43e9-4992-aaa4-3e606afdd186' from onward-cinema72 '64e544b1-d175-48bb-8f51-d207bae652d7'",
+    "UserId": "4afea628-cb68-4bcb-8b04-4a0b5639cecb",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-04T09:32:10.436Z"},
+    "last": {"$date": "2026-06-08T16:10:24.365Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '8cda6e7d-051a-4c94-bf17-7eeee5b97cb9' from BB_KING_14 'f4a127e6-23a1-46a6-a31c-705ec0182e79'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-26T04:50:28.878Z"},
+    "last": {"$date": "2026-06-02T02:23:36.556Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #294 count 1 for request '48f138cc-5b3c-4979-90b6-3f418da8c5e5' from Nancy_Wilde 'e8bad883-5c91-45c3-b8dc-f13aef2a8ffc'",
+    "UserId": "bd8f9048-47af-49b7-bda7-4f1c9b9d9a3a",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-12T20:38:10.570Z"},
+    "last": {"$date": "2026-05-18T19:56:01.899Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #707 count 1 for request 'cac3700c-e955-4dc5-934c-81dfd4a34ef9' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-09T03:58:59.374Z"},
+    "last": {"$date": "2026-05-14T23:01:59.103Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #294 count 1 for request '62267bad-dbec-4afb-a255-ad05b2d03fe3' from Natasha_Hunter '158ab4db-219e-4e86-b7b3-578065eda216'",
+    "UserId": "bd8f9048-47af-49b7-bda7-4f1c9b9d9a3a",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-12T14:51:44.469Z"},
+    "last": {"$date": "2026-05-18T19:56:01.883Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request '5cb895c9-cda6-40a2-94de-3b51a84dedad' from Wildesie '23144089-c7de-4517-9ab6-b4a739871d01'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T16:19:51.992Z"},
+    "last": {"$date": "2026-05-19T18:07:26.161Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request '790afa1b-b9bc-43ab-b270-b47f7d0fae03' from Natasha_Hunter '158ab4db-219e-4e86-b7b3-578065eda216'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T16:47:30.313Z"},
+    "last": {"$date": "2026-05-19T18:07:26.177Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #713 count 1 for request '85d88d21-96ac-40ba-96d9-386ea47d5dea' from Nancy_Wilde 'e8bad883-5c91-45c3-b8dc-f13aef2a8ffc'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T08:32:35.768Z"},
+    "last": {"$date": "2026-05-19T18:07:26.161Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request 'afe7bb17-5d00-43a4-869b-549ce2a267b6' from boobooblake '90bd8d94-4b42-459a-9540-b45371d01433'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-01T02:40:51.582Z"},
+    "last": {"$date": "2026-06-07T03:49:56.544Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #5610 count 1 for request '0d6a8dd6-bf0d-42d4-824d-404fdb05d17f' from lIlllIll-IllIlIl 'ed86e98c-b308-40b8-9972-114e89e69f5a'",
+    "UserId": "133f09ac-0125-4c10-bcbd-1ddf0ad7d665",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-31T12:52:38.157Z"},
+    "last": {"$date": "2026-06-06T13:45:04.506Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '75ccdcd5-0f50-4184-b3a1-feb234460598' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "fb5f89f5-988d-4c10-8bdd-dd19c80da22d",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-19T21:10:43.143Z"},
+    "last": {"$date": "2026-06-24T13:44:37.086Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'be30e625-ce3d-48cf-887f-a8b57d492df9' from kgboomersie 'a802ebd3-e707-42cd-b792-f717b3ffb54c'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-15T16:23:59.018Z"},
+    "last": {"$date": "2026-05-19T18:07:26.145Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'f062ef5c-b439-4eef-b7de-fedd2b47a44e' from greencat2008 '9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T06:53:26.132Z"},
+    "last": {"$date": "2026-05-22T21:16:39.315Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '04d8a289-9883-4aa6-b7a7-c0410ce7d30c' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T12:02:49.243Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '585ed27e-36e5-4b4a-85bb-d3e699130459' from david1033 '5191b94c-6d78-4a8d-839a-0677d81db3a7'",
+    "UserId": "0d97dd2d-9f73-4688-8b7c-150b7c73f755",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-04T07:22:39.065Z"},
+    "last": {"$date": "2026-06-10T17:04:17.560Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '3cf87dcd-fd9d-4e05-9b5d-1c99f71f023f' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T13:12:34.939Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'ce00f680-a744-4831-b604-83cde1373dfa' from kgboomersie 'a802ebd3-e707-42cd-b792-f717b3ffb54c'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T20:28:48.637Z"},
+    "last": {"$date": "2026-05-19T18:07:26.177Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #699 count 1 for request '595b9d0c-4930-426a-a26c-f23e7cdbcbbc' from kogari23 '83afb0e7-9279-4a9a-9498-5be4c2232a85'",
+    "UserId": "249a2e82-7a55-4f2d-a187-cdb8209e83a3",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-05T13:57:03.125Z"},
+    "last": {"$date": "2026-06-12T13:27:04.627Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #469 count 1 for request '0281dfb7-83f3-47de-8f20-236f16471531' from III-Trzbully-III 'd6d85199-4a4b-45c1-b53a-67b1ee81a95f'",
+    "UserId": "a9e37323-efed-45ce-afb6-a09d01de2f16",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-20T18:23:04.060Z"},
+    "last": {"$date": "2026-05-27T12:13:53.693Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request '37a00a73-79fc-485a-943a-d6c53ad0e9d6' from sai_p08 'd5f0ea52-e768-485a-bae9-e0580bfd3005'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-01T02:40:51.567Z"},
+    "last": {"$date": "2026-06-07T03:49:56.544Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'f3f15559-b9d2-403e-8e91-6338d7ee0db1' from Sushant2326 '17df0b19-e1d9-4397-bdab-537e357e510f'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T06:53:26.147Z"},
+    "last": {"$date": "2026-05-22T21:16:39.330Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'ceb7f5a0-718a-40ad-ba02-4a6ffa9a5be0' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T16:54:54.354Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '7c423581-bc9b-4bc4-ac3c-cd83c3f737cb' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T12:02:49.243Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request '07172f4a-45d3-4a04-b366-59ae43249489' from GeneralTadaaki '44bb4533-59a3-43c4-aebf-1c0843a1bb69'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-01T02:40:51.582Z"},
+    "last": {"$date": "2026-06-07T03:49:56.544Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request 'd546ee95-0c45-4da6-b5ee-a674d16e5911' from western-ghost62 '2734b990-cb0b-40b7-9fb5-108a100f341d'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-31T06:36:32.998Z"},
+    "last": {"$date": "2026-06-07T03:49:56.544Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #431 count 1 for request '256900ea-0199-4e2b-93d0-e25a05364136' from tommyresky99 '0e98467a-0cbd-4e53-8929-bcaccbbe56cd'",
+    "UserId": "feb77dfd-5a2e-44b7-be68-bb0c39663825",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-21T05:01:23.375Z"},
+    "last": {"$date": "2026-05-27T18:58:26.506Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '8530aede-907e-438c-a8ce-c0877b3aab10' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-02T03:00:42.570Z"},
+    "last": {"$date": "2026-05-07T23:48:38.936Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '2ae8ca36-cd58-4994-b749-46b2d53d2833' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T13:12:25.673Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'ee0bdb09-8522-46c0-a791-f1458d5e7a68' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-17T06:53:26.147Z"},
+    "last": {"$date": "2026-05-22T21:16:39.330Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'e443883c-162c-4e6a-8b98-6125e4f181f8' from Wildesie '23144089-c7de-4517-9ab6-b4a739871d01'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-14T17:34:06.838Z"},
+    "last": {"$date": "2026-05-19T18:07:26.130Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'f67bf487-935d-4292-8faa-c777464a3370' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 4,
+    "first": {"$date": "2026-04-25T17:10:08.964Z"},
+    "last": {"$date": "2026-05-02T01:39:30.015Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #713 count 1 for request 'dbd64d35-c5fd-4dde-ba34-898734e9a2a9' from Natasha_Hunter '158ab4db-219e-4e86-b7b3-578065eda216'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-16T20:21:23.398Z"},
+    "last": {"$date": "2026-05-19T18:07:26.161Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #718 count 1 for request 'a4b3d31d-7e72-4627-80f8-1cc1d8a0852e' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-10T03:57:54.792Z"},
+    "last": {"$date": "2026-05-14T23:01:59.103Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #14220 count 1 for request '51309638-a82b-414f-99c6-018d135b0367' from kogari23 '83afb0e7-9279-4a9a-9498-5be4c2232a85'",
+    "UserId": "4afea628-cb68-4bcb-8b04-4a0b5639cecb",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-04T08:14:47.362Z"},
+    "last": {"$date": "2026-06-08T16:10:24.365Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'a5e1c568-a3a7-4ccc-8390-3badd117e256' from Nancy_Wilde 'e8bad883-5c91-45c3-b8dc-f13aef2a8ffc'",
+    "UserId": "9129ad21-4ceb-40a0-8bfc-db1f8775bf62",
+    "deliveries": 4,
+    "first": {"$date": "2026-05-15T16:23:59.018Z"},
+    "last": {"$date": "2026-05-19T18:07:26.145Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '36af9eb8-dde1-4e27-a774-d7f70bf46858' from ICEcold_KID24 'b4e972cc-a967-48fc-95ad-03acf07acead'",
+    "UserId": "fb5f89f5-988d-4c10-8bdd-dd19c80da22d",
+    "deliveries": 4,
+    "first": {"$date": "2026-06-20T05:58:41.182Z"},
+    "last": {"$date": "2026-06-24T13:44:37.086Z"},
+    "surplus": 3
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '698f71eb-ebad-4b73-81f2-9ffb7bc3f918' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-13T00:47:13.776Z"},
+    "last": {"$date": "2026-06-16T18:31:32.004Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #435 count 1 for request '320b20bb-8b81-45b2-9042-f9c6412c97a3' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T21:24:59.360Z"},
+    "last": {"$date": "2026-06-16T18:31:31.957Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '188d77fa-f65c-4264-9a81-94f482c162f4' from mustangfreak8812 '00b86a92-1ca3-4c0d-aee4-ed8f5d29de36'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 3,
+    "first": {"$date": "2026-04-27T12:34:44.105Z"},
+    "last": {"$date": "2026-04-29T03:32:07.466Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '734aacd3-0c67-427a-9875-8efebc36f1d2' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 3,
+    "first": {"$date": "2026-04-27T12:34:44.105Z"},
+    "last": {"$date": "2026-04-29T03:32:07.451Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #14260 count 1 for request 'e99651f4-916d-465f-9b53-6d97446d2ebd' from sneagalmaker 'a60b8085-ccea-410b-9865-6e24925f7dd5'",
+    "UserId": "ba463fb5-e51c-49bf-a0fb-9b9c1e001917",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-06T17:48:04.363Z"},
+    "last": {"$date": "2026-06-12T17:42:37.898Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '22f4fca6-29ff-45b2-8785-7f8607e6ac18' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-13T00:45:51.858Z"},
+    "last": {"$date": "2026-06-16T18:31:32.004Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '874083a8-52a2-4f21-b209-174dad7e6bd8' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T13:54:24.760Z"},
+    "last": {"$date": "2026-06-16T18:31:31.973Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #435 count 1 for request '1c058cd2-4f21-4537-b0a0-632e35725dd8' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T13:54:24.766Z"},
+    "last": {"$date": "2026-06-16T18:31:31.973Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '4e7e7b01-ad4f-42dc-9f6c-3797945dcfd8' from ThatToxicBaldGuy '8219775c-73a2-4fd1-8cd0-0d0098c45adf'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-17T05:31:21.560Z"},
+    "last": {"$date": "2026-05-23T20:05:18.259Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'f21c45d8-22b9-486f-8633-4422d185308e' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 3,
+    "first": {"$date": "2026-04-27T12:34:44.089Z"},
+    "last": {"$date": "2026-04-29T03:32:07.451Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '6337ba71-addd-42f1-8aae-e46f98eb5e48' from king-Gc93 '1248a32b-09e5-4be7-9ded-e27a908d732e'",
+    "UserId": "2f6ce51f-82bd-46cc-a4aa-2f688f9edbbd",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-01T20:39:16.919Z"},
+    "last": {"$date": "2026-06-06T20:55:59.197Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '6b7b79c0-2780-4216-b566-af15e8ec6872' from Bazwani '91effd28-bc41-47ac-9ef8-bdd859ead890'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-17T06:02:32.555Z"},
+    "last": {"$date": "2026-05-23T20:05:18.259Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '41a33c31-ff22-4f33-952c-57a3f38b3552' from Remington511 '832c9cae-695b-47c6-afbe-b89f73729760'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-11T16:08:50.796Z"},
+    "last": {"$date": "2026-06-16T18:31:31.988Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '41747fee-bc39-471a-8322-86517a66836b' from ARROWfrance02001 'dea64cac-d207-4e40-b6be-63d7ed440639'",
+    "UserId": "ad758966-0a2a-432e-9ca4-13ebc548d9a6",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-01T09:44:13.352Z"},
+    "last": {"$date": "2026-06-08T09:19:58.504Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '97844ef1-48d1-46fc-ab23-57f72ca7898f' from CFC-San1972 '870edad3-1019-45c0-b803-70ac3108b8ac'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-13T14:02:27.525Z"},
+    "last": {"$date": "2026-06-20T13:35:53.934Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'ddafc6ee-ee1b-4f30-8f67-2e70810fea0e' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-21T01:29:57.998Z"},
+    "last": {"$date": "2026-05-26T21:56:16.459Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5540 count 1 for request '077c0a15-92d1-41e7-8448-c3f4515fecf3' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-11T16:08:50.796Z"},
+    "last": {"$date": "2026-06-16T18:31:31.988Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '9e91be81-981e-4b90-b6c1-2e9be936b571' from romain28310 '28df9727-0fb0-4306-9f4b-87e29520a978'",
+    "UserId": "ad758966-0a2a-432e-9ca4-13ebc548d9a6",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-02T12:45:01.608Z"},
+    "last": {"$date": "2026-06-08T09:19:58.504Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'd8733a99-fd5a-4d60-b995-cb4ff5fc9d36' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-24T07:16:13.103Z"},
+    "last": {"$date": "2026-05-26T21:56:16.490Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #30565 count 1 for request 'c62c400b-68f1-4213-9a33-6f19f9784bfd' from Oaloff64 '86c39ccf-5007-49d1-a05e-9222f7c5b1af'",
+    "UserId": "28615734-eb01-4a67-9710-82f8626f47ca",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-07T16:50:28.846Z"},
+    "last": {"$date": "2026-06-12T17:47:47.566Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5540 count 1 for request '02204d7d-6975-406c-9294-87f58e7c12b9' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T14:01:05.845Z"},
+    "last": {"$date": "2026-06-16T18:31:31.988Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5550 count 1 for request 'c499b7a2-5da9-43bb-a600-5d74e8f563e4' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T22:55:29.763Z"},
+    "last": {"$date": "2026-06-16T18:31:31.957Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5590 count 1 for request '60f30e07-59ed-474b-b743-52021b4f09ae' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-28T19:38:10.199Z"},
+    "last": {"$date": "2026-06-02T23:52:30.742Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'b3633ad2-75e1-4d09-bfd3-30d2bc66472a' from TankedDemon '27aa2a91-748b-4ef5-bf46-3d2dad615982'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-25T22:12:28.533Z"},
+    "last": {"$date": "2026-06-01T21:21:55.074Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '4500f3a9-86ba-4dd8-9d2c-fd1e7b9af189' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 3,
+    "first": {"$date": "2026-04-30T17:06:06.854Z"},
+    "last": {"$date": "2026-05-02T01:39:30.000Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5590 count 1 for request '4e4be6a3-1735-4620-b2f4-a900299c75c6' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-28T19:38:10.197Z"},
+    "last": {"$date": "2026-06-02T23:52:30.742Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request 'c8eac5aa-5406-4176-b19a-9668b702a830' from HoonDaDDy477 '94d3bbe4-aa28-44d8-9144-41697a73a6e9'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-31T03:36:32.083Z"},
+    "last": {"$date": "2026-06-06T16:08:57.377Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5550 count 1 for request '307cb30f-e2a9-4072-a9a7-ce7e3d3659dd' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T21:24:59.360Z"},
+    "last": {"$date": "2026-06-16T18:31:31.942Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '952c5446-6e5b-4829-a89e-fbd360c8c13c' from grecos161183 '7f6f64b8-29e8-4557-a110-9ca1e69a1824'",
+    "UserId": "2f6ce51f-82bd-46cc-a4aa-2f688f9edbbd",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-01T20:39:16.935Z"},
+    "last": {"$date": "2026-06-06T20:55:59.197Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5540 count 1 for request '5ce43bf3-c14d-467b-abbb-e0151a4cdb9e' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-11T03:20:34.799Z"},
+    "last": {"$date": "2026-06-16T18:31:31.988Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #1452 count 1 for request 'e8d44b02-3c76-4c5a-a3e5-789f75147954' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-06T04:05:13.520Z"},
+    "last": {"$date": "2026-05-12T21:50:49.747Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #443 count 1 for request 'b498063f-9b74-438c-9e50-e671587bf20d' from ARROWfrance02001 'dea64cac-d207-4e40-b6be-63d7ed440639'",
+    "UserId": "93b78060-081c-4af5-95f5-5919edbc23e0",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-05T16:41:52.747Z"},
+    "last": {"$date": "2026-06-09T15:55:16.885Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #716 count 1 for request 'eb2b12a0-ef55-4e4d-baa7-671c8854797c' from BBW_Lover_420 '7d7772b8-c058-4f48-8d77-c16f56e63eb9'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-25T22:13:18.620Z"},
+    "last": {"$date": "2026-06-01T21:21:55.074Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request 'd4c19795-5cad-40f3-b6c6-bda7753a7d11' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-11T16:08:50.796Z"},
+    "last": {"$date": "2026-06-16T18:31:31.988Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #435 count 1 for request 'a542c507-3f77-4373-a399-a5f8b220c90a' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T13:54:24.754Z"},
+    "last": {"$date": "2026-06-16T18:31:31.973Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #1452 count 1 for request '35faf793-f163-499d-8c26-1ad5552845e9' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-06T02:34:04.903Z"},
+    "last": {"$date": "2026-05-12T21:50:49.747Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '8d763371-b573-4f77-862a-0b1882fc3dc3' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T13:54:24.757Z"},
+    "last": {"$date": "2026-06-16T18:31:31.973Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #14260 count 1 for request '95dbd365-805e-49f6-8b93-4113d2924eb9' from Oaloff64 '86c39ccf-5007-49d1-a05e-9222f7c5b1af'",
+    "UserId": "ba463fb5-e51c-49bf-a0fb-9b9c1e001917",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-06T23:00:45.012Z"},
+    "last": {"$date": "2026-06-12T17:42:37.898Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '74d8bd4e-58b4-4a21-bdba-b4bb0301b6aa' from Remington511 '832c9cae-695b-47c6-afbe-b89f73729760'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T21:24:59.360Z"},
+    "last": {"$date": "2026-06-16T18:31:31.957Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '1a5689b4-ce4d-4279-a799-6c9cd285253f' from Bazwani '91effd28-bc41-47ac-9ef8-bdd859ead890'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-17T06:02:41.586Z"},
+    "last": {"$date": "2026-05-23T20:05:18.259Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '31f5f086-07d4-4d1e-8cab-f06cd61b0e16' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "3297ab74-ad00-43c0-8580-353a5f850af3",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-16T06:14:18.778Z"},
+    "last": {"$date": "2026-06-19T12:45:34.757Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '7a68a930-d0a7-4a02-a429-c23d027e0d96' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-15T12:41:03.320Z"},
+    "last": {"$date": "2026-06-19T13:35:49.859Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #721 count 1 for request '6e339fc2-f767-47f7-84e2-9d7db85a08df' from TankedDemon '27aa2a91-748b-4ef5-bf46-3d2dad615982'",
+    "UserId": "29e38456-9366-4a20-98c5-230cffbfaca1",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-25T22:16:03.383Z"},
+    "last": {"$date": "2026-06-01T21:21:55.074Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request 'a3d095c4-b8c0-4e83-ac02-4f77ac89f96e' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-06T04:36:14.979Z"},
+    "last": {"$date": "2026-05-12T21:50:49.747Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '6e5b86ba-a13a-438b-853d-30ad2e52da96' from mickeyoneee 'ea1d091e-368d-4e23-81f7-b25ddf83dc91'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-22T06:56:53.672Z"},
+    "last": {"$date": "2026-05-26T21:56:16.459Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'f757a2b9-1467-4075-b2c4-c3a7a2e53e58' from DANMAROTTO '0eee53db-cdcd-4911-b4fc-bbaaf9f76ac1'",
+    "UserId": "5880e947-b043-4156-aa60-e20571a3e7f5",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-04T13:18:46.416Z"},
+    "last": {"$date": "2026-05-08T14:38:18.478Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '5d1572db-e236-4dba-bfc5-6c97ef280120' from Super_CHI911 '371144f6-e946-4339-967f-d7a0815ed683'",
+    "UserId": "5880e947-b043-4156-aa60-e20571a3e7f5",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-02T20:16:20.458Z"},
+    "last": {"$date": "2026-05-08T14:38:18.415Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'b5c2c353-925f-422c-864c-b1bf59f5f58d' from Z_Carlo_38 'b2a79adb-2e5f-4730-86e1-392e8dac9f3d'",
+    "UserId": "90afe1ac-a05e-4727-b49a-e03892124385",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-21T16:19:19.399Z"},
+    "last": {"$date": "2026-05-28T15:15:16.184Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '9587590a-9f02-4aef-95af-f2c2925b4b7c' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "3297ab74-ad00-43c0-8580-353a5f850af3",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-16T06:14:18.778Z"},
+    "last": {"$date": "2026-06-19T12:45:34.757Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '0b674c4b-aa21-42fd-92c2-2979f2b8cff6' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 3,
+    "first": {"$date": "2026-04-27T12:34:44.105Z"},
+    "last": {"$date": "2026-04-29T03:32:07.466Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request 'faa96690-ba56-47fb-bd3f-2e74bddffed2' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-06T04:36:31.765Z"},
+    "last": {"$date": "2026-05-12T21:50:49.747Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request 'ac860644-1f52-4464-b599-885ab6cf55f6' from Crazy_Ace73 '392a10ee-e090-40fe-b460-e3f729ed8f76'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-17T05:31:21.560Z"},
+    "last": {"$date": "2026-05-23T20:05:18.243Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #30565 count 1 for request '48a31ec0-60d0-457a-aff4-e44bd245534f' from sneagalmaker 'a60b8085-ccea-410b-9865-6e24925f7dd5'",
+    "UserId": "28615734-eb01-4a67-9710-82f8626f47ca",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-06T17:47:51.428Z"},
+    "last": {"$date": "2026-06-12T17:47:47.566Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '79863547-edb4-4409-89fe-04958d55cc28' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-21T05:55:15.479Z"},
+    "last": {"$date": "2026-05-28T04:37:16.715Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '6f5ea91e-cadf-4436-b83c-ddca1bf72ba4' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 3,
+    "first": {"$date": "2026-04-30T17:06:06.854Z"},
+    "last": {"$date": "2026-05-02T01:39:30.000Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #431 count 1 for request '095244a5-7b04-43b7-9e99-2d8ee99bcc5a' from Tommylie_05 'bd41eb54-4586-499e-9128-a2be68393dac'",
+    "UserId": "feb77dfd-5a2e-44b7-be68-bb0c39663825",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-20T15:12:11.652Z"},
+    "last": {"$date": "2026-05-26T11:07:54.239Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request '3d93137b-9180-4bc5-8ece-36783d62a4d4' from boobooblake '90bd8d94-4b42-459a-9540-b45371d01433'",
+    "UserId": "95a7896d-cb65-4c8b-97b3-e346ecc86ac6",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-30T20:54:24.375Z"},
+    "last": {"$date": "2026-06-06T16:08:57.377Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #720 count 1 for request 'b3972923-ca43-43d2-bd3d-e8e28f49cbc6' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "2f2238e2-dd73-4d8f-ab30-2b1535d96db4",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-01T14:32:49.770Z"},
+    "last": {"$date": "2026-06-03T14:32:15.022Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '1186014d-0c31-4446-9cfb-ea76e547f6b5' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T13:54:24.763Z"},
+    "last": {"$date": "2026-06-16T18:31:31.973Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '467e6737-114b-4731-8eec-28a41defe0fb' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-06T12:56:58.458Z"},
+    "last": {"$date": "2026-05-12T21:50:49.747Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #1452 count 1 for request 'e67522fc-5729-4d95-98f3-b04a0c5d7446' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-06T03:18:58.100Z"},
+    "last": {"$date": "2026-05-12T21:50:49.747Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '4f51823c-4225-42c3-aea1-0e46ec488153' from greencat2008 '9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd'",
+    "UserId": "43d54ab1-2ee8-43c3-b98b-8416e941fca0",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-21T05:28:53.502Z"},
+    "last": {"$date": "2026-05-26T21:56:16.459Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '2002df67-26e3-434e-a3a5-fc04adf918e0' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T21:24:59.360Z"},
+    "last": {"$date": "2026-06-16T18:31:31.957Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #443 count 1 for request '7a7a2595-b19b-412a-a745-bd212e0695bf' from KRIST-ARROW2 'bf99fc8e-9df2-4b65-bf77-524b0fd50ee9'",
+    "UserId": "93b78060-081c-4af5-95f5-5919edbc23e0",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-05T17:11:50.149Z"},
+    "last": {"$date": "2026-06-09T15:55:16.885Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '72311d20-6943-440f-a64e-ccd7a3cec143' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T23:15:14.865Z"},
+    "last": {"$date": "2026-06-16T18:31:31.973Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5540 count 1 for request '6d939ddf-94f8-461f-bba0-89172b08be54' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-12T04:46:46.951Z"},
+    "last": {"$date": "2026-06-16T18:31:32.004Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #14260 count 1 for request 'e3ffdfe1-c3d6-4ba5-ba79-d11305b4356f' from jacksternater_ '28615734-eb01-4a67-9710-82f8626f47ca'",
+    "UserId": "ba463fb5-e51c-49bf-a0fb-9b9c1e001917",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-06T17:45:07.963Z"},
+    "last": {"$date": "2026-06-12T17:42:37.898Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '9c1fdcfe-56a4-4768-9b60-542fbba36324' from bigbeast29 'c7d7f63e-eb9c-4982-9416-f6f4a9172251'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-10T13:54:24.768Z"},
+    "last": {"$date": "2026-06-16T18:31:31.988Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '2f78598f-c3d1-4f7f-b7e2-92db86ffb296' from DarkGhotsJ '4e3ddf98-20d9-49bc-b766-bf5269ef3348'",
+    "UserId": "5880e947-b043-4156-aa60-e20571a3e7f5",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-02T20:16:20.458Z"},
+    "last": {"$date": "2026-05-08T14:38:18.415Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '5b24e46d-57ed-4816-bd9b-1f6b77f3d554' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "3297ab74-ad00-43c0-8580-353a5f850af3",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-16T06:14:18.763Z"},
+    "last": {"$date": "2026-06-19T12:45:34.742Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #443 count 1 for request '4c40d883-c144-4798-953c-4d658133b4e7' from Havock-AhorA 'a644fbcc-4aec-40f1-add1-b32e9ca8e884'",
+    "UserId": "93b78060-081c-4af5-95f5-5919edbc23e0",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-05T17:06:09.548Z"},
+    "last": {"$date": "2026-06-09T15:55:16.885Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #704 count 1 for request '0082e546-1c58-467b-a6c9-2f1ec603e81f' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-13T00:21:31.040Z"},
+    "last": {"$date": "2026-06-16T18:31:32.004Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'b0955ef0-df5f-481f-b714-7c03b0a96650' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "3297ab74-ad00-43c0-8580-353a5f850af3",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-16T06:14:18.763Z"},
+    "last": {"$date": "2026-06-19T12:45:34.757Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #709 count 1 for request 'd905099f-22bf-4cf0-8e2f-3143c032241c' from graviertique47 '6525e1d2-0bcb-44b9-80b0-e76ba7779ceb'",
+    "UserId": "ad758966-0a2a-432e-9ca4-13ebc548d9a6",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-02T12:45:01.608Z"},
+    "last": {"$date": "2026-06-08T09:19:58.504Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #431 count 1 for request 'aada58dd-e42b-4f0a-9875-d274a59993c1' from Mr-_-Goobs '6f73a01b-6ea6-4388-9473-f3ed8bbabc88'",
+    "UserId": "feb77dfd-5a2e-44b7-be68-bb0c39663825",
+    "deliveries": 3,
+    "first": {"$date": "2026-05-20T16:17:03.796Z"},
+    "last": {"$date": "2026-05-26T11:07:54.250Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #5550 count 1 for request 'c8a620d5-27ca-431e-8d96-eed33ddd8c7f' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 3,
+    "first": {"$date": "2026-06-09T21:48:22.401Z"},
+    "last": {"$date": "2026-06-16T18:31:31.957Z"},
+    "surplus": 2
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'b45e6019-b61e-4086-8e29-7ba71bdcfe76' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:20:11.274Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5600 count 1 for request '6af71401-93d7-43bb-ba5f-c49182881bb2' from snickers_biscuit 'f7fc7e2b-3279-40ff-b990-1e02ae398880'",
+    "UserId": "3783505b-7ff7-4e9f-9030-408ee13d1b1c",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-27T20:38:30.869Z"},
+    "last": {"$date": "2026-06-02T16:31:00.857Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '5a2e8aa6-c420-4ac2-bf05-6f4c03767090' from Kaisern 'c158fbe9-18fe-4723-99d1-718c4034ac74'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T19:56:54.652Z"},
+    "last": {"$date": "2026-05-22T13:32:47.229Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '4fcdbec3-f82a-40bd-bcdd-b554b4d44874' from CFC-ronaldo 'baa60c90-cd67-4f25-87f6-4bfcd01f28d7'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-12T21:34:50.631Z"},
+    "last": {"$date": "2026-06-19T14:21:35.746Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #1456 count 1 for request '6ad31955-ba25-4126-abb9-b8f7afc9a178' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T12:50:34.914Z"},
+    "last": {"$date": "2026-05-28T22:03:01.598Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'f7c273ee-2b46-49d1-8930-100a7922f72d' from CFC-TAKASH1_ll 'a6d0aff0-633a-4734-947b-feb87b14db6e'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-13T13:35:06.762Z"},
+    "last": {"$date": "2026-06-19T14:21:35.746Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #16040 count 1 for request 'bb8253d4-54e9-4644-a59d-72b1962b780e' from Jimmywright37 '95a7896d-cb65-4c8b-97b3-e346ecc86ac6'",
+    "UserId": "90bd8d94-4b42-459a-9540-b45371d01433",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-02T03:25:29.323Z"},
+    "last": {"$date": "2026-06-07T19:16:00.276Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #699 count 1 for request '744102e4-a032-4131-b80e-2161495d00ad' from xXMadMOonkeyXx 'd876a34b-04ba-485a-98e8-7c6ba77500e5'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-06T09:58:44.906Z"},
+    "last": {"$date": "2026-05-12T11:17:38.011Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'b3064722-9040-4970-8d85-3c9ebdfd0c09' from AssassinDuck456 'b4d42d9c-5543-40a5-ab30-051c9ebe5a96'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:20:11.274Z"},
+    "last": {"$date": "2026-06-19T13:35:49.906Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5600 count 1 for request 'e178c415-eee5-4c60-9b2b-035cbfd1117b' from AlphaKing__X 'fef4d155-c7a0-4da8-82b2-87ff35322339'",
+    "UserId": "9b18ba77-6301-46fc-94ec-d75006b56f62",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-04T08:58:15.417Z"},
+    "last": {"$date": "2026-06-08T17:26:05.485Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '0f72108c-a2fd-4330-90f4-afb6dab87f28' from greencat2008 '9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T17:16:54.398Z"},
+    "last": {"$date": "2026-05-28T22:03:01.613Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #31331 count 1 for request '8856f4c8-c6c0-4a0b-93cc-68e05db54af9' from glodomorek1982 '67f13533-4b7b-403f-99ab-3bffcc5280d6'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T15:00:23.892Z"},
+    "last": {"$date": "2026-05-19T21:46:54.422Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'ec87dbee-4fa5-4565-977f-bf601af88dc9' from ICEcold_KID24 'b4e972cc-a967-48fc-95ad-03acf07acead'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:20:11.274Z"},
+    "last": {"$date": "2026-06-19T13:35:49.906Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14260 count 1 for request '7310c122-c325-4709-91e9-45364a7dc403' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "c75e06ad-d2d9-42e2-a522-c369e670c328",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-20T11:53:53.706Z"},
+    "last": {"$date": "2026-05-24T18:34:05.328Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5600 count 1 for request '792e81c4-25b1-4bce-8991-85b4b2a9704b' from domeGG36 '828a00d7-868a-42ad-adc3-493dc2964454'",
+    "UserId": "3783505b-7ff7-4e9f-9030-408ee13d1b1c",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-27T20:38:19.523Z"},
+    "last": {"$date": "2026-06-02T16:31:00.857Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '99abce3b-d2f3-4e52-a1fa-ec3d280edf78' from unit969preium 'dd461b13-d634-47af-afd0-06d5b96c52ad'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T00:04:47.533Z"},
+    "last": {"$date": "2026-05-19T21:46:54.407Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #721 count 1 for request '721ad650-5a19-42f6-9258-a01f9efc01fa' from sm1975sch '61d636f3-c05e-4e87-a7b6-b8f688d991f0'",
+    "UserId": "7826941f-0903-47f6-9e69-c89d4055f135",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T16:17:43.912Z"},
+    "last": {"$date": "2026-05-29T10:46:18.036Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #511 count 1 for request 'a3856da3-db32-46be-ab62-6f061fc2a0b2' from stoneybroke1972 'a6cad10c-1a84-4b4a-a617-587e4cdd2841'",
+    "UserId": "0c906923-824a-412e-92fb-322b3f9763b1",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-31T11:10:51.631Z"},
+    "last": {"$date": "2026-06-04T14:00:01.617Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '90c73f55-fd64-41a0-9437-1fc032e83a1e' from fishdaddy54 'd96c9ed1-a430-475e-ba11-bd5dd06b03f0'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-27T01:55:00.123Z"},
+    "last": {"$date": "2026-04-30T04:54:26.133Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request '5ac64b91-8614-4bd6-be9f-6ad8c32bc5f5' from unit969preium 'dd461b13-d634-47af-afd0-06d5b96c52ad'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T19:42:52.163Z"},
+    "last": {"$date": "2026-05-19T21:46:54.375Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30563 count 1 for request '7c6373b9-f8b0-4048-9036-e2af13dfc264' from coyotbipbip64 '34e367ec-6158-4b2b-9aa5-e7032a02b0e7'",
+    "UserId": "bbc75add-b5d6-486f-9edc-5572c586cc4f",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-18T16:03:32.806Z"},
+    "last": {"$date": "2026-05-24T10:36:23.533Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '0dbb780a-f7b7-4205-a6d0-91b59258fa62' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-16T12:38:51.492Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #469 count 1 for request '34db3aaf-39c1-428e-b8b7-19622021b0bd' from domeGG36 '828a00d7-868a-42ad-adc3-493dc2964454'",
+    "UserId": "3783505b-7ff7-4e9f-9030-408ee13d1b1c",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-27T20:43:48.956Z"},
+    "last": {"$date": "2026-06-02T16:31:00.857Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request 'c870f18b-8b4e-4cdd-a12c-e59c867bd0bd' from glodomorek1982 '67f13533-4b7b-403f-99ab-3bffcc5280d6'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T19:42:52.163Z"},
+    "last": {"$date": "2026-05-19T21:46:54.391Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '2f2fb06e-04be-4378-bed0-56c902ef0b27' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-16T12:38:51.492Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30563 count 1 for request 'edd190af-3c03-46e1-a5a3-3fe1b9f243f6' from TankedDemon '27aa2a91-748b-4ef5-bf46-3d2dad615982'",
+    "UserId": "fd387b34-a79c-4134-b905-694eb4026df3",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-29T04:20:24.484Z"},
+    "last": {"$date": "2026-05-31T13:12:33.415Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '069c1e4e-fc39-4017-8296-baa1a1500f90' from DarkGhotsJ '4e3ddf98-20d9-49bc-b766-bf5269ef3348'",
+    "UserId": "16fd7dde-1892-4c62-ba24-e4536de62475",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-04T01:01:51.050Z"},
+    "last": {"$date": "2026-05-08T23:39:39.497Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '4c2eaf7a-2409-4923-8739-beede7ec1c25' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T17:16:54.398Z"},
+    "last": {"$date": "2026-05-28T22:03:01.598Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14220 count 1 for request 'e5c25de5-cba5-4379-baf1-b13f55ea1531' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "059500fd-f6d4-4968-a88f-3b921bafbfb2",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T14:54:20.960Z"},
+    "last": {"$date": "2026-05-17T18:31:58.919Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #16040 count 1 for request '1349c513-5fe2-40b0-896d-23c072e510c5' from GeneralTadaaki '44bb4533-59a3-43c4-aebf-1c0843a1bb69'",
+    "UserId": "90bd8d94-4b42-459a-9540-b45371d01433",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-02T14:10:28.549Z"},
+    "last": {"$date": "2026-06-07T19:16:00.292Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5600 count 1 for request '0d9f57bd-586c-44b1-8b0d-f0aec221b425' from graviertique47 '6525e1d2-0bcb-44b9-80b0-e76ba7779ceb'",
+    "UserId": "93b78060-081c-4af5-95f5-5919edbc23e0",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-01T17:20:45.138Z"},
+    "last": {"$date": "2026-06-07T09:05:55.838Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #1456 count 1 for request '563b4def-7ff4-45b3-af09-537bc5d40fa0' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T17:16:54.398Z"},
+    "last": {"$date": "2026-05-28T22:03:01.598Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #707 count 1 for request 'be350342-0bda-4868-a835-f2bd1e6ee88e' from sm1975sch '61d636f3-c05e-4e87-a7b6-b8f688d991f0'",
+    "UserId": "7826941f-0903-47f6-9e69-c89d4055f135",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T16:17:13.756Z"},
+    "last": {"$date": "2026-05-29T10:46:18.033Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #16040 count 1 for request 'fd5366bf-0bdc-49cb-b3a4-53a7a96da283' from GeneralTadaaki '44bb4533-59a3-43c4-aebf-1c0843a1bb69'",
+    "UserId": "90bd8d94-4b42-459a-9540-b45371d01433",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-02T14:10:28.549Z"},
+    "last": {"$date": "2026-06-07T19:16:00.292Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '302c12a8-3913-44dd-8f1e-c01f7bcd69c9' from benderstarke 'd73fee8c-1921-408b-ba96-911457342526'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-25T04:33:00.567Z"},
+    "last": {"$date": "2026-04-25T17:35:33.582Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'db32fd91-2f1b-4826-b676-ca476a598ae1' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-27T12:34:44.089Z"},
+    "last": {"$date": "2026-04-28T00:22:52.164Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '4c49ee22-229b-4969-a456-3af9f64457f0' from greencat2008 '9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T21:11:08.900Z"},
+    "last": {"$date": "2026-05-28T22:03:01.582Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #15550 count 1 for request '5ef17b86-aacc-4707-92b2-27acd86c3c58' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "ac725d7c-547e-4d80-9870-988f613feebf",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T14:52:06.379Z"},
+    "last": {"$date": "2026-05-28T15:35:35.488Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30565 count 1 for request '2766702a-2978-497f-82df-f2e9617db45f' from WFGlanny2 '64ec37f6-7340-4737-80e8-78a11f7c60e0'",
+    "UserId": "6cf0e941-c78f-4793-a7e8-85b724b0902a",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-01T09:02:35.686Z"},
+    "last": {"$date": "2026-05-06T20:27:27.856Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'cf835cf0-c53e-4e3e-9b53-590585e276b9' from cbj0401 'bc076258-b74e-4b10-a179-6649a14f9d5e'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-27T12:34:44.089Z"},
+    "last": {"$date": "2026-04-28T00:22:52.164Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #711 count 1 for request '63c1f956-c241-40ff-90ef-89e8b1661b2a' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "3297ab74-ad00-43c0-8580-353a5f850af3",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:45:34.757Z"},
+    "last": {"$date": "2026-06-21T08:06:17.995Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #704 count 1 for request 'd1783b47-2db4-4bb3-ab8d-8d40b8dc9279' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-09T21:24:59.344Z"},
+    "last": {"$date": "2026-06-16T02:13:04.631Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '69d34913-f4b5-4263-9f28-753653b2bc80' from switch-toad 'bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-26T23:09:43.650Z"},
+    "last": {"$date": "2026-04-30T04:54:26.133Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request 'c1fa71df-8656-4611-9eed-93178bc63bcc' from IgnisEstKuba 'b91ea926-731d-4b9f-b956-0034ee686074'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T19:42:52.163Z"},
+    "last": {"$date": "2026-05-19T21:46:54.391Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'c6039e2f-e700-4db5-b84d-a44373d4febe' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-16T12:38:51.492Z"},
+    "last": {"$date": "2026-06-19T13:35:49.874Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request 'e58f5030-e41d-4436-ae23-fbb8651780e2' from dey30110 '27f028cc-98d5-452b-a3db-a42788ab73e5'",
+    "UserId": "3ff3f039-6479-48e4-be77-13dd0ad15d21",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-05T16:56:45.847Z"},
+    "last": {"$date": "2026-06-11T23:31:22.412Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5600 count 1 for request 'f3e6ddbe-70e8-4ac5-910f-73b1929b6a26' from ARROWfrance02001 'dea64cac-d207-4e40-b6be-63d7ed440639'",
+    "UserId": "93b78060-081c-4af5-95f5-5919edbc23e0",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-31T11:53:10.608Z"},
+    "last": {"$date": "2026-06-07T09:05:55.822Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #435 count 1 for request '3c0f7d85-0da3-4c7d-ac48-30bdd98ecbaf' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-09T21:24:59.344Z"},
+    "last": {"$date": "2026-06-16T02:13:04.631Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request '212f3516-d1d3-480d-b838-3c1edf1cdf1d' from obalony-gabaryt 'ad1efe22-c839-4f59-b064-df012dd5e8c8'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T19:42:52.163Z"},
+    "last": {"$date": "2026-05-19T21:46:54.375Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '4ac97ad3-470d-4fbf-ad1b-d818845a410b' from dobry-gosc '50f85749-70b8-48ff-b5ee-b21c3da6782d'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T11:30:44.623Z"},
+    "last": {"$date": "2026-05-19T21:46:54.407Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #708 count 1 for request 'bfa50b21-c980-4fb3-919a-6e4f10d69399' from unit969preium 'dd461b13-d634-47af-afd0-06d5b96c52ad'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T20:31:39.922Z"},
+    "last": {"$date": "2026-05-19T21:46:54.391Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'fbc03bbc-64c8-4916-afea-b86552c12ee8' from babyarm1 '915a8ea8-8e6d-4dd4-8a68-ce1b15f05f25'",
+    "UserId": "927311e8-8ba5-49b8-b574-d03d6557919b",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-22T13:24:39.400Z"},
+    "last": {"$date": "2026-06-23T16:02:43.893Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #15550 count 1 for request '27cd91e7-b205-429b-95ab-7222af3b92dc' from Catalystic67 '0ebd3581-ddcb-4fd0-b362-6f82e6b3eaf6'",
+    "UserId": "ac725d7c-547e-4d80-9870-988f613feebf",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T16:59:24.398Z"},
+    "last": {"$date": "2026-05-28T15:35:35.473Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'c8ed474a-9ca1-4cf2-90bb-28c33e4b52a5' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T21:11:08.900Z"},
+    "last": {"$date": "2026-05-28T22:03:01.582Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '2a3b5539-317a-44fd-a24f-65b367db056b' from obalony-gabaryt 'ad1efe22-c839-4f59-b064-df012dd5e8c8'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T11:30:44.623Z"},
+    "last": {"$date": "2026-05-19T21:46:54.407Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request 'cc585464-7e07-440a-ba19-675973a8cc53' from gabitucho '16fd7dde-1892-4c62-ba24-e4536de62475'",
+    "UserId": "89b82fe4-7ae4-45c0-ab90-fd430e8a922a",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-06T08:50:15.010Z"},
+    "last": {"$date": "2026-05-08T18:56:14.800Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #707 count 1 for request '0a61375b-3366-44a1-9e2c-a14fe1241e66' from beastcb '371a1ff7-2c19-4210-ac1e-0cd9a77a2f62'",
+    "UserId": "7826941f-0903-47f6-9e69-c89d4055f135",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-27T15:47:14.061Z"},
+    "last": {"$date": "2026-05-29T10:46:18.052Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '307a2e19-6533-4145-87d8-e6b8348e0cf5' from outlawzmadden '4d4379d9-7ef1-4195-97b0-c87673e19e26'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-25T04:33:00.552Z"},
+    "last": {"$date": "2026-04-25T17:35:33.567Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30566 count 1 for request '916fff9c-9b83-490b-8dc2-0e6606055ea0' from ANG3L1C-00 '67525716-1427-4298-b53d-a5dcba806b15'",
+    "UserId": "c40daf08-70f6-4512-b404-6d17c3e1d420",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-06T20:16:06.145Z"},
+    "last": {"$date": "2026-06-12T10:41:16.508Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '55297426-d8ed-4123-b1e8-3640436d480c' from Kaisern 'c158fbe9-18fe-4723-99d1-718c4034ac74'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T19:56:54.652Z"},
+    "last": {"$date": "2026-05-22T13:32:47.229Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #707 count 1 for request '14dbee94-9603-49e9-bcd2-3b36be4fdeb1' from tommyresky99 '0e98467a-0cbd-4e53-8929-bcaccbbe56cd'",
+    "UserId": "7826941f-0903-47f6-9e69-c89d4055f135",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T20:51:23.271Z"},
+    "last": {"$date": "2026-05-29T10:46:18.040Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'df4f69a3-01d5-451e-9828-78fc7b9c5893' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "5305cfcc-930a-4980-867c-b7ecafbd97bc",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-14T18:43:38.491Z"},
+    "last": {"$date": "2026-06-16T22:58:18.834Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5590 count 1 for request '2f0e8ba4-7593-4078-aa10-63ca7df713c3' from demonxr32 'a83330a5-8c4e-44c5-ac25-7a00aece7321'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T21:11:11.119Z"},
+    "last": {"$date": "2026-05-28T22:03:01.613Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #16040 count 1 for request '55f2e39f-b33b-4eb9-890b-508106c16fbc' from Jimmywright37 '95a7896d-cb65-4c8b-97b3-e346ecc86ac6'",
+    "UserId": "90bd8d94-4b42-459a-9540-b45371d01433",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-02T03:25:29.320Z"},
+    "last": {"$date": "2026-06-07T19:16:00.276Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '1caa4e3c-8652-4052-843e-c13ff75bde68' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-06T09:58:44.906Z"},
+    "last": {"$date": "2026-05-12T11:17:38.011Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request '3c7f2fed-1560-4681-9963-dc4ce640d32c' from esperanza23_ '88eaad98-61a4-4d46-93fe-e1af11e5f3aa'",
+    "UserId": "55cc809b-f7da-4807-bfa9-4b214a6e26b8",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-17T20:36:41.316Z"},
+    "last": {"$date": "2026-05-23T20:10:25.675Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #714 count 1 for request 'dfd5aeee-f447-4708-a929-6c3796a18244' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-21T04:54:09.479Z"},
+    "last": {"$date": "2026-05-27T09:44:03.119Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request '4c9063ce-75aa-4d94-ae5d-be7f2090c4a3' from Adiwern1982 '02850883-6e2a-4f53-985d-e4c810d03bb3'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T19:42:52.163Z"},
+    "last": {"$date": "2026-05-19T21:46:54.375Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'd98a24d4-287c-4fd5-9acd-685578177a59' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "927311e8-8ba5-49b8-b574-d03d6557919b",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-22T13:17:18.275Z"},
+    "last": {"$date": "2026-06-23T16:02:43.893Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #708 count 1 for request '3aa4903c-e523-4d05-805a-8ae274d7eee2' from Adiwern1982 '02850883-6e2a-4f53-985d-e4c810d03bb3'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T20:24:39.240Z"},
+    "last": {"$date": "2026-05-19T21:46:54.391Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5550 count 1 for request '2a03aa5b-f080-4b03-bd54-04636da4ef7b' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-09T15:03:32.398Z"},
+    "last": {"$date": "2026-06-16T02:13:04.615Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request '5ecadc02-ca16-44a0-8051-ca760dad28c0' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "bfaf6154-7a56-4025-a4a8-4ffe8d6b74b1",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-27T12:34:44.089Z"},
+    "last": {"$date": "2026-04-28T00:22:52.148Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'be4562ef-c589-48c4-b014-e14b160faace' from fazecillian125 '5305cfcc-930a-4980-867c-b7ecafbd97bc'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:20:11.274Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '232d0e59-9d60-4727-b469-be7a9a4611bd' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-16T12:38:51.492Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '38c175b0-b596-45b6-839c-b463272c573c' from ThatToxicBaldGuy '8219775c-73a2-4fd1-8cd0-0d0098c45adf'",
+    "UserId": "e5e5cc56-bad4-4e62-b6c2-633a79795699",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T13:43:09.899Z"},
+    "last": {"$date": "2026-05-22T13:32:47.229Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'a2e4c759-ea4e-4323-a202-7b69d5921b94' from GET-Y0UR-H0 '3e0f1200-7f0e-417d-807b-b3110587775b'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:20:11.274Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #707 count 1 for request '20739ee2-cc48-4564-9294-eec50e8526da' from Mr-_-Goobs '6f73a01b-6ea6-4388-9473-f3ed8bbabc88'",
+    "UserId": "7826941f-0903-47f6-9e69-c89d4055f135",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-27T15:47:14.046Z"},
+    "last": {"$date": "2026-05-29T10:46:18.043Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '79c262c6-7870-4bb4-bf6c-d548ed3310e5' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-16T13:05:41.681Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '49219d1c-3538-4f75-ad37-cdca5f367ab1' from fazecillian125 '5305cfcc-930a-4980-867c-b7ecafbd97bc'",
+    "UserId": "832c9cae-695b-47c6-afbe-b89f73729760",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-16T12:38:51.492Z"},
+    "last": {"$date": "2026-06-19T13:35:49.890Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request 'a939c1e2-908f-40cc-b1c4-d227ca356a78' from ravi_vasuki 'fb5f89f5-988d-4c10-8bdd-dd19c80da22d'",
+    "UserId": "927311e8-8ba5-49b8-b574-d03d6557919b",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-22T13:54:50.129Z"},
+    "last": {"$date": "2026-06-23T16:02:43.893Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5590 count 1 for request 'a203b4af-b012-45a1-9ca6-2a0e1430d556' from greencat2008 '9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T21:22:41.177Z"},
+    "last": {"$date": "2026-05-28T22:03:01.613Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14270 count 1 for request '23b574a4-35b6-43b8-b45c-bb0e4cc01451' from ARROWfrance02001 'dea64cac-d207-4e40-b6be-63d7ed440639'",
+    "UserId": "d647c2a8-a476-4d7d-ba71-5938d5198e05",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-05T09:10:00.147Z"},
+    "last": {"$date": "2026-06-10T09:06:59.758Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #31332 count 1 for request '1900b48f-61fa-40d6-8df9-b77d5ee5b488' from Bongler '9fcd3f1e-df02-47e7-936d-16b70f76dc22'",
+    "UserId": "6cf0e941-c78f-4793-a7e8-85b724b0902a",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-30T13:38:42.033Z"},
+    "last": {"$date": "2026-05-06T20:27:27.840Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'fa7ba86d-db08-4b7e-82cf-23bb841db9bf' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-13T17:34:23.841Z"},
+    "last": {"$date": "2026-05-19T20:06:34.361Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '868db598-ea4a-4bb8-80c5-a3849a7fe985' from DANMAROTTO '0eee53db-cdcd-4911-b4fc-bbaaf9f76ac1'",
+    "UserId": "16fd7dde-1892-4c62-ba24-e4536de62475",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-04T01:01:51.050Z"},
+    "last": {"$date": "2026-05-08T23:39:39.497Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #15550 count 1 for request 'b8e31aec-ced2-48e3-aa5c-32c4c467bdd9' from quintin_c67 '7b1e38ad-97d7-4bf3-9489-db88d2346ac2'",
+    "UserId": "ac725d7c-547e-4d80-9870-988f613feebf",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T17:28:24.171Z"},
+    "last": {"$date": "2026-05-28T15:35:35.488Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '57ef5503-7223-4fa5-ada9-b9f9a16f7b72' from supersayien01 '6a59156a-4f21-4ab7-b814-153524ac9edb'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-09T15:03:32.398Z"},
+    "last": {"$date": "2026-06-16T02:13:04.615Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #699 count 1 for request '397dbe0e-7e10-45b2-be1d-445a460ecb17' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-06T09:58:44.906Z"},
+    "last": {"$date": "2026-05-12T11:17:38.011Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '80fb505f-9a71-43d8-901b-7e0bacdc55ed' from xTheViperKing03x '5555a067-8a23-484a-b56d-88b39d418b2f'",
+    "UserId": "9cf7a7a9-3ec3-47dd-8ff9-ce0b20b637cd",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-13T17:34:23.841Z"},
+    "last": {"$date": "2026-05-19T20:06:34.361Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '14b2a8c7-64b4-419a-adf3-bafcda6d1d9e' from Lordfreelancer21 '4997690e-5c70-4f5d-834c-af01d8637fa4'",
+    "UserId": "5305cfcc-930a-4980-867c-b7ecafbd97bc",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-14T19:06:18.570Z"},
+    "last": {"$date": "2026-06-16T22:58:18.834Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'a794c6ba-cac8-44ce-b0ec-72cf88574fa1' from Da_420_God '79c0310d-298e-4a21-9ff1-899a6928fa06'",
+    "UserId": "5305cfcc-930a-4980-867c-b7ecafbd97bc",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-14T18:50:29.319Z"},
+    "last": {"$date": "2026-06-16T22:58:18.834Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #443 count 1 for request 'f20e576c-6a0b-4546-b17e-cf5ae215073f' from NGVL-_-80 'ad758966-0a2a-432e-9ca4-13ebc548d9a6'",
+    "UserId": "93b78060-081c-4af5-95f5-5919edbc23e0",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-07T11:20:08.220Z"},
+    "last": {"$date": "2026-06-09T15:55:16.901Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14240 count 1 for request '922f971b-ab97-4735-b19f-c48dd21efd08' from glodomorek1982 '67f13533-4b7b-403f-99ab-3bffcc5280d6'",
+    "UserId": "42fa4d50-e6a3-4341-bdf9-0d63329eee53",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T11:30:44.623Z"},
+    "last": {"$date": "2026-05-19T21:46:54.407Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #710 count 1 for request 'c13a3314-a732-4c14-8a14-d1db9bf709cc' from munch8222 'a2c6a0df-11ad-4493-8e0a-cdd34295ecd4'",
+    "UserId": "6abf11d2-efea-48cb-99e6-1a8ff646eeaa",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-21T04:54:09.479Z"},
+    "last": {"$date": "2026-05-27T09:44:03.119Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #711 count 1 for request 'fb4b80df-b0e4-4909-a6bf-6d412b891d6c' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "3297ab74-ad00-43c0-8580-353a5f850af3",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-19T12:45:34.757Z"},
+    "last": {"$date": "2026-06-21T08:06:17.980Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #701 count 1 for request '45cbccb2-e5df-4e27-b5f8-16fe1526cc64' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "059500fd-f6d4-4968-a88f-3b921bafbfb2",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-14T22:31:42.366Z"},
+    "last": {"$date": "2026-05-17T18:31:58.935Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received ClubToken count 1 for request 'a26b1d40-a39f-42fc-be53-be21e52a38e7' from CFC-Picero-x__ '5f1e5f25-154d-4fd1-9f7e-07b8cea0dc6f'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-13T00:38:55.495Z"},
+    "last": {"$date": "2026-06-19T14:21:35.746Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #511 count 1 for request '1cdda2b4-75ae-496f-8986-10a66d12ae53' from jollityfarm67 'ab7d7f63-ae8d-4372-9415-51f78a07bb79'",
+    "UserId": "0c906923-824a-412e-92fb-322b3f9763b1",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-31T12:42:04.777Z"},
+    "last": {"$date": "2026-06-04T14:00:01.633Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #708 count 1 for request 'e47f212b-66f0-444a-8a28-c4b9ab3b58a9' from xXMadMOonkeyXx 'd876a34b-04ba-485a-98e8-7c6ba77500e5'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-06T09:58:44.906Z"},
+    "last": {"$date": "2026-05-12T11:17:38.011Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #5590 count 1 for request '3d275c50-0b01-4cc5-a997-cf43c92b6e98' from idyllic_aside4 '10c9793a-263a-4225-a90b-2a71762785a5'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T21:44:24.854Z"},
+    "last": {"$date": "2026-05-28T22:03:01.613Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #30564 count 1 for request 'ffe8d513-f196-463e-a82a-0e9fd95eeee6' from esperanza23_ '88eaad98-61a4-4d46-93fe-e1af11e5f3aa'",
+    "UserId": "55cc809b-f7da-4807-bfa9-4b214a6e26b8",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-17T20:36:11.022Z"},
+    "last": {"$date": "2026-05-23T20:10:25.659Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '3628f5fb-42e9-44a9-99cb-303f5bdda76d' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-23T17:16:54.398Z"},
+    "last": {"$date": "2026-05-28T22:03:01.598Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #434 count 1 for request '6b20260a-e572-4173-ab25-2e8a52629e68' from gabitucho '16fd7dde-1892-4c62-ba24-e4536de62475'",
+    "UserId": "89b82fe4-7ae4-45c0-ab90-fd430e8a922a",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-06T08:50:15.026Z"},
+    "last": {"$date": "2026-05-08T18:56:14.800Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #709 count 1 for request '63de61d5-6e12-4cc2-84a4-5279d7d99a60' from supersayien01 '6a59156a-4f21-4ab7-b814-153524ac9edb'",
+    "UserId": "7b31e860-3514-4b3c-b706-661a89857353",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-09T15:03:32.398Z"},
+    "last": {"$date": "2026-06-16T02:13:04.615Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #32455 count 1 for request 'ca9b83e6-9341-48b9-bb09-477ff2643d83' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "64ec37f6-7340-4737-80e8-78a11f7c60e0",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-30T17:06:06.854Z"},
+    "last": {"$date": "2026-05-01T21:48:26.159Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request '8877100f-5110-4dd2-bfea-bb4ac45018b4' from hbrown114 '847ded8e-a8cf-4043-8490-62d170a12122'",
+    "UserId": "9c1ad9fe-8c3b-4f73-83e5-a81e2b77eadd",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-27T00:00:15.468Z"},
+    "last": {"$date": "2026-04-30T04:54:26.133Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received ClubToken count 1 for request '84fd60b5-5797-4925-b281-e65faa7774a1' from edy-diesel '4d63d5d2-a635-416a-a451-e7ef620468ab'",
+    "UserId": "18760ea0-ece4-426f-9e49-f8dd31445ef1",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-12T17:38:24.842Z"},
+    "last": {"$date": "2026-06-19T14:21:35.730Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #858 count 1 for request '9400302f-f97f-4da5-9b7a-1c5541b8d148' from King_Solomun '82a4172e-9acd-41b4-8072-6e68114ced62'",
+    "UserId": "5062376a-d4f3-48f1-911d-483428ad4935",
+    "deliveries": 2,
+    "first": {"$date": "2026-04-25T04:33:00.552Z"},
+    "last": {"$date": "2026-04-25T17:35:33.551Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #710 count 1 for request '2bf3ee65-fc30-4e9f-96c6-8efcdf5068c6' from Jointmaster_00 'a43d3e6a-ec44-462b-b477-37a5ec4b54a5'",
+    "UserId": "059500fd-f6d4-4968-a88f-3b921bafbfb2",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-15T11:11:59.751Z"},
+    "last": {"$date": "2026-05-17T18:31:58.935Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #435 count 1 for request '1d461864-0e01-4451-8ac2-751b19137f05' from AlphaKing__X 'fef4d155-c7a0-4da8-82b2-87ff35322339'",
+    "UserId": "9b18ba77-6301-46fc-94ec-d75006b56f62",
+    "deliveries": 2,
+    "first": {"$date": "2026-06-04T08:58:15.417Z"},
+    "last": {"$date": "2026-06-08T17:26:05.501Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #721 count 1 for request 'cfd678be-ddcc-4431-a9a4-ca420739be5a' from beastcb '371a1ff7-2c19-4210-ac1e-0cd9a77a2f62'",
+    "UserId": "7826941f-0903-47f6-9e69-c89d4055f135",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-27T15:47:14.061Z"},
+    "last": {"$date": "2026-05-29T10:46:18.050Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #715 count 1 for request 'fb6d0770-5d26-4d12-9538-525b3782ceaf' from sawnoffkilla '16bf62b5-67bb-466e-9835-892e1347a973'",
+    "UserId": "2f7ff039-af6b-48bf-b8a1-0b358e28c6af",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-22T21:11:08.900Z"},
+    "last": {"$date": "2026-05-28T22:03:01.566Z"},
+    "surplus": 1
+  },
+  {
+    "Message": "Received bait #14260 count 1 for request 'ab9d677a-fd6b-4ff7-8903-7e713bb2f5e1' from NHz_Benny '77eea733-4ba3-4170-9594-1c79f82d5e58'",
+    "UserId": "c75e06ad-d2d9-42e2-a522-c369e670c328",
+    "deliveries": 2,
+    "first": {"$date": "2026-05-20T11:53:53.710Z"},
+    "last": {"$date": "2026-05-24T18:34:05.328Z"},
+    "surplus": 1
+  }
+]

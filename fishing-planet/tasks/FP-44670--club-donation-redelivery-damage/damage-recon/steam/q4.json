@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "TokenResponse",
+    "affectedEvents": 144,
+    "surplus": 16120
+  },
+  {
+    "_id": "BaitResponse",
+    "affectedEvents": 691,
+    "surplus": 7912
+  }
+]

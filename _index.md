@@ -16,6 +16,7 @@
 | FP-44598 | FP/server | buoy-backup-restore       | in-progress   | fishing-planet/tasks/FP-44598--buoy-backup-restore/                     |
 | FP-44596 | FP/server | node-load-observability   | in-progress   | fishing-planet/tasks/FP-44596--node-load-observability/                 |
 | FP-42677 | FP/server | rating-abuse-prevention   | in-discussion | fishing-planet/tasks/FP-42677--rating-abuse-prevention/                 |
+| FP-44670 | FP/server | club-redelivery-damage    | in-progress   | fishing-planet/tasks/FP-44670--club-donation-redelivery-damage/         |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
