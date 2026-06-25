@@ -277,3 +277,23 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   + a post-shrink baseline full backup; + optional DROP of FP44337_TailLoadControl. Phase 7 archive
   (TESTVova) still deferred. New fact tables are freshly built - they do NOT need rebuilding (STEP 3 is
   remaining tables only).
+- 2026-06-25 — **Phase 8 sliding-window Agent job CREATED & verified on PS PROD.** (STEP 3 index rebuild
+  still deferred to an upcoming maintenance DOWNTIME ~1 week out; the job itself needs no downtime.)
+  Pre-flight green: SQL Agent (PSSTATS) Running/Automatic; `sa` enabled (kept as owner - sysadmin, won't
+  lose perms); PF boundaries confirmed Jun1/Jul1/Aug1 (max=Aug1, no SPLIT yet). Proc
+  `usp_Fact_AddNextMonth` created on prod + dry-runs matched: @MonthsAhead=2 -> no-op ("buffer OK through
+  2026-08-01, added 0"); @MonthsAhead=3 -> printed the real ADD path (FG/file
+  `Z:\...\MSSQL15.PSSTATS\...\StatsFact_2026_09.ndf`, NEXT USED, SPLIT '2026-09-01'), nothing committed.
+  SCHEDULE moved 23:00 -> 02:00 server-local (renamed `Monthly_28th_at_02`) to hit the ~06:00 UTC daily
+  online trough: Agent fires on server-local (NY) wall-clock, no UTC pin, so 02:00 NY = 06:00 UTC (EDT,
+  incl. the first real run 28 Jul) / 07:00 UTC (EST); 28th is mid-month so UTC/local offset never crosses
+  a month boundary (SYSUTCDATETIME() target math unaffected) and 02:00-on-28th is always a valid wall-clock
+  (DST spring-forward is the 2nd Sun of Mar). Job `Facts_AddNextMonth` (owner sa, 2 steps
+  StatsFact->MissionsFact, retry 2/5, eventlog-on-fail) verified; next run computed 2026-06-28 02:00 -
+  forced the Agent cache recompute via an enabled 0->1 toggle (a plain re-enable to 1 did NOT refresh
+  `sysjobschedules.next_run_date`, since it's a no-op change). Smoke-test via `sp_start_job`: job outcome
+  + both steps run_status=1, no-op "added 0", `Executed as PSSTATSGOLD\Administrator` - confirms the Agent
+  service context holds the DDL rights the unattended monthly ADD FILE/ALTER PARTITION will need. Phase 8
+  complete & verified end-to-end on PROD. Artifacts synced to the 02:00 schedule (Phase8 script, runbook,
+  operator checklist, rehearsal copy). REMAINING on FP-44337: STEP 3 index rebuild (next downtime) +
+  post-shrink baseline backup; Phase 7 archive (TESTVova) deferred.

@@ -5,7 +5,7 @@
 
    One generic procedure handles any fact table following the naming convention
      pf_<T>_Timestamp / ps_<T>_Timestamp / FG_<T>_YYYY_MM / <T>_YYYY_MM.ndf.
-   A single Agent job runs it for StatsFact and MissionsFact on the 28th, 23:00.
+   A single Agent job runs it for StatsFact and MissionsFact on the 28th at 02:00 server-local (NY) = ~06:00 UTC daily online trough.
 
    Resilience: the proc maintains a buffer of @MonthsAhead empty future partitions
    (default 2) by adding as many months as needed in one run — so a MISSED monthly
@@ -100,7 +100,7 @@ EXEC dbo.usp_Fact_AddNextMonth @Table = 'MissionsFact', @Debug = 1;
 GO
 
 /* ----------------------------------------------------------------------------
-   SQL Agent job — 28th of each month, 23:00. Two steps (one per table).
+   SQL Agent job — 28th of each month at 02:00 server-local (NY) = ~06:00 UTC daily online trough. Two steps (one per table).
    Requires SQL Server Agent to be running on the instance.
    ---------------------------------------------------------------------------- */
 USE msdb;
@@ -141,12 +141,12 @@ EXEC dbo.sp_add_jobstep
     @retry_attempts = 2, @retry_interval = 5;
 
 EXEC dbo.sp_add_schedule
-    @schedule_name          = N'Monthly_28th_at_23',
+    @schedule_name          = N'Monthly_28th_at_02',
     @freq_type              = 16,      -- monthly
     @freq_interval          = 28,      -- 28th
     @freq_recurrence_factor = 1,
-    @active_start_time      = 230000;  -- 23:00:00
+    @active_start_time      = 020000;  -- 02:00:00 server-local (NY); = 06:00 UTC (EDT) / 07:00 UTC (EST) - daily online trough
 
-EXEC dbo.sp_attach_schedule @job_name = N'Facts_AddNextMonth', @schedule_name = N'Monthly_28th_at_23';
+EXEC dbo.sp_attach_schedule @job_name = N'Facts_AddNextMonth', @schedule_name = N'Monthly_28th_at_02';
 EXEC dbo.sp_add_jobserver   @job_name = N'Facts_AddNextMonth', @server_name = N'(LOCAL)';
 GO

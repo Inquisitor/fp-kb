@@ -25,7 +25,7 @@ in run order. Raw DevOps drafts are kept under `original-plan/` for reference.
 | 2     | `Phase2_PROD_Swap.sql`               | PROD       | window (downtime)                       |
 | 3     | `Phase3_PROD_TailLoad.sql`           | PROD       | window (downtime), then START PROD      |
 | 6     | `Phase6_PROD_Drop_Shrink.sql`        | PROD       | online, only after the drop gate is met |
-| 7     | `Phase7_SQLARCHIVE_BuildAndLoad.sql` | SQLARCHIVE | **DEFERRABLE** — later, from the backup  |
+| 7     | `Phase7_SQLARCHIVE_BuildAndLoad.sql` | SQLARCHIVE | **DEFERRABLE** — later, from the backup |
 | 8     | `Phase8_PROD_SlidingWindowJob.sql`   | PROD       | after cutover                           |
 
 > Phase numbers 4 and 5 (the SQLSTAGING delta export/import) were **removed** as redundant — see the
@@ -46,17 +46,17 @@ in run order. Raw DevOps drafts are kept under `original-plan/` for reference.
 
 ## Current state (verified 2026-06-08, read-only)
 
-| Fact                     | Value                                                                                           |
-|--------------------------|-------------------------------------------------------------------------------------------------|
-| Instance                 | `MSSQL15.PSSTATS` on `Z:` — SQL Server 2019 **Standard Edition** (15.0.2000.5 RTM)              |
-| Recovery model           | **SIMPLE** (no log backups; DR relies on full backups)                                          |
-| Data file `Stats` (ROWS) | **3190.7 GB**, used **3190.7 GB**, free-in-file **0 GB** (full)                                 |
-| Log file `Stats_log`     | **322 GB** allocated, **2.6 GB** used                                                           |
-| Free on `Z:` volume      | **~62.4 GB** (critical)                                                                         |
-| `StatsFact`              | 1728 GB, ~5.80 B rows, clustered PK on `EntityId` (bigint IDENTITY), no secondary indexes       |
-| `MissionsFact`           | 829 GB, ~1.99 B rows, clustered PK on `EntityId`, no secondary indexes                          |
+| Fact                     | Value                                                                                                                                                                                       |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Instance                 | `MSSQL15.PSSTATS` on `Z:` — SQL Server 2019 **Standard Edition** (15.0.2000.5 RTM)                                                                                                          |
+| Recovery model           | **SIMPLE** (no log backups; DR relies on full backups)                                                                                                                                      |
+| Data file `Stats` (ROWS) | **3190.7 GB**, used **3190.7 GB**, free-in-file **0 GB** (full)                                                                                                                             |
+| Log file `Stats_log`     | **322 GB** allocated, **2.6 GB** used                                                                                                                                                       |
+| Free on `Z:` volume      | **~62.4 GB** (critical)                                                                                                                                                                     |
+| `StatsFact`              | 1728 GB, ~5.80 B rows, clustered PK on `EntityId` (bigint IDENTITY), no secondary indexes                                                                                                   |
+| `MissionsFact`           | 829 GB, ~1.99 B rows, clustered PK on `EntityId`, no secondary indexes                                                                                                                      |
 | `EntityId` ↔ `Timestamp` | **coarsely** monotonic (id 10B→2024-09, 12.0B→2026-01); fine skew per FP-43469: ~21.6% row-level, 1-2 id interleave at date boundaries (absorbed by Phase 3 Timestamp filter + 100k margin) |
-| Full backup              | Today's full backup (2026-06-08 ~00:45): file on the backup server + **restored on SQLSTAGING** |
+| Full backup              | Today's full backup (2026-06-08 ~00:45): file on the backup server + **restored on SQLSTAGING**                                                                                             |
 
 **Key facts driving the plan:**
 - Standard Edition → online index rebuild and online piecemeal restore are **not** available;
@@ -91,7 +91,7 @@ baked into `Phase2_PROD_Swap.sql`:
 - Aligned NCI `(UserId, [Timestamp]) WITH (DATA_COMPRESSION = PAGE)` — built in **Phase 3 after the
   tail load** (cheaper than maintaining it during the bulk insert).
 - `EntityId` stays `IDENTITY`; new table seeds at `MAX(old.EntityId) + 1,000,000` (any positive cushion is collision-proof since new ids only ascend from the seed and all tail ids are below it; the large value just removes doubt).
-- Monthly maintenance: generic `usp_Fact_AddNextMonth` + SQL Agent job (28th 23:00) — Phase 8.
+- Monthly maintenance: generic `usp_Fact_AddNextMonth` + SQL Agent job (28th 02:00 NY-local / ~06:00 UTC trough) — Phase 8.
 
 ---
 
@@ -195,7 +195,7 @@ Build it whenever SQLARCHIVE hardware is ready; it does not block prod.
 
 ### Phase 8 — Sliding-window job (PROD, after cutover)
 
-`Phase8_PROD_SlidingWindowJob.sql` — generic `usp_Fact_AddNextMonth` + SQL Agent job (28th 23:00) for
+`Phase8_PROD_SlidingWindowJob.sql` — generic `usp_Fact_AddNextMonth` + SQL Agent job (28th 02:00 NY-local / ~06:00 UTC trough) for
 both tables. The proc keeps a **2-month buffer of empty future partitions** (Phase 2 seeds July+August
 empty) and **catches up** if a run was missed (adds as many months as needed in one pass), so `SPLIT`
 always targets an empty partition → metadata-only. If the buffer was **fully depleted** (job down for

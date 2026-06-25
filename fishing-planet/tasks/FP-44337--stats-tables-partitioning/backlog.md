@@ -9,7 +9,7 @@
 - [ ] Confirm >= 2 preserved copies: backup file on backup server + restored copy on SQLSTAGING
 - [ ] Measure per-row insert rate on staging (PAGE-compressed inserts + NCI build may exceed the ~40 min window — bump if so)
 - [ ] Prove the backup: `RESTORE VERIFYONLY` + `DBCC CHECKDB` on the SQLSTAGING copy
-- [ ] Confirm SQL Agent service running on PSSTATS; set Phase 8 job owner to a service account (not `sa`)
+- [x] Confirm SQL Agent service running on PSSTATS; set Phase 8 job owner to a service account (not `sa`) — Agent Running/Automatic; owner kept as `sa` (enabled, sysadmin ops account; service runs as `PSSTATSGOLD\Administrator`)
 - [ ] SQLARCHIVE: provision disks / box for the Phase 7 archive build (deferrable)
 
 ## Confirmed with team (2026-06-08)
@@ -39,7 +39,7 @@
 - ~~Phase 4: delta bcp out~~ / ~~Phase 5: delta bcp in~~ — **REMOVED** (redundant; preservation = {backup} U {June tail})
 - [~] Phase 6: pre-drop backup + gate + DROP done; stepped shrink done (Stats 3205.6 GB -> ~740 GB, Z: -> ~2.67 TB). **PENDING: STEP 3 index REBUILD of fragmented remaining tables (in an upcoming maintenance downtime) + post-shrink baseline backup**
 - [ ] Phase 7 (deferrable): build partitioned archive on SQLARCHIVE (TESTVova) from a restored backup, `< 2026-06-01`
-- [ ] Phase 8: enable monthly sliding-window Agent job (proc dry-run validated on Test2)
+- [x] Phase 8: monthly sliding-window Agent job CREATED & verified on PROD (2026-06-25). Proc `usp_Fact_AddNextMonth` + job `Facts_AddNextMonth`; schedule `Monthly_28th_at_02` (02:00 NY = ~06:00 UTC trough); next run 2026-06-28 02:00; smoke-test via `sp_start_job` green (both steps no-op `added 0`, run under `PSSTATSGOLD\Administrator`)
 
 ## Follow-ups (after PS stabilized)
 - [ ] Decide whether to rewrite `FishingRateStatUpdateJob` cursor to `Timestamp` (or keep EntityId seek)

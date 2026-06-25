@@ -101,7 +101,7 @@ Scripts live next to this file. The master narrative is `Runbook_PS_Stats_Partit
 
 ## F. Deferred (after the cutover — separate days, no rush)
 - [ ] **Phase 7 — archive build (SQLARCHIVE)** — `Phase7_SQLARCHIVE_BuildAndLoad.sql`. Build the partitioned analyst archive from the **restored backup**, loading history **< 2026-06-01** (the dropped bulk); June+ stays on prod and SWITCHes into the archive later as it ages out. Align the archive's monthly boundaries with prod. Does not block prod. Keep the backup until the archive is verified.
-- [ ] **Phase 8 — sliding-window job (PROD)** — `Phase8_PROD_SlidingWindowJob.sql`. Run the dry-run (`@Debug=1`) first, then create the proc + Agent job (28th 23:00). Confirm Agent is running.
+- [ ] **Phase 8 — sliding-window job (PROD)** — `Phase8_PROD_SlidingWindowJob.sql`. Run the dry-run (`@Debug=1`) first, then create the proc + Agent job (28th 02:00 NY-local / ~06:00 UTC trough). Confirm Agent is running.
 - [ ] **Later:** backfill 11-12 months from the archive into prod partitions; grow to 24-month retention.
 
 ## G. Rollback quick-reference

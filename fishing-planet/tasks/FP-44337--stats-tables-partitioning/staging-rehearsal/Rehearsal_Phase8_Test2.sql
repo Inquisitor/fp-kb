@@ -9,7 +9,7 @@
 
    One generic procedure handles any fact table following the naming convention
      pf_<T>_Timestamp / ps_<T>_Timestamp / FG_<T>_YYYY_MM / <T>_YYYY_MM.ndf.
-   A single Agent job runs it for StatsFact and MissionsFact on the 28th, 23:00.
+   A single Agent job runs it for StatsFact and MissionsFact on the 28th at 02:00 server-local (NY) = ~06:00 UTC daily online trough.
 
    Resilience: the proc maintains a buffer of @MonthsAhead empty future partitions
    (default 2) by adding as many months as needed in one run — so a MISSED monthly
@@ -113,5 +113,5 @@ GO
 /* ----------------------------------------------------------------------------
    SQL Agent job creation is INTENTIONALLY OMITTED here — do NOT create a scheduled job on
    Test2. On PROD, run the Agent-job block from the canonical Phase8_PROD_SlidingWindowJob.sql
-   (28th 23:00, owner sa, event-log on failure).
+   (28th 02:00 NY-local / ~06:00 UTC, owner sa, event-log on failure).
    ---------------------------------------------------------------------------- */
