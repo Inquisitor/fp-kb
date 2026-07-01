@@ -35,3 +35,4 @@ status: stub
 
 ## Related Tasks
 - FP-41492 (resolved 2025-12-31) — wrap Missions ProcessReward in try-catch + cache validation infra; narrow containment scope, design debt for other 15 sites filed in [backlog.md](backlog.md)
+- FP-43009 (resolved 2026-06-30) — Xbox achievement reward products not rendered; root cause was a client platform-id mismatch (GDK build reported Win10 instead of XBox), fixed client-side. Server reward pipeline unchanged. See [journal](../../../tasks/FP-43009--xbox-achievement-reward-platform/journal.md) and [log.md](log.md)
