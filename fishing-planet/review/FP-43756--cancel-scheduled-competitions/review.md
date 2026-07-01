@@ -1,7 +1,7 @@
 ---
-status: reopened
+status: resolved
 executor: Yevhenii Shust
-branch: MFT20260325 @ r16113, Unity_Fishing_CodeBranch @ r54483 (merged to MainClient @ r54572)
+branch: MFT20260325 @ r16113, round-2 fix NPN20260602 @ r16174 merged to MFT20260325 @ r16248; client Unity_Fishing_CodeBranch @ r54483 -> MainClient @ r54572
 jira: https://fishingplanet.atlassian.net/browse/FP-43756
 ---
 
@@ -105,6 +105,22 @@ Server change refactors the tournament start/cancel flow so scheduled competitio
 **Question to GD (not code):** F-7 — confirm "cancel on any non-zero overlap" matches the GD decision on JIRA open question #3.
 
 **Closed / non-issues:** F-6 (client synced), F-8 (all prod scheduled competitions are paid-entry → notification fires).
+
+## Round 2 (fix)
+
+Executor's fix landed on **NPN20260602 (Code) @ r16174** (not on MFT/Content, the release branch — executor requested a back-merge). `svn diff -c 16174` verified all five reopen findings are correctly and completely addressed:
+
+- **F-1** ✅ UGC row `onclick` `cancelCompetition` → `cancelUGC` — routing corrected to `CancelUGC()`/`UGCProcess`.
+- **F-3** ✅ SQL now references `@KindId`/`@LanguageId` (already-bound params) instead of hardcoded `3`/`3` — contract honest, behavior unchanged.
+- **F-4** ✅ scheduled confirm uses `c.Name` (was `c.NameCustom`).
+- **F-2** ✅ `InGameStartHour.Value` guarded by `HasValue` (renders `-` when null).
+- **F-5** ✅ unique anchors `ugc-overlap` / `regular-overlap` (bonus: fixed "User Generate" → "Generated" typo).
+
+Bonus polish: confirm dialogs now include the tournament `Id` and distinguish UGC from competition. No new issues.
+
+**Merge:** fix originated on Code (NPN); release ships from Content (MFT), which still held the buggy r16113. Cherry-picked `svn merge -c 16174 NPN20260602 → MFT20260325` (clean, only the two files), committed **MFT r16248**. WC had unrelated local mods + was mixed-revision — updated to r16246 first, committed only the two files + root mergeinfo (`--depth empty`), leaving local mods untouched. Process note (verbal to executor, not filed): a release-critical fix should originate on the release branch (MFT) and merge up to Code, not the reverse.
+
+**Round 2 verdict: APPROVE** — all findings resolved, fix merged into the release branch.
 
 ## Investigation Journal
 
