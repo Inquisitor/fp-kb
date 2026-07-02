@@ -15,8 +15,9 @@ and its template (page 4395597825) are fully validated; every branch-specific re
 collected (JIRA field + SQL-sweep), applied, and verified; the release-step field gate was codified
 into the close skills. Remaining deliverable is the release execution itself (per the checklist).
 Buoy export/backup tooling that briefly lived under this folder is being split to a dedicated task.
-Now also driving the post-release **server patch 2026.4.1.1 FTUE Server Hotfix** (id 16439) — recon in
-[patch-2026.4.1.1-recon.md](artifacts/patch-2026.4.1.1-recon.md).
+Post-release **server patch 2026.4.2.1 FTUE Server Hotfix** (id 16439, renamed 2026-07-01 from
+2026.4.1.1) is assembled and **bundled into the 2026.4.2 console release** (co-tagged 16240) — recon
+in [patch-2026.4.2.1-recon.md](artifacts/patch-2026.4.2.1-recon.md).
 
 ## Summary
 Drive the 2026.4 FTUE release: build the executable checklist from the template, validate every
@@ -79,5 +80,23 @@ No formal multi-phase plan — driven by the checklist. All directions complete:
   (transfer/add applied + verified). Owner re-tagged the 5 commitless 2026.4.1 server tasks to where
   their code shipped. Captured the FP release-versions/process model in
   [`reference/release_versions_and_process.md`](../../../reference/release_versions_and_process.md).
-  Recon + assembled set: [patch-2026.4.1.1-recon.md](artifacts/patch-2026.4.1.1-recon.md). NEXT: groom
+  Recon + assembled set: [patch-2026.4.2.1-recon.md](artifacts/patch-2026.4.2.1-recon.md). NEXT: groom
   the 11 Next-Server-Hotfix tasks not yet in MFT.
+- 2026-06-30: Next-Hotfix grooming + console bundle. Re-scanned MFT (HEAD still r16232, no new
+  boundary): 16 post-boundary tasks. Groomed Next Server Hotfix — only FP-44396 was a real patch
+  addition (back-port MFT r16228, now on 16439+16240); the rest already shipped or have no code, and
+  no merges into MFT were needed. Since tomorrow's 2026.4.2 console release ships from the same MFT
+  HEAD, bundled the patch into it: added `2026.4.2 FTUE Consoles Release` (16240) to the 13 patch
+  tasks lacking it + FP-42918 (14 edits, verified — all 16 post-boundary tasks now on 16240).
+  FP-42918 stays off 16439: its post-boundary commit r16172 is ReleaseTool-only (not a binary fix),
+  upfront conversion unfinished -> Internal/Async; skip the ReleaseTool upfront step for consoles
+  (login path covers console players).
+- 2026-07-01: NSH reconciliation + version rename. Renamed 16439 `2026.4.1.1` -> `2026.4.2.1 FTUE
+  Server Hotfix` (consoles ship first; the hotfix follows). Reconciled the old NSH-stuck tasks (shipped
+  to prod pre-review): set **honest** platform versions and dropped NSH on 10 tasks — WebAdmin Dec'25
+  (FP-41067/41455/41468/41498/41532) -> `2026.3 Leaderboards` + `FTUE M/N`; line/torch Feb'26
+  (FP-41958/41962/42033) -> `Norway Consoles` + `2026.3 Leaderboards` + `FTUE M/N`; FP-43750/43817 ->
+  `2026.4 FTUE Steam` + `2026.4.2 Consoles` + `FTUE M/N` (all verified). M/N catch-up is the single
+  `2026 FTUE Mobile + Nintendo` (16241) — no separate Norway/Leaderboards M/N release exists.
+  FP-43756 merged/closed/versioned by owner (reviewed separately). FP-41407/44395/44464/44701 have no
+  code, stay in NSH. Renamed recon artifact -> patch-2026.4.2.1-recon.md.

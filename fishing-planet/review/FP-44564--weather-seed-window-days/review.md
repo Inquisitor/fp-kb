@@ -53,7 +53,7 @@ Fix r16226 reworks the seed query to be date-based and adds real `WeatherBuilder
 
 **Approve.** Single clean commit implementing exactly the reporter's proposed date-based dedup, plus genuine regression tests where there were none. Two independent passes (skill recon + code-reviewer agent) found no blocking issue. Production caller benefits correctly; no regression. Only Info/Low non-blocking observations, all Accepted.
 
-**Closed (open phase) as `waiting-for-release`.** Merged MFT r16226 -> Code (NPN) @ r16233 (not inherited; r16226 > NPN base 16130, dry-run clean). LGTM posted to JIRA (comment 125986). `customfield_11323` set to Post-Release Checks. Pending: verify on live data, once the 2026.4.1.1 FTUE Server Hotfix (release date 2026-06-30) is deployed, that the daily-appended weather run mix matches bulk `RegenerateAll` (no length-1 over-variety) — reporter's acceptance criterion #2. Stays in Active Reviews until that check confirms.
+**Closed (open phase) as `waiting-for-release`.** Merged MFT r16226 -> Code (NPN) @ r16233 (not inherited; r16226 > NPN base 16130, dry-run clean). LGTM posted to JIRA (comment 125986). `customfield_11323` set to Post-Release Checks. Pending: verify on live data, once the 2026.4.2.1 FTUE Server Hotfix (after the 2026.4.2 console release) is deployed, that the daily-appended weather run mix matches bulk `RegenerateAll` (no length-1 over-variety) — reporter's acceptance criterion #2. Stays in Active Reviews until that check confirms.
 
 ## Investigation Journal
 
