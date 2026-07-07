@@ -100,3 +100,8 @@ No formal multi-phase plan — driven by the checklist. All directions complete:
   `2026 FTUE Mobile + Nintendo` (16241) — no separate Norway/Leaderboards M/N release exists.
   FP-43756 merged/closed/versioned by owner (reviewed separately). FP-41407/44395/44464/44701 have no
   code, stay in NSH. Renamed recon artifact -> patch-2026.4.2.1-recon.md.
+- 2026-07-06: Release-cleanup task sweep. Stanislav + Anna Vorona moved a batch of Resolved/In-Review
+  tasks off Stanislav's plate. Captured the ones that closed or reassigned away (may have shipped
+  without his review) for review-triage in
+  [2026-07-06-moved-tasks-review-triage.md](artifacts/2026-07-06-moved-tasks-review-triage.md);
+  fixVersion-only moves left untracked (still on him, non-critical).
