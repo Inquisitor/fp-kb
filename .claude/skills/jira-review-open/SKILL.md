@@ -76,7 +76,7 @@ Update card Scope with audited commit list. See [commit-discovery.md](references
 
 **WC freshness check (do this before reading any changed file from disk).** After collecting the revisions, run `svn info --show-item revision` on the WC and compare against the lowest revision under review. If the WC is behind:
 1. Run `svn status`. If the WC is clean, **ask the user for permission** and `svn update` to HEAD; after that the disk is trustworthy — read files normally.
-2. If the WC is dirty, the user declines, or the review targets a pinned older revision — fall back: treat `svn diff -c` / `svn cat -r` as the sole source of truth, do NOT read the changed files from disk, and (Step 6) include this stale-WC warning plus the exact commands in the delegated agent's prompt.
+2. If the WC is dirty, the user declines, or the review targets a pinned older revision — fall back: treat `svn diff -c` / `svn cat -r` as the sole source of truth, do NOT read the changed files from disk, and (Step 6) include this stale-WC warning plus the exact commands in the delegated reviewers' prompts (agent and Codex).
 
 Why this matters: a stale WC silently shows pre-fix file state, which has twice caused a changed file to look absent/reverted (once propagated into a delegated agent as a false "fix not present" alarm).
 
@@ -98,16 +98,21 @@ Each hypothesis-level concern (potential issue) gets verified before becoming a 
 
 See [`<kb>/feedback/branch_copy_inheritance.md`](../../../feedback/branch_copy_inheritance.md). If the fix is already inherited via branch copy, mark in Scope; close phase will skip merge.
 
-### Step 6 — Mandatory agent delegation question
+### Step 6 — Mandatory independent delegation (agent + Codex)
 
-Use `AskUserQuestion`:
-> "Diffs read, recon observations collected. Spawn code-reviewer agent for independent check?
-> 1. Yes — deep delegation
-> 2. No — recon sufficient"
+After recon, launch an independent review in parallel — a required step, run even when recon found nothing (clean-LGTM is the highest-risk case for a missed defect). Two modes, both in parallel:
 
-Spawn the question even when recon found nothing. The question's purpose is to validate "absence-of-issues" claim from outside — clean-LGTM territory is the highest skip-risk for this step.
+**Independent defect hunt (blind).** Point the `code-reviewer` agent (Agent tool) and Codex (`/ask-codex` skill) at the diffs/scope: hunt for defects, assume bugs exist, ground every claim in the diff (cite file/method). Prefer NOT to pre-load the recon findings — a delegate that echoes recon adds nothing, and one told to argue against it manufactures objections. Independence + code-grounding is the goal.
 
-**Stale-WC propagation (per Step 1 fallback):** if the WC was not updated (dirty / declined / pinned old rev), the delegated agent will read pre-fix disk state unless warned. Include in the agent prompt: an explicit warning that the WC is behind the reviewed revision, plus the exact `svn diff -c <rev>` and `svn cat -r <rev> <branch-URL>/<path>` commands to use as the source of truth instead of disk reads.
+**Targeted verification (grounded).** For any specific recon finding you are genuinely unsure about, hand that finding to a delegate (agent and/or Codex, in parallel with the hunt) for a focused confirm/refute — scoped to that finding, required to cite code evidence either way. This is where adversarial pressure belongs: on a named uncertain claim, not a blanket "challenge everything".
+
+**Critically re-verify every delegated finding before accepting it** — this re-verification is the filter that kills both sycophantic confirmations and contrarian red herrings:
+- Verify each delegated finding (from either mode) against the actual code/diff yourself (read the cited file/method) before it becomes a card finding — same bar as Step 4 (a verification bullet in Investigation). A finding with no code evidence that does not survive your check is dropped (or recorded as considered-and-rejected).
+- Where a delegation corrects your own recon (mechanism, severity), record it in the Investigation journal (hypothesis disproven).
+- Where the delegations disagree with each other or with recon, resolve by reading the code — not by majority. **Surface any disagreement that stays unresolved or is decision-affecting to the user directly, not only in the card.**
+- Attribute each surviving finding in "Discovered by" (skill recon / code-reviewer agent / Codex).
+
+**Stale-WC propagation (per Step 1 fallback):** if the WC was not updated (dirty / declined / pinned old rev), both the agent and Codex will read pre-fix disk state unless warned. Include in each prompt an explicit warning that the WC is behind the reviewed revision, plus the exact `svn diff -c <rev>` and `svn cat -r <rev> <branch-URL>/<path>` commands to use as the source of truth instead of disk reads.
 
 ## Phase 3: Verification
 
@@ -126,7 +131,7 @@ Verify executor's claims about codebase structure (claims in commit messages, JI
 
 **Resolution:** action + brief justification.
 
-**Discovered by:** skill recon | code-reviewer agent | executor's comment | manual scan. (Required for non-trivial findings.)
+**Discovered by:** skill recon | code-reviewer agent | Codex | executor's comment | manual scan. (Required for non-trivial findings.)
 ```
 
 ### Severity (about the issue)
