@@ -154,6 +154,22 @@ prompt: do NOT invent data; if a file is empty, return empty; if a regex doesn't
 field blank. The week-5 first attempt was thrown away because the agent hallucinated synthetic
 data; the current prompt explicitly forbids this.
 
+### 4.5 Evidence completeness gate (post-Codex refinement)
+
+Before dispatching the cohort to trial, cross-check parser-reported NO-SHOW counts against the
+Step 1 SQL numbers per candidate. If a candidate's parser NO-SHOW count differs from SQL by more
+than 20% OR by more than 5 absolute events (whichever is larger), flag the card with
+`evidence_completeness: degraded` and include the SQL/parser diff in the pre-trial context. The
+judge should downgrade confidence and prefer WATCH on degraded evidence unless the trajectory
+signature is independently overwhelming (Da Sneaky Snake week-10 is an example where completeness
+would be flagged but severity is sufficient to sustain BAN anyway).
+
+Observed cases: Gustyn112 week-9 (parser 10 vs SQL 15, diff −5), alphaBiTsoop16 week-10 (parser
+26 vs SQL 50, diff −24). Both remained BAN because signature severity dominated, but recurring
+disagreement is a data-integrity signal that warrants investigation (possible Support pre-action
+redaction of tail ledger entries, tail entries appearing post-parser-run, or parser regex
+missing a variant).
+
 ### 5. Adversarial trial — workflow with prosecutor / defense / judge per case
 
 A `Workflow` script (using the `Workflow` MCP tool) runs three subagents per candidate in a
@@ -192,35 +208,36 @@ Without this the trial loses calibration.
    hypothesis when the climbs are followed by no-show flushes and re-engagement at
    NOOBS-bracket competitions. The climb is the up-arc of a climb-and-cash cycle, not climber
    behavior. Only use net-positive as defense when there is NO climb-then-flush signature.
-6. (week-8 KingYakO2 refinement) NEW first-cycle with novice lifetime (TotalPrizes < 10)
-   warrants WATCH with elevated week+1 escalation bias if NOOBS pattern persists. Applies to
-   genuine novices with sparse total activity; does NOT apply to veterans whose flavor has
-   changed to NOOBS (those are BAN under rule 1/4). **Under review** (post-Codex): the
-   TotalPrizes<10 threshold is case-shaped from KingYakO2 and stretched at week-10; reframe
-   candidate is "low lifetime volume + structural counter-evidence + low leaderboard extraction".
-7. (week-8 TR-dennisfb refinement) High-PCR sandbagging WATCH (PCR >= 800 OR Lifetime TOPS >= 5)
-   carries a one-cycle clock. If NOOBS shift appears next cycle, rule 4 fires (BAN). **Under
-   review** (post-Codex): needs a closure rule for VM_Vigor / Panonski_Alas style -- 3
-   consecutive cycles at unchanged TOP-flavor with 0 NOOBS shift should exit FP-43631 scope
-   rather than remain eternal WATCH.
+6. (week-8 KingYakO2 refinement, reframed post-Codex) NEW first-cycle candidates with a
+   **novice competition profile** warrant WATCH with a one-cycle clock. Novice profile means:
+   TotalPrizes < 10 (KingYakO2 baseline threshold) OR combination of (a) low lifetime volume,
+   (b) structural counter-evidence (recovery-climb, continuous absence block, scheduler-artifact
+   batches), (c) low leaderboard extraction (rank far outside top-100 or Wins <= 2). Does NOT
+   apply to veterans whose flavor has changed to NOOBS -- those are BAN under rule 1/4.
+7. (week-8 TR-dennisfb refinement + week-10 closure) High-PCR sandbagging WATCH (PCR >= 800
+   OR Lifetime TOPS >= 5) carries a one-cycle clock. **Direction 1**: if NOOBS shift appears
+   next cycle, rule 4 fires (BAN). **Direction 2** (post-Codex closure): if the candidate
+   remains in the wide cohort for 3+ consecutive cycles with unchanged TOP-flavor and 0 NOOBS
+   shift (VM_Vigor / Panonski_Alas pattern), close the case as "not FP-43631 target" and stop
+   re-listing on the watchlist -- separate anti-abuse framework should own it if needed.
 8. (week-9 CreekSamurai refinement / week-10 validation) Novice-deference WATCH from rule 6
-   comes with a persistence check: if the same candidate returns next cycle with the same
-   NOOBS pattern (any additional MIDDLES->NOOBS drops, NOOBS prize count growing, or
-   NoShowSharePct persisting on a larger sample), rule 4 auto-BAN fires. Rule 6 -> rule 4/8
-   escalation ladder was validated in week-10 when CreekSamurai returned with escalated
-   pattern (8 M->N drops up from 3) and Support pre-actioned at the exact 2W duration our
-   rule would have applied. **Under review** (post-Codex): "persistence" is not yet defined
-   numerically; needs a concrete threshold (e.g. "at least N additional M->N drops OR NOOBS
-   prize count grew by K OR Lifetime NOOBS/TotalPrizes ratio exceeded X").
-
-**Rule 9 candidate (post-week-10, not yet applied)**: within-bracket detector for cases like
-sandaljepitt (week-10) where the entire trajectory sits inside NOOBS bracket [0..100] and the
-account never crosses into MIDDLES. Rules 1/4/6 all require cross-bracket signature
-(MIDDLES->NOOBS drops OR climb-then-flush arcs) as load-bearing evidence and miss this pattern.
-Rule 9 draft would fire on: high NoShowSharePct AND pure NOOBS prize flavor AND PCR range
-entirely below 100 across the trajectory window. To discuss with CS lead and formalize;
-sandaljepitt is the first documented case where Support pre-actioned but trial dissented on
-rating-drop grounds (alignment counter 27/28).
+   comes with a persistence check. Rule 4 auto-BAN fires next cycle if ANY of: (a) at least
+   one additional MIDDLES->NOOBS drop compared to prior cycle, (b) NOOBS prize count grew by
+   >= 2, (c) NoShowSharePct maintained above 30% on a >= 20% larger sample (Registrations grew
+   materially without proportional Played growth). Validated week-10: CreekSamurai returned
+   with 8 M->N drops (up from 3) satisfying condition (a) with margin -- Support pre-actioned
+   at the exact 2W duration our rule would have applied.
+9. (week-10 sandaljepitt refinement) **Within-bracket detector** for cases entirely inside the
+   NOOBS bracket [0..100] where rules 1/4/6 miss because no MIDDLES->NOOBS drops and no
+   climb-then-flush arcs are possible. Rule 9 fires on ALL of: (a) NoShowSharePct >= 40 (higher
+   than the wide-gate 30%), (b) Prizes_NMT >= 4N with 0M and 0T (pure NOOBS flavor),
+   (c) max PCR across the trajectory window < 100 (never climbs into MIDDLES), (d) at least
+   10 Registrations in the sweep window (avoid tiny-sample false positives). Judge should
+   accept "within-bracket abuse" as a load-bearing BAN argument even without cross-bracket
+   evidence; defense counters remain novice-deference (rule 6, if TotalPrizes < 10) and
+   sample-size (rule 3, if <10 played). Discovered from sandaljepitt week-10 dissent -- Support
+   pre-actioned 2W (rating-drop duration; cheat bans are permanent on FP), trial WATCH under
+   rule 6, alignment counter 27/28.
 
 Output is `{ trials: [{ name, platform, status, prosArg, defArg, verdict }] }` — extract
 verdicts via:
@@ -464,11 +481,12 @@ The trial's discriminator over weeks 3-10 has stabilized to:
   (recovery-climb, continuous absence block, scheduler-artifact batches) — WATCH with
   one-cycle clock per rule 6 / rule 8 ladder
 
-**Known blind spot (post-Codex + week-10 sandaljepitt case)**: all four BAN criteria assume
-cross-bracket movement. A player farming NOOBS prizes entirely below PCR 100 (never climbs
-into MIDDLES, no MIDDLES->NOOBS drops possible) satisfies rules 1 and 3 but fails rule 2 by
-absence-of-signal. Rule 9 candidate (see standing rules section) addresses this within-bracket
-pattern; formalization pending.
+**Within-bracket abuse pattern** (post-week-10 sandaljepitt, rule 9 formalized): a player
+farming NOOBS prizes entirely below PCR 100 (never climbs into MIDDLES, no MIDDLES->NOOBS
+drops possible) satisfies rules 1 and 3 but fails rule 2 by absence-of-signal. Rule 9 (see
+Standing rules section) closes this gap: high NoShowSharePct + pure NOOBS flavor + max PCR
+below 100 across the window + >= 10 Registrations. Judges should accept within-bracket abuse
+as load-bearing BAN evidence even without cross-bracket signature.
 
 **Watchlist escalation rule** (rule 4): a player carried over from a prior cycle's watchlist
 who shows flavor change to pure NOOBS this cycle is BAN without further deliberation. Fired
@@ -604,3 +622,38 @@ Memory rules accessed via `<memory>/MEMORY.md` SQL Conventions / VCS / JIRA sect
 
 Journal `<task>/journal.md` is append-only and carries the cycle-by-cycle history.
 `<task>/backlog.md` tracks deferred items.
+
+## Deferred architectural refinements (post-Codex, not yet implemented)
+
+Documented for future work. Each item is a real improvement identified in the Codex
+consultation post-week-10; not blocking for the weekly cycle but worth acting on.
+
+- **Two-phase blind→informed verdict.** Split the judge into two calls: (1) blind pattern
+  verdict reading only the trajectory card (no status, no watchlist history, no Support
+  action) — output one of `NOOBS-farm / non-target sandbagging / novice-uncertain / insufficient`;
+  (2) informed duration/escalation decision reading blind verdict + pre-trial context (status,
+  Support action, watchlist holdover, recidivism). Reduces the correlated-reasoning bias where
+  the current single-phase judge sees Support-pre-actioned status in the context field before
+  rendering its BAN/WATCH call, undermining the alignment counter's independence. Implementation:
+  modify the workflow script in `.claude/…/workflows/scripts/fp43631-*-adversarial-review-*.js`
+  to add a blind-pattern agent before the judge.
+- **ZeroScore column as second detection path.** The current gate treats `IsStarted=1 AND
+  Score=0` (zero-score) as a legitimate play. A farmer who starts a comp and immediately
+  disconnects/idles achieves the same NOOBS-drain outcome as a no-show without triggering the
+  `IsStarted=0` signature. `week3-cs-report.sql` already emits `ZeroScore` per candidate; add
+  a second-path detection query `zero-score-abuse.sql` that gates on `ZeroScore >= 6` AND
+  `NoShowSharePct < 30` (i.e. the population no-show gate misses) AND `TotalPrizes > 3`. Run
+  alongside the no-show gate; merge cohorts for the trial.
+- **Blind falsification test.** The alignment counter is a sanity check, not validation
+  (Codex critique). A real falsification would replay 1-2 prior weeks blind: strip Support
+  pre-action flags, watchlist history, and prior verdict labels from the pre-trial context;
+  add non-cohort negatives (Support-Competition-banned players NOT in the wide cohort;
+  cheat-vector bans; random high-no-show players with 0 prizes). Score blind verdict against
+  later observed persistence, leaderboard extraction, and independent Support action. Not
+  worth doing weekly, but a good end-of-quarter check.
+- **Rule 8 numerical persistence formalized above** (concrete thresholds added in-line at rule
+  8). This item retained as a followup for tightening the thresholds after more validation
+  cycles.
+- **Persistent high-PCR sandbagger auto-close** (rule 7 direction 2 above): once formalized,
+  add a "3-cycle sandbagger" auto-close bookkeeping check to the sample triage step (Step 2)
+  so operators don't manually re-list VM_Vigor / Panonski_Alas indefinitely.
