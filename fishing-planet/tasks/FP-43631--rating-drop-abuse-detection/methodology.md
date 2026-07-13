@@ -1,9 +1,9 @@
 ---
 title: FP-43631 — Rating-drop abuse detection & ban methodology
 purpose: Self-contained operational playbook for the weekly FP-43631 cycle. Hand-off ready.
-status: stable (calibrated through weeks 5-7, in production since week-3)
+status: stable (calibrated through weeks 5-10, in production since week-3)
 jira: https://fishingplanet.atlassian.net/browse/FP-43631
-example_cycle: week-7 (2026-06-22) — all referenced file paths point to that cycle's artifacts
+example_cycle: week-10 (2026-07-12) — file references point to that cycle; week-7 walkthrough kept below as historical illustration
 ---
 
 # FP-43631 — Rating-drop abuse detection & ban methodology
@@ -183,14 +183,44 @@ Without this the trial loses calibration.
 
 1. BAN is for clear NOOBS-bracket-farming via deliberate no-show deflation. Not for absence
    alone; not for MIDDLES-only or TOP-only sandbagging (different mechanism).
-2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak.
+2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak. When status is
+   REPEAT and prize flavor is TOP/MIDDLES not NOOBS, WATCH applies just like NEW.
 3. Sample-size objections deserve weight on first-cycle NEW candidates.
 4. Watchlist players escalating to NOOBS flavor (NOOBS prizes appear OR MIDDLES->NOOBS drops
    appear) trigger automatic BAN without further deliberation.
-5. Net-positive PCR alone does NOT defeat the bracket-farming hypothesis when the climbs are
-   followed by no-show flushes and re-engagement at NOOBS-bracket competitions. The climb is
-   the up-arc of a climb-and-cash cycle, not climber behavior. **Refinement added week-7 after
-   the Kacumi calibration case.**
+5. (week-7 Kacumi refinement) Net-positive PCR alone does NOT defeat the bracket-farming
+   hypothesis when the climbs are followed by no-show flushes and re-engagement at
+   NOOBS-bracket competitions. The climb is the up-arc of a climb-and-cash cycle, not climber
+   behavior. Only use net-positive as defense when there is NO climb-then-flush signature.
+6. (week-8 KingYakO2 refinement) NEW first-cycle with novice lifetime (TotalPrizes < 10)
+   warrants WATCH with elevated week+1 escalation bias if NOOBS pattern persists. Applies to
+   genuine novices with sparse total activity; does NOT apply to veterans whose flavor has
+   changed to NOOBS (those are BAN under rule 1/4). **Under review** (post-Codex): the
+   TotalPrizes<10 threshold is case-shaped from KingYakO2 and stretched at week-10; reframe
+   candidate is "low lifetime volume + structural counter-evidence + low leaderboard extraction".
+7. (week-8 TR-dennisfb refinement) High-PCR sandbagging WATCH (PCR >= 800 OR Lifetime TOPS >= 5)
+   carries a one-cycle clock. If NOOBS shift appears next cycle, rule 4 fires (BAN). **Under
+   review** (post-Codex): needs a closure rule for VM_Vigor / Panonski_Alas style -- 3
+   consecutive cycles at unchanged TOP-flavor with 0 NOOBS shift should exit FP-43631 scope
+   rather than remain eternal WATCH.
+8. (week-9 CreekSamurai refinement / week-10 validation) Novice-deference WATCH from rule 6
+   comes with a persistence check: if the same candidate returns next cycle with the same
+   NOOBS pattern (any additional MIDDLES->NOOBS drops, NOOBS prize count growing, or
+   NoShowSharePct persisting on a larger sample), rule 4 auto-BAN fires. Rule 6 -> rule 4/8
+   escalation ladder was validated in week-10 when CreekSamurai returned with escalated
+   pattern (8 M->N drops up from 3) and Support pre-actioned at the exact 2W duration our
+   rule would have applied. **Under review** (post-Codex): "persistence" is not yet defined
+   numerically; needs a concrete threshold (e.g. "at least N additional M->N drops OR NOOBS
+   prize count grew by K OR Lifetime NOOBS/TotalPrizes ratio exceeded X").
+
+**Rule 9 candidate (post-week-10, not yet applied)**: within-bracket detector for cases like
+sandaljepitt (week-10) where the entire trajectory sits inside NOOBS bracket [0..100] and the
+account never crosses into MIDDLES. Rules 1/4/6 all require cross-bracket signature
+(MIDDLES->NOOBS drops OR climb-then-flush arcs) as load-bearing evidence and miss this pattern.
+Rule 9 draft would fire on: high NoShowSharePct AND pure NOOBS prize flavor AND PCR range
+entirely below 100 across the trajectory window. To discuss with CS lead and formalize;
+sandaljepitt is the first documented case where Support pre-actioned but trial dissented on
+rating-drop grounds (alignment counter 27/28).
 
 Output is `{ trials: [{ name, platform, status, prosArg, defArg, verdict }] }` — extract
 verdicts via:
@@ -413,7 +443,7 @@ Static shared artifacts (not per-cycle):
 
 ## Key concepts that distinguish BAN from WATCH
 
-The trial's discriminator over weeks 3-7 has stabilized to:
+The trial's discriminator over weeks 3-10 has stabilized to:
 
 **BAN if all four hold:**
 1. Net-negative PCR over the trajectory window
@@ -424,16 +454,32 @@ The trial's discriminator over weeks 3-7 has stabilized to:
    long-tenured MIDDLES/TOPS veterans require flavor change to NOOBS prizes)
 
 **WATCH if any of these dominate:**
-- MIDDLES-only or TOP-only prize signature regardless of no-show share (different mechanism)
+- MIDDLES-only or TOP-only prize signature regardless of no-show share (different mechanism);
+  under rule 7, high-PCR sandbagging WATCH also carries a one-cycle clock for NOOBS-flavor shift
 - Net-positive PCR across the window with PCR ending in MIDDLES — but **only** if the climbs
-  are not climb-then-flush cycles; if they are, BAN per the week-7 Kacumi refinement
+  are not climb-then-flush cycles; if they are, BAN per the week-7 Kacumi rule 5
 - Sample size too thin (< 10 played events) on a first-cycle candidate
 - Sandbagging-within-MASTERS (PCR > 1000 throughout, prizes in 0N+kM+0T pattern)
+- Novice-deference: NEW first-cycle with TotalPrizes < 10 AND structural counter-evidence
+  (recovery-climb, continuous absence block, scheduler-artifact batches) — WATCH with
+  one-cycle clock per rule 6 / rule 8 ladder
 
-**Watchlist escalation rule**: a player carried over from a prior cycle's watchlist who shows
-flavor change to pure NOOBS this cycle is BAN without further deliberation. Fired twice in
-week-7 (`rabolio41100` from week-6, `maminapokorny83` from week-5), once in week-8 expected
-(`MonsterFish_fuark` from week-6, `Matiamo_PL` from week-7).
+**Known blind spot (post-Codex + week-10 sandaljepitt case)**: all four BAN criteria assume
+cross-bracket movement. A player farming NOOBS prizes entirely below PCR 100 (never climbs
+into MIDDLES, no MIDDLES->NOOBS drops possible) satisfies rules 1 and 3 but fails rule 2 by
+absence-of-signal. Rule 9 candidate (see standing rules section) addresses this within-bracket
+pattern; formalization pending.
+
+**Watchlist escalation rule** (rule 4): a player carried over from a prior cycle's watchlist
+who shows flavor change to pure NOOBS this cycle is BAN without further deliberation. Fired
+cleanly across cycles:
+- Week-7: `rabolio41100` (from week-6), `maminapokorny83` (from week-5)
+- Week-8: `MonsterFish_fuark` (from week-6), `Matiamo_PL` (from week-7)
+- Week-10: `CreekSamurai` (from week-9 novice-deference WATCH — validation of rule 6/8 ladder)
+
+**FarantirPL non-return** (week-9 novice-deference WATCH → did not appear in week-10 cohort) is
+the parallel data point confirming rule 6 correctly declined to BAN on cycle 1. Rule 6 -> rule
+4/8 escalation ladder demonstrated both directions in the same follow-up cycle (week-10).
 
 ## Trial-Support alignment
 
@@ -442,10 +488,30 @@ players Support had already actioned before the sweep. These get logged in the b
 `support_pre_actioned_trial_confirmed` and are NOT re-banned (their Support BanEnd typically
 runs past the 2W standard; the Step 6 SQL WHERE clause skips them automatically).
 
-Running alignment counter — independently confirmed BAN verdicts on Support-actioned candidates:
-- Week-6: 0 of 0 in rating-drop domain (the one match `VM_NPWP` was anti-cheat-orthogonal)
-- Week-7: 4 of 4 (Kacumi, poink, A-J-Rimmer-BSC, nowa_zajawka)
-- Cumulative: **18/18** (with the VM_NPWP separate-domain note)
+Running alignment counter — independently confirmed BAN verdicts on Support-actioned candidates
+at the rating-drop vector:
+
+| Cycle   | Support pre-actioned | Trial verdict alignment | Cumulative |
+|---------|---------------------:|-------------------------|-----------:|
+| Week-6  | 0 in rating-drop domain (`VM_NPWP` was anti-cheat-orthogonal) | n/a       | 0/0        |
+| Week-7  | 4 (Kacumi, poink, A-J-Rimmer-BSC, nowa_zajawka)              | 4 conf 9-10/10 BAN | 18/18 |
+| Week-8  | 2 (Adlerblut-Slayer, TR-dennisfb)                             | 2 conf 10/10 BAN   | 20/20 |
+| Week-9  | 2 (ArTeM209, Gustyn112)                                       | 2 conf 9-10/10 BAN | 22/22 |
+| Week-10 | 7 (JFF_Gothyka, LaccFarro, CreekSamurai, MLG720YOLO, Da Sneaky Snake, CraddiePoosta, **sandaljepitt**) | 6 confirmed BAN + **1 dissent (sandaljepitt: trial WATCH conf 7)** | **27/28** |
+
+**Interpretation caveat (post-Codex)**: the alignment counter is a sanity check, not a
+validation metric. Independence is weak because Support-pre-actioned status is included in the
+pre-trial context field (methodology Step 5), so the judge is not blind to Support's action
+when rendering the verdict. Kept for operational awareness; a real validation would require
+blind replay of prior weeks (strip labels/status/history, mix in non-cohort negatives, score
+against later observed persistence + leaderboard extraction).
+
+**sandaljepitt (first dissent)**: Support pre-actioned at 2W for rating-drop (cheat bans on FP
+are permanent -- the 2W duration confirms the vector). Trial gave WATCH under rule 6
+novice-deference (Lifetime 5) with load-bearing structural argument: PCR range 0..69 entirely
+inside NOOBS bracket, 0 MIDDLES->NOOBS drops -- no cross-bracket signature. Support saw enough;
+trial framework did not. This is the within-bracket blind spot rule 9 candidate would address
+(see Standing rules section).
 
 ## Methodology refinements over cycles
 
@@ -469,6 +535,18 @@ section the cycle it's discovered, then carried forward via memory rules.
 | week-7 | Mongo trajectory: one consolidated `$in` aggregate per platform, not N queries | (in journal) |
 | week-7 | Post-ban TSV refresh: amend ban-pack commit, not separate commit | `feedback_post_ban_tsv_amend.md` |
 | week-7 | Re-ban WHERE clause adopts canonical form | (in `bans-2026-06-21.sql`) |
+| week-8 | Novice-deference rule 6: NEW first-cycle + TotalPrizes < 10 → WATCH with week+1 escalation bias | (in `bans-2026-06-28.md` KingYakO2 case) |
+| week-8 | High-PCR sandbagging rule 7: one-cycle clock on WATCH; NOOBS shift → BAN under rule 4 | (in `bans-2026-06-28.md` TR-dennisfb case) |
+| week-8 | Mongo banLog backfill ships with active `insertMany([...])` blocks (no `//` prefix) | (in Step 11 above) |
+| week-8 | Post-ban TSV refresh: `git commit --amend --no-edit` on the ban-pack commit | `feedback_post_ban_tsv_amend.md` |
+| week-8 | Monthly leaderboard sanity check added to the cycle (period 20260601 top-50 across 3 platforms) | (in `bans-2026-06-28.md`) |
+| week-9 | Rule 8 novice-deference ladder: WATCH once, auto-BAN on pattern persistence (validated week-10 CreekSamurai) | (in `bans-2026-07-05.md`) |
+| week-9 | June monthly LB back-fill script: `monthly-lb-ban-june-2026.sql` (kept for future cycles; June run was no-op) | (in `bans-2026-07-05.md`) |
+| week-9 | Commit-message rule: describe what changed in KB, not artefact contents; weekly ban-pack collapses to one bullet | (in Step 11 above) |
+| week-10 | Sink-comp repeat targeting: same competition ID NO-SHOWed twice by same UserId is smoking-gun intent evidence that overrides sample-size defense | (in `bans-2026-07-12.md` Miron_33 case) |
+| week-10 | First Trial-Support dissent on rating-drop (sandaljepitt): rule 9 candidate for within-bracket detector | (in `bans-2026-07-12.md` and standing rules above) |
+| week-10 | LaccFarro operational case: our week-6 REPEAT trial-confirmed but Support already covered him at 5W; WHERE clause correctly skipped Profile update, Mongo banLog audit entry inserted (record of intent) | (in `bans-2026-07-12.md`) |
+| week-10 | Codex consultation deferred followups: (a) methodology.md stale — this update addresses it; (b) two-phase blind→informed verdict architecture; (c) alignment counter is sanity check not validation, real falsification needs blind replay; (d) blind spots list — boundary camouflage (sandaljepitt), start-but-throw pivot (ZeroScore column unused), data-source SQL/Mongo reconciliation gate | (in `bans-2026-07-12.md`) |
 
 ## Example: week-7 walkthrough (2026-06-22 ban date)
 
@@ -503,11 +581,12 @@ was always real).
 This document is the entry point. Concrete recent examples for every step are in:
 
 - `artifacts/week3-cs-report.sql` — detection query
-- `artifacts/bans-2026-06-21.sql` — most recent ban execution (updated WHERE clause)
-- `artifacts/bans-2026-06-21.md` — most recent execution record with full trial verdicts
-- `artifacts/ban-log-backfill-2026-06-21.js` — Mongo banLog backfill
-- `artifacts/verify-bans-2026-06-21.sql` — 3-layer verify
+- `artifacts/bans-2026-07-12.sql` — most recent ban execution
+- `artifacts/bans-2026-07-12.md` — most recent execution record with full trial verdicts + refinements ledger
+- `artifacts/ban-log-backfill-2026-07-12.js` — Mongo banLog backfill
+- `artifacts/verify-bans-2026-07-12.sql` — 3-layer verify
 - `artifacts/leaderboard-ban-sync.sql` — LB sync (shared, not date-specific)
+- `artifacts/monthly-lb-ban-june-2026.sql` + `-verify.sql` — one-shot LB back-fill scripts (kept for future cycles when Steam patch actually unbans on Profile expiry; the June run was a no-op)
 - `artifacts/cs-report-2026-06-21.md` — most recent CS handoff narrative
 - `artifacts/cs-report-2026-06-21-{steam,ps,xb}.tsv` — most recent TSVs
 - `artifacts/pcr-trajectory-queries-2026-06-21.js` — consolidated trajectory query
