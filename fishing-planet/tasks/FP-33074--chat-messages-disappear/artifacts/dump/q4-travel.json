@@ -1,0 +1,2180 @@
+[
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 6cd9c6beabd44e68 at pond: 0 (player is on Local Map at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:04:11.931Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 111, , , ) => (Private, , 111, , , )",
+    "RequestId": 344,
+    "Timestamp": {"$date": "2026-06-26T13:06:10.108Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 05049d07e1b4359a at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.692Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.692Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.692Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.692Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.692Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.708Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 207,
+    "Timestamp": {"$date": "2026-06-26T13:07:00.380Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorUp",
+    "RequestId": 1796,
+    "Timestamp": {"$date": "2026-06-26T13:11:43.752Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 6946309b02641a6a at pond: 0 (player is on Local Map at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:27:53.281Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 111, , , ) => (Private, , 111, , , )",
+    "RequestId": 278,
+    "Timestamp": {"$date": "2026-06-26T17:28:46.163Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 8adcacaeb7947d39 at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:28:49.827Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:28:49.827Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:28:49.843Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:28:49.843Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:28:49.843Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:28:49.859Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player entered location 'Location1'",
+    "RequestId": 17,
+    "Timestamp": {"$date": "2026-06-26T17:28:52.968Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 121,
+    "Timestamp": {"$date": "2026-06-26T17:29:23.346Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 159,
+    "Timestamp": {"$date": "2026-06-26T17:29:30.158Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 160,
+    "Timestamp": {"$date": "2026-06-26T17:29:30.158Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorUp",
+    "RequestId": 439,
+    "Timestamp": {"$date": "2026-06-26T17:30:18.464Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 443,
+    "Timestamp": {"$date": "2026-06-26T17:30:20.260Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 460,
+    "Timestamp": {"$date": "2026-06-26T17:30:24.761Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 461,
+    "Timestamp": {"$date": "2026-06-26T17:30:24.761Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorUp",
+    "RequestId": 662,
+    "Timestamp": {"$date": "2026-06-26T17:31:04.933Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 666,
+    "Timestamp": {"$date": "2026-06-26T17:31:06.691Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 676,
+    "Timestamp": {"$date": "2026-06-26T17:31:09.586Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 677,
+    "Timestamp": {"$date": "2026-06-26T17:31:09.586Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorUp",
+    "RequestId": 1694,
+    "Timestamp": {"$date": "2026-06-26T17:34:12.229Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 1698,
+    "Timestamp": {"$date": "2026-06-26T17:34:13.870Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 1708,
+    "Timestamp": {"$date": "2026-06-26T17:34:16.823Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 1709,
+    "Timestamp": {"$date": "2026-06-26T17:34:16.823Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: Morning, AirTemperature: 11, WaterTemperature: 12, Pressure: Medium, WindSpeed: 2.8, WindDirection: SW, Precipitation: , FishPlayFreq: Low, Sky: HeavyCloudy",
+    "RequestId": 2262,
+    "Timestamp": {"$date": "2026-06-26T17:35:52.051Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room d8f61f2ae034dab8 at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:39:55.461Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T17:39:56.949Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T17:39:56.949Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to Pond #121 'KANIQ CREEK' for 1 days, traveling by public transport. Money spent: 10000 SC. Balance after: 66856431 SC",
+    "RequestId": 292,
+    "Timestamp": {"$date": "2026-06-26T17:41:13.212Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '1855807730'",
+    "RequestId": 292,
+    "Timestamp": {"$date": "2026-06-26T17:41:13.212Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 121, , , ) => (None, , 121, , , )",
+    "RequestId": 369,
+    "Timestamp": {"$date": "2026-06-26T17:41:52.524Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 6c9d22de61943e1b at pond: 121 (player is in 3D at Pond #121 'KANIQ CREEK')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:41:56.163Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny_2, TimeOfDay: EarlyMorning, AirTemperature: 14, WaterTemperature: 10, Pressure: Medium, WindSpeed: 0, WindDirection: SW, Precipitation: SoftFog, FishPlayFreq: High, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:41:56.179Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Sunny_2, Seed: -28533000",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:41:56.179Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T17:41:56.226Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'LocAlasaka_Hunter-sCabin'",
+    "RequestId": 19,
+    "Timestamp": {"$date": "2026-06-26T17:41:58.163Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 7139,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.034Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 7139,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.233Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 7139,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.233Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 7139,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.327Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 7139,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.327Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 7140,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.467Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 7141,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.483Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 7142,
+    "Timestamp": {"$date": "2026-06-26T18:07:00.736Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room ed5128106d346739 at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:07:07.602Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:07:07.744Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:07:07.759Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 21,
+    "Timestamp": {"$date": "2026-06-26T18:07:10.787Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to Pond #109 'FALCON LAKE' for 1 days, traveling by public transport. Money spent: 4900 SC. Balance after: 66862930 SC",
+    "RequestId": 49,
+    "Timestamp": {"$date": "2026-06-26T18:07:28.786Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '474448837'",
+    "RequestId": 49,
+    "Timestamp": {"$date": "2026-06-26T18:07:28.786Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 109, , , ) => (None, , 109, , , )",
+    "RequestId": 103,
+    "Timestamp": {"$date": "2026-06-26T18:07:48.664Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room e61d0417d8e4b219 at pond: 109 (player is in 3D at Pond #109 'FALCON LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:07:53.372Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Clouds_4, TimeOfDay: EarlyMorning, AirTemperature: 5, WaterTemperature: 11, Pressure: Medium, WindSpeed: 0, WindDirection: E, Precipitation: , FishPlayFreq: Low, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:07:53.372Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Clouds_4, Seed: -2126510343",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:07:53.372Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:07:53.419Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'LocationLogs'",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T18:07:56.341Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "MoveTime on 7 hours, from 00.05:09 to 00.12:00",
+    "RequestId": 1725,
+    "Timestamp": {"$date": "2026-06-26T18:13:30.654Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Clouds_4, TimeOfDay: Midday, AirTemperature: 14, WaterTemperature: 10, Pressure: Medium, WindSpeed: 1.5, WindDirection: NE, Precipitation: , FishPlayFreq: High, Sky: Cloudy",
+    "RequestId": 1725,
+    "Timestamp": {"$date": "2026-06-26T18:13:30.654Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Update MoveTimeForwardTimeout to 6/26/2026 6:34:02 PM",
+    "RequestId": 1725,
+    "Timestamp": {"$date": "2026-06-26T18:13:30.654Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 5523,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.287Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 5523,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.302Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 5523,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.302Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 5523,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.365Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 5523,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.365Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 5524,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.521Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 5525,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.521Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 5526,
+    "Timestamp": {"$date": "2026-06-26T18:19:02.786Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 2de124995d84b58a at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:19:10.764Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:19:10.936Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:19:10.936Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 22,
+    "Timestamp": {"$date": "2026-06-26T18:19:14.046Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to Pond #220 'MAKU-MAKU LAKE' for 1 days, traveling by public transport. Money spent: 16500 SC. Balance after: 66837179 SC",
+    "RequestId": 110,
+    "Timestamp": {"$date": "2026-06-26T18:20:20.307Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '1892794056'",
+    "RequestId": 110,
+    "Timestamp": {"$date": "2026-06-26T18:20:20.307Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 220, , , ) => (None, , 220, , , )",
+    "RequestId": 150,
+    "Timestamp": {"$date": "2026-06-26T18:20:33.392Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 5441130594942db8 at pond: 220 (player is in 3D at Pond #220 'MAKU-MAKU LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:20:37.160Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Rain_2, TimeOfDay: EarlyMorning, AirTemperature: 26, WaterTemperature: 26, Pressure: Low, WindSpeed: 0, WindDirection: N, Precipitation: , FishPlayFreq: Low, Sky: Unclear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:20:37.176Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Rain_2, Seed: -1627384359",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:20:37.176Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '8'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:20:37.207Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'Loc_1_Tourists'",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T18:20:39.441Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (e54d1fd1-0a7e-40e4-8b56-b8692d06db0f)",
+    "RequestId": 208,
+    "Timestamp": {"$date": "2026-06-26T18:21:58.412Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 208,
+    "Timestamp": {"$date": "2026-06-26T18:21:58.412Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "MoveTime on 14 hours, from 00.05:10 to 00.19:00",
+    "RequestId": 584,
+    "Timestamp": {"$date": "2026-06-26T18:23:40.283Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Rain_2, TimeOfDay: LateEvening, AirTemperature: 27, WaterTemperature: 26, Pressure: Medium, WindSpeed: 1.1, WindDirection: SE, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 584,
+    "Timestamp": {"$date": "2026-06-26T18:23:40.283Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Update MoveTimeForwardTimeout to 6/26/2026 7:05:08 PM",
+    "RequestId": 584,
+    "Timestamp": {"$date": "2026-06-26T18:23:40.283Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '8'",
+    "RequestId": 1021,
+    "Timestamp": {"$date": "2026-06-26T18:24:51.741Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 1153,
+    "Timestamp": {"$date": "2026-06-26T18:25:38.972Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 1153,
+    "Timestamp": {"$date": "2026-06-26T18:25:38.972Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 1153,
+    "Timestamp": {"$date": "2026-06-26T18:25:38.972Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 1153,
+    "Timestamp": {"$date": "2026-06-26T18:25:39.050Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 1153,
+    "Timestamp": {"$date": "2026-06-26T18:25:39.050Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 1154,
+    "Timestamp": {"$date": "2026-06-26T18:25:39.206Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 1155,
+    "Timestamp": {"$date": "2026-06-26T18:25:39.216Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 1157,
+    "Timestamp": {"$date": "2026-06-26T18:25:39.457Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room ed5128106d346739 at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:25:46.466Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:25:46.808Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:25:46.808Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 22,
+    "Timestamp": {"$date": "2026-06-26T18:25:50.089Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to Pond #114 'SAN JOAQUIN DELTA' for 1 days, traveling by public transport. Money spent: 9800 SC. Balance after: 66820435 SC",
+    "RequestId": 67,
+    "Timestamp": {"$date": "2026-06-26T18:26:18.010Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '129503765'",
+    "RequestId": 67,
+    "Timestamp": {"$date": "2026-06-26T18:26:18.010Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 114, , , ) => (None, , 114, , , )",
+    "RequestId": 102,
+    "Timestamp": {"$date": "2026-06-26T18:26:26.576Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room cdc5ee3c75b4d96b at pond: 114 (player is in 3D at Pond #114 'SAN JOAQUIN DELTA')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:26:31.903Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: SunAndClouds_1, TimeOfDay: EarlyMorning, AirTemperature: 15, WaterTemperature: 15, Pressure: High, WindSpeed: 0, WindDirection: S, Precipitation: , FishPlayFreq: Medium, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:26:31.903Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: SunAndClouds_1, Seed: 1772631463",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:26:31.903Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '3.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:26:31.950Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'Location1'",
+    "RequestId": 17,
+    "Timestamp": {"$date": "2026-06-26T18:26:34.106Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'Location2'",
+    "RequestId": 643,
+    "Timestamp": {"$date": "2026-06-26T18:29:05.939Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 10307,
+    "Timestamp": {"$date": "2026-06-26T18:32:51.124Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player entered location 'Location2'",
+    "RequestId": 10318,
+    "Timestamp": {"$date": "2026-06-26T18:32:51.217Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 10401,
+    "Timestamp": {"$date": "2026-06-26T18:33:17.975Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 10401,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.007Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 10401,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.007Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 10401,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.053Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 10401,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.053Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 10402,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.241Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 10403,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.257Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 10404,
+    "Timestamp": {"$date": "2026-06-26T18:33:18.507Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 2de124995d84b58a at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:33:35.592Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:33:35.733Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:33:35.733Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 23,
+    "Timestamp": {"$date": "2026-06-26T18:33:40.451Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Arrived to Pond #106 'NEHERRIN RIVER' for 1 days, traveling by public transport. Money spent: 3300 SC. Balance after: 1264919 SC",
+    "RequestId": 155,
+    "Timestamp": {"$date": "2026-06-26T18:35:24.599Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Scene seed - initialized: '1558720375'",
+    "RequestId": 155,
+    "Timestamp": {"$date": "2026-06-26T18:35:24.599Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 106, , , ) => (None, , 106, , , )",
+    "RequestId": 200,
+    "Timestamp": {"$date": "2026-06-26T18:35:42.271Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room fce50512cc545dd8 at pond: 106 (player is in 3D at Pond #106 'NEHERRIN RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:35:44.984Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: SunAndClouds_4, TimeOfDay: EarlyMorning, AirTemperature: 15, WaterTemperature: 21, Pressure: Medium, WindSpeed: 0, WindDirection: SW, Precipitation: SoftFog, FishPlayFreq: High, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:35:44.984Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: SunAndClouds_4, Seed: 1369346936",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:35:44.984Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:35:44.994Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player entered location 'LocationBigTree'",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T18:35:46.833Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is fce50512cc545dd8 (Random, fce50512cc545dd8, 106, , , ) => (Private, , 106, , , )",
+    "RequestId": 140,
+    "Timestamp": {"$date": "2026-06-26T18:36:29.862Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 4afc989964f4abeb at pond: 106 (player is in 3D at Pond #106 'NEHERRIN RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:36:32.519Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: SunAndClouds_4, TimeOfDay: EarlyMorning, AirTemperature: 15, WaterTemperature: 21, Pressure: Medium, WindSpeed: 0, WindDirection: SW, Precipitation: SoftFog, FishPlayFreq: High, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:36:32.519Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: SunAndClouds_4, Seed: 1369346936",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:36:32.519Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:36:32.534Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player entered location 'LocationTreeArc'",
+    "RequestId": 13,
+    "Timestamp": {"$date": "2026-06-26T18:36:32.612Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player entered location 'Location1'",
+    "RequestId": 3165,
+    "Timestamp": {"$date": "2026-06-26T18:37:06.554Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room e256db2188b47a4a at pond: 0 (player is on Local Map at Pond #119 'LONE STAR LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:40:58.589Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player entered location 'Location2'",
+    "RequestId": 5664,
+    "Timestamp": {"$date": "2026-06-26T18:47:43.365Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 6114,
+    "Timestamp": {"$date": "2026-06-26T18:49:07.832Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 6114,
+    "Timestamp": {"$date": "2026-06-26T18:49:07.848Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 6114,
+    "Timestamp": {"$date": "2026-06-26T18:49:07.863Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 6114,
+    "Timestamp": {"$date": "2026-06-26T18:49:07.941Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 6114,
+    "Timestamp": {"$date": "2026-06-26T18:49:07.941Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 6116,
+    "Timestamp": {"$date": "2026-06-26T18:49:08.098Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 6117,
+    "Timestamp": {"$date": "2026-06-26T18:49:08.110Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 6118,
+    "Timestamp": {"$date": "2026-06-26T18:49:08.361Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room e256db2188b47a4a at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T18:49:16.048Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:49:16.231Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:49:16.231Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 22,
+    "Timestamp": {"$date": "2026-06-26T18:49:19.642Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 119, , , ) => (None, , 119, , , )",
+    "RequestId": 1834,
+    "Timestamp": {"$date": "2026-06-26T19:02:47.590Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room a929fb2844b4a97a at pond: 119 (player is in 3D at Pond #119 'LONE STAR LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:02:54.762Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny_4, TimeOfDay: EarlyMorning, AirTemperature: 17, WaterTemperature: 23, Pressure: Medium, WindSpeed: 1, WindDirection: NW, Precipitation: , FishPlayFreq: Medium, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:02:54.778Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Sunny_4, Seed: -28532998",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:02:54.778Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:02:54.793Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player entered location 'LocationBridge'",
+    "RequestId": 541,
+    "Timestamp": {"$date": "2026-06-26T19:07:39.314Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player entered location 'LocationUnderDam'",
+    "RequestId": 632,
+    "Timestamp": {"$date": "2026-06-26T19:08:16.011Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player entered location 'LocationHome'",
+    "RequestId": 726,
+    "Timestamp": {"$date": "2026-06-26T19:08:42.042Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room cbae2c8682c4fc39 at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:36:24.997Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 19,
+    "Timestamp": {"$date": "2026-06-26T19:36:27.227Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 19,
+    "Timestamp": {"$date": "2026-06-26T19:36:27.227Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny_4, TimeOfDay: Morning, AirTemperature: 21, WaterTemperature: 20, Pressure: Medium, WindSpeed: 2.3, WindDirection: NW, Precipitation: , FishPlayFreq: Low, Sky: Clear",
+    "RequestId": 4458,
+    "Timestamp": {"$date": "2026-06-26T19:39:48.286Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Arrived to Pond #252 'KAIJI NO RI' for 1 days, traveling by public transport. Money spent: 33000 SC. Balance after: 66740793 SC",
+    "RequestId": 772,
+    "Timestamp": {"$date": "2026-06-26T19:44:25.899Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '1778394845'",
+    "RequestId": 772,
+    "Timestamp": {"$date": "2026-06-26T19:44:25.899Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 252, , , ) => (None, , 252, , , )",
+    "RequestId": 822,
+    "Timestamp": {"$date": "2026-06-26T19:44:46.540Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 8801e19573b48b2b at pond: 252 (player is in 3D at Pond #252 'KAIJI NO RI')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:44:50.837Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny, TimeOfDay: EarlyMorning, AirTemperature: 17, WaterTemperature: 23, Pressure: High, WindSpeed: 4, WindDirection: N, Precipitation: Fog, FishPlayFreq: Low, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:44:50.837Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Sunny, Seed: 768429975",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:44:50.852Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is complete and boat has GPS and its Isobar step is '8'. Final step value is '8'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T19:44:50.931Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'Loc_1'",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T19:44:53.270Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Board Item #31811 [FishingYacht] 'Chamaeleon™ Fishing Yacht' (76cf5eec-3d04-4502-9742-b0d19703d758)",
+    "RequestId": 68,
+    "Timestamp": {"$date": "2026-06-26T19:45:03.292Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -5,
+    "Timestamp": {"$date": "2026-06-26T19:45:03.292Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-600.7706,1073.93), boatRotation: 187.1554, boatSpeed: 0, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -5,
+    "Timestamp": {"$date": "2026-06-26T19:45:03.292Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 123 radar changes generated. Added: 123; Updated: 0; Removed: 0; Still valid: 0. Generate time: 00:00:00.0706936",
+    "RequestId": -5,
+    "Timestamp": {"$date": "2026-06-26T19:45:03.370Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Travelled to nav buoy #3. Source: (-600.7744,-0.4561763,1073.932); Destination: (-1195.612,0,3363.095)",
+    "RequestId": 89,
+    "Timestamp": {"$date": "2026-06-26T19:45:08.765Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 104,
+    "Timestamp": {"$date": "2026-06-26T19:45:12.447Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Glasses On",
+    "RequestId": 572,
+    "Timestamp": {"$date": "2026-06-26T19:46:29.752Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -134,
+    "Timestamp": {"$date": "2026-06-26T19:48:31.854Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "MoveTime on 7 hours, from 00.05:14 to 00.12:00",
+    "RequestId": 1398,
+    "Timestamp": {"$date": "2026-06-26T19:48:34.365Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny, TimeOfDay: Midday, AirTemperature: 21, WaterTemperature: 23, Pressure: High, WindSpeed: 6.5, WindDirection: N, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 1398,
+    "Timestamp": {"$date": "2026-06-26T19:48:34.365Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Update MoveTimeForwardTimeout to 6/26/2026 8:08:50 PM",
+    "RequestId": 1398,
+    "Timestamp": {"$date": "2026-06-26T19:48:34.365Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -136,
+    "Timestamp": {"$date": "2026-06-26T19:48:35.885Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1536.248,3195.44), boatRotation: 299.0767, boatSpeed: 2.860126, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -136,
+    "Timestamp": {"$date": "2026-06-26T19:48:35.885Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 148 radar changes generated. Added: 2; Updated: 128; Removed: 18; Still valid: 0. Generate time: 00:00:00.2283996",
+    "RequestId": -136,
+    "Timestamp": {"$date": "2026-06-26T19:48:36.103Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is complete and boat has GPS and its Isobar step is '8'. Final step value is '8'",
+    "RequestId": 3292,
+    "Timestamp": {"$date": "2026-06-26T19:53:20.848Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Glasses Off",
+    "RequestId": 3303,
+    "Timestamp": {"$date": "2026-06-26T19:53:24.489Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Glasses On",
+    "RequestId": 3336,
+    "Timestamp": {"$date": "2026-06-26T19:53:36.405Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -329,
+    "Timestamp": {"$date": "2026-06-26T19:53:49.114Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -350,
+    "Timestamp": {"$date": "2026-06-26T19:54:17.236Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1514.053,3157.281), boatRotation: 311.7936, boatSpeed: 0.1756609, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -350,
+    "Timestamp": {"$date": "2026-06-26T19:54:17.236Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 108 radar changes generated. Added: 0; Updated: 106; Removed: 2; Still valid: 22. Generate time: 00:00:00.1881861",
+    "RequestId": -350,
+    "Timestamp": {"$date": "2026-06-26T19:54:17.424Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -582,
+    "Timestamp": {"$date": "2026-06-26T19:57:03.547Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -584,
+    "Timestamp": {"$date": "2026-06-26T19:57:05.547Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1814.157,3328.864), boatRotation: 299.311, boatSpeed: 2.996921, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -584,
+    "Timestamp": {"$date": "2026-06-26T19:57:05.547Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 6 radar changes generated. Added: 0; Updated: 5; Removed: 1; Still valid: 125. Generate time: 00:00:00.0093992",
+    "RequestId": -584,
+    "Timestamp": {"$date": "2026-06-26T19:57:05.547Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 4830,
+    "Timestamp": {"$date": "2026-06-26T19:57:14.531Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 4831,
+    "Timestamp": {"$date": "2026-06-26T19:57:14.547Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Boat AnchorUp",
+    "RequestId": 4848,
+    "Timestamp": {"$date": "2026-06-26T19:57:17.180Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 4876,
+    "Timestamp": {"$date": "2026-06-26T19:57:21.322Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -747,
+    "Timestamp": {"$date": "2026-06-26T20:00:31.958Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -749,
+    "Timestamp": {"$date": "2026-06-26T20:00:33.974Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-2308.298,3610.055), boatRotation: 307.2241, boatSpeed: 2.906017, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -749,
+    "Timestamp": {"$date": "2026-06-26T20:00:33.974Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 4 radar changes generated. Added: 0; Updated: 2; Removed: 2; Still valid: 129. Generate time: 00:00:00.0065475",
+    "RequestId": -749,
+    "Timestamp": {"$date": "2026-06-26T20:00:33.974Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -871,
+    "Timestamp": {"$date": "2026-06-26T20:03:02.674Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -888,
+    "Timestamp": {"$date": "2026-06-26T20:03:26.893Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-2056.176,3436.036), boatRotation: 117.3223, boatSpeed: 2.806118, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -888,
+    "Timestamp": {"$date": "2026-06-26T20:03:26.893Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 8 radar changes generated. Added: 5; Updated: 2; Removed: 1; Still valid: 123. Generate time: 00:00:00.0134297",
+    "RequestId": -888,
+    "Timestamp": {"$date": "2026-06-26T20:03:26.893Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -948,
+    "Timestamp": {"$date": "2026-06-26T20:04:43.539Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -952,
+    "Timestamp": {"$date": "2026-06-26T20:04:51.601Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1880.138,3345.393), boatRotation: 117.1702, boatSpeed: 0.6729811, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -952,
+    "Timestamp": {"$date": "2026-06-26T20:04:51.601Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 7 radar changes generated. Added: 0; Updated: 3; Removed: 4; Still valid: 118. Generate time: 00:00:00.0097509",
+    "RequestId": -952,
+    "Timestamp": {"$date": "2026-06-26T20:04:51.601Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -955,
+    "Timestamp": {"$date": "2026-06-26T20:04:53.617Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -959,
+    "Timestamp": {"$date": "2026-06-26T20:05:01.656Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1878.081,3344.346), boatRotation: 117.1764, boatSpeed: 0.5316193, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -959,
+    "Timestamp": {"$date": "2026-06-26T20:05:01.656Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 5 radar changes generated. Added: 0; Updated: 3; Removed: 2; Still valid: 119. Generate time: 00:00:00.0076615",
+    "RequestId": -959,
+    "Timestamp": {"$date": "2026-06-26T20:05:01.656Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -1146,
+    "Timestamp": {"$date": "2026-06-26T20:08:48.564Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -1155,
+    "Timestamp": {"$date": "2026-06-26T20:09:00.796Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1606.519,3188.816), boatRotation: 122.9127, boatSpeed: 0.1495542, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -1155,
+    "Timestamp": {"$date": "2026-06-26T20:09:00.796Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 2 radar changes generated. Added: 0; Updated: 2; Removed: 0; Still valid: 122. Generate time: 00:00:00.0050658",
+    "RequestId": -1155,
+    "Timestamp": {"$date": "2026-06-26T20:09:00.796Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is complete and boat has GPS and its Isobar step is '8'. Final step value is '8'",
+    "RequestId": 11837,
+    "Timestamp": {"$date": "2026-06-26T20:12:56.558Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -1348,
+    "Timestamp": {"$date": "2026-06-26T20:13:09.115Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Enabled",
+    "RequestId": -1354,
+    "Timestamp": {"$date": "2026-06-26T20:13:17.392Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "RefreshFishRadarData params: boatPosition: (-1156.694,3049.772), boatRotation: 92.8535, boatSpeed: 0.2631268, maxBoatSpeed: 23, radarRange: 200",
+    "RequestId": -1354,
+    "Timestamp": {"$date": "2026-06-26T20:13:17.392Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Radar data refresh. A total of 15 radar changes generated. Added: 0; Updated: 11; Removed: 4; Still valid: 114. Generate time: 00:00:00.0228342",
+    "RequestId": -1354,
+    "Timestamp": {"$date": "2026-06-26T20:13:17.407Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game paused",
+    "RequestId": -1355,
+    "Timestamp": {"$date": "2026-06-26T20:13:19.407Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 11920,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.631Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 11920,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.631Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 11920,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.646Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 11920,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.756Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 11920,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.756Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 11922,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.912Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 11923,
+    "Timestamp": {"$date": "2026-06-26T20:13:20.912Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 11924,
+    "Timestamp": {"$date": "2026-06-26T20:13:21.176Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "FishRadar: Disabled. Reason: Game logic is finalized (ending session)",
+    "RequestId": -1356,
+    "Timestamp": {"$date": "2026-06-26T20:13:21.422Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 6946309b02641a6a at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:13:28.142Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:13:28.273Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:13:28.273Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 21,
+    "Timestamp": {"$date": "2026-06-26T20:13:31.617Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is a929fb2844b4a97a (Random, a929fb2844b4a97a, 119, , , ) => (Private, , 119, , , )",
+    "RequestId": 7569,
+    "Timestamp": {"$date": "2026-06-26T20:15:32.628Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 5c1aeb9b6f24ed68 at pond: 119 (player is in 3D at Pond #119 'LONE STAR LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:15:38.484Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny_4, TimeOfDay: Morning, AirTemperature: 21, WaterTemperature: 20, Pressure: Medium, WindSpeed: 2.3, WindDirection: NW, Precipitation: , FishPlayFreq: Low, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:15:38.484Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Sunny_4, Seed: -28532998",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:15:38.499Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:15:38.499Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is 5c1aeb9b6f24ed68 (Private, 5c1aeb9b6f24ed68, 119, , , ) => (Random, , 119, , , )",
+    "RequestId": 108,
+    "Timestamp": {"$date": "2026-06-26T20:16:16.845Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 4249afc0cc24d808 at pond: 119 (player is in 3D at Pond #119 'LONE STAR LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:16:22.822Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: Sunny_4, TimeOfDay: Morning, AirTemperature: 21, WaterTemperature: 20, Pressure: Medium, WindSpeed: 2.3, WindDirection: NW, Precipitation: , FishPlayFreq: Low, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:16:22.822Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Sunny_4, Seed: -28532998",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:16:22.822Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:16:22.994Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 101,
+    "Timestamp": {"$date": "2026-06-26T20:17:02.914Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 101,
+    "Timestamp": {"$date": "2026-06-26T20:17:02.930Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 101,
+    "Timestamp": {"$date": "2026-06-26T20:17:02.930Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 101,
+    "Timestamp": {"$date": "2026-06-26T20:17:02.992Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 101,
+    "Timestamp": {"$date": "2026-06-26T20:17:02.992Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 102,
+    "Timestamp": {"$date": "2026-06-26T20:17:03.243Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 103,
+    "Timestamp": {"$date": "2026-06-26T20:17:03.274Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:True IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 104,
+    "Timestamp": {"$date": "2026-06-26T20:17:03.493Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room ab6e8b479af439ea at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:17:10.693Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:17:10.818Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:17:10.818Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 28,
+    "Timestamp": {"$date": "2026-06-26T20:17:16.211Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Arrived to Pond #111 'EMERALD LAKE' for 1 days, traveling by public transport. Money spent: 3000 SC. Balance after: 66887331 SC",
+    "RequestId": 304,
+    "Timestamp": {"$date": "2026-06-26T20:17:39.306Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '1781087365'",
+    "RequestId": 304,
+    "Timestamp": {"$date": "2026-06-26T20:17:39.306Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to Pond #102 'MUDWATER RIVER' for 1 days, traveling by public transport. Money spent: 1200 SC. Balance after: 10544586 SC",
+    "RequestId": 67,
+    "Timestamp": {"$date": "2026-06-26T20:17:46.109Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Scene seed - initialized: '538405362'",
+    "RequestId": 67,
+    "Timestamp": {"$date": "2026-06-26T20:17:46.109Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 102, , , ) => (None, , 102, , , )",
+    "RequestId": 118,
+    "Timestamp": {"$date": "2026-06-26T20:18:07.546Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 80aa2c234aa49d0a at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:18:14.534Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:18:14.534Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:18:14.534Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:18:14.550Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player entered location 'LocationBulrush'",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T20:18:16.503Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "EndOfMission request arrived!",
+    "RequestId": 385,
+    "Timestamp": {"$date": "2026-06-26T20:18:19.134Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: True, ShouldDisplayDialog: False, IsFishingTogetherDay: False, RealDayFinished: False",
+    "RequestId": 385,
+    "Timestamp": {"$date": "2026-06-26T20:18:19.134Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been prepared",
+    "RequestId": 385,
+    "Timestamp": {"$date": "2026-06-26T20:18:19.134Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfMission result has been sent to client",
+    "RequestId": 385,
+    "Timestamp": {"$date": "2026-06-26T20:18:19.205Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 385,
+    "Timestamp": {"$date": "2026-06-26T20:18:19.205Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 386,
+    "Timestamp": {"$date": "2026-06-26T20:18:19.354Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 82d24cbbe954862a at pond: 0 (player is on GLOBE)",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:18:24.838Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Arrived to base",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:18:25.026Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - reset",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:18:25.026Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:False",
+    "RequestId": 21,
+    "Timestamp": {"$date": "2026-06-26T20:18:28.260Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 96172ed01994e51a at pond: 0 (player is on Local Map at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:20:14.479Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: SunAndClouds_4, TimeOfDay: Morning, AirTemperature: 21, WaterTemperature: 19, Pressure: Medium, WindSpeed: 1.1, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Clear",
+    "RequestId": 14228,
+    "Timestamp": {"$date": "2026-06-26T20:20:32.373Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room e386b20cb8440b88 at pond: 0 (player is on Local Map at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:21:24.011Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 102, , , ) => (None, , 102, , , )",
+    "RequestId": 374,
+    "Timestamp": {"$date": "2026-06-26T20:21:51.459Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room f55c692c99046bc8 at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:21:56.657Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:21:56.657Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:21:56.657Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:21:56.672Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player entered location 'LocationBoats'",
+    "RequestId": 178,
+    "Timestamp": {"$date": "2026-06-26T20:23:07.790Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Arrived to Pond #111 'EMERALD LAKE' for 1 days, traveling by public transport. Money spent: 3000 SC. Balance after: 66884331 SC",
+    "RequestId": 407,
+    "Timestamp": {"$date": "2026-06-26T20:24:04.962Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Scene seed - initialized: '1124141591'",
+    "RequestId": 407,
+    "Timestamp": {"$date": "2026-06-26T20:24:04.962Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 111, , , ) => (None, , 111, , , )",
+    "RequestId": 445,
+    "Timestamp": {"$date": "2026-06-26T20:24:15.149Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 44823eaf3ec4e94a at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:24:19.807Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:24:19.807Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:24:19.807Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:24:20.042Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player entered location 'Location2'",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-26T20:24:22.151Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is f55c692c99046bc8 (Random, f55c692c99046bc8, 102, , , ) => (Private, , 102, , , )",
+    "RequestId": 1158,
+    "Timestamp": {"$date": "2026-06-26T20:32:21.154Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room c3580b75bf341f48 at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:32:26.456Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:32:26.456Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:32:26.456Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:32:26.472Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is c3580b75bf341f48 (Private, c3580b75bf341f48, 102, , , ) => (Random, , 102, , , )",
+    "RequestId": 91,
+    "Timestamp": {"$date": "2026-06-26T20:33:01.186Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room fd81533c3d84406a at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:33:06.326Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:33:06.326Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:33:06.326Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:33:06.326Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is fd81533c3d84406a (Random, fd81533c3d84406a, 102, , , ) => (Private, , 102, , , )",
+    "RequestId": 1326,
+    "Timestamp": {"$date": "2026-06-26T20:45:28.583Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 4f3a2a171e045178 at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.855Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.855Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.855Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.870Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is 4f3a2a171e045178 (Private, 4f3a2a171e045178, 102, , , ) => (Random, , 102, , , )",
+    "RequestId": 150,
+    "Timestamp": {"$date": "2026-06-26T20:46:40.696Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room baffabdfa9a4fefa at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:46:46.400Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:46:46.400Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:46:46.400Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:46:46.416Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is 44823eaf3ec4e94a (Random, 44823eaf3ec4e94a, 111, , , ) => (Private, , 111, , , )",
+    "RequestId": 5690,
+    "Timestamp": {"$date": "2026-06-26T20:47:17.481Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room d4f84eaca3f4072b at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:21.071Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:21.071Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:21.071Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:21.118Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is baffabdfa9a4fefa (Random, baffabdfa9a4fefa, 102, , , ) => (Private, , 102, , , )",
+    "RequestId": 115,
+    "Timestamp": {"$date": "2026-06-26T20:47:31.086Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 62f21f9c0944c6cb at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:37.384Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:37.400Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:37.400Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:47:37.415Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is 62f21f9c0944c6cb (Private, 62f21f9c0944c6cb, 102, , , ) => (FriendsOnly, , 102, , , )",
+    "RequestId": 147,
+    "Timestamp": {"$date": "2026-06-26T20:48:41.911Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Player caa03b10-efce-45e3-a3d2-8f399224e067 arrives to room 73d108bb8ab4e4da at pond: 102 (player is in 3D at Pond #102 'MUDWATER RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:48:48.605Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: EarlyMorning, AirTemperature: 23, WaterTemperature: 18, Pressure: Low, WindSpeed: 1.9, WindDirection: SE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:48:48.605Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_3, Seed: 1564468433",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:48:48.605Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '2.5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:48:48.620Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_3, TimeOfDay: Morning, AirTemperature: 25, WaterTemperature: 17, Pressure: Low, WindSpeed: 2, WindDirection: NE, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 429,
+    "Timestamp": {"$date": "2026-06-26T20:52:43.997Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is d4f84eaca3f4072b (Private, d4f84eaca3f4072b, 111, , , ) => (FriendsOnly, , 111, , , )",
+    "RequestId": 1475,
+    "Timestamp": {"$date": "2026-06-26T20:53:11.883Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 5c7ea5cc1644b8db at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:53:17.363Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:53:17.379Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:53:17.379Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:53:17.457Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is 5c7ea5cc1644b8db (FriendsOnly, 5c7ea5cc1644b8db, 111, , , ) => (Random, , 111, , , )",
+    "RequestId": 1403,
+    "Timestamp": {"$date": "2026-06-26T20:57:17.871Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room b455847fd424942a at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.530Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.530Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.530Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.577Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is b455847fd424942a (Random, b455847fd424942a, 111, , , ) => (Private, , 111, , , )",
+    "RequestId": 117,
+    "Timestamp": {"$date": "2026-06-26T20:57:56.743Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 82adeaba6014675a at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.518Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 10, WaterTemperature: 10, Pressure: Medium, WindSpeed: 2.7, WindDirection: W, Precipitation: SoftFog, FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.518Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.518Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.565Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: Morning, AirTemperature: 11, WaterTemperature: 12, Pressure: Medium, WindSpeed: 2.8, WindDirection: SW, Precipitation: , FishPlayFreq: Low, Sky: HeavyCloudy",
+    "RequestId": 474,
+    "Timestamp": {"$date": "2026-06-26T20:59:21.546Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "[CLN]: Moving to new room because required RoomId is  and current is 82adeaba6014675a (Private, 82adeaba6014675a, 111, , , ) => (Random, , 111, , , )",
+    "RequestId": 1136,
+    "Timestamp": {"$date": "2026-06-26T21:01:37.031Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Player 38aeb767-64db-4a52-ab7b-bc25fdecbfe8 arrives to room 5d23b1830754d259 at pond: 111 (player is in 3D at Pond #111 'EMERALD LAKE')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T21:01:41.235Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "Day: 0, CurrentWeather: HeavyClouds_5, TimeOfDay: Morning, AirTemperature: 11, WaterTemperature: 12, Pressure: Medium, WindSpeed: 2.8, WindDirection: SW, Precipitation: , FishPlayFreq: Low, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T21:01:41.235Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: HeavyClouds_5, Seed: 1564468431",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T21:01:41.235Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '4'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-26T21:01:41.313Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  }
+]

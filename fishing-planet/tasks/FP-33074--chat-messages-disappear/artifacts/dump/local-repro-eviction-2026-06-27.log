@@ -1,0 +1,59 @@
+# FP-33074 - Mechanism #2 (channel inactivity eviction) - local repro, 2026-06-27 (UTC)
+# Source: chat-server Chat.log (classic Photon, local build). Debug user P = 4acec0a2-99cc-4098-818e-c4b1404e5d6b. Channel: club1202.
+# Repro build: ChannelInactivityTimeout 30->1 min, ChannelsReleaseTimeout 10->0.1 min (TEMP, to hit the window fast); added the EVICT log line.
+# Filtered: verbatim lines, only the duplicate DEBUG "Message delivery attempt to ..." lines removed. Nothing else altered.
+#
+# Logger legend (MiniLog):
+#   N = new incoming accepted   P = processed/persisted   T = TRANSFERED (actually delivered to a recipient; tail = nodeIP + status)
+#   S = terminal disposition ("Sent " = delivered, done)  J = Join (player->channel [N]; N = backlog msgs replayed)
+#   L = Leave (channel->player) EVICT = channel evicted while still occupied (added for this investigation)
+# Read rule: a message delivered to P has a "T 4acec0a2...->4acec0a2... club1202 ... Ok" self-echo. No such T => not delivered to P.
+
+# ---------------- BASELINE: P joined and receiving (self-echo T present) ----------------
+2026-06-27 16:56:36,100 [22] INFO  N [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:56:36,102 [7] DEBUG Photon.LoadBalancing.ChatServer.Processing.ChatProcessor [(null)] - ProcessChatMessage [N Incoming #06868cc7-51fa-41a1-bcb1-c6b544fd81a6, Data: 'ClubEvent', Sender: 4acec0a2-99cc-4098-818e-c4b1404e5d6b, Recepient: , Channel: club1202, Message: '{"InstanceId":"c43e8637-d010-45d4-81b9-bbfec7342dd5","ClubId":1202,"Type":"Text","Timestamp":"2026-06-27T16:56:36.0983624Z","From":"4acec0a2-99cc-4098-818e-c4b1404e5d6b","FromName":"Stan.S.Steam.Local","Text":"Test from 3D/ Waiting 2 min"}']
+2026-06-27 16:56:36,102 [7] INFO  P [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:56:36,104 [13] INFO  T [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N Y 192.168.11.55 Ok
+2026-06-27 16:56:36,105 [13] INFO  S [(null)] - Sent 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N Y
+# ... P stays joined but sends nothing. Channel ExpireDate = 16:56:36 + 1 min = 16:57:36. ...
+
+# ---------------- EVICTION: channel removed while P is still a participant (no Leave) ----------------
+2026-06-27 16:57:46,851 [39] INFO  EVICT [(null)] - Channel club1202 evicted with 1 participant(s) still joined, 5 cached message(s); dropped debug user(s): 4acec0a2-99cc-4098-818e-c4b1404e5d6b
+
+# ---------------- DEAD WINDOW: messages accepted + persisted, but NO T (P no longer a participant) ----------------
+2026-06-27 16:58:22,388 [7] INFO  N [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:58:22,389 [11] DEBUG Photon.LoadBalancing.ChatServer.Processing.ChatProcessor [(null)] - ProcessChatMessage [N Incoming #8a3fa792-2b04-4436-920d-529058442007, Data: 'ClubEvent', Sender: 4acec0a2-99cc-4098-818e-c4b1404e5d6b, Recepient: , Channel: club1202, Message: '{"InstanceId":"2abbd693-a46c-4093-8574-fa77c5ab1c01","ClubId":1202,"Type":"Text","Timestamp":"2026-06-27T16:58:22.3799866Z","From":"4acec0a2-99cc-4098-818e-c4b1404e5d6b","FromName":"Stan.S.Steam.Local","Text":"I see log of EVICT. I should not see this message now."}']
+2026-06-27 16:58:22,393 [11] INFO  P [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:58:33,685 [7] INFO  N [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:58:33,686 [11] DEBUG Photon.LoadBalancing.ChatServer.Processing.ChatProcessor [(null)] - ProcessChatMessage [N Incoming #dbead135-5e93-49ae-8070-8d16ae860259, Data: 'ClubEvent', Sender: 4acec0a2-99cc-4098-818e-c4b1404e5d6b, Recepient: , Channel: club1202, Message: '{"InstanceId":"27b401fe-fc4c-48ce-b7e4-ccb08c7de21f","ClubId":1202,"Type":"Text","Timestamp":"2026-06-27T16:58:33.6820852Z","From":"4acec0a2-99cc-4098-818e-c4b1404e5d6b","FromName":"Stan.S.Steam.Local","Text":"And indeed I do not see it/"}']
+2026-06-27 16:58:33,687 [11] INFO  P [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:58:55,093 [11] INFO  N [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:58:55,093 [7] DEBUG Photon.LoadBalancing.ChatServer.Processing.ChatProcessor [(null)] - ProcessChatMessage [N Incoming #324b9c79-0d87-4c53-9791-864e7e2919a2, Data: 'ClubEvent', Sender: 4acec0a2-99cc-4098-818e-c4b1404e5d6b, Recepient: , Channel: club1202, Message: '{"InstanceId":"aa779598-c9c1-4810-ae10-fb738d62e65b","ClubId":1202,"Type":"Text","Timestamp":"2026-06-27T16:58:55.0892254Z","From":"4acec0a2-99cc-4098-818e-c4b1404e5d6b","FromName":"Stan.S.Steam.Local","Text":"Let me reconnect to another room."}']
+2026-06-27 16:58:55,095 [7] INFO  P [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+
+# ---------------- RECOVERY: P re-Joins (room change); J [3] => 3 backlog msgs replayed (self-echo T) ----------------
+2026-06-27 16:59:12,830 [24] INFO  N [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: 06868cc7-5 join N N
+2026-06-27 16:59:12,831 [25] DEBUG Photon.LoadBalancing.ChatServer.Processing.ChatProcessor [(null)] - ProcessChatMessage [N Incoming #c2c4567d-e097-44ec-8c8a-c4198fcc89a9, Data: 'join', Sender: 4acec0a2-99cc-4098-818e-c4b1404e5d6b, Recepient: , Channel: club1202, Message: '06868cc7-51fa-41a1-bcb1-c6b544fd81a6']
+2026-06-27 16:59:12,833 [25] INFO  J [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b->club1202 [3]
+2026-06-27 16:59:12,834 [25] INFO  T [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N N 192.168.11.55 Ok
+2026-06-27 16:59:12,835 [25] INFO  S [(null)] - Sent 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N N
+2026-06-27 16:59:12,836 [25] INFO  T [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N N 192.168.11.55 Ok
+2026-06-27 16:59:12,838 [25] INFO  S [(null)] - Sent 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N N
+2026-06-27 16:59:12,839 [25] INFO  T [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N N 192.168.11.55 Ok
+2026-06-27 16:59:12,840 [25] INFO  S [(null)] - Sent 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N N
+2026-06-27 16:59:12,841 [25] INFO  T [(null)] - (0..)->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: 6391817552 ChannelExp N Y 192.168.11.55 Ok
+2026-06-27 16:59:12,842 [25] INFO  S [(null)] - Sent (0..)->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: 6391817552 ChannelExp N Y
+2026-06-27 16:59:12,842 [25] INFO  P [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: 06868cc7-5 join N N
+2026-06-27 16:59:12,844 [18] INFO  T [(null)] - (0..)->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: 1 ChannelPop N Y 192.168.11.55 Ok
+2026-06-27 16:59:12,846 [18] INFO  S [(null)] - Sent (0..)->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: 1 ChannelPop N Y
+
+# ---------------- LIVE AGAIN: next message delivered (self-echo T restored) ----------------
+2026-06-27 16:59:39,708 [16] INFO  N [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:59:39,708 [7] DEBUG Photon.LoadBalancing.ChatServer.Processing.ChatProcessor [(null)] - ProcessChatMessage [N Incoming #82bc27c2-9e2c-4eba-b70d-6f7dcabccd35, Data: 'ClubEvent', Sender: 4acec0a2-99cc-4098-818e-c4b1404e5d6b, Recepient: , Channel: club1202, Message: '{"InstanceId":"e6c38824-3fb9-4ebc-8eea-4db0f521b85b","ClubId":1202,"Type":"Text","Timestamp":"2026-06-27T16:59:39.7045087Z","From":"4acec0a2-99cc-4098-818e-c4b1404e5d6b","FromName":"Stan.S.Steam.Local","Text":"All messages are now delivered."}']
+2026-06-27 16:59:39,711 [7] INFO  P [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b-> club1202: {"Instance ClubEvent N N
+2026-06-27 16:59:39,713 [16] INFO  T [(null)] - 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N Y 192.168.11.55 Ok
+2026-06-27 16:59:39,714 [16] INFO  S [(null)] - Sent 4acec0a2-99cc-4098-818e-c4b1404e5d6b->4acec0a2-99cc-4098-818e-c4b1404e5d6b club1202: {"Instance ClubEvent N Y
+
+# Cross-check (Mongo, db "main", collection chatLog): the three dead-window messages are persisted -
+#   InstanceId 2abbd693 (16:58:22), 27b401fe (16:58:33), aa779598 (16:58:55) - i.e. accepted -> stored -> not delivered.
+# Game-side sysLog shows no client leave/reconnect at 16:57:46 - the drop is purely server-side (the eviction sweep).

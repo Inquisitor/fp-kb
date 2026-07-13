@@ -1,0 +1,1697 @@
+[
+  {
+    "Message": "Master session #4a06451fafa748bc999a8d222cb6b216 started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:55.475Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:56.042Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:56.042Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3652852, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T02:30:56.272Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T02:30:56.569Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T02:30:59.303Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:59.922Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:59.922Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:31:00.309Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:31:00.590Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:82",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T02:31:00.699Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T02:31:00.715Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T02:31:01.480Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-24T02:31:02.141Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 623,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.406Z"}
+  },
+  {
+    "Message": "Profile saved on PreviewDisconnect by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3652852, rE: 0",
+    "RequestId": 625,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.578Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #4a06451fafa748bc999a8d222cb6b216. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 02:36:52.547, LastGetTime: 2026-06-24 02:36:47.453, LastGameAction: 2026-06-24 02:30:59.449, IsGamePaused: True, PondTimeSpent: 2.10:13:17.0041628, Ping: 83, Queue: 0, Exec: 3, LastRxRs: 621]",
+    "RequestId": 625,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.797Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #4a06451fafa748bc999a8d222cb6b216 Reason: ClientDisconnect",
+    "RequestId": 625,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.797Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:53.123Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server (re-auth with token). Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:53.123Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T02:36:53.557Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:54.392Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:54.392Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #4a06451fafa748bc999a8d222cb6b216",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:54.923Z"}
+  },
+  {
+    "Message": "PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.001Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:83",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.032Z"}
+  },
+  {
+    "Message": "join 'club6777' 6600eacc-ef6e-45cd-8e5e-2c5e3d6f05d5",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.126Z"}
+  },
+  {
+    "Message": "PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.126Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T02:36:58.454Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 40,
+    "Timestamp": {"$date": "2026-06-24T02:37:03.423Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 43,
+    "Timestamp": {"$date": "2026-06-24T02:37:04.220Z"}
+  },
+  {
+    "Message": "PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat",
+    "RequestId": 10996,
+    "Timestamp": {"$date": "2026-06-24T02:48:41.110Z"}
+  },
+  {
+    "Message": "PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 11104,
+    "Timestamp": {"$date": "2026-06-24T02:49:00.079Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 21846,
+    "Timestamp": {"$date": "2026-06-24T02:58:11.241Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 21849,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.225Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: PondStayFinished",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.600Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 21873,
+    "Timestamp": {"$date": "2026-06-24T02:58:16.303Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3653621, rE: 0",
+    "RequestId": 31889,
+    "Timestamp": {"$date": "2026-06-24T03:06:19.979Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3653742, rE: 0",
+    "RequestId": 36284,
+    "Timestamp": {"$date": "2026-06-24T03:09:56.599Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3654739, rE: 0",
+    "RequestId": 41736,
+    "Timestamp": {"$date": "2026-06-24T03:14:29.846Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3658832, rE: 0",
+    "RequestId": 45365,
+    "Timestamp": {"$date": "2026-06-24T03:17:52.884Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3664102, rE: 0",
+    "RequestId": 60992,
+    "Timestamp": {"$date": "2026-06-24T03:30:41.567Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 61124,
+    "Timestamp": {"$date": "2026-06-24T03:30:48.858Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 61155,
+    "Timestamp": {"$date": "2026-06-24T03:31:08.342Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3664123, rE: 0",
+    "RequestId": 65066,
+    "Timestamp": {"$date": "2026-06-24T03:34:19.523Z"}
+  },
+  {
+    "Message": "join 'g3' ",
+    "RequestId": 81698,
+    "Timestamp": {"$date": "2026-06-24T03:48:07.639Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 81742,
+    "Timestamp": {"$date": "2026-06-24T03:48:27.443Z"}
+  },
+  {
+    "Message": "PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.318Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.318Z"}
+  },
+  {
+    "Message": "leave 'g3'",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.318Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3665240, rE: 0",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.349Z"}
+  },
+  {
+    "Message": "Game session #4a06451fafa748bc999a8d222cb6b216 ended (quit)",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.365Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #4a06451fafa748bc999a8d222cb6b216. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 03:48:32.302, LastGetTime: 2026-06-24 03:48:18.380, LastGameAction: 2026-06-24 03:48:27.443, IsGamePaused: True, PondTimeSpent: 3.08:19:27.3078596, Ping: 66, Queue: 0, Exec: 3, LastRxRs: 81748]",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.568Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #4a06451fafa748bc999a8d222cb6b216 Reason: ClientDisconnect",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.568Z"}
+  },
+  {
+    "Message": "Master session #387d365b0451475094c16f8dcbd73bab started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:47.770Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:47.993Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:47.993Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #387d365b0451475094c16f8dcbd73bab. L:64, R: 0, E:3665240, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T03:48:48.165Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T03:48:48.473Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T03:48:51.040Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:52.436Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:52.436Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:53.612Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T03:48:53.690Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:82",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T03:48:53.956Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T03:48:53.971Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T03:48:57.217Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 35,
+    "Timestamp": {"$date": "2026-06-24T03:48:58.018Z"}
+  },
+  {
+    "Message": "No PreviewDisconnect arrived. Saving profile on disconnect. Session #387d365b0451475094c16f8dcbd73bab",
+    "RequestId": 86,
+    "Timestamp": {"$date": "2026-06-24T03:50:36.805Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 86,
+    "Timestamp": {"$date": "2026-06-24T03:50:36.805Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #387d365b0451475094c16f8dcbd73bab. L:64, R: 0, E:3665240, rE: 0",
+    "RequestId": 86,
+    "Timestamp": {"$date": "2026-06-24T03:50:36.868Z"}
+  },
+  {
+    "Message": "Game session #387d365b0451475094c16f8dcbd73bab ended (disconnect without preview disconnect). [LastOperation: Ping, LastActivity: 2026-06-24 03:49:18.519, LastGetTime: 2026-06-24 03:49:07.471, LastGameAction: 2026-06-24 03:48:51.185, IsGamePaused: True, PondTimeSpent: 3.08:19:27.3078596, Ping: 66, Queue: 1, Exec: 3, LastRxRs: 85]",
+    "RequestId": 86,
+    "Timestamp": {"$date": "2026-06-24T03:50:36.884Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #387d365b0451475094c16f8dcbd73bab Reason: ClientDisconnect",
+    "RequestId": 86,
+    "Timestamp": {"$date": "2026-06-24T03:50:36.884Z"}
+  },
+  {
+    "Message": "Master session #3ddf4792ac85458e902b72575b57ed62 started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.116Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.397Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.397Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3665240, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.580Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.955Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 12,
+    "Timestamp": {"$date": "2026-06-24T13:07:48.799Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:49.474Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:49.474Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:50.244Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:07:50.306Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:145",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T13:07:50.443Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T13:07:50.443Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T13:07:51.259Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-24T13:07:51.974Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 290,
+    "Timestamp": {"$date": "2026-06-24T13:09:08.913Z"}
+  },
+  {
+    "Message": "Profile saved on PreviewDisconnect by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3665240, rE: 0",
+    "RequestId": 292,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.073Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #3ddf4792ac85458e902b72575b57ed62. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 01:09:09.022, LastGetTime: 2026-06-24 01:09:06.835, LastGameAction: 2026-06-24 01:07:48.959, IsGamePaused: True, PondTimeSpent: 3.08:19:27.3078596, Ping: 66, Queue: 0, Exec: 3, LastRxRs: 288]",
+    "RequestId": 292,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.338Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #3ddf4792ac85458e902b72575b57ed62 Reason: ClientDisconnect",
+    "RequestId": 292,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.338Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.715Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server (re-auth with token). Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.715Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T13:09:10.141Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:10.790Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:10.790Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #3ddf4792ac85458e902b72575b57ed62",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.213Z"}
+  },
+  {
+    "Message": "PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.291Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:82",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.306Z"}
+  },
+  {
+    "Message": "join 'club6777' 3137025d-1bdf-4526-b458-910338466c62",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.368Z"}
+  },
+  {
+    "Message": "PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.383Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T13:09:15.135Z"}
+  },
+  {
+    "Message": "PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat",
+    "RequestId": 37,
+    "Timestamp": {"$date": "2026-06-24T13:09:23.947Z"}
+  },
+  {
+    "Message": "PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 133,
+    "Timestamp": {"$date": "2026-06-24T13:09:42.150Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 183,
+    "Timestamp": {"$date": "2026-06-24T13:09:56.447Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 189,
+    "Timestamp": {"$date": "2026-06-24T13:09:59.400Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 3059,
+    "Timestamp": {"$date": "2026-06-24T13:12:59.243Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 3078,
+    "Timestamp": {"$date": "2026-06-24T13:13:10.659Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3675921, rE: 0",
+    "RequestId": 11388,
+    "Timestamp": {"$date": "2026-06-24T13:20:50.902Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 12108,
+    "Timestamp": {"$date": "2026-06-24T13:21:33.329Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 12158,
+    "Timestamp": {"$date": "2026-06-24T13:22:06.847Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3675942, rE: 0",
+    "RequestId": 13523,
+    "Timestamp": {"$date": "2026-06-24T13:23:13.750Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3676212, rE: 0",
+    "RequestId": 15048,
+    "Timestamp": {"$date": "2026-06-24T13:24:37.524Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 22832,
+    "Timestamp": {"$date": "2026-06-24T13:31:02.356Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 25623,
+    "Timestamp": {"$date": "2026-06-24T14:09:09.959Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3677732, rE: 0",
+    "RequestId": 28534,
+    "Timestamp": {"$date": "2026-06-24T14:11:30.992Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 39003,
+    "Timestamp": {"$date": "2026-06-24T14:20:02.134Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 39005,
+    "Timestamp": {"$date": "2026-06-24T14:20:03.228Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678373, rE: 0",
+    "RequestId": 44159,
+    "Timestamp": {"$date": "2026-06-24T14:24:13.398Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678394, rE: 0",
+    "RequestId": 47253,
+    "Timestamp": {"$date": "2026-06-24T14:26:45.060Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678420, rE: 0",
+    "RequestId": 55154,
+    "Timestamp": {"$date": "2026-06-24T14:33:09.808Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 57132,
+    "Timestamp": {"$date": "2026-06-24T14:34:47.858Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 60297,
+    "Timestamp": {"$date": "2026-06-24T15:18:34.024Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678528, rE: 0",
+    "RequestId": 69958,
+    "Timestamp": {"$date": "2026-06-24T15:26:24.986Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678551, rE: 0",
+    "RequestId": 73968,
+    "Timestamp": {"$date": "2026-06-24T15:29:42.856Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682348, rE: 0",
+    "RequestId": 98283,
+    "Timestamp": {"$date": "2026-06-24T15:49:23.539Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682422, rE: 0",
+    "RequestId": 108683,
+    "Timestamp": {"$date": "2026-06-24T15:57:53.459Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682523, rE: 0",
+    "RequestId": 112718,
+    "Timestamp": {"$date": "2026-06-24T16:01:13.871Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 123372,
+    "Timestamp": {"$date": "2026-06-24T16:09:57.108Z"}
+  },
+  {
+    "Message": "PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.110Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.110Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682613, rE: 0",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.141Z"}
+  },
+  {
+    "Message": "Game session #3ddf4792ac85458e902b72575b57ed62 ended (quit)",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.141Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #3ddf4792ac85458e902b72575b57ed62. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 04:10:05.110, LastGetTime: 2026-06-24 04:09:59.326, LastGameAction: 2026-06-24 04:09:57.108, IsGamePaused: True, PondTimeSpent: 4.01:29:10.8381734, Ping: 89, Queue: 0, Exec: 3, LastRxRs: 123381]",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.421Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #3ddf4792ac85458e902b72575b57ed62 Reason: ClientDisconnect",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.421Z"}
+  },
+  {
+    "Message": "Master session #5f31a1825c204e9584850d9b79c828ab started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:26.427Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:26.630Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:26.630Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #5f31a1825c204e9584850d9b79c828ab. L:64, R: 0, E:3682613, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T16:10:26.814Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T16:10:27.126Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T16:10:29.802Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:30.521Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:30.521Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #5f31a1825c204e9584850d9b79c828ab",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:31.096Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T16:10:31.192Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:81",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T16:10:31.317Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T16:10:31.317Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T16:10:32.474Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-24T16:10:33.113Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 10120,
+    "Timestamp": {"$date": "2026-06-24T18:27:55.193Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #5f31a1825c204e9584850d9b79c828ab. L:64, R: 0, E:3682613, rE: 0",
+    "RequestId": 10120,
+    "Timestamp": {"$date": "2026-06-24T18:27:55.225Z"}
+  },
+  {
+    "Message": "Game session #5f31a1825c204e9584850d9b79c828ab ended (quit)",
+    "RequestId": 10120,
+    "Timestamp": {"$date": "2026-06-24T18:27:55.225Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #5f31a1825c204e9584850d9b79c828ab. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 06:27:55.178, LastGetTime: 2026-06-24 06:27:41.150, LastGameAction: 2026-06-24 04:10:29.925, IsGamePaused: True, PondTimeSpent: 4.01:29:10.8381734, Ping: 66, Queue: 0, Exec: 3, LastRxRs: 10118]",
+    "RequestId": 10120,
+    "Timestamp": {"$date": "2026-06-24T18:27:55.443Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #5f31a1825c204e9584850d9b79c828ab Reason: ClientDisconnect",
+    "RequestId": 10120,
+    "Timestamp": {"$date": "2026-06-24T18:27:55.443Z"}
+  },
+  {
+    "Message": "Master session #35bf0de0c49b4bea9ab31a46d5b87188 started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:19.460Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:19.698Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:19.698Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3682613, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T18:30:19.886Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T18:30:20.210Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T18:30:22.838Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:23.907Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:23.923Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:24.537Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:30:24.626Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:82",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T18:30:24.782Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T18:30:24.813Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T18:30:26.344Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-24T18:30:27.126Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 744,
+    "Timestamp": {"$date": "2026-06-24T18:38:01.302Z"}
+  },
+  {
+    "Message": "Profile saved on PreviewDisconnect by Game session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3682613, rE: 0",
+    "RequestId": 746,
+    "Timestamp": {"$date": "2026-06-24T18:38:01.443Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #35bf0de0c49b4bea9ab31a46d5b87188. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 06:38:01.395, LastGetTime: 2026-06-24 06:37:54.084, LastGameAction: 2026-06-24 06:30:22.985, IsGamePaused: True, PondTimeSpent: 4.01:29:10.8381734, Ping: 66, Queue: 0, Exec: 3, LastRxRs: 742]",
+    "RequestId": 746,
+    "Timestamp": {"$date": "2026-06-24T18:38:02.005Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #35bf0de0c49b4bea9ab31a46d5b87188 Reason: ClientDisconnect",
+    "RequestId": 746,
+    "Timestamp": {"$date": "2026-06-24T18:38:02.005Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:02.959Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server (re-auth with token). Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:02.959Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T18:38:03.374Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.287Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.287Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #35bf0de0c49b4bea9ab31a46d5b87188",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.739Z"}
+  },
+  {
+    "Message": "PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.818Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:81",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.849Z"}
+  },
+  {
+    "Message": "join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.943Z"}
+  },
+  {
+    "Message": "PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.943Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-24T18:38:08.302Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3683530, rE: 0",
+    "RequestId": 15661,
+    "Timestamp": {"$date": "2026-06-24T18:51:29.200Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 15809,
+    "Timestamp": {"$date": "2026-06-24T18:51:37.651Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 15812,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.404Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: PondStayFinished",
+    "RequestId": 15816,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.607Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 15834,
+    "Timestamp": {"$date": "2026-06-24T18:51:42.980Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 15856,
+    "Timestamp": {"$date": "2026-06-24T18:51:44.262Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 15882,
+    "Timestamp": {"$date": "2026-06-24T18:52:01.136Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 15903,
+    "Timestamp": {"$date": "2026-06-24T18:52:02.011Z"}
+  },
+  {
+    "Message": "PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.369Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.369Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3683530, rE: 0",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.416Z"}
+  },
+  {
+    "Message": "Game session #35bf0de0c49b4bea9ab31a46d5b87188 ended (quit)",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.431Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #35bf0de0c49b4bea9ab31a46d5b87188. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 06:52:09.353, LastGetTime: 2026-06-24 06:51:54.964, LastGameAction: 2026-06-24 06:52:02.011, IsGamePaused: True, PondTimeSpent: 4.05:00:08.6307020, Ping: 82, Queue: 0, Exec: 3, LastRxRs: 15910]",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.636Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #35bf0de0c49b4bea9ab31a46d5b87188 Reason: ClientDisconnect",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.636Z"}
+  },
+  {
+    "Message": "Master session #d83dd238c29e4cb783c084232465bc6f started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:16.444Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:16.834Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:16.834Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #d83dd238c29e4cb783c084232465bc6f. L:64, R: 0, E:3683530, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T20:09:17.056Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T20:09:17.365Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 12,
+    "Timestamp": {"$date": "2026-06-24T20:09:20.772Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.388Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.388Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.684Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.763Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:86",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.841Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.860Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 19,
+    "Timestamp": {"$date": "2026-06-24T20:09:22.591Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-24T20:09:23.341Z"}
+  },
+  {
+    "Message": "No PreviewDisconnect arrived. Saving profile on disconnect. Session #d83dd238c29e4cb783c084232465bc6f",
+    "RequestId": 61,
+    "Timestamp": {"$date": "2026-06-24T20:10:41.779Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 61,
+    "Timestamp": {"$date": "2026-06-24T20:10:41.779Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #d83dd238c29e4cb783c084232465bc6f. L:64, R: 0, E:3683530, rE: 0",
+    "RequestId": 61,
+    "Timestamp": {"$date": "2026-06-24T20:10:41.826Z"}
+  },
+  {
+    "Message": "Game session #d83dd238c29e4cb783c084232465bc6f ended (disconnect without preview disconnect). [LastOperation: GetTime, LastActivity: 2026-06-24 08:09:41.623, LastGetTime: 2026-06-24 08:09:41.623, LastGameAction: 2026-06-24 08:09:20.891, IsGamePaused: True, PondTimeSpent: 4.05:00:08.6307020, Ping: 124, Queue: 2, Exec: 3, LastRxRs: 53]",
+    "RequestId": 61,
+    "Timestamp": {"$date": "2026-06-24T20:10:41.826Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #d83dd238c29e4cb783c084232465bc6f Reason: ClientDisconnect",
+    "RequestId": 61,
+    "Timestamp": {"$date": "2026-06-24T20:10:41.826Z"}
+  },
+  {
+    "Message": "Master session #31d4118311c74e919e47d2a9295deec6 started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:36.279Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:36.483Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:36.498Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3683530, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T20:12:37.049Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T20:12:37.373Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T20:12:39.939Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:40.578Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:40.578Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:40.891Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:12:41.000Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:82",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T20:12:41.094Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T20:12:41.110Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 19,
+    "Timestamp": {"$date": "2026-06-24T20:12:41.954Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-24T20:12:42.656Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 82,
+    "Timestamp": {"$date": "2026-06-24T20:13:05.969Z"}
+  },
+  {
+    "Message": "Profile saved on PreviewDisconnect by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3683530, rE: 0",
+    "RequestId": 84,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.157Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #31d4118311c74e919e47d2a9295deec6. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 08:13:06.094, LastGetTime: 2026-06-24 08:12:57.578, LastGameAction: 2026-06-24 08:12:40.094, IsGamePaused: True, PondTimeSpent: 4.05:00:08.6307020, Ping: 67, Queue: 0, Exec: 3, LastRxRs: 80]",
+    "RequestId": 84,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.375Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #31d4118311c74e919e47d2a9295deec6 Reason: ClientDisconnect",
+    "RequestId": 84,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.375Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.780Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server (re-auth with token). Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.780Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T20:13:07.207Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.168Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.168Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #31d4118311c74e919e47d2a9295deec6",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.897Z"}
+  },
+  {
+    "Message": "PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.975Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:84",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-24T20:13:09.007Z"}
+  },
+  {
+    "Message": "join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T20:13:09.090Z"}
+  },
+  {
+    "Message": "PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 6,
+    "Timestamp": {"$date": "2026-06-24T20:13:09.090Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 159,
+    "Timestamp": {"$date": "2026-06-24T20:13:12.512Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3694751, rE: 0",
+    "RequestId": 22006,
+    "Timestamp": {"$date": "2026-06-24T20:31:26.015Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 26457,
+    "Timestamp": {"$date": "2026-06-24T20:35:02.798Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 26558,
+    "Timestamp": {"$date": "2026-06-24T20:36:04.085Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3694776, rE: 0",
+    "RequestId": 26952,
+    "Timestamp": {"$date": "2026-06-24T20:36:24.086Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 27491,
+    "Timestamp": {"$date": "2026-06-24T20:36:51.632Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 30604,
+    "Timestamp": {"$date": "2026-06-24T21:19:50.660Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3694879, rE: 0",
+    "RequestId": 34910,
+    "Timestamp": {"$date": "2026-06-24T21:23:19.574Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3695508, rE: 0",
+    "RequestId": 35712,
+    "Timestamp": {"$date": "2026-06-24T21:24:02.164Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 41640,
+    "Timestamp": {"$date": "2026-06-24T21:29:26.858Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 43973,
+    "Timestamp": {"$date": "2026-06-24T22:01:44.482Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3704593, rE: 0",
+    "RequestId": 46926,
+    "Timestamp": {"$date": "2026-06-24T22:04:29.118Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3708888, rE: 0",
+    "RequestId": 60229,
+    "Timestamp": {"$date": "2026-06-24T22:15:16.916Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 60361,
+    "Timestamp": {"$date": "2026-06-24T22:15:23.573Z"}
+  },
+  {
+    "Message": "PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 60377,
+    "Timestamp": {"$date": "2026-06-24T22:15:35.682Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 60377,
+    "Timestamp": {"$date": "2026-06-24T22:15:35.682Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3708888, rE: 0",
+    "RequestId": 60377,
+    "Timestamp": {"$date": "2026-06-24T22:15:35.729Z"}
+  },
+  {
+    "Message": "Game session #31d4118311c74e919e47d2a9295deec6 ended (quit)",
+    "RequestId": 60377,
+    "Timestamp": {"$date": "2026-06-24T22:15:35.745Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #31d4118311c74e919e47d2a9295deec6. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 10:15:35.667, LastGetTime: 2026-06-24 10:15:20.207, LastGameAction: 2026-06-24 10:15:23.573, IsGamePaused: True, PondTimeSpent: 4.08:03:41.1796460, Ping: 82, Queue: 0, Exec: 3, LastRxRs: 60375]",
+    "RequestId": 60378,
+    "Timestamp": {"$date": "2026-06-24T22:15:36.146Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #31d4118311c74e919e47d2a9295deec6 Reason: ClientDisconnect",
+    "RequestId": 60378,
+    "Timestamp": {"$date": "2026-06-24T22:15:36.146Z"}
+  },
+  {
+    "Message": "Master session #588ab53975de490eaa329f5b3c9d3edc started!",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:05.879Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:06.102Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:06.102Z"}
+  },
+  {
+    "Message": "Profile saved on SetAddProps by Master session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3708888, rE: 0",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-25T02:26:06.289Z"}
+  },
+  {
+    "Message": "Profile is sent to client from MASTER. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-25T02:26:06.598Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-25T02:26:09.598Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.250Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.250Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.559Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: ArriveToLobby",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.809Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:68",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.938Z"}
+  },
+  {
+    "Message": "[CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.954Z"}
+  },
+  {
+    "Message": "SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4",
+    "RequestId": 18,
+    "Timestamp": {"$date": "2026-06-25T02:26:11.699Z"}
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-25T02:26:12.668Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 247,
+    "Timestamp": {"$date": "2026-06-25T02:26:56.794Z"}
+  },
+  {
+    "Message": "Profile saved on PreviewDisconnect by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3708888, rE: 0",
+    "RequestId": 249,
+    "Timestamp": {"$date": "2026-06-25T02:26:56.950Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #588ab53975de490eaa329f5b3c9d3edc. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-25 02:26:56.903, LastGetTime: 2026-06-25 02:26:44.418, LastGameAction: 2026-06-25 02:26:09.730, IsGamePaused: True, PondTimeSpent: 4.08:03:41.1796460, Ping: 66, Queue: 0, Exec: 3, LastRxRs: 245]",
+    "RequestId": 249,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.173Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #588ab53975de490eaa329f5b3c9d3edc Reason: ClientDisconnect",
+    "RequestId": 249,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.173Z"}
+  },
+  {
+    "Message": "Profile loaded on Master. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.506Z"}
+  },
+  {
+    "Message": "Authenticated on MASTER Server (re-auth with token). Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.506Z"}
+  },
+  {
+    "Message": "Disconnected from MASTER server. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.947Z"}
+  },
+  {
+    "Message": "Profile loaded on Game. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:58.910Z"}
+  },
+  {
+    "Message": "Authenticated on GAME Server. Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:58.910Z"}
+  },
+  {
+    "Message": "ScheduleInactivityCheck in Session #588ab53975de490eaa329f5b3c9d3edc",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.352Z"}
+  },
+  {
+    "Message": "PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.430Z"}
+  },
+  {
+    "Message": "[CLN]: Client version: 2.9.14 ping:66",
+    "RequestId": 3,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.462Z"}
+  },
+  {
+    "Message": "join 'club6777' 0f3e794a-8833-4ed4-a25b-3ca04cef1a0c",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.597Z"}
+  },
+  {
+    "Message": "PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.597Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 17,
+    "Timestamp": {"$date": "2026-06-25T02:27:02.645Z"}
+  },
+  {
+    "Message": "PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat",
+    "RequestId": 65,
+    "Timestamp": {"$date": "2026-06-25T02:27:20.939Z"}
+  },
+  {
+    "Message": "PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 219,
+    "Timestamp": {"$date": "2026-06-25T02:27:55.736Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 3807,
+    "Timestamp": {"$date": "2026-06-25T02:31:13.714Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 3841,
+    "Timestamp": {"$date": "2026-06-25T02:31:22.771Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3711237, rE: 0",
+    "RequestId": 12035,
+    "Timestamp": {"$date": "2026-06-25T02:38:06.425Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 18858,
+    "Timestamp": {"$date": "2026-06-25T02:43:38.516Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 18865,
+    "Timestamp": {"$date": "2026-06-25T02:43:42.545Z"}
+  },
+  {
+    "Message": "[CLN]: Low Latency - RTT: 875",
+    "RequestId": 20925,
+    "Timestamp": {"$date": "2026-06-25T02:45:21.973Z"}
+  },
+  {
+    "Message": "Low Latency - Ping: 2249, Queue: 0, Executing: 3",
+    "RequestId": 23140,
+    "Timestamp": {"$date": "2026-06-25T02:47:08.680Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3712085, rE: 0",
+    "RequestId": 25672,
+    "Timestamp": {"$date": "2026-06-25T02:49:00.610Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3712211, rE: 0",
+    "RequestId": 42733,
+    "Timestamp": {"$date": "2026-06-25T03:00:31.350Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 44844,
+    "Timestamp": {"$date": "2026-06-25T03:02:08.807Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 44848,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.057Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: PondStayFinished",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.245Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 44872,
+    "Timestamp": {"$date": "2026-06-25T03:02:13.931Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3714334, rE: 0",
+    "RequestId": 57756,
+    "Timestamp": {"$date": "2026-06-25T03:12:41.376Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3716097, rE: 0",
+    "RequestId": 63029,
+    "Timestamp": {"$date": "2026-06-25T03:17:00.144Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 64004,
+    "Timestamp": {"$date": "2026-06-25T03:17:51.441Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 64005,
+    "Timestamp": {"$date": "2026-06-25T03:17:51.785Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 64050,
+    "Timestamp": {"$date": "2026-06-25T03:17:54.425Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 64068,
+    "Timestamp": {"$date": "2026-06-25T03:18:06.785Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3716122, rE: 0",
+    "RequestId": 66564,
+    "Timestamp": {"$date": "2026-06-25T03:19:49.585Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3717114, rE: 0",
+    "RequestId": 71748,
+    "Timestamp": {"$date": "2026-06-25T03:23:26.655Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 71861,
+    "Timestamp": {"$date": "2026-06-25T03:23:33.243Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 71877,
+    "Timestamp": {"$date": "2026-06-25T03:23:46.114Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 71906,
+    "Timestamp": {"$date": "2026-06-25T03:23:47.901Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 71913,
+    "Timestamp": {"$date": "2026-06-25T03:23:50.166Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3717964, rE: 0",
+    "RequestId": 90209,
+    "Timestamp": {"$date": "2026-06-25T03:36:49.649Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3719579, rE: 0",
+    "RequestId": 96332,
+    "Timestamp": {"$date": "2026-06-25T03:40:58.903Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 98980,
+    "Timestamp": {"$date": "2026-06-25T03:42:46.534Z"}
+  },
+  {
+    "Message": "ResumeGame",
+    "RequestId": 98987,
+    "Timestamp": {"$date": "2026-06-25T03:42:51.186Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3720545, rE: 0",
+    "RequestId": 105377,
+    "Timestamp": {"$date": "2026-06-25T03:47:07.921Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3720613, rE: 0",
+    "RequestId": 107761,
+    "Timestamp": {"$date": "2026-06-25T03:48:44.711Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3720628, rE: 0",
+    "RequestId": 108116,
+    "Timestamp": {"$date": "2026-06-25T03:49:02.555Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3721443, rE: 0",
+    "RequestId": 111803,
+    "Timestamp": {"$date": "2026-06-25T03:52:04.726Z"}
+  },
+  {
+    "Message": "PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat",
+    "RequestId": 112364,
+    "Timestamp": {"$date": "2026-06-25T03:52:53.413Z"}
+  },
+  {
+    "Message": "PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 112488,
+    "Timestamp": {"$date": "2026-06-25T03:53:20.462Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3722321, rE: 0",
+    "RequestId": 114505,
+    "Timestamp": {"$date": "2026-06-25T03:55:44.507Z"}
+  },
+  {
+    "Message": "Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3724049, rE: 0",
+    "RequestId": 123534,
+    "Timestamp": {"$date": "2026-06-25T04:03:09.887Z"}
+  },
+  {
+    "Message": "PauseGame. Reason: GameAction",
+    "RequestId": 124126,
+    "Timestamp": {"$date": "2026-06-25T04:03:55.986Z"}
+  },
+  {
+    "Message": "PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat",
+    "RequestId": 124546,
+    "Timestamp": {"$date": "2026-06-25T04:09:28.440Z"}
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 124546,
+    "Timestamp": {"$date": "2026-06-25T04:09:28.440Z"}
+  },
+  {
+    "Message": "Profile saved on Disconnect/Quit by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3724049, rE: 0",
+    "RequestId": 124546,
+    "Timestamp": {"$date": "2026-06-25T04:09:28.737Z"}
+  },
+  {
+    "Message": "Game session #588ab53975de490eaa329f5b3c9d3edc ended (quit)",
+    "RequestId": 124546,
+    "Timestamp": {"$date": "2026-06-25T04:09:29.158Z"}
+  },
+  {
+    "Message": "Already disconnected. No profile saving. Session #588ab53975de490eaa329f5b3c9d3edc. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-25 04:09:28.424, LastGetTime: 2026-06-25 04:09:19.306, LastGameAction: 2026-06-25 04:03:55.986, IsGamePaused: True, PondTimeSpent: 5.09:04:38.2579740, Ping: 83, Queue: 0, Exec: 3, LastRxRs: 124544]",
+    "RequestId": 124547,
+    "Timestamp": {"$date": "2026-06-25T04:09:29.908Z"}
+  },
+  {
+    "Message": "Disconnected from GAME server. Session #588ab53975de490eaa329f5b3c9d3edc Reason: ClientDisconnect",
+    "RequestId": 124547,
+    "Timestamp": {"$date": "2026-06-25T04:09:29.908Z"}
+  }
+]

@@ -1,0 +1,539 @@
+06-24 02:30:55.460 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 02:30:55.460 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 02:30:55.475 sys    r     1 Master session #4a06451fafa748bc999a8d222cb6b216 started!
+06-24 02:30:56.042 sys    r     1 Profile loaded on Master. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:30:56.042 sys    r     1 Authenticated on MASTER Server. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:30:56.272 sys    r     4 Profile saved on SetAddProps by Master session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3652852, rE: 0
+06-24 02:30:56.569 sys    r     5 Profile is sent to client from MASTER. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:30:59.303 sys    r    11 Disconnected from MASTER server. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:30:59.303 secur  r    11 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 02:30:59.922 sys    r     1 Profile loaded on Game. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:30:59.922 sys    r     1 Authenticated on GAME Server. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:30:59.922 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 02:30:59.922 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)
+06-24 02:31:00.309 sys    r     1 ScheduleInactivityCheck in Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:31:00.590 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 02:31:00.590 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room d8f61f2ae034dab8 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 02:31:00.699 sys    r     3 [CLN]: Client version: 2.9.14 ping:82
+06-24 02:31:00.715 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 02:31:01.480 sys    r    18 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 02:31:02.141 sys    r    33 join 'club6777' 
+06-24 02:34:26.848 CHAT   r       [Text] Waz 10000: Evenin
+06-24 02:36:52.406 sys    r   623 leave 'club6777'
+06-24 02:36:52.422 travel r   624 [CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )
+06-24 02:36:52.578 sys    r   625 Profile saved on PreviewDisconnect by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3652852, rE: 0
+06-24 02:36:52.578 secur  r   625 User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)
+06-24 02:36:52.797 sys    r   625 Already disconnected. No profile saving. Session #4a06451fafa748bc999a8d222cb6b216. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 02:36:
+06-24 02:36:52.797 sys    r   625 Disconnected from GAME server. Session #4a06451fafa748bc999a8d222cb6b216 Reason: ClientDisconnect
+06-24 02:36:52.920 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 02:36:52.920 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 02:36:53.123 sys    r     1 Profile loaded on Master. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:36:53.123 sys    r     1 Authenticated on MASTER Server (re-auth with token). Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:36:53.557 sys    r     4 Disconnected from MASTER server. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:36:53.557 secur  r     4 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 02:36:54.392 sys    r     1 Profile loaded on Game. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:36:54.392 sys    r     1 Authenticated on GAME Server. Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:36:54.392 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 02:36:54.392 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.141:4541)
+06-24 02:36:54.923 sys    r     1 ScheduleInactivityCheck in Session #4a06451fafa748bc999a8d222cb6b216
+06-24 02:36:55.001 sys    r     2 PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 02:36:55.001 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room c13725c5a014f789 at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')
+06-24 02:36:55.001 travel r     2 Day: 2, CurrentWeather: SunAndClouds_2, TimeOfDay: Midday, AirTemperature: 36, WaterTemperature: 27, Pressure: Medium, WindSpeed: 1, WindDirection: N,
+06-24 02:36:55.001 travel r     2 InitBiteSystem WeatherName: SunAndClouds_2, Seed: 206547522
+06-24 02:36:55.032 sys    r     3 [CLN]: Client version: 2.9.14 ping:83
+06-24 02:36:55.032 travel r     2 GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'
+06-24 02:36:55.126 sys    r     4 join 'club6777' 6600eacc-ef6e-45cd-8e5e-2c5e3d6f05d5
+06-24 02:36:55.126 sys    r     5 PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 02:36:58.454 sys    r    18 ResumeGame
+06-24 02:37:03.423 sys    r    40 PauseGame. Reason: GameAction
+06-24 02:37:04.220 sys    r    43 ResumeGame
+06-24 02:38:04.798 CHAT   r       [Text] Waz 10000: Test after choosing room.
+06-24 02:38:51.545 CHAT   r       [Text] Waz 10000: Trying to screenshot the troubles I'm having chat messages from me and others  register for viewing until I log back out and in
+06-24 02:39:05.795 CHAT   r       [Text] Waz 10000: wouldn't you know it... murphy's law, it's working as it's supposed to right now.
+06-24 02:48:41.110 sys    r 10996 PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat
+06-24 02:48:41.110 travel r 10996 Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-24 02:48:41.110 travel r 10996 Fish radar is not found
+06-24 02:48:43.016 travel r 11000 Boat EngineStarted
+06-24 02:49:00.079 sys    r 11104 PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 02:49:00.079 travel r 11103 Boat EngineStopped
+06-24 02:49:00.079 travel r 11104 Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-24 02:49:00.079 travel r 11105 Boat AnchorDown
+06-24 02:58:11.241 sys    r 21846 PauseGame. Reason: GameAction
+06-24 02:58:13.225 sys    r 21849 ResumeGame
+06-24 02:58:13.600 sys    r 21854 PauseGame. Reason: PondStayFinished
+06-24 02:58:13.600 travel r 21854 MoveTime on 24 hours, from 02.11:38 to 03.05:00
+06-24 02:58:13.600 travel r 21854 Day: 3, CurrentWeather: Rain_3, TimeOfDay: EarlyMorning, AirTemperature: 30, WaterTemperature: 25, Pressure: Medium, WindSpeed: 0.9, WindDirection: SE
+06-24 02:58:13.615 travel r 21854 EndOfDay result has been prepared. IsLastDay: False, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True
+06-24 02:58:13.615 travel r 21854 Update MoveTimeForwardTimeout to 6/24/2026 3:54:24 AM
+06-24 02:58:13.615 travel r 21854 ReseedBiteSystem WeatherName: Rain_3, Seed: -61300418
+06-24 02:58:13.615 travel r 21854 EndOfDay result has been sent to client
+06-24 02:58:13.615 ERR    r 21856 InvalidOperationException occured in ProcessGameAction. Ping: 66, Queue: 0, Exec: 9, LastRxRs: 21847 Game is paused. No game action available! No way 
+06-24 02:58:13.615 ERR    r 21856 Game.Walk completed with error code 32662 - GameActionError, subCode:  "Game is paused. No game action available! No way to resume. Reason: Pond stay 
+06-24 02:58:14.037 travel r 21867 [CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:True
+06-24 02:58:14.272 travel r 21869 [CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:True
+06-24 02:58:16.225 travel r 21872 Pond stay prolonged. Money spent: 1500 SC. Balance after: 1277923 SC
+06-24 02:58:16.303 sys    r 21873 ResumeGame
+06-24 03:06:19.979 sys    r 31889 Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3653621, rE: 0
+06-24 03:09:56.599 sys    r 36284 Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3653742, rE: 0
+06-24 03:14:29.846 sys    r 41736 Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3654739, rE: 0
+06-24 03:17:52.884 sys    r 45365 Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3658832, rE: 0
+06-24 03:28:16.274 travel r 58005 Day: 3, CurrentWeather: Rain_3, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 24, Pressure: Low, WindSpeed: 0, WindDirection: E, Precipita
+06-24 03:30:41.567 sys    r 60992 Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3664102, rE: 0
+06-24 03:30:48.858 sys    r 61124 PauseGame. Reason: GameAction
+06-24 03:31:08.342 sys    r 61155 ResumeGame
+06-24 03:34:19.523 sys    r 65066 Profile saved on CatchFish by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3664123, rE: 0
+06-24 03:47:23.867 ERR    r 81162 (slot 3) [7]: STATE: Unavailable transition requested: state=Move, transition=FinishAttack. Ping: 65, Queue: 0, Exec: 3, LastRxRs: 81142
+06-24 03:48:07.639 sys    r 81698 join 'g3' 
+06-24 03:48:27.443 sys    r 81742 PauseGame. Reason: GameAction
+06-24 03:48:32.318 sys    r 81750 PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 03:48:32.318 sys    r 81750 leave 'club6777'
+06-24 03:48:32.318 sys    r 81750 leave 'g3'
+06-24 03:48:32.349 sys    r 81750 Profile saved on Disconnect/Quit by Game session #4a06451fafa748bc999a8d222cb6b216. L:64, R: 0, E:3665240, rE: 0
+06-24 03:48:32.365 sys    r 81750 Game session #4a06451fafa748bc999a8d222cb6b216 ended (quit)
+06-24 03:48:32.365 secur  r 81750 User Waz 10000 disconected from GAME server (server IP: 192.40.222.141:4541)
+06-24 03:48:32.568 sys    r 81750 Already disconnected. No profile saving. Session #4a06451fafa748bc999a8d222cb6b216. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 03:4
+06-24 03:48:32.568 sys    r 81750 Disconnected from GAME server. Session #4a06451fafa748bc999a8d222cb6b216 Reason: ClientDisconnect
+06-24 03:48:47.770 sys    r     1 Master session #387d365b0451475094c16f8dcbd73bab started!
+06-24 03:48:47.770 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 03:48:47.770 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 03:48:47.993 sys    r     1 Profile loaded on Master. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:47.993 sys    r     1 Authenticated on MASTER Server. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:48.165 sys    r     4 Profile saved on SetAddProps by Master session #387d365b0451475094c16f8dcbd73bab. L:64, R: 0, E:3665240, rE: 0
+06-24 03:48:48.473 sys    r     5 Profile is sent to client from MASTER. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:51.040 sys    r    11 Disconnected from MASTER server. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:51.040 secur  r    11 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 03:48:52.436 sys    r     1 Profile loaded on Game. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:52.436 sys    r     1 Authenticated on GAME Server. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:52.436 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 03:48:52.436 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.131:4541)
+06-24 03:48:53.612 sys    r     1 ScheduleInactivityCheck in Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:48:53.690 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 03:48:53.690 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room e256db2188b47a4a at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 03:48:53.956 sys    r     3 [CLN]: Client version: 2.9.14 ping:82
+06-24 03:48:53.971 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 03:48:57.217 sys    r    18 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 03:48:58.018 sys    r    35 join 'club6777' 
+06-24 03:50:36.805 sys    r    86 No PreviewDisconnect arrived. Saving profile on disconnect. Session #387d365b0451475094c16f8dcbd73bab
+06-24 03:50:36.805 sys    r    86 leave 'club6777'
+06-24 03:50:36.868 sys    r    86 Profile saved on Disconnect/Quit by Game session #387d365b0451475094c16f8dcbd73bab. L:64, R: 0, E:3665240, rE: 0
+06-24 03:50:36.884 sys    r    86 Game session #387d365b0451475094c16f8dcbd73bab ended (disconnect without preview disconnect). [LastOperation: Ping, LastActivity: 2026-06-24 03:49:18.
+06-24 03:50:36.884 sys    r    86 Disconnected from GAME server. Session #387d365b0451475094c16f8dcbd73bab Reason: ClientDisconnect
+06-24 03:50:36.884 secur  r    86 User Waz 10000 disconected from GAME server (server IP: 192.40.222.131:4541)
+06-24 13:07:45.069 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 13:07:45.069 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 13:07:45.116 sys    r     1 Master session #3ddf4792ac85458e902b72575b57ed62 started!
+06-24 13:07:45.397 sys    r     1 Profile loaded on Master. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:45.397 sys    r     1 Authenticated on MASTER Server. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:45.580 sys    r     4 Profile saved on SetAddProps by Master session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3665240, rE: 0
+06-24 13:07:45.955 sys    r     5 Profile is sent to client from MASTER. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:48.799 sys    r    12 Disconnected from MASTER server. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:48.799 secur  r    12 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 13:07:49.474 sys    r     1 Profile loaded on Game. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:49.474 sys    r     1 Authenticated on GAME Server. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:49.474 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 13:07:49.474 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)
+06-24 13:07:50.244 sys    r     1 ScheduleInactivityCheck in Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:07:50.306 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 13:07:50.306 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room d8f61f2ae034dab8 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 13:07:50.443 sys    r     3 [CLN]: Client version: 2.9.14 ping:145
+06-24 13:07:50.443 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 13:07:51.259 sys    r    18 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 13:07:51.974 sys    r    33 join 'club6777' 
+06-24 13:09:08.913 sys    r   290 leave 'club6777'
+06-24 13:09:08.913 travel r   291 [CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )
+06-24 13:09:09.073 sys    r   292 Profile saved on PreviewDisconnect by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3665240, rE: 0
+06-24 13:09:09.073 secur  r   292 User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)
+06-24 13:09:09.338 sys    r   292 Already disconnected. No profile saving. Session #3ddf4792ac85458e902b72575b57ed62. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 01:09:
+06-24 13:09:09.338 sys    r   292 Disconnected from GAME server. Session #3ddf4792ac85458e902b72575b57ed62 Reason: ClientDisconnect
+06-24 13:09:09.481 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 13:09:09.481 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 13:09:09.715 sys    r     1 Profile loaded on Master. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:09:09.715 sys    r     1 Authenticated on MASTER Server (re-auth with token). Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:09:10.125 secur  r     4 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 13:09:10.141 sys    r     4 Disconnected from MASTER server. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:09:10.790 sys    r     1 Profile loaded on Game. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:09:10.790 sys    r     1 Authenticated on GAME Server. Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:09:10.790 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 13:09:10.790 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.129:4541)
+06-24 13:09:11.213 sys    r     1 ScheduleInactivityCheck in Session #3ddf4792ac85458e902b72575b57ed62
+06-24 13:09:11.291 sys    r     2 PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 13:09:11.291 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room d1c41efc5fc4e23a at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')
+06-24 13:09:11.291 travel r     2 Day: 3, CurrentWeather: Rain_3, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 24, Pressure: Low, WindSpeed: 0, WindDirection: E, Precipita
+06-24 13:09:11.291 travel r     2 InitBiteSystem WeatherName: Rain_3, Seed: -61300418
+06-24 13:09:11.306 sys    r     3 [CLN]: Client version: 2.9.14 ping:82
+06-24 13:09:11.306 travel r     2 GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'
+06-24 13:09:11.368 sys    r     4 join 'club6777' 3137025d-1bdf-4526-b458-910338466c62
+06-24 13:09:11.383 sys    r     5 PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 13:09:15.135 sys    r    18 ResumeGame
+06-24 13:09:23.947 sys    r    37 PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat
+06-24 13:09:23.947 travel r    37 Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-24 13:09:23.947 travel r    37 Fish radar is not found
+06-24 13:09:30.229 travel r    57 Boat EngineStarted
+06-24 13:09:42.150 sys    r   133 PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 13:09:42.150 travel r   132 Boat EngineStopped
+06-24 13:09:42.150 travel r   133 Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-24 13:09:42.150 travel r   134 Boat AnchorDown
+06-24 13:09:56.447 sys    r   183 PauseGame. Reason: GameAction
+06-24 13:09:59.400 sys    r   189 ResumeGame
+06-24 13:09:59.603 travel r   190 MoveTime on 11 hours, from 03.08:22 to 03.19:00
+06-24 13:09:59.603 travel r   190 Day: 3, CurrentWeather: Rain_3, TimeOfDay: LateEvening, AirTemperature: 30, WaterTemperature: 28, Pressure: Medium, WindSpeed: 0, WindDirection: NE, P
+06-24 13:09:59.603 travel r   190 Update MoveTimeForwardTimeout to 6/24/2026 2:13:45 PM
+06-24 13:12:59.243 sys    r  3059 PauseGame. Reason: GameAction
+06-24 13:13:10.659 sys    r  3078 ResumeGame
+06-24 13:20:50.902 sys    r 11388 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3675921, rE: 0
+06-24 13:21:33.329 sys    r 12108 PauseGame. Reason: GameAction
+06-24 13:22:06.847 sys    r 12158 ResumeGame
+06-24 13:23:13.750 sys    r 13523 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3675942, rE: 0
+06-24 13:24:37.524 sys    r 15048 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3676212, rE: 0
+06-24 13:31:02.356 sys    r 22832 PauseGame. Reason: GameAction
+06-24 14:09:09.959 sys    r 25623 ResumeGame
+06-24 14:11:30.992 sys    r 28534 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3677732, rE: 0
+06-24 14:18:52.155 travel r 37585 Day: 3, CurrentWeather: Rain_3, TimeOfDay: EarlyNight, AirTemperature: 24, WaterTemperature: 26, Pressure: Medium, WindSpeed: 0, WindDirection: NE, Pr
+06-24 14:19:05.555 travel r 37864 Flashlight On
+06-24 14:20:02.134 sys    r 39003 PauseGame. Reason: GameAction
+06-24 14:20:03.228 sys    r 39005 ResumeGame
+06-24 14:24:13.398 sys    r 44159 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678373, rE: 0
+06-24 14:26:45.060 sys    r 47253 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678394, rE: 0
+06-24 14:33:09.808 sys    r 55154 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678420, rE: 0
+06-24 14:34:47.858 sys    r 57132 PauseGame. Reason: GameAction
+06-24 15:18:34.024 sys    r 60297 ResumeGame
+06-24 15:26:24.986 sys    r 69958 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678528, rE: 0
+06-24 15:29:42.856 sys    r 73968 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3678551, rE: 0
+06-24 15:32:39.483 travel r 77590 Day: 3, CurrentWeather: Rain_3, TimeOfDay: MidNight, AirTemperature: 24, WaterTemperature: 25, Pressure: Low, WindSpeed: 0, WindDirection: NE, Precipi
+06-24 15:33:43.289 CHAT   r       [Text] Gonzo1964: The chat really has issues. Until they fix it, this is what it is. happens to everyone at some point
+06-24 15:49:23.539 sys    r 98283 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682348, rE: 0
+06-24 15:57:53.459 sys    r108683 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682422, rE: 0
+06-24 16:01:13.871 sys    r112718 Profile saved on CatchFish by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682523, rE: 0
+06-24 16:04:00.288 CHAT   r       [Text] Waz 10000: mornin
+06-24 16:08:02.356 CHAT   r       [Text] Waz 10000: Excellent. Broken again. I need to hit enter to capture this
+06-24 16:09:57.108 sys    r123372 PauseGame. Reason: GameAction
+06-24 16:10:05.110 sys    r123383 PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 16:10:05.110 sys    r123383 leave 'club6777'
+06-24 16:10:05.141 sys    r123383 Profile saved on Disconnect/Quit by Game session #3ddf4792ac85458e902b72575b57ed62. L:64, R: 0, E:3682613, rE: 0
+06-24 16:10:05.141 sys    r123383 Game session #3ddf4792ac85458e902b72575b57ed62 ended (quit)
+06-24 16:10:05.141 secur  r123383 User Waz 10000 disconected from GAME server (server IP: 192.40.222.129:4541)
+06-24 16:10:05.421 sys    r123383 Already disconnected. No profile saving. Session #3ddf4792ac85458e902b72575b57ed62. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 04:1
+06-24 16:10:05.421 sys    r123383 Disconnected from GAME server. Session #3ddf4792ac85458e902b72575b57ed62 Reason: ClientDisconnect
+06-24 16:10:26.411 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 16:10:26.411 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 16:10:26.427 sys    r     1 Master session #5f31a1825c204e9584850d9b79c828ab started!
+06-24 16:10:26.630 sys    r     1 Profile loaded on Master. Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:26.630 sys    r     1 Authenticated on MASTER Server. Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:26.814 sys    r     4 Profile saved on SetAddProps by Master session #5f31a1825c204e9584850d9b79c828ab. L:64, R: 0, E:3682613, rE: 0
+06-24 16:10:27.126 sys    r     5 Profile is sent to client from MASTER. Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:29.802 sys    r    11 Disconnected from MASTER server. Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:29.802 secur  r    11 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 16:10:30.521 sys    r     1 Profile loaded on Game. Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:30.521 sys    r     1 Authenticated on GAME Server. Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:30.521 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 16:10:30.521 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.130:4541)
+06-24 16:10:31.096 sys    r     1 ScheduleInactivityCheck in Session #5f31a1825c204e9584850d9b79c828ab
+06-24 16:10:31.192 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 16:10:31.192 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room ab6e8b479af439ea at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 16:10:31.317 sys    r     3 [CLN]: Client version: 2.9.14 ping:81
+06-24 16:10:31.317 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 16:10:32.474 sys    r    18 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 16:10:33.113 sys    r    33 join 'club6777' 
+06-24 18:27:55.193 sys    r 10120 leave 'club6777'
+06-24 18:27:55.225 sys    r 10120 Profile saved on Disconnect/Quit by Game session #5f31a1825c204e9584850d9b79c828ab. L:64, R: 0, E:3682613, rE: 0
+06-24 18:27:55.225 sys    r 10120 Game session #5f31a1825c204e9584850d9b79c828ab ended (quit)
+06-24 18:27:55.225 secur  r 10120 User Waz 10000 disconected from GAME server (server IP: 192.40.222.130:4541)
+06-24 18:27:55.443 sys    r 10120 Already disconnected. No profile saving. Session #5f31a1825c204e9584850d9b79c828ab. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 06:2
+06-24 18:27:55.443 sys    r 10120 Disconnected from GAME server. Session #5f31a1825c204e9584850d9b79c828ab Reason: ClientDisconnect
+06-24 18:28:54.973 CHAT   r       [Text] Gonzo1964: yeah, broken lol HAd to change locations to even see ya typed anything. So morning back at ya
+06-24 18:30:19.444 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 18:30:19.444 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 18:30:19.460 sys    r     1 Master session #35bf0de0c49b4bea9ab31a46d5b87188 started!
+06-24 18:30:19.698 sys    r     1 Profile loaded on Master. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:19.698 sys    r     1 Authenticated on MASTER Server. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:19.886 sys    r     4 Profile saved on SetAddProps by Master session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3682613, rE: 0
+06-24 18:30:20.210 sys    r     5 Profile is sent to client from MASTER. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:22.838 sys    r    11 Disconnected from MASTER server. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:22.838 secur  r    11 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 18:30:23.907 sys    r     1 Profile loaded on Game. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:23.923 sys    r     1 Authenticated on GAME Server. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:23.923 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 18:30:23.923 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)
+06-24 18:30:24.537 sys    r     1 ScheduleInactivityCheck in Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:30:24.626 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 18:30:24.626 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 26efb33469c419b8 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 18:30:24.782 sys    r     3 [CLN]: Client version: 2.9.14 ping:82
+06-24 18:30:24.813 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 18:30:26.344 sys    r    18 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 18:30:27.126 sys    r    33 join 'club6777' 
+06-24 18:38:01.302 sys    r   744 leave 'club6777'
+06-24 18:38:01.302 travel r   745 [CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )
+06-24 18:38:01.443 sys    r   746 Profile saved on PreviewDisconnect by Game session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3682613, rE: 0
+06-24 18:38:01.443 secur  r   746 User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)
+06-24 18:38:02.005 sys    r   746 Already disconnected. No profile saving. Session #35bf0de0c49b4bea9ab31a46d5b87188. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 06:38:
+06-24 18:38:02.005 sys    r   746 Disconnected from GAME server. Session #35bf0de0c49b4bea9ab31a46d5b87188 Reason: ClientDisconnect
+06-24 18:38:02.655 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 18:38:02.655 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 18:38:02.959 sys    r     1 Profile loaded on Master. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:38:02.959 sys    r     1 Authenticated on MASTER Server (re-auth with token). Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:38:03.374 sys    r     4 Disconnected from MASTER server. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:38:03.374 secur  r     4 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 18:38:04.287 sys    r     1 Profile loaded on Game. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:38:04.287 sys    r     1 Authenticated on GAME Server. Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:38:04.287 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 18:38:04.287 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)
+06-24 18:38:04.739 sys    r     1 ScheduleInactivityCheck in Session #35bf0de0c49b4bea9ab31a46d5b87188
+06-24 18:38:04.818 sys    r     2 PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 18:38:04.818 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room e4527f6b07140aea at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')
+06-24 18:38:04.818 travel r     2 Day: 3, CurrentWeather: Rain_3, TimeOfDay: MidNight, AirTemperature: 24, WaterTemperature: 25, Pressure: Low, WindSpeed: 0, WindDirection: NE, Precipi
+06-24 18:38:04.833 travel r     2 InitBiteSystem WeatherName: Rain_3, Seed: -61300418
+06-24 18:38:04.849 sys    r     3 [CLN]: Client version: 2.9.14 ping:81
+06-24 18:38:04.849 travel r     2 GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'
+06-24 18:38:04.943 sys    r     4 join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad
+06-24 18:38:04.943 sys    r     5 PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 18:38:08.302 sys    r    18 ResumeGame
+06-24 18:38:15.599 travel r    36 Flashlight On
+06-24 18:45:50.694 travel r  8699 Day: 3, CurrentWeather: Rain_3, TimeOfDay: LateNight, AirTemperature: 27, WaterTemperature: 28, Pressure: Medium, WindSpeed: 0, WindDirection: SE, Pre
+06-24 18:51:29.200 sys    r 15661 Profile saved on CatchFish by Game session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3683530, rE: 0
+06-24 18:51:37.651 sys    r 15809 PauseGame. Reason: GameAction
+06-24 18:51:39.404 sys    r 15812 ResumeGame
+06-24 18:51:39.607 sys    r 15816 PauseGame. Reason: PondStayFinished
+06-24 18:51:39.607 travel r 15816 MoveTime on 24 hours, from 04.02:23 to 04.05:00
+06-24 18:51:39.607 travel r 15816 Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 31, WaterTemperature: 26, Pressure: High, WindSpeed: 0.7, WindDirecti
+06-24 18:51:39.636 travel r 15816 EndOfDay result has been prepared. IsLastDay: False, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True
+06-24 18:51:39.652 travel r 15816 ReseedBiteSystem WeatherName: SunAndClouds_5, Seed: -196737005
+06-24 18:51:39.652 travel r 15816 EndOfDay result has been sent to client
+06-24 18:51:39.839 travel r 15823 [CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:True
+06-24 18:51:39.839 travel r 15825 Flashlight Off
+06-24 18:51:40.105 travel r 15827 [CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:True
+06-24 18:51:42.902 travel r 15832 Pond stay prolonged. Money spent: 1500 SC. Balance after: 1331988 SC
+06-24 18:51:42.980 sys    r 15834 ResumeGame
+06-24 18:51:44.262 sys    r 15856 PauseGame. Reason: GameAction
+06-24 18:52:01.136 sys    r 15882 ResumeGame
+06-24 18:52:02.011 sys    r 15903 PauseGame. Reason: GameAction
+06-24 18:52:09.369 sys    r 15912 PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 18:52:09.369 sys    r 15912 leave 'club6777'
+06-24 18:52:09.416 sys    r 15912 Profile saved on Disconnect/Quit by Game session #35bf0de0c49b4bea9ab31a46d5b87188. L:64, R: 0, E:3683530, rE: 0
+06-24 18:52:09.416 secur  r 15912 User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)
+06-24 18:52:09.431 sys    r 15912 Game session #35bf0de0c49b4bea9ab31a46d5b87188 ended (quit)
+06-24 18:52:09.636 sys    r 15912 Already disconnected. No profile saving. Session #35bf0de0c49b4bea9ab31a46d5b87188. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 06:5
+06-24 18:52:09.636 sys    r 15912 Disconnected from GAME server. Session #35bf0de0c49b4bea9ab31a46d5b87188 Reason: ClientDisconnect
+06-24 20:09:16.428 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 20:09:16.428 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 20:09:16.444 sys    r     1 Master session #d83dd238c29e4cb783c084232465bc6f started!
+06-24 20:09:16.834 sys    r     1 Profile loaded on Master. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:16.834 sys    r     1 Authenticated on MASTER Server. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:17.056 sys    r     4 Profile saved on SetAddProps by Master session #d83dd238c29e4cb783c084232465bc6f. L:64, R: 0, E:3683530, rE: 0
+06-24 20:09:17.365 sys    r     5 Profile is sent to client from MASTER. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:20.772 sys    r    12 Disconnected from MASTER server. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:20.772 secur  r    12 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 20:09:21.388 sys    r     1 Profile loaded on Game. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:21.388 sys    r     1 Authenticated on GAME Server. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:21.388 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 20:09:21.388 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)
+06-24 20:09:21.684 sys    r     1 ScheduleInactivityCheck in Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:09:21.763 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 20:09:21.763 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 6cd9c6beabd44e68 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 20:09:21.841 sys    r     3 [CLN]: Client version: 2.9.14 ping:86
+06-24 20:09:21.860 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 20:09:22.591 sys    r    19 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 20:09:23.341 sys    r    33 join 'club6777' 
+06-24 20:10:41.779 sys    r    61 No PreviewDisconnect arrived. Saving profile on disconnect. Session #d83dd238c29e4cb783c084232465bc6f
+06-24 20:10:41.779 sys    r    61 leave 'club6777'
+06-24 20:10:41.826 sys    r    61 Profile saved on Disconnect/Quit by Game session #d83dd238c29e4cb783c084232465bc6f. L:64, R: 0, E:3683530, rE: 0
+06-24 20:10:41.826 sys    r    61 Game session #d83dd238c29e4cb783c084232465bc6f ended (disconnect without preview disconnect). [LastOperation: GetTime, LastActivity: 2026-06-24 08:09:
+06-24 20:10:41.826 sys    r    61 Disconnected from GAME server. Session #d83dd238c29e4cb783c084232465bc6f Reason: ClientDisconnect
+06-24 20:10:41.826 secur  r    61 User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)
+06-24 20:12:36.279 sys    r     1 Master session #31d4118311c74e919e47d2a9295deec6 started!
+06-24 20:12:36.279 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 20:12:36.279 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 20:12:36.483 sys    r     1 Profile loaded on Master. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:36.498 sys    r     1 Authenticated on MASTER Server. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:37.049 sys    r     4 Profile saved on SetAddProps by Master session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3683530, rE: 0
+06-24 20:12:37.373 sys    r     5 Profile is sent to client from MASTER. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:39.939 sys    r    11 Disconnected from MASTER server. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:39.939 secur  r    11 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 20:12:40.578 sys    r     1 Profile loaded on Game. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:40.578 sys    r     1 Authenticated on GAME Server. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:40.578 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 20:12:40.578 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.129:4541)
+06-24 20:12:40.891 sys    r     1 ScheduleInactivityCheck in Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:12:41.000 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-24 20:12:41.000 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 6946309b02641a6a at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-24 20:12:41.094 sys    r     3 [CLN]: Client version: 2.9.14 ping:82
+06-24 20:12:41.110 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 20:12:41.954 sys    r    19 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-24 20:12:42.656 sys    r    33 join 'club6777' 
+06-24 20:13:05.969 sys    r    82 leave 'club6777'
+06-24 20:13:05.969 travel r    83 [CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )
+06-24 20:13:06.157 sys    r    84 Profile saved on PreviewDisconnect by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3683530, rE: 0
+06-24 20:13:06.157 secur  r    84 User Waz 10000 disconected from GAME server (server IP: 192.40.222.129:4541)
+06-24 20:13:06.375 sys    r    84 Already disconnected. No profile saving. Session #31d4118311c74e919e47d2a9295deec6. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-24 08:13:
+06-24 20:13:06.375 sys    r    84 Disconnected from GAME server. Session #31d4118311c74e919e47d2a9295deec6 Reason: ClientDisconnect
+06-24 20:13:06.531 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-24 20:13:06.531 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-24 20:13:06.780 sys    r     1 Profile loaded on Master. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:13:06.780 sys    r     1 Authenticated on MASTER Server (re-auth with token). Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:13:07.207 sys    r     5 Disconnected from MASTER server. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:13:07.207 secur  r     5 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-24 20:13:08.168 sys    r     1 Profile loaded on Game. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:13:08.168 sys    r     1 Authenticated on GAME Server. Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:13:08.168 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-24 20:13:08.168 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.131:4541)
+06-24 20:13:08.897 sys    r     1 ScheduleInactivityCheck in Session #31d4118311c74e919e47d2a9295deec6
+06-24 20:13:08.960 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 3ca50d03f5045489 at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')
+06-24 20:13:08.975 sys    r     2 PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 20:13:08.975 travel r     2 Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 31, WaterTemperature: 26, Pressure: High, WindSpeed: 0.7, WindDirecti
+06-24 20:13:08.975 travel r     2 InitBiteSystem WeatherName: SunAndClouds_5, Seed: -196737005
+06-24 20:13:09.007 sys    r     3 [CLN]: Client version: 2.9.14 ping:84
+06-24 20:13:09.007 travel r     2 GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'
+06-24 20:13:09.090 sys    r     5 join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad
+06-24 20:13:09.090 sys    r     6 PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 20:13:12.512 sys    r   159 ResumeGame
+06-24 20:14:35.535 CHAT   r       [Text] Waz 10000: I've opened a ticket, and made it clear I'm not the only one experiencing this issue.
+06-24 20:18:00.732 CHAT   r       [Text] Gonzo1964: Oh I am sure they know lol Ben happening for years
+06-24 20:23:20.420 CHAT   r       [Text] Waz 10000: Crap, just saw the Swiss have scored 2 in the 2nd half.
+06-24 20:24:10.926 CHAT   r       [Text] Gonzo1964: not watching, unfortunatley. Don't really follow it
+06-24 20:24:43.863 CHAT   r       [Text] Waz 10000: Yeah, I can't stomach the diving.  I played for 2 many years in a provincial league where that BS wouldn't fly.
+06-24 20:24:52.648 CHAT   r       [Text] Waz 10000: 2->too
+06-24 20:25:52.121 CHAT   r       [Text] Gonzo1964: lol I got what ya meant. I speak fluent internetese lmao
+06-24 20:31:26.015 sys    r 22006 Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3694751, rE: 0
+06-24 20:35:02.798 sys    r 26457 PauseGame. Reason: GameAction
+06-24 20:36:04.085 sys    r 26558 ResumeGame
+06-24 20:36:24.086 sys    r 26952 Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3694776, rE: 0
+06-24 20:36:51.632 sys    r 27491 PauseGame. Reason: GameAction
+06-24 21:19:50.660 sys    r 30604 ResumeGame
+06-24 21:23:19.574 sys    r 34910 Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3694879, rE: 0
+06-24 21:24:02.164 sys    r 35712 Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3695508, rE: 0
+06-24 21:27:10.673 travel r 39536 Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 27, Pressure: High, WindSpeed: 0.8, WindDirection: N
+06-24 21:29:26.858 sys    r 41640 PauseGame. Reason: GameAction
+06-24 22:01:44.482 sys    r 43973 ResumeGame
+06-24 22:04:29.118 sys    r 46926 Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3704593, rE: 0
+06-24 22:15:16.916 sys    r 60229 Profile saved on CatchFish by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3708888, rE: 0
+06-24 22:15:23.573 sys    r 60361 PauseGame. Reason: GameAction
+06-24 22:15:35.682 sys    r 60377 PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-24 22:15:35.682 sys    r 60377 leave 'club6777'
+06-24 22:15:35.729 sys    r 60377 Profile saved on Disconnect/Quit by Game session #31d4118311c74e919e47d2a9295deec6. L:64, R: 0, E:3708888, rE: 0
+06-24 22:15:35.745 sys    r 60377 Game session #31d4118311c74e919e47d2a9295deec6 ended (quit)
+06-24 22:15:35.745 secur  r 60377 User Waz 10000 disconected from GAME server (server IP: 192.40.222.131:4541)
+06-24 22:15:36.146 sys    r 60378 Already disconnected. No profile saving. Session #31d4118311c74e919e47d2a9295deec6. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-24 10:1
+06-24 22:15:36.146 sys    r 60378 Disconnected from GAME server. Session #31d4118311c74e919e47d2a9295deec6 Reason: ClientDisconnect
+06-25 00:34:32.213 CHAT   r       [Text] RareSKEETLEZ: Gotcha gonzo makes sense especially for club events to have as many active people in 
+06-25 00:36:17.488 CHAT   r       [Text] RareSKEETLEZ: I think that is a good idea gonzo for the inactivity change
+06-25 02:26:05.879 sys    r     1 Master session #588ab53975de490eaa329f5b3c9d3edc started!
+06-25 02:26:05.879 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-25 02:26:05.879 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-25 02:26:06.102 sys    r     1 Profile loaded on Master. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:06.102 sys    r     1 Authenticated on MASTER Server. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:06.289 sys    r     4 Profile saved on SetAddProps by Master session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3708888, rE: 0
+06-25 02:26:06.598 sys    r     5 Profile is sent to client from MASTER. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:09.598 sys    r    11 Disconnected from MASTER server. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:09.598 secur  r    11 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-25 02:26:10.250 sys    r     1 Profile loaded on Game. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:10.250 sys    r     1 Authenticated on GAME Server. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:10.250 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-25 02:26:10.250 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)
+06-25 02:26:10.559 sys    r     1 ScheduleInactivityCheck in Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:10.809 sys    r     2 PauseGame. Reason: ArriveToLobby
+06-25 02:26:10.809 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 276a8f3d10041148 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')
+06-25 02:26:10.938 sys    r     3 [CLN]: Client version: 2.9.14 ping:68
+06-25 02:26:10.954 sys    r     4 [CLN]: PersistentData(client) received: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-25 02:26:11.699 sys    r    18 SYNC_FRIENDS Found: 4 Add: 0/0, Remove: 0 Count: 4/4/4
+06-25 02:26:12.668 sys    r    33 join 'club6777' 
+06-25 02:26:56.794 sys    r   247 leave 'club6777'
+06-25 02:26:56.794 travel r   248 [CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )
+06-25 02:26:56.950 sys    r   249 Profile saved on PreviewDisconnect by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3708888, rE: 0
+06-25 02:26:56.950 secur  r   249 User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)
+06-25 02:26:57.173 sys    r   249 Already disconnected. No profile saving. Session #588ab53975de490eaa329f5b3c9d3edc. [LastOperation: PreviewDisconnect, LastActivity: 2026-06-25 02:26:
+06-25 02:26:57.173 sys    r   249 Disconnected from GAME server. Session #588ab53975de490eaa329f5b3c9d3edc Reason: ClientDisconnect
+06-25 02:26:57.291 secur  r     1 XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y
+06-25 02:26:57.291 secur  r     1 User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)
+06-25 02:26:57.506 sys    r     1 Profile loaded on Master. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:57.506 sys    r     1 Authenticated on MASTER Server (re-auth with token). Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:57.946 secur  r     4 User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)
+06-25 02:26:57.947 sys    r     4 Disconnected from MASTER server. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:58.910 sys    r     1 Profile loaded on Game. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:58.910 sys    r     1 Authenticated on GAME Server. Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:58.910 secur  r     1 PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'
+06-25 02:26:58.910 secur  r     1 User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)
+06-25 02:26:59.352 sys    r     1 ScheduleInactivityCheck in Session #588ab53975de490eaa329f5b3c9d3edc
+06-25 02:26:59.430 sys    r     2 PersistentData - Before BoatManager create: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-25 02:26:59.430 travel r     2 Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room f6bed3eec084658a at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')
+06-25 02:26:59.430 travel r     2 Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 27, Pressure: High, WindSpeed: 0.8, WindDirection: N
+06-25 02:26:59.430 travel r     2 InitBiteSystem WeatherName: SunAndClouds_5, Seed: -196737005
+06-25 02:26:59.462 sys    r     3 [CLN]: Client version: 2.9.14 ping:66
+06-25 02:26:59.462 travel r     2 GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'
+06-25 02:26:59.597 sys    r     4 join 'club6777' 0f3e794a-8833-4ed4-a25b-3ca04cef1a0c
+06-25 02:26:59.597 sys    r     5 PersistentData - No change on SetLastPinId: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-25 02:27:02.645 sys    r    17 ResumeGame
+06-25 02:27:20.939 sys    r    65 PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat
+06-25 02:27:20.939 travel r    65 Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-25 02:27:20.939 travel r    65 Fish radar is not found
+06-25 02:27:28.407 travel r    89 Boat EngineStarted
+06-25 02:27:44.048 travel r   180 Boat EngineStopped
+06-25 02:27:55.736 sys    r   219 PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-25 02:27:55.736 travel r   219 Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-25 02:27:55.736 travel r   220 Boat AnchorDown
+06-25 02:31:13.714 sys    r  3807 PauseGame. Reason: GameAction
+06-25 02:31:22.771 sys    r  3841 ResumeGame
+06-25 02:38:06.425 sys    r 12035 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3711237, rE: 0
+06-25 02:43:38.516 sys    r 18858 PauseGame. Reason: GameAction
+06-25 02:43:42.545 sys    r 18865 ResumeGame
+06-25 02:45:21.973 sys    r 20925 [CLN]: Low Latency - RTT: 875
+06-25 02:46:19.648 ERR    r 22127 (slot 4) [2]: STATE: Unavailable transition requested: state=Move, transition=FinishAttack. Ping: 1533, Queue: 0, Exec: 3, LastRxRs: 22078
+06-25 02:47:08.680 sys    r 23140 Low Latency - Ping: 2249, Queue: 0, Executing: 3
+06-25 02:49:00.610 sys    r 25672 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3712085, rE: 0
+06-25 02:56:20.445 travel r 36663 Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: Midday, AirTemperature: 36, WaterTemperature: 28, Pressure: Medium, WindSpeed: 1.7, WindDirection: 
+06-25 03:00:31.350 sys    r 42733 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3712211, rE: 0
+06-25 03:02:08.807 sys    r 44844 PauseGame. Reason: GameAction
+06-25 03:02:11.057 sys    r 44848 ResumeGame
+06-25 03:02:11.245 sys    r 44852 PauseGame. Reason: PondStayFinished
+06-25 03:02:11.245 travel r 44852 MoveTime on 24 hours, from 04.10:23 to 05.05:00
+06-25 03:02:11.245 travel r 44852 Day: 5, CurrentWeather: Sunny_1, TimeOfDay: EarlyMorning, AirTemperature: 29, WaterTemperature: 27, Pressure: High, WindSpeed: 0.5, WindDirection: NW,
+06-25 03:02:11.245 travel r 44852 EndOfDay result has been prepared. IsLastDay: False, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True
+06-25 03:02:11.260 travel r 44852 Update MoveTimeForwardTimeout to 6/25/2026 4:05:28 AM
+06-25 03:02:11.260 travel r 44852 ReseedBiteSystem WeatherName: Sunny_1, Seed: -28533003
+06-25 03:02:11.260 travel r 44852 EndOfDay result has been sent to client
+06-25 03:02:11.276 ERR    r 44854 InvalidOperationException occured in ProcessGameAction. Ping: 85, Queue: 0, Exec: 3, LastRxRs: 44846 Game is paused. No game action available! No way 
+06-25 03:02:11.276 ERR    r 44854 Game.Move completed with error code 32662 - GameActionError, subCode:  "Game is paused. No game action available! No way to resume. Reason: Pond stay 
+06-25 03:02:11.843 travel r 44866 [CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:True
+06-25 03:02:12.088 travel r 44868 [CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:True
+06-25 03:02:13.774 travel r 44870 Pond stay prolonged. Money spent: 1500 SC. Balance after: 1361440 SC
+06-25 03:02:13.931 sys    r 44872 ResumeGame
+06-25 03:12:41.376 sys    r 57756 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3714334, rE: 0
+06-25 03:17:00.144 sys    r 63029 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3716097, rE: 0
+06-25 03:17:51.441 sys    r 64004 PauseGame. Reason: GameAction
+06-25 03:17:51.785 sys    r 64005 ResumeGame
+06-25 03:17:54.425 sys    r 64050 PauseGame. Reason: GameAction
+06-25 03:18:06.785 sys    r 64068 ResumeGame
+06-25 03:19:49.585 sys    r 66564 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3716122, rE: 0
+06-25 03:23:26.655 sys    r 71748 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3717114, rE: 0
+06-25 03:23:33.243 sys    r 71861 PauseGame. Reason: GameAction
+06-25 03:23:46.114 sys    r 71877 ResumeGame
+06-25 03:23:47.901 sys    r 71906 PauseGame. Reason: GameAction
+06-25 03:23:50.166 sys    r 71913 ResumeGame
+06-25 03:32:41.907 travel r 84010 Day: 5, CurrentWeather: Sunny_1, TimeOfDay: Morning, AirTemperature: 29, WaterTemperature: 27, Pressure: High, WindSpeed: 1.7, WindDirection: E, Preci
+06-25 03:36:49.649 sys    r 90209 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3717964, rE: 0
+06-25 03:39:31.710 CHAT   r       [Text] Waz 10000: Evenin
+06-25 03:40:58.903 sys    r 96332 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3719579, rE: 0
+06-25 03:42:46.534 sys    r 98980 PauseGame. Reason: GameAction
+06-25 03:42:51.186 sys    r 98987 ResumeGame
+06-25 03:47:07.921 sys    r105377 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3720545, rE: 0
+06-25 03:48:44.711 sys    r107761 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3720613, rE: 0
+06-25 03:49:02.555 sys    r108116 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3720628, rE: 0
+06-25 03:52:04.726 sys    r111803 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3721443, rE: 0
+06-25 03:52:53.413 sys    r112364 PersistentData - Update on Board: TournamentId: ; PinId: 10550; Boarded: True; BoatType: BassBoat
+06-25 03:52:53.413 travel r112364 Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-25 03:52:53.413 travel r112364 Fish radar is not found
+06-25 03:52:53.413 travel r112365 Boat AnchorUp
+06-25 03:52:55.571 travel r112373 Boat EngineStarted
+06-25 03:53:20.462 sys    r112488 PersistentData - Update on UnBoard: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-25 03:53:20.462 travel r112487 Boat EngineStopped
+06-25 03:53:20.462 travel r112488 Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)
+06-25 03:53:20.508 travel r112489 Boat AnchorDown
+06-25 03:55:44.507 sys    r114505 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3722321, rE: 0
+06-25 04:03:09.887 sys    r123534 Profile saved on CatchFish by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3724049, rE: 0
+06-25 04:03:55.986 sys    r124126 PauseGame. Reason: GameAction
+06-25 04:09:28.440 sys    r124546 PersistentData - Update on CollectPersistedData: TournamentId: ; PinId: 10550; Boarded: False; BoatType: BassBoat
+06-25 04:09:28.440 sys    r124546 leave 'club6777'
+06-25 04:09:28.737 sys    r124546 Profile saved on Disconnect/Quit by Game session #588ab53975de490eaa329f5b3c9d3edc. L:64, R: 0, E:3724049, rE: 0
+06-25 04:09:29.158 sys    r124546 Game session #588ab53975de490eaa329f5b3c9d3edc ended (quit)
+06-25 04:09:29.158 secur  r124546 User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)
+06-25 04:09:29.908 sys    r124547 Already disconnected. No profile saving. Session #588ab53975de490eaa329f5b3c9d3edc. [LastOperation: Profile.PreviewQuit, LastActivity: 2026-06-25 04:0
+06-25 04:09:29.908 sys    r124547 Disconnected from GAME server. Session #588ab53975de490eaa329f5b3c9d3edc Reason: ClientDisconnect
+06-25 04:23:53.857 CHAT   r       [Text] RareSKEETLEZ: Wsg waz

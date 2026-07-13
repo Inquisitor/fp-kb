@@ -25,6 +25,9 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 - [rewards](modules/rewards/_card.md) — reward delivery pipeline (items, licenses, products, currency)
 - [reel-of-fortune](modules/reel-of-fortune/_card.md) — daily two-wheel mini-game; per-profile state, AB-test/country gating, premium-spin allocation on subscription grant (stub)
 
+## Chat
+- [chat-server](modules/chat-server/_card.md) — Photon Chat app: channel membership, message dispatch/fan-out, Mongo persistence; FP-33074 root causes (membership reorder + channel eviction) + fix design
+
 ## Infrastructure
 - [dal](modules/dal/_card.md) — repository-pattern DAL, reflection-based mapping (SQL Server + MongoDB)
 - [cache](modules/cache/_card.md) — cache registry, refresh orchestration, dependency graph (stub)

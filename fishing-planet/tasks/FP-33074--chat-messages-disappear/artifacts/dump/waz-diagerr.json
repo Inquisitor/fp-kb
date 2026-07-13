@@ -1,0 +1,56 @@
+[
+  {
+    "_id": {"$oid": "6a3b47c4125aec7af80933b0"},
+    "Message": "InvalidOperationException occured in ProcessGameAction. Ping: 66, Queue: 0, Exec: 9, LastRxRs: 21847\nGame is paused. No game action available! No way to resume. Reason: Pond stay time finished[[. Action: Walk]]",
+    "RequestId": 21856,
+    "Source": "SRV",
+    "StackTrace": "   at Photon.LoadBalancing.DalAdapters.GameActionAdapter.ProcessGameAction(GameClientPeer peer, OperationRequest request, SendParameters sendParameters)",
+    "Timestamp": {"$date": "2026-06-24T02:58:13.615Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "_id": {"$oid": "6a3b47c4125aec7af80933b1"},
+    "Message": "Game.Walk completed with error code 32662 - GameActionError, subCode:  \"Game is paused. No game action available! No way to resume. Reason: Pond stay time finished[[. Action: Walk]]\"",
+    "RequestId": 21856,
+    "Source": "SRV",
+    "StackTrace": null,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.615Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "_id": {"$oid": "6a3b534a125aec7af8093f3c"},
+    "Message": "(slot 3) [7]: STATE: Unavailable transition requested: state=Move, transition=FinishAttack. Ping: 65, Queue: 0, Exec: 3, LastRxRs: 81142",
+    "RequestId": 81162,
+    "Source": "SRV",
+    "StackTrace": null,
+    "Timestamp": {"$date": "2026-06-24T03:47:23.867Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "_id": {"$oid": "6a3c9665b315d03db985fc23"},
+    "Message": "(slot 4) [2]: STATE: Unavailable transition requested: state=Move, transition=FinishAttack. Ping: 1533, Queue: 0, Exec: 3, LastRxRs: 22078",
+    "RequestId": 22127,
+    "Source": "SRV",
+    "StackTrace": null,
+    "Timestamp": {"$date": "2026-06-25T02:46:19.648Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "_id": {"$oid": "6a3c9a1cb315d03db985fe28"},
+    "Message": "InvalidOperationException occured in ProcessGameAction. Ping: 85, Queue: 0, Exec: 3, LastRxRs: 44846\nGame is paused. No game action available! No way to resume. Reason: Pond stay time finished[[. Action: Move]]",
+    "RequestId": 44854,
+    "Source": "SRV",
+    "StackTrace": "   at Photon.LoadBalancing.DalAdapters.GameActionAdapter.ProcessGameAction(GameClientPeer peer, OperationRequest request, SendParameters sendParameters)",
+    "Timestamp": {"$date": "2026-06-25T03:02:11.276Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "_id": {"$oid": "6a3c9a1cb315d03db985fe29"},
+    "Message": "Game.Move completed with error code 32662 - GameActionError, subCode:  \"Game is paused. No game action available! No way to resume. Reason: Pond stay time finished[[. Action: Move]]\"",
+    "RequestId": 44854,
+    "Source": "SRV",
+    "StackTrace": null,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.276Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  }
+]

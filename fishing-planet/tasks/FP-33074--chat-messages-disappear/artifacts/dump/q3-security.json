@@ -1,0 +1,1466 @@
+[
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:04:07.319Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:04:07.319Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-26T13:04:10.815Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:04:11.466Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:04:11.466Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 345,
+    "Timestamp": {"$date": "2026-06-26T13:06:10.264Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:06:10.600Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:06:10.600Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T13:06:11.229Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.083Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.141:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.083Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.141:4541)",
+    "RequestId": 7908,
+    "Timestamp": {"$date": "2026-06-26T13:29:46.327Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:27:48.767Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:27:48.767Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-26T17:27:52.247Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:27:52.875Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:27:52.875Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 279,
+    "Timestamp": {"$date": "2026-06-26T17:28:46.303Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:28:46.691Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:28:46.691Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T17:28:47.346Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:28:48.874Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.141:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:28:48.874Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:39:47.678Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:39:47.678Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 13,
+    "Timestamp": {"$date": "2026-06-26T17:39:53.644Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:39:54.995Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:39:54.995Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 370,
+    "Timestamp": {"$date": "2026-06-26T17:41:52.698Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:41:53.150Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:41:53.150Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T17:41:54.400Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:41:55.730Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T17:41:55.730Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 7147,
+    "Timestamp": {"$date": "2026-06-26T18:07:04.065Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:04.575Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:04.575Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:07:05.906Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:07.164Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.130:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:07.164Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.130:4541)",
+    "RequestId": 104,
+    "Timestamp": {"$date": "2026-06-26T18:07:48.849Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:49.798Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:49.798Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:07:51.001Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:52.965Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:07:52.965Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 5532,
+    "Timestamp": {"$date": "2026-06-26T18:19:05.615Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:19:06.488Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:19:06.488Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:19:07.794Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:19:10.037Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:19:10.037Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 151,
+    "Timestamp": {"$date": "2026-06-26T18:20:33.626Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:20:34.100Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:20:34.100Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:20:35.330Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:20:36.754Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:20:36.754Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 1162,
+    "Timestamp": {"$date": "2026-06-26T18:25:42.879Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:25:43.378Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:25:43.378Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:25:44.690Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:25:46.042Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.130:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:25:46.058Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.130:4541)",
+    "RequestId": 103,
+    "Timestamp": {"$date": "2026-06-26T18:26:26.745Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:26:28.442Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:26:28.442Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:26:30.224Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:26:31.452Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.130:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:26:31.452Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.141:4541)",
+    "RequestId": 10423,
+    "Timestamp": {"$date": "2026-06-26T18:33:32.976Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:33:33.391Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:33:33.391Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:33:34.035Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:33:35.035Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:33:35.035Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 201,
+    "Timestamp": {"$date": "2026-06-26T18:35:42.443Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:35:42.831Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:35:42.831Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:35:43.499Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:35:44.442Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:35:44.442Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 141,
+    "Timestamp": {"$date": "2026-06-26T18:36:30.019Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:36:30.391Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:36:30.391Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:36:31.036Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:36:31.862Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.141:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:36:31.862Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:40:45.257Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:40:45.257Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 16,
+    "Timestamp": {"$date": "2026-06-26T18:40:54.178Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:40:57.380Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:40:57.380Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.130:4541)",
+    "RequestId": 6121,
+    "Timestamp": {"$date": "2026-06-26T18:49:11.110Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:49:11.581Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:49:11.581Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:49:13.069Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:49:15.173Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T18:49:15.173Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 90,
+    "Timestamp": {"$date": "2026-06-26T18:50:04.408Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 1835,
+    "Timestamp": {"$date": "2026-06-26T19:02:47.856Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:02:48.441Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:02:48.441Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T19:02:50.331Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:02:52.731Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:02:52.731Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:36:16.540Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:36:16.540Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 13,
+    "Timestamp": {"$date": "2026-06-26T19:36:22.462Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:36:24.168Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:36:24.168Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 823,
+    "Timestamp": {"$date": "2026-06-26T19:44:46.758Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:44:47.211Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:44:47.211Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T19:44:48.488Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:44:50.332Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T19:44:50.332Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 11928,
+    "Timestamp": {"$date": "2026-06-26T20:13:24.267Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:13:24.760Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:13:24.760Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:13:26.014Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:13:27.290Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:13:27.290Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 7570,
+    "Timestamp": {"$date": "2026-06-26T20:15:32.863Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:15:33.467Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:15:33.467Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:15:35.435Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:15:37.483Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:15:37.483Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 109,
+    "Timestamp": {"$date": "2026-06-26T20:16:17.037Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:16:17.628Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:16:17.628Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:16:20.163Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:16:22.119Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:16:22.119Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 107,
+    "Timestamp": {"$date": "2026-06-26T20:17:05.571Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:17:06.160Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:17:06.160Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:17:08.004Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:17:09.974Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.130:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:17:09.974Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.130:4541)",
+    "RequestId": 119,
+    "Timestamp": {"$date": "2026-06-26T20:18:07.767Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:08.297Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:08.297Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:18:10.387Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:13.722Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 04421AD35FE4); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:13.722Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 388,
+    "Timestamp": {"$date": "2026-06-26T20:18:20.478Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:20.953Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:20.953Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:18:22.172Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:24.041Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:18:24.041Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 120,
+    "Timestamp": {"$date": "2026-06-26T20:19:10.401Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:20:00.833Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:20:00.833Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 19,
+    "Timestamp": {"$date": "2026-06-26T20:20:10.802Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:20:13.354Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:20:13.354Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 265,
+    "Timestamp": {"$date": "2026-06-26T20:21:08.288Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:12.846Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:12.846Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 13,
+    "Timestamp": {"$date": "2026-06-26T20:21:19.929Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:22.589Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:22.589Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 375,
+    "Timestamp": {"$date": "2026-06-26T20:21:51.682Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:52.185Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:52.185Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:21:54.074Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:55.938Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:21:55.938Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 446,
+    "Timestamp": {"$date": "2026-06-26T20:24:15.399Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:24:15.869Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:24:15.869Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:24:17.154Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:24:19.089Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.141:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:24:19.089Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 1159,
+    "Timestamp": {"$date": "2026-06-26T20:32:21.327Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:32:21.868Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:32:21.868Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:32:23.868Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:32:25.769Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:32:25.769Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 92,
+    "Timestamp": {"$date": "2026-06-26T20:33:01.370Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:33:01.891Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:33:01.891Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:33:03.797Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:33:05.639Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:33:05.639Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 1327,
+    "Timestamp": {"$date": "2026-06-26T20:45:28.777Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:45:29.313Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:45:29.313Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:45:31.313Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.175Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.175Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 151,
+    "Timestamp": {"$date": "2026-06-26T20:46:40.868Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:46:41.352Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:46:41.352Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:46:43.383Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:46:45.712Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:46:45.712Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.141:4541)",
+    "RequestId": 5691,
+    "Timestamp": {"$date": "2026-06-26T20:47:17.699Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:18.182Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:18.182Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:47:19.428Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:20.650Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:20.650Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 116,
+    "Timestamp": {"$date": "2026-06-26T20:47:31.258Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:31.756Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:31.756Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:47:33.709Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:36.286Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:47:36.286Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 148,
+    "Timestamp": {"$date": "2026-06-26T20:48:42.146Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:48:42.652Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to MASTER server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:48:42.652Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:48:44.417Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:48:47.542Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Inquisitor7533 transfered to GAME server (client IP: 8.44.201.100, MAC: 047BCB4621C7); (server IP: 192.40.222.141:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:48:47.542Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 1476,
+    "Timestamp": {"$date": "2026-06-26T20:53:12.040Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:53:12.508Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:53:12.508Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:53:13.695Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:53:16.848Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:53:16.848Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 1404,
+    "Timestamp": {"$date": "2026-06-26T20:57:18.090Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:57:18.590Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:57:18.590Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:57:19.793Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.107Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.107Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 118,
+    "Timestamp": {"$date": "2026-06-26T20:57:56.915Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:57:57.406Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:57:57.406Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:57:58.751Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.085Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.085Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 1137,
+    "Timestamp": {"$date": "2026-06-26T21:01:37.172Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T21:01:38.148Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to MASTER server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T21:01:38.163Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T21:01:39.440Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T21:01:40.777Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Gonzo1964 transfered to GAME server (client IP: 184.65.109.72, MAC: 74D02B9985DB); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-26T21:01:40.777Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "User Inquisitor7533 disconected from GAME server (server IP: 192.40.222.141:4541)",
+    "RequestId": 1723,
+    "Timestamp": {"$date": "2026-06-26T21:05:04.832Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  }
+]

@@ -1,0 +1,638 @@
+[
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-26T13:04:13.467Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 343,
+    "Timestamp": {"$date": "2026-06-26T13:06:10.108Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' 0e4d8bf3-4929-4a62-89f4-a4846f6fd9ff",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T13:06:12.817Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 7908,
+    "Timestamp": {"$date": "2026-06-26T13:29:46.280Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-26T17:27:54.937Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 277,
+    "Timestamp": {"$date": "2026-06-26T17:28:46.163Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' 0e4d8bf3-4929-4a62-89f4-a4846f6fd9ff",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T17:28:50.015Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 34,
+    "Timestamp": {"$date": "2026-06-26T17:39:57.871Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 301,
+    "Timestamp": {"$date": "2026-06-26T17:41:13.509Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 326,
+    "Timestamp": {"$date": "2026-06-26T17:41:24.149Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 368,
+    "Timestamp": {"$date": "2026-06-26T17:41:52.524Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T17:41:56.335Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 7147,
+    "Timestamp": {"$date": "2026-06-26T18:07:03.971Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 6,
+    "Timestamp": {"$date": "2026-06-26T18:07:08.258Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 20,
+    "Timestamp": {"$date": "2026-06-26T18:07:10.643Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 58,
+    "Timestamp": {"$date": "2026-06-26T18:07:29.053Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 80,
+    "Timestamp": {"$date": "2026-06-26T18:07:35.695Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 102,
+    "Timestamp": {"$date": "2026-06-26T18:07:48.664Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:07:53.528Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 5532,
+    "Timestamp": {"$date": "2026-06-26T18:19:05.552Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 9,
+    "Timestamp": {"$date": "2026-06-26T18:19:11.249Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 20,
+    "Timestamp": {"$date": "2026-06-26T18:19:13.936Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 119,
+    "Timestamp": {"$date": "2026-06-26T18:20:20.610Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 142,
+    "Timestamp": {"$date": "2026-06-26T18:20:28.190Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 149,
+    "Timestamp": {"$date": "2026-06-26T18:20:33.392Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:20:37.317Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1162,
+    "Timestamp": {"$date": "2026-06-26T18:25:42.816Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 8,
+    "Timestamp": {"$date": "2026-06-26T18:25:47.138Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 21,
+    "Timestamp": {"$date": "2026-06-26T18:25:49.933Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 77,
+    "Timestamp": {"$date": "2026-06-26T18:26:18.294Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 97,
+    "Timestamp": {"$date": "2026-06-26T18:26:23.663Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 101,
+    "Timestamp": {"$date": "2026-06-26T18:26:26.576Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T18:26:32.059Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 10423,
+    "Timestamp": {"$date": "2026-06-26T18:33:32.944Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 7,
+    "Timestamp": {"$date": "2026-06-26T18:33:36.139Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' 0e4d8bf3-4929-4a62-89f4-a4846f6fd9ff",
+    "RequestId": 22,
+    "Timestamp": {"$date": "2026-06-26T18:33:40.389Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 164,
+    "Timestamp": {"$date": "2026-06-26T18:35:24.906Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' 0e4d8bf3-4929-4a62-89f4-a4846f6fd9ff",
+    "RequestId": 188,
+    "Timestamp": {"$date": "2026-06-26T18:35:33.755Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 199,
+    "Timestamp": {"$date": "2026-06-26T18:35:42.271Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' 0e4d8bf3-4929-4a62-89f4-a4846f6fd9ff",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:35:45.072Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 138,
+    "Timestamp": {"$date": "2026-06-26T18:36:29.862Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "join 'club6777' 0e4d8bf3-4929-4a62-89f4-a4846f6fd9ff",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T18:36:32.597Z"},
+    "UserId": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 6121,
+    "Timestamp": {"$date": "2026-06-26T18:49:11.045Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 8,
+    "Timestamp": {"$date": "2026-06-26T18:49:16.533Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b",
+    "RequestId": 20,
+    "Timestamp": {"$date": "2026-06-26T18:49:19.465Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 90,
+    "Timestamp": {"$date": "2026-06-26T18:50:04.299Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 1115,
+    "Timestamp": {"$date": "2026-06-26T18:53:00.514Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1833,
+    "Timestamp": {"$date": "2026-06-26T19:02:47.590Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' cd6539f5-a84b-415b-8320-e78bca17dc22",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T19:02:54.918Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 35,
+    "Timestamp": {"$date": "2026-06-26T19:36:28.211Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 782,
+    "Timestamp": {"$date": "2026-06-26T19:44:26.222Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' be27c522-159d-4da8-a9a7-8412f3f64405",
+    "RequestId": 813,
+    "Timestamp": {"$date": "2026-06-26T19:44:42.868Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 821,
+    "Timestamp": {"$date": "2026-06-26T19:44:46.540Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' be27c522-159d-4da8-a9a7-8412f3f64405",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T19:44:51.040Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 11928,
+    "Timestamp": {"$date": "2026-06-26T20:13:24.160Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 7,
+    "Timestamp": {"$date": "2026-06-26T20:13:28.710Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 20,
+    "Timestamp": {"$date": "2026-06-26T20:13:31.492Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 7567,
+    "Timestamp": {"$date": "2026-06-26T20:15:32.628Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:15:38.640Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 106,
+    "Timestamp": {"$date": "2026-06-26T20:16:16.845Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 6,
+    "Timestamp": {"$date": "2026-06-26T20:16:23.150Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 107,
+    "Timestamp": {"$date": "2026-06-26T20:17:05.508Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 8,
+    "Timestamp": {"$date": "2026-06-26T20:17:11.523Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 25,
+    "Timestamp": {"$date": "2026-06-26T20:17:15.896Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 313,
+    "Timestamp": {"$date": "2026-06-26T20:17:39.588Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 334,
+    "Timestamp": {"$date": "2026-06-26T20:17:44.774Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 77,
+    "Timestamp": {"$date": "2026-06-26T20:17:46.546Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 98,
+    "Timestamp": {"$date": "2026-06-26T20:17:53.531Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 117,
+    "Timestamp": {"$date": "2026-06-26T20:18:07.546Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:18:14.675Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 388,
+    "Timestamp": {"$date": "2026-06-26T20:18:20.416Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 8,
+    "Timestamp": {"$date": "2026-06-26T20:18:25.416Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 2ed67ce3-552f-47fa-903e-d2424406bb25",
+    "RequestId": 20,
+    "Timestamp": {"$date": "2026-06-26T20:18:28.135Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 120,
+    "Timestamp": {"$date": "2026-06-26T20:19:10.172Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 33,
+    "Timestamp": {"$date": "2026-06-26T20:20:17.302Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 265,
+    "Timestamp": {"$date": "2026-06-26T20:21:08.194Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' ",
+    "RequestId": 171,
+    "Timestamp": {"$date": "2026-06-26T20:21:26.979Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 369,
+    "Timestamp": {"$date": "2026-06-26T20:21:49.651Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 6d48b6e4-519e-4607-8a2d-3c48167b4fec",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:21:56.782Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 417,
+    "Timestamp": {"$date": "2026-06-26T20:24:05.274Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' d5f78d8d-b461-45c1-bd71-e02e5ad73b78",
+    "RequestId": 436,
+    "Timestamp": {"$date": "2026-06-26T20:24:09.773Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 444,
+    "Timestamp": {"$date": "2026-06-26T20:24:15.149Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' d5f78d8d-b461-45c1-bd71-e02e5ad73b78",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:24:20.167Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1156,
+    "Timestamp": {"$date": "2026-06-26T20:32:21.154Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 8ff92cb2-b301-4181-bd92-ca9e3eac993c",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:32:26.581Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 89,
+    "Timestamp": {"$date": "2026-06-26T20:33:01.186Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 8ff92cb2-b301-4181-bd92-ca9e3eac993c",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:33:06.436Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1324,
+    "Timestamp": {"$date": "2026-06-26T20:45:28.583Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' ff7c54db-7b59-48be-b6a7-423ac50ac1ee",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:45:33.980Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 148,
+    "Timestamp": {"$date": "2026-06-26T20:46:40.696Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 626e7625-b82c-4128-88de-5a2795c01644",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:46:46.525Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 5688,
+    "Timestamp": {"$date": "2026-06-26T20:47:17.481Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 626e7625-b82c-4128-88de-5a2795c01644",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:47:21.212Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 113,
+    "Timestamp": {"$date": "2026-06-26T20:47:31.086Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' 05a6a6e0-482c-482f-9948-4972a83dc483",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:47:37.521Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 145,
+    "Timestamp": {"$date": "2026-06-26T20:48:41.896Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "join 'club6777' b67eee53-c192-42af-b317-44474f8b0dc7",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-26T20:48:48.729Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1473,
+    "Timestamp": {"$date": "2026-06-26T20:53:11.868Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 193753c1-854e-435e-b63e-fc76962fe7d7",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:53:17.582Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1401,
+    "Timestamp": {"$date": "2026-06-26T20:57:17.871Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 0334d729-a0e4-4b78-9537-4c9a02ecc5e6",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:57:21.701Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 115,
+    "Timestamp": {"$date": "2026-06-26T20:57:56.743Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 0334d729-a0e4-4b78-9537-4c9a02ecc5e6",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-26T20:58:00.690Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1134,
+    "Timestamp": {"$date": "2026-06-26T21:01:37.015Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "join 'club6777' 8d21eb6b-14c9-4d53-84bd-3dec4eb1870c",
+    "RequestId": 6,
+    "Timestamp": {"$date": "2026-06-26T21:01:41.417Z"},
+    "UserId": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8"
+  },
+  {
+    "Message": "leave 'club6777'",
+    "RequestId": 1723,
+    "Timestamp": {"$date": "2026-06-26T21:05:04.285Z"},
+    "UserId": "caa03b10-efce-45e3-a3d2-8f399224e067"
+  }
+]

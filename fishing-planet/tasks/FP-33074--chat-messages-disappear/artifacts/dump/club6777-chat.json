@@ -1,0 +1,154 @@
+[
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"1c06abc4-fd1a-4faf-b01f-f9dc5267d66a\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T02:34:26.8483018Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Evenin\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T02:34:26.848Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"585b1176-2adf-4f82-814a-325472961fbf\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T02:38:04.798277Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Test after choosing room.\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T02:38:04.798Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"a9bd90e6-08d7-4493-830f-bc7187239962\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T02:38:51.5451826Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Trying to screenshot the troubles I'm having chat messages from me and others  register for viewing until I log back out and in\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T02:38:51.545Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"7e3f38f5-8379-47c2-91b2-3dafd11d2e41\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T02:39:05.7953916Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"wouldn't you know it... murphy's law, it's working as it's supposed to right now.\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T02:39:05.795Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"0fbb1bd7-05e9-41d2-96bb-b85b9fed3de6\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T15:33:43.2895229Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"The chat really has issues. Until they fix it, this is what it is. happens to everyone at some point\"}",
+    "Sender": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-24T15:33:43.289Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"c5917797-142a-49e8-8bfd-9843e07936ad\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T16:04:00.2883469Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"mornin\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T16:04:00.288Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"1ef8579e-1a37-41f3-9862-869f9c393766\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T16:08:02.3561922Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Excellent. Broken again. I need to hit enter to capture this\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T16:08:02.356Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"bfe1451a-daaf-439b-9b3d-1e669acf9c99\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T18:28:54.9736313Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"yeah, broken lol HAd to change locations to even see ya typed anything. So morning back at ya\"}",
+    "Sender": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-24T18:28:54.973Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"38e105e4-b2c5-4c44-97b5-e004ee48a5b9\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:14:35.5356444Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"I've opened a ticket, and made it clear I'm not the only one experiencing this issue.\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T20:14:35.535Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"dc76f577-3e8a-4421-9044-d3c8506c3c31\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:18:00.7322168Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Oh I am sure they know lol Ben happening for years\"}",
+    "Sender": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-24T20:18:00.732Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"bc1d0858-63bd-4753-9b5f-a9598d7a49c8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:23:20.420409Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Crap, just saw the Swiss have scored 2 in the 2nd half.\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T20:23:20.420Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"9a1c0a22-9e77-4785-902e-5398e2cabf7d\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:24:10.9269276Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"not watching, unfortunatley. Don't really follow it\"}",
+    "Sender": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-24T20:24:10.926Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"99ef2a7c-5a72-4f7f-b64d-3dc358e69601\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:24:43.8634102Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Yeah, I can't stomach the diving.  I played for 2 many years in a provincial league where that BS wouldn't fly.\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T20:24:43.863Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"a945c381-fd86-4957-af3c-84edbf8d217e\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:24:52.6332912Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"2->too\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-24T20:24:52.648Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"ab2c40f3-ffb4-420e-9c91-a5be65f7911d\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-24T20:25:52.1214221Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"lol I got what ya meant. I speak fluent internetese lmao\"}",
+    "Sender": "38aeb767-64db-4a52-ab7b-bc25fdecbfe8",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-24T20:25:52.121Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"9aaac8a4-7456-47a8-af89-84ee9ed9e7d3\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-25T00:34:32.2138536Z\",\"From\":\"2b175d0f-24b5-4df2-96f6-1fbdcdc1c43c\",\"FromName\":\"RareSKEETLEZ\",\"Text\":\"Gotcha gonzo makes sense especially for club events to have as many active people in \"}",
+    "Sender": "2b175d0f-24b5-4df2-96f6-1fbdcdc1c43c",
+    "SenderName": "RareSKEETLEZ",
+    "Timestamp": {"$date": "2026-06-25T00:34:32.213Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"409ed792-4d6d-4de3-9202-57b8d22ef3b8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-25T00:36:17.4887705Z\",\"From\":\"2b175d0f-24b5-4df2-96f6-1fbdcdc1c43c\",\"FromName\":\"RareSKEETLEZ\",\"Text\":\"I think that is a good idea gonzo for the inactivity change\"}",
+    "Sender": "2b175d0f-24b5-4df2-96f6-1fbdcdc1c43c",
+    "SenderName": "RareSKEETLEZ",
+    "Timestamp": {"$date": "2026-06-25T00:36:17.488Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"46b2e33b-faa5-452b-bfd3-9d87983a6739\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-25T03:39:31.7101562Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Evenin\"}",
+    "Sender": "a0fe2188-4eb0-46f3-94e0-1e96a1afa45b",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-25T03:39:31.710Z"}
+  },
+  {
+    "Channel": "club6777",
+    "Data": "ClubEvent",
+    "Message": "{\"InstanceId\":\"29d6cfe0-8940-45fe-871e-9a81e01b6c87\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-25T04:23:53.8421366Z\",\"From\":\"2b175d0f-24b5-4df2-96f6-1fbdcdc1c43c\",\"FromName\":\"RareSKEETLEZ\",\"Text\":\"Wsg waz\"}",
+    "Sender": "2b175d0f-24b5-4df2-96f6-1fbdcdc1c43c",
+    "SenderName": "RareSKEETLEZ",
+    "Timestamp": {"$date": "2026-06-25T04:23:53.857Z"}
+  }
+]

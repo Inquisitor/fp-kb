@@ -1,0 +1,392 @@
+[
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:55.460Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:55.460Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T02:30:59.303Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:59.922Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:30:59.922Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 625,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.578Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.920Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.920Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T02:36:53.557Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:54.392Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.141:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T02:36:54.392Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.141:4541)",
+    "RequestId": 81750,
+    "Timestamp": {"$date": "2026-06-24T03:48:32.365Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:47.770Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:47.770Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T03:48:51.040Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:52.436Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T03:48:52.436Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 86,
+    "Timestamp": {"$date": "2026-06-24T03:50:36.884Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.069Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:45.069Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 12,
+    "Timestamp": {"$date": "2026-06-24T13:07:48.799Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:49.474Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:07:49.474Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 292,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.073Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.481Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:09.481Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T13:09:10.125Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:10.790Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T13:09:10.790Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 123383,
+    "Timestamp": {"$date": "2026-06-24T16:10:05.141Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:26.411Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:26.411Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T16:10:29.802Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:30.521Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.130:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T16:10:30.521Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.130:4541)",
+    "RequestId": 10120,
+    "Timestamp": {"$date": "2026-06-24T18:27:55.225Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:19.444Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:19.444Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T18:30:22.838Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:23.923Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:30:23.923Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 746,
+    "Timestamp": {"$date": "2026-06-24T18:38:01.443Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:02.655Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:02.655Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-24T18:38:03.374Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.287Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.287Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 15912,
+    "Timestamp": {"$date": "2026-06-24T18:52:09.416Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:16.428Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:16.428Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 12,
+    "Timestamp": {"$date": "2026-06-24T20:09:20.772Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.388Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.388Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 61,
+    "Timestamp": {"$date": "2026-06-24T20:10:41.826Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:36.279Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:36.279Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-24T20:12:39.939Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:40.578Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.129:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:12:40.578Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.129:4541)",
+    "RequestId": 84,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.157Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.531Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:06.531Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 5,
+    "Timestamp": {"$date": "2026-06-24T20:13:07.207Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.168Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.131:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.168Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.131:4541)",
+    "RequestId": 60377,
+    "Timestamp": {"$date": "2026-06-24T22:15:35.745Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:05.879Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:05.879Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 11,
+    "Timestamp": {"$date": "2026-06-25T02:26:09.598Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.250Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.250Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.62:4541)",
+    "RequestId": 249,
+    "Timestamp": {"$date": "2026-06-25T02:26:56.950Z"}
+  },
+  {
+    "Message": "XSTS trace - Sandbox: RETAIL XUID: Y PremiumContent: N Comms: Y MultiplayerSessions: Y",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.291Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to MASTER server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.62:4540)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.291Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from MASTER server (server IP: 192.40.222.62:4540)",
+    "RequestId": 4,
+    "Timestamp": {"$date": "2026-06-25T02:26:57.946Z"}
+  },
+  {
+    "Message": "PlatformMapping inited on LoadProfile. PlatformId: 4 'Win10', RegionId: 1 'Global'",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:58.910Z"}
+  },
+  {
+    "Message": "User Waz 10000 transfered to GAME server (client IP: 75.159.129.187, MAC: 047C161176B0); (server IP: 192.40.222.140:4541)",
+    "RequestId": 1,
+    "Timestamp": {"$date": "2026-06-25T02:26:58.910Z"}
+  },
+  {
+    "Message": "User Waz 10000 disconected from GAME server (server IP: 192.40.222.140:4541)",
+    "RequestId": 124546,
+    "Timestamp": {"$date": "2026-06-25T04:09:29.158Z"}
+  }
+]

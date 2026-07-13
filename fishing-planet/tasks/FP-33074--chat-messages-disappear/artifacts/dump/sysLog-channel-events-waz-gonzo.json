@@ -1,0 +1,1046 @@
+[
+  {
+    "line": "2026-06-11 13:12:35  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-11 13:13:06  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-11 13:13:09  Waz    join 'club6777' 282c1341-156a-48ab-be65-61ecb5ce53c6"
+  },
+  {
+    "line": "2026-06-11 18:59:21  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-11 20:23:46  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-11 20:25:27  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-11 20:25:30  Waz    join 'club6777' 18665460-28ce-4ba5-95b0-dfa39ca01175"
+  },
+  {
+    "line": "2026-06-12 01:19:44  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-12 03:02:46  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-12 03:07:02  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-12 03:07:06  Waz    join 'club6777' 18665460-28ce-4ba5-95b0-dfa39ca01175"
+  },
+  {
+    "line": "2026-06-12 04:26:22  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 01:18:22  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-14 01:25:33  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 01:25:53  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 01:26:00  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 01:26:04  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 01:30:50  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-14 02:09:33  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 02:09:33  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 02:10:05  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-14 02:10:50  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 02:10:54  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 02:13:58  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-14 02:15:58  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 02:15:58  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 02:16:02  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 02:16:02  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 02:16:05  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 02:16:31  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 02:16:36  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 02:16:48  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 02:16:52  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 02:19:36  Gonzo  join 'g3' 653a1b0a-97da-40a6-a37b-ffb39db290f9"
+  },
+  {
+    "line": "2026-06-14 03:03:16  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:03:16  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 03:03:20  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 03:03:20  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:03:22  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 03:03:41  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:03:45  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 03:04:48  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:04:54  Gonzo  join 'club6777' e0ff9346-26a3-47a3-8213-e371781d9131"
+  },
+  {
+    "line": "2026-06-14 03:09:30  Gonzo  join 'g3' 0171c543-1f78-4dab-a891-eaf31d1a6f4f"
+  },
+  {
+    "line": "2026-06-14 03:24:45  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:24:45  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 03:24:49  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 03:24:49  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:24:52  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 03:26:05  Gonzo  join 'g3' 3c002889-83b2-4786-b24b-93076ab684c8"
+  },
+  {
+    "line": "2026-06-14 03:28:22  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 03:28:23  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:28:37  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 03:28:50  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:28:54  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 03:28:57  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 03:31:03  Gonzo  join 'g3' 56e4640b-9d9e-4423-aa45-af6223179294"
+  },
+  {
+    "line": "2026-06-14 04:14:29  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 04:14:33  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 04:14:37  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 04:15:18  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 04:15:23  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 04:32:10  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 04:32:14  Gonzo  join 'g3' 3403aa81-bbc9-428b-8357-338d6e759374"
+  },
+  {
+    "line": "2026-06-14 04:32:14  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 04:32:14  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 04:32:18  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 04:35:30  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 04:35:35  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 04:38:39  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 04:38:42  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 04:41:21  Gonzo  join 'g3' dec2c281-78e8-4088-9c73-766b56221af1"
+  },
+  {
+    "line": "2026-06-14 05:30:01  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 05:30:01  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 05:30:28  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-14 05:31:15  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 05:31:19  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 05:33:10  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-14 06:25:25  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 06:25:25  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 06:25:34  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 06:25:34  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 06:25:34  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 06:26:26  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 06:26:32  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 06:26:38  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 06:26:42  Gonzo  join 'club6777' 7c05e678-22f4-49a1-8d02-2b2eb95d1450"
+  },
+  {
+    "line": "2026-06-14 06:27:19  Gonzo  join 'g3' 530bf5fb-d8bb-458c-a137-7a72ddf9fb51"
+  },
+  {
+    "line": "2026-06-14 07:09:43  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 07:09:43  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 07:09:48  Gonzo  join 'g3' 0a7be26a-f52f-43a7-89e1-a99259c0cfec"
+  },
+  {
+    "line": "2026-06-14 07:09:48  Gonzo  join 'club6777' 4736b5c4-b666-4b88-85d9-22c56572644d"
+  },
+  {
+    "line": "2026-06-14 07:10:11  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 07:10:11  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 07:10:16  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-14 07:10:16  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-14 07:10:18  Gonzo  join 'club6777' e0154719-cdad-4ec1-bc8c-4d18c4a945e7"
+  },
+  {
+    "line": "2026-06-14 07:11:20  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-15 02:44:52  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-15 02:46:36  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-15 02:46:39  Waz    join 'club6777' c55a814e-890c-46d9-9bd7-935f144c97bf"
+  },
+  {
+    "line": "2026-06-15 03:30:52  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 01:35:21  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-17 01:37:36  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 01:37:38  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 01:42:09  Waz    join 'g3' "
+  },
+  {
+    "line": "2026-06-17 02:59:57  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 02:59:57  Waz    leave 'g3'"
+  },
+  {
+    "line": "2026-06-17 13:13:24  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-17 13:14:34  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 13:14:37  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 18:49:07  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 18:49:10  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 18:49:19  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 18:49:47  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 18:49:58  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 18:50:03  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 18:50:06  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 18:57:14  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 18:57:17  Waz    join 'g3' "
+  },
+  {
+    "line": "2026-06-17 18:57:17  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 18:57:17  Waz    leave 'g3'"
+  },
+  {
+    "line": "2026-06-17 18:57:19  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 19:02:19  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 19:02:33  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-17 20:58:20  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-17 20:58:23  Waz    join 'club6777' 1d5f5300-5b82-4d7e-81a2-084dcf1b5f80"
+  },
+  {
+    "line": "2026-06-18 01:23:59  Waz    join 'g3' f03ee9d3-8201-4ef0-a726-fbd4afe7a150"
+  },
+  {
+    "line": "2026-06-18 02:05:59  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-18 02:05:59  Waz    leave 'g3'"
+  },
+  {
+    "line": "2026-06-18 13:19:06  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-18 13:20:00  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-18 13:20:02  Waz    join 'club6777' aa1abf31-c4ac-4c83-9807-0b1cb77ef860"
+  },
+  {
+    "line": "2026-06-19 04:15:50  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-19 13:06:36  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-19 13:18:34  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-19 13:18:38  Waz    join 'club6777' ee9dad03-6721-482c-b2b2-2790846fef77"
+  },
+  {
+    "line": "2026-06-20 05:24:22  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-20 16:07:36  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-20 16:09:50  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-20 16:09:53  Waz    join 'club6777' fe96b3ba-10a1-4a96-ba2f-af5919390700"
+  },
+  {
+    "line": "2026-06-20 16:50:28  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-20 20:11:05  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-20 22:59:22  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-20 23:01:48  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 02:56:58  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 02:57:01  Waz    join 'club6777' 8c67a202-2cb9-4629-a71d-102301ab7f12"
+  },
+  {
+    "line": "2026-06-21 03:43:15  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 15:06:55  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-21 15:08:18  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 15:08:21  Waz    join 'club6777' 5f220228-a724-40ea-8037-022027aa0052"
+  },
+  {
+    "line": "2026-06-21 16:16:11  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 16:16:14  Waz    join 'g3' "
+  },
+  {
+    "line": "2026-06-21 16:16:15  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 16:16:15  Waz    leave 'g3'"
+  },
+  {
+    "line": "2026-06-21 16:16:20  Waz    join 'club6777' 5f220228-a724-40ea-8037-022027aa0052"
+  },
+  {
+    "line": "2026-06-21 16:38:08  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:33:06  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-21 17:36:10  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:36:21  Waz    join 'club6777' 7b52ff06-8cbe-4bba-81f4-fe53fb264ed0"
+  },
+  {
+    "line": "2026-06-21 17:38:16  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:38:19  Waz    join 'club6777' 7b52ff06-8cbe-4bba-81f4-fe53fb264ed0"
+  },
+  {
+    "line": "2026-06-21 17:48:07  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:48:10  Waz    join 'g3' "
+  },
+  {
+    "line": "2026-06-21 17:48:10  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:48:10  Waz    leave 'g3'"
+  },
+  {
+    "line": "2026-06-21 17:48:14  Waz    join 'club6777' 7b52ff06-8cbe-4bba-81f4-fe53fb264ed0"
+  },
+  {
+    "line": "2026-06-21 17:48:49  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:49:00  Waz    join 'club6777' 7b52ff06-8cbe-4bba-81f4-fe53fb264ed0"
+  },
+  {
+    "line": "2026-06-21 17:49:09  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-21 17:49:12  Waz    join 'club6777' 7b52ff06-8cbe-4bba-81f4-fe53fb264ed0"
+  },
+  {
+    "line": "2026-06-21 18:43:02  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-22 02:14:23  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-22 02:17:30  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-22 02:17:33  Waz    join 'club6777' 7b52ff06-8cbe-4bba-81f4-fe53fb264ed0"
+  },
+  {
+    "line": "2026-06-22 04:04:57  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-22 22:44:13  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-22 22:47:58  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-22 22:48:01  Waz    join 'club6777' 90893e79-5109-486f-b2fa-91d07af25af5"
+  },
+  {
+    "line": "2026-06-23 03:53:37  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-23 03:54:01  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-23 03:54:56  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-23 18:30:54  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-23 18:41:56  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-23 18:42:05  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-23 18:42:05  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-23 22:24:36  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-23 22:25:55  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-23 22:26:09  Gonzo  join 'club6777' 21153c84-c9a2-4557-91d8-3e8e33033d7f"
+  },
+  {
+    "line": "2026-06-23 22:26:58  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 02:31:02  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 02:36:52  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 02:36:55  Waz    join 'club6777' 6600eacc-ef6e-45cd-8e5e-2c5e3d6f05d5"
+  },
+  {
+    "line": "2026-06-24 03:48:07  Waz    join 'g3' "
+  },
+  {
+    "line": "2026-06-24 03:48:32  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 03:48:32  Waz    leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 03:48:58  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 03:50:36  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 13:07:51  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 13:09:08  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 13:09:11  Waz    join 'club6777' 3137025d-1bdf-4526-b458-910338466c62"
+  },
+  {
+    "line": "2026-06-24 15:32:24  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 15:35:56  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 15:36:01  Gonzo  join 'club6777' 38120c9d-65fe-411d-af79-69f9ba574ae4"
+  },
+  {
+    "line": "2026-06-24 15:36:43  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-24 16:10:05  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:10:33  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 16:19:23  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:19:23  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:19:29  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:19:29  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:19:32  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:20:28  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:20:32  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:20:36  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:20:41  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:23:33  Gonzo  join 'g3' 2ac167bf-8a3f-43c2-aff9-ebbee0ed01b3"
+  },
+  {
+    "line": "2026-06-24 16:26:31  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:26:31  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:26:36  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:26:36  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:26:39  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:26:58  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:27:03  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:27:28  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:27:33  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:27:44  Gonzo  join 'g3' 67bd7ab3-1f7e-422c-9c66-0b52cf2bd132"
+  },
+  {
+    "line": "2026-06-24 16:44:44  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:44:44  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:44:48  Gonzo  join 'g3' 3c04d2eb-deed-4430-a878-85d82670a221"
+  },
+  {
+    "line": "2026-06-24 16:44:48  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:47:38  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:47:38  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:47:43  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:47:43  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:47:45  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:49:27  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:49:32  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:49:40  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:49:44  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:53:11  Gonzo  join 'g3' 2372b6f5-a2ef-4422-adbc-ba09d2d103e3"
+  },
+  {
+    "line": "2026-06-24 16:55:21  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:55:21  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:55:25  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 16:55:25  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:55:28  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:55:40  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:55:46  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 16:55:49  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 16:55:53  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 17:02:32  Gonzo  join 'g3' 02685ebe-dc30-4de8-abdd-21ad50b55c4f"
+  },
+  {
+    "line": "2026-06-24 17:36:04  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 17:36:04  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 17:36:07  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 17:36:07  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 17:36:10  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 17:41:01  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 17:41:07  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 17:41:15  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 17:41:19  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 17:41:35  Gonzo  join 'g3' 7e32b86f-8815-4a7d-a88e-760f3c24b8a5"
+  },
+  {
+    "line": "2026-06-24 18:27:25  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 18:27:25  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 18:27:30  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 18:27:30  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 18:27:33  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 18:27:51  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 18:27:55  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 18:27:58  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 18:28:00  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 18:28:06  Gonzo  join 'club6777' d2d1ac29-b2ff-474e-8cfe-b911ec0e81ec"
+  },
+  {
+    "line": "2026-06-24 18:29:03  Gonzo  join 'g3' 92038ef4-c678-4ed0-b0b1-7726ca8905a2"
+  },
+  {
+    "line": "2026-06-24 18:30:27  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 18:38:01  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 18:38:04  Waz    join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad"
+  },
+  {
+    "line": "2026-06-24 18:52:09  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 19:05:03  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 19:05:03  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 19:44:18  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 19:44:33  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 19:44:40  Gonzo  join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad"
+  },
+  {
+    "line": "2026-06-24 19:45:18  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-24 20:01:16  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 20:01:16  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 20:01:19  Gonzo  join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad"
+  },
+  {
+    "line": "2026-06-24 20:01:19  Gonzo  join 'g3' a085700c-7a4c-4c1e-bccf-aae8f757c788"
+  },
+  {
+    "line": "2026-06-24 20:09:23  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 20:10:41  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 20:12:42  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-24 20:13:05  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 20:13:09  Waz    join 'club6777' e47add57-16cd-487a-a6b5-a68f6e4b63ad"
+  },
+  {
+    "line": "2026-06-24 20:34:11  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 20:34:11  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 20:34:15  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 20:34:15  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-24 20:34:18  Gonzo  join 'club6777' 7d1c22a1-90c3-4e56-9eba-42d542fe8997"
+  },
+  {
+    "line": "2026-06-24 20:35:17  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-24 22:15:35  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 02:26:12  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-25 02:26:56  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 02:26:59  Waz    join 'club6777' 0f3e794a-8833-4ed4-a25b-3ca04cef1a0c"
+  },
+  {
+    "line": "2026-06-25 04:09:28  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 13:05:00  Waz    join 'club6777' "
+  },
+  {
+    "line": "2026-06-25 13:08:42  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 13:08:45  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 13:08:48  Waz    join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 13:09:51  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 13:09:57  Waz    join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 13:10:33  Waz    leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 13:10:36  Waz    join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 16:37:45  Gonzo  join 'club6777' "
+  },
+  {
+    "line": "2026-06-25 16:39:50  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 16:40:04  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 16:40:10  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 16:40:15  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 16:47:02  Gonzo  join 'g3' "
+  },
+  {
+    "line": "2026-06-25 16:55:57  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 16:55:57  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 16:56:01  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 16:56:01  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 16:56:04  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 17:04:55  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 17:05:02  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 17:05:11  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 17:05:16  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 17:32:58  Gonzo  join 'g3' fd06a800-37cd-4843-b9fe-526fd315e950"
+  },
+  {
+    "line": "2026-06-25 18:11:33  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:11:33  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 18:11:36  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 18:11:36  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:11:39  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 18:11:59  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:12:05  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 18:12:08  Gonzo  join 'g3' a40c3891-d8c3-471e-a594-099c8c870190"
+  },
+  {
+    "line": "2026-06-25 18:12:14  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 18:12:14  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:12:18  Gonzo  join 'g3' 1c5efe39-1dec-4494-a4e1-c1cea9146f75"
+  },
+  {
+    "line": "2026-06-25 18:12:18  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 18:42:28  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 18:42:28  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:42:34  Gonzo  leave 'g3'"
+  },
+  {
+    "line": "2026-06-25 18:42:34  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:42:36  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 18:43:00  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:43:06  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 18:43:10  Gonzo  leave 'club6777'"
+  },
+  {
+    "line": "2026-06-25 18:43:14  Gonzo  join 'club6777' f00b11f9-1618-4e94-8760-08c85fffa27b"
+  },
+  {
+    "line": "2026-06-25 18:45:47  Gonzo  join 'g3' 40c64f03-46b4-4b57-837d-5cdb36b05d88"
+  }
+]

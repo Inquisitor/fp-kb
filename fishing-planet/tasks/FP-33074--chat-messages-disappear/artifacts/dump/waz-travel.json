@@ -1,0 +1,487 @@
+[
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room d8f61f2ae034dab8 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:31:00.590Z"}
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )",
+    "RequestId": 624,
+    "Timestamp": {"$date": "2026-06-24T02:36:52.422Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room c13725c5a014f789 at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.001Z"}
+  },
+  {
+    "Message": "Day: 2, CurrentWeather: SunAndClouds_2, TimeOfDay: Midday, AirTemperature: 36, WaterTemperature: 27, Pressure: Medium, WindSpeed: 1, WindDirection: N, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.001Z"}
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: SunAndClouds_2, Seed: 206547522",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.001Z"}
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T02:36:55.032Z"}
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 10996,
+    "Timestamp": {"$date": "2026-06-24T02:48:41.110Z"}
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 10996,
+    "Timestamp": {"$date": "2026-06-24T02:48:41.110Z"}
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 11000,
+    "Timestamp": {"$date": "2026-06-24T02:48:43.016Z"}
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 11103,
+    "Timestamp": {"$date": "2026-06-24T02:49:00.079Z"}
+  },
+  {
+    "Message": "Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 11104,
+    "Timestamp": {"$date": "2026-06-24T02:49:00.079Z"}
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 11105,
+    "Timestamp": {"$date": "2026-06-24T02:49:00.079Z"}
+  },
+  {
+    "Message": "MoveTime on 24 hours, from 02.11:38 to 03.05:00",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.600Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: EarlyMorning, AirTemperature: 30, WaterTemperature: 25, Pressure: Medium, WindSpeed: 0.9, WindDirection: SE, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.600Z"}
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: False, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.615Z"}
+  },
+  {
+    "Message": "Update MoveTimeForwardTimeout to 6/24/2026 3:54:24 AM",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.615Z"}
+  },
+  {
+    "Message": "ReseedBiteSystem WeatherName: Rain_3, Seed: -61300418",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.615Z"}
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 21854,
+    "Timestamp": {"$date": "2026-06-24T02:58:13.615Z"}
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 21867,
+    "Timestamp": {"$date": "2026-06-24T02:58:14.037Z"}
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 21869,
+    "Timestamp": {"$date": "2026-06-24T02:58:14.272Z"}
+  },
+  {
+    "Message": "Pond stay prolonged. Money spent: 1500 SC. Balance after: 1277923 SC",
+    "RequestId": 21872,
+    "Timestamp": {"$date": "2026-06-24T02:58:16.225Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 24, Pressure: Low, WindSpeed: 0, WindDirection: E, Precipitation: , FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 58005,
+    "Timestamp": {"$date": "2026-06-24T03:28:16.274Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room e256db2188b47a4a at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T03:48:53.690Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room d8f61f2ae034dab8 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:07:50.306Z"}
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )",
+    "RequestId": 291,
+    "Timestamp": {"$date": "2026-06-24T13:09:08.913Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room d1c41efc5fc4e23a at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.291Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 24, Pressure: Low, WindSpeed: 0, WindDirection: E, Precipitation: , FishPlayFreq: Medium, Sky: HeavyCloudy",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.291Z"}
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Rain_3, Seed: -61300418",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.291Z"}
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T13:09:11.306Z"}
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 37,
+    "Timestamp": {"$date": "2026-06-24T13:09:23.947Z"}
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 37,
+    "Timestamp": {"$date": "2026-06-24T13:09:23.947Z"}
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 57,
+    "Timestamp": {"$date": "2026-06-24T13:09:30.229Z"}
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 132,
+    "Timestamp": {"$date": "2026-06-24T13:09:42.150Z"}
+  },
+  {
+    "Message": "Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 133,
+    "Timestamp": {"$date": "2026-06-24T13:09:42.150Z"}
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 134,
+    "Timestamp": {"$date": "2026-06-24T13:09:42.150Z"}
+  },
+  {
+    "Message": "MoveTime on 11 hours, from 03.08:22 to 03.19:00",
+    "RequestId": 190,
+    "Timestamp": {"$date": "2026-06-24T13:09:59.603Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: LateEvening, AirTemperature: 30, WaterTemperature: 28, Pressure: Medium, WindSpeed: 0, WindDirection: NE, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 190,
+    "Timestamp": {"$date": "2026-06-24T13:09:59.603Z"}
+  },
+  {
+    "Message": "Update MoveTimeForwardTimeout to 6/24/2026 2:13:45 PM",
+    "RequestId": 190,
+    "Timestamp": {"$date": "2026-06-24T13:09:59.603Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: EarlyNight, AirTemperature: 24, WaterTemperature: 26, Pressure: Medium, WindSpeed: 0, WindDirection: NE, Precipitation: SoftFog, FishPlayFreq: High, Sky: ClearHalfMoonNight",
+    "RequestId": 37585,
+    "Timestamp": {"$date": "2026-06-24T14:18:52.155Z"}
+  },
+  {
+    "Message": "Flashlight On",
+    "RequestId": 37864,
+    "Timestamp": {"$date": "2026-06-24T14:19:05.555Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: MidNight, AirTemperature: 24, WaterTemperature: 25, Pressure: Low, WindSpeed: 0, WindDirection: NE, Precipitation: , FishPlayFreq: Low, Sky: ClearHalfMoonNight",
+    "RequestId": 77590,
+    "Timestamp": {"$date": "2026-06-24T15:32:39.483Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room ab6e8b479af439ea at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T16:10:31.192Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 26efb33469c419b8 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:30:24.626Z"}
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )",
+    "RequestId": 745,
+    "Timestamp": {"$date": "2026-06-24T18:38:01.302Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room e4527f6b07140aea at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.818Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: MidNight, AirTemperature: 24, WaterTemperature: 25, Pressure: Low, WindSpeed: 0, WindDirection: NE, Precipitation: , FishPlayFreq: Low, Sky: ClearHalfMoonNight",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.818Z"}
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: Rain_3, Seed: -61300418",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.833Z"}
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T18:38:04.849Z"}
+  },
+  {
+    "Message": "Flashlight On",
+    "RequestId": 36,
+    "Timestamp": {"$date": "2026-06-24T18:38:15.599Z"}
+  },
+  {
+    "Message": "Day: 3, CurrentWeather: Rain_3, TimeOfDay: LateNight, AirTemperature: 27, WaterTemperature: 28, Pressure: Medium, WindSpeed: 0, WindDirection: SE, Precipitation: , FishPlayFreq: High, Sky: ClearHalfMoonNight",
+    "RequestId": 8699,
+    "Timestamp": {"$date": "2026-06-24T18:45:50.694Z"}
+  },
+  {
+    "Message": "MoveTime on 24 hours, from 04.02:23 to 04.05:00",
+    "RequestId": 15816,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.607Z"}
+  },
+  {
+    "Message": "Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 31, WaterTemperature: 26, Pressure: High, WindSpeed: 0.7, WindDirection: E, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 15816,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.607Z"}
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: False, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 15816,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.636Z"}
+  },
+  {
+    "Message": "ReseedBiteSystem WeatherName: SunAndClouds_5, Seed: -196737005",
+    "RequestId": 15816,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.652Z"}
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 15816,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.652Z"}
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 15823,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.839Z"}
+  },
+  {
+    "Message": "Flashlight Off",
+    "RequestId": 15825,
+    "Timestamp": {"$date": "2026-06-24T18:51:39.839Z"}
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 15827,
+    "Timestamp": {"$date": "2026-06-24T18:51:40.105Z"}
+  },
+  {
+    "Message": "Pond stay prolonged. Money spent: 1500 SC. Balance after: 1331988 SC",
+    "RequestId": 15832,
+    "Timestamp": {"$date": "2026-06-24T18:51:42.902Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 6cd9c6beabd44e68 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:09:21.763Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 6946309b02641a6a at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:12:41.000Z"}
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )",
+    "RequestId": 83,
+    "Timestamp": {"$date": "2026-06-24T20:13:05.969Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 3ca50d03f5045489 at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.960Z"}
+  },
+  {
+    "Message": "Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: EarlyMorning, AirTemperature: 31, WaterTemperature: 26, Pressure: High, WindSpeed: 0.7, WindDirection: E, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.975Z"}
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: SunAndClouds_5, Seed: -196737005",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:13:08.975Z"}
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-24T20:13:09.007Z"}
+  },
+  {
+    "Message": "Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 27, Pressure: High, WindSpeed: 0.8, WindDirection: N, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 39536,
+    "Timestamp": {"$date": "2026-06-24T21:27:10.673Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room 276a8f3d10041148 at pond: 0 (player is on Local Map at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:10.809Z"}
+  },
+  {
+    "Message": "[CLN]: Moving to new room because player is not in a room. (None, , 230, , , ) => (Private, , 230, , , )",
+    "RequestId": 248,
+    "Timestamp": {"$date": "2026-06-25T02:26:56.794Z"}
+  },
+  {
+    "Message": "Player a0fe2188-4eb0-46f3-94e0-1e96a1afa45b arrives to room f6bed3eec084658a at pond: 230 (player is in 3D at Pond #230 'MARRON RIVER')",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.430Z"}
+  },
+  {
+    "Message": "Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: Morning, AirTemperature: 32, WaterTemperature: 27, Pressure: High, WindSpeed: 0.8, WindDirection: N, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.430Z"}
+  },
+  {
+    "Message": "InitBiteSystem WeatherName: SunAndClouds_5, Seed: -196737005",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.430Z"}
+  },
+  {
+    "Message": "GetIsobarStepForPond: Detailed map mission is not complete - use Standard Isobar step '5'",
+    "RequestId": 2,
+    "Timestamp": {"$date": "2026-06-25T02:26:59.462Z"}
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 65,
+    "Timestamp": {"$date": "2026-06-25T02:27:20.939Z"}
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 65,
+    "Timestamp": {"$date": "2026-06-25T02:27:20.939Z"}
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 89,
+    "Timestamp": {"$date": "2026-06-25T02:27:28.407Z"}
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 180,
+    "Timestamp": {"$date": "2026-06-25T02:27:44.048Z"}
+  },
+  {
+    "Message": "Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 219,
+    "Timestamp": {"$date": "2026-06-25T02:27:55.736Z"}
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 220,
+    "Timestamp": {"$date": "2026-06-25T02:27:55.736Z"}
+  },
+  {
+    "Message": "Day: 4, CurrentWeather: SunAndClouds_5, TimeOfDay: Midday, AirTemperature: 36, WaterTemperature: 28, Pressure: Medium, WindSpeed: 1.7, WindDirection: SW, Precipitation: , FishPlayFreq: Medium, Sky: Cloudy",
+    "RequestId": 36663,
+    "Timestamp": {"$date": "2026-06-25T02:56:20.445Z"}
+  },
+  {
+    "Message": "MoveTime on 24 hours, from 04.10:23 to 05.05:00",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.245Z"}
+  },
+  {
+    "Message": "Day: 5, CurrentWeather: Sunny_1, TimeOfDay: EarlyMorning, AirTemperature: 29, WaterTemperature: 27, Pressure: High, WindSpeed: 0.5, WindDirection: NW, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.245Z"}
+  },
+  {
+    "Message": "EndOfDay result has been prepared. IsLastDay: False, ShouldDisplayDialog: True, IsFishingTogetherDay: False, RealDayFinished: True",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.245Z"}
+  },
+  {
+    "Message": "Update MoveTimeForwardTimeout to 6/25/2026 4:05:28 AM",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.260Z"}
+  },
+  {
+    "Message": "ReseedBiteSystem WeatherName: Sunny_1, Seed: -28533003",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.260Z"}
+  },
+  {
+    "Message": "EndOfDay result has been sent to client",
+    "RequestId": 44852,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.260Z"}
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Init IsLastDay:False IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 44866,
+    "Timestamp": {"$date": "2026-06-25T03:02:11.843Z"}
+  },
+  {
+    "Message": "[CLN]: DayResultInit:Show IsLastDay:False IsFT:False ShouldDisplayDialog:True",
+    "RequestId": 44868,
+    "Timestamp": {"$date": "2026-06-25T03:02:12.088Z"}
+  },
+  {
+    "Message": "Pond stay prolonged. Money spent: 1500 SC. Balance after: 1361440 SC",
+    "RequestId": 44870,
+    "Timestamp": {"$date": "2026-06-25T03:02:13.774Z"}
+  },
+  {
+    "Message": "Day: 5, CurrentWeather: Sunny_1, TimeOfDay: Morning, AirTemperature: 29, WaterTemperature: 27, Pressure: High, WindSpeed: 1.7, WindDirection: E, Precipitation: , FishPlayFreq: High, Sky: Clear",
+    "RequestId": 84010,
+    "Timestamp": {"$date": "2026-06-25T03:32:41.907Z"}
+  },
+  {
+    "Message": "Board Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 112364,
+    "Timestamp": {"$date": "2026-06-25T03:52:53.413Z"}
+  },
+  {
+    "Message": "Fish radar is not found",
+    "RequestId": 112364,
+    "Timestamp": {"$date": "2026-06-25T03:52:53.413Z"}
+  },
+  {
+    "Message": "Boat AnchorUp",
+    "RequestId": 112365,
+    "Timestamp": {"$date": "2026-06-25T03:52:53.413Z"}
+  },
+  {
+    "Message": "Boat EngineStarted",
+    "RequestId": 112373,
+    "Timestamp": {"$date": "2026-06-25T03:52:55.571Z"}
+  },
+  {
+    "Message": "Boat EngineStopped",
+    "RequestId": 112487,
+    "Timestamp": {"$date": "2026-06-25T03:53:20.462Z"}
+  },
+  {
+    "Message": "Unboard Item #11720 [BassBoat] 'Garry Scott™ Orion™ Bass Boat' (dd9402c4-4514-4436-9478-172c5331d590)",
+    "RequestId": 112488,
+    "Timestamp": {"$date": "2026-06-25T03:53:20.462Z"}
+  },
+  {
+    "Message": "Boat AnchorDown",
+    "RequestId": 112489,
+    "Timestamp": {"$date": "2026-06-25T03:53:20.508Z"}
+  }
+]

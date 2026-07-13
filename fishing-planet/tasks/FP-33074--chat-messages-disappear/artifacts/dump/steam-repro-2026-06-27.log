@@ -1,0 +1,89 @@
+{"date":"2026-06-27T02:11:29.2182890Z","thread":"30","level":"INFO","logger":"C","message":"(0..)->886dd663-e62c-4828-88cb-57b2c2c5d022 :  R{\"TournamentId\":324988,\" Y N"}
+{"date":"2026-06-27T02:17:31.9678324Z","thread":"188","level":"INFO","logger":"T","message":"(0..)->9757fd6a-8435-409a-9f83-33214af80424 :  R{\"TournamentId\":324988,\" Y N 192.40.222.106 Ok"}
+{"date":"2026-06-27T02:17:31.9678324Z","thread":"188","level":"INFO","logger":"D","message":"CON (0..)->9757fd6a-8435-409a-9f83-33214af80424 :  R{\"TournamentId\":324988,\" Y N"}
+{"date":"2026-06-27T02:18:31.9836706Z","thread":"64","level":"INFO","logger":"C","message":"(0..)->9757fd6a-8435-409a-9f83-33214af80424 :  R{\"TournamentId\":324988,\" Y N"}
+{"date":"2026-06-27T02:18:47.8896187Z","thread":"114","level":"INFO","logger":"T","message":"(0..)->07f5c26b-0720-4da6-af6b-4d05d932dfdb :  R{\"TournamentId\":324984,\" Y N 192.40.222.65 Ok"}
+{"date":"2026-06-27T02:18:47.8896187Z","thread":"114","level":"INFO","logger":"D","message":"CON (0..)->07f5c26b-0720-4da6-af6b-4d05d932dfdb :  R{\"TournamentId\":324984,\" Y N"}
+{"date":"2026-06-27T02:19:27.0925140Z","thread":"109","level":"INFO","logger":"T","message":"(0..)->894f6574-cd30-4aa7-8028-afac8d12ea0f :  R{\"TournamentId\":324988,\" Y N 192.40.222.73 Ok"}
+{"date":"2026-06-27T02:19:27.0925140Z","thread":"109","level":"INFO","logger":"D","message":"CON (0..)->894f6574-cd30-4aa7-8028-afac8d12ea0f :  R{\"TournamentId\":324988,\" Y N"}
+{"date":"2026-06-27T02:19:47.9066646Z","thread":"101","level":"INFO","logger":"C","message":"(0..)->07f5c26b-0720-4da6-af6b-4d05d932dfdb :  R{\"TournamentId\":324984,\" Y N"}
+{"date":"2026-06-27T02:20:27.1087153Z","thread":"266","level":"INFO","logger":"C","message":"(0..)->894f6574-cd30-4aa7-8028-afac8d12ea0f :  R{\"TournamentId\":324988,\" Y N"}
+{"date":"2026-06-27T02:21:07.1868648Z","thread":"56","level":"INFO","logger":"T","message":"(0..)->1180b520-2ea9-402a-81dc-388bb62f3219 :  R{\"TournamentId\":324993,\" Y N 192.40.222.2 Ok"}
+{"date":"2026-06-27T02:21:07.1868648Z","thread":"56","level":"INFO","logger":"D","message":"CON (0..)->1180b520-2ea9-402a-81dc-388bb62f3219 :  R{\"TournamentId\":324993,\" Y N"}
+{"date":"2026-06-27T02:21:46.7804479Z","thread":"29","level":"INFO","logger":"DebugUsersCache","message":"Debug Users config updated. 1 users under debug."}
+{"date":"2026-06-27T02:22:07.2018379Z","thread":"218","level":"INFO","logger":"C","message":"(0..)->1180b520-2ea9-402a-81dc-388bb62f3219 :  R{\"TournamentId\":324993,\" Y N"}
+{"date":"2026-06-27T02:23:03.4675683Z","thread":"248","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:03.4675683Z","thread":"265","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:23:03.4675683Z","thread":"265","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y"}
+{"date":"2026-06-27T02:23:03.4675683Z","thread":"156","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"203","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"86","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: 60957bca-6 join N N"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"203","level":"INFO","logger":"L","message":"club2176->db431443-dee8-4606-8731-21fa5db3a923"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"203","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"86","level":"INFO","logger":"J","message":"db431443-dee8-4606-8731-21fa5db3a923->club2176 [0]"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"86","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: 60957bca-6 join N N"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"157","level":"INFO","logger":"T","message":"(0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:23:07.7167508Z","thread":"157","level":"INFO","logger":"S","message":"Sent (0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y"}
+{"date":"2026-06-27T02:23:10.4369937Z","thread":"276","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:10.4369937Z","thread":"248","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:23:10.4369937Z","thread":"248","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y"}
+{"date":"2026-06-27T02:23:10.4369937Z","thread":"13","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"234","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"157","level":"INFO","logger":"L","message":"club2176->db431443-dee8-4606-8731-21fa5db3a923"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"157","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"234","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: 783b9ba1-c join N N"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"234","level":"INFO","logger":"J","message":"db431443-dee8-4606-8731-21fa5db3a923->club2176 [0]"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"234","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: 783b9ba1-c join N N"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"78","level":"INFO","logger":"T","message":"(0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:23:12.3434951Z","thread":"78","level":"INFO","logger":"S","message":"Sent (0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y"}
+{"date":"2026-06-27T02:23:14.1248696Z","thread":"157","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:14.1248696Z","thread":"13","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:14.1248696Z","thread":"217","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:23:14.1248696Z","thread":"217","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"137","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"183","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: d06f439d-8 join N N"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"38","level":"INFO","logger":"J","message":"db431443-dee8-4606-8731-21fa5db3a923->club2176 [0]"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"38","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: d06f439d-8 join N N"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"203","level":"INFO","logger":"L","message":"club2176->db431443-dee8-4606-8731-21fa5db3a923"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"203","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"103","level":"INFO","logger":"T","message":"(0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:23:15.6244803Z","thread":"103","level":"INFO","logger":"S","message":"Sent (0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y"}
+{"date":"2026-06-27T02:23:17.2496521Z","thread":"157","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:17.2496521Z","thread":"276","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:21.2805069Z","thread":"51","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:21.2961424Z","thread":"105","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:22.6238550Z","thread":"269","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:23:22.6394723Z","thread":"190","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:26:49.1876798Z","thread":"133","level":"INFO","logger":"T","message":"(0..)->e93f82d6-072e-4de1-96cf-5e7e75c9113c :  R{\"TournamentId\":324989,\" Y N 192.40.222.109 Ok"}
+{"date":"2026-06-27T02:26:49.1876798Z","thread":"133","level":"INFO","logger":"D","message":"CON (0..)->e93f82d6-072e-4de1-96cf-5e7e75c9113c :  R{\"TournamentId\":324989,\" Y N"}
+{"date":"2026-06-27T02:26:49.1876798Z","thread":"282","level":"INFO","logger":"T","message":"(0..)->e93f82d6-072e-4de1-96cf-5e7e75c9113c :  R{\"TournamentId\":324987,\" Y N 192.40.222.109 Ok"}
+{"date":"2026-06-27T02:26:49.1876798Z","thread":"282","level":"INFO","logger":"D","message":"CON (0..)->e93f82d6-072e-4de1-96cf-5e7e75c9113c :  R{\"TournamentId\":324987,\" Y N"}
+{"date":"2026-06-27T02:27:49.1867425Z","thread":"149","level":"INFO","logger":"C","message":"(0..)->e93f82d6-072e-4de1-96cf-5e7e75c9113c :  R{\"TournamentId\":324989,\" Y N"}
+{"date":"2026-06-27T02:27:49.1867425Z","thread":"44","level":"INFO","logger":"C","message":"(0..)->e93f82d6-072e-4de1-96cf-5e7e75c9113c :  R{\"TournamentId\":324987,\" Y N"}
+{"date":"2026-06-27T02:27:51.8730919Z","thread":"248","level":"INFO","logger":"T","message":"(0..)->ba84a8c2-864f-4d02-b336-1cf7dd959cdd :  R{\"TournamentId\":324993,\" Y N 192.40.222.116 Ok"}
+{"date":"2026-06-27T02:27:51.8730919Z","thread":"248","level":"INFO","logger":"D","message":"CON (0..)->ba84a8c2-864f-4d02-b336-1cf7dd959cdd :  R{\"TournamentId\":324993,\" Y N"}
+{"date":"2026-06-27T02:28:51.8889540Z","thread":"102","level":"INFO","logger":"C","message":"(0..)->ba84a8c2-864f-4d02-b336-1cf7dd959cdd :  R{\"TournamentId\":324993,\" Y N"}
+{"date":"2026-06-27T02:30:05.1407597Z","thread":"262","level":"INFO","logger":"T","message":"(0..)->97e7e191-3e90-4f04-bca0-daaaee3649f0 :  R{\"TournamentId\":324989,\" Y N 192.40.222.56 Ok"}
+{"date":"2026-06-27T02:30:05.1407597Z","thread":"262","level":"INFO","logger":"D","message":"CON (0..)->97e7e191-3e90-4f04-bca0-daaaee3649f0 :  R{\"TournamentId\":324989,\" Y N"}
+{"date":"2026-06-27T02:31:05.1557677Z","thread":"49","level":"INFO","logger":"C","message":"(0..)->97e7e191-3e90-4f04-bca0-daaaee3649f0 :  R{\"TournamentId\":324989,\" Y N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"12","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"105","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: d06f439d-8 join N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"248","level":"INFO","logger":"L","message":"club2176->db431443-dee8-4606-8731-21fa5db3a923"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"248","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176:  leave N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"J","message":"db431443-dee8-4606-8731-21fa5db3a923->club2176 [3]"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N N 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N N 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N N 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"T","message":"(0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 6391812376 ChannelExp N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"S","message":"Sent (0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 6391812376 ChannelExp N Y"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"284","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: d06f439d-8 join N N"}
+{"date":"2026-06-27T02:32:22.5153504Z","thread":"141","level":"INFO","logger":"C","message":"(0..)->db431443-dee8-4606-8731-21fa5db3a923 club2176: 1 ChannelPop N Y"}
+{"date":"2026-06-27T02:32:36.1240312Z","thread":"232","level":"INFO","logger":"N","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:32:36.1240312Z","thread":"149","level":"INFO","logger":"P","message":"db431443-dee8-4606-8731-21fa5db3a923-> club2176: {\"Instance ClubEvent N N"}
+{"date":"2026-06-27T02:32:36.1240312Z","thread":"13","level":"INFO","logger":"T","message":"db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y 192.40.222.92 Ok"}
+{"date":"2026-06-27T02:32:36.1240312Z","thread":"13","level":"INFO","logger":"S","message":"Sent db431443-dee8-4606-8731-21fa5db3a923->db431443-dee8-4606-8731-21fa5db3a923 club2176: {\"Instance ClubEvent N Y"}
+{"date":"2026-06-27T02:33:53.2312001Z","thread":"113","level":"INFO","logger":"T","message":"(0..)->dae5428a-7464-4874-b000-1d3194c79f11 :  R{\"TournamentId\":324993,\" Y N 192.40.222.23 Ok"}
+{"date":"2026-06-27T02:33:53.2312001Z","thread":"113","level":"INFO","logger":"D","message":"CON (0..)->dae5428a-7464-4874-b000-1d3194c79f11 :  R{\"TournamentId\":324993,\" Y N"}

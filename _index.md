@@ -1,22 +1,23 @@
 # Knowledge Base
 
 ## Active Tasks
-| Task     | Project   | Topic                     | Status        | Path                                                                    |
-|----------|-----------|---------------------------|---------------|-------------------------------------------------------------------------|
-| FP-41845 | FP/server | fish-weight-gen-v2        | in-progress   | fishing-planet/tasks/FP-41845--weight-generation-v2/                    |
-| FP-41929 | FP/server | xbox-purchases            | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/                |
-| FP-43424 | FP/server | kb-mapping                | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/                       |
-| FP-41595 | FP/server | lbm-release-support       | in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/            |
-| FP-43632 | FP/server | gc-migration              | in-progress   | fishing-planet/tasks/FP-43632--game-carrier-on-steam-ps-mobile-support/ |
-| FP-43625 | FP/server | matchmaking-maxwins       | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
-| FP-32370 | FP/server | po-test-coverage          | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
-| FP-44337 | FP/server | stats-tables-partitioning | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
-| FP-44591 | FP/server | twitch-no-email-linking   | planned       | fishing-planet/tasks/FP-44591--twitch-no-email-linking/                 |
-| FP-44594 | FP/server | cpu-memory-map            | planning      | fishing-planet/tasks/FP-44594--server-cpu-memory-map/                   |
-| FP-44598 | FP/server | buoy-backup-restore       | in-progress   | fishing-planet/tasks/FP-44598--buoy-backup-restore/                     |
-| FP-44596 | FP/server | node-load-observability   | in-progress   | fishing-planet/tasks/FP-44596--node-load-observability/                 |
-| FP-42677 | FP/server | rating-abuse-prevention   | in-discussion | fishing-planet/tasks/FP-42677--rating-abuse-prevention/                 |
-| FP-44670 | FP/server | club-redelivery-damage    | in-progress   | fishing-planet/tasks/FP-44670--club-donation-redelivery-damage/         |
+| Task     | Topic                          | Status        | Path                                                                    |
+|----------|--------------------------------|---------------|-------------------------------------------------------------------------|
+| FP-41845 | fish-weight-gen-v2             | in-progress   | fishing-planet/tasks/FP-41845--weight-generation-v2/                    |
+| FP-41929 | xbox-purchases                 | investigating | fishing-planet/tasks/FP-41929--xbox-duplicate-purchases/                |
+| FP-43424 | kb-mapping                     | in-progress   | fishing-planet/tasks/FP-43424--server-kb-mapping/                       |
+| FP-41595 | lbm-release-support            | in-progress   | fishing-planet/tasks/FP-41595--leaderboards-release-support/            |
+| FP-43632 | gc-migration                   | in-progress   | fishing-planet/tasks/FP-43632--game-carrier-on-steam-ps-mobile-support/ |
+| FP-43625 | matchmaking-maxwins            | in-progress   | fishing-planet/tasks/FP-43625--matchmaking-maxwins/                     |
+| FP-32370 | po-test-coverage               | planning      | fishing-planet/tasks/FP-32370--personal-offers-test-coverage/           |
+| FP-44337 | stats-tables-partitioning      | in-progress   | fishing-planet/tasks/FP-44337--stats-tables-partitioning/               |
+| FP-44591 | twitch-no-email-linking        | planned       | fishing-planet/tasks/FP-44591--twitch-no-email-linking/                 |
+| FP-44594 | cpu-memory-map                 | planning      | fishing-planet/tasks/FP-44594--server-cpu-memory-map/                   |
+| FP-44598 | buoy-backup-restore            | in-progress   | fishing-planet/tasks/FP-44598--buoy-backup-restore/                     |
+| FP-44596 | node-load-observability        | in-progress   | fishing-planet/tasks/FP-44596--node-load-observability/                 |
+| FP-42677 | rating-abuse-prevention        | in-discussion | fishing-planet/tasks/FP-42677--rating-abuse-prevention/                 |
+| FP-44670 | club-redelivery-damage         | in-progress   | fishing-planet/tasks/FP-44670--club-donation-redelivery-damage/         |
+| FP-33074 | chat-messages-disappear        | implementing  | fishing-planet/tasks/FP-33074--chat-messages-disappear/                 |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |

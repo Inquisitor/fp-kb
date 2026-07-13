@@ -1,0 +1,367 @@
+[
+  {
+    "Message": "{\"InstanceId\":\"14394852-b077-490f-9083-23e8edf82eb9\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:50:37.8912433Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Hah, of course Gonzo just left.    \"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:50:37.891Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"6050686c-729b-437b-a200-8c233f5eb2cf\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:50:56.5631921Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"I'm in conversations with one of the devs who is trouble shooting the chat troubles\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:50:56.563Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"83df38cc-e0ce-401c-92d3-adbed1d7c8fa\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:51:33.4976467Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"I am going to temporarilly add him to the club, if I have the permissions to do so. Gonzo can yell at me later. ;)\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:51:33.497Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"8d5df759-c7ca-4ddd-8b80-467f56b3423e\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:53:19.5090474Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Hello everyone!\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:53:19.514Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"338db990-75b6-4b1e-93d5-adb443259b38\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:53:36.9348462Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"I see your message, and see my last 3, Inquisitor\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:53:36.934Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"d4005d3f-b1ef-4ffc-b718-27c27b1822b4\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:54:16.778175Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Okay. Let's try this. You just play normally. When messages will stop coming, ping me on Discord.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:54:16.793Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"e69bd860-e65b-4727-96e4-7aece88a47db\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:55:36.3455565Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"My discord nickname on the FP server is Inquisitor, with the account tag being 'jangalor'\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:55:36.345Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"7d9a43fc-fdbb-4bfc-8b61-e2535ef1f845\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:56:11.7034527Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Hmmm, I'm an old fart who isn't on discord. I'll get connected though.\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:56:11.703Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"525b922d-83bd-4e79-bffa-6533301e26e7\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:56:51.2592438Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"darn innacurate swear filters.   I'll figure it out.\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:56:51.259Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"23fbd18a-6231-4c6b-a633-9f400afa0eec\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:57:20.1419217Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"We'll address the filters some day as well.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:57:20.141Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"f2d6f122-e116-4a77-88d9-cde05406a30e\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:57:52.7074749Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"It's all good.  A minor inconvenience.\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:57:52.707Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"cd493a73-5bef-4bb2-92e8-ac216b3b8ffc\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:58:24.9409743Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Well, it's happening for months now, if not years. This has to be addressed.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:58:24.940Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"6d7a17c4-d51a-4d5e-8da6-77f885cd34ec\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:59:01.3524526Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Anyways, feel free to either hit me on Discord, or ping our support, or just type the message here in the chat. I'll come and see it.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:59:01.352Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"ace2c43d-79c6-49b9-a9a8-05d8922e17f8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:59:07.1230607Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Thank you!\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:59:07.123Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"2ca6743e-7600-493e-8f2e-0f2db8350c63\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:59:20.6018542Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Thanks again for the help.\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T18:59:20.601Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"c457c4cb-c04d-48fc-b136-778faf54a450\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T18:59:47.0602752Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"No worries! Sorry for inconvenience.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T18:59:47.060Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"c44712a3-977e-484f-a561-9118642eeaea\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T19:44:03.4411161Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Welcome Inquisitor\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T19:44:03.456Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"651f229d-b201-4b33-bf7a-6ab641745a3f\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T19:53:49.265446Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Thank you!\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T19:53:49.265Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"5916ee8a-8bcc-48ce-943d-f799e9068354\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T19:54:00.1615374Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Quite Welcome\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T19:54:00.161Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"3a0b8585-4924-453f-bcd5-8b47c74336d8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T19:54:58.897984Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"I believe I've pinpointed the problem. But I need a confirmation, so I'm looking for steps to reproduce the bug.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T19:54:58.897Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"f7ac8d30-6ab8-4bab-90d2-c89261320383\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T19:57:55.7662188Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"This is for the chat blanking out I presume?\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T19:57:55.766Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"d502cac2-c44d-46be-bc38-38ab8ede9419\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:00:23.7249744Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Yes. I've noticed that you and Waz were reporting these problems. 20 months apart.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:00:23.724Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"a601991a-6126-4763-8bc5-f4264d5bb03b\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:00:39.7246642Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"That's why I decided to reach out\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:00:39.724Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"2e45e3d7-7bc2-421b-83fc-98055251842c\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:01:19.1506104Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"I've currently added some additional debug logging to your accounts, so when the bug manifests once again, I'll see what happens in more detail.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:01:19.150Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"1ebd64a3-1c46-44af-aa7d-3ad256462ac3\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:01:29.6072872Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"yeah, been happening as far backas I can remember\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:01:29.607Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"08b2420a-a51e-4ee5-9eaa-8c72cfc2b55e\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:01:40.0569366Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Basically, I'm fishing the bugs here.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:01:40.056Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"83ae67d1-4b17-419c-970f-209ecc793cc6\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:01:51.3800644Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"I got ya.\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:01:51.380Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"58c53766-4b68-4b71-a357-610514053068\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:02:25.3726731Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Just play normally. If you notice something - tell me. And tell the time when you noticed. That will help a lot.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:02:25.372Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"e778bc8f-ce84-469d-9d94-53ca9882b3ea\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:02:32.8623981Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Thank you for your help!\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:02:32.862Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"83ced47d-b0ce-4c66-b431-2e8c3b622a6c\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:03:45.7220646Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"No prob, and ty\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:03:45.722Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"a85c01c3-c52c-4a4f-b0cc-b99e8774a5bd\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:19:49.9743328Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"So far so good... still seeing club messages.\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:19:49.974Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"0a4c358d-a0f6-48f5-ad19-3763f7408d98\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:23:58.6485935Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Same here. But I have been moving around also. Usually resets it, if you leave a lake\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:23:58.664Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"542a50a5-e9e3-4fc6-aef6-2a1bd0a59d59\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:26:13.6867928Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Okay, no problem. We can wat a bit. :)\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:26:13.686Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"6f036b6f-0fbf-4e58-a13a-9920e84e6d70\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:26:17.3599952Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"wait*\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:26:17.359Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"4ceebc42-103b-4014-b937-fe3a83d1e3ba\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:29:29.7910985Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Of course you do realize. Now that your here, it is not gonna do it lmao\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:29:29.791Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"35a6982c-5a48-4f40-92d1-dffd9398a9e5\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:33:37.1070421Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Yeah, when I was younger and had a more direct IT role, I was told by many people the didn't need me. They needed a cardboard\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:33:37.107Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"22057d24-a760-4801-ba9c-43a71ba016ef\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:33:52.8101236Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"cutout of me... as they just needed me standing behind them to make things work\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:33:52.810Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"0850be7c-265e-443c-98ed-7093ea9dfb6f\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:34:15.7075705Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"lol\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:34:15.707Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"9756cb15-6842-4500-bdde-e6159ec1f56c\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:34:17.2458574Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"When this happens, you don't see any previous messages in the club chat in 3D mode, do you?\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:34:17.245Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"bb0bb392-cc50-4a45-9c61-4c4e5b91e5ec\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:35:59.5357427Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"When it freezes, you can see things before the freeze. Anything after that, you can only see if you leave the lake your at\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:35:59.535Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"1cd0ed1b-eb8c-4872-a05f-999d585c3333\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:36:04.0983141Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"or restart the game\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:36:04.098Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"5d4ed9f0-f4a8-4583-ad1e-eb83de3340d6\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:36:37.4629982Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Ok, I see. So, the cached messages are there. But the new ones stop coming.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:36:37.462Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"9ed32fb3-ad7c-4040-8785-b65ed4a4e572\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:36:37.9107018Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"What often happens is I'll leave the water body, and most often message by me and others will be visible from theGlobal location\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:36:37.910Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"1ea3fa26-1956-4d94-844a-c50928f81d31\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:37:42.9885876Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Right Inquisitor. I have heard, some lose their global chat also, but hasn't happened to me\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:37:42.988Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"a185ed6b-2d38-4075-bed6-ab3297182d6a\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:38:16.2174932Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"separate issue, is that incoming messages don't always force the interface to scroll downwards. So my only indication that a\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:38:16.217Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"3915b5a5-4bd0-4a7b-a51f-e95eb90aefa8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:38:35.9641891Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"new message was submitted by someone is that the scroll bar will now show a gap suggesting it can drag downwards\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:38:35.964Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"a98c35ce-0ed8-4742-a048-6908cfa5629d\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:39:03.8403026Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"Hey Gonzo, with that said, I've often seen a flurry of chat messages in global where I'm obviously missing half the conversation\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:39:03.871Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"be90ef3c-c65c-4e6a-a7fb-069c1d714262\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:39:11.3413196Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"This may change things. My current theory is some sort of race condition when you change rooms.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:39:11.341Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"4cbffe4c-34f0-40fc-9c17-69b617093e5f\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:39:22.2692445Z\",\"From\":\"a0fe2188-4eb0-46f3-94e0-1e96a1afa45b\",\"FromName\":\"Waz 10000\",\"Text\":\"and I don't believe it's because I've muted the sender\"}",
+    "SenderName": "Waz 10000",
+    "Timestamp": {"$date": "2026-06-26T20:39:22.269Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"484e41c7-1271-4257-9f20-15c616d4fcf1\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:39:48.2577719Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"So, when you join a room, you leave one room first and join the other. The finalization in the prior room may disconnect you.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:39:48.257Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"1c595ab2-1d44-495b-a827-aee832d2ca41\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:40:24.117167Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"To reproduce the but, it's just enoght to change between room types (private/random)\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:40:24.117Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"65796e00-2569-4025-b17d-41d83244ad88\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:40:27.8846856Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"I see what your saying. Switching from Club, to Global, to Fishing room, may cause it\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:40:27.884Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"f1e4dd2e-61b6-4747-9955-ac4aa2ed5940\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:40:28.3050592Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"bug*\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:40:28.305Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"35391e87-cbc7-4667-abb2-c7b7fd395fc7\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:41:19.9945791Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"No, going to globe, then going to a water way, or just changing private/random room in the game interface while on a waterway.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:41:19.994Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"27b8c7a3-5872-42ce-be5f-15dacdcb7440\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:41:40.7277438Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Oh I got ya now\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:41:40.727Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"0763584b-228e-4cf4-96fe-afb084d287a4\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:42:13.3729371Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"On 06/24, when you reported, you moved from a random room to a private one.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:42:13.372Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"05111b1e-85b9-43b7-b86c-b43eb0929195\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:45:41.8565004Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"let me try moving in a sec and see if it does anything\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:45:41.856Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"ab03c2a8-500e-4fd3-a9be-74e7ab8c35f1\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:46:30.2596316Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"I don't expect it to work instantly. It's a tiny chance that this may trigger the bug.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:46:30.259Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"4b1b8ff5-7063-4143-b881-fbb11e24cfd6\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:47:19.2129879Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Also, it'll fix itself once you change the room type once again.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:47:19.212Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"1e7bf11e-e0b6-4cea-9b60-3fa0cfa58f13\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:48:14.5721679Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"So went to a private room. will try some other rooms to see if I can maybe trigger it\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:48:14.572Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"d46c8dcb-1a87-467c-abae-aa405fe89833\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:48:34.0523545Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"And when the bug happens, you also unable to see your sent messages, right?\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:48:34.052Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"9b980ee3-e2dd-44e9-af43-20cc38ae5678\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:49:07.5008381Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"yes sir. Just in the Club room\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:49:07.500Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"f9630cb0-d71a-4b0a-8264-722df25fc9a8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:49:55.4212619Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"That is for me anyway. Not sure if Waz is seeing it an the others or not\\\\\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:49:55.421Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"2ce284ac-049e-49a9-bf36-c2730a6b0c8e\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:51:47.0508179Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"Others see your sent messages. They get registered, because you can see them later in the chat.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:51:47.050Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"a82c9ea2-d433-425e-ae78-07aa5da80164\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:52:33.8367647Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"right, but I see them, only if I leave the llake I am fishing at. Then it seems to free them up\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:52:33.836Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"7e2343be-244f-4bad-a045-a1b325a5235f\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:53:56.0766762Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"You can try switching private/random room back and forth - no need to leave the lake. \"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:53:56.076Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"f239695b-b4d3-4bca-a1e2-799225801e04\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:54:18.9224961Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"This has to fix the chat as well.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:54:18.938Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"4000d100-6272-423f-95b5-fa08e046eca7\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:55:06.833507Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"yeah, that's what I have been doing. Just trying different rooms. Still at Emerald. \"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:55:06.833Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"2965a57a-e686-4c8c-ac78-4c6909e504d8\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:55:26.7429475Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"Will try just switching rooms if it happens\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:55:26.742Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"f56c999a-1e38-4309-b613-7898344a5e24\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:56:14.0737947Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"If you wish, otherwise I'll just try to trigger the bug programmatically.\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T20:56:14.073Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"95bd50fe-b95c-47de-9021-47aead817af0\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T20:56:41.9647779Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"lol trying to trigger it, but like I said. Now that your here, it won;t do it\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T20:56:41.964Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"c2b985ae-edc1-4f6e-80dd-fbd09e03dd72\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T21:01:24.0227534Z\",\"From\":\"caa03b10-efce-45e3-a3d2-8f399224e067\",\"FromName\":\"Inquisitor7533\",\"Text\":\"No worries, just play normally. Thank you!\"}",
+    "SenderName": "Inquisitor7533",
+    "Timestamp": {"$date": "2026-06-26T21:01:24.022Z"}
+  },
+  {
+    "Message": "{\"InstanceId\":\"4fea51a1-d719-4381-acbc-047def9f355c\",\"ClubId\":6777,\"Type\":\"Text\",\"Timestamp\":\"2026-06-26T21:02:22.1120954Z\",\"From\":\"38aeb767-64db-4a52-ab7b-bc25fdecbfe8\",\"FromName\":\"Gonzo1964\",\"Text\":\"ok, will do. And thank you\"}",
+    "SenderName": "Gonzo1964",
+    "Timestamp": {"$date": "2026-06-26T21:02:22.112Z"}
+  }
+]
