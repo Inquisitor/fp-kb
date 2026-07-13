@@ -25,6 +25,7 @@
 | FP-43705 | Yuriy Burda    | fishing-planet/review/FP-43705--bait-negative-values/                                   |
 | FP-43817 | Yevhenii Shust | fishing-planet/review/FP-43817--tournament-log-levels/                                  |
 | FP-44564 | Yevhenii Shust | fishing-planet/review/FP-44564--weather-seed-window-days/                               |
+| FP-42918 | Yuriy Burda    | fishing-planet/review/FP-42918--profile-conversion-framework/                           |
 
 ## Active Confluence Work
 | Draft                    | Task     | Target                                                                        |
