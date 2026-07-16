@@ -45,5 +45,20 @@
 - [ ] Decide whether to rewrite `FishingRateStatUpdateJob` cursor to `Timestamp` (or keep EntityId seek)
 - [ ] Deprecate/remove `FindStatsFactIdByTimestamp` once EntityId-range backfills are migrated
 - [ ] Backfill 11-12 months from archive into prod partitions; grow to 24-month retention
-- [ ] Adapt runbook for Steam / XB / MOB / NX
+- [~] Adapt runbook for Steam / XB / MOB / NX — **Steam artifact set prepared** (2026-07-09, see Steam section); XB/MOB/NX still to adapt
 - [ ] Confirm SQL Agent enabled on each Stats instance for the monthly sliding-window job
+
+## Steam (artifact set prepared 2026-07-09; live cutover pending its own window)
+Assessment (2026-07-06): Standard 15.0.2000.5, NY TZ, SIMPLE. Z: free 307 GB (NOT a crisis), `Stats.mdf` 3238 GB, `StatsFact` 1669 GB/5.37B, `MissionsFact` 879 GB/6.14B, `Stats_log` 9.77 GB (**Phase 1 skipped**). Both facts clustered PK on `EntityId` only, no NCI. Retention model **A** (cut to current month, drop older); NCI `(UserId,Timestamp)` replicated. Scripts + runbook + checklist in `artifacts/steam/` (Phase2/3/6/7/8, boundaries assume a **July** cutover — shift if the window slips).
+Pending pre-flight (Steam):
+- [ ] SQL Agent running on STEAMSTATS + owner login (`sa`) enabled
+- [ ] IFI granted to the SQL service account
+- [ ] `tempdb` location (**UNKNOWN**) — if on `Z:`, pre-size + cap `MAXSIZE`
+- [ ] No object-level GRANTs on the fact tables (app `farm` role membership)
+- [ ] No job/proc hardcoded `*_old`/3-part references to the fact tables
+- [ ] Pre-drop backup target space (~3.2 TB) + a 2nd retained copy
+Pending execution:
+- [ ] Agree a Steam maintenance window; finalize the cutover month (shift Phase 2 boundaries/FG suffixes + Phase 3 `@tailFrom` if not July)
+- [ ] Re-measure the July tail the day of cutover (cut early in the month; ~11 M rows/day)
+- [ ] Run Phase 2 -> Phase 3 (window) -> START PROD -> Phase 6 drop+shrink the same day
+- [ ] Phase 8 job after cutover; Phase 7 archive deferred (source = the pre-drop FULL's `*_old`)

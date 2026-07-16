@@ -297,3 +297,25 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   complete & verified end-to-end on PROD. Artifacts synced to the 02:00 schedule (Phase8 script, runbook,
   operator checklist, rehearsal copy). REMAINING on FP-44337: STEP 3 index rebuild (next downtime) +
   post-shrink baseline backup; Phase 7 archive (TESTVova) deferred.
+- 2026-07-09 — **STEAM prep: assessment + full artifact set adapted from PS** (no Steam DB changed yet).
+  ASSESSMENT (2026-07-06, read-only on `WIN-3HO01NN5VO4\STEAMSTATS`): Standard 15.0.2000.5, NY TZ (local
+  11:42 / utc 15:42 = EDT), SIMPLE. `Stats.mdf` 3238 GB (~= PS's 3205), Z: free **307 GB** (NOT the 62 GB PS
+  crisis - comfortable), `Stats_log` **9.77 GB** -> **Phase 1 skipped**. `StatsFact` 1669 GB / 5.37 B rows,
+  `MissionsFact` 879 GB / 6.14 B; BOTH clustered PK on `EntityId` only, **no NCI**. Two facts = 2548 GB (~79%
+  of the file); other big residents Stmt 224 / FishFact 177 / ActionStats 77 / Balance 72 / TargetedAdFact 45.
+  July tail (binary-search over the clustered PK, no scan): StatsFact ~40.4 M (id 14,945,287,783..14,985,656,189),
+  MissionsFact ~26.1 M (id 3,500,490,596..3,526,572,528); ~11 M rows/day combined.
+  DECISIONS: retention model **A** (as PS - cut to current month, drop older -> pre-drop FULL -> archive later;
+  user declined keeping a tail); **replicate** PS's aligned `(UserId, Timestamp)` NCI. Backup discussion:
+  SIMPLE + weekly FULL today; steady-state win = mark aged month-FG `READ_ONLY` + one-time FG backup +
+  weekly `READ_WRITE_FILEGROUPS` partial backup (a FULL alone does NOT skip read-only FGs); a dropped month
+  returns only via restore into a SEPARATE archive DB (piecemeal), NOT a hot filegroup-graft into live prod;
+  READ_ONLY is reversible until the partition is REMOVEd. ARTIFACTS (`artifacts/steam/`): Phase2/3/6/7/8 +
+  Runbook + Operator Checklist. Steam deltas vs PS: Phase 1 skipped; boundaries **07-01/08-01/09-01** (July
+  cutover assumption; shift if the window slips); STEAMSTATS data path; StatsFact Rank default re-created by
+  CAPTURING the old definition (robust) vs PS's hardcoded `DEFAULT(0)`; gap-free anchored to the pre-drop
+  FULL (tail = continuity only); Phase 7 sources `*_old` from the restored pre-drop FULL (+ drops the restored
+  prod-partitioned table) and keeps empty Jul/Aug/Sep landing slots; Phase 8 `@DataPath`+02:00 schedule (Steam
+  also NY TZ); docs reframed (not a crisis, cut-early-in-month advice, tempdb-location pre-flight UNKNOWN on
+  Steam). STATUS: **prep only - the live Steam cutover needs its own maintenance window**; Steam pre-flight
+  mostly PENDING (Agent/IFI/tempdb-location/grants/hardcoded-refs/backup). XB/MOB/NX still to adapt.
