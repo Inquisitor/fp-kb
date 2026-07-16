@@ -1,7 +1,7 @@
 ---
 status: resolved
 executor: Yevhenii Shust
-branch: NPN20260602 @ r16299
+branch: NPN20260602 @ r16299, merged to MFT20260325 @ r16328
 jira: https://fishingplanet.atlassian.net/browse/FP-41925
 ---
 
@@ -24,6 +24,12 @@ Allow `Hat` items to be stored in the backpack (`Equipment`), occupying Misc slo
   - JIRA comment link URL points at r56237 while the text says r56336 — verify actual revision in Phase 2
 - **r56063** — prior-round client-side work by Sergii Karchavets ("At revision: 56063 - code"), posted before the task was reassigned; predates the server change
 
+### MFT20260325 (merged)
+- **r16328** — Merge of r16299 + r16326 (downward, release-directed: FPA ships from MFT)
+
+### Unity_Fishing_MainClient (merged)
+- **r56432** — Merge of r56336; `Photon.Interfaces.dll` rebuilt from MFT sources instead of carrying the CodeBranch binary (DLL is branch-paired). r56063 was already present via an earlier bulk merge.
+
 ## Investigation Journal
 
 - Intake: Executor field (`customfield_11224`) empty in JIRA — expected Yevhenii Shust per commit comments (detect-only, surfaced to user).
@@ -42,6 +48,8 @@ Allow `Hat` items to be stored in the backpack (`Equipment`), occupying Misc slo
   - Destroy/sell route (Codex High): `CanDestroyItem` blocks only `MissionItem`; destroying a worn hat leaves the pool over-capacity with no spill. Verified — but the pattern is pre-existing (identical for worn LuresBox; none of these files touched by r16299) → severity collapses to pre-existing observation.
   - Car/Lodge bypass (both delegates High): fully confirmed — `CheckItemAvailability` allows `CarEquipment` (car travel) / `LodgeEquipment` (lodge is pond-only) on pond; `CanMove` has no constraint check for those destinations and the new guard requires `storage == Equipment`; `MoveRelatedItems` Hat branch unconditionally spills `TackleOutOfStorage` to home `Storage`. Spill route itself pre-existed for hats; the new pond-block semantic just does not cover it.
 - Targeted delegate verdict on ErrorDetails: CONFIRMED — count reaches no user-visible surface on any path (local precheck → no-args `ShowMessage`; connection-layer precheck → log-only `RaiseValidationFailedEvent`; server rejection → parameterless `OnInventoryMoveFailure` + generic `InventoryOperationFailed` toast; a `{0}` placeholder in localization would render literally — `Localize` never calls `string.Format`).
+- Close-phase paired-client verification (content tokens, not mergeinfo): r56063 present in MainClient HEAD; r56336 absent → both halves merged at close, user-directed per the Releases mapping (FPA ships from MFT). `Photon.Interfaces.dll` for MainClient rebuilt from MFT sources — the binary is branch-paired and is never carried across pairs by merge.
+- Sequencing incident at close: the server half (MFT r16328) was committed before the client pair was smoke-tested — corrected by the user's end-to-end smoke test (build+run server, build client, login) followed immediately by the client commit; the pairing rule was generalized beyond protocol increments in `reference/release_versions_and_process.md` and `reference/photon_interfaces_dll_distribution.md`.
 
 ## Findings
 
