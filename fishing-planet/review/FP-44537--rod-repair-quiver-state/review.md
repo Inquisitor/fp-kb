@@ -58,6 +58,7 @@ No FP-44537 commits on MFT (correct — protocol-coupled fix belongs to Code bra
 - FPA merges executed 2026-07-16 as a same-minute pair: server r16229 → MFT @ **r16323** (3 files + root mergeinfo, clean); client r55712 content → MainClient @ **r56426**. No Photon.Interfaces rebuild needed for the merge — r16229 touches ObjectModel + tests only; the wire-DTO change travels as source.
 - Client cherry-pick gotcha hit: MainClient root mergeinfo blanket-covers CodeBranch `37953-56303`, so `svn merge -c 55712` silently no-oped (mergeinfo-only, zero file changes — the file still had `QuiverIsBroken`). Force-applied with `--ignore-ancestry`, content verified by grep before commit. Gotcha recorded in project memory (`mainclient-cherry-pick-mergeinfo`).
 - MFT-side mergeinfo verified post-commit: `/branches/NPN20260602:...,16229` recorded as a precise per-revision list (no blanket ranges — the silent-no-op trap does not exist on the server side).
+- Runtime verification closed: MainClient pair confirmed by the reviewer right after the same-minute commits; CodeBranch pair confirmed 2026-07-16 after the deferred smoke run. Increment chain fully verified on both branch pairs.
 
 ## Findings
 
@@ -110,7 +111,7 @@ Ship conditions (release-gate) — ALL SATISFIED 2026-07-16:
 2. ✅ r16229 merged NPN → MFT @ r16323, paired same-minute with the client apply-fix port into MainClient @ r56426.
 3. ✅ Client CodeBranch carries the client fix (Decomposition merge-back r56307 overrode the r55915 revert) — verified at repo HEAD.
 
-Residual: runtime smoke of the rebuilt CodeBranch DLL pending on the reviewer (constants verified via reflection); NPN gets a further increment when separated for its own release.
+Residual: none — the CodeBranch DLL runtime smoke passed (verified 2026-07-16; the MainClient pair had been runtime-verified at commit time). NPN gets a further increment when separated for its own release.
 
 Non-blocking suggestion for the JIRA comment: an integration test driving repair → diff → client apply via the NUnit test client (`RepairItem_m` currently has no FeederRod callers) would pin the end-to-end scenario; the added unit tests cover the projection only.
 
