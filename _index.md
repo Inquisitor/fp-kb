@@ -18,6 +18,7 @@
 | FP-42677 | rating-abuse-prevention        | in-discussion | fishing-planet/tasks/FP-42677--rating-abuse-prevention/                 |
 | FP-44670 | club-redelivery-damage         | in-progress   | fishing-planet/tasks/FP-44670--club-donation-redelivery-damage/         |
 | FP-33074 | chat-messages-disappear        | implementing  | fishing-planet/tasks/FP-33074--chat-messages-disappear/                 |
+| FP-44946 | git-workflow                   | in-progress   | fishing-planet/tasks/FP-44946--svn-to-git-migration/                    |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
@@ -32,6 +33,7 @@
 | Draft                    | Task     | Target                                                                        |
 |--------------------------|----------|-------------------------------------------------------------------------------|
 | twitch-no-email-handling | FP-44591 | TECH > SERVER > Twitch integration (child) — published v2 (5696978945)        |
+| git-flow-options         | FP-44946 | TECH > SERVER > Infrastructure (child) — published v6 (5768642569)            |
 
 > See [confluence backlog](confluence/backlog.md) for the broader assessment plan.
 
