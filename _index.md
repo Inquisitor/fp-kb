@@ -52,6 +52,18 @@
 > Authoritative source: Confluence "Environment and branch status" (page id 68616199)
 > Note: MainClient revisions newer than the Stable-pinned rev belong to Content.
 
+## Releases (current)
+
+Release↔branch mapping — one branch can host several releases at once; a reviewed commit's merge targets follow the RELEASE it ships with, not the role table alone (downward merges are user-directed; see `jira-review-close` → Step 3).
+
+| Release                  | Ships from (server) | Status                                                                                                                                         |
+|--------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| FTUE                     | MFT20260325         | Released on Steam/EGS, PlayStation, Xbox; not released on Mobile and Nintendo — expected to catch up via FPA                                   |
+| 2026.5 Anniversary (FPA) | MFT20260325         | In progress, target 2026-07-27; continuation of FTUE from the same branch — in-branch boundary is the `F2PProtocolVersion` 1125→1126 increment |
+
+> The client always releases from MainClient (per-release pin revisions: Branch Roles above).
+> Update on each release cut / release-plan change.
+
 ## Server Branch Ancestry
 
 Minimal ancestry for active branches — used to decide whether a commit is already inherited via `svn copy` and does not need explicit merge.
