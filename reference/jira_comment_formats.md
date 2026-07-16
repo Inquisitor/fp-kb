@@ -12,6 +12,8 @@ After every SVN commit (or merge) to an FP-##### task: propose a JIRA comment in
 
 **Always post via ADF (`contentFormat: adf`), never markdown.** The role colors on branch labels are `textColor` marks — markdown cannot render them, so a markdown post silently drops the colors. The Jira instance supports `textColor` (confirmed in use). Build the ADF: branch label = `{"type":"text","text":"MFT","marks":[{"type":"strong"},{"type":"textColor","attrs":{"color":"<role hex>"}}]}`, revisions = `link` marks, code identifiers / `Source` values = `code` marks. Role hex values: see `<kb>/CLAUDE.md` -> Branch Roles (Content `#ff991f`, Code `#0747a6`, etc.).
 
+**Issue references are inline cards.** Any `FP-XXXXX` mention in a comment body must be an `inlineCard` node — `{"type":"inlineCard","attrs":{"url":"https://fishingplanet.atlassian.net/browse/FP-XXXXX"}}` — not plain text and not a `link`-marked text: plain keys do not smart-link in API-posted ADF and read as dead text. Same rule for issue descriptions created/edited via API (see `jira_required_fields.md`).
+
 Note: the MCP comment API has no edit/delete for Jira comments - get the format right before posting; a wrong post must be deleted by the user.
 
 ## Repos and branch labels
