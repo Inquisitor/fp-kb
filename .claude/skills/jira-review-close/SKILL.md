@@ -86,6 +86,8 @@ Look up [`<kb>/_index.md`](../../../_index.md) → Branch Roles for current role
 - Source = Content → targets: Code
 - Source = Code → no upward merges
 
+**Release-mapping caveat (downward merges are user-directed).** The role table covers upward merges only; the target set is ultimately a release question, and one branch can host more than one release at a time (e.g. Content carrying its regular release plus a team-specific one) — that is normal, but it means a commit may need a downward cherry-pick the role table will never produce. Downward merges are directed by the user, not derived. If release↔branch info is available ([`<kb>/_index.md`](../../../_index.md) → Releases) and you are 100% certain which branch the task's release ships from, and the reviewed commit is not there — propose that merge to the user; otherwise surface the uncertainty instead of concluding "no targets" from the role table alone. Record any user-directed deviation in the review card.
+
 **For each target branch, apply branch-copy inheritance check** (see required reads). If the commit revision is ≤ the target's creation revision from its source, the fix is already inherited via branch copy — skip merge for that target.
 
 For each remaining target:
@@ -93,6 +95,8 @@ For each remaining target:
 - `svn merge -c <rev>` into target branch working copy
 - Verify result (no unexpected files, no conflicts); on conflict — STOP, do not post any JIRA comment yet
 - Commit using SVN merge commit format from [`<kb>/CLAUDE.md`](../../../CLAUDE.md) → SVN merge commit format
+
+**Paired client commits.** If the task has paired client commits (client-repo revisions in the JIRA thread / review card Scope), verify at close that they are present in the target client branch. `svn mergeinfo --show-revs eligible` is necessary but NOT sufficient — client bulk merges record ranges without a content guarantee (project memory `mainclient-cherry-pick-mergeinfo`) — so verify by content tokens: distinctive identifiers/files from each client commit's diff, checked in the client checkout. Client-branch merges are owned by the client team: if commits are missing, flag it to the user / client lead — the server side merges client commits only as a last resort, at the user's explicit direction. Record the outcome in the review card. Omit `Merged → <client branch>` JIRA lines for merges not performed.
 
 ### Step 4 — Draft JIRA comment
 
