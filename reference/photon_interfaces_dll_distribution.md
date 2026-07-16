@@ -62,3 +62,14 @@ annotation is noise. Do not pre-emptively decorate types "just in case" -- the r
    client's `ObjectModel` copy and commit to client SVN.
 4. Other client-side code (Photon networking adapters, UI, etc.) lives only in the client SVN and is edited
    there directly.
+
+## Branch pairing and merge discipline
+
+- The DLL is **branch-paired**: it embeds the owning server branch's `F2PProtocolVersion`. When a
+  `Photon.Interfaces` change moves to another branch pair (cross-branch merge), do NOT carry the DLL
+  binary with the merge — rebuild it from the **target** server branch (after the server-side merge
+  lands there) and copy that build into the paired client checkout.
+- The server-side commit and its paired client commit (mirror sources + DLL) land together, after an
+  end-to-end smoke test (build server, run it, build client, log in). The server half never goes in
+  alone — see the pairing rule in
+  [release versions and process](release_versions_and_process.md).

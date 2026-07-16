@@ -80,6 +80,16 @@ built and tested breaks every developer on that branch pair — their local clie
 gate against the updated server. Never commit the server increment until the paired DLL is built,
 tested, and sitting in the client WC ready to commit.
 
+**The same atomicity applies to any paired server+client landing, not only increments.** A
+cross-branch merge whose server side has a client counterpart (ObjectModel mirror, message wiring, a
+`Photon.Interfaces` change) lands as a pair: prepare BOTH working copies first, verify, then commit
+the server and the client immediately after each other — the server half never goes in alone. The
+DLL is rebuilt from the target server branch, never carried across branch pairs as a merged binary
+(see [Photon.Interfaces DLL distribution](photon_interfaces_dll_distribution.md)). Verification gate
+before the pair lands: end-to-end smoke test — build the server, run it, build the client, at
+minimum log in with the client against that server (user-driven; a clean textual merge or compile
+proves nothing about runtime pairing).
+
 ## Preparing a server patch (method)
 
 1. **Find the boundary** — `svn blame`/`svn log` `SharedConsts.cs` for the last "Increment minor
