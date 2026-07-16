@@ -1,5 +1,10 @@
 # equipment-rules -- backlog
 
+## Cleanup candidates
+
+- [ ] **Remove or fence off vestigial Car/Lodge Equipment storages.** `StoragePlaces.CarEquipment` / `LodgeEquipment` are not player-reachable in the shipped UI (product knowledge, FP-41925 review) yet remain fully supported server-side (`CheckItemAvailability` admits them on pond; `MoveInventoryItem` takes client-supplied storage) and half-wired client-side (`InventoryItemComponent.ToCar()`, `ShowContextMenuInStorage`). `CanMove` applies no per-type constraints to either destination, so every capacity guard review has to reason about them — the FP-41925 pond guard is formally bypassable through them (self-inflicted tackle spill only, no gain). Origin: `review/FP-41925--hats-to-backpack/` (F-1).
+- [ ] **Destroy/sell of a worn capacity-granting outfit leaves the tackle pool over-capacity silently.** `CanDestroyItem` blocks only `MissionItem`; destroying/selling a worn Hat or LuresBox removes its `TackleKitCount` capacity with no spill and no block — Equipment stays over-cap (tolerated state: only future adds are gated). Long-standing pattern; decide whether intended. Origin: `review/FP-41925--hats-to-backpack/` (F-5).
+
 ## Research / documentation
 
 - [ ] **Document `RodTemplates` test architecture.** `Shared/ObjectModel.Tests/RodTemplatesTests.cs` uses a `Block` / `BlockRow` declarative DSL: per-block `Existing = InitItems(...)` declares the universe, `blockX.CanMove(...)` declares the allow-set, and `_CantMove = Existing.Except(_CanMove)` is implicit negative-coverage. `Test_Compatibility_Core()` orchestrates. There are ~30+ `[TestMethod]` scenarios covering most templates -- but the coverage matrix is not documented anywhere. Needed: which (template x rod-subtype x slot) cells are tested vs not; which scenarios use `.Move(realItem)` to drive `ExpectedTemplate` vs leave the block dangling; where to add a new scenario when adding a template or restriction. Triggers from FP-43502: had to read the file end-to-end to find the 10 scenarios that needed the `monoLeader` allow-set update.
