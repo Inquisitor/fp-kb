@@ -291,7 +291,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [Photon.Interfaces DLL distribution](reference/photon_interfaces_dll_distribution.md) — server-built DLL copied to client via `Refresh.cmd`; ObjectModel source-duplicated with sensitive code stripped
 - [Server Release Checklist Steps field](reference/release_checklist_field.md) — `customfield_11323` vocabulary, option→template-step mapping, SQL-sweep blind-zone check, release-mechanics cheat-sheet (DataPump denylist, profile conversions, env-var create-vs-enable, destructive regenerate)
 - [FP release versions and server-patch process](reference/release_versions_and_process.md) — fixVersion semantics (Internal/Async, Next Server Hotfix incubator, "released-for-us"), protocol-increment release boundary, transfer/add patch-prep method, client-coupling async-vs-sync, server-task identification via `assignee was`
-- [Analytics read-only access (Stats copy)](reference/stats_analyst_ro_access.md) — `stats_analyst_ro` login: `db_datareader` across the 5 Stats-copy DBs with column-level DENY on identity columns (`Username`/`ExternalId`/`ForegnTransactionId`); what/why + idempotent setup SQL
+- [Analytics read-only access (Stats copy)](reference/stats_analyst_ro_access.md) — shared `analytics_ro` role (member of `db_datareader` + column DENY on identity columns) with per-colleague RO logins on the Stats copy; what/why + idempotent setup SQL
 - [Stats schema divergence across platforms](reference/stats_platform_schema_divergence.md) — per-column presence matrix of same-named Stats `dbo` tables/views that differ across Steam/PS/Xbox/Mob/Nx (snapshot); feeds the server-backlog divergence item
 
 ## Rules
