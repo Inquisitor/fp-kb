@@ -50,8 +50,35 @@ This commit is the **boundary** between released code and new post-release code:
 - Commits after the increment rev = new code that needs a patch vehicle.
 - Branch history after the increment is the list of post-release work.
 
-(A separate **major** protocol bump happens when a branch is set up: `Increment major protocol
-version for the branch`.)
+### Increment commit convention
+
+Both major and minor increments are **standalone one-line, branch-local commits** — no FP-task
+prefix, no JIRA link, no bullets — touching only `SharedConsts.cs`. **Increment commits are never
+merged between branches**: the `[<BRANCH>]` prefix exists precisely to mark the commit as
+branch-local (exclude it from upward merges); every branch commits its own increment.
+
+- **Major** — when a branch enters its (next) release phase. A branch can receive more than one
+  major bump if it carries consecutive releases (e.g. FTUE → FPA phases on one branch):
+  `[<BRANCH>] Increment major protocol version for the branch: <maj>.<min> -> <maj+1>.0`
+  — `MinorProtocolVersion` resets to 0 in the same commit.
+- **Minor** — after each sub-release ships:
+  `[<BRANCH>] Increment minor protocol version after the <release> release: <maj>.<min> -> <maj>.<min+1>`
+
+The old value in the message is the actual current `major.minor`. `RetailProtocolVersion` is a
+separate constant, untouched by F2P bumps. The new value reaches clients only via the per-branch
+`Photon.Interfaces.dll` rebuild — see [Photon.Interfaces DLL distribution](photon_interfaces_dll_distribution.md).
+
+The paired client-side DLL commit is also a standalone one-liner, prefixed `[Maintenance]` with the
+server branch named by role:
+`[Maintenance] Increment major protocol version for the <role> branch: <maj>.<min> -> <maj+1>.0`.
+The dedicated commit is preferred; historically a bump has also reached the client piggy-backed on a
+task commit that refreshed the DLL anyway.
+
+**Pairing is atomic in time: the server increment commit and the paired client DLL commit always
+land together (within the same minute).** Committing the server side while the client DLL is not yet
+built and tested breaks every developer on that branch pair — their local client fails the protocol
+gate against the updated server. Never commit the server increment until the paired DLL is built,
+tested, and sitting in the client WC ready to commit.
 
 ## Preparing a server patch (method)
 
