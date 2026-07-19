@@ -92,7 +92,20 @@ Quick scan across diffs; surface obvious patterns; summarize to user.
 
 ### Step 4 — Hypothesis-then-verification
 
-Each hypothesis-level concern (potential issue) gets verified before becoming a finding. The Resolution field of any finding may NOT be drafted until at least one verification bullet exists in the Investigation section.
+Every factual claim presented in or used to support a finding — its title/problem statement, description, mechanism, severity, resolution, or remediation (together, the finding's **supported claims**) — must be verified before it is written as fact. Investigation must contain a claim-specific verification bullet stating the exact target, instrument and scope, observed result, and conclusion. One verified premise does not unlock any other premise. "Read code", "checked DB", and delegate confidence are not verification.
+
+If verification does not settle the claim — the instrument is unavailable, or the evidence it produced is inconclusive, partial, or non-reproducible — record it explicitly unresolved and state why (for an unavailable instrument, name the instrument, the blocker, the access attempted, and the alternative considered). Do not use an unresolved claim to support any of the finding's supported claims; unresolved is never rejected and never promoted.
+
+- **Persisted-instance claim** ("row exists", "field has value X", "save committed") — verify the relevant stored state using a DB query or stored bytes, with the environment, record/key, and relevant time/revision identified. A save call or serialization mapping proves only an attempted write or serialization capability, not the persisted outcome.
+- **Serialization/schema-shape claim** ("field X is serialized", "DTO lacks property Y") — inspect the actual DTO, mapping, serializer, or schema.
+- **Control-flow/reachability/identity claim** ("scenario X calls Y", "this is the applicable implementation") — trace from the scenario entry/dispatch point to the exact implementation at the reviewed revision. Reading an implementation in isolation does not prove that the scenario uses it; use a trace, test, logs, or configuration when dispatch is dynamic.
+- **Negative-data claim** — an empty query result establishes only absence from the queried population. It does not refute a reachable or latent case unless that population is shown to be authoritative; check live references and sibling/variant consistency, or record why each cannot affect authoritativeness.
+- **Remediation-scope claim** — before stating that a fix requires adding or changing a field, DTO/schema, method, or call site, inspect the exact named artifact and record the missing capability in Investigation. Do not prescribe changes to an uninspected artifact.
+- **Other factual claim** (numeric/computation, concurrency/timing/ordering, runtime-config/deployment/feature-flag, protocol/client-contract, provenance/VCS-history, compilation/test/platform, authorization) — use an instrument capable of observing the exact proposition in its applicable revision, environment, configuration, and execution context. Static source inspection establishes only static-source facts; runtime, data, deployment, and external-contract claims require corresponding executable or runtime evidence (a test, a run, a probe), and a provenance/history claim needs the VCS record (svn log/diff/blame). When no capable instrument settles it, the unavailable/inconclusive rule above governs.
+
+Where any rule above says "relevant", "applicable", "the population", or "already verified", bind it to the exact proposition and context the finding asserts; a surrogate context or a subset is admissible only with a stated equivalence or discovery argument, not a judgement that it is close enough.
+
+This gate applies before a recon hypothesis, a delegated finding (Step 6), an executor claim (Phase 3), or a remediation claim is promoted to — or used to support — any of the finding's supported claims. A hypothesis may be recorded unverified in the Investigation Journal; it may not be relied on as fact until it passes this gate.
 
 ### Step 5 — Branch-copy inheritance check (if Code-branch merge applies)
 
@@ -102,21 +115,21 @@ See [`<kb>/feedback/branch_copy_inheritance.md`](../../../feedback/branch_copy_i
 
 After recon, launch an independent review in parallel — a required step, run even when recon found nothing (clean-LGTM is the highest-risk case for a missed defect). Two modes, both in parallel:
 
-**Independent defect hunt (blind).** Point the `code-reviewer` agent (Agent tool) and Codex (`/ask-codex` skill) at the diffs/scope: hunt for defects, assume bugs exist, ground every claim in the diff (cite file/method). Prefer NOT to pre-load the recon findings — a delegate that echoes recon adds nothing, and one told to argue against it manufactures objections. Independence + code-grounding is the goal.
+**Independent defect hunt (blind).** Point the `code-reviewer` agent (Agent tool) and Codex (`/ask-codex` skill) at the diffs/scope: hunt for defects, assume bugs exist, ground each claim in the evidence Step 4 requires — cite the file/method for a code claim; for a data/runtime claim whose probe cannot be run, return it as an unresolved hypothesis, not a finding. Prefer NOT to pre-load the recon findings — a delegate that echoes recon adds nothing, and one told to argue against it manufactures objections. Independence + claim-appropriate evidence (per Step 4) is the goal.
 
-**Targeted verification (grounded).** For any specific recon finding you are genuinely unsure about, hand that finding to a delegate (agent and/or Codex, in parallel with the hunt) for a focused confirm/refute — scoped to that finding, required to cite code evidence either way. This is where adversarial pressure belongs: on a named uncertain claim, not a blanket "challenge everything".
+**Targeted verification (grounded).** For any specific recon finding you are genuinely unsure about, hand that finding to a delegate (agent and/or Codex, in parallel with the hunt) for a focused confirm/refute — scoped to that finding, required to cite evidence per Step 4 either way. This is where adversarial pressure belongs: on a named uncertain claim, not a blanket "challenge everything".
 
 **Critically re-verify every delegated finding before accepting it** — this re-verification is the filter that kills both sycophantic confirmations and contrarian red herrings:
-- Verify each delegated finding (from either mode) against the actual code/diff yourself (read the cited file/method) before it becomes a card finding — same bar as Step 4 (a verification bullet in Investigation). A finding with no code evidence that does not survive your check is dropped (or recorded as considered-and-rejected).
+- Accept a delegated finding only after your own Step-4-compliant verification supports every one of the finding's supported claims. If your verification disproves it, record it considered-and-rejected; if verification does not settle it (instrument unavailable, or evidence inconclusive), record it explicitly unresolved per Step 4 — never rejected, never promoted.
 - Where a delegation corrects your own recon (mechanism, severity), record it in the Investigation journal (hypothesis disproven).
-- Where the delegations disagree with each other or with recon, resolve by reading the code — not by majority. **Surface any disagreement that stays unresolved or is decision-affecting to the user directly, not only in the card.**
+- Where the delegations disagree with each other or with recon, resolve each disagreement using the evidence Step 4 requires for the disputed claim — not by majority; code inspection alone resolves only static-code propositions. **Surface any disagreement that stays unresolved or is decision-affecting to the user directly, not only in the card.**
 - Attribute each surviving finding in "Discovered by" (skill recon / code-reviewer agent / Codex).
 
 **Stale-WC propagation (per Step 1 fallback):** if the WC was not updated (dirty / declined / pinned old rev), both the agent and Codex will read pre-fix disk state unless warned. Include in each prompt an explicit warning that the WC is behind the reviewed revision, plus the exact `svn diff -c <rev>` and `svn cat -r <rev> <branch-URL>/<path>` commands to use as the source of truth instead of disk reads.
 
 ## Phase 3: Verification
 
-Verify executor's claims about codebase structure (claims in commit messages, JIRA comments). Don't take at face value.
+Coverage sweep for executor claims: enumerate the executor's factual claims from commit messages and JIRA comments (structure, data, runtime, deployment, compatibility — not only code structure). For each claim not already verified in Phase 2, apply the Step 4 gate and record its verification bullet in the Investigation Journal; do not re-verify claims already covered. Don't take any executor claim at face value.
 
 ## Phase 4: Findings
 
@@ -127,7 +140,7 @@ Verify executor's claims about codebase structure (claims in commit messages, JI
 
 **Description:** what's wrong, where (file/method, no line numbers), why it matters; severity-justifying in 1 sentence.
 
-**Investigation:** chronological bullets of work done — read, grepped, hypothesized, ruled out, agent-checked. For trivial findings: "File inspection only".
+**Investigation:** chronological bullets of work done — read, grepped, hypothesized, ruled out, agent-checked. Trivial findings are NOT exempt from Step 4: each verification bullet must still state the target, instrument and scope, observed result, and conclusion; a bare "File inspection only" is invalid.
 
 **Resolution:** action + brief justification.
 
