@@ -516,6 +516,7 @@ at the rating-drop vector:
 | Week-8  | 2 (Adlerblut-Slayer, TR-dennisfb)                             | 2 conf 10/10 BAN   | 20/20 |
 | Week-9  | 2 (ArTeM209, Gustyn112)                                       | 2 conf 9-10/10 BAN | 22/22 |
 | Week-10 | 7 (JFF_Gothyka, LaccFarro, CreekSamurai, MLG720YOLO, Da Sneaky Snake, CraddiePoosta, **sandaljepitt**) | 6 confirmed BAN + **1 dissent (sandaljepitt: trial WATCH conf 7)** | **27/28** |
+| Week-11 | 5 (yevhen331, sen1a, evgeniy3311, Ricky27sampei, **LZ23J7KS**) | 4 confirmed BAN + **1 dissent (LZ23J7KS: trial WATCH conf 7 under rule 7 direction 2)** | **32/34** |
 
 **Interpretation caveat (post-Codex)**: the alignment counter is a sanity check, not a
 validation metric. Independence is weak because Support-pre-actioned status is included in the
@@ -565,6 +566,11 @@ section the cycle it's discovered, then carried forward via memory rules.
 | week-10 | First Trial-Support dissent on rating-drop (sandaljepitt): rule 9 candidate for within-bracket detector | (in `bans-2026-07-12.md` and standing rules above) |
 | week-10 | LaccFarro operational case: our week-6 REPEAT trial-confirmed but Support already covered him at 5W; WHERE clause correctly skipped Profile update, Mongo banLog audit entry inserted (record of intent) | (in `bans-2026-07-12.md`) |
 | week-10 | Codex consultation deferred followups: (a) methodology.md stale — this update addresses it; (b) two-phase blind→informed verdict architecture; (c) alignment counter is sanity check not validation, real falsification needs blind replay; (d) blind spots list — boundary camouflage (sandaljepitt), start-but-throw pivot (ZeroScore column unused), data-source SQL/Mongo reconciliation gate | (in `bans-2026-07-12.md`) |
+| week-11 | Rule 7 direction 2 EMPIRICALLY VALIDATED for closure: LZ23J7KS (2nd Trial-Support dissent) confirms TOP-flavor MASTERS sandbagger family (LZ23J7KS/JIALIN0720/Bas_di08/VM_Vigor/Panonski_Alas) exits FP-43631 scope. Support scope broader; our methodology targets NOOBS-farming only | (in `bans-2026-07-19.md`) |
+| week-11 | Rule 6 → rule 4/8 ladder VALIDATED SECOND TIME: evgeniy3311 (was W10 WATCH conf 7 Lifetime 10) escalated +11 NOOBS prizes → Support pre-actioned at 2W matching rule 4 auto-BAN. First was CreekSamurai w9→w10. Off-ramp works | (in `bans-2026-07-19.md`) |
+| week-11 | Rule 6 in-window vs lifetime ambiguity flag: La_Iena_River_ (Lifetime 54, in-window TotalPrizes 6) triggered rule 6 novice-deference. On the standard wide-cohort where TotalPrizes gates are 4-11, rule 6 fires broadly. **Recommend clarifying: "Lifetime prizes < 10" is the KingYakO2-intent threshold; in-window prizes are a separate factor** | (in `bans-2026-07-19.md`) |
+| week-11 | Rule 9 vs rule 6 collision flag: TurboBandz6351 hit ALL rule 9 gates (NS 46%, pure 5N, max PCR 81 < 100, Reg 29 >= 10) AND rule 6 novice-deference (Lifetime 5). Judge resolved via rule 6 override + rule 8 persistence clock. **Formalize precedence: rule 6 wins on first-cycle NEW, rule 8 carries the escalation** | (in `bans-2026-07-19.md`) |
+| week-11 | Cheat-vector orthogonality precedent: Belion019 (Xbox) had 88 CHEAT triggers active (Undriven boat / Fish catch distance / Line high extension) alongside a clean rating-drop pattern (4 Kacumi + 6 batched flushes + 1 M→N). Trial BAN 2W on rating-drop grounds only, cheat vector orthogonal (AntiCheat framework separate scope). No methodology change; rules fire independently | (in `bans-2026-07-19.md`) |
 
 ## Example: week-7 walkthrough (2026-06-22 ban date)
 
