@@ -103,13 +103,13 @@ Journal captures methodology and non-obvious decisions, not action narration. Ea
 
 ## Present when applicable
 
-- **Findings** — with severity tags + structured format, only if there are non-trivial observations
+- **Findings** — code-rooted observations (a defect, risk, or quality consequence in the diff), each with a severity tag + structured format
 - **Checklist** — correctness checks, only for complex logic changes
 - **Verdict** — explicit approve/reject, only when not obvious from Findings + Resolution
-- **Notes** — minor observations that don't rise to Findings
+- **Notes** — one-liner observations that assert no code issue (ticket metadata, context); never carry a severity tag
 
 ## Examples by complexity
 
-- **Simple** (single-commit fix): Summary + Scope + Notes (or Findings if any non-trivial)
+- **Simple** (single-commit fix): Summary + Scope + Notes (or Findings if any code-rooted)
 - **Medium** (multi-commit feature): Summary + Scope + Checklist + Notes
 - **Complex** (multi-commit cross-branch): Summary + Scope + Findings (multiple) + Notes

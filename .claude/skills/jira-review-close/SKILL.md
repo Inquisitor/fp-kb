@@ -49,7 +49,7 @@ Load before drafting any JIRA comment or running any merge:
 
 ### Step 1 — Confirm verdict
 
-The verdict was drafted in Phase 5 of `jira-review-open`. Confirm it still reflects the current state — revise if findings shifted or new info emerged. Final verdict is one of: `approve` / `reject` / `approve-with-waiting-for-release`.
+The verdict was drafted in Phase 5 of `jira-review-open`. Confirm it still reflects the current state — revise if findings shifted or new info emerged. Final verdict is one of: `approve` / `reject` / `approve-with-waiting-for-release`. An `approve` may additionally carry the **ship-and-reopen sub-case** (Step 4): the change still ships and merges as an approve, but the card is set `status: reopened` and the `_index.md` row stays (Steps 6/7) because the task returns to the executor for non-blocking rework.
 
 ### Step 2 — Waiting-for-release check / finalize
 
@@ -61,7 +61,7 @@ The verdict was drafted in Phase 5 of `jira-review-open`. Confirm it still refle
 
 Signals include: logging improvements, fixes for rare races/unsync, changes observable only via production telemetry, threshold/heuristic changes whose effect needs production data.
 
-If neither signals match nor user explicitly requests post-release verification — go straight to `resolved`.
+If neither signals match nor user explicitly requests post-release verification — go straight to `resolved` (unless the approve is a ship-and-reopen sub-case, which sets `reopened` per Step 4).
 
 **Reverse path (when this skill triggers on a card already in `waiting-for-release` status):**
 1. Load the existing review card
@@ -75,9 +75,9 @@ If neither signals match nor user explicitly requests post-release verification 
 
 ### Step 2b — Release-step field gate (mandatory; approve path)
 
-On `approve` / `approve-with-waiting-for-release`, apply the gate from [`<kb>/reference/release_checklist_field.md`](../../../reference/release_checklist_field.md) -> "Closure / review gate", using the reviewed diff (or `svn diff --summarize` on the carded revs) to derive the required options. If `customfield_11323` misses any, convey the release impact concretely and drive the field to set (propose value + set via `editJiraIssue` on approval, or have the executor/user set it) **before posting the verdict comment (Step 5)**. The only bypass is an explicit user waiver with a stated reason. On `reject`, skip.
+On any approve-family verdict (`approve` / `approve-with-waiting-for-release`, including a ship-and-reopen approve), apply the gate from [`<kb>/reference/release_checklist_field.md`](../../../reference/release_checklist_field.md) -> "Closure / review gate", using the reviewed diff (or `svn diff --summarize` on the carded revs) to derive the required options. If `customfield_11323` misses any, convey the release impact concretely and drive the field to set (propose value + set via `editJiraIssue` on approval, or have the executor/user set it) **before posting the verdict comment (Step 5)**. The only bypass is an explicit user waiver with a stated reason. On `reject`, skip.
 
-### Step 3 — Cross-branch merge (only if approve)
+### Step 3 — Cross-branch merge (any approve-family verdict; skip on reject)
 
 Look up [`<kb>/_index.md`](../../../_index.md) → Branch Roles for current role assignments. Per [`<kb>/CLAUDE.md`](../../../CLAUDE.md) → Branch Roles, merge direction is `OldStable → Stable → Content → Code` — each level merges into all levels above it. Determine the target list from the source branch role:
 
@@ -91,12 +91,15 @@ Look up [`<kb>/_index.md`](../../../_index.md) → Branch Roles for current role
 **For each target branch, apply branch-copy inheritance check** (see required reads). If the commit revision is ≤ the target's creation revision from its source, the fix is already inherited via branch copy — skip merge for that target.
 
 For each remaining target:
+- `svn status` the target WC **first**, before update or merge, to record the pre-existing-mods baseline — so afterward you can tell your merge from the user's in-flight edits (explicit-path commit protects unrelated *files*, but not the user's edits in a file the merge also touches, nor root property changes swept by `.`)
 - `svn update` the target branch working copy to HEAD first — a stale target root fails the merge commit with `svn: E170004: ... out of date`, forcing an update + re-commit round-trip
 - `svn merge -c <rev>` into target branch working copy
 - Verify result (no unexpected files, no conflicts); on conflict — STOP, do not post any JIRA comment yet
-- Commit using SVN merge commit format from [`<kb>/CLAUDE.md`](../../../CLAUDE.md) → SVN merge commit format
+- Commit using SVN merge commit format from [`<kb>/CLAUDE.md`](../../../CLAUDE.md) → SVN merge commit format. **If the target WC carries unrelated local modifications** (another task's in-flight edits — run `svn status` before committing), never `svn commit` at the WC root: it sweeps those edits into the merge commit. Commit only the merged paths explicitly, plus the root for mergeinfo: `svn commit <merged-path-1> <merged-path-2> . --depth empty`. After commit, verify only the pre-recorded baseline remains uncommitted. (Same hot-WC discipline as the `_index.md` staging rule in Step 8.)
 
 **Paired client commits.** If the task has paired client commits (client-repo revisions in the JIRA thread / review card Scope), verify at close that they are present in the target client branch. `svn mergeinfo --show-revs eligible` is necessary but NOT sufficient — client bulk merges record ranges without a content guarantee (project memory `mainclient-cherry-pick-mergeinfo`) — so verify by content tokens: distinctive identifiers/files from each client commit's diff, checked in the client checkout. Client-branch merges are owned by the client team: if commits are missing, flag it to the user / client lead — the server side merges client commits only as a last resort, at the user's explicit direction. Record the outcome in the review card. Omit `Merged → <client branch>` JIRA lines for merges not performed.
+
+**Paired landing order.** When the close performs user-directed paired merges (server change + client mirror / `Photon.Interfaces` change), prepare BOTH working copies first — server merge applied, client merge applied, DLL rebuilt from the TARGET server branch (never carried across branch pairs as a binary) — then wait for the user's end-to-end smoke test (build the server, run it, build the client, log in), and only then commit the two halves back-to-back. The server half never lands alone: it opens a mismatch window on a shared release branch. See [`<kb>/reference/release_versions_and_process.md`](../../../reference/release_versions_and_process.md) → pairing rule and [`<kb>/reference/photon_interfaces_dll_distribution.md`](../../../reference/photon_interfaces_dll_distribution.md) → Branch pairing and merge discipline.
 
 ### Step 4 — Draft JIRA comment
 
@@ -105,6 +108,8 @@ Read formats fresh at draft-time: [`<kb>/reference/jira_comment_formats.md`](../
 The comment combines a verdict base with optional add-ons. Default is to combine in one comment; split when an add-on is substantial, wants its own notification thread, or is technically independent.
 
 **Verdict patterns:**
+
+**Bare-`LGTM.` admissibility (check first).** A bare `LGTM.` is admissible only when the Verdict carries no caveat. If the Verdict carries a caveat — a `Verification scope:` line from open Phase 5, or a behavioural caveat — a bare `LGTM.` is forbidden and that caveat must be **carried forward into the posted comment**: as the reasoning of **Approval with reasoning**, a **warning panel**, or (for a ship-and-reopen approve) the ship-and-reopen lead. A `Verification scope:` caveat must not be dropped from JIRA — the gate exists to stop the close comment erasing what open Phase 5 made mandatory. Metadata-only Notes (executor-quality) do not by themselves forbid a bare `LGTM.`.
 
 - **Dry approval** (default): `LGTM.`
 - **Approval with reasoning** (when accepted approach is non-obvious): `LGTM. <1-2 sentences stating what about the approach is sound — facts, not praise>.`
@@ -120,6 +125,8 @@ The comment combines a verdict base with optional add-ons. Default is to combine
   - <minor observation>
   ```
   Opening phrases: "A few items need rework before this can merge." / "Approach is close; flagging [N] blocking items." / "Raising blockers below; rest of the change reads well."
+
+- **Ship-and-reopen** (an `approve` sub-case — change ships and merges as-is but the task returns for non-blocking rework): lead by decoupling release safety from the reopen — `No blocking issue; safe for the release.` — then a numbered non-blocking follow-up list. Keep follow-up on the same task (reopen) when it stays within the task's accepted scope; split into a separate ticket only out-of-scope work. This comment does not open with `LGTM.` — an explicit exception to the LGTM-first approve convention. Set card `status: reopened`, keep the `_index.md` row (Steps 6/7), and transition the JIRA ticket back to the executor (or request it; mark pending in the Step 9 table if the tool cannot).
 
 **Add-ons:**
 
@@ -141,11 +148,13 @@ Per `jira_comment_preview` rule:
 - Set closure status in frontmatter:
   - `resolved` (default)
   - `waiting-for-release` (only when post-release verification needed)
+  - `reopened` (a ship-and-reopen approve sub-case, or a blocking `reject` that returns the task to the executor for rework)
 
 ### Step 7 — Update Active Reviews in `<kb>/_index.md`
 
 - `resolved` → remove entry
 - `waiting-for-release` → keep entry (stays listed until resolved later)
+- `reopened` → keep entry (stays listed until the executor's rework lands and the review re-closes)
 
 ### Step 8 — KB commit
 
@@ -157,9 +166,16 @@ Examples:
 - Park as waiting-for-release: `[Review] FP-41962: Line break logging (waiting-for-release)` + `+ Awaiting log review post-release`
 - Open then pause: `[Review] FP-XXXXX: Title (in-progress)` + `+ Initial card with 3 findings; paused waiting for executor response on F-2`
 - Finalize after waiting-for-release: `[Review] FP-41962: Line break logging (resolved)` + `+ Logs verified post-release; behavior confirmed`
-- Reopen: `[Review] FP-XXXXX: Title (in-progress)` + `+ Reopened — F-1 turned out blocking after retest`
+- Reopen: `[Review] FP-XXXXX: Title (reopened)` + `+ Reopened — F-1 turned out blocking after retest`
 
-Do NOT list the `_index.md` Active Reviews row add/remove as a bullet — it is housekeeping implied by the status (resolved drops the row, reopen keeps/returns it). The row change is bundled into this `[Review]` commit by design — it keeps the review's active/reopen state in focus — and does not get a separate commit. Describe only real content.
+Do NOT list the `_index.md` Active Reviews row add/remove as a bullet — it is housekeeping implied by the status (resolved drops the row, reopen keeps/returns it). Describe only real content.
+
+**Staging `_index.md` safely (mandatory).** `_index.md` is a hot file the user edits concurrently mid-session — never `git add` / `git commit` it wholesale. Before staging, run `git diff -- _index.md` and confirm every hunk is your review's own row:
+- Your row is the only diff → stage it with the card (bundled into this `[Review]` commit).
+- The diff also carries the user's unrelated rows → stage only your hunk (`git add -p`), or leave the whole `_index.md` row to the user and commit just the card folder.
+- Open+close happened in one session with no intermediate commit → the add+remove nets to zero; nothing of yours to stage — commit only the card.
+
+Then, before committing, inspect `git diff --cached -- _index.md` (the full cached content — `--name-only` cannot reveal a foreign hunk staged *inside* `_index.md`) plus `git diff --cached --name-only` for the file list; confirm both are exactly your intended change. The whole KB repo is hot and a concurrent session may have pre-staged foreign files or hunks — capture the pre-existing staged state first, unstage foreign entries (`git restore --staged <path>`), and restore that captured staging afterward. If you leave the `_index.md` row entirely to the user, the KB close is not complete: mark the KB commit pending in the Step 9 table rather than reporting it done.
 
 The commit message describes what changed in KB, not what's in the review card. The card itself is the state; the commit message is the diff.
 
@@ -183,7 +199,7 @@ mark anything still pending (user-side action or post-release verification) dist
 | Cross-branch merge                       | ✅ r<rev> per target  /  ➖ inherited-skipped  /  ➖ n/a (reject)   |
 | JIRA comment                             | ✅ <permalink>  /  ✅ rejection posted                             |
 | Release-step field (`customfield_11323`) | ✅ <options set>  /  ➖ n/a                                        |
-| Review card                              | ✅ resolved  /  ✅ waiting-for-release                             |
+| Review card                              | ✅ resolved  /  ✅ waiting-for-release  /  ✅ reopened             |
 | KB commit                                | ✅ <hash>                                                         |
 | Pending                                  | ⏳ <user-side JIRA transition / post-release due-date>  /  ➖ none |
 
@@ -220,7 +236,7 @@ Triggers for action:
   Entries are reviewed periodically; user decides what to codify into the skills, then clears the entry.
 - **Nothing notable** → skip.
 
-This step does NOT block closure — closure already complete at Step 8. Reflection is value-add, not load-bearing.
+This step does NOT block closure — closure is complete once Step 8 commits (or, if the `_index.md` row was left to the user per Step 8, once that row lands). Reflection is value-add, not load-bearing.
 
 ## Edge cases
 
@@ -228,3 +244,4 @@ This step does NOT block closure — closure already complete at Step 8. Reflect
 - **Multiple target branches** — all merges in step 3 happen as separate commits; one JIRA comment in step 5 lists multiple `Merged → <BRANCH>` lines.
 - **Merge conflict** — fix or skip the merge first; do not post any JIRA comment until merge state is settled.
 - **Fix already inherited via branch copy on all targets** — skip step 3 entirely; JIRA comment omits all `Merged → <BRANCH>` lines.
+- **Reopen after prior approval** — when off-channel triage flips a previously approved (LGTM'd) review: post a rejection-template comment (Step 4), set card frontmatter `status: reopened` (returning finished review work to the executor is `reopened`, not `in-progress` — per card-format semantics), and re-add the row to Active Reviews in `_index.md`. Perform, or request from the user, the actual JIRA workflow transition; if the tool cannot transition it, mark that pending in the Step 9 table. Re-approval after the executor's patch lands uses the standard approve template; if the author merged before the re-LGTM, omit the `Merged → <BRANCH>` line (no false audit claim).

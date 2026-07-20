@@ -43,8 +43,8 @@ Size of the change is irrelevant. Small commit is NOT grounds to compress this p
 2. **Executor hygiene check** (detect-only): if `customfield_11224` is empty, surface one line: `⚠ Executor field empty (expected: <commit author from JIRA comment>)`. Do NOT block, do NOT auto-fill.
 3. Identify executor = commit author per JIRA comment (NOT JIRA assignee).
 4. Collect commits as listed in JIRA comments — at face value. Do NOT verify via `svn log` here (that's Phase 2).
-5. Determine source branch from JIRA comment as-is. If executor wrote it ambiguously or wrong, capture as Phase 2 finding — do not block intake, do not override.
-6. **Existing-card check (re-review guard)** — before creating any folder, glob `<kb>/fishing-planet/review/<JIRA-ID>--*/`. The Active Reviews table in `_index.md` is NOT authoritative for this: resolved reviews are removed from that table but their folder stays. If a folder exists, this is a **re-review** (reopen / second-round fix): reuse that folder, keep the original content, and append a new `## Round N` section (Scope / Investigation / Findings / Verdict) for the new commits. Do NOT create a second folder. If none exists, create new card: `<kb>/fishing-planet/review/<JIRA-ID>--<slug>/review.md` with frontmatter, H1, Summary, Scope (placeholder if no commits in JIRA — capture as Phase 2 finding). See [card-format.md](references/card-format.md).
+5. Determine source branch from JIRA comment as-is. If executor wrote it ambiguously or wrong, capture as a Phase 2 executor-quality note — do not block intake, do not override.
+6. **Existing-card check (re-review guard)** — before creating any folder, glob `<kb>/fishing-planet/review/<JIRA-ID>--*/`. The Active Reviews table in `_index.md` is NOT authoritative for this: resolved reviews are removed from that table but their folder stays. If a folder exists, this is a **re-review** (reopen / second-round fix): reuse that folder, keep the original content, and append a new `## Round N` section (Scope / Investigation / Findings / Verdict) for the new commits. Do NOT create a second folder. If none exists, create new card: `<kb>/fishing-planet/review/<JIRA-ID>--<slug>/review.md` with frontmatter, H1, Summary, Scope (placeholder if no commits in JIRA — capture as a Phase 2 executor-quality note). See [card-format.md](references/card-format.md).
 7. Add to (or refresh) the Active Reviews entry in `<kb>/_index.md` — point to the existing folder on a re-review; list all round executors.
 
 ### Blocking checkpoint (BEFORE Phase 2)
@@ -67,16 +67,16 @@ svn log -r <low>:HEAD <branch-URL> | grep "FP-XXXXX"
 
 (`svn log --search` proven unreliable across multiple sessions — prefer `svn log | grep`.)
 
-Cross-check found commits against intake. Findings:
-- Commits found that aren't in JIRA → executor-quality finding (commit not posted)
-- Branch in JIRA comment doesn't match commit metadata → executor-quality finding
+Cross-check found commits against intake. Executor-quality notes:
+- Commits found that aren't in JIRA → executor-quality note (commit not posted)
+- Branch in JIRA comment doesn't match commit metadata → executor-quality note
 - Commit count mismatch → either above
 
 Update card Scope with audited commit list. See [commit-discovery.md](references/commit-discovery.md) for fallback strategies.
 
 **WC freshness check (do this before reading any changed file from disk).** After collecting the revisions, run `svn info --show-item revision` on the WC and compare against the lowest revision under review. If the WC is behind:
 1. Run `svn status`. If the WC is clean, **ask the user for permission** and `svn update` to HEAD; after that the disk is trustworthy — read files normally.
-2. If the WC is dirty, the user declines, or the review targets a pinned older revision — fall back: treat `svn diff -c` / `svn cat -r` as the sole source of truth, do NOT read the changed files from disk, and (Step 6) include this stale-WC warning plus the exact commands in the delegated reviewers' prompts (agent and Codex).
+2. If the WC is dirty, the user declines, or the review targets a pinned older revision — fall back: treat `svn diff -c` / `svn cat -r` as the sole source of truth, do NOT read the changed files from disk, and (Step 7) include this stale-WC warning plus the exact commands in the delegated reviewers' prompts (agent and Codex).
 
 Why this matters: a stale WC silently shows pre-fix file state, which has twice caused a changed file to look absent/reverted (once propagated into a delegated agent as a false "fix not present" alarm).
 
@@ -105,15 +105,24 @@ If verification does not settle the claim — the instrument is unavailable, or 
 
 Where any rule above says "relevant", "applicable", "the population", or "already verified", bind it to the exact proposition and context the finding asserts; a surrogate context or a subset is admissible only with a stated equivalence or discovery argument, not a judgement that it is close enough.
 
-This gate applies before a recon hypothesis, a delegated finding (Step 6), an executor claim (Phase 3), or a remediation claim is promoted to — or used to support — any of the finding's supported claims. A hypothesis may be recorded unverified in the Investigation Journal; it may not be relied on as fact until it passes this gate.
+This gate applies before a recon hypothesis, a delegated finding (Step 7), an executor claim (Phase 3), or a remediation claim is promoted to — or used to support — any of the finding's supported claims. A hypothesis may be recorded unverified in the Investigation Journal; it may not be relied on as fact until it passes this gate.
 
 ### Step 5 — Branch-copy inheritance check (if Code-branch merge applies)
 
 See [`<kb>/feedback/branch_copy_inheritance.md`](../../../feedback/branch_copy_inheritance.md). If the fix is already inherited via branch copy, mark in Scope; close phase will skip merge.
 
-### Step 6 — Mandatory independent delegation (agent + Codex)
+### Step 6 — Cross-repo client-mirror check (diff-triggered)
 
-After recon, launch an independent review in parallel — a required step, run even when recon found nothing (clean-LGTM is the highest-risk case for a missed defect). Two modes, both in parallel:
+The server repo alone cannot settle a claim whose correctness lives in the Unity client (which source-duplicates `Shared/ObjectModel` but keeps equip/compatibility gates as its own hardcoded lists). Two triggers:
+
+- **Diff touches `Shared/ObjectModel/`** → decide per [`<kb>/reference/photon_interfaces_dll_distribution.md`](../../../reference/photon_interfaces_dll_distribution.md): if the change alters combinatorial/behavioral logic the mirror rule requires → a client mirror is needed; if it is a data/display field → grep the client tree for a consumer and confirm whether the value is server-produced → a mirror is needed only if the client consumes it. A pure server-side display-feed field needs no mirror; record any divergence as a finding.
+- **Server change narrows or redefines a user-facing option set** (shop / inventory / UI compatibility list) whose correctness or severity depends on a client-enforced rule — whether the executor cited it or the reviewer found the dependency → do not finalize the finding's severity from the server repo alone; verify the client repo (Explore agent over the paired client checkout per [`<kb>/_index.md`](../../../_index.md) → Branch Roles → Client, and/or an empirical in-client test) before deciding Accept vs divergence.
+
+Either way this is a Step 4 control-flow/identity claim whose capable instrument is the client repo, not the server diff.
+
+### Step 7 — Mandatory independent delegation (agent + Codex)
+
+After recon and applicable cross-branch/cross-repo checks (Steps 5-6), launch an independent review in parallel — a required step, run even when recon found nothing (clean-LGTM is the highest-risk case for a missed defect). Two modes, both in parallel:
 
 **Independent defect hunt (blind).** Point the `code-reviewer` agent (Agent tool) and Codex (`/ask-codex` skill) at the diffs/scope: hunt for defects, assume bugs exist, ground each claim in the evidence Step 4 requires — cite the file/method for a code claim; for a data/runtime claim whose probe cannot be run, return it as an unresolved hypothesis, not a finding. Prefer NOT to pre-load the recon findings — a delegate that echoes recon adds nothing, and one told to argue against it manufactures objections. Independence + claim-appropriate evidence (per Step 4) is the goal.
 
@@ -144,15 +153,23 @@ Coverage sweep for executor claims: enumerate the executor's factual claims from
 
 **Resolution:** action + brief justification.
 
-**Discovered by:** skill recon | code-reviewer agent | Codex | executor's comment | manual scan. (Required for non-trivial findings.)
+**Discovered by:** skill recon | code-reviewer agent | Codex | executor's comment | manual scan. (Required for every Finding.)
 ```
+
+### Finding vs Note
+
+**Classify before formatting.** If an observation asserts a defect, a risk, or a review-relevant quality consequence in the diff / code / commit under review, it is a **Finding**: assign the applicable severity (High/Medium/Low/Info — Info still counts) and use the full format (Description/Investigation/Resolution/Discovered by). You may NOT withhold a severity to keep a code-rooted concern as a one-liner.
+
+A **Note** is only for an observation that asserts no code issue — JIRA-ticket metadata (Executor field, Fix Version, labels, links) or contextual asides, including items surfaced by the skill's own hygiene checks. A Note is a one-liner and never carries a severity tag.
+
+The discriminator is "does it assert a code issue", not whether the reviewer chose to tag a severity. A Finding surfaced by a delegated reviewer still takes the full format, not a numbered Note.
 
 ### Severity (about the issue)
 
 - **High** — bug, data corruption risk, security
 - **Medium** — meaningful concern, may not block
 - **Low** — minor / cosmetic
-- **Info** — observation only
+- **Info** — code-rooted observation only (no defect/risk; still a Finding, not a Note)
 
 ### Resolution (independent of severity)
 
@@ -161,6 +178,7 @@ Coverage sweep for executor claims: enumerate the executor's factual claims from
 - `Accepted` — reviewed and accepted as-is
 - `Skipped` — too minor to act on
 - `Pre-existing` — noted, not addressed in this review
+- `Resolved → r<rev>` — fixed within this review cycle: the fix landed **after** this round raised the finding (directly, or `(by side effect)` of another finding's patch); cite the revision. (A fix that predates the review is `Skipped — superseded by r<later>`, not this.)
 
 ### Severity-assessment rules
 
@@ -174,7 +192,7 @@ Coverage sweep for executor claims: enumerate the executor's factual claims from
 - **Author clarification, decision-affecting** ("if intentional Accept; otherwise reopen") → triage-file if active; else JIRA question with reopen-pending stance
 - **Author clarification, no consequences** ("want to understand the intent") → JIRA comment, card only
 - **Pre-existing gap** → `<kb>/fishing-planet/server/modules/<module>/backlog.md` with note citing the discovering review
-- **Info / observation** → card only
+- **Info Finding / Note** → card only
 
 For triage-file activation and entry rules, see [triage-file.md](references/triage-file.md).
 
@@ -186,4 +204,6 @@ For 1-2 findings: walk inline, no tracker.
 
 ## Phase 5: Draft verdict, stop
 
-Decide approve / reject. Draft the verdict text in the review card body — do NOT publish anything to JIRA. Close phase (`jira-review-close`) takes over from here.
+Decide approve / reject (an approve may carry the ship-and-reopen sub-case — non-blocking rework returned to the executor while the change still ships; close Step 4). Draft the verdict text in the review card body — do NOT publish anything to JIRA. Close phase (`jira-review-close`) takes over from here.
+
+**Verification scope (mandatory when verification is symptom-level).** When the review (recon, Phase 3, or delegated verification) established the patch is mechanically correct but did NOT establish the root cause — e.g. the executor's own comments admit an unclear repro, or the verification rests on "diff matches source / guards prevent the symptom" — the verdict must carry an explicit `Verification scope:` line stating what was verified and what was not. An `approve` must never implicitly claim root-cause coverage it does not have.
