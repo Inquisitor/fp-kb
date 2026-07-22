@@ -1,5 +1,9 @@
 # Missions — Backlog
 
+## Config Validation
+
+- WebAdmin mission-config save path cannot catch silently-ignored keys: `MissionsSerializationUtils.DeserializeTask` runs without `MissingMemberHandling.Error`, `JsonKeyValidator.AreAllKeysValid` (WebAdmin) checks key-name characters only (`^[@$A-Za-z0-9_]+$`), and `MissionTasksModel.PreprocessJson` validates parse-ability then stores the submitted raw JSON untouched. A key typo (`ItemSubTypo`) or a property lacking `[JsonProperty]` on an OptIn condition class saves cleanly and yields a silently-unfiltered condition — the failure class behind FP-45032. Note for the fix: naive `MissingMemberHandling.Error` won't work — mission JSON legitimately carries preprocessor constructs (`@resources`, predicate strings, hint objects); contract-aware validation must run post-preprocessing. From FP-45032 review (F-2, pre-existing).
+
 ## Test Coverage
 
 - `MatchFishPredicate()` has zero test coverage — all `IFishCondition` fields uncovered (HookDepth, MaxHookDepth, MinGenerationDepth, MaxGenerationDepth, Weight, Length, FishForm, etc.)
