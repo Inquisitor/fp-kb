@@ -1,5 +1,13 @@
 # `--export-buoys` Implementation Plan
 
+> **STATUS: DONE — shipped 2026-07 (MFT20260325 r16349).** Implemented and run in production across
+> Steam/PS/Xbox. Deviations from this plan, captured in the [journal](../journal.md) 2026-07 milestone:
+> added `TolerantProfileReader` fallback + `--users` option after production surfaced profiles with an
+> enum value undefined in this branch; `BuoyExportRunner` is `public` (tests call `BuildUserPredicate`);
+> meta `source` uses `SqlConnectionStringBuilder.DataSource` (not `connectionString.Split(';')`);
+> `ProfileCount`/enumeration got a raised SQL command timeout. Retained as the historical implementation
+> plan; full per-task subtask archival deferred to task closure.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add a `ReleaseTool --export-buoys` command that dumps, per player, the marker/nav/share buoys + recolor counters for the given ponds from a (reserve-backup) DB to a JSONL payload + CSV index + meta sidecar, for later opt-in restore.

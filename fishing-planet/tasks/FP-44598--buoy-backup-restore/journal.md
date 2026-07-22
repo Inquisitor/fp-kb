@@ -10,9 +10,12 @@ platforms: [Steam, PS, XB, MOB, NX]
 # FP-44598: Buoy backup & opt-in restore for deprecated ponds
 
 ## Status
-Backup tooling (`--export-buoys`) implemented (subagent-driven) and building; pending lint/BOM pass,
-final review, manual smoke on a dev/QA DB, and the single atomic SVN commit (under FP-44598). Restore
-(`--import-buoys`) is deferred (lower priority). Split out of FP-44389 (release-prep) on 2026-06-21.
+`--export-buoys` shipped: implemented, unit-tested, and committed to MFT20260325 (r16349 feature,
+r16350 `ProfileConverter` timeout fix). Run in production against the pre-release backups of every
+**released** platform — **Steam, PS, Xbox** — with **zero buoys lost**; per-pond artifacts consolidated
+to one `.7z` per platform on the local dumps. **Mobile and Nintendo** exports are pending their
+(not-yet-shipped) releases — same tool, one clean pass each. Restore (`--import-buoys`) remains deferred
+(lower priority). Split out of FP-44389 (release-prep) on 2026-06-21.
 
 ## Summary
 The 2026.4 FTUE/Old Ponds Rework `RemoveDeprecatedBuoys` conversion strips player buoys from ponds
@@ -27,9 +30,10 @@ for later opt-in restore.
 
 ## Code location (SVN working copy, not KB)
 `Photon/tools/ReleaseTool/ReleaseTool/BuoyBackup/` — `BuoyBackupRecord`, `BuoyBackupExtractor`,
-`BuoyBackupCsv`, `BuoyExportRunner`, `export-buoys.example.cmd`; `EntryPoint` `--export-buoys` case +
-`GetOption`; tests in `Photon/tools/ReleaseTool.Tests/BuoyBackup/`. One-off, deletable as a unit when
-the restore work is done. Committed to SVN under FP-44598 once the gates pass.
+`BuoyBackupCsv`, `BuoyExportRunner`, `TolerantProfileReader`, `export-buoys.example.cmd`; `EntryPoint`
+`--export-buoys` case + `GetOption`; tests in `Photon/tools/ReleaseTool.Tests/BuoyBackup/`. One-off,
+deletable as a unit when the restore work is done. Committed to SVN under FP-44598 (r16349; `ProfileConverter`
+timeout fix r16350).
 
 ## Milestones (log)
 - 2026-06-13..18: Design brainstormed (superpowers:brainstorming) and hardened through ~7 Plannotator
@@ -59,3 +63,27 @@ the restore work is done. Committed to SVN under FP-44598 once the gates pass.
   and added the required `<None Include="Cmd\export-buoys.example.cmd"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>`
   to `ReleaseTool.csproj` (`.cmd` is not auto-copied — `EnableDefaultNoneItems` is off). Build confirms
   it now copies to the output `Cmd\` folder. Plan corrected accordingly.
+- 2026-06-30..07-14: Production execution against the released platforms' pre-release backups (restored
+  on a reserve server, one platform at a time; ReleaseTool `sql` connection points at the local `Main`).
+  - **Steam** (~11.5M profiles, ~20h at Parallelizm=8): 3 profiles failed to deserialize on an enum
+    value the backup's server version carries but this branch's `ObjectModel` lacks
+    (`ForcePlayerToLeavePondReason.CriticalItemBroken`) — the strict reader aborts the whole profile.
+    Fixes: added `TolerantProfileReader` (deserializes with the shared settings but swallows unknown
+    enum/value-conversion errors, so the buoys survive) wired into `BuoyExportRunner` as a
+    `catch (JsonSerializationException)` fallback; added a `--users <guids>` option for targeted
+    re-runs; recovered the 3 via a scoped re-run (one marker buoy in LoneStar for one user; the other
+    two had nothing in the deprecated ponds). Also raised the SQL command timeout in `ProfileConverter`
+    (the full-table count/enumeration aborted at ADO.NET's 30s default on the large table). Folded the
+    one recovered buoy into the main Steam LoneStar set (739586 users / 1408241 marker buoys).
+  - **PS** (~12.89M, ~16h): 0 failed, 1 profile recovered **inline** — the tolerant fallback now lives
+    in the main path, so unknown-enum profiles heal during the run instead of dropping; no separate
+    recovery step needed. (Same holds for Xbox and every future platform.)
+  - **Xbox**: 0 failed. LoneStar 517282 users / 990074 buoys, LesniVila 150368 / 286930,
+    Zeekanaal 20941 / 70803.
+  - Outcome: zero buoys lost across Steam/PS/Xbox. Per-pond JSONL + CSV + `.meta.json` sets consolidated
+    to one archive per platform (`buoy-export-steam/ps/xbox.7z`) on the local dumps; meta `source`
+    records the server only, no credentials.
+- 2026-07-21: Committed to MFT20260325 — r16349 (`[BuoyBackup]` feature incl. tolerant fallback +
+  `--users`), r16350 (`[ProfileConverter]` timeout). The branch had advanced (FP-44943 touched
+  `EntryPoint.cs`); reconciled via `svn update` (clean `G` merge to r16348), rebuilt (`MSBUILD_EXIT=0`)
+  and re-ran tests (9/9) before committing.

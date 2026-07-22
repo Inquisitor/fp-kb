@@ -1,10 +1,10 @@
 # FP-44598 Backlog
 
-## Backup (`--export-buoys`) — finish
-- [ ] Lint/format + UTF-8 BOM pass on the new BuoyBackup files (`dotnet format --verify-no-changes`)
-- [ ] Final whole-feature code review
-- [ ] Manual smoke on a dev/QA Main DB (point `App.config` `sql` connection), verify 3 per-pond sets
-- [ ] Single atomic `svn commit` of the feature under FP-44598 (run by user)
+## Backup (`--export-buoys`) — DONE
+- [x] Feature implemented + unit-tested; committed to MFT20260325 (r16349), with the `ProfileConverter` full-table-scan timeout fix (r16350)
+- [x] Tolerant deserialization fallback (`TolerantProfileReader`) + `--users` targeted-recovery option — added after Steam surfaced profiles carrying an enum value undefined in this branch
+- [x] Run on pre-release backups: **Steam, PS, Xbox** — zero buoys lost; per-pond set packed one `.7z` per platform on the dumps
+- [ ] **Mobile, Nintendo** — run when those platforms ship (not yet released); same tool, one pass each
 
 ## Restore (`--import-buoys`) — deferred, lower priority
 - [ ] Implement per-pond import (load-mutate-save; identity PondId+Position+Fish; preserve BuoyId best-effort)
