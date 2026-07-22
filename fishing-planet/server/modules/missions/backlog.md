@@ -10,10 +10,15 @@
 - No tests for any `FishCondition` subclass (HookFishCondition, CatchFishCondition, FightFishCondition, etc.)
 - No tests for `ReleaseFishFromCageInteraction` condition matching
 - No tests for daily mission lifecycle at rollover: `Container_RefreshDailyMissions`, `GetMissionsCompleted` post-rollover, `TryGenerateMissions` when `missionsManager == null` (from FP-42372 review)
+- `MissionCloneTests` extension (bool/string/list types, definition-pollution assert, nested-list isolation) — tracked in FP-45154. From FP-44758 review (F-4).
 
 ## Test Scaffolding
 
 - `TestPondSettingsService.fishCategoryToIdsMap` (`Shared/SharedLib.Tests/DailyMissions/CatchFishTasks/TestSettings/`) populated by ctor, never read — only the forward `fishIdToCategoryMap` is consumed by `GetPondFish` / `GetPondFishCategoryIds`. Dead reverse map; remove or wire up if a future test needs category→ids lookup. From FP-42190 review (F-3).
+
+## Clone Isolation
+
+- Mission `Clone()` isolation gaps beyond the FP-44758 variable-dictionary fix — `BuyItemsHint` shared index sets (+ carrier conditions), `AssembleRodHint` shared component conditions (cross-player `CheckCached` bleed), `TasksToCheck` not reset, `RandomArray` shallow-copied arrays, `MissionCloneTests` extension — tracked in **FP-45154** (Technical Debt epic). Sibling audit of the remaining BaseHint/condition family found no other shared-mutation defects. From FP-44758 review (F-1..F-4).
 
 ## Concurrency
 
