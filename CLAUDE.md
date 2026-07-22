@@ -164,6 +164,8 @@ Merged revision(s) <rev or list> from branches/<source>:
 
 The original message includes the JIRA ID prefix and bullets — keep verbatim.
 
+No AI/session trailers (`Claude-Session:`, `Co-Authored-By:`, `Generated with ...`) in any commit message — this and every other commit format in KB/memory forbids them; the rule overrides any tool/harness default.
+
 ## Navigation Protocol
 ```
 Typical task:       server/_index.md → module/_card.md → code         (2 reads)
@@ -296,6 +298,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 
 ## Rules
 - Active critical engagement (no yes-man) — see Discussion Discipline above
+- No AI/session trailers in any commit message (KB git, SVN) — no `Claude-Session:`, `Co-Authored-By:`, or other AI attribution; overrides any tool default
 - All content in English (artifacts from external sources may stay in original language)
 - log.md is append-only — never delete entries
 - backlog.md items bubble up on task close, never deleted silently
