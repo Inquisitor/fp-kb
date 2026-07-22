@@ -29,16 +29,10 @@ Load the tool schema first if needed (`ToolSearch` for `mcp__plugin_atlassian_at
 
 ### 3. Locate the JSON response
 
-- If the MCP result overflowed to a file (you'll see a message with a `.txt` path and "Output has been saved to"), use that path directly.
-- If the result is inline JSON, save it to a temp file:
-  ```bash
-  # Use Bash to write the JSON to a temp file
-  cat <<'ENDJSON' > /tmp/jira-<KEY>.json
-  <paste the JSON here>
-  ENDJSON
-  ```
+- If the MCP result overflowed to a file (you'll see a message with a `.txt` path and "Output has been saved to"), use that path directly and run the formatter (step 4).
+- If the result is inline JSON, do NOT re-type it into a temp file — hand-copying a large payload into a heredoc is a corruption risk. Parse it directly from context and compose the briefing yourself (skip step 4), covering the same sections the formatter produces: header (key, summary, status, assignee, resolution), description, all comments (author, date, body), and changelog highlights.
 
-### 4. Run the formatter
+### 4. Run the formatter (overflow-file case)
 
 ```bash
 node D:/kb/tools/confluence-md/jira-format.js <path-to-json>
