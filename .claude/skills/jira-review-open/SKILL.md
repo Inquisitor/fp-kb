@@ -185,6 +185,7 @@ The discriminator is "does it assert a code issue", not whether the reviewer cho
 ### Severity-assessment rules
 
 - **Check release status BEFORE assigning severity** to any data-integrity / backfill / stale-row finding. Pre-release / Test environment has no "existing bad rows" surface — severity often collapses (e.g., from High to Skipped).
+- **Content-exposure check when reachability depends on data shape.** When a finding's reachability depends on content/data (mission definitions, config rows, item tables), query the dev-copy DB for the actual population before finalizing severity. A mechanism gap with zero current-content exposure is latent — severity drops (typically to Low), routing shifts toward Filed/backlog instead of reopen. Record the scope caveat: the query binds to the current content snapshot; future content can change exposure without any code change.
 - **HEAD-verification on commits ≥2 weeks old.** Read each affected file on HEAD before assigning Resolution; if the issue was already addressed in a follow-up commit, Resolution = `Skipped — superseded by r<later>` (cite revision).
 - **Per-site audit when N call sites have same risk shape.** Don't assume uniform fix; check each site — different post-call state mutations may need different patterns (or none).
 
