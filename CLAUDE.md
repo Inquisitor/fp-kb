@@ -279,6 +279,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [JIRA comment preview](feedback/jira_comment_preview.md) — show draft, get approval, then post; share permalink after
 - [Mongo log semantics — stateful vs event](feedback/mongo_log_semantics.md) — check whether a log is stateful-snapshot or event-stream before cloning `Find(userId, from, to)` between providers
 - [New C# files need explicit UTF-8 BOM](feedback/new_csharp_file_bom.md) — Write tool doesn't add BOM; prepend U+FEFF when creating .cs files; `.editorconfig` mandates BOM
+- [No KB references outside KB](feedback/no_kb_refs_in_code.md) — no KB paths / notes / review-card mentions / agent-investigation framing in source code or outward artifacts (JIRA, Confluence, commits); inline product-level facts instead
 - [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
 - [Vue island bare semantic tags](feedback/vue_island_bare_semantic_tags.md) — avoid bare `<header>/<footer>/<aside>/<main>` inside Vue islands in WebAdmin (global CSS preempts scoped styles)
