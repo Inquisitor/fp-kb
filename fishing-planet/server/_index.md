@@ -23,6 +23,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 
 ## Shared Game Services
 - [rewards](modules/rewards/_card.md) — reward delivery pipeline (items, licenses, products, currency)
+- [balance](modules/balance/_card.md) — currency balance mutation + ledger logging primitive (`BalanceHelper`); `preventNegativeBalance` = no downward zero-crossing (stub)
 - [reel-of-fortune](modules/reel-of-fortune/_card.md) — daily two-wheel mini-game; per-profile state, AB-test/country gating, premium-spin allocation on subscription grant (stub)
 
 ## Chat
