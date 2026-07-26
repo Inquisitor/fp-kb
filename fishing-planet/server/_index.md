@@ -5,7 +5,8 @@ Photon Server (.NET 4.7.2, C# 9). MasterServer + GameServer + ChatServer + ClubS
 See CLAUDE.md in server repo for full architecture overview.
 
 ## Fishing Gameplay → [system overview](modules/_systems/fishing.md)
-Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor (5800 LOC).
+Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor (5900 LOC).
+- [game-processor](modules/game-processor/_card.md) — per-rod fishing FSM, action routing, fight models, unsync tolerance
 - [fish-generator](modules/fish-generator/_card.md) — spawning, weight, hooking
 - bite-system — probabilistic fish selection, maps, attractors (TODO: create card)
 

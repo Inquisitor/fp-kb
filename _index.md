@@ -21,6 +21,7 @@
 | FP-44725 | abtests-cache-refresh-reminder | planned       | fishing-planet/tasks/FP-44725--ab-tests-cache-refresh-reminder-on-prod/ |
 | FP-44946 | git-workflow                   | in-progress   | fishing-planet/tasks/FP-44946--svn-to-git-migration/                    |
 | FP-45093 | fpa-release                    | planned       | fishing-planet/tasks/FP-45093--fpa-release/                             |
+| FP-45122 | fish-fight-protocol            | in-progress   | fishing-planet/tasks/FP-45122--fish-fight-protocol/                     |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
