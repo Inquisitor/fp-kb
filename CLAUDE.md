@@ -190,6 +190,8 @@ Role definitions and merge direction. Current assignments are in `_index.md`.
 
 Merge direction: OldStable → Stable → Content → Code (each level merges into all levels above it).
 
+**mergeinfo invariant:** `svn:mergeinfo` lives only on a branch's root directory; mergeinfo on any sub-path (file/subdir) is a split-brain defect. Carry commits cross-branch with a root-level `svn merge` (never a single file/subtree). See [feedback/mergeinfo_root_only.md](feedback/mergeinfo_root_only.md).
+
 ### Before merging: check ancestry
 
 Before running `svn merge` from branch X into branch Y, check `_index.md` → Server Branch Ancestry:
@@ -281,6 +283,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [New C# files need explicit UTF-8 BOM](feedback/new_csharp_file_bom.md) — Write tool doesn't add BOM; prepend U+FEFF when creating .cs files; `.editorconfig` mandates BOM
 - [No KB references outside KB](feedback/no_kb_refs_in_code.md) — no KB paths / notes / review-card mentions / agent-investigation framing in source code or outward artifacts (JIRA, Confluence, commits); inline product-level facts instead
 - [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
+- [svn:mergeinfo lives only on the branch root](feedback/mergeinfo_root_only.md) — mergeinfo only on a branch's root dir; cross-branch carry is a root-level merge; record-only only after content verification; subtree-mergeinfo cleanup via subset-vs-subtree-only check
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
 - [Vue island bare semantic tags](feedback/vue_island_bare_semantic_tags.md) — avoid bare `<header>/<footer>/<aside>/<main>` inside Vue islands in WebAdmin (global CSS preempts scoped styles)
 
