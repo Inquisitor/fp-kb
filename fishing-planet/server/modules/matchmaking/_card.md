@@ -23,6 +23,7 @@ module: matchmaking
 ← WebAdmin: CompetetiveActivityBreaksModel, ReviewTournamentModel, ToolsController, StatsController
 
 ## Deep Dives
+[Rating application and logging](rating-application.md) — why SQL and the `tournamentLog` ledger disagree by design, how the zero floor silently swallows penalties, and how to read a rating trajectory (volume from SQL, shape from the ledger)
 Tests: `SharedLib.Tests/Tournaments/MatchmakingLogicTests.cs` + `MatchmakingTestCase.cs` (string-notation parser)
 Data: SQL `Tournaments`, `TournamentTemplates`, `TournamentSeries`, `TournamentGrid`; config via `TournamentGroupingRule` JSON in DB/WebAdmin
 Confluence: [Matchmaking spec](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5505613835) (Business Logic > Competitive), [Matchmaking testing](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/4339925014)
