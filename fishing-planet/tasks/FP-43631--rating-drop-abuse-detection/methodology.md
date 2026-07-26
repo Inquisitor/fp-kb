@@ -273,6 +273,20 @@ week-7. See `<memory>/feedback_competitions_banned_semantic.md`.
 Other things the SQL sets per row: `CompetitionsBanEndDate = b.BanUntil`, `AdminComment` audit
 note appended (existing comment preserved), `IsInfluencer = 0` if it was 1.
 
+**`AdminComment` carries the reason and the duration — nothing else.** It is a production player
+record, so it must not describe how the case was decided: no mention of the review mechanism, no
+internal role names, no tooling. Shape to keep:
+
+```
+Auto-ban by Stan via FP-43631 follow-up <date> - rating-drop abuse (week-<n>) (<NEW|REPEAT> until <date>)
+```
+
+Cycles 6-12 leaked an internal review description into this field and it reached 52 profiles
+across the three platforms; `artifacts/fix-admincomment-2026-07-27.sql` is the idempotent
+remediation. When building the next cycle's ban script by copying the previous one, check this
+line first — that copy step is exactly how the wording propagated for seven cycles. See
+`<kb>/feedback/no_kb_refs_in_code.md`.
+
 **Layer 2: Leaderboard ban** — `artifacts/leaderboard-ban-sync.sql` (shared script, not
 date-specific). Propagates active Profile bans to `CompetitiveRatingsCurrent.IsBanned = 1`
 across Weekly/Monthly/Yearly periods. Must be COMMITted separately — the gotcha that caused
