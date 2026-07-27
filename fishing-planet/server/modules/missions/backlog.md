@@ -36,6 +36,10 @@
 
 - `MissionsManager_Client.GetMissionsArchived` and `GetMissionsFailed` (`Shared/ObjectModel/Mission/MissionsManager_Client.cs`) pass profile entry to `ConvertToMissionOnClient`, then force `IsCompleted = false` post-call. With FP-42974's gate `!isMissionCompleted` reading `missionInProfile?.IsCompleted` (typically `false` for archived/failed entries), a previously-completed Club/Premium mission whose owner has since lost eligibility can re-emerge with `IsLocked=true` in the Archived/Failed lists. Visibility depends on whether the client's archived/failed UI tabs render the padlock — verify client-side before any patch. From FP-42974 review (F-1, pre-existing).
 
+## Condition/Hint Caching
+
+- `BaseHintRegular.CheckCached` (`Shared/ObjectModel/Hint/Hints/BaseHintRegular.cs`) uses the same single-barrier `RequestId`-only cache the mission conditions had before FP-44859 (r16291), with no dirty bit. Unlike conditions, `IHint` exposes no `ResetCached` at all — hints invalidate only via the coarse full `Reset()`, so hint display text can go stale for the rest of a processing pass when a monitored dependency changes mid-pass. Cosmetic (display text, single-pass, no cross-request cache), so left unpatched. If hints ever gain per-dependency invalidation, this cache needs the same dirty-bit guard the conditions got. Also noted in **FP-45234** (the condition-side residual-window task). From FP-44859 review (F-3, pre-existing).
+
 ## Fish Form Detection
 
 - `DailyMissionGenerator_Utils.GetFishId(fishCategoryId, fishForm)` (`Shared/SharedLib/DailyMissions/DailyMissionGenerator_Utils.cs`) still picks form-specific fish from a category by `fish.CodeName.EndsWith("Y" | "T" | "U")` — the same bug shape FP-42551 fixed on the credit side. If a category contains a fish whose `Status` is `Trophy / Young / Unique` without the conventional suffix (e.g. event fish placed inside a regular `FishCategoryId`), this lookup yields `0`. `categoryFish` is sourced from `FishCache.MultilingualFish` (`ServerFish`), which has `Status` available — the fix is `f.Status == FishStatus.Trophy` etc. From FP-42551 review (F-1, pre-existing).
