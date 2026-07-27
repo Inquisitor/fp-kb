@@ -9,7 +9,7 @@ type: story
 
 ## Status
 
-Server-side cleanup done: MFT (r16365) and NPN (r16366) now carry `svn:mergeinfo` only on the branch root — verified. Remaining: post the forensic comment on JIRA (drafted, deferred), and the client-side `Assets/Scripts/` cleanup (separate, after the server side). Pre-MFT branches are left as-is by decision.
+Server-side cleanup done: MFT (r16365) and NPN (r16366) now carry `svn:mergeinfo` only on the branch root — verified. The forensic comment is posted on JIRA. Remaining: the client-side `Assets/Scripts/` cleanup (separate follow-up, after the server side). Pre-MFT branches are left as-is by decision.
 
 ## Summary
 
@@ -31,3 +31,4 @@ See [backlog.md](backlog.md).
 - 2026-07-27 — KB invariant codified: `feedback/mergeinfo_root_only.md` + Feedback Rules / Branch Roles references in `CLAUDE.md` (commit `857961b`; 2019 origin appendix `5c194b1`).
 - 2026-07-27 — MFT `SQL/Patches` subtree mergeinfo removed (`r16365`).
 - 2026-07-27 — NPN cleaned — `SQL/Patches` + the r16160-materialized ProfileConversions file nodes — and the MFT cleanup merged up (`r16366` records r16365 on NPN root). Both branches verified root-only.
+- 2026-07-27 — Forensic comment posted on FP-45231 (origin r6966, inheritance chain, r16160 materialization, cleanup commits r16365/r16366).
