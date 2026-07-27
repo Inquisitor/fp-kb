@@ -32,6 +32,21 @@
 
 - `Container_RefreshDailyMissions` does not enter `lock (lockObject)` — other `Container_*` methods (`Container_AddNewMission`, `Container_RemoveMission`, `Container_RefreshMissions`) do. Likely safe under the peer's single-threaded execution fiber, but the pattern is inconsistent. Decide: enforce locking everywhere, or document why this method is intentionally lock-free. From FP-42372 review (F-5).
 
+## HUD Delivery
+
+- The first-pass re-assert added by FP-44716 (r16283, `MissionsManager.ProcessForwardMissions`) converges task
+  *visibility* after a re-initialization but skips completed tasks (`!task.IsCompleted`), so a client whose
+  mirror still shows a completed task as incomplete is never corrected through the incremental channel. The
+  asymmetry is deliberate and sound for the reported bug — `StartedMissionTask` persists `IsCompleted` and
+  `Progress` but not `IsHiddenInHud`/`IsHiddenInMenu`, so visibility is the flag that gets recomputed and lost
+  while completion is restored from the profile. The residual gap is the client side: `RefreshActiveMission`
+  (`HintSystem.cs`, MainClient) reaches the `GetActiveMission` snapshot only from `Awake` and
+  `ActiveMissionChanged`, so a Photon reconnect that keeps the scene alive never re-pulls the full state. Entry
+  requires the disconnect to land between the server completing a task and the message reaching the client;
+  it self-corrects on the next progress event, an active-mission change, or a scene reload. Wanted: either
+  re-assert completed tracked tasks too, or have the client re-request the snapshot on reconnect. From FP-44716
+  review (F-2, pre-existing gap of the same class as the fixed bug).
+
 ## Client Conversion
 
 - `MissionsManager_Client.GetMissionsArchived` and `GetMissionsFailed` (`Shared/ObjectModel/Mission/MissionsManager_Client.cs`) pass profile entry to `ConvertToMissionOnClient`, then force `IsCompleted = false` post-call. With FP-42974's gate `!isMissionCompleted` reading `missionInProfile?.IsCompleted` (typically `false` for archived/failed entries), a previously-completed Club/Premium mission whose owner has since lost eligibility can re-emerge with `IsLocked=true` in the Archived/Failed lists. Visibility depends on whether the client's archived/failed UI tabs render the padlock — verify client-side before any patch. From FP-42974 review (F-1, pre-existing).
