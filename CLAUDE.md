@@ -316,3 +316,4 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - Never store credentials, connection strings, API keys
 - Use Executor (not Assignee) in task/review files
 - Subtask IDs (ALG-004, TRM-002, etc.) are KB-internal — never use in commits, GDD, TDD, or any external documentation
+- Run git/tooling against another repo with `git -C <path> ...` (or the tool's own path flag), never `cd <path> && git ...` — a `cd` in a compound command can trigger a permission prompt and obscures what actually runs
