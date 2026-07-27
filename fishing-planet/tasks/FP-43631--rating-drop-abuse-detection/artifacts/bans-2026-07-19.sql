@@ -52,7 +52,7 @@ SET NOCOUNT ON;
 BEGIN
     DECLARE @BanUntil_NEW    date          = '2026-08-03';   -- 2 weeks, Monday-aligned (first-time bans)
     DECLARE @BanUntil_REPEAT date          = '2026-08-17';   -- 4 weeks (recidivism)
-    DECLARE @Note            nvarchar(300) = N'Auto-ban by Stan via FP-43631 follow-up 2026-07-20 - rating-drop abuse (week-11, adversarial-reviewed: prosecutor/defense/judge per case)';
+    DECLARE @Note            nvarchar(300) = N'Auto-ban by Stan via FP-43631 follow-up 2026-07-20 - rating-drop abuse (week-11)';
 
     BEGIN TRAN;
 
