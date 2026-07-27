@@ -172,8 +172,22 @@ Do NOT list the `_index.md` Active Reviews row add/remove as a bullet — it is 
 
 **Staging `_index.md` safely (mandatory).** `_index.md` is a hot file the user edits concurrently mid-session — never `git add` / `git commit` it wholesale. Before staging, run `git diff -- _index.md` and confirm every hunk is your review's own row:
 - Your row is the only diff → stage it with the card (bundled into this `[Review]` commit).
-- The diff also carries the user's unrelated rows → stage only your hunk (`git add -p`), or leave the whole `_index.md` row to the user and commit just the card folder.
+- The diff also carries the user's unrelated rows → stage only your own row (recipe below), or leave the whole `_index.md` row to the user and commit just the card folder.
 - Open+close happened in one session with no intermediate commit → the add+remove nets to zero; nothing of yours to stage — commit only the card.
+
+**Staging a single row without `git add -p`.** `git add -p` is interactive and unusable from the shell tool. Stage the one row by piping a zero-context patch to `git apply --cached --unidiff-zero`, anchored on the HEAD version of the file (not the working copy — your row sits among the user's new rows, which do not exist in HEAD):
+
+```bash
+git -C D:/kb show HEAD:_index.md | grep -n "<row above yours in HEAD>"   # gives <N>
+git -C D:/kb apply --cached --unidiff-zero - <<'PATCH'
+--- a/_index.md
++++ b/_index.md
+@@ -<N>,0 +<N+1> @@
++<your row, copied verbatim from `git diff`>
+PATCH
+```
+
+Do NOT hand-write a normal 3-line-context patch: a context line that is blank (the table's trailing empty line) loses its leading space through the heredoc and `git apply` rejects the whole patch with `corrupt patch at line <n>`. Zero-context sidesteps the problem entirely. Verify with `git diff --cached -- _index.md` before committing — it must show your row and nothing else.
 
 Then, before committing, inspect `git diff --cached -- _index.md` (the full cached content — `--name-only` cannot reveal a foreign hunk staged *inside* `_index.md`) plus `git diff --cached --name-only` for the file list; confirm both are exactly your intended change. The whole KB repo is hot and a concurrent session may have pre-staged foreign files or hunks — capture the pre-existing staged state first, unstage foreign entries (`git restore --staged <path>`), and restore that captured staging afterward. If you leave the `_index.md` row entirely to the user, the KB close is not complete: mark the KB commit pending in the Step 9 table rather than reporting it done.
 
