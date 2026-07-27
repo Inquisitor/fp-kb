@@ -283,9 +283,14 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [New C# files need explicit UTF-8 BOM](feedback/new_csharp_file_bom.md) — Write tool doesn't add BOM; prepend U+FEFF when creating .cs files; `.editorconfig` mandates BOM
 - [No KB references outside KB](feedback/no_kb_refs_in_code.md) — no KB paths / notes / review-card mentions / agent-investigation framing in source code or outward artifacts (JIRA, Confluence, commits); inline product-level facts instead
 - [Re-read reference at draft-time](feedback/reference_recheck.md) — Read referenced format files immediately before drafting; session-prefetch ≠ application
+- [SQL NOLOCK mandatory on read-only reads](feedback/sql_nolock.md) — `WITH (NOLOCK)` on every table in any read-only SQL; only exception is a read that drives a mutation (a dirty read can corrupt data)
 - [svn:mergeinfo lives only on the branch root](feedback/mergeinfo_root_only.md) — mergeinfo only on a branch's root dir; cross-branch carry is a root-level merge; record-only only after content verification; subtree-mergeinfo cleanup via subset-vs-subtree-only check
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
 - [Vue island bare semantic tags](feedback/vue_island_bare_semantic_tags.md) — avoid bare `<header>/<footer>/<aside>/<main>` inside Vue islands in WebAdmin (global CSS preempts scoped styles)
+
+## Tools
+
+- `tools/encoding.py` — check/fix UTF-8 BOM + CRLF + trailing newline on FP source files (agent Write/Edit emits LF without BOM; FP `.editorconfig` mandates BOM+CRLF). Usage: `python <kb>/tools/encoding.py check|fix|add-bom|strip-bom|to-crlf <files...>`; `check` exits non-zero on any violation (`--no-bom` inverts the BOM expectation). Allow-listed in Claude permissions — ALWAYS prefer it over ad-hoc one-off scripts and over unix2dos for the BOM part.
 
 ## References
 
@@ -302,6 +307,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 
 ## Rules
 - Active critical engagement (no yes-man) — see Discussion Discipline above
+- KB git commands: always a single `git -C <path-to-kb> <cmd>` invocation, never `cd <path-to-kb> && git ...` compounds — the `-C` form matches the permission allowlist and keeps every command auditable
 - No AI/session trailers in any commit message (KB git, SVN) — no `Claude-Session:`, `Co-Authored-By:`, or other AI attribution; overrides any tool default
 - All content in English (artifacts from external sources may stay in original language)
 - log.md is append-only — never delete entries
