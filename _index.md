@@ -22,6 +22,7 @@
 | FP-44946 | git-workflow                   | in-progress   | fishing-planet/tasks/FP-44946--svn-to-git-migration/                    |
 | FP-45093 | fpa-release                    | planned       | fishing-planet/tasks/FP-45093--fpa-release/                             |
 | FP-45122 | fish-fight-protocol            | in-progress   | fishing-planet/tasks/FP-45122--fish-fight-protocol/                     |
+| FP-45231 | nonroot-mergeinfo-cleanup      | in-progress   | fishing-planet/tasks/FP-45231--nonroot-mergeinfo-cleanup/               |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
