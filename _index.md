@@ -34,6 +34,7 @@
 | FP-42918 | Yuriy Burda    | fishing-planet/review/FP-42918--profile-conversion-framework/                           |
 | FP-44794 | Yevhenii Shust | fishing-planet/review/FP-44794--pond-pin-icons/                                         |
 | FP-41593 | Yevhenii Shust | fishing-planet/review/FP-41593--restricted-country-global-chat/                         |
+| FP-44413 | Yuriy Burda    | fishing-planet/review/FP-44413--reissued-mission-task-state/                            |
 
 ## Active Confluence Work
 | Draft                    | Task     | Target                                                                        |

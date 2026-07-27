@@ -20,6 +20,10 @@
 
 - Mission `Clone()` isolation gaps beyond the FP-44758 variable-dictionary fix — `BuyItemsHint` shared index sets (+ carrier conditions), `AssembleRodHint` shared component conditions (cross-player `CheckCached` bleed), `TasksToCheck` not reset, `RandomArray` shallow-copied arrays, `MissionCloneTests` extension — tracked in **FP-45154** (Technical Debt epic). Sibling audit of the remaining BaseHint/condition family found no other shared-mutation defects. From FP-44758 review (F-1..F-4).
 
+## Processing Loop
+
+- `MissionsManager.ProcessMessagesLoop` caps neither its outer cycle nor the inner `ProcessForwardMissions` loop, so a mission whose fail condition is still true immediately after an immediate restart (`RestartFailedMissionAfterMinutes: 0`) drives fail → restart → fail without bound, all under `lock (lockObject)`. Nothing enforces the invariant that currently protects the server: `MissionsValidator` checks only that a `TaskCompletedCondition` names an existing task, and live content stays safe by authoring convention alone — fail tasks are gated on mission counters that `Api_RemoveFailedMission` zeroes before the restart, and the one mission with a direct state-based fail condition has a start condition that is its logical negation. Wanted: an iteration cap, or a "restarted in this request" guard on fail evaluation. Tracked in **FP-45233**. From FP-44413 review (F-1).
+
 ## Concurrency
 
 - `Container_RefreshDailyMissions` does not enter `lock (lockObject)` — other `Container_*` methods (`Container_AddNewMission`, `Container_RemoveMission`, `Container_RefreshMissions`) do. Likely safe under the peer's single-threaded execution fiber, but the pattern is inconsistent. Decide: enforce locking everywhere, or document why this method is intentionally lock-free. From FP-42372 review (F-5).
