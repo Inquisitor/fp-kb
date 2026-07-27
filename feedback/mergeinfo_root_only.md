@@ -23,3 +23,23 @@ merge is enough to pollute a path.
   - subtree-only revs (not on root) -> per rev, verify the actual diff is present in the code;
     if present, record it on the root (record-only, verified) then delete; if absent, it is a
     false record - do a real merge, do not silently delete.
+
+## Origin (2019 incident, for reference)
+
+The subtree-mergeinfo creep this rule guards against has a concrete origin in this repo,
+traced 2026-07 during the FP-41501 review:
+
+- **r6966, author `ivan`, 2019-09-19, branch `Ugc20190620`** - "Merged revision(s) 6896-6961
+  from branches/Retail20190522". This merge first recorded subtree `svn:mergeinfo` on
+  `SQL/Patches` (0 -> 19 lines) and, via a 2019-era merge-tracking quirk, a malformed entry
+  `/branches/Retail20190522:6908` - a branch-root path recorded on the subtree, missing the
+  `/SQL/Patches/` segment.
+- It then rode **every branch copy** for ~7 years (Ugc -> PFL -> MI -> ... -> KNW -> LBM -> MFT
+  -> NPN), growing ~1 line per branch as later merges re-stamped the subtree.
+- 2026-06-08 **r16160 (`yuriy.burda`, FP-44159)** made it visible on files: a file-level
+  `svn copy` of the ProfileConversions patch + helpers materialized the inherited directory
+  mergeinfo onto the file nodes, rewriting the malformed entry into a file path.
+
+Lesson: one path-mismatched merge propagated silently for years and only surfaced when a
+2026 file-level copy materialized it. Cleanup was scoped to MFT+; pre-MFT branches are left
+as-is by decision.
