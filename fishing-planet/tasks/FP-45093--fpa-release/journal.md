@@ -25,7 +25,7 @@ EnvironmentVariables / AbTests rollout decisions, one-off fixes uncovered during
 cycle. Each line of work gets its own artifact under `artifacts/`; the journal records
 milestones.
 
-Target release date: 2026-07-27 (per release plan at time of writing).
+Target release date: 2026-07-30 (moved from 2026-07-27).
 
 ## Plan
 No formal multi-phase plan — work is driven by issues as they surface (same model as the
