@@ -153,18 +153,9 @@ Drop on migration from project memory to KB:
 
 **Promote periodically.** Project memory captures ad-hoc findings; FP-wide rules belong in KB so they survive SVN branch rotations and machine changes. When a memory entry stabilizes (no recent edits, applied across sessions, applicability beyond one branch/machine), promote per the rules above.
 
-### SVN merge commit format
+### Commit messages
 
-TortoiseSVN-style header followed by the original commit message verbatim:
-
-```
-Merged revision(s) <rev or list> from branches/<source>:
-<full original commit message — every line, not just the first>
-```
-
-The original message includes the JIRA ID prefix and bullets — keep verbatim.
-
-No AI/session trailers (`Claude-Session:`, `Co-Authored-By:`, `Generated with ...`) in any commit message — this and every other commit format in KB/memory forbids them; the rule overrides any tool/harness default.
+**Before composing ANY commit message (SVN task commit, SVN merge, or KB-git), Read [`reference/commit_message_format.md`](reference/commit_message_format.md) — compose from the doc, not from memory.** It carries the templates, bullet prefixes, forbidden content (subtask IDs, same-session reverts, concrete counts, AI/session trailers), and the SVN merge format.
 
 ## Navigation Protocol
 ```
@@ -295,6 +286,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 ## References
 
 - [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
+- [Commit message format](reference/commit_message_format.md) — SVN task/merge + KB-git commit templates and rules; **read before composing any commit message**
 - [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
 - [JIRA required fields on create](reference/jira_required_fields.md) — Scrum Team `customfield_11001` required (Other=`10203`); option ids, components, no "Task" type (use Story), epic-link via `parent`, cloudId
 - [Technical Debt epic rotation](reference/technical_debt_epic_rotation.md) — quarterly epic rotation: fields, Prev/Next comment chain, move-non-Closed + orphan sweep + close-with-Done, `updated`-field staleness gotcha
@@ -307,7 +299,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 
 ## Rules
 - Active critical engagement (no yes-man) — see Discussion Discipline above
-- KB git commands: always a single `git -C <path-to-kb> <cmd>` invocation, never `cd <path-to-kb> && git ...` compounds — the `-C` form matches the permission allowlist and keeps every command auditable
+- Run git/tooling against any repo (KB included) with `git -C <path> ...` (or the tool's own path flag), never `cd <path> && git ...` — the single `-C` form is auditable and can be allowlisted, whereas a `cd`-in-compound triggers a permission prompt and obscures what actually runs
 - No AI/session trailers in any commit message (KB git, SVN) — no `Claude-Session:`, `Co-Authored-By:`, or other AI attribution; overrides any tool default
 - All content in English (artifacts from external sources may stay in original language)
 - log.md is append-only — never delete entries
@@ -316,4 +308,3 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - Never store credentials, connection strings, API keys
 - Use Executor (not Assignee) in task/review files
 - Subtask IDs (ALG-004, TRM-002, etc.) are KB-internal — never use in commits, GDD, TDD, or any external documentation
-- Run git/tooling against another repo with `git -C <path> ...` (or the tool's own path flag), never `cd <path> && git ...` — a `cd` in a compound command can trigger a permission prompt and obscures what actually runs
