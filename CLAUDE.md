@@ -135,23 +135,9 @@ Active items in `_index.md` cover current in-flight work. Backlog items cover ev
 - Markdown tables: align columns with spaces (readability over token savings)
 - Large plans (>200 lines): completed items collapse to one-liner with link to `artifacts/archived/subtasks/<ID>--<slug>.md`
 
-### Authoring (abstraction & memory promotion)
+### Authoring & knowledge placement
 
-When writing or migrating KB content, abstract from machine/branch/tool specifics:
-
-- **Paths**: use `<kb>/...` (KB root) and `<project>/...` (working tree root) placeholders, not absolute paths
-- **Branches**: refer by role (`{branch}`, "Code branch") not by current name; lookup role assignments in `_index.md` → Branch Roles
-- **Tools / MCPs**: describe the capability ("DB-access MCP", "JIRA account lookup tool"), not vendor or server name
-- **Examples**: concrete data goes in dedicated Example sections; mark transient state ("X at time of writing")
-
-Drop on migration from project memory to KB:
-- `originSessionId` and other session-bookkeeping
-- "Verified on FP-XXXXX (date)" historical citations
-- "This rule was violated on FP-YYYYY" narrative — keep the rule, drop the incident
-- User-specific framing — generalize to rational/engineering reasons
-- Hard machine paths — replace with placeholders
-
-**Promote periodically.** Project memory captures ad-hoc findings; FP-wide rules belong in KB so they survive SVN branch rotations and machine changes. When a memory entry stabilizes (no recent edits, applied across sessions, applicability beyond one branch/machine), promote per the rules above.
+When authoring KB content, deciding where a rule belongs, or promoting a memory note, Read [`reference/knowledge_homes.md`](reference/knowledge_homes.md) — the four homes (global / project CLAUDE.md / KB / memory), the visibility-nesting placement rule, the cross-audience mirror exception, and the abstraction/drop rules for promotion.
 
 ### Commit messages
 
@@ -300,6 +286,7 @@ answer is in `DataChanges`.
 
 - [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
 - [Commit message format](reference/commit_message_format.md) — SVN task/merge + KB-git commit templates and rules; **read before composing any commit message**
+- [Knowledge homes & authoring](reference/knowledge_homes.md) — where a rule belongs (homes + visibility nesting), the cross-audience mirror exception, memory-note abstraction/drop rules; **read when authoring or promoting**
 - [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
 - [JIRA required fields on create](reference/jira_required_fields.md) — Scrum Team `customfield_11001` required (Other=`10203`); option ids, components, no "Task" type (use Story), epic-link via `parent`, cloudId
 - [Technical Debt epic rotation](reference/technical_debt_epic_rotation.md) — quarterly epic rotation: fields, Prev/Next comment chain, move-non-Closed + orphan sweep + close-with-Done, `updated`-field staleness gotcha
@@ -315,6 +302,7 @@ answer is in `DataChanges`.
 - Run git/tooling against any repo (KB included) with `git -C <path> ...` (or the tool's own path flag), never `cd <path> && git ...` — the single `-C` form is auditable and can be allowlisted, whereas a `cd`-in-compound triggers a permission prompt and obscures what actually runs
 - No AI/session trailers in any commit message (KB git, SVN) — no `Claude-Session:`, `Co-Authored-By:`, or other AI attribution; overrides any tool default
 - All content in English (artifacts from external sources may stay in original language)
+- No counts in enumerative prose — write "Open questions:", not "three open questions"; the number goes stale the moment an item is added or removed. Keep a count only when a claim depends on it. Applies to KB notes, JIRA, plans, commit bodies, docs
 - log.md is append-only — never delete entries
 - backlog.md items bubble up on task close, never deleted silently
 - Never write security root causes (exploit details, bypass methods)
