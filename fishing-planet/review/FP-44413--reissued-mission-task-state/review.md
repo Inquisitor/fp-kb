@@ -1,5 +1,5 @@
 ---
-status: reopened
+status: resolved
 executor: Yuriy Burda
 branch: MFT20260325 @ r16263, merged to NPN20260602 @ r16265
 jira: https://fishingplanet.atlassian.net/browse/FP-44413
@@ -81,6 +81,33 @@ Approve, ship-and-reopen. The change itself carries no blocking issue and ships 
 Root cause is established, not merely the symptom: `MissionConditionWrapper.IsProcessed` was the only piece of per-request state that survived the fail/restart transition, and every sibling reset (`task.IsCompleted`, `CompleteConditionWrapper.ResetCached`, `TasksToCheck`, counters and variables) was already in place.
 
 The posted comment also records that FP-44704, credited with the missing-mission-name half of the expected result, has since been reopened.
+
+## Round 2
+
+### Scope
+
+No new commits. The round is the executor's answer to the returned follow-up, posted 2026-07-28.
+
+### Investigation
+
+- Mechanism claim verified in code: `MissionsUtils.CheckTaskCondition` short-circuits to complete only when the task is `IsDynamic` and every other `IsMissionTask` in the mission is done. A non-dynamic task never takes that path, so a hidden non-dynamic fail-watcher blocks `Tasks.All(IsCompleted)` — the executor's mechanism as stated.
+- Preconditions verified in content: mission 3957 carries `Task_3` as its `IsMissionTask` objective, and its fail-watcher `Task_1` is dynamic in the current data.
+- Historical claim verified through the admin change history (`DataChanges` on the Dev authoring environment, keyed by the task's primary key): `Task_1` was created 2026-06-10 with `IsDynamic=false`, made invisible 2026-06-11, and the dynamic flag was set 2026-07-07 by the mission author. The reporter's "never completes" comment is dated 2026-06-23, i.e. while the task was hidden and non-dynamic — exactly the state the executor described. Round 1's note that the mission configuration does not explain the symptom was wrong: the config snapshot it rested on was taken 2026-07-26, after the correction.
+- FP-44704: the executor's statement was accurate when written; the ticket was moved from the Anniversary release to 2026.6 Australia later the same day, and currently sits Resolved. The mission-name half of the expected result therefore lands in the following release, not this one.
+- Release-population recheck: round 1's content sweep queried the TEST copy, but the copy promoted to production is QA. Re-ran on QA — the same eleven missions combine a fail task with an immediate restart, every fail driver is gated on a mission counter and is dynamic, and the 3957 correction is present. The zero-exposure conclusion now binds to the population that actually ships.
+- Ship-risk assessment for the release: condition side effects (`VariableSet` counter increments on catch conditions) cannot re-fire after the restart, because the transients they key on (`CaughtFish`, `Transition`) are cleared by `MissionsContext.AfterProcessingCycle` at the end of each inner cycle, and the fail check runs at the top of the next one. Duplicate completion events and rewards are excluded by the `!task.IsCompleted` gate in `ProcessForwardMissions`. Reverting the change would reintroduce the defect across the whole Anniversary mission set, which is the content that depends on it.
+
+### Findings
+
+None new.
+
+### Verdict
+
+Resolved. The returned question is answered and verified as far as the available instruments allow; the change stands as approved.
+
+## Notes (round 2)
+
+- The ticket's Fix Version was moved to `Internal/Async` on 2026-07-28 and is being returned to the Anniversary release — the tag contradicted the change's own content, since its code ships with the Photon stack. Handled outside the review as a misunderstanding.
 
 ## Investigation Journal
 
