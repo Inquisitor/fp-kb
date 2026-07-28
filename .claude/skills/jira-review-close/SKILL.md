@@ -101,6 +101,22 @@ For each remaining target:
 
 **Paired landing order.** When the close performs user-directed paired merges (server change + client mirror / `Photon.Interfaces` change), prepare BOTH working copies first — server merge applied, client merge applied, DLL rebuilt from the TARGET server branch (never carried across branch pairs as a binary) — then wait for the user's end-to-end smoke test (build the server, run it, build the client, log in), and only then commit the two halves back-to-back. The server half never lands alone: it opens a mismatch window on a shared release branch. See [`<kb>/reference/release_versions_and_process.md`](../../../reference/release_versions_and_process.md) → pairing rule and [`<kb>/reference/photon_interfaces_dll_distribution.md`](../../../reference/photon_interfaces_dll_distribution.md) → Branch pairing and merge discipline.
 
+### Step 3b — File follow-up items (duplicate check first, mandatory)
+
+For every finding routed `Filed → <JIRA-ID>` in open Phase 4, the ticket has to exist before the verdict comment can reference it. **Search for an existing one before creating anything** — reviews of neighbouring tasks in the same subsystem repeatedly land on the same code, and the earlier review has often already filed the very item you are about to re-file.
+
+Run both checks, not one:
+
+1. **List the open children of the current tech-debt epic** (`parent = <epic> ORDER BY created DESC`) and read the summaries; open the descriptions of anything whose subject overlaps a finding. Sibling follow-ups from other reviews live here and are titled by symptom, so a keyword search alone can miss them.
+2. **JQL by the finding's own identifiers** — the class/method/property names it names, e.g. `text ~ "ShowOnTransition" OR text ~ "MissionListResource"`. Beware false positives from unrelated subsystems sharing a property name (a `TimesToShow` hit may be about ads, not mission hints); confirm by reading, not by title.
+
+Outcomes:
+- **Exact match exists** → do not create a duplicate. Change the finding's Resolution to `Filed → <existing-ID>`, note in the review card which review filed it, and reference that ID in the verdict comment.
+- **Partial overlap** → decide explicitly whether to extend the existing ticket (comment there) or file a distinct one; record the reasoning in the card.
+- **Nothing found** → create the ticket. Match sibling naming/shape in the target epic and confirm the Scrum Team with the user (see project memory `jira-issue-creation` / `jira-issue-authoring`); show the summary and description for approval before the create call, per the JIRA preview rule.
+
+Link the new ticket to the reviewed task (`Relates`) so the trail survives outside the KB.
+
 ### Step 4 — Draft JIRA comment
 
 Read formats fresh at draft-time: [`<kb>/reference/jira_comment_formats.md`](../../../reference/jira_comment_formats.md).
