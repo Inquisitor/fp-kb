@@ -24,13 +24,14 @@ Load the tool schema first if needed (`ToolSearch` for `mcp__plugin_atlassian_at
 - `cloudId`: `fishingplanet.atlassian.net`
 - `issueIdOrKey`: extracted key
 - `expand`: `changelog`
-- `fields`: `["summary", "status", "assignee", "resolution", "resolutiondate", "description", "comment"]`
+- `fields`: `["summary", "status", "assignee", "resolution", "resolutiondate", "description", "comment", "customfield_11224", "fixVersions"]`
+  - `customfield_11224` is the Executor field (who did the work — not the assignee); `fixVersions` carries the release status. Review workflows require both.
 - `responseContentFormat`: `adf`
 
 ### 3. Locate the JSON response
 
 - If the MCP result overflowed to a file (you'll see a message with a `.txt` path and "Output has been saved to"), use that path directly and run the formatter (step 4).
-- If the result is inline JSON, do NOT re-type it into a temp file — hand-copying a large payload into a heredoc is a corruption risk. Parse it directly from context and compose the briefing yourself (skip step 4), covering the same sections the formatter produces: header (key, summary, status, assignee, resolution), description, all comments (author, date, body), and changelog highlights.
+- If the result is inline JSON, do NOT re-type it into a temp file — hand-copying a large payload into a heredoc is a corruption risk. Parse it directly from context and compose the briefing yourself (skip step 4), covering the same sections the formatter produces: header (key, summary, status, assignee, executor, resolution, fix version), description, all comments (author, date, body), and changelog highlights.
 
 ### 4. Run the formatter (overflow-file case)
 
@@ -39,7 +40,7 @@ node D:/kb/tools/confluence-md/jira-format.js <path-to-json>
 ```
 
 Read stdout — this is the formatted briefing with:
-- **Header:** issue key, summary, status, assignee, resolution
+- **Header:** issue key, summary, status, assignee, executor, resolution, fix version (with release status)
 - **Description:** converted from ADF to markdown
 - **Timeline:** status transitions and assignee changes (chronological table)
 - **Comments:** all comments with author, date, ID, edited indicator, markdown body (preserves color spans, bold, code, links)

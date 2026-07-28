@@ -60,16 +60,25 @@ function formatHeader(issue) {
   const assignee = f.assignee?.displayName || 'Unassigned';
   const resolution = f.resolution?.name;
   const resDate = f.resolutiondate ? f.resolutiondate.slice(0, 10) : null;
+  // Executor (customfield_11224) is the person who did the work — distinct from
+  // assignee, and the field review workflows key off. Fix Version carries the
+  // release status that severity assessment depends on.
+  const executor = f.customfield_11224?.displayName;
+  const fixVersions = (f.fixVersions || [])
+    .map(v => `${v.name} [${v.released ? `released ${v.releaseDate}` : 'unreleased'}]`)
+    .join(', ');
 
   let line1 = `# ${issue.key}: ${summary}`;
   let line2 = `**Status:** ${status}`;
   if (category) line2 += ` (${category})`;
   line2 += ` | **Assignee:** ${assignee}`;
+  if (executor) line2 += ` | **Executor:** ${executor}`;
 
   if (resolution) {
     line2 += `\n**Resolution:** ${resolution}`;
     if (resDate) line2 += ` | **Resolved:** ${resDate}`;
   }
+  if (fixVersions) line2 += `\n**Fix Version:** ${fixVersions}`;
 
   return `${line1}\n${line2}`;
 }
