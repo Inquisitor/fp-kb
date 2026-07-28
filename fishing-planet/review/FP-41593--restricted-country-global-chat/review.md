@@ -1,7 +1,7 @@
 ---
-status: reopened
+status: resolved
 executor: Yevhenii Shust
-branch: MFT20260325 @ r16158, NPN20260602 @ r16161
+branch: MFT20260325 @ r16158, NPN20260602 @ r16161, NPN20260602 @ r16368
 jira: https://fishingplanet.atlassian.net/browse/FP-41593
 ---
 
@@ -23,6 +23,12 @@ Temporary server-side workaround for global chat in restricted countries: a rest
 
 ### NPN20260602
 - **r16161** — twin direct commit of r16158 (same message, same 5 files; diffs verified content-identical)
+
+### Round 2 — test hardening (F-6/F-7 rework)
+- **NPN r16368** — Harden restricted-country chat tests against replayed-history false positives (`ChatTest.cs` only)
+  - Unique per-run payloads (`$"... {Guid.NewGuid()}"`) + `SentBy(m, client)` sender assertion in every wait predicate — closes F-6
+  - `ClassCleanup` mirrors ClassInit's `RunOnGameServer(ForceCachesRefresh)` + `Sleep(1500)` — closes F-7
+  - **No MFT twin** (round 1 had twins on both release branches) — see Round 2 journal
 
 ## Investigation Journal
 
@@ -48,6 +54,15 @@ Temporary server-side workaround for global chat in restricted countries: a rest
 - FP-33074 connection (user pointer during findings discussion): the redirect collapses a restricted language switch into a same-channel adjacent Leave+Join pair on g0 — the FP-33074 racy shape; folded into F-1 and cross-noted into that task's backlog (fence-fix coverage + QA STR)
 - Findings routing (discussion round with user): F-1 Accepted + FP-33074 backlog cross-note; F-2 Pre-existing (by-design: settings affect new sessions); F-3 Filed → FP-45153; F-4 Accepted; F-5 Skipped; F-6/F-7 Reopened non-blocking (test-hardening follow-up); F-8 Accepted + comment-accuracy remark
 - Close: r16161 confirmed formally untracked as a merge (`svn propget svn:mergeinfo` on NPN root — r16158 absent while neighboring MFT cherry-picks are recorded); mergeinfo debt closed via `--record-only` merge of r16158 into NPN @ r16356 (property-only, root + 4 subtree-mergeinfo paths; no content change, twin r16161 already present). No JIRA "Merged →" line — record-only is bookkeeping, not a content merge
+
+### Round 2 (2026-07-28)
+- Intake: executor comment 132768 posts only **NPN r16368**; VCS audit (`svn log -r16357:HEAD | grep FP-41593` on both branches) confirms r16368 exists only on NPN — **no MFT twin this round** (round-1 fix was twinned on both). Same executor-quality pattern as round 1 (MFT r16158 was also unposted). Also present on NPN: an FP-45153 commit (the separately-filed ban/unban bug — out of this review's scope)
+- WC freshness: NPN @ 16373 ≥ 16368 — disk authoritative
+- F-6 verified: diff read — every `const string` payload → `$"... {Guid.NewGuid()}"`; every wait predicate gains `&& SentBy(m, cN)`; `SentBy` compares `m.Sender` to `client.UserId` (OrdinalIgnoreCase). Sender binding checked per assertion across all 3 tests — each ties to the correct sender (received-from-P1 → c1, received-from-P2 → c2, echoes → own). Negative test (test 2) not weakened: the per-run GUID already makes the text unique, so the added `SentBy` is belt-and-suspenders, not a filter that could mask a real delivery
+- F-7 verified: `ClassCleanup` now calls `RunOnGameServer(c => c.ForceCachesRefresh())` + `Thread.Sleep(1500)` (ChatTest.cs:64), mirroring ClassInit (:53)
+- env-var deletion (F-7 optional "prefer removing over ''"): executor declined, scope — verified prior art `PushNotificationTests.cs:66-67` (`SharedLib.Tests`) uses `SetEnvironmentVariable(.., null)`. Note: that precedent actually shows `null` could have been passed to drop the `?? ""` materialization without a new DAL method; functionally a no-op (`GetStringArrayValue` treats "", null, absent identically), so not a defect — just a slightly cleaner path than the one kept
+- Open question (MFT twin) surfaced to user — test hardening lives only on the Code branch (NPN); MFT (Content, hosts FTUE/FPA) keeps the round-1 test with weaker predicates. Not a prod risk (tests aren't shipped); the exposure is future regression runs on MFT and test divergence between release branches. Downward twin is user-directed
+- User decision: **keep hardening on NPN only** — no MFT twin. Accepted divergence: MFT ChatTest stays round-1 (weaker predicates but not broken); FTUE/FPA builds already cut, so hardening would not affect them. Round 2 closes with this understood
 
 ## Findings
 
@@ -154,3 +169,13 @@ Reopen scope (non-blocking): unique per-run test payloads + sender assertions (F
 Executor remarks for the closing JIRA comment: MFT r16158 not posted in the task comment; `ClientExtensions.cs` absent from the comment's file list; `ChatChannelController.cs` hunk is log-wording polish, not "channel map logic" (F-8).
 
 **Verification scope:** static code inspection (server repo at the reviewed revisions and HEAD) plus cross-repo client-source verification; the three new integration tests were read but not executed (running them requires the local game+chat server stack). The claim "tests pass" remains the executor's; the review verified test *logic* (and found the F-6 replay weakness), not test *runs*.
+
+## Round 2 verdict (2026-07-28) — Approve, resolved
+
+The reopen items are closed correctly (NPN r16368, `ChatTest.cs`):
+- **F-6** — every payload is now per-run unique (`$"... {Guid.NewGuid()}"`) and every wait predicate adds a `SentBy(m, client)` sender match; the replayed-history false-positive path is closed. Sender binding verified correct per assertion across all three tests; the negative test is not weakened.
+- **F-7** — `ClassCleanup` mirrors ClassInit's forced cache refresh. The optional env-var *removal* was declined with a verified precedent (`PushNotificationTests` uses `SetEnvironmentVariable(.., null)`); functionally a no-op, accepted.
+
+Divergence accepted by the user: the hardening lands on NPN (Code) only — no MFT twin — so MFT keeps the round-1 test. Not a prod risk (tests are not shipped) and FTUE/FPA builds are already cut.
+
+**Verification scope (unchanged from round 1):** static review of the diff at r16368 against the surrounding test code; the integration tests were read, not executed.
