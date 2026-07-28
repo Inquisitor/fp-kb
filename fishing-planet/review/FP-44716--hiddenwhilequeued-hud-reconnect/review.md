@@ -1,7 +1,7 @@
 ---
-status: reopened
+status: resolved
 executor: Yuriy Burda
-branch: MFT20260325 @ r16283, merged to NPN20260602 @ r16284
+branch: MFT20260325 @ r16283 (Round 1 fix), merged to NPN20260602 @ r16284; NPN20260602 @ r16377 (Round 2 tests)
 jira: https://fishingplanet.atlassian.net/browse/FP-44716
 ---
 
@@ -149,10 +149,9 @@ file reads as three-fold regression protection while carrying one-fold: a later 
 - Conclusion: reverting the production hunk leaves both tests green. Independent confirmation from both
   delegated reviewers, each reaching it from the same observable-based argument.
 
-**Resolution:** Returned to the executor, non-blocking (ship-and-reopen). Either subscribe to
-`MissionProgress` in both tests and assert delivery, or restate their comments so they read as
-barrier-behavior regression tests rather than as coverage of this fix. The change itself ships — the fix is
-correct and test 1 does pin it.
+**Resolution:** Returned to the executor, non-blocking (ship-and-reopen) → **closed in Round 2** (NPN r16377):
+the misleading comment was restated and a delivery-asserting test covering mission 3978's shape was added.
+Verified by mutation, not by inspection — see Round 2.
 
 **Discovered by:** skill recon (confirmed independently by code-reviewer agent and Codex)
 
@@ -233,6 +232,54 @@ pins exactly the no-transition case, and the suite is green on HEAD. NOT verifie
 reproduced on a live environment, and mission 3978's actual task graph was not compared against the structure
 modelled in the tests. So the approve covers the delivery defect and its fix, not a runtime reproduction of
 the QA scenario.
+
+## Round 2 — F-1 rework (NPN20260602 r16377)
+
+### Scope
+
+- **NPN20260602 r16377** — Add on-boat-gate reconnect delivery test for HiddenWhileQueued tasks
+  - Restated the `Relogin_BarrierBehindUnsatisfiedSerialStep` comment as a characterization test rather than a
+    repro
+  - Added `Relogin_PondAndOnBoatGates_CatchTaskDeliveredOnFirstPass`, subscribing to `MissionProgress` and
+    asserting delivery
+  - Extracted `PondGateTask()` / `BuildStandardMission()` to drop the duplicated mission builders
+
+The commit touches the test file only, and lands on the Code branch alone — MFT's copy still holds the r16283
+version. Confirmed deliberate with the user: test-only improvements stay in Code, the release branch is not
+reopened for them. Consequence to be aware of: the file has diverged between the branches, so a future
+MFT→NPN merge that touches it will conflict.
+
+### F-1 verified closed by mutation
+
+Static reasoning was not relied on here — F-1 was itself a finding about tests that look like coverage without
+being it, so the rework was checked the same way it was found:
+
+- Reproduced the reviewed state: the WC was at r16373, below r16377, so the test file was pulled to r16377
+  explicitly. r16374/r16376 touch only `Photon/tools/*`, leaving `ObjectModel` identical between the two
+  revisions, so a file-scoped update is sound for building.
+- Mutated the production hunk in the NPN WC (`resendOnFirstPass` forced false), rebuilt, re-ran:
+  `Failed: 2, Passed: 2`. The failures are exactly `Relogin_GateStateAlreadySatisfied_TrackedTaskVisibleInHud`
+  and the new `Relogin_PondAndOnBoatGates_CatchTaskDeliveredOnFirstPass`; the two characterization tests pass,
+  as their restated comments now claim. Mutation reverted, assembly rebuilt clean, suite green at 4/4, WC left
+  as found.
+
+So the new test genuinely pins the fix, and the file no longer advertises coverage it does not carry. F-1 is
+closed. The two characterization tests remain zero-discrimination for this fix by design — that is now stated
+rather than implied, which was one of the two remedies offered.
+
+### Live reproduction — executor claim, not independently verified
+
+The executor reports in JIRA that the STR was reproduced against a running server (Congo, mission 3978, first
+3D entry while boarded), that the mission log shows the first 3D pass now delivering the catch tasks with
+`hid=0` where it previously delivered only the gate, and that it was validated in-client. This is the part the
+Round 1 verdict explicitly carved out as unverified. It is consistent with the mechanism established here, and
+the new test models that exact task shape — but the live run itself was not reproduced by the reviewer and is
+recorded as the executor's claim.
+
+### Round 2 verdict
+
+**Approve — F-1 closed, review resolved.** No new findings. F-2 remains in the missions module backlog; F-3
+remains accepted.
 
 ## Notes
 

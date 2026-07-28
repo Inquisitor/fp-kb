@@ -35,7 +35,6 @@
 | FP-44794 | Yevhenii Shust | fishing-planet/review/FP-44794--pond-pin-icons/                                         |
 | FP-41593 | Yevhenii Shust | fishing-planet/review/FP-41593--restricted-country-global-chat/                         |
 | FP-45166 | Yuriy Burda    | fishing-planet/review/FP-45166--protocol-version-enforcement/                           |
-| FP-44716 | Yuriy Burda    | fishing-planet/review/FP-44716--hiddenwhilequeued-hud-reconnect/                        |
 
 ## Active Confluence Work
 | Draft                    | Task     | Target                                                                        |
