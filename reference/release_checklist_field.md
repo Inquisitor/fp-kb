@@ -79,12 +79,20 @@ be a stakeholder decision with no task.
 - *Online / auto-on-login*: compatible changes (corrupted-data fixes, compensations, deprecations). Codes
   registered as enabled rows in `dbo.ProfileConversions` via SQL patches; the runtime `ProfileConversionRunner`
   applies them **lazily on each player's next login**. Optional **proactive sweep** (so the base converts in
-  hours, not weeks): `ReleaseTool.exe --finalize-conversion <ConversionId> [--retry]`
+  hours, not weeks): `ReleaseTool.exe --finalize-conversion --code <Code> [--retry]`
   (`<project>/Photon/tools/ReleaseTool`, `ProfileConversionFinalizer`). It processes profiles with no
   `ProfileConversionUserStatus` row for that conversion, **offline only** (`SmartOfflineProfileUpdater`),
   backs up each changed profile, idempotent. `--retry` re-includes only previously-errored profiles
-  (`HasError=1`). Arg is the numeric `ConversionId` (`SELECT ConversionId, Code FROM dbo.ProfileConversions
-  WHERE IsEnabled = 1`), not the Code.
+  (`HasError=1`). The arg is the `Code` (`SELECT ConversionId, Code FROM dbo.ProfileConversions WHERE
+  IsEnabled = 1`; unique via `UQ_ProfileConversions_Code`), **not** the numeric `ConversionId` — that id is
+  a per-database IDENTITY and does not match across servers. Switched from the id to the code by FP-44701
+  (MFT r16375, NPN r16376); branches that predate it still take the positional numeric id.
+
+  A conversion that finds nothing to do still records a `ProfileConversionUserStatus` row (the logon path
+  commits on `Unchanged`, not only on `Changed`), and both the logon path and the finalizer skip any player
+  who has one — `--retry` re-opens only `HasError=1`. So enabling a conversion before the data it repairs
+  exists on that platform burns each player's single pass; `IProfileConversionProvider.ResetConversion` is
+  the way back.
 
 **Regenerate future competitive activities** (WebAdmin Tools): "Regenerate future tournaments / competitions"
 are **destructive by design** (`TournamentSchedulingAdapter.RegenerateFutureCompetitions` ->
