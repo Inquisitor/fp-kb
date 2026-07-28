@@ -279,6 +279,19 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [Verify identifiers, no placeholders](feedback/verify_identifiers.md) — run trivial lookup for unknown URL/ID/path; never substitute placeholder
 - [Vue island bare semantic tags](feedback/vue_island_bare_semantic_tags.md) — avoid bare `<header>/<footer>/<aside>/<main>` inside Vue islands in WebAdmin (global CSS preempts scoped styles)
 
+## Databases
+
+**Row history.** No content table keeps its own history — the audit lives in `DataChanges` in the
+same `Main` DB. Before concluding that a table has no history, look there: it records who changed
+what and when. Recipe and payload shape: [data-editing → change history](fishing-planet/server/modules/data-editing/change-history.md).
+
+Scope of that guarantee: only edits made **through the admin panel** are captured, and only on the
+Dev authoring environment. Changes applied by SQL patches (`SQL/Patches`), release scripts
+(`SQL/Releases`) or one-off manual queries never appear there. Those are the exception — normally a
+fix the admin panel cannot express, or a bulk correction — and by convention they carry a script in
+VCS or attached to the JIRA task, which is where their trail is. In the large majority of cases the
+answer is in `DataChanges`.
+
 ## Tools
 
 - `tools/encoding.py` — check/fix UTF-8 BOM + CRLF + trailing newline on FP source files (agent Write/Edit emits LF without BOM; FP `.editorconfig` mandates BOM+CRLF). Usage: `python <kb>/tools/encoding.py check|fix|add-bom|strip-bom|to-crlf <files...>`; `check` exits non-zero on any violation (`--no-bom` inverts the BOM expectation). Allow-listed in Claude permissions — ALWAYS prefer it over ad-hoc one-off scripts and over unix2dos for the BOM part.

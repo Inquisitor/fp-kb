@@ -19,7 +19,14 @@ later be extracted, replayed, or rolled back for recovery / propagation.
 - `CaptureDataSet : Dictionary<string,object>` — `CompressUpdate(prior, pkColumns)` keeps only PK +
   columns whose value differs between before and after; payload = those keys as JSON
 
+## Deep Dives
+- [Reading the admin change history](change-history.md) — where the audit exists and where it does
+  not, payload shape per change type, lookup recipe, what never reaches the table
+
 ## Gotchas
+- **Capture is environment-gated.** `DataCapture.Init(Settings.IsDev && Settings.IsDataEditable)`
+  (`IsDataEditable` = `!IsProd && !IsQa && !IsEnvironmentDataFreeze`) — the audit accumulates on the
+  Dev authoring environment only; DataPump carries the content onward but not the history.
 - **Read-only join leak.** `CaptureDataSet.FromObject` serializes *all* public entity properties,
   including `[Readonly]` joined columns (e.g. `LocalShop` exposes Currency / OriginalPrice from
   `InventoryItems`). The before-entity often has them unpopulated (null/0) while the after-entity is
