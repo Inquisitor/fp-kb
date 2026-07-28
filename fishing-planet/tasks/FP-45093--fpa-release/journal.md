@@ -48,3 +48,9 @@ Active tracking:
   FP-42124, FP-41616 — 3 of them Resolved), so they cannot ship in FPA until merged down.
   Also cross-checked the "was mine, since moved away" set: all their commits either already in
   MFT or legitimately absent (duplicate / as-designed / client-only / not-started)
+- 2026-07-29: Release-eve state. FPA effectively clear: everything Resolved except FP-45166
+  (protocol-compatibility gate, Reopened) — it carries an online-flag-sticking tail and ships via
+  Next Server Hotfix, so it does not block the FPA cut. Non-critical / sensitive-tail tasks trimmed
+  out of FPA to NSH / Australia (weather cluster, RU-ban, broken-fish, Dragonfly donate). Corrected
+  FP-41616 fixVersion (was still 16274) -> Next Server Hotfix + 2026.6 Australia, matching its
+  weather siblings. Board refreshed to the final release-day snapshot
