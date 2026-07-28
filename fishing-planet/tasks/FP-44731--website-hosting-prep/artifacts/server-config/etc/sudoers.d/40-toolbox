@@ -1,0 +1,4 @@
+# The toolbox SSH account may run only this one wrapper as root - nothing else.
+# The wrapper execs `docker exec` into the site container as www-data; no arguments are accepted,
+# so there is no path to an arbitrary docker command or a host shell.
+snigcli ALL=(root) NOPASSWD: /usr/local/bin/toolbox-enter

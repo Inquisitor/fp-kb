@@ -1,0 +1,17 @@
+# Relaxed policy while the contractor is uploading: a strict 2-failure/1-year ban risks locking them
+# out (an ssh client offering several keys trips it before the right one). Tighten to 2 failures ->
+# 1-year ban after handover. Login is key-only; this only throttles bruteforce, it does not gate access.
+[sshd]
+bantime  = 15m
+findtime = 3h
+maxretry = 10
+
+[sshd-sftp]
+enabled = true
+filter = sshd
+port = 2222
+backend = systemd
+journalmatch = _SYSTEMD_UNIT=sshd-sftp.service + _COMM=sshd
+bantime  = 15m
+findtime = 3h
+maxretry = 10

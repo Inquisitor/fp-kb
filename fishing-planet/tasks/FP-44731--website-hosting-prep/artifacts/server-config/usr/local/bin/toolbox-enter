@@ -1,0 +1,6 @@
+#!/bin/sh
+# Contractor console: an interactive shell INSIDE the site container. The container user is
+# www-data (uid 33) with the webroot group (gid 1004) as a supplementary group, so both the DB
+# secret (group www-data) and the webroot (group webdata) are accessible. Do NOT pass -u here -
+# that would drop one of those groups. Never a host shell.
+exec docker exec -it -w /var/www/html fp-main-website-toolbox /bin/sh -l

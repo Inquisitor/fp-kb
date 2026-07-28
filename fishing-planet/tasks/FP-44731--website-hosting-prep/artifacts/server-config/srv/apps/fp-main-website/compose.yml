@@ -1,0 +1,102 @@
+name: fp-main-website
+services:
+  web:
+    image: nginx:1.27-alpine
+    container_name: fp-main-website-nginx
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    volumes:
+      - ./html:/var/www/html:ro
+      - ./nginx/wp.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on: [php]
+    networks: [front, back]
+  php:
+    image: wordpress:6-fpm
+    container_name: fp-main-website-php
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /run
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETGID, SETUID, KILL]
+    group_add: ["1004"]
+    pids_limit: 256
+    mem_limit: 1g
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+      WORDPRESS_CONFIG_EXTRA: |
+        if (isset($$_SERVER['HTTP_X_FORWARDED_PROTO']) && $$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') { $$_SERVER['HTTPS'] = 'on'; }
+        define('WP_HOME', 'https://fishingplanet.com');
+        define('WP_SITEURL', 'https://fishingplanet.com');
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - ./html:/var/www/html
+      - ./secrets/db_password:/run/secrets/db_password:ro
+      - ./secrets/sendgrid-mailsend.key:/run/secrets/sendgrid_key:ro
+      - ./php-config/mail.php:/var/www/html/wp-content/mu-plugins/00-mail.php:ro
+    networks: [back]
+  db:
+    image: mariadb:11.4
+    container_name: fp-main-website-db
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETGID, SETUID, KILL]
+    pids_limit: 512
+    mem_limit: 1g
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./secrets/db_password:/run/secrets/db_password:ro
+      - ./secrets/db_root_password:/run/secrets/db_root_password:ro
+    networks: [back]
+  toolbox:
+    # Contractor console: WP-CLI + file/db access as www-data, no host access.
+    image: wordpress:cli
+    container_name: fp-main-website-toolbox
+    restart: unless-stopped
+    user: "33:33"
+    group_add: ["1004"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    pids_limit: 128
+    mem_limit: 512m
+    entrypoint: ["tail", "-f", "/dev/null"]
+    working_dir: /var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+    volumes:
+      - ./html:/var/www/html
+      - ./secrets/db_password:/run/secrets/db_password:ro
+    networks: [back]
+  phpmyadmin:
+    # Contractor DB web UI. Reached only behind the edge basic-auth; login is the site DB user, not root.
+    image: phpmyadmin:5
+    container_name: fp-main-website-pma
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      PMA_HOST: db
+      PMA_ABSOLUTE_URI: https://pma.fishingplanet.com/
+      UPLOAD_LIMIT: 512M
+    networks: [front, back]
+volumes:
+  db_data: {}
+networks:
+  front:
+    name: fp-main-website_front
+    external: true
+  back:
+    name: fp-main-website_back

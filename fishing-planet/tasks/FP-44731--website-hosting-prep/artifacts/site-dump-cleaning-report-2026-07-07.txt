@@ -1,0 +1,167 @@
+FISHING PLANET WEBSITE DUMP - CLEANED ARCHIVE CONTENT REPORT
+Archive: web-2026-07-07-clean.zip (next to this file)
+Source: web-2026-07-07.zip (original site dump from 2026-07-07)
+Report date: 2026-07-07
+
+=================================================================
+1. PURPOSE OF THIS REPORT
+=================================================================
+web-2026-07-07-clean.zip is a dump of the old static Fishing Planet
+website, from which content pages (ToU, Privacy Policy, Game Rules,
+etc.) need to be pulled for the new site being built by an external
+studio. Secrets and files unrelated to the site have already been
+removed from the dump (see section 6). Everything else is unchanged
+from the original.
+
+This file describes WHAT REMAINS in the archive: the structure, which
+pages are current, which are duplicates/drafts, and what to watch out
+for when migrating the text to the new site.
+
+=================================================================
+2. IMPORTANT: TWO DIFFERENT PRODUCTS IN ONE DUMP
+=================================================================
+The site serves two different products, and their legal documents
+must NOT be mixed up:
+
+- Fishing Planet - the main free version of the game.
+  Folders without the "r" suffix: console/, pc/, mobile/, nintendo/, xbox/
+
+- The Fisherman - Fishing Planet - a paid Retail version (sold on
+  discs), with its own economy and exclusive waterbodies.
+  Folders with the "r" suffix: consoler/, pcr/, xboxr/
+
+Some pages share the SAME <title> but have DIFFERENT body text
+(e.g. GameRules.htm and GameRulesPC.htm) - see section 5.
+
+=================================================================
+3. CURRENT CONTENT BY PRODUCT (this is what should be extracted)
+=================================================================
+
+--- Fishing Planet (free version) ---
+console/eula/index.html      EULA - FISHING PLANET
+console/tos/index.html       TERMS OF SERVICE - FISHING PLANET
+console/privacy/index.html   PRIVACY AND COOKIE POLICY - FISHING PLANET (eff. 2023-08-30)
+pc/eula/index.html           EULA - FISHING PLANET
+pc/tos/index.html            TERMS OF SERVICE - FISHING PLANET
+pc/privacy/index.html        PRIVACY AND COOKIE POLICY - FISHING PLANET (eff. 2023-08-30)
+pc/GameRules.htm             Game Rules - FISHING PLANET (PC-specific rules)
+pc/Denuvo.htm                Denuvo Anti-Cheat system FAQ - FISHING PLANET
+mobile/eula/index.html       EULA - FISHING PLANET
+mobile/tos/index.html        TERMS OF SERVICE - FISHING PLANET
+mobile/privacy/index.html    PRIVACY AND COOKIE POLICY - FISHING PLANET (eff. 2023-08-30)
+mobile/TournamentRules.htm   Competitive Activity Rules - FISHING PLANET
+nintendo/eula/index.html     EULA - FISHING PLANET
+nintendo/tos/index.html      TERMS OF SERVICE - FISHING PLANET
+nintendo/privacy/index.html  PRIVACY AND COOKIE POLICY - FISHING PLANET (eff. 2025-02-24 - NEWEST Privacy doc in the whole dump)
+nintendo/TournamentRules.htm Competitive Activity Rules - FISHING PLANET
+xbox/eula/index.html         EULA - FISHING PLANET
+xbox/tos/index.html          TERMS OF SERVICE - FISHING PLANET
+xbox/privacy/index.html      PRIVACY AND COOKIE POLICY - FISHING PLANET (eff. 2023-08-30)
+GameRules.htm (root)         Game Rules - FISHING PLANET (generic/console-style rules)
+TournamentRules.htm (root)   Competitive Activity Rules - FISHING PLANET
+
+--- The Fisherman - Fishing Planet (Retail version) ---
+consoler/eula/index.html     EULA (see <title> note in section 5)
+consoler/tos/index.html      TERMS OF SERVICE - THE FISHERMAN - FISHING PLANET
+consoler/privacy/index.html  PRIVACY - THE FISHERMAN - FISHING PLANET (eff. 2018-05-25 - see section 5, stale)
+pcr/GameRules.htm            Game Rules - THE FISHERMAN - FISHING PLANET
+pcr/privacy/index.html       PRIVACY - THE FISHERMAN - FISHING PLANET
+                              (note: pcr/ has no eula/ or tos/ of its own - it
+                               appears to share those with pc/, only Game Rules
+                               and Privacy are Retail-specific)
+xboxr/eula/index.html        EULA (see <title> note in section 5)
+xboxr/tos/index.html         TERMS OF SERVICE - THE FISHERMAN - FISHING PLANET
+xboxr/privacy/index.html     PRIVACY - THE FISHERMAN - FISHING PLANET
+GameRulesr.htm (root)        Game Rules - The Fisherman - Fishing Planet
+TournamentRulesr.htm (root)  Tournament Rules - THE FISHERMAN - FISHING PLANET
+
+--- Retail EULA/ToS/Privacy localization ---
+consoler/lang/ contains 13 locale folders with a full translation of
+the Retail version's EULA/ToS/Privacy: EN, DE, RU, CN (simplified
+Chinese), ES, FR, IT, NL, PL, PT, UA, plus "11" and "ZN" (both
+traditional Chinese, duplicates of each other - see section 4).
+
+=================================================================
+4. DUPLICATES AND STALE COPIES LEFT IN THE ARCHIVE (not removed
+   during cleanup - do not confuse these with the current content
+   listed in section 3)
+=================================================================
+- In every platform folder, index.html is just a copy of eula/index.html
+  from the same folder, not a separate homepage. The EULA text source
+  is always the file inside the eula/ subfolder.
+
+- consoler/lang/11/ and consoler/lang/ZN/ duplicate each other (both
+  are traditional Chinese). One of them is enough for translation
+  purposes.
+
+- 5 *.old files (console/privacy/index.old, consoler/privacy/index.old,
+  consoler/lang/EN/privacy/index.old, xbox/privacy/index.old,
+  xboxr/privacy/index.old) are all the same Privacy Policy draft dated
+  2017-04-13, copy-pasted into 5 locations. Just an old legal text,
+  nothing unusual inside. Do not use - all current Privacy pages are
+  newer (see section 3).
+
+- In the archive root - 7 files forming a historical chain of homepage
+  drafts (tiny "coming soon" CTA stubs, not real content):
+  fp_beta.html, old.html, new.html, Index_old.html, index_preapple.html,
+  i.html, index.html. No real text content there, just changing
+  buttons/links/pixels.
+
+- theme/ and pcr/theme/ are byte-identical folders containing the old
+  site's stylesheets and Compass/Sass build tooling (not content, just
+  the old build system).
+
+- Fan_Kit.zip is a 2015 press kit (photos + logo), a marketing asset,
+  not legal content.
+
+=================================================================
+5. THINGS TO WATCH OUT FOR WHEN MIGRATING THE TEXT
+=================================================================
+- SAME <title>, DIFFERENT TEXT: GameRules.htm and GameRulesPC.htm both
+  carry the title "Game Rules - FISHING PLANET", but the body text
+  differs (different minimum age, different terminology, different
+  abuse-report email). Do not deduplicate by title - compare by file
+  path.
+
+- <TITLE> BUG: consoler/eula/index.html and xboxr/eula/index.html have
+  <TITLE>Game Rules...</TITLE> instead of an EULA title (looks like the
+  Game Rules page was copied as a template and the title was never
+  updated). The body text itself is genuine EULA text - only the
+  browser-tab title is wrong. Take this into account when migrating
+  (use the body text, not the <title> tag).
+
+- STALE PRIVACY POLICY FOR THE RETAIL VERSION: consoler/privacy and
+  xboxr/privacy are dated 2018-05-25, while the free version's Privacy
+  Policy was updated in 2023 (2025 for Nintendo). If the Retail version
+  is still being sold, this may be a compliance gap (outside the scope
+  of this archive) - the text may need to be updated rather than simply
+  copied over to the new site.
+
+- TYPO IN EMAIL ADDRESS: all 14 tos/index.html files inside consoler/
+  (root + all 13 locales) list support@fishingplane.com in the Forum
+  Rules section (missing the letter "t" - a dead address).
+
+- WRONG SUPPORT DOMAIN: pc/GameRules.htm and pcr/GameRules.htm ask
+  players to report violations to support@fishingbeta.com (looks like
+  a beta/staging domain, not the live support address).
+
+=================================================================
+6. WHAT WAS REMOVED FROM THE ORIGINAL DUMP (for context, in case the
+   studio asks about missing files - their absence is intentional)
+=================================================================
+- ap/ (entire folder) - contained a tool for forging a signature for a
+  third-party software license with a hardcoded private key, a test
+  diagnostic ASPX page, and files completely unrelated to the site
+  (LED-controller software, DVR/IP-camera firmware).
+- u_ex210527.zip - actually a raw IIS log file (156 MB) containing
+  visitor IP addresses and query strings from 2021-05-27 - personal data.
+- FP_files/main.fc97045f.js.download and FP.html - production code and
+  a page belonging to a third-party service, QRfy.com, unrelated to
+  Fishing Planet.
+
+Everything else from the original dump (428 files) has been kept
+unchanged.
+
+=================================================================
+End of report.
+=================================================================

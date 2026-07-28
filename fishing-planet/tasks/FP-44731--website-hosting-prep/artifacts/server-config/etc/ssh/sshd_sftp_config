@@ -1,0 +1,41 @@
+# SFTP-only endpoint for the website contractor: chroot jail, key auth only, no shell.
+Port 2222
+PidFile /run/sshd-sftp.pid
+AllowUsers snig snigcli
+AuthorizedKeysFile /srv/sftp/snig_keys/authorized_keys
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitRootLogin no
+ChrootDirectory /srv/sftp/snig
+ForceCommand internal-sftp -u 0002 -P symlink,hardlink
+Subsystem sftp internal-sftp
+
+# Forwarding fully off. NB: AllowTcpForwarding no does NOT cover StreamLocal (Unix-socket)
+# or agent forwarding - DisableForwarding is the umbrella switch.
+DisableForwarding yes
+AllowTcpForwarding no
+AllowStreamLocalForwarding no
+AllowAgentForwarding no
+X11Forwarding no
+PermitTunnel no
+PermitOpen none
+PermitListen none
+
+# No interactive surface.
+PermitTTY no
+PermitUserRC no
+
+# Connection / brute-force / DoS limits.
+LoginGraceTime 30
+MaxAuthTries 3
+MaxStartups 5:30:20
+PerSourceMaxStartups 3
+UnusedConnectionTimeout 30
+
+# Toolbox account: not chrooted, not SFTP. Forced straight into the site container as www-data
+# (interactive shell only, via the sudo wrapper). No host shell, no other command.
+Match User snigcli
+    AuthorizedKeysFile /srv/sftp/snigcli_keys/authorized_keys
+    ChrootDirectory none
+    ForceCommand sudo -n /usr/local/bin/toolbox-enter
+    PermitTTY yes
