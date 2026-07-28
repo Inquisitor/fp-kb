@@ -21,7 +21,7 @@ TBD
 
 ## Deep Dives
 
-(none yet)
+- [Condition monitoring and re-arming](condition-monitoring.md) *(draft)* — dynamic watched sets, dependency-key shapes, re-arming, the transient-state contract, why stalls happen
 
 ## Related Tasks
 
