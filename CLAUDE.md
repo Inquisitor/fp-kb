@@ -308,4 +308,4 @@ answer is in `DataChanges`.
 - Never write security root causes (exploit details, bypass methods)
 - Never store credentials, connection strings, API keys
 - Use Executor (not Assignee) in task/review files
-- Subtask IDs (ALG-004, TRM-002, etc.) are KB-internal — never use in commits, GDD, TDD, or any external documentation
+- Subtask IDs and review-finding labels (ALG-004, TRM-002, F-6, etc.) are KB-internal — never use in commits, GDD, TDD, JIRA comments, or any external documentation; expand to prose describing the actual item
