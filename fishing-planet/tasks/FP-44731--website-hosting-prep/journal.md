@@ -474,3 +474,13 @@ the new site (isolated, outside the internal network), preserving the existing p
   moved there via `wp config set` (note: `wp-config.php` is on the bind, so it is covered by backups
   but not by the config mirror). The now-redundant `redis.php` mu-plugin was removed. Lesson: verify a
   cache backend is reachable from the web context before enabling its drop-in.
+- 2026-07-30: Contractor imported the source site's database (wp-migrate-db-pro), which replaced
+  `wp_users`/`wp_usermeta` - the locally created `fpadmin` and `snig` accounts disappeared with the old
+  data. The site now carries their content and users: `root` (the contractor, administrator) plus three
+  editors from the fishingplanet.com team. The file-based parts of the stack survived untouched (Redis
+  drop-in still Connected, SendGrid constants still in effect, site 200), which confirms the value of
+  keeping runtime config in mounted files rather than the database. A single admin account `jangalor`
+  was created for the site owner (password in the keystore); the previous `fpadmin` naming was dropped.
+  Two follow-ups: any further DB
+  import will wipe these accounts again, and their `root` administrator login is a brute-force magnet
+  while `wp-login.php` is still public - one more reason to enable the wp-admin IP gate before go-live.
