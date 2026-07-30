@@ -85,8 +85,9 @@ be a stakeholder decision with no task.
   backs up each changed profile, idempotent. `--retry` re-includes only previously-errored profiles
   (`HasError=1`). The arg is the `Code` (`SELECT ConversionId, Code FROM dbo.ProfileConversions WHERE
   IsEnabled = 1`; unique via `UQ_ProfileConversions_Code`), **not** the numeric `ConversionId` — that id is
-  a per-database IDENTITY and does not match across servers. Switched from the id to the code by FP-44701
-  (MFT r16375, NPN r16376); branches that predate it still take the positional numeric id.
+  a per-database `IDENTITY`, so identical numbering across streams is not guaranteed (in practice it has
+  matched: the rows are inserted by the same patches in the same order). Switched from the id to the code by
+  FP-44701 (MFT r16375, NPN r16376); branches that predate it still take the positional numeric id.
 
   A conversion that finds nothing to do still records a `ProfileConversionUserStatus` row (the logon path
   commits on `Unchanged`, not only on `Changed`), and both the logon path and the finalizer skip any player

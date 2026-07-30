@@ -42,6 +42,10 @@ No formal multi-phase plan — driven by the checklist. All directions complete:
 - Verifications: A/B #10 origin (liveops), DataPump coverage (FP-43334/43400), Server Config (none). DONE.
 - Process: codified the field check into kb-close-task / jira-review-close; authored
   [`reference/release_checklist_field.md`](../../../reference/release_checklist_field.md). DONE.
+- Process (added 2026-07-30 from the 2026.5 Anniversary release): the procedure for *editing* a checklist
+  page is now [`reference/release_checklist_editing.md`](../../../reference/release_checklist_editing.md)
+  — confirmation gate per edit, template instructions are never deleted, 🚧 is cleared only by the user,
+  no stale "no changes" notes, panels only for exceptions. Read it before touching a checklist page.
 
 ## Milestones
 - 2026-06-10: Task started; KB card created. Read checklist (5551947777) vs template (4395597825);
