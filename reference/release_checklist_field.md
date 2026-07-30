@@ -52,6 +52,13 @@ against what actually changed in the Code branch since it forked:
 The sweep is what catches untagged env-vars, profile conversions, and custom scripts. Fork revisions:
 `_index.md` -> Server Branch Ancestry.
 
+**A commit in the log is not code in the branch.** A revision found by `svn log --search FP-XXXXX` may
+have been reverted a revision later, and that revert is invisible to the same grep whenever its message
+cites only the revision rather than the task id. Before stating that a task ships with this release,
+confirm the branch state — mention-search the found revisions, and check the file content at HEAD for
+anything release-critical. Protocol and pitfalls:
+[commit discovery](../.claude/skills/jira-review-open/references/commit-discovery.md) (layers 3-4).
+
 ## Release mechanics cheat-sheet
 
 **DataPump** (`<project>/Photon/tools/DataPump`): driven by an **allowlist** script file (`select ... from
