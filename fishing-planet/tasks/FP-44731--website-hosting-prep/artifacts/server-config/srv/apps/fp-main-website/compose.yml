@@ -39,6 +39,8 @@ services:
       - ./secrets/db_password:/run/secrets/db_password:ro
       - ./secrets/sendgrid-mailsend.key:/run/secrets/sendgrid_key:ro
       - ./php-config/mail.php:/var/www/html/wp-content/mu-plugins/00-mail.php:ro
+      - ./php-config/cron.php:/var/www/html/wp-content/mu-plugins/01-cron.php:ro
+      - ./php-config/updates.php:/var/www/html/wp-content/mu-plugins/02-updates.php:ro
     networks: [back]
   db:
     image: mariadb:11.4

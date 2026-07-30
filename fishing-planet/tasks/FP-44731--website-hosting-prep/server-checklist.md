@@ -24,6 +24,8 @@ config mirror in `artifacts/server-config/`.
 | Contractor toolbox console | ✅ `snigcli` -> `docker exec` into an isolated `wordpress:cli` container (WP-CLI/files/db as www-data, no host shell) |
 | phpMyAdmin for the contractor | ✅ `pma.fishingplanet.com` behind edge basic-auth, isolated container, login as the site DB user (not root) |
 | Config mirror | ✅ `artifacts/server-config/` |
+| WordPress core security | ✅ patched to 6.9.5 (wp2shell pre-auth RCE); IoC-checked clean; WP-Cron moved to host cron so security auto-updates actually fire |
+| WP runtime config split | ✅ one mu-plugin per concern (mail / cron / updates), each a removable mount = per-feature kill switch |
 
 ## Remaining
 
@@ -34,7 +36,8 @@ config mirror in `artifacts/server-config/`.
 | Retire contractor tools (toolbox, phpMyAdmin, `snigcli`) | ⏳ after handover - they are working aids, not for prod (reduce surface) |
 | wp-admin IP gate | ⏳ before go-live |
 | Least-privilege DB user + rotate | ⏳ before go-live |
-| Full egress allowlist on the VM | ⏳ after upload (learn real destinations) |
+| Full egress allowlist on the VM | ⏳ after handover - carve granularly once traffic is representative and the site is fully ours |
+| Integrity monitoring (core/plugin checksums + mail alert) | ⏳ after handover - contractor uploads would drown the alerts; stable webroot makes any change a signal |
 | Backups off-box pull | ⏳ needs a target machine |
 | DNS cutover | ⏳ final, CEO-controlled |
 | `yk`/`vk` keys | ⏳ add when sent |

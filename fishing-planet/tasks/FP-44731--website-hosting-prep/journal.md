@@ -409,3 +409,24 @@ the new site (isolated, outside the internal network), preserving the existing p
   Verified from the workstation: 401 without auth, phpMyAdmin login page with auth, container->farm
   blocked. Basic-auth `snig` / (in the handover note). htpasswd kept out of git (gitignored + purged
   like the certs).
+- 2026-07-29: wp2shell (CVE-2026-63030 + CVE-2026-60137, pre-auth RCE, in CISA KEV, public exploits)
+  affects WP 6.9.0-6.9.4 - we were on 6.9.4. Updated core to the patched 6.9.5 (backup taken first);
+  checksums verify, site 200. IoC check clean: no forged admin (only fpadmin + snig), no unexpected
+  users, cron hooks all stock, siteurl/home intact, no PHP in uploads, active plugins ours only - not
+  compromised. Root cause we stayed vulnerable: WP-Cron was stalled (all next_run frozen at Jul 21-22)
+  because the in-container loopback to the site URL does not resolve behind the reverse proxy, so the
+  security auto-update never fired. Fixed: `DISABLE_WP_CRON` + `WP_AUTO_UPDATE_CORE='minor'` in the
+  mu-plugin, and a host cron (`/etc/cron.d/wp-cron`) runs `wp cron event run --due-now` every 10 min
+  via the toolbox container. Catch-up ran 14 events; events now reschedule forward; core is latest.
+- 2026-07-30: Split the WordPress runtime config into one mu-plugin per concern, each on its own
+  removable mount so a feature can be killed by dropping its compose line (no code edit):
+  `00-mail.php` (SendGrid transport), `01-cron.php` (`DISABLE_WP_CRON`), `02-updates.php`
+  (`WP_AUTO_UPDATE_CORE='minor'`). Verified both defines still active in the web container, site 200.
+- 2026-07-30: Supply-chain question on core auto-updates weighed. Kept ON: it covers core only
+  (plugins/themes stay manual - that's the real WP supply-chain vector), minor/security only, over
+  HTTPS with checksum verification, and we just got burned by the opposite failure (stuck on the
+  vulnerable 6.9.4 during active exploitation). Compensating controls - container egress allowlist and
+  checksum/integrity monitoring with mail alerts - deliberately **deferred until the contractor
+  finishes and their access is removed**: only then is traffic representative enough to carve egress
+  granularly, and only then is the webroot stable enough that integrity alerts are signal rather than
+  noise (constant contractor uploads would drown them).
