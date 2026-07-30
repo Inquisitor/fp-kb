@@ -31,7 +31,9 @@ config mirror in `artifacts/server-config/`.
 
 | Item | Status |
 |---|---|
-| Snig upload content | ⏳ waiting on them |
+| Snig upload content | 🔄 in progress - core updated by them to 7.0.2, their plugin set installed, DB migration under way |
+| Move the php image tag to the 7.0 line | ⏳ cosmetic - the tag only supplies the runtime, the running core is 7.0.2 from the bind |
+| Verify the nginx upstream-resolver fix behaviourally | ⏳ needs a real php IP change (few seconds of downtime) - do it when the contractor is idle |
 | Re-apply strict fail2ban (2 fails -> 1-year ban) | ⏳ after Snig handover (relaxed to 10/15m for now so they don't self-lock) |
 | Retire contractor tools (toolbox, phpMyAdmin, `snigcli`) | ⏳ after handover - they are working aids, not for prod (reduce surface) |
 | wp-admin IP gate | ⏳ before go-live |

@@ -430,3 +430,22 @@ the new site (isolated, outside the internal network), preserving the existing p
   finishes and their access is removed**: only then is traffic representative enough to carve egress
   granularly, and only then is the webroot stable enough that integrity alerts are signal rather than
   noise (constant contractor uploads would drown them).
+- 2026-07-30: Contractor asked for PHP 8.4 (his minimum). Swapped the runtime images to
+  `wordpress:6.9-php8.4-fpm` and `wordpress:cli-php8.4` (PHP 8.4.21; core lives on the bind so the
+  runtime swap does not touch it). **Caused a ~2 min outage**: nginx caches the fastcgi upstream IP at
+  startup, so recreating the php container (new IP) made every request 502 until nginx was restarted.
+  Fixed properly - the app nginx now resolves the upstream per request via Docker's embedded DNS
+  (`resolver 127.0.0.11` + `set $upstream php:9000`). Config verified loaded; the behavioural test is
+  deferred because a force-recreate reused the same IP and a real IP change needs a few seconds of php
+  downtime while the contractor is working.
+- 2026-07-30: Found the contractor's actual blocker (his 500s predate our image swap): stock PHP limits
+  - 2M uploads, 8M POST, 128M memory - while nginx allowed 512m bodies, so `wp-migrate-db-pro` failed
+  on `admin-ajax.php`. Raised via a mounted `php.ini`: memory 512M, upload/post 256M,
+  max_execution_time 300, max_input_vars 5000; nginx `fastcgi_read_timeout/send_timeout` 300s for long
+  migrations. Verified in FPM context over HTTP: PHP 8.4.21, 300 / 512M / 256M.
+- 2026-07-30: Contractor updated WordPress core himself to **7.0.2** (asked whether to go to 7.0; that
+  release also carries the wp2shell fix, so we are patched on the 7.0 line now). He also installed his
+  plugin set (wp-migrate-db-pro, wordpress-seo, ewww-image-optimizer, svg-support,
+  simple-custom-post-order, sg-security/sg-cachepress inactive). NB: our php image tag still pins the
+  6.9 line - it only supplies the PHP runtime and a seed template, so it does not affect the running
+  7.0.2 core, but the tag should be moved to the 7.0 line to stay honest.

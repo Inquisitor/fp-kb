@@ -11,7 +11,7 @@ services:
     depends_on: [php]
     networks: [front, back]
   php:
-    image: wordpress:6-fpm
+    image: wordpress:6.9-php8.4-fpm
     container_name: fp-main-website-php
     restart: unless-stopped
     security_opt: ["no-new-privileges:true"]
@@ -41,6 +41,7 @@ services:
       - ./php-config/mail.php:/var/www/html/wp-content/mu-plugins/00-mail.php:ro
       - ./php-config/cron.php:/var/www/html/wp-content/mu-plugins/01-cron.php:ro
       - ./php-config/updates.php:/var/www/html/wp-content/mu-plugins/02-updates.php:ro
+      - ./php-config/php.ini:/usr/local/etc/php/conf.d/zz-site.ini:ro
     networks: [back]
   db:
     image: mariadb:11.4
@@ -63,7 +64,7 @@ services:
     networks: [back]
   toolbox:
     # Contractor console: WP-CLI + file/db access as www-data, no host access.
-    image: wordpress:cli
+    image: wordpress:cli-php8.4
     container_name: fp-main-website-toolbox
     restart: unless-stopped
     user: "33:33"
