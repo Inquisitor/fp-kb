@@ -72,7 +72,9 @@ Cross-check found commits against intake. Executor-quality notes:
 - Branch in JIRA comment doesn't match commit metadata → executor-quality note
 - Commit count mismatch → either above
 
-Update card Scope with audited commit list. See [commit-discovery.md](references/commit-discovery.md) for fallback strategies.
+Update card Scope with audited commit list.
+
+The single `grep FP-XXXXX` above is layers 1-2 only. It proves a commit mentioning the task exists — NOT that the fix is currently on the branch. The diff and the branch can diverge for two non-adversarial reasons: **executor discipline** (a revert or move may omit the JIRA id — the author might cite the reverted revision, the task, or neither — so the grep misses it) and **review lag** (a later commit, often a bugfix under another task, rewrote the reviewed code, so HEAD no longer matches the diff). Follow the layered protocol in [commit-discovery.md](references/commit-discovery.md): always run layer 3 (grep the branch log for each found revision — catches reverts/follow-ups that cite a revision, for free), and for any "fix is present on release branch X" claim confirm by branch state (full file history, or a fix-marker `svn cat` on X's HEAD), not by the task grep. Layers 4-5 (file-history, module-heuristic) only on a discrepancy signal.
 
 **WC freshness check (do this before reading any changed file from disk).** After collecting the revisions, run `svn info --show-item revision` on the WC and compare against the lowest revision under review. If the WC is behind:
 1. Run `svn status`. If the WC is clean, **ask the user for permission** and `svn update` to HEAD; after that the disk is trustworthy — read files normally.
