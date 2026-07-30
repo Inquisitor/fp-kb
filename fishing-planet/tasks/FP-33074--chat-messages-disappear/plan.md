@@ -19,7 +19,7 @@ spec: artifacts/fix-design.md
 ## Global Constraints
 
 - **Working tree = the Code branch: `D:\FishingPlanet\src\server\svn\branches\NPN20260602`.** ALL file paths in this plan are relative to that checkout; all edits, builds, tests and commits happen there. (The investigation ran in `MFT20260325`, now the Content branch - its working copy still holds the UNCOMMITTED repro edits: TEMP timeout consts + the EVICT keeper logging. Those are NOT part of this work; discard them in MFT when convenient. The EVICT logging is ported into NPN by Task 2.) NPN divergence from the analyzed code was verified 2026-07-13: only FP-41809 (restricted-country channel redirect in `GameClientPeer_Messaging`, targets misc = "all" channels which are in the persistent set - no interaction with the fence/lifetime work) and sysLog wording in `ChatChannelController`; all plan anchors intact.
-- **Builds:** CLI builds do NOT work in this environment. After code changes, ASK THE USER to build `Photon\src-server\Loadbalancing\LoadBalancing.sln`. Never run `msbuild`/`dotnet build` yourself.
+- **Builds:** CLI build works (verified in NPN): `MSBuild.exe LoadBalancing.sln -restore -p:Configuration=Debug -p:NuGetAudit=false -m -v:minimal` from `Photon\src-server\Loadbalancing\` (**`-p:NuGetAudit=false` required** - the NuGet audit escalates a log4net advisory to a restore error in `Nintendo.csproj`). Run in background; check the real msbuild exit code.
 - **Tests:** after the user builds - `dotnet test --no-build --filter "<filter>" Photon\src-server\LoadBalancing.Tests\LoadBalancing.Tests.csproj`.
 - **VCS = SVN.** "Commit" steps mean: stage nothing, PROVIDE the commit message text and STOP; the user commits. Full message format (per the project commit reference - summary, bullets, task-type line, JIRA link):
 
@@ -32,7 +32,7 @@ spec: artifacts/fix-design.md
 
   Every commit message in this plan ends with those two trailer lines - they are written out in each task.
 - **Code comment style:** keep the why-oriented tone across ALL new and touched code (short XML-doc `<summary>` on new public types/members; explain intent and invariants, never restate what the code says). Hard rules: NO task IDs in comments (blame carries them), NO plan/spec cross-references ("Task 6", "split-safety rule 2"), NO historical/"unlike before" phrasing ("replaces...", "no longer...", "stays...") - comments describe the current nature, not the diff.
-- **New `.cs` files:** UTF-8 **with BOM**, **CRLF** line endings (convert after Write/Edit: regex `(?<!\r)\n` -> `\r\n`, `Set-Content -Encoding utf8BOM`). `LoadBalancing.csproj` is SDK-style - no `<Compile Include>` needed.
+- **New `.cs` files:** UTF-8 **with BOM**, **CRLF** line endings. Canonical tool: `python D:\kb\tools\encoding.py check|fix <files...>` (allow-listed; `check` exits non-zero on violation) - run `fix` after Write/Edit, `check` to verify. `LoadBalancing.csproj` is SDK-style - no `<Compile Include>` needed.
 - **Code comments/docs: English.** No KB references in code comments.
 - `HashCode.Combine` unavailable (net472). Allman braces, accessibility modifiers, readonly where possible, `var` OK.
 - `InternalsVisibleTo("LoadBalancing.Tests")` already present (`Properties/AssemblyInternals.cs`) - internals are testable.
@@ -638,7 +638,13 @@ public MembershipOpResult ApplyMembershipOp(ChatMessage message)
         switch (message.Data)
         {
             case ChatChannelsCommands.Join:
-                membership.ApplyJoin(message.Sender, message.GetMembershipToken(), DT.Helper.UtcNow);
+                // A fence-rejected join (stale straggler) must not trigger any side-effects either:
+                // no backlog replay, no join log, no population broadcast, no expiry refresh.
+                if (!membership.ApplyJoin(message.Sender, message.GetMembershipToken(), DT.Helper.UtcNow))
+                {
+                    MiniLog.Fence(message, "JOIN-STALE ignored");
+                    return result;   // empty result = no side-effects downstream
+                }
                 result.BacklogSnapshot = ComputeBacklogNoLock(message.Message);
                 result.FirstMessage = messages.FirstOrDefault();
                 MiniLog.Join(message.Sender, Id, result.BacklogSnapshot.Length);
@@ -647,7 +653,13 @@ public MembershipOpResult ApplyMembershipOp(ChatMessage message)
             case ChatChannelsCommands.Leave:
                 var verdict = membership.ApplyLeave(message.Sender, message.GetMembershipToken(), MembershipFenceEnforce);
                 if (verdict != LeaveVerdict.Removed && verdict != LeaveVerdict.NotMember)
+                {
                     MiniLog.Fence(message, (MembershipFenceEnforce ? "IGNORED " : "WOULD-IGNORE ") + verdict);
+                    // Under enforcement an ignored leave must be side-effect-free as well -
+                    // no population broadcast and no expiry refresh for an op that did nothing.
+                    if (MembershipFenceEnforce)
+                        return result;
+                }
                 result.BacklogSnapshot = new ChatMessage[] { };
                 MiniLog.Leave(message.Sender, Id);
                 break;
@@ -1201,6 +1213,7 @@ https://fishingplanet.atlassian.net/browse/FP-33074
 - [ ] **Step 1:** with the user - local deploy, flags ON (`MembershipFenceEnforce=True`, `MembershipDrivenChannelLifetime=True` in the local config), debug user in `DebugUsers.lst`. Re-run both historical repros:
   - **Eviction repro (mechanism #2):** join club chat, send one message, idle past 30+ min (or temporarily shrink the timeout in local config only - NOT in code) -> messages must keep delivering (no EVICT of an occupied channel, self-echo `T` present).
   - **Rapid leave+join repro (mechanism #1):** spam the rapid leave+join debug trigger while sending messages -> membership must survive every cycle (`FENCE` lines show `IGNORED` verdicts on stale ops; self-echo `T` never disappears).
+  - **Restricted-redirect same-channel pair (FP-41593 source, if a restricted-country setup is available):** as a restricted player, switch the global-chat language (client Leave g3 + Join g2 -> server-side redirect collapses both to g0) -> membership on g0 must survive; a pool-reordered late Leave must show `IgnoredStaleSeq` in FENCE. Covered by the inline lane by construction AND by the seq fence independently; this checks the wiring. If no restricted setup locally - leave to QA STR / prod shadow observation.
 - [ ] **Step 2:** verify canary + reconcile logs appear (`AGE`, "Membership reconcile:") and shadow logs are quiet on healthy flow.
 - [ ] **Step 3:** journal milestone (append-only, bottom); module `log.md` entry: implementation landed, fence semantics live; tick the fix items in module `backlog.md`.
 - [ ] **Step 4:** hand off to the user: single delivery to prod; post-release activation via config (observe FENCE shadow -> flip enforce -> flip lifetime, window at the operator's discretion); post-release telemetry check per the task backlog "Post-release" item (reconcile young-skips, AGE canary, FENCE volume) - candidate for waiting-for-release on the JIRA task. JIRA comment about the fix drafted separately (jira-post-preview applies).

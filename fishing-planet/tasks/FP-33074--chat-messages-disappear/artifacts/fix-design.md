@@ -66,7 +66,9 @@ participant: userId -> { roomId, nodeId, peerGen, seq, joinedAt }
   `seq`/`joinedAt`, preserves the room) - else a room-less rejoin downgrades the fence for a later stale leave.
 - **Leave** = remove only if it comes from the same ownership context as the recorded Join:
   1. both rooms known -> remove iff `leave.roomId == entry.roomId` (the precise fence; catches same-node room moves);
-  2. **room-less Leave is WEAK**: it may remove only a room-less entry (with `nodeId` + `peerGen` matching) -
+  2. **room-less Leave is WEAK**: it may remove only a room-less entry (with `nodeId` matching AND `peerGen`
+     strictly equal - an unknown generation on either side is a mismatch, not a wildcard; adversarial review
+     showed the "when comparable" reading leaves a theoretical hole) -
      it can never remove an entry that has a known room. Rationale: a late `TearDown` leave (fires from
      `PreviewDisconnect`, `GameClientPeer.cs` - which can run tens of seconds late, "No PreviewDisconnect arrived")
      would otherwise kill a fresh same-node re-join; even a room fence would not help on a reconnect into the
