@@ -36,6 +36,12 @@ Active tracking:
 - [Readiness of server tasks on Stanislav](artifacts/currently-mine-readiness.md) — prioritized
   board of FPA server tasks currently assigned to the lead (commit-in-MFT + review/QA state),
   used to drive per-task review in parallel sessions.
+- [Release checklist steps mapping](artifacts/release-steps-mapping.md) — branch-specific release
+  steps for this release (sweep window, per-category instances, paste-ready blocks).
+
+Procedure references: [what content belongs in the checklist](../../../reference/release_checklist_field.md)
+and [how to edit the checklist page](../../../reference/release_checklist_editing.md) — the latter was
+authored from this release; read it before touching a checklist page.
 
 ## Milestones
 - 2026-07-20: JIRA task created (mirrors FTUE release task FP-44389 — Story, Scrum Team FPA,
