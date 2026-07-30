@@ -222,12 +222,19 @@ eventually leave the channel. `PlayerCache2` is the authority on "still online a
 - For each member: `PlayersCache.LookupPlayer` **at prune time** (never a pre-collected `AllPlayers` snapshot -
   it goes stale during the sweep). Absent from presence -> drop the member; emptied channel -> remove (atomically,
   split-safety #3).
-- **Grace window:** skip entries younger than a threshold (via `joinedAt`) - a chat Join can legitimately
-  arrive before the presence `UpdateGameState.NewUsers` for the same player; without grace the reconcile would
-  evict a mid-join member (TOCTOU). The threshold is **configurable and derived from the real lag bound**: not
-  an `UpdateGameState` cadence (those send immediately, `Game.UpdateGameStateOnChat`) but the game-node's chat
-  S2S **reconnect + offline-queue flush** window (`OutgoingChatServerPeerBase` reconnect path). Log the count of
-  skipped-young entries per sweep - a growing number flags the grace being load-bearing. **Post-release check**
+- **Grace = continuous-absence persistence** (adversarial-review redesign, supersedes the earlier joinedAt-skip):
+  each member entry carries `AbsentSince` - set on the first absent observation, cleared whenever presence (or a
+  re-join) confirms the player; the member is pruned only after presence has been continuously absent for the
+  full grace window (>= two sweeps). Rationale: a single absent observation can be a node-handover transient
+  (crash -> purge -> reconcile fires before the replacement node re-registers its players) - a joinedAt-based
+  skip would not protect a long-standing member there, silently evicting a live player: exactly the bug class
+  this fix exists to kill. Absence persistence also subsumes the join-before-presence TOCTOU (a fresh join
+  observed absent only gets MARKED; the presence update lands before the next sweep and clears the mark).
+  The threshold stays configurable; log dropped/markedAbsent counters per sweep.
+- **Convoy relief:** the reconcile takes ONE normalized presence snapshot before any channel locks and walks a
+  snapshot of the channel array with per-channel locking only; emptied-channel removal re-acquires the cache
+  lock per candidate with a re-verification. Holding the global cache lock across a full membership walk would
+  stall every join/leave each sweep tick. **Post-release check**
   (not part of the implementation): watch this counter on prod and tune the grace - tracked in the task backlog
   ("Post-release" section); candidate for waiting-for-release on the JIRA task.
 - A lost Leave (crash) lingers at most one sweep interval + grace - harmless, the member is offline.
@@ -325,3 +332,15 @@ splits the release:
   online x channels-per-user + per-user channel cap hardening; reconcile grace made configurable/derived + young-skip
   logging; Expire naming guard (`ChannelExpiration` event stays); reject-metric for identity-less membership ops;
   staged rollout order (shadow-log first). **[LOCKED]**.
+- 2026-07-30 - Pillar 3 grace redesigned to **continuous-absence persistence** (`AbsentSince` on the
+  entry; prune only after a full grace window of uninterrupted absence) after a Codex finding: a transient
+  presence gap (node crash / replacement purge) would have evicted long-standing live members under the
+  joinedAt-skip semantics. Reconcile locking restructured for convoy relief (presence snapshot + per-channel
+  locks + scoped removal); purge logging moved outside `cacheLock`; perf counters refreshed after removals. **[LOCKED]**.
+- 2026-07-30 - Pillar 4 implemented as designed; T9 review round outcomes: Codex's "JoinedAt refresh on rejoin
+  defeats the canary" HIGH **rejected** - it contradicts the locked design intent (age = time since the last
+  accepted join; joins only come from live peers, so a refresh implies presence; a leaked entry receives no joins
+  and only ages) - locked in with a rejoin test. Accepted refinements: persistent (global/waterbody) channels
+  excluded from the walk (permanent residency there is by design, would drown the signal); presence snapshotted
+  before locks (mirrors the reconcile - no cacheLock under OpLock); log cadence advances before collection
+  (a throwing canary degrades to one attempt/hour, not a 1 Hz retry); threshold hours included in the AGE line. **[LOCKED]**.
