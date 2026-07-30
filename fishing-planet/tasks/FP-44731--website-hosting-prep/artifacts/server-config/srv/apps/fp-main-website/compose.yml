@@ -43,6 +43,21 @@ services:
       - ./php-config/updates.php:/var/www/html/wp-content/mu-plugins/02-updates.php:ro
       - ./php-config/php.ini:/usr/local/etc/php/conf.d/zz-site.ini:ro
     networks: [back]
+  redis:
+    # Object cache backend. Internal network only, never published. Cache data is disposable,
+    # so persistence is off and memory is capped with LRU eviction.
+    image: redis:7-alpine
+    container_name: fp-main-website-redis
+    restart: unless-stopped
+    # Start as the redis user directly: with all capabilities dropped the entrypoint cannot
+    # setuid away from root itself.
+    user: "redis"
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    pids_limit: 128
+    mem_limit: 384m
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru", "--save", ""]
+    networks: [back]
   db:
     image: mariadb:11.4
     container_name: fp-main-website-db
@@ -83,6 +98,14 @@ services:
     volumes:
       - ./html:/var/www/html
       - ./secrets/db_password:/run/secrets/db_password:ro
+      - ./secrets/sendgrid-mailsend.key:/run/secrets/sendgrid_key:ro
+      # The same runtime config as the web container: mu-plugins are mounted per file, so without
+      # these the CLI would see empty placeholders and run with none of the site's constants
+      # (mail routing, redis backend) - and the host cron runs its jobs in here.
+      - ./php-config/mail.php:/var/www/html/wp-content/mu-plugins/00-mail.php:ro
+      - ./php-config/cron.php:/var/www/html/wp-content/mu-plugins/01-cron.php:ro
+      - ./php-config/updates.php:/var/www/html/wp-content/mu-plugins/02-updates.php:ro
+      - ./php-config/php.ini:/usr/local/etc/php/conf.d/zz-site.ini:ro
     networks: [back]
   phpmyadmin:
     # Contractor DB web UI. Reached only behind the edge basic-auth; login is the site DB user, not root.

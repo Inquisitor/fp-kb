@@ -286,7 +286,7 @@ the new site (isolated, outside the internal network), preserving the existing p
   `AllowStreamLocalForwarding no` + `restrict` prefix on the key; also `AllowAgentForwarding no`,
   `PermitTunnel/PermitTTY/PermitUserRC` off, `PermitOpen/PermitListen none`, denied symlink/hardlink
   (`-P`), tightened `LoginGraceTime/MaxAuthTries/MaxStartups/PerSourceMaxStartups/UnusedConnectionTimeout`.
-  Then cleaned ALL my server configs of task-ids / dates / process / tooling mentions (comments are
+  Then cleaned ALL server configs of task-ids / dates / process / tooling mentions (comments are
   technical-why only), renamed `10-fp44731-hardening.conf` -> `10-hardening.conf`
   (see [[no-ai-pentest-mentions-in-server-configs]]). Test key + probe artifacts removed; clean configs
   committed.
@@ -432,8 +432,8 @@ the new site (isolated, outside the internal network), preserving the existing p
   noise (constant contractor uploads would drown them).
 - 2026-07-30: Contractor asked for PHP 8.4 (his minimum). Swapped the runtime images to
   `wordpress:6.9-php8.4-fpm` and `wordpress:cli-php8.4` (PHP 8.4.21; core lives on the bind so the
-  runtime swap does not touch it). **Caused a ~2 min outage**: nginx caches the fastcgi upstream IP at
-  startup, so recreating the php container (new IP) made every request 502 until nginx was restarted.
+  runtime swap does not touch it). Recreating the php container served 502s for ~2 min: nginx caches
+  the fastcgi upstream IP at startup, so the container's new IP was unreachable until nginx restarted.
   Fixed properly - the app nginx now resolves the upstream per request via Docker's embedded DNS
   (`resolver 127.0.0.11` + `set $upstream php:9000`). Config verified loaded; the behavioural test is
   deferred because a force-recreate reused the same IP and a real IP change needs a few seconds of php
@@ -449,3 +449,28 @@ the new site (isolated, outside the internal network), preserving the existing p
   simple-custom-post-order, sg-security/sg-cachepress inactive). NB: our php image tag still pins the
   6.9 line - it only supplies the PHP runtime and a seed template, so it does not affect the running
   7.0.2 core, but the tag should be moved to the 7.0 line to stay honest.
+- 2026-07-30: Contractor asked about server-side caching, then about Memcached. Facts checked: no
+  nginx proxy/fastcgi cache, no object-cache/advanced-cache drop-ins, no caching plugin active
+  (his `sg-cachepress` is SiteGround-specific and inert here); only PHP opcache with
+  `validate_timestamps=On, revalidate_freq=2`. No memcached/redis/apcu extension or service existed.
+  He chose Redis over Memcached.
+- 2026-07-30: Redis object cache added. `redis:7-alpine` container on the app's back network only
+  (never published), no persistence (`--save ""`), `maxmemory 256mb` + `allkeys-lru`. Started as the
+  `redis` user because with `cap_drop: ALL` the entrypoint cannot setuid away from root itself.
+  Client is the plugin's bundled **Predis** rather than the phpredis extension: adding the extension
+  would mean building a custom image, which would cut us off from base-image security updates - the
+  exact failure mode we just fixed. Verified: Status Connected, Redis 7.4.10, ~196 `fpmain:` keys.
+- 2026-07-30: Two findings from that work (the site is still pre-live, so both only affected the
+  contractor's session, not visitors).
+  (1) **Latent bug:** mu-plugins are mounted per file into the php container, so on the host they exist
+  only as empty mount-point placeholders - the toolbox (and therefore the host cron that runs
+  `wp cron event run` inside it) saw empty files and ran with none of the site constants, e.g. mail
+  would have bypassed SendGrid. Fixed by mounting the same php-config files and php.ini into the
+  toolbox.
+  (2) **Drop-in enabled before its backend was reachable:** the object-cache drop-in went live while
+  the Redis constants still lived in an mu-plugin. `object-cache.php` is loaded before mu-plugins, so
+  it fell back to 127.0.0.1 and fataled the site (500s for a few minutes). Redis config must live in
+  `wp-config.php` -
+  moved there via `wp config set` (note: `wp-config.php` is on the bind, so it is covered by backups
+  but not by the config mirror). The now-redundant `redis.php` mu-plugin was removed. Lesson: verify a
+  cache backend is reachable from the web context before enabling its drop-in.

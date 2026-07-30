@@ -25,7 +25,9 @@ config mirror in `artifacts/server-config/`.
 | phpMyAdmin for the contractor | ✅ `pma.fishingplanet.com` behind edge basic-auth, isolated container, login as the site DB user (not root) |
 | Config mirror | ✅ `artifacts/server-config/` |
 | WordPress core security | ✅ patched to 6.9.5 (wp2shell pre-auth RCE); IoC-checked clean; WP-Cron moved to host cron so security auto-updates actually fire |
-| WP runtime config split | ✅ one mu-plugin per concern (mail / cron / updates), each a removable mount = per-feature kill switch |
+| WP runtime config split | ✅ one mu-plugin per concern (mail / cron / updates), each a removable mount = per-feature kill switch; the same set is mounted into the CLI container so both contexts match |
+| PHP 8.4 + site limits | ✅ PHP 8.4.21; memory 512M, upload/post 256M, exec 300s, nginx fastcgi timeouts 300s |
+| Redis object cache | ✅ internal-only `redis:7-alpine` (no persistence, LRU), Predis client, drop-in valid, keys populating. Config lives in `wp-config.php` - the drop-in loads before mu-plugins |
 
 ## Remaining
 
