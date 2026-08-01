@@ -1,0 +1,4 @@
+/dev/disk/by-uuid/ff649222-60a2-4c89-8a04-1d3b65f62294 / ext4 defaults 0 1
+/dev/disk/by-uuid/7E96-0E7E /boot/efi vfat defaults 0 1
+/swap.img	none	swap	sw	0	0
+/srv/apps/fp-main-website/html /srv/sftp/snig/html none bind 0 0

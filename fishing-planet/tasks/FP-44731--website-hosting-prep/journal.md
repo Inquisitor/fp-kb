@@ -484,3 +484,30 @@ the new site (isolated, outside the internal network), preserving the existing p
   Two follow-ups: any further DB
   import will wipe these accounts again, and their `root` administrator login is a brute-force magnet
   while `wp-login.php` is still public - one more reason to enable the wp-admin IP gate before go-live.
+- 2026-08-01: Second external configuration review of the whole host (the first covered only SFTP).
+  Note on tooling: the adversarial framing ("refute our defences, give exploitation steps") was
+  rejected by the provider's safety filter; rerunning it as a defensive configuration audit
+  ("what is misconfigured or missing, with fixes") returned the same substance. Findings were verified
+  against the live host rather than taken at face value - three were real, three were artefacts of an
+  incomplete snapshot.
+  **Confirmed and fixed:**
+  (1) *Critical - uploaded PHP was executable.* nginx matches the first regex location, and the generic
+  `~ \.php$` handler sat above the uploads deny rule, so the deny never applied. Proven by serving a
+  probe from `wp-content/uploads` (it executed). Deny rules moved above the PHP handler, extended to
+  `phar/phtml/php[0-9]`, plus `try_files $uri =404` in the PHP location against PATH_INFO smuggling.
+  Retested: uploaded PHP now 403, ordinary uploads still 200.
+  (2) The edge proxy had no timeouts, so its 60s default truncated long admin requests while the
+  application allowed 300s - this matches the contractor's failing migrations. Edge now mirrors 300s.
+  (3) The edge still resolved upstreams once at startup (the bug already fixed one layer down), so
+  recreating the site or phpMyAdmin container would serve persistent 502s. Both edge vhosts now
+  resolve per request.
+  **Also hardened:** the backup pipeline no longer pipes the dump straight into gzip (a truncated dump
+  produced a valid-looking archive) - it dumps to a file, checks for the completion marker, compresses,
+  validates, and publishes atomically from a staging directory; the internal-range block now drops all
+  traffic after the established accept rather than only `ct state new`. Verified: backup run produced a
+  complete set, internet/container/site/SSH unaffected.
+  **False positives, all traceable to the snapshot lacking runtime state:** the SFTP jail was reported
+  as disconnected from the webroot (the bind mount lives in `/etc/fstab`, now added to the mirror);
+  Redis reported as unwired (its constants are in `wp-config.php`); the sshd ban jail reported as
+  disabled (it is active). Backups have grown to ~1.1 GB per run as the contractor's media landed;
+  4.4 GB used against 74 GB free, so retention is comfortable for now.

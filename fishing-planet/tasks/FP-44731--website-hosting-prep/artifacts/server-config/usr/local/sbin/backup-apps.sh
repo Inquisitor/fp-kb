@@ -5,15 +5,23 @@ set -eu
 umask 077
 STAMP=$(date +%F_%H%M)
 DEST=/srv/backups/$STAMP
-mkdir -p "$DEST"
+WORK=$DEST/.incomplete
+mkdir -p "$WORK"
 
 # --- fp-main-website (WordPress) ---
-docker exec fp-main-website-db sh -c 'mariadb-dump -uroot -p"$(cat /run/secrets/db_root_password)" --single-transaction --quick --routines wordpress' | gzip > "$DEST/fp-main-website-db.sql.gz"
-tar -C /srv/apps/fp-main-website -czf "$DEST/fp-main-website-html.tar.gz" html
+# Dump to a file first and verify the dumper's own result: piping straight into gzip hides a failed
+# or truncated dump, because gzip still exits 0 and writes a perfectly valid archive.
+docker exec fp-main-website-db sh -c 'mariadb-dump -uroot -p"$(cat /run/secrets/db_root_password)" --single-transaction --quick --routines wordpress' > "$WORK/fp-main-website-db.sql"
+tail -c 200 "$WORK/fp-main-website-db.sql" | grep -q "Dump completed"
+gzip "$WORK/fp-main-website-db.sql"
+gzip -t "$WORK/fp-main-website-db.sql.gz"
 
-# --- integrity check: dump must be valid gzip and non-empty ---
-gzip -t "$DEST/fp-main-website-db.sql.gz"
-test "$(zcat "$DEST/fp-main-website-db.sql.gz" | head -c 64 | wc -c)" -gt 0
+tar -C /srv/apps/fp-main-website -czf "$WORK/fp-main-website-html.tar.gz" html
+gzip -t "$WORK/fp-main-website-html.tar.gz"
+
+# --- publish only after every artifact validated, so a partial run never looks like a good backup ---
+mv "$WORK"/* "$DEST"/
+rmdir "$WORK"
 
 # --- retention: 7 days ---
 find /srv/backups -mindepth 1 -maxdepth 1 -type d -mtime +7 -exec rm -rf {} +
