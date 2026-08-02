@@ -9,11 +9,14 @@ type: story
 # FP-45093: Prepare and release 2026.5 Anniversary (FPA)
 
 ## Status
-Planned (created 2026-07-20). Umbrella task for 2026.5 Anniversary (FPA) server
-release-prep work that does not belong to a dedicated JIRA task — investigations,
-audits, sanity checks, ad-hoc fixes, configuration reviews. Sibling of the FTUE release
-task [FP-44389](https://fishingplanet.atlassian.net/browse/FP-44389); FPA continues from
-the same MFT20260325 branch.
+**Released on Steam 2026-07-30** (server v1126.0, SRV/16375). Still open: the release has not gone
+to EGS and the consoles yet, and FP-45166 (protocol-compatibility enforcement) ships separately via
+Next Server Hotfix — so this umbrella stays open until the remaining platforms are out.
+
+Umbrella task for 2026.5 Anniversary (FPA) server release-prep work that does not belong to a
+dedicated JIRA task — investigations, audits, sanity checks, ad-hoc fixes, configuration reviews.
+Sibling of the FTUE release task [FP-44389](https://fishingplanet.atlassian.net/browse/FP-44389);
+FPA continues from the same MFT20260325 branch.
 
 ## Summary
 Catch-all task for FPA release-prep work outside other tickets. FPA (2026.5 Anniversary)
@@ -60,3 +63,19 @@ authored from this release; read it before touching a checklist page.
   out of FPA to NSH / Australia (weather cluster, RU-ban, broken-fish, Dragonfly donate). Corrected
   FP-41616 fixVersion (was still 16274) -> Next Server Hotfix + 2026.6 Australia, matching its
   weather siblings. Board refreshed to the final release-day snapshot
+- 2026-07-30: **Released on Steam**, window 09:00-11:00 UTC, downtime 45 min. Protocol 1125.0 ->
+  1126.0; Build F2P#831, SRV/16375, BM/56607; client 6.0.13 (post-release bumped to 6.0.14, EGS domain
+  `epic_v34`). The date slipped from 07-27 because the EGS client sat in certification at Epic — which
+  bought the time for the backlog pass below. Release incident, recorded in the Server Release Log: the
+  Master server was upgraded (96 -> 192 GB memory, CPU 6132 -> 6230) and TLS 1.2 was missing from the
+  setup script on the new box, so the Master would not start. Post-release checklist steps all done —
+  minor protocol increment (MFT r16388, 1126.0 -> 1126.1), Environment and branch status (v378),
+  Server Release Log, Releases 2026 (v39).
+  Backlog pass during the slip: FP-41593 turned out to be **absent from MFT** — its fix (r16158) had
+  been reverted an hour later by r16159 (`committed to wrong branch instead of NPN20260602`), which the
+  task-id grep never saw; it surfaced on QA and was traced only because the author remembered. Decided
+  not to re-apply: moved to Next Server Hotfix + 2026.6 Australia, where the code already lives (NPN).
+  The lesson is now in `reference/release_checklist_field.md`. Also dropped the FPA tag from FP-31878
+  (To Do, unspeced GD work that was never going to ship) so the release report is clean.
+  Known and accepted: MFT r16321 and NPN r16322 both took major protocol 1126.0 eight minutes apart, so
+  1126.0 is currently shared between shipped Steam prod and the NPN code branch; NPN will move to 1127
