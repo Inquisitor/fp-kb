@@ -201,32 +201,55 @@ Without this the trial loses calibration.
    alone; not for MIDDLES-only or TOP-only sandbagging (different mechanism).
 2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak. When status is
    REPEAT and prize flavor is TOP/MIDDLES not NOOBS, WATCH applies just like NEW.
-3. Sample-size objections deserve weight on first-cycle NEW candidates.
-4. Watchlist players escalating to NOOBS flavor (NOOBS prizes appear OR MIDDLES->NOOBS drops
-   appear) trigger automatic BAN without further deliberation.
+3. (reframed week-13) Data-sufficiency objection, and the **only** leniency available on
+   evidentiary grounds: fewer than 10 competitions **PLAYED** in the window. This is a claim
+   about how much evidence exists, not about who the player is. Unavailable where SQL volume is
+   high and the ledger merely looks thin because the rating sat at the floor (see Step 4.5).
+4. (broadened week-13) Any candidate returning to the cohort after a prior WATCH whose NOOBS
+   flavor has appeared or grown (NOOBS prizes appear or increase, or MIDDLES->NOOBS drops appear
+   or increase) is BAN without further deliberation. Previously scoped to watchlist entries
+   only; broadened because rule 6's withdrawal removed the wording that carried the other cases.
 5. (week-7 Kacumi refinement) Net-positive PCR alone does NOT defeat the bracket-farming
    hypothesis when the climbs are followed by no-show flushes and re-engagement at
    NOOBS-bracket competitions. The climb is the up-arc of a climb-and-cash cycle, not climber
    behavior. Only use net-positive as defense when there is NO climb-then-flush signature.
-6. (week-8 KingYakO2 refinement, reframed post-Codex) NEW first-cycle candidates with a
-   **novice competition profile** warrant WATCH with a one-cycle clock. Novice profile means:
-   TotalPrizes < 10 (KingYakO2 baseline threshold) OR combination of (a) low lifetime volume,
-   (b) structural counter-evidence (recovery-climb, continuous absence block, scheduler-artifact
-   batches), (c) low leaderboard extraction (rank far outside top-100 or Wins <= 2). Does NOT
-   apply to veterans whose flavor has changed to NOOBS -- those are BAN under rule 1/4.
+6. (**REWRITTEN week-13 — the week-8 KingYakO2 novice-deference version is withdrawn**)
+   **There is no standalone novice deference.** A thin record is handled by rule 3 and only
+   rule 3. Affirmatively: **low lifetime volume is AGGRAVATING when in-window extraction is
+   high.** The wide gate already requires >= 6 no-shows, >= 30% share, <= -90 rating from
+   no-shows AND more than 3 prizes, so every candidate reaching review has already demonstrated
+   both volume and cashing. If a large share of the candidate's lifetime prize count was earned
+   inside the window, their entire competitive record consists of the conduct under review --
+   the pattern in its strongest form, not an excuse for it. The judge computes the ratio
+   explicitly (in-window TotalPrizes against lifetime Gold+Silver+Bronze) and states it.
+   Two arguments are expressly closed to the defense: (i) a **recovery-climb**, because rule 5
+   already classifies the climb as the up-arc of a climb-and-cash cycle; (ii) **absence from a
+   later cohort**, because a candidate can simply pause -- absence proves nothing either way.
+   *Basis for the rewrite*: across weeks 8-13 the deference branch produced twelve WATCH
+   verdicts and not one was later vindicated; every traceable case ended in a ban by us or by
+   Support. The week-13 Support-blind A/B re-ran the same 18-candidate cohort under both
+   versions -- the old rules missed two players Support had independently banned
+   (ELPEZGORDO12, ZacKasoN), the rewrite missed none, and no confident BAN flipped the other
+   way. See `bans-2026-08-02.md`.
 7. (week-8 TR-dennisfb refinement + week-10 closure) High-PCR sandbagging WATCH (PCR >= 800
    OR Lifetime TOPS >= 5) carries a one-cycle clock. **Direction 1**: if NOOBS shift appears
    next cycle, rule 4 fires (BAN). **Direction 2** (post-Codex closure): if the candidate
    remains in the wide cohort for 3+ consecutive cycles with unchanged TOP-flavor and 0 NOOBS
    shift (VM_Vigor / Panonski_Alas pattern), close the case as "not FP-43631 target" and stop
    re-listing on the watchlist -- separate anti-abuse framework should own it if needed.
-8. (week-9 CreekSamurai refinement / week-10 validation) Novice-deference WATCH from rule 6
-   comes with a persistence check. Rule 4 auto-BAN fires next cycle if ANY of: (a) at least
-   one additional MIDDLES->NOOBS drop compared to prior cycle, (b) NOOBS prize count grew by
-   >= 2, (c) NoShowSharePct maintained above 30% on a >= 20% larger sample (Registrations grew
-   materially without proportional Played growth). Validated week-10: CreekSamurai returned
-   with 8 M->N drops (up from 3) satisfying condition (a) with margin -- Support pre-actioned
-   at the exact 2W duration our rule would have applied.
+   **Uniformity (week-13)**: two candidates with the same multi-cycle upper-bracket profile must
+   receive the same disposition. Note the limit found in practice -- an instruction alone does
+   not achieve this, because each candidate is judged independently and the judges cannot see
+   one another. Week-13 produced EXONERATE for X1aoDouYa and WATCH for EsseDouble on
+   near-identical profiles. Consistency inside a family needs an operator pass over the family
+   as a whole, not a clause in the rule.
+8. (week-9 CreekSamurai refinement / week-10 validation / broadened week-13) Persistence check
+   on **any** prior WATCH, not only a novice one. Rule 4 auto-BAN fires next cycle if ANY of:
+   (a) at least one additional MIDDLES->NOOBS drop compared to prior cycle, (b) NOOBS prize
+   count grew by >= 2, (c) NoShowSharePct maintained above 30% on a >= 20% larger sample
+   (Registrations grew materially without proportional Played growth). Validated week-10:
+   CreekSamurai returned with 8 M->N drops (up from 3) satisfying condition (a) with margin --
+   Support pre-actioned at the exact 2W duration our rule would have applied.
 9. (week-10 sandaljepitt refinement) **Within-bracket detector** for cases entirely inside the
    NOOBS bracket [0..100] where rules 1/4/6 miss because no MIDDLES->NOOBS drops and no
    climb-then-flush arcs are possible. Rule 9 fires on ALL of: (a) NoShowSharePct >= 40 (higher
@@ -234,10 +257,14 @@ Without this the trial loses calibration.
    (c) max PCR across the trajectory window < 100 (never climbs into MIDDLES), (d) at least
    10 Registrations in the sweep window (avoid tiny-sample false positives). Judge should
    accept "within-bracket abuse" as a load-bearing BAN argument even without cross-bracket
-   evidence; defense counters remain novice-deference (rule 6, if TotalPrizes < 10) and
-   sample-size (rule 3, if <10 played). Discovered from sandaljepitt week-10 dissent -- Support
+   evidence. **Precedence (corrected week-13): rule 9 stands on its own and is NOT outranked by
+   any consideration of the player's inexperience; the only defense that defeats it is rule 3.**
+   The earlier week-12 precedence — rule 6 outranking rule 9 on a first-cycle candidate — is
+   withdrawn: in the week-13 A/B it was the mechanism that let ZacKasoN through (rule 9's gates
+   all fired at PCR 4 with pure 4N flavor, and the deference branch suppressed them) while
+   Support banned him for a month. Discovered from sandaljepitt week-10 dissent -- Support
    pre-actioned 2W (rating-drop duration; cheat bans are permanent on FP), trial WATCH under
-   rule 6, alignment counter 27/28.
+   the then-current rule 6, alignment counter 27/28 at the time.
 
 Output is `{ trials: [{ name, platform, status, prosArg, defArg, verdict }] }` — extract
 verdicts via:
@@ -532,6 +559,15 @@ at the rating-drop vector:
 | Week-10 | 7 (JFF_Gothyka, LaccFarro, CreekSamurai, MLG720YOLO, Da Sneaky Snake, CraddiePoosta, **sandaljepitt**) | 6 confirmed BAN + **1 dissent (sandaljepitt: trial WATCH conf 7)** | **27/28** |
 | Week-11 | 5 (yevhen331, sen1a, evgeniy3311, Ricky27sampei, **LZ23J7KS**) | 4 confirmed BAN + **1 dissent (LZ23J7KS: trial WATCH conf 7 under rule 7 direction 2)** | **32/34** |
 | Week-12 | 3 (KondaFlk, VGB_N4rkos060905, rascof molotov) | 3 confirmed BAN, conf 9-10, all defense CONCEDE | **35/37** |
+| Week-13 | 7 (LuizFernandoo, BarbosUa, MORPH3US, ELPEZGORDO12, aperno, La_Iena_River_, ZacKasoN) | **First Support-blind run.** Under the previous rules 5 of 7 confirmed (ELPEZGORDO12 and ZacKasoN released under rule 6); under the revised rules **7 of 7** | **42/44** |
+
+**Independence note (week-13)**: from this cycle the review is run **Support-blind** -- the
+pre-trial context carries no indication of who Support has already actioned, and NEW/REPEAT
+status is set from our own ban history only. The cross-check happens afterwards, at the operator
+step. This removes the correlated-reasoning weakness that made the counter a sanity check rather
+than a validation, and it is what made the rule-6 measurement possible: with Support status
+visible the judges would most likely have banned the two missed candidates for the wrong reason
+and the defect would have stayed invisible. The counter above records the revised-rules figure.
 
 **Interpretation caveat (post-Codex)**: the alignment counter is a sanity check, not a
 validation metric. Independence is weak because Support-pre-actioned status is included in the
@@ -593,6 +629,13 @@ section the cycle it's discovered, then carried forward via memory rules.
 | week-12 | Rule 7 direction 2 produced its **first actual closure**: Panonski_Alas EXONERATEd and exits tracking rather than rolling forward on another WATCH. Family remainder: X1aoDouYa, EsseDouble, autoteo78 | (in `bans-2026-07-26.md`) |
 | week-12 | Briefing defect caught by a judge: same-second batched groups are **flush moments**, not proof of contemporaneous presence. Future briefs must state this explicitly so prosecutors stop arguing "he was online while burning parallel registrations" | (in `bans-2026-07-26.md`) |
 | week-12 | Rule 6 wording corrected in the brief to **LIFETIME** prizes < 10 (the KingYakO2 intent), resolving the w11 in-window/lifetime ambiguity. Rule 9 precedence made explicit: rule 6 outranks rule 9 on a first-cycle NEW candidate, but not on a returning one — which is what carried TurboBandz6351 to BAN | (in `bans-2026-07-26.md`) |
+| week-13 | **Rule 6 rewritten from leniency into aggravator; the week-8 novice-deference version withdrawn.** Measured by an A/B over the same 18 candidates with identical evidence, both runs Support-blind: previous rules 11 BAN and released two players Support had banned, revision 14 BAN and released none, no confident BAN destabilised. Basis: twelve deference WATCH verdicts across weeks 8-13, zero ever vindicated | `bans-2026-08-02.md`; rule 6 in Standing rules |
+| week-13 | **Absence from a later cohort retired as evidence.** Previously recorded as validating a WATCH (FarantirPL w9 and several w10 candidates); FarantirPL returned this cycle at 70% no-show after two absent cycles. Now an explicitly closed defense alongside the recovery-climb | (in `bans-2026-08-02.md`) |
+| week-13 | Rules 3, 4, 8, 9 adjusted alongside rule 6 — rule 3 becomes the sole evidentiary leniency and is framed as data-sufficiency, rules 4 and 8 broadened from watchlist/novice scope to any returning WATCH, rule 9 precedence corrected so inexperience no longer outranks the within-bracket detector (the w12 precedence is withdrawn — it is what released ZacKasoN) | (in `bans-2026-08-02.md`) |
+| week-13 | **Review is now run Support-blind** and the cross-check moved to the operator step. Recommended permanently — it converts the alignment counter from a sanity check into a real measurement | (alignment table above) |
+| week-13 | **Uniformity cannot be achieved by instruction.** The rule 7 uniformity clause did not bind: X1aoDouYa drew EXONERATE and EsseDouble WATCH on near-identical profiles in both runs, because judges are independent and cannot see one another. Family-level consistency needs an operator pass | (in `bans-2026-08-02.md`) |
+| week-13 | **Ban durations raised to 4W NEW / 8W REPEAT** after measured recidivism intervals (13-31 days after a 2W ban lapsed). CS lead proposed permanent for repeat offenders; 4W/8W is the interim step. Support's own duration practice found to be split between operators (one month vs two weeks in the same week) | (in `bans-2026-08-02.md`) |
+| week-13 | New unused signal identified: `TournamentRegistrationDeniedBanned` — attempts to register while already banned (ELPEZGORDO12 8, LuizFernandoo 5, BarbosUa 4, MORPH3US 2). Direct intent evidence, independent of the rating clamp and queueing. Candidate aggravator | (in `bans-2026-08-02.md`) |
 
 ## Example: week-7 walkthrough (2026-06-22 ban date)
 
