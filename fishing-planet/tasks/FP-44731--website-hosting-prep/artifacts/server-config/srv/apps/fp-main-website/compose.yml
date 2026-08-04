@@ -8,12 +8,17 @@ services:
     volumes:
       - ./html:/var/www/html:ro
       - ./nginx/wp.conf:/etc/nginx/conf.d/default.conf:ro
+      # Whole directory, so an include file can be added or deleted on the host alone.
+      - ./nginx:/etc/nginx/site-includes:ro
     depends_on: [php]
     networks: [front, back]
   php:
     image: wordpress:6.9-php8.4-fpm
     container_name: fp-main-website-php
     restart: unless-stopped
+    # The webroot is shared with the upload account, so anything PHP creates must stay writable by
+    # the webroot group; the default 022 umask would produce files only PHP itself could rewrite.
+    command: ["sh", "-c", "umask 0002 && exec php-fpm"]
     security_opt: ["no-new-privileges:true"]
     read_only: true
     tmpfs:

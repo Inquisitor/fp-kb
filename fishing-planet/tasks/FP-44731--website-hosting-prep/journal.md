@@ -511,3 +511,30 @@ the new site (isolated, outside the internal network), preserving the existing p
   Redis reported as unwired (its constants are in `wp-config.php`); the sshd ban jail reported as
   disabled (it is active). Backups have grown to ~1.1 GB per run as the contractor's media landed;
   4.4 GB used against 74 GB free, so retention is comfortable for now.
+- 2026-08-04: Contractor finished uploading the retained static pages and reported two problems, both
+  ours. (1) Bare directory paths such as `/xbox/` returned 403 because the server only tried
+  `index.php`. (2) He could not overwrite files over SFTP: PHP created files with mode 644 under the
+  default 022 umask, so the shared webroot group could not write them, while his client created
+  directories 2755 that PHP in turn could not write into - the shared tree was writable in neither
+  direction. Fixed: `index.html` is now tried first, php-fpm runs with umask 0002 (files land 664),
+  and the existing tree was normalised to 2775/664 under the webroot group. Verified by reproducing
+  the failure as the contractor account and re-running it after the change.
+- 2026-08-04: Checking the retained URLs surfaced breakage neither side had noticed, all caused by the
+  previous host running Windows and matching paths case-insensitively. The authoritative list came from
+  the email templates in the database (translated strings), not from code: `/gamerules.htm` (100
+  templates), `/pc/denuvo.htm` (28), `/fan_kit.zip` (11) plus several that already worked. On the new
+  host `/pc/denuvo.htm` returned 404 against the real `Denuvo.htm`, and the fan kit was missing from
+  the server entirely - it was restored from the reference archive. `.well-known/` had also not been
+  uploaded (dot-directories are commonly skipped by SFTP clients), which would have broken iOS
+  universal links and the Microsoft app association; both files restored, and the Apple file now
+  declares `application/json` instead of being served as a generic binary. `/pcr/` returning 403 is not
+  a regression - the original had no index there either.
+- 2026-08-04: All carried-over-site compatibility now lives in a single `nginx/legacy-static.conf`,
+  generated from the real filenames on disk (directory index, case mappings for every mixed-case
+  document and download, and the upper-case retail locale folders). The site config includes it by
+  wildcard from a mounted directory, so when the static pages are replaced by CMS URLs the whole set
+  goes away by deleting that one file - no config edit, no container change. Note for the next time:
+  the first attempt included the file from a path that was not mounted into the container, so the
+  wildcard silently matched nothing and the static pages fell back to 403; mounting the directory
+  fixed it. Verified afterwards that every database-referenced URL, both case variants, the locale
+  folders, WordPress admin and the uploads-PHP denial all behave correctly.
