@@ -43,6 +43,14 @@ config mirror in `artifacts/server-config/`.
 | Pin image digests / move off the obsolete nginx 1.27 line | ⏳ tags are mutable, so a pull can change the runtime underneath |
 | Restrict accounts on admin SSH (`AllowUsers`) | ⏳ contractor accounts cannot log in there today (no keys), but the daemon does not forbid it |
 | Baseline HTTP security headers + `server_tokens off` | ⏳ before go-live |
+| Contractor-writable tree can still hold executable PHP outside `uploads` | ⏳ SFTP write access is effectively code execution; move uploads/static to a non-executable area or deploy reviewed code separately |
+| Backup and WordPress cron both fire at 03:10 | ⏳ an update can rewrite the webroot while tar reads it - serialise with a lock and give them separate slots |
+| SendGrid key readable from the contractor console | ⏳ move mail sending to a separate non-interactive runner; rotate the key at handover |
+| IPv6 gaps | ⏳ web listeners are IPv4-only while the host has global IPv6, and the internal-range block has no IPv6 counterpart |
+| `htpasswd` is world-readable (0644) | ⏳ tighten to root and the proxy group |
+| DB root password passed on the dump command line | ⏳ use a restricted backup account with an option file |
+| No container healthchecks; retention keeps ~8 days, not 7 | ⏳ minor, fix with the next maintenance pass |
+| Real client IP not reconstructed for the application | ⏳ reset `X-Forwarded-For` at the edge and trust it only from the proxy network |
 | Re-apply strict fail2ban (2 fails -> 1-year ban) | ⏳ after Snig handover (relaxed to 10/15m for now so they don't self-lock) |
 | Retire contractor tools (toolbox, phpMyAdmin, `snigcli`) | ⏳ after handover - they are working aids, not for prod (reduce surface) |
 | wp-admin IP gate | ⏳ before go-live |

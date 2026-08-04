@@ -538,3 +538,25 @@ the new site (isolated, outside the internal network), preserving the existing p
   wildcard silently matched nothing and the static pages fell back to 403; mounting the directory
   fixed it. Verified afterwards that every database-referenced URL, both case variants, the locale
   folders, WordPress admin and the uploads-PHP denial all behave correctly.
+- 2026-08-04: The case rules were widened from exact lower-case matches to case-insensitive ones, so
+  any spelling resolves, while each target still names the real file - matching ignores case but the
+  filesystem lookup does not. Rules are produced by `regenerate-legacy-rules.sh` from the files on
+  disk rather than written by hand, after a hand-edit of the regexes broke every legacy URL; the
+  generator escapes regex metacharacters, which an earlier inline attempt did not.
+- 2026-08-04: Third configuration review (whole host, with runtime state included this time, which
+  removed the previous round's false positives). It found two regressions introduced the same day,
+  both confirmed by test and fixed:
+  (1) setting the umask by replacing the container command meant the image entrypoint no longer saw
+  `php-fpm`, so it skipped seeding and wp-config generation - invisible today because the webroot is
+  populated, but a restore onto an empty volume would have produced an empty site. Proven by seeding
+  a scratch webroot with and without the wrapper. The umask is now set around the entrypoint instead.
+  (2) `group_add` reaches only the FPM master: workers re-initialise their groups and run with `[33]`
+  alone, so PHP could not write into directories the contractor owns. Confirmed by reading the
+  workers' `Groups:` and by a real request failing to write into `/xbox/`. Fixed with POSIX ACLs
+  granting both identities on the shared webroot, including defaults for new entries - no custom
+  image, so base-image updates keep flowing.
+  Also applied: `index.php` now precedes `index.html`, so a stray index file cannot shadow application
+  routing while the carried-over folders (which have no index.php) still resolve.
+  Confirmed sound by the review: the uploads-PHP denial and its ordering, the internal-range rules,
+  SFTP forwarding lockdown, absence of published ports on the data services, and the backup validation
+  logic. One claim was wrong: the Redis object cache is active (drop-in present, keys in use).

@@ -17,8 +17,11 @@ services:
     container_name: fp-main-website-php
     restart: unless-stopped
     # The webroot is shared with the upload account, so anything PHP creates must stay writable by
-    # the webroot group; the default 022 umask would produce files only PHP itself could rewrite.
-    command: ["sh", "-c", "umask 0002 && exec php-fpm"]
+    # the others; the default 022 umask would produce files only PHP itself could rewrite. Set it
+    # around the image entrypoint rather than replacing the command - the entrypoint is what seeds
+    # an empty webroot and writes wp-config, and it only does so when it receives php-fpm.
+    entrypoint: ["/bin/sh", "-c", "umask 0002 && exec docker-entrypoint.sh \"$$@\"", "--"]
+    command: ["php-fpm"]
     security_opt: ["no-new-privileges:true"]
     read_only: true
     tmpfs:
