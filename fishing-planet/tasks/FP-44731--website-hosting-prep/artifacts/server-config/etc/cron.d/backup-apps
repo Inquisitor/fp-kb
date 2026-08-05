@@ -1,1 +1,4 @@
-10 3 * * * root /usr/local/sbin/backup-apps.sh
+# Off the ten-minute grid the scheduled-task runner uses, and holding the shared lock so the two
+# never touch the webroot at the same time. Output is logged rather than discarded, so a failed
+# backup is visible instead of silently missing.
+13 3 * * * root flock -w 900 /run/lock/fp-main-website.lock /usr/local/sbin/backup-apps.sh >> /var/log/fp-backup.log 2>&1

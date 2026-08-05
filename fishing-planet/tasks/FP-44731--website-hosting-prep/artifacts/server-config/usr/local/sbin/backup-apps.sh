@@ -1,6 +1,10 @@
 #!/bin/sh
 # Nightly local backups for the web apps: DB via a consistent logical dump, webroot via tar.
 # Kept 7 days on-box; a separate off-box pull is expected to copy these to an internal host.
+#
+# Runs under the same lock as the scheduled-task runner: that runner installs updates and lets
+# plugins rewrite files in the webroot, and a file changing mid-archive both corrupts the copy and
+# aborts this script.
 set -eu
 umask 077
 STAMP=$(date +%F_%H%M)
@@ -23,5 +27,5 @@ gzip -t "$WORK/fp-main-website-html.tar.gz"
 mv "$WORK"/* "$DEST"/
 rmdir "$WORK"
 
-# --- retention: 7 days ---
-find /srv/backups -mindepth 1 -maxdepth 1 -type d -mtime +7 -exec rm -rf {} +
+# --- retention: keep seven nightly copies ---
+find /srv/backups -mindepth 1 -maxdepth 1 -type d -mtime +6 -exec rm -rf {} +

@@ -72,9 +72,14 @@
   Snig's upload shows what the site actually needs to reach)
 - [ ] Keep `wp-admin` / `wp-login` off public 443 - edge config is ready for an IP gate but it is
   intentionally OFF pre-live (user decision); MUST enable before go-live
-- [~] Backups: local nightly done (consistent DB dump + webroot tar, `/srv/backups` root 700, 7-day
-  retention, cron at 03:10). TODO: off-box pull from an internal host (VM cannot push inward) - needs
-  the source/target machine; plus post-handoff review of uploaded plugins/themes (supply chain)
+- [~] Backups: local nightly done (consistent DB dump + webroot tar, `/srv/backups` root 700, seven
+  copies, 03:13, serialised with the scheduled-task runner through a shared lock and logged with
+  rotation). TODO: off-box pull from an internal host (VM cannot push inward) - needs the
+  source/target machine; plus post-handoff review of uploaded plugins/themes (supply chain)
+- [ ] Alerting on backup and scheduled-task failures: both now write logs, but nothing reads them, so
+  a failed dump or a stalled update job still goes unnoticed. Do it together with the file-integrity
+  monitoring after the contractor hands over - both can notify through the SendGrid path that is
+  already working
 - [ ] Front-end WAF (Cloudflare or similar) before 80/443 - optional, revisit; DNS is CEO-controlled
 - [x] SFTP endpoint hardened after a security review: all forwarding disabled (StreamLocal was the real
   gap - `AllowTcpForwarding no` does not cover it), symlink/hardlink denied, connection/DoS limits,

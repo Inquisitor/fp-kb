@@ -39,12 +39,11 @@ config mirror in `artifacts/server-config/`.
 | Split the shared `front` network per application | ⏳ before the forum/wiki land - today anything on `front` can reach phpMyAdmin directly, bypassing the edge basic-auth |
 | Harden the remaining containers (edge/app nginx, phpMyAdmin) | ⏳ they still lack cap drops, read-only rootfs and resource limits that php/redis already have |
 | Container and host image update cadence | ⏳ WordPress auto-updates cover only WP core - nothing refreshes PHP/nginx/MariaDB/Redis/phpMyAdmin images or reboots for kernel updates |
-| Alerting on backup and cron failures | ⏳ both run silently; a failed dump or stalled update job would go unnoticed |
 | Pin image digests / move off the obsolete nginx 1.27 line | ⏳ tags are mutable, so a pull can change the runtime underneath |
 | Restrict accounts on admin SSH (`AllowUsers`) | ⏳ contractor accounts cannot log in there today (no keys), but the daemon does not forbid it |
 | Baseline HTTP security headers + `server_tokens off` | ⏳ before go-live |
 | Contractor-writable tree can still hold executable PHP outside `uploads` | ⏳ SFTP write access is effectively code execution; move uploads/static to a non-executable area or deploy reviewed code separately |
-| Backup and WordPress cron both fire at 03:10 | ⏳ an update can rewrite the webroot while tar reads it - serialise with a lock and give them separate slots |
+| Alerting on backup and cron failures | ⏳ output is now logged instead of discarded, but nothing watches the logs yet |
 | SendGrid key readable from the contractor console | ⏳ move mail sending to a separate non-interactive runner; rotate the key at handover |
 | IPv6 gaps | ⏳ web listeners are IPv4-only while the host has global IPv6, and the internal-range block has no IPv6 counterpart |
 | `htpasswd` is world-readable (0644) | ⏳ tighten to root and the proxy group |

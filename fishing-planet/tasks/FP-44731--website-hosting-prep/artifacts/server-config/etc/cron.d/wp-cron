@@ -1,3 +1,7 @@
 # Run WordPress scheduled tasks (incl. security auto-updates) from the host, since the
 # in-container loopback WP-Cron does not work behind the reverse proxy.
-*/10 * * * * root /usr/bin/docker exec fp-main-website-toolbox wp cron event run --due-now >/dev/null 2>&1
+#
+# Holds the same lock as the backup: these tasks install updates and let plugins rewrite files in
+# the webroot, which would corrupt an archive being written at the same moment. -n skips the run
+# instead of queueing, because another run follows in ten minutes anyway.
+*/10 * * * * root flock -n /run/lock/fp-main-website.lock /usr/bin/docker exec fp-main-website-toolbox wp cron event run --due-now >> /var/log/fp-wp-cron.log 2>&1

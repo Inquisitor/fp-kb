@@ -1,0 +1,10 @@
+/var/log/fp-backup.log /var/log/fp-wp-cron.log {
+    # /var/log is group-writable on this distribution, so rotation needs an explicit identity.
+    su root adm
+    weekly
+    rotate 8
+    compress
+    missingok
+    notifempty
+    create 0640 root adm
+}

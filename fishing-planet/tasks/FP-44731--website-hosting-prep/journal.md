@@ -560,3 +560,16 @@ the new site (isolated, outside the internal network), preserving the existing p
   Confirmed sound by the review: the uploads-PHP denial and its ordering, the internal-range rules,
   SFTP forwarding lockdown, absence of published ports on the data services, and the backup validation
   logic. One claim was wrong: the Redis object cache is active (drop-in present, keys in use).
+- 2026-08-05: Backup and the scheduled-task runner were colliding every night, not occasionally. The
+  runner fires on the ten-minute grid and the backup started at 03:10 exactly; measured window is
+  ~45s (dump 03:10:02, archive done 03:10:47). The runner is an active writer to the same tree: as
+  well as the twice-daily core/plugin/theme update checks that install updates, `action_scheduler_run_queue`
+  runs every minute (it drives the image optimiser rewriting files under uploads) and Yoast indexes
+  every fifteen. A file changing mid-archive both corrupts the copy and, with `set -e`, aborts the
+  run - and since output went to /dev/null the result would have been silently missing backups.
+  Fixed: both jobs now take a shared `flock` (the runner uses `-n` and simply skips, since another
+  run follows in ten minutes), the backup moved to 03:13 off the runner's grid, both log to
+  `/var/log/fp-{backup,wp-cron}.log` with rotation (the rotation config needs an explicit `su root adm`
+  on this distribution, otherwise it is skipped for insecure parent permissions), and retention
+  corrected from `-mtime +7` to `+6` so seven copies are kept rather than eight. Verified the lock
+  actually serialises, and that both jobs run and log correctly in their cron form.
