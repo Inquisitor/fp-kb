@@ -9,21 +9,29 @@ type: story
 # FP-44731: Prepare hosting & infrastructure for the new fishingplanet.com website (WordPress, Snig)
 
 ## Status
-In progress - the isolated multi-app web host is standing up on the received VM (`fpweb`,
-162.222.23.28, Ubuntu 24.04). Design (`server-setup-design.md`) and runbook
-(`artifacts/server-setup-plan.md`) approved. **Done:** host baseline (default-deny nft firewall, SSH
-source-IP allowlist, sshd hardening, unattended-upgrades, fail2ban tuned, etckeeper); Docker; the
-`fp-main-website` WordPress stack (nginx+php-fpm+MariaDB, per-app isolated networks, file secrets);
-edge-nginx on 80/443 with the purchased GlobalSign wildcard cert exported from IIS (valid to
-2026-11-03); WP core installed; chroot-SFTP endpoint on :2222 for Snig (their key installed).
-**In flight:** authorized pentest of the SFTP/defense posture (Codex + own audit).
-**Next:** act on pentest findings; egress default-deny experiment (once Snig upload shows what the site
-needs); backups (Task 9); SendGrid DKIM + scoped key (Task 6).
-**Blockers / external:** farm-side firewall block of the VM subnet (HARD GATE before go-live - currently
-only a bypassable host-level plug); DNS cutover is CEO-controlled (post-cutover TLS renewal switches to
-HTTP-01); keys/personal accounts for `ap`/devops before disabling SSH passwords.
-Snig get no access to the internal-network site - they upload via SFTP; the cleaned archive
-(`web-2026-07-07-clean-v3.zip`) + validated URL keep-set are the reference deliverables.
+In progress - the host is built and the contractor is working on it; what remains is the pre-launch
+pass and the cutover. Live status table: `server-checklist.md`. Design: `server-setup-design.md`;
+runbook: `artifacts/server-setup-plan.md`.
+
+**Built and verified:** isolated VM (`fpweb`, 162.222.23.28, Ubuntu 24.04) with a default-deny host
+firewall, key-only SSH behind a source-IP allowlist, fail2ban, unattended-upgrades and etckeeper;
+Docker; the `fp-main-website` stack (nginx + php-fpm 8.4 + MariaDB + Redis object cache, per-app
+networks, file-based secrets, hardened containers); edge nginx on 80/443 with the purchased GlobalSign
+wildcard exported from IIS (valid to 2026-11-03); mail through SendGrid; nightly backups serialised
+with the scheduled-task runner; contractor access via chroot-SFTP, a console container, phpMyAdmin and
+WordPress admin. The farm-side firewall block was confirmed by test, so the isolation no longer rests
+on the host rule alone.
+
+**Contractor state:** the site content and database are imported, WordPress core is on the patched
+7.0.2, and the static pages retained from the previous site are served with their original URLs
+(directory indexes plus case compatibility, since the previous host was Windows).
+
+**Next:** the pre-launch pass in the checklist - address restriction on wp-admin, least-privilege
+database user, outbound allowlist and file-integrity monitoring once the contractor finishes, network
+split before the forum and wiki arrive, plus the smaller items the reviews raised.
+
+**External:** DNS cutover is CEO-controlled (TLS renewal moves to HTTP-01 afterwards); off-box backup
+copies need a target machine; contractor tooling and credentials are removed and rotated at handover.
 
 ## Summary
 Snig.digital delivered a new WordPress fishingplanet.com site. The website project itself (content,

@@ -51,22 +51,29 @@ by hostname:
 - fail2ban on SSH / SFTP / wp-login
 
 ## TLS, DNS, staging, cutover
-- **Certificates via ACME DNS-01** (we control DNS): pre-issue a real cert for `fishingplanet.com`
-  (and later `forum.`/`wiki.`) **without** pointing A-records at the VM. Needs DNS-provider API
-  credentials for acme.sh.
-- Front proxy = **nginx**; TLS via **acme.sh (DNS-01)** with auto-renew.
-- **Staging = hosts-file:** testers map `fishingplanet.com` -> VM IP locally. Because the cert is a real
-  DNS-01-issued cert for that exact name, testers get valid TLS with no public exposure and no public
-  staging hostname.
+- **Certificate: the purchased GlobalSign wildcard** `*.fishingplanet.com`, exported from the previous
+  IIS host and installed on the edge (valid to 2026-11-03). It covers the apex, `www` and the future
+  `forum.`/`wiki.` names. *Superseded the original plan of pre-issuing via ACME DNS-01: no DNS API
+  credentials exist or will exist, because the domain is controlled personally by the CEO.*
+- Front proxy = **nginx**, terminating TLS for every hostname.
+- **Renewal after cutover:** switch to acme.sh over **HTTP-01** on the VM, which needs no DNS access at
+  all once the domain resolves here.
+- **Staging = hosts-file:** testers map `fishingplanet.com` -> VM IP locally; the wildcard is a real
+  certificate for that name, so they get valid TLS with no public exposure and no staging hostname.
 - **Cutover:** flip apex/`www` A-records to the VM; verify legal URLs + transactional emails; keep
   `live.fishingplanet.com` untouched (separate distribution host, out of scope).
 
 ## Content-in (Snig)
 - **chroot-SFTP** account, jailed to the WordPress webroot bind-mount; no interactive shell; key-based;
-  source-IP-allow to Snig's egress IPs; time-boxed; removed / credentials rotated after handoff.
-- **DB import:** SFTP alone cannot import a DB. Snig upload a WP migration plugin (All-in-One WP
-  Migration / Duplicator) via SFTP and import through `wp-admin`. No separate DB admin tool is exposed
-  to the internet.
+  time-boxed; removed / credentials rotated after handoff. *Source-IP restriction was dropped while the
+  contractor works - key-only plus the chroot carry it, and their address list was not fixed.*
+- **DB import:** SFTP alone cannot import a DB. In practice the contractor pulled the source database
+  with their own migration plugin, which also replaced the WordPress user table - locally created
+  accounts have to be recreated after each import.
+- **Console access:** a long-lived `wordpress:cli` container the contractor reaches over SSH through a
+  forced command, giving WP-CLI, file and database access as the web user with no host shell.
+- **phpMyAdmin** on its own hostname behind HTTP basic auth at the edge, signing in as the site
+  database user, never root. *Both of these are working aids and are removed at handover.*
 
 ## Hardening
 - Network isolation (done) + per-app container isolation (app-to-app).
@@ -88,14 +95,12 @@ by hostname:
   - egress to a non-allowlisted host -> must fail (default-deny)
   - from the WP container, attempt to reach the forum/wiki DB -> must fail (app-to-app isolation)
 
-## Prerequisites to gather at execution
-- SSH access (public key added / credentials) + confirm this workstation reaches the VM shell.
-- DNS provider + API credentials for ACME DNS-01.
-- Snig's fixed egress IP ranges (SFTP + wp-admin allowlists).
-- SendGrid: confirm DKIM domain authentication; issue the scoped Mail-Send key.
-- VM specs (RAM/CPU/disk) - verify on the box that it can eventually hold WordPress, Invision and
-  MediaWiki together.
-- (Later) Invision license; current forum/wiki hosting + data exports for migration.
+## Prerequisites (all obtained unless noted)
+- SSH access, VM specs, SendGrid DKIM and a scoped Mail-Send key - done.
+- Certificate: taken from the previous IIS host, so no DNS credentials were ever needed.
+- Still open: a target machine for off-box backup copies; the contractor's address ranges if we decide
+  to restrict their endpoints before handover.
+- (Later, for the forum and wiki) Invision licence; current forum/wiki hosting and data exports.
 
 ## Out of scope
 - `live.fishingplanet.com` (separate game-build distribution host).

@@ -16,9 +16,11 @@ spec: ../server-setup-design.md
 **Goal:** Stand up the bare Linux VM as an isolated multi-app web host serving the new WordPress
 `fishingplanet.com`, ready to later add the Invision forum and MediaWiki as sibling isolated stacks.
 
-**Architecture:** Docker Compose, one stack per app; a front nginx container terminates TLS (acme.sh
-DNS-01, cert pre-issued for the apex) and routes by hostname; per-app Docker networks isolate apps
-from each other; host firewall + egress default-deny on top of the already-inplace network isolation.
+**Architecture:** Docker Compose, one stack per app; a front nginx container terminates TLS and routes
+by hostname; per-app Docker networks isolate apps from each other; host firewall + egress default-deny
+on top of the already-inplace network isolation. *As built, the certificate is the purchased wildcard
+carried over from the previous host rather than the ACME DNS-01 issuance written below - see Execution
+status.*
 
 **Tech Stack:** Ubuntu/Debian (verify in Task 1), Docker Engine + Compose plugin, nginx:alpine,
 wordpress:fpm, mariadb, acme.sh, OpenSSH internal-sftp, nftables, fail2ban, etckeeper.
@@ -52,22 +54,29 @@ wordpress:fpm, mariadb, acme.sh, OpenSSH internal-sftp, nftables, fail2ban, etck
 
 ---
 
-## Execution status (updated 2026-07-21)
+## Execution status
 
-- **Task 0 Access** - DONE (SSH keys in keystores/fpweb, temp NOPASSWD sudo; snapshot waived).
-- **Task 1 Recon** - DONE (Ubuntu 24.04, 4 vCPU / 8 GB; isolation pre-proof FAILED -> temp host plug).
-- **Task 2 Host baseline** - DONE (default-deny fw, SSH allowlist, sshd hardening, unattended-upgrades,
-  fail2ban 10/15m, etckeeper). Deviation: PasswordAuthentication kept ON (ap/fpwebadmin have no keys).
-- **Task 3 Docker** - DONE (29.6.2 + Compose v5.3.1).
-- **Task 4 App stack** - DONE, renamed `wordpress` -> **fp-main-website** (nginx+fpm+MariaDB, per-app nets).
-- **Task 5 Edge + TLS** - DONE, but via the **purchased GlobalSign wildcard from IIS**, not acme.sh
-  DNS-01 (no DNS API token - CEO-controlled domain). Post-cutover renewal -> HTTP-01.
-- **Task 6 WP bootstrap** - PARTIAL: `wp core install` done (admin fpadmin); **SendGrid still TODO**.
-- **Task 7 chroot-SFTP** - DONE (:2222, Snig key installed). Deviation: source-IP restriction skipped
-  pre-live (user). Under authorized pentest (Codex + own audit) 2026-07-21.
-- **Task 8 Egress deny** - TODO (experiment after Snig upload).
-- **Task 9 Backups** - TODO (GATE before Snig content lands).
-- **Task 10 Verify + handoff / Task 11 Cutover** - TODO. HARD GATE: farm-side firewall block.
+This runbook records how the host was built. It is no longer the working list - current state and the
+remaining pre-launch items live in `../server-checklist.md`, and the narrative is in `../journal.md`.
+
+- **Tasks 0-5, 7 (access, recon, host baseline, Docker, app stack, edge + TLS, SFTP)** - DONE.
+  Deviations from the plan as written: the app stack is named `fp-main-website`; TLS uses the purchased
+  GlobalSign wildcard exported from the previous host rather than ACME DNS-01, because no DNS
+  credentials exist (renewal moves to HTTP-01 after cutover); the SFTP endpoint has no source-IP
+  restriction while the contractor works; SSH passwords were disabled once the accounts that needed
+  them were retired.
+- **Task 6 WP bootstrap + mail** - DONE. Mail goes through SendGrid and was verified end to end. The
+  contractor later replaced the database with their own import, which also replaces WordPress accounts.
+- **Task 8 Egress allowlist** - deferred by decision until the contractor finishes, so the traffic
+  observed is representative.
+- **Task 9 Backups** - DONE locally (validated dump + archive, seven copies, serialised with the
+  scheduled-task runner, logged). Off-box copies still need a target machine.
+- **Task 10 Verify + handoff** - partially done: routing, TLS, mail, retained URLs and the isolation
+  proofs have all been verified; the handover steps themselves come at the end.
+- **Task 11 Cutover** - TODO, CEO-controlled. The farm-side firewall gate it depended on is closed and
+  confirmed by test.
+- Added beyond the original plan: Redis object cache, a contractor console container, phpMyAdmin, PHP
+  8.4 with raised limits, and a compatibility include for the static pages kept from the previous site.
 
 ---
 
@@ -252,7 +261,11 @@ server {
   - expect WP install-wizard HTML (redirect to `/wp-admin/install.php` is fine).
 - [ ] **Step 7:** Commit: `cd /srv/apps && sudo git add -A && sudo git commit -m "FP-44731: wordpress stack (nginx+fpm+mariadb, per-app networks)"`.
 
-### Task 5: Front proxy + TLS (DNS-01)
+### Task 5: Front proxy + TLS
+
+> As built this task did **not** use ACME DNS-01: no DNS API credentials exist, so the purchased
+> wildcard was exported from the previous host and installed directly. The steps below are the
+> original plan; renewal moves to HTTP-01 after cutover.
 
 **Files (create):** `/srv/apps/proxy/compose.yml`, `/srv/apps/proxy/conf.d/fishingplanet.conf`,
 `/srv/apps/proxy/snippets/proxy.conf`, certs in `/srv/apps/proxy/certs/`.
