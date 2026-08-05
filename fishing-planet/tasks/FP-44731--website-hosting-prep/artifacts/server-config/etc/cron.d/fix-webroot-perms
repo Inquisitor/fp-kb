@@ -1,0 +1,1 @@
+*/5 * * * * root /usr/local/sbin/fix-webroot-perms.sh >> /var/log/fp-webroot-perms.log 2>&1

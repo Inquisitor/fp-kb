@@ -581,3 +581,18 @@ the new site (isolated, outside the internal network), preserving the existing p
   on this distribution, otherwise it is skipped for insecure parent permissions), and retention
   corrected from `-mtime +7` to `+6` so seven copies are kept rather than eight. Verified the lock
   actually serialises, and that both jobs run and log correctly in their cron form.
+- 2026-08-05: Contractor reported a caching plugin refusing to install (could not create
+  `wp-cache-config.php` or `advanced-cache.php`, could not update `wp-config.php`) and asked about a
+  "CRON disabled" warning. Root cause of the first: the ACLs granting the site write access were
+  present but showed `#effective:r--`, because an ACL mask is recomputed from a file's group bits and
+  the contractor's client uploads with its own modes (644/755) - so every re-upload silently revoked
+  the site's write access, including on `wp-config.php`, which he had re-uploaded that morning.
+  A first attempt to fix it at the transfer layer failed and was reverted: denying `setstat/fsetstat`
+  made mode-preserving clients report errors while the files still landed 644, because the mode comes
+  from the client's create request and a umask can only clear bits, never add them. Settled on
+  reconciling instead - `/usr/local/sbin/fix-webroot-perms.sh` every five minutes restores 2775/664
+  and the ACL mask across the webroot. Verified end to end: after a contractor upload the mask
+  collapses to `r--` and the reconciler restores `rwx`. The second report needs no change: WordPress's
+  own request-driven cron is disabled deliberately because it cannot reach itself behind the proxy,
+  and the same jobs run from the host every ten minutes, so the plugin's warning is cosmetic and its
+  garbage collection still executes.
