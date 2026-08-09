@@ -23,6 +23,7 @@
 | FP-45093 | fpa-release                    | planned       | fishing-planet/tasks/FP-45093--fpa-release/                             |
 | FP-45122 | fish-fight-protocol            | in-progress   | fishing-planet/tasks/FP-45122--fish-fight-protocol/                     |
 | FP-45231 | nonroot-mergeinfo-cleanup      | in-progress   | fishing-planet/tasks/FP-45231--nonroot-mergeinfo-cleanup/               |
+| FP-45678 | player-session-ownership       | planning      | fishing-planet/tasks/FP-45678--player-session-ownership/                |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
