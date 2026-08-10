@@ -22,16 +22,29 @@ with the scheduled-task runner; contractor access via chroot-SFTP, a console con
 WordPress admin. The farm-side firewall block was confirmed by test, so the isolation no longer rests
 on the host rule alone.
 
-**Contractor state:** the site content and database are imported, WordPress core is on the patched
-7.0.2, and the static pages retained from the previous site are served with their original URLs
-(directory indexes plus case compatibility, since the previous host was Windows).
+**LIVE as of 2026-08-05.** DNS was cut over: `fishingplanet.com`/`www`/`pma` now resolve to the VM
+(162.222.23.28) and the site serves real users; `live.fishingplanet.com` was left untouched on the
+old distribution host (192.40.222.58). Contractor imported the content and database (which replaced
+the WordPress user table, so admin accounts were recreated - a single owner admin `jangalor` remains),
+core is on the patched 7.0.2, and the retained static pages resolve with their original URLs.
 
-**Next:** the pre-launch pass in the checklist - address restriction on wp-admin, least-privilege
-database user, outbound allowlist and file-integrity monitoring once the contractor finishes, network
-split before the forum and wiki arrive, plus the smaller items the reviews raised.
+**Going live changed the threat model:** `wp-login.php`, phpMyAdmin (basic-auth only) and SFTP :2222
+are now public, and the items that were deferred "until go-live" are now due. An attempt to add
+edge rate-limiting + fail2ban web jails + xmlrpc deny was **reviewed twice (Codex and an independent
+reviewer) and rejected - do NOT deploy the draft**. It was reverted from the artifacts; the full
+verdict, the corrected plan, and two open decisions (2FA plugin choice; the orphaned Redis drop-in)
+are in the milestones below and in `server-checklist.md`. **Nothing from that hardening round is on
+the server** except: the `two-factor` plugin was installed+activated, and `htpasswd` was tightened to
+0640. Wordfence (contractor-installed) is active and is the better home for login protection.
 
-**External:** DNS cutover is CEO-controlled (TLS renewal moves to HTTP-01 afterwards); off-box backup
-copies need a target machine; contractor tooling and credentials are removed and rotated at handover.
+**Next (see the checklist):** redo the login hardening per the review (rate-limit only the login POST,
+429 not 503, a dedicated zone in `00-limits.conf`, an ACME-challenge exception on :80, fail2ban web
+jails only if their action targets the Docker forward path - default INPUT bans do nothing for
+published ports); pick one 2FA plugin; resolve the Redis drop-in; then least-privilege DB user,
+network split before the forum/wiki, off-box backups, egress allowlist and integrity monitoring.
+
+**External:** TLS renewal must move to HTTP-01 (needs the :80 ACME exception first); off-box backup
+copies need a target machine; contractor tooling and credentials are removed/rotated at handover.
 
 ## Summary
 Snig.digital delivered a new WordPress fishingplanet.com site. The website project itself (content,
@@ -596,3 +609,53 @@ the new site (isolated, outside the internal network), preserving the existing p
   own request-driven cron is disabled deliberately because it cannot reach itself behind the proxy,
   and the same jobs run from the host every ten minutes, so the plugin's warning is cosmetic and its
   garbage collection still executes.
+- 2026-08-05: **Go-live.** The CEO cut the DNS over to the VM. Verified over real DNS (no hosts
+  pinning): `fishingplanet.com`/`www`/`pma` -> 162.222.23.28, http->https and www->apex 301s, TLS is
+  the GlobalSign wildcard (SAN `*.fishingplanet.com` + `fishingplanet.com`, so it covers pma too),
+  every legal URL our game emails link to answers 200, and the Apple/Microsoft association files serve
+  as JSON. `live.fishingplanet.com` stayed on 192.40.222.58 - the build-distribution host was not
+  touched. Newly public and therefore newly exposed: `wp-login.php`, phpMyAdmin (basic-auth only), and
+  SFTP :2222.
+- 2026-08-05: Login-hardening round - drafted, reviewed twice, REJECTED, reverted. The draft added at
+  the edge: a `limit_req` login zone, throttling on `wp-login.php` AND on all of phpMyAdmin, an
+  `xmlrpc.php` deny, an access log to a host file, and two fail2ban web jails (`fp-wp-login` matching
+  `POST /wp-login.php ... 200`, `fp-basic-auth` matching ` 401`). Both Codex and an independent Opus
+  reviewer (told to distrust the author) landed the same blocking findings, verified against nginx/
+  fail2ban docs and then against the live box:
+  * **fail2ban web jails would ban nothing.** Confirmed on the host: bans land in an nftables chain on
+    the `input` hook, but traffic to the published container ports is DNATed through `forward`/
+    `DOCKER-USER` and never traverses input. `fail2ban-client` would report a ban while the attacker
+    keeps loading the site. (The SSH jails are fine - sshd is a host process.)
+  * **the phpMyAdmin `limit_req` was at `server` scope**, so it throttled every asset (CSS/JS/AJAX),
+    which breaks the UI at burst 10; and `limit_req` runs before basic-auth, so a fast guesser gets
+    503 instead of the 401 the jail counts - the limit and the jail cancelled each other.
+  * **the basic-auth filter matched nothing** (` 401` sequence is not in the combined format) and both
+    vhosts shared one log with no `$host`, so it would also count WordPress's routine REST 401s and
+    ban real visitors off the whole site.
+  * **`200 = failed login` is not reliable** - 2FA/interim-login/cookie-error flows also return 200,
+    and 5 failures/10 min bans a whole NATed office.
+  Other verified points: cert SAN does cover pma; Jetpack is NOT installed so denying xmlrpc is safe;
+  the existing `[sshd-sftp]` journalmatch uses `+` which is OR, so it matches every sshd process and
+  double-bans with `[sshd]` (worth fixing regardless); the port-80 vhosts 301 everything including
+  `/.well-known/acme-challenge/`, which will silently break future HTTP-01 renewal.
+- 2026-08-05: **Corrected plan for the next session to execute** (draft was reverted, server is clean
+  of it): (1) rate-limit ONLY `location = /wp-login.php`, a dedicated `wp_login` zone in a new
+  `conf.d/00-limits.conf`, with `limit_req_status 429` and `limit_req_log_level warn`; NO limit on
+  phpMyAdmin as a whole. (2) `deny all` on `/xmlrpc.php` (Jetpack absent). (3) an exception so
+  `/.well-known/acme-challenge/` on :80 is served, not redirected, or HTTP-01 renewal dies. (4) a
+  second `access_log .../nginx/access.log main` in each server block so `docker logs` is not blinded
+  (defining any access_log cancels the image's stdout one). (5) if fail2ban web jails are wanted at
+  all, their action must target `DOCKER-USER`/forward and carry `ignoreip` for our offices - otherwise
+  skip them and let Wordfence do login lockout. (6) adding the `./logs` volume RECREATES edge-nginx
+  (drops in-flight uploads) - do it in a quiet window. (7) fix the `[sshd-sftp]` `+` OR-match.
+- 2026-08-05: **Open decision 1 - 2FA.** Two plugins are active: the contractor's **Wordfence 8.2.2**
+  (app-level WAF + login lockout + 2FA, understands WordPress login semantics) and the `two-factor`
+  0.16.0 that this task installed. Recommendation: keep Wordfence (it is broader and already the
+  contractor's choice) and deactivate `two-factor` to avoid two enrolment flows. NB checked on the
+  box: `two-factor` already has 1 enrolled user (uid 8 = `jangalor`), Wordfence 2FA has 0 enrolled -
+  so switching fully to Wordfence means re-enrolling. User was deciding this at session reset.
+- 2026-08-05: **Open decision 2 - orphaned Redis drop-in.** The `redis-cache` plugin is now INACTIVE
+  but `wp-content/object-cache.php` remains and is live (`wp cache type` = Redis, ~2400 keys). The
+  drop-in loads code from the deactivated plugin, so deleting that plugin would fatal the site. Either
+  reactivate `redis-cache` or remove the drop-in. Likely the contractor deactivated it when adding
+  WP Super Cache (different layer - object cache vs page cache, they do not conflict).

@@ -35,10 +35,10 @@
   skipped pre-live (user decision). STILL TODO after handoff: remove/close the endpoint + rotate.
 - [ ] Act on the SFTP pentest findings (Codex + own audit, 2026-07-21) - see journal
 - [ ] Map and preserve legal & referenced apex URLs (same paths or 301 redirects)
-- [ ] Preserve `.well-known/apple-app-site-association` and `.well-known/microsoft-identity-association.json`
-  on the new site (iOS universal-link / Microsoft app-identity association)
-- [ ] Confirm `live.` distribution is untouched; define the DNS cutover plan
-- [ ] Cutover + post-launch verification of legal links and transactional emails
+- [x] Preserve `.well-known/apple-app-site-association` and `.well-known/microsoft-identity-association.json`
+  (restored from the archive, Apple file now served as JSON)
+- [x] `live.` distribution confirmed untouched (still 192.40.222.58); DNS cutover done 2026-08-05
+- [x] Cutover + post-launch verification of legal links and transactional emails (all 200 over real DNS)
 
 ## Email (SendGrid)
 - [x] Domain authentication (DKIM) already Verified (`em330.fishingplanet.com`); SPF already has
@@ -70,8 +70,9 @@
 - [x] Auto security updates (unattended-upgrades) on the host
 - [ ] Default-deny outbound internet egress from the VM + allowlist (planned as an experiment once
   Snig's upload shows what the site actually needs to reach)
-- [ ] Keep `wp-admin` / `wp-login` off public 443 - edge config is ready for an IP gate but it is
-  intentionally OFF pre-live (user decision); MUST enable before go-live
+- [~] Login protection: IP gate dropped (remote team editors); go via Wordfence 2FA + edge rate-limit
+  on the login POST. First hardening draft was reviewed twice and rejected - corrected plan is in the
+  2026-08-05 journal milestones. NOT yet on the server
 - [~] Backups: local nightly done (consistent DB dump + webroot tar, `/srv/backups` root 700, seven
   copies, 03:13, serialised with the scheduled-task runner through a shared lock and logged with
   rotation). TODO: off-box pull from an internal host (VM cannot push inward) - needs the

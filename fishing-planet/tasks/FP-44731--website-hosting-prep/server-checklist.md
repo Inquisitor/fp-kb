@@ -33,7 +33,12 @@ config mirror in `artifacts/server-config/`.
 
 | Item | Status |
 |---|---|
-| Snig upload content | 🔄 in progress - core updated by them to 7.0.2, their plugin set installed, DB migration under way |
+| Snig upload content | ✅ content + database imported, plugin set installed, core 7.0.2 - site is live |
+| **DNS cutover** | ✅ done 2026-08-05 - verified over real DNS; `live.` left on the old host |
+| **Login hardening (redo per review)** | ⏳ **next up** - draft was reviewed twice and rejected; correct plan is in the 2026-08-05 journal milestones. Rate-limit only the login POST (429, dedicated `00-limits.conf` zone), deny xmlrpc, ACME-challenge exception on :80, second stdout access_log; fail2ban web jails ONLY if action targets DOCKER-USER/forward, else lean on Wordfence |
+| **2FA plugin choice** | ⏳ decide - Wordfence (contractor's, broader) vs the `two-factor` this task added; recommendation is Wordfence, deactivate `two-factor` (note: 1 user already enrolled in two-factor, 0 in Wordfence) |
+| **Orphaned Redis drop-in** | ⏳ `redis-cache` plugin is inactive but `object-cache.php` is live - deleting the plugin would fatal the site; reactivate it or remove the drop-in |
+| Fix `[sshd-sftp]` journalmatch | ⏳ the `+` is OR, so it matches every sshd process and double-bans with `[sshd]` |
 | Move the php image tag to the 7.0 line | ⏳ cosmetic - the tag only supplies the runtime, the running core is 7.0.2 from the bind |
 | Verify the nginx upstream-resolver fix behaviourally | ⏳ needs a real php IP change (few seconds of downtime) - do it when the contractor is idle |
 | Split the shared `front` network per application | ⏳ before the forum/wiki land - today anything on `front` can reach phpMyAdmin directly, bypassing the edge basic-auth |
@@ -41,23 +46,23 @@ config mirror in `artifacts/server-config/`.
 | Container and host image update cadence | ⏳ WordPress auto-updates cover only WP core - nothing refreshes PHP/nginx/MariaDB/Redis/phpMyAdmin images or reboots for kernel updates |
 | Pin image digests / move off the obsolete nginx 1.27 line | ⏳ tags are mutable, so a pull can change the runtime underneath |
 | Restrict accounts on admin SSH (`AllowUsers`) | ⏳ contractor accounts cannot log in there today (no keys), but the daemon does not forbid it |
-| Baseline HTTP security headers + `server_tokens off` | ⏳ before go-live |
+| Baseline HTTP security headers + `server_tokens off` | ⏳ overdue - site went live without them |
 | Contractor-writable tree can still hold executable PHP outside `uploads` | ⏳ SFTP write access is effectively code execution; move uploads/static to a non-executable area or deploy reviewed code separately |
 | Alerting on backup and cron failures | ⏳ output is now logged instead of discarded, but nothing watches the logs yet |
 | SendGrid key readable from the contractor console | ⏳ move mail sending to a separate non-interactive runner; rotate the key at handover |
 | IPv6 gaps | ⏳ web listeners are IPv4-only while the host has global IPv6, and the internal-range block has no IPv6 counterpart |
-| `htpasswd` is world-readable (0644) | ⏳ tighten to root and the proxy group |
+| `htpasswd` is world-readable (0644) | ✅ tightened to 0640 root:root; edge still reads it |
 | DB root password passed on the dump command line | ⏳ use a restricted backup account with an option file |
 | No container healthchecks; retention keeps ~8 days, not 7 | ⏳ minor, fix with the next maintenance pass |
 | Real client IP not reconstructed for the application | ⏳ reset `X-Forwarded-For` at the edge and trust it only from the proxy network |
 | Re-apply strict fail2ban (2 fails -> 1-year ban) | ⏳ after Snig handover (relaxed to 10/15m for now so they don't self-lock) |
 | Retire contractor tools (toolbox, phpMyAdmin, `snigcli`) | ⏳ after handover - they are working aids, not for prod (reduce surface) |
-| wp-admin IP gate | ⏳ before go-live |
+| wp-admin IP gate | ➖ superseded - team editors work remotely, so login protection goes via Wordfence 2FA + rate-limit instead of an IP gate (user decision) |
 | Least-privilege DB user + rotate | ⏳ before go-live |
 | Full egress allowlist on the VM | ⏳ after handover - carve granularly once traffic is representative and the site is fully ours |
 | Integrity monitoring (core/plugin checksums + mail alert) | ⏳ after handover - contractor uploads would drown the alerts; stable webroot makes any change a signal |
 | Backups off-box pull | ⏳ needs a target machine |
-| DNS cutover | ⏳ final, CEO-controlled |
+| TLS renewal to HTTP-01 | ⏳ needs the ACME-challenge exception on :80 first (part of the login-hardening redo) |
 | `yk`/`vk` keys | ⏳ add when sent |
 | Drop temporary NOPASSWD for `inqui` | ⏳ after setup work is done |
 | Hypervisor console / external 22 / IPv6 parity | ⏳ confirm with the farm owner |
