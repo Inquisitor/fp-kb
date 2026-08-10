@@ -1,6 +1,6 @@
 /* ============================================================================
    FP-44337  Phase 6  |  SERVER: STEAM PROD (MSSQL15.STEAMSTATS)
-   ONLINE (prod is running; new tables already hold the July tail from Phase 3).
+   ONLINE (prod is running; new tables already hold the August tail from Phase 3).
      1. Drop the historical *_old tables (frees ~2.5 TB INSIDE the data file).
      2. SHRINKFILE to return that space to the OS (Steam Stats.mdf ~3238 GB -> ~1 TB expected).
      3. Index maintenance on the remaining tables (shrink fragments them).
@@ -10,7 +10,8 @@
        into the shrink headroom. Check Steam: if tempdb data files are on Z:, pre-cap MAXSIZE and
        run STEP 3 rebuilds so their sort hits the data files, not tempdb (SORT_IN_TEMPDB defaults
        OFF for a bare REBUILD - keep it that way). If tempdb is on another volume, no action.
-     - Comfortable headroom (307 GB free at cutover) - this is NOT the knife-edge PS was.
+     - Z: headroom has TIGHTENED to ~91 GB (2026-08-10; was 307 at assessment) - treat this
+       near-PS: run the DROP + start the shrink the same day, keep the Z: alert active throughout.
 
    >>> DROP GATE - lossless when BOTH hold (this is irreversible): <<<
        (a) the STEP 0 pre-drop FULL backup - taken AFTER STOP PROD, so it contains *_old IN FULL -
@@ -18,7 +19,7 @@
        (b) the Phase 3 preload is verified complete AND *_old is unchanged since Phase 3
            (both enforced programmatically in STEP 1).
    WHY the DROP is lossless: the STEP 0 pre-drop FULL captures *_old in its ENTIRETY (every row, every
-   timestamp) in-window, so nothing is lost by the drop regardless of id/time skew. The July tail on
+   timestamp) in-window, so nothing is lost by the drop regardless of id/time skew. The August tail on
    prod is for CONTINUITY of incremental consumers, not preservation. EntityId is only COARSELY
    monotonic with Timestamp - FP-43469 measured this ON STEAM PROD (~21.6% row-level skew, 1-2 id
    interleave at date boundaries); the Phase 3 100k-id scan-floor margin absorbs it and it does not
@@ -71,10 +72,10 @@ BEGIN TRY
     OPEN v; FETCH NEXT FROM v INTO @t, @start, @maxOld, @recNew;
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- old-count carries the SAME Timestamp >= '2026-07-01' filter as Phase 3's load, so it
-        -- matches the new table (which holds only July+ rows in this id range). Without it the
-        -- late-June rows still in *_old would inflate @oldNow and the gate would falsely THROW.
-        SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t + '_old') + N' WHERE EntityId BETWEEN @a AND @b AND [Timestamp] >= ''2026-07-01'';';
+        -- old-count carries the SAME Timestamp >= '2026-08-01' filter as Phase 3's load, so it
+        -- matches the new table (which holds only August+ rows in this id range). Without it the
+        -- late-July rows still in *_old would inflate @oldNow and the gate would falsely THROW.
+        SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t + '_old') + N' WHERE EntityId BETWEEN @a AND @b AND [Timestamp] >= ''2026-08-01'';';
         EXEC sp_executesql @sql, N'@a BIGINT,@b BIGINT,@c BIGINT OUTPUT', @start, @maxOld, @oldNow OUTPUT;
         SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t) + N' WHERE EntityId BETWEEN @a AND @b;';
         EXEC sp_executesql @sql, N'@a BIGINT,@b BIGINT,@c BIGINT OUTPUT', @start, @maxOld, @newNow OUTPUT;

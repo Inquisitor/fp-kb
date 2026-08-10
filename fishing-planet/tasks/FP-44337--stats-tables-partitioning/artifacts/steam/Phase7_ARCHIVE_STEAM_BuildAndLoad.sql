@@ -7,19 +7,19 @@
    SOURCE (Steam-specific choice): restore the Phase 6 STEP 0 PRE-DROP FULL backup. It is
    guaranteed complete (taken in-window, HARD gate) and, being post-Phase-2, its FULL history
    lives in the *_old tables (dbo.StatsFact_old / dbo.MissionsFact_old). The restored DB also
-   contains the prod-partitioned dbo.StatsFact/MissionsFact (July tail only) + prod's pf/ps -
+   contains the prod-partitioned dbo.StatsFact/MissionsFact (August tail only) + prod's pf/ps -
    those are NOT the archive; this script drops them and builds the archive from *_old.
-     (A pre-cutover weekly FULL could be used instead ONLY if taken AFTER 2026-07-01, so that
-      < 2026-07-01 is complete in the original non-partitioned dbo.StatsFact; the pre-drop FULL
+     (A pre-cutover weekly FULL could be used instead ONLY if taken AFTER 2026-08-01, so that
+      < 2026-08-01 is complete in the original non-partitioned dbo.StatsFact; the pre-drop FULL
       avoids depending on weekly-backup timing.)
 
-   SCOPE: load ONLY history < 2026-07-01 (the bulk dropped from prod in Phase 6). July and later
+   SCOPE: load ONLY history < 2026-08-01 (the bulk dropped from prod in Phase 6). August and later
    stay on prod as live partitions and move to the archive LATER as they age out. A direct
    cross-server ALTER TABLE ... SWITCH PROD->archive is NOT possible (SWITCH is metadata-only
    within one DB/instance). The real later-flow is: on prod, SWITCH OUT the aged month into a local
    staging table (metadata-only), then transfer it here (backup/restore or bulk-load) and SWITCH it
    into the matching EMPTY archive partition. So the archive's monthly RANGE RIGHT boundaries must
-   ALIGN with prod's calendar and keep EMPTY [Jul1,Aug1), [Aug1,Sep1), [Sep1,...) landing slots.
+   ALIGN with prod's calendar and keep EMPTY [Aug1,Sep1), [Sep1,Oct1), [Oct1,...) landing slots.
    (Finalize the exact boundary set when the archive is actually built - prod may have more live months by then.)
 
    PARAMETERS:
@@ -47,9 +47,9 @@ END
 GO
 
 /* ----------------------------------------------------------------------------
-   Build per table: drop the restored prod-partitioned table + its pf/ps (July tail, not
+   Build per table: drop the restored prod-partitioned table + its pf/ps (August tail, not
    the archive), source history from *_old, generate monthly boundaries from the data,
-   create partitioned+compressed archive table, load < 2026-07-01 (keep EntityId), verify,
+   create partitioned+compressed archive table, load < 2026-08-01 (keep EntityId), verify,
    drop *_old.
    ---------------------------------------------------------------------------- */
 DECLARE @tables TABLE (name SYSNAME);
@@ -65,21 +65,21 @@ BEGIN
     DECLARE @ps  SYSNAME = N'ps_' + @t + N'_Timestamp';
     DECLARE @sql NVARCHAR(MAX);
 
-    -- 0) Remove the restored prod-partitioned table (July tail) so we can rebuild dbo.<t> as the
+    -- 0) Remove the restored prod-partitioned table (August tail) so we can rebuild dbo.<t> as the
     --    archive. Its pf/ps are prod's and are dropped next (recreated with archive boundaries).
     IF OBJECT_ID('dbo.' + @t, 'U') IS NOT NULL
     BEGIN SET @sql = N'DROP TABLE dbo.' + QUOTENAME(@t) + N';'; EXEC sp_executesql @sql; END
 
     -- 2) Monthly boundary list from the data: first month .. (aligned with prod calendar).
     DECLARE @minTs DATETIME, @maxTs DATETIME;
-    SET @sql = N'SELECT @a=MIN([Timestamp]), @b=MAX([Timestamp]) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-07-01'';';
+    SET @sql = N'SELECT @a=MIN([Timestamp]), @b=MAX([Timestamp]) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-08-01'';';
     EXEC sp_executesql @sql, N'@a DATETIME OUTPUT,@b DATETIME OUTPUT', @minTs OUTPUT, @maxTs OUTPUT;
 
-    -- Boundaries from the first data month through 2026-09-01 (aligned with prod's calendar), so the
-    -- last LOADED partition is June 2026 and [Jul1,Aug1), [Aug1,Sep1), [Sep1,...) stay EMPTY - the
-    -- landing slots that prod's aged July+ months are transferred into later.
+    -- Boundaries from the first data month through 2026-10-01 (aligned with prod's calendar), so the
+    -- last LOADED partition is July 2026 and [Aug1,Sep1), [Sep1,Oct1), [Oct1,...) stay EMPTY - the
+    -- landing slots that prod's aged August+ months are transferred into later.
     DECLARE @cursor DATETIME = DATEFROMPARTS(YEAR(@minTs), MONTH(@minTs), 1);
-    DECLARE @stop   DATETIME = '2026-10-01';   -- loop adds boundaries while < @stop -> last = 2026-09-01 (Jul1/Aug1/Sep1 included)
+    DECLARE @stop   DATETIME = '2026-11-01';   -- loop adds boundaries while < @stop -> last = 2026-10-01 (Aug1/Sep1/Oct1 included)
     DECLARE @vals NVARCHAR(MAX) = N'';
     WHILE @cursor < @stop
     BEGIN
@@ -111,9 +111,9 @@ BEGIN
     FROM sys.columns WHERE object_id = OBJECT_ID('dbo.' + @imp);
 
     DECLARE @lo BIGINT, @hi BIGINT;
-    -- Bound the id range to the ARCHIVED scope (< 2026-07-01) so the batch loop doesn't iterate
-    -- the whole post-June id space with empty-result batches (pointless I/O on a multi-TB source).
-    SET @sql = N'SELECT @x=MIN(EntityId),@y=MAX(EntityId) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-07-01'';';
+    -- Bound the id range to the ARCHIVED scope (< 2026-08-01) so the batch loop doesn't iterate
+    -- the whole post-July id space with empty-result batches (pointless I/O on a multi-TB source).
+    SET @sql = N'SELECT @x=MIN(EntityId),@y=MAX(EntityId) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-08-01'';';
     EXEC sp_executesql @sql, N'@x BIGINT OUTPUT,@y BIGINT OUTPUT', @lo OUTPUT, @hi OUTPUT;
 
     DECLARE @batch BIGINT = 5000000, @from BIGINT = @lo, @to BIGINT;
@@ -123,7 +123,7 @@ BEGIN
         SET @sql = N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' ON;'
                  + N'INSERT INTO dbo.' + QUOTENAME(@t) + N' (' + @cols + N') SELECT ' + @cols
                  + N' FROM dbo.' + QUOTENAME(@imp) + N' WHERE EntityId BETWEEN @f AND @tt'
-                 + N'   AND [Timestamp] < ''2026-07-01'';'   -- archive only the dropped history; July+ via SWITCH later
+                 + N'   AND [Timestamp] < ''2026-08-01'';'   -- archive only the dropped history; August+ via SWITCH later
                  + N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' OFF;';
         EXEC sp_executesql @sql, N'@f BIGINT,@tt BIGINT', @from, @to;
         SET @from = @to + 1;
@@ -140,15 +140,15 @@ BEGIN
         + QUOTENAME(@ps) + N'([Timestamp]);';
     EXEC sp_executesql @sql;
 
-    -- 6) Verify row counts match (same < 2026-07-01 scope), then drop the source *_old.
+    -- 6) Verify row counts match (same < 2026-08-01 scope), then drop the source *_old.
     DECLARE @cNew BIGINT, @cImp BIGINT;
     SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@t) + N';';
     EXEC sp_executesql @sql, N'@c BIGINT OUTPUT', @cNew OUTPUT;
-    SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-07-01'';';
+    SET @sql = N'SELECT @c=COUNT_BIG(*) FROM dbo.' + QUOTENAME(@imp) + N' WHERE [Timestamp] < ''2026-08-01'';';
     EXEC sp_executesql @sql, N'@c BIGINT OUTPUT', @cImp OUTPUT;
-    PRINT @t + ': archived(<Jul1)=' + CAST(@cNew AS VARCHAR(20)) + ' source(<Jul1)=' + CAST(@cImp AS VARCHAR(20));
+    PRINT @t + ': archived(<Aug1)=' + CAST(@cNew AS VARCHAR(20)) + ' source(<Aug1)=' + CAST(@cImp AS VARCHAR(20));
     IF @cNew = @cImp BEGIN SET @sql = N'DROP TABLE dbo.' + QUOTENAME(@imp) + N';'; EXEC sp_executesql @sql; END
-    ELSE PRINT '*** COUNT MISMATCH for ' + @t + ' (< 2026-07-01) - investigate before dropping ' + @imp;
+    ELSE PRINT '*** COUNT MISMATCH for ' + @t + ' (< 2026-08-01) - investigate before dropping ' + @imp;
 
     FETCH NEXT FROM cur INTO @t;
 END

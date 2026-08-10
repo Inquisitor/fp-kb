@@ -29,7 +29,10 @@ GO
 CREATE OR ALTER PROCEDURE dbo.usp_Fact_AddNextMonth
     @Table       SYSNAME,
     @DataPath    NVARCHAR(260) = N'Z:\Microsoft SQL Server\MSSQL15.STEAMSTATS\MSSQL\DATA\',
-    @InitSizeMB  INT           = 8192,
+    @InitSizeMB  INT           = 1024,   -- month files start SMALL (Z: is tight: ~91 GB @ 2026-08-10).
+                                         -- Data-file autogrow is IFI-instant, so the real month grows
+                                         -- itself in @GrowthMB steps. Once Z: is comfortably post-shrink
+                                         -- (~2.4 TB) you MAY pass 8192 for pre-sized files - not required.
     @GrowthMB    INT           = 4096,
     @MonthsAhead INT           = 2,      -- keep at least this many empty future partitions
     @Debug       BIT           = 0

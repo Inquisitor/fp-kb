@@ -2,7 +2,7 @@
    FP-44337  Phase 3  |  SERVER: STEAM PROD (MSSQL15.STEAMSTATS)
    IN THE DOWNTIME WINDOW, after Phase 2 (swap) and BEFORE START PROD.
 
-   Pre-load the current-month (JULY) tail from *_old into the new tables so that
+   Pre-load the current-month (AUGUST) tail from *_old into the new tables so that
    incremental / recent-window consumers see a continuous history at restart.
 
    WHY before START (not online): FishingRateStatUpdateJob is incremental - it
@@ -14,12 +14,12 @@
    protects any consumer that reads the last hrs/days.
 
    PRESERVATION vs CONTINUITY: this tail is about CONTINUITY. The DROPPED history
-   (everything older than the July tail) is PRESERVED by the Phase 6 STEP 0 pre-drop FULL
-   backup, which captures *_old in its entirety in-window. {pre-drop FULL} U {July tail}
+   (everything older than the August tail) is PRESERVED by the Phase 6 STEP 0 pre-drop FULL
+   backup, which captures *_old in its entirety in-window. {pre-drop FULL} U {August tail}
    covers every *_old row gap-free by Timestamp, which is what the Phase 6 drop relies on.
 
-   Reads *_old (static - prod is stopped). @tailFrom is FIXED at 2026-07-01 (the current-month
-   1st) so the July partition is CLEAN (SWITCH-able later). Cutover lands several days into July,
+   Reads *_old (static - prod is stopped). @tailFrom is FIXED at 2026-08-01 (the current-month
+   1st) so the August partition is CLEAN (SWITCH-able later). Cutover lands several days into August,
    well past the incremental cursor's ~1h lag, so month-1st fully covers the recent window.
    >>> IF THE WINDOW MONTH DIFFERS FROM Phase 2: set @tailFrom to that month's 1st. <<<
    ============================================================================ */
@@ -40,7 +40,7 @@ IF OBJECT_ID('dbo.FP44337_TailLoadControl') IS NULL
     );
 GO
 
-DECLARE @tailFrom DATE = '2026-07-01';   -- FIXED = current-month 1st. Keeps the July partition CLEAN.
+DECLARE @tailFrom DATE = '2026-08-01';   -- FIXED = current-month 1st. Keeps the August partition CLEAN.
                                           -- The pre-drop FULL (Phase 6 STEP 0) preserves everything older.
 
 DECLARE @tables TABLE (name SYSNAME);
@@ -89,11 +89,11 @@ BEGIN
         ELSE SET @lo = @mid + 1;
     END
 
-    -- Lower the start by a margin to also pull in any out-of-order July rows whose EntityId
+    -- Lower the start by a margin to also pull in any out-of-order August rows whose EntityId
     -- sits just below the boundary (identity-reseed / late-commit skew).
     -- DATA-SAFETY: the tail IS load-bearing now. {pre-drop FULL} (all of *_old) U {this tail}
-    -- (from @tailFrom=2026-07-01) covers every *_old row gap-free - exactly what the Phase 6 drop
-    -- relies on. A few late-June rows pulled in by the margin are harmless: they land in P1 (the
+    -- (from @tailFrom=2026-08-01) covers every *_old row gap-free - exactly what the Phase 6 drop
+    -- relies on. A few late-July rows pulled in by the margin are harmless: they land in P1 (the
     -- left catch-all) and are also in the backup.
     SET @jStart = @jStart - 100000;
     IF @jStart < @minId SET @jStart = @minId;   -- clamp: never below the table's MIN(EntityId)
@@ -111,9 +111,9 @@ BEGIN
             N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' ON;' +
             N'INSERT INTO dbo.' + QUOTENAME(@t) + N' (' + @cols + N') ' +
             N'SELECT ' + @cols + N' FROM dbo.' + QUOTENAME(@old) + N' WITH (NOLOCK) ' +
-            -- Load ONLY July+ (Timestamp >= @tailFrom). The id-range floor (@jStart, margin-lowered)
-            -- guarantees no July row is missed even with id<->time skew; this filter drops the
-            -- late-June collateral so the July partition is clean and SWITCH-able later.
+            -- Load ONLY August+ (Timestamp >= @tailFrom). The id-range floor (@jStart, margin-lowered)
+            -- guarantees no August row is missed even with id<->time skew; this filter drops the
+            -- late-July collateral so the August partition is clean and SWITCH-able later.
             N'WHERE EntityId BETWEEN @f AND @tt AND [Timestamp] >= @tf;' +
             N'SET IDENTITY_INSERT dbo.' + QUOTENAME(@t) + N' OFF;';
         EXEC sp_executesql @ins, N'@f BIGINT,@tt BIGINT,@tf DATE', @from, @to, @tailFrom;

@@ -7,15 +7,17 @@
 
    Adapted from the validated PS runbook. STEAM deltas:
      - Instance MSSQL15.STEAMSTATS; data path Z:\...\MSSQL15.STEAMSTATS\MSSQL\DATA\.
-     - Phase 1 (log shrink) is SKIPPED on Steam - Stats_log is already ~10 GB.
-     - Boundaries are the CURRENT month at cutover. WORKING ASSUMPTION = JULY:
-       2026-07-01 / -08-01 / -09-01 -> July is its OWN bounded partition (SWITCH-able later),
-       Aug+Sep are the empty trailing buffer for the sliding window, and P1 (< 2026-07-01) is
-       the unbounded LEFT catch-all that stays EMPTY (Phase 3 loads only Timestamp >= 2026-07-01).
+     - Phase 1 on Steam is a log RIGHT-SIZE (pre-grow Stats_log ~10 GB -> ~32 GB, online,
+       days before the window) - not the PS emergency shrink. Run it BEFORE this script.
+     - Boundaries are the CURRENT month at cutover. WORKING ASSUMPTION = AUGUST:
+       2026-08-01 / -09-01 / -10-01 -> August is its OWN bounded partition (SWITCH-able later),
+       Sep+Oct are the empty trailing buffer for the sliding window, and P1 (< 2026-08-01) is
+       the unbounded LEFT catch-all that stays EMPTY (Phase 3 loads only Timestamp >= 2026-08-01).
        >>> IF THE WINDOW SLIPS TO ANOTHER MONTH: shift ALL boundaries AND FG suffixes by that month. <<<
      - Retention model A (as PS): load only the current-month tail; everything older is DROPPED in
-       Phase 6 (-> pre-drop backup -> archive later). Hard-drive headroom is comfortable (307 GB free),
-       so the cutover is NOT the knife-edge PS was.
+       Phase 6 (-> pre-drop backup -> archive later). Z: headroom has TIGHTENED: 307 GB at assessment
+       (2026-07-06) -> ~91 GB by 2026-08-10. Near-PS urgency: cut over ASAP, keep the buffer files
+       small (Sep/Oct start at 1 GB), run the Phase 6 drop + shrink the same day.
      - Rank DEFAULT on StatsFact is re-created by CAPTURING the old definition (robust to any value),
        not a hardcoded literal. MissionsFact.Rank is NOT NULL with no default (app supplies it).
 
@@ -66,15 +68,17 @@ IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = 'pf_StatsFact_Time
 GO
 
 -- Step 3 - filegroups + files. FOUR partitions need FOUR FGs:
---   catch-all (< 2026-07-01, stays EMPTY), July (current), August (next), September (empty buffer).
--- Month files SIZE 8 GB / GROWTH 8 GB; the catch-all is small (holds no rows). Before the window,
--- raise the CURRENT-month (2026_07) file SIZE to the measured compressed July-tail size to avoid
--- autogrow churn (tail grows ~11M rows/day - size it to the day of cutover). Aug/Sep/catch-all stay small.
+--   catch-all (< 2026-08-01, stays EMPTY), August (current), September (next), October (empty buffer).
+-- Z: is TIGHT (~91 GB free on 2026-08-10; was 307 at assessment), so only the CURRENT month starts big:
+--   2026_08 starts at 8 GB - raise it to the measured compressed August-tail size before the window
+--   (tail grows ~11M rows/day - size it to the day of cutover);
+--   Sep/Oct buffers start at 1 GB - they hold NOTHING until their month arrives, and by then the
+--   Phase 6 shrink has freed the disk. GROWTH 8 GB everywhere; the catch-all is small (holds no rows).
 DECLARE @DataPath NVARCHAR(260) = N'Z:\Microsoft SQL Server\MSSQL15.STEAMSTATS\MSSQL\DATA\';
 DECLARE @db SYSNAME = DB_NAME();
 DECLARE @sql NVARCHAR(MAX);
 
--- catch-all FG/file (small; empty placeholder for any < 2026-07-01 row that ever shows up)
+-- catch-all FG/file (small; empty placeholder for any < 2026-08-01 row that ever shows up)
 IF NOT EXISTS (SELECT 1 FROM sys.filegroups WHERE name = 'FG_StatsFact_catchall')
 BEGIN
     EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_StatsFact_catchall];');
@@ -84,11 +88,11 @@ BEGIN
     EXEC sp_executesql @sql;
 END
 
-DECLARE @m TABLE (suffix CHAR(7));
-INSERT INTO @m VALUES ('2026_07'), ('2026_08'), ('2026_09');
-DECLARE @s CHAR(7);
-DECLARE fg CURSOR LOCAL FAST_FORWARD FOR SELECT suffix FROM @m;
-OPEN fg; FETCH NEXT FROM fg INTO @s;
+DECLARE @m TABLE (suffix CHAR(7), sizeMB INT);
+INSERT INTO @m VALUES ('2026_08', 8192), ('2026_09', 1024), ('2026_10', 1024);
+DECLARE @s CHAR(7); DECLARE @szMB INT;
+DECLARE fg CURSOR LOCAL FAST_FORWARD FOR SELECT suffix, sizeMB FROM @m;
+OPEN fg; FETCH NEXT FROM fg INTO @s, @szMB;
 WHILE @@FETCH_STATUS = 0
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM sys.filegroups WHERE name = 'FG_StatsFact_' + @s)
@@ -96,24 +100,24 @@ BEGIN
         EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_StatsFact_' + @s + N'];');
         SET @sql = N'ALTER DATABASE [' + @db + N'] ADD FILE (NAME=N''StatsFact_' + @s + N''','
                  + N'FILENAME=N''' + @DataPath + N'StatsFact_' + @s + N'.ndf'','
-                 + N'SIZE=8192MB, FILEGROWTH=8192MB) TO FILEGROUP [FG_StatsFact_' + @s + N'];';
+                 + N'SIZE=' + CAST(@szMB AS NVARCHAR(10)) + N'MB, FILEGROWTH=8192MB) TO FILEGROUP [FG_StatsFact_' + @s + N'];';
         EXEC sp_executesql @sql;
     END
-    FETCH NEXT FROM fg INTO @s;
+    FETCH NEXT FROM fg INTO @s, @szMB;
 END
 CLOSE fg; DEALLOCATE fg;
 GO
 
 -- Step 4 - partition function + scheme. THREE boundaries -> FOUR partitions:
---   P1 (< 2026-07-01) = EMPTY catch-all ; P2 [Jul,Aug) = July ; P3 [Aug,Sep) = August ;
---   P4 (>= 2026-09-01) = EMPTY trailing buffer. July is its OWN bounded partition so it can be
+--   P1 (< 2026-08-01) = EMPTY catch-all ; P2 [Aug,Sep) = August ; P3 [Sep,Oct) = September ;
+--   P4 (>= 2026-10-01) = EMPTY trailing buffer. August is its OWN bounded partition so it can be
 --   cleanly SWITCHed OUT later; the unbounded P1 catch-all is never switched.
 CREATE PARTITION FUNCTION pf_StatsFact_Timestamp (DATETIME)
-AS RANGE RIGHT FOR VALUES ('2026-07-01T00:00:00', '2026-08-01T00:00:00', '2026-09-01T00:00:00');
+AS RANGE RIGHT FOR VALUES ('2026-08-01T00:00:00', '2026-09-01T00:00:00', '2026-10-01T00:00:00');
 GO
 CREATE PARTITION SCHEME ps_StatsFact_Timestamp
 AS PARTITION pf_StatsFact_Timestamp
-TO ([FG_StatsFact_catchall], [FG_StatsFact_2026_07], [FG_StatsFact_2026_08], [FG_StatsFact_2026_09]);
+TO ([FG_StatsFact_catchall], [FG_StatsFact_2026_08], [FG_StatsFact_2026_09], [FG_StatsFact_2026_10]);
 GO
 
 -- Step 5 + 6 - IDENTITY start from old table, then create the new partitioned table
@@ -184,7 +188,8 @@ IF EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = 'pf_MissionsFact_T
     DROP PARTITION FUNCTION pf_MissionsFact_Timestamp;
 GO
 
--- Step 3 - filegroups + files: catch-all (empty), July, August, September (empty buffer).
+-- Step 3 - filegroups + files: catch-all (empty), August, September, October (empty buffer).
+-- Same sizing as StatsFact: current month 8 GB (pre-size to the measured tail), Sep/Oct buffers 1 GB (Z: tight).
 DECLARE @DataPath NVARCHAR(260) = N'Z:\Microsoft SQL Server\MSSQL15.STEAMSTATS\MSSQL\DATA\';
 DECLARE @db SYSNAME = DB_NAME();
 DECLARE @sql NVARCHAR(MAX);
@@ -198,11 +203,11 @@ BEGIN
     EXEC sp_executesql @sql;
 END
 
-DECLARE @m TABLE (suffix CHAR(7));
-INSERT INTO @m VALUES ('2026_07'), ('2026_08'), ('2026_09');
-DECLARE @s CHAR(7);
-DECLARE fg CURSOR LOCAL FAST_FORWARD FOR SELECT suffix FROM @m;
-OPEN fg; FETCH NEXT FROM fg INTO @s;
+DECLARE @m TABLE (suffix CHAR(7), sizeMB INT);
+INSERT INTO @m VALUES ('2026_08', 8192), ('2026_09', 1024), ('2026_10', 1024);
+DECLARE @s CHAR(7); DECLARE @szMB INT;
+DECLARE fg CURSOR LOCAL FAST_FORWARD FOR SELECT suffix, sizeMB FROM @m;
+OPEN fg; FETCH NEXT FROM fg INTO @s, @szMB;
 WHILE @@FETCH_STATUS = 0
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM sys.filegroups WHERE name = 'FG_MissionsFact_' + @s)
@@ -210,22 +215,22 @@ BEGIN
         EXEC (N'ALTER DATABASE [' + @db + N'] ADD FILEGROUP [FG_MissionsFact_' + @s + N'];');
         SET @sql = N'ALTER DATABASE [' + @db + N'] ADD FILE (NAME=N''MissionsFact_' + @s + N''','
                  + N'FILENAME=N''' + @DataPath + N'MissionsFact_' + @s + N'.ndf'','
-                 + N'SIZE=8192MB, FILEGROWTH=8192MB) TO FILEGROUP [FG_MissionsFact_' + @s + N'];';
+                 + N'SIZE=' + CAST(@szMB AS NVARCHAR(10)) + N'MB, FILEGROWTH=8192MB) TO FILEGROUP [FG_MissionsFact_' + @s + N'];';
         EXEC sp_executesql @sql;
     END
-    FETCH NEXT FROM fg INTO @s;
+    FETCH NEXT FROM fg INTO @s, @szMB;
 END
 CLOSE fg; DEALLOCATE fg;
 GO
 
 -- Step 4 - partition function + scheme. THREE boundaries -> FOUR partitions:
---   P1 (< 2026-07-01) catch-all EMPTY ; P2 July ; P3 August ; P4 (>= 2026-09-01) EMPTY buffer.
+--   P1 (< 2026-08-01) catch-all EMPTY ; P2 August ; P3 September ; P4 (>= 2026-10-01) EMPTY buffer.
 CREATE PARTITION FUNCTION pf_MissionsFact_Timestamp (DATETIME)
-AS RANGE RIGHT FOR VALUES ('2026-07-01T00:00:00', '2026-08-01T00:00:00', '2026-09-01T00:00:00');
+AS RANGE RIGHT FOR VALUES ('2026-08-01T00:00:00', '2026-09-01T00:00:00', '2026-10-01T00:00:00');
 GO
 CREATE PARTITION SCHEME ps_MissionsFact_Timestamp
 AS PARTITION pf_MissionsFact_Timestamp
-TO ([FG_MissionsFact_catchall], [FG_MissionsFact_2026_07], [FG_MissionsFact_2026_08], [FG_MissionsFact_2026_09]);
+TO ([FG_MissionsFact_catchall], [FG_MissionsFact_2026_08], [FG_MissionsFact_2026_09], [FG_MissionsFact_2026_10]);
 GO
 
 -- Step 5 + 6 - IDENTITY start + create new partitioned table (clustered PK only).
@@ -280,8 +285,8 @@ WHERE o.name IS NULL OR n.name IS NULL
 -- Expect 0 rows. Any row = a mismatch to resolve before the tail load.
 GO
 
--- IDENTITY seeds + partition layout (expect 4 partitions each: catch-all / 07 / 08 / 09 filegroups,
--- ALL empty at this point - the July tail is loaded in Phase 3).
+-- IDENTITY seeds + partition layout (expect 4 partitions each: catch-all / 08 / 09 / 10 filegroups,
+-- ALL empty at this point - the August tail is loaded in Phase 3).
 SELECT 'StatsFact' AS tbl, IDENT_CURRENT('dbo.StatsFact') AS curr
 UNION ALL SELECT 'MissionsFact', IDENT_CURRENT('dbo.MissionsFact');
 
