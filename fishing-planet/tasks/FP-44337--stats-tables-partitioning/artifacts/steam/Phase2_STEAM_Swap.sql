@@ -138,6 +138,9 @@ ALTER TABLE dbo.StatsFact ADD CONSTRAINT PK_StatsFact
     WITH (DATA_COMPRESSION = PAGE)
     ON ps_StatsFact_Timestamp([Timestamp]);
 DBCC CHECKIDENT('dbo.StatsFact', RESEED, @startFrom);             -- next ids ~1,000,000 above old max
+-- NOTE: Phase 3's idempotency TRUNCATE resets this counter to the column's original seed;
+-- Phase 3 re-applies the cushion (RESEED MaxOldId+1M) after its load - so this value is
+-- informational for the Ledger, the operative reseed is Phase 3's.
 
 -- Re-create the Rank DEFAULT on the new table (SELECT INTO does not copy constraints). Capture the
 -- OLD table's default DEFINITION and replicate it verbatim, preserving whatever value Steam uses
@@ -247,7 +250,7 @@ ALTER TABLE dbo.MissionsFact ADD CONSTRAINT PK_MissionsFact
     PRIMARY KEY CLUSTERED (EntityId, [Timestamp])
     WITH (DATA_COMPRESSION = PAGE)
     ON ps_MissionsFact_Timestamp([Timestamp]);
-DBCC CHECKIDENT('dbo.MissionsFact', RESEED, @startFrom);
+DBCC CHECKIDENT('dbo.MissionsFact', RESEED, @startFrom);          -- see the Phase 3 TRUNCATE/reseed NOTE above
 GO
 
 /* ============================================================================

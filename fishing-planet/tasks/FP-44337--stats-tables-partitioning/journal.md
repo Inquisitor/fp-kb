@@ -319,3 +319,30 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   also NY TZ); docs reframed (not a crisis, cut-early-in-month advice, tempdb-location pre-flight UNKNOWN on
   Steam). STATUS: **prep only - the live Steam cutover needs its own maintenance window**; Steam pre-flight
   mostly PENDING (Agent/IFI/tempdb-location/grants/hardcoded-refs/backup). XB/MOB/NX still to adapt.
+- 2026-08-10 — **STEAM PROD CUTOVER: downtime part EXECUTED (Phases 1-3 + START PROD).** DevOps had
+  shifted the artifact set July->August (verified complete: PF boundaries 08/09/10, FG suffixes,
+  @tailFrom, Phase 6 gate + Phase 7 filters all consistent; grep for residual July = clean) and added
+  `Phase1_STEAM_LogRightsize.sql` (pre-GROW Stats_log ~10->32 GB - log growth is never IFI; validated
+  on SQLSTAGING; run on PROD in-window: 9.8->32.0 GB) + small buffer files (Sep/Oct 1 GB; Z: had
+  tightened 307->~69 GB, data file 3454 GB near-full, ~6 GB/day burn). KB synced to that version.
+  Rehearsed by DevOps on a copy ~Aug 1-2 (tail was tiny then - "1 min").
+  LIVE RUN: Monday full backup finished first (ADD FILE serializes vs BACKUP - flagged, waited).
+  August tail re-measured in-window: 60.2M/44.4M (~105M vs ~20M at rehearsal). Phase 2 clean (IDENTITY
+  starts 15,205,222,555 / 3,673,059,566; Rank default `((0))` captured+recreated from *_old; column
+  compare 0; 4 empty partitions catch-all/08/09/10 both tables). Phase 3: tail loaded+verified
+  StatsFact 60,242,179 (ids 15,143,880,376..15,204,222,555) / MissionsFact 44,382,770
+  (3,627,576,797..3,672,059,566) in ~25 min (~5M rows/min, PAGEIOLATCH_SH then CPU-bound); NCI builds
+  ~5 + ~3.5 min (progress watched via sys.dm_exec_query_profiles); sanity min_ts >= Aug 1 both. START
+  PROD at ~1h downtime. Post-START: WRITELOG storm (hundreds of INSERTs, 0-2s waits, no blockers, no
+  open txns) = catch-up + checkpoint flushing ~15 GB of tail+NCI pages through the single Z: - drained
+  in minutes. **FINDING (user question caught it): Phase 3's idempotency TRUNCATE resets the identity
+  counter to the column's ORIGINAL seed, discarding Phase 2's RESEED; the IDENTITY_INSERT load pulls it
+  up to MaxOldId only -> live ids start at MaxOldId+1, NOT seed+1M.** Verified: max_id 15,204,240,760 /
+  3,672,142,901 (18k/83k live rows, all below the "seed"). Harmless: no collisions (tail <= MaxOldId),
+  Phase 6 gate ranges cap at MaxOldId, Phase 3 safety-THROW keys off MAX(old) - but my post-START
+  "live rows > seed" check used the WRONG threshold (nulls misread as WRITELOG lag until the user
+  pushed back). Same latent behavior existed on the PS run (never checked there). FIX: Phase 3 (PS
+  canon + Steam) now re-applies the cushion (DBCC CHECKIDENT RESEED MaxOldId+1M after load), Phase 2
+  comment corrected. REMAINING (online, same day): STEP 0 pre-drop FULL -> gate -> DROP *_old ->
+  stepped shrink (Z: alert active; expect ~69 GB -> ~2.4 TB) -> E4 baseline backup; then Phase 8 job;
+  Phase 7 archive deferred.

@@ -57,8 +57,8 @@ Pending pre-flight (Steam):
 - [ ] No object-level GRANTs on the fact tables (app `farm` role membership)
 - [ ] No job/proc hardcoded `*_old`/3-part references to the fact tables
 - [ ] Pre-drop backup target space (~3.2 TB) + a 2nd retained copy
-Pending execution:
-- [ ] Agree a Steam maintenance window; finalize the cutover month (shift Phase 2 boundaries/FG suffixes + Phase 3 `@tailFrom` if not July)
-- [ ] Re-measure the July tail the day of cutover (cut early in the month; ~11 M rows/day)
-- [ ] Run Phase 2 -> Phase 3 (window) -> START PROD -> Phase 6 drop+shrink the same day
-- [ ] Phase 8 job after cutover; Phase 7 archive deferred (source = the pre-drop FULL's `*_old`)
+Pending execution — cutover downtime part DONE 2026-08-10 (August boundaries):
+- [x] Phase 1 (log right-size 9.8->32 GB) + Phase 2 (swap; seeds 15,205,222,555 / 3,673,059,566; verification clean) + Phase 3 (tail 60,242,179 / 44,382,770 verified; both NCIs; sanity clean) -> START PROD (~1h downtime); live inserts confirmed (from MaxOldId+1 - see journal identity-cushion finding)
+- [ ] **Phase 6 (online, ASAP - Z: ~69 GB): STEP 0 pre-drop FULL + VERIFYONLY (HARD gate) -> STEP 1 gate + DROP *_old -> STEP 2 stepped shrink (expect Z: -> ~2.4 TB) -> E4 baseline backup**
+- [ ] Phase 6 STEP 3 index rebuild of fragmented remaining tables (needs a downtime; offline on Standard)
+- [ ] Phase 8 job after cutover (dry-run -> job -> smoke, as PS); Phase 7 archive deferred (source = the pre-drop FULL's `*_old`)

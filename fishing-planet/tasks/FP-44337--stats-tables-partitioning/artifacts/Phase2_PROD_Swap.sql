@@ -136,6 +136,9 @@ ALTER TABLE dbo.StatsFact ADD CONSTRAINT PK_StatsFact
     WITH (DATA_COMPRESSION = PAGE)
     ON ps_StatsFact_Timestamp([Timestamp]);
 DBCC CHECKIDENT('dbo.StatsFact', RESEED, @startFrom);             -- next ids ~1,000,000 above old max
+-- NOTE: Phase 3's idempotency TRUNCATE resets this counter to the column's original seed;
+-- Phase 3 re-applies the cushion (RESEED MaxOldId+1M) after its load - so this value is
+-- informational for the Ledger, the operative reseed is Phase 3's.
 IF NOT EXISTS (SELECT 1 FROM sys.default_constraints
                WHERE name = 'DF_StatsFact_Rank' AND parent_object_id = OBJECT_ID('dbo.StatsFact'))
     ALTER TABLE dbo.StatsFact ADD CONSTRAINT DF_StatsFact_Rank DEFAULT (0) FOR [Rank];

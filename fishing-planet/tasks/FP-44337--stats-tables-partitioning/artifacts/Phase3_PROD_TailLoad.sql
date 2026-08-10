@@ -131,6 +131,15 @@ BEGIN
     INSERT INTO dbo.FP44337_TailLoadControl (TableName, TailStartId, MaxOldId, OldCount, NewCount)
     VALUES (@t, @jStart, @maxId, @oldCnt, @newCnt);
 
+    -- Re-apply the identity cushion (LEARNED on the Steam cutover 2026-08-10, applies here too):
+    -- the TRUNCATE above RESETS the identity counter to the column's ORIGINAL seed (discarding the
+    -- Phase 2 RESEED); the IDENTITY_INSERT load then pulls the counter up to MaxOldId only - so live
+    -- rows start at MaxOldId+1 (collision-free, since all tail ids are <= MaxOldId, but WITHOUT the
+    -- intended +1M cushion). The PS run went live without this - harmless (gate ranges cap at MaxOldId).
+    DECLARE @newSeed BIGINT = @maxId + 1000000;
+    DBCC CHECKIDENT(@t, RESEED, @newSeed);
+    PRINT 'Identity cushion re-applied: ' + @t + ' reseeded to ' + CAST(@newSeed AS VARCHAR(20));
+
     IF @oldCnt <> @newCnt
     BEGIN
         DECLARE @msg NVARCHAR(400) = N'Phase 3 preload MISMATCH for ' + @t
