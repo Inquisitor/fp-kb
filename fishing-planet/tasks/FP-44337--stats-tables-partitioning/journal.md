@@ -346,3 +346,26 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   comment corrected. REMAINING (online, same day): STEP 0 pre-drop FULL -> gate -> DROP *_old ->
   stepped shrink (Z: alert active; expect ~69 GB -> ~2.4 TB) -> E4 baseline backup; then Phase 8 job;
   Phase 7 archive deferred.
+- 2026-08-10 (cont.) — **STEP 0 backup saga + Z: firefight (online, prod running).** Z: fell 69 -> 10 GB
+  during the backup; diagnosed live: (1) **tempdb ballooned to ~33 GB** (8x4.1 GB; NCI-build/query spills
+  at 3:45) - hidden because sys.master_files shows tempdb's RESTART size (0.01 GB), not current (my
+  earlier "tempdb is tiny" read was wrong; found via a PowerShell large-file sweep); tempdb SHRINKFILE
+  is NOT blocked by the Stats backup (other DB) -> shrank live, Z: 10 -> 29 GB. (2) Month files bloated
+  by the 8 GB FILEGROWTH steps (Missions_2026_08 24 GB, StatsFact_2026_08 16 GB). (3) **Stats.mdf had
+  FILEGROWTH = 0 (fixed file!)** - explains the DB living "full" for years; free-in-file 2.6 GB = ~1 day
+  to insert failures for the PRIMARY-resident tables (Stmt/FishFact/...), independent of Z: - the DROP
+  (frees ~2.5 TB in-file) is the fix; growth enabled as fallback. Learned the hard way: SHRINKFILE/ALTER
+  MODIFY FILE on Stats are SERIALIZED against its running BACKUP (same 3023 as ADD FILE) - the
+  between-backups gap is the only file-ops window. Post-backup batch applied: month-file TRUNCATEONLY,
+  FILEGROWTH 2 GB on both 2026_08 files AND on the mdf (user decision: growth WITHOUT MAXSIZE - rely on
+  monitoring), log shrink 32 -> ~29 (active VLF pinned; re-shrink later), Z: -> ~38 GB. **Backup #1
+  completed but was taken WITHOUT CHECKSUM** (devops caught it); and **PAGE_VERIFY was NONE** (pre-2008-
+  era DB - pages carry no checksums at all, so even BACKUP WITH CHECKSUM could not page-verify).
+  Decision: RESTORE backup #1 on a spare server (~3 h) = the strongest restorability proof + the 2nd
+  preserved copy + the future Phase 7 archive source; DBCC CHECKDB on the restored copy afterwards =
+  the real integrity check. PAGE_VERIFY set to CHECKSUM going forward (pages checksum as rewritten; the
+  STEP 2 shrink page moves will stamp much of the DB). Missions-partition width anomaly investigated:
+  data_compression = PAGE everywhere (my "compression not applied" hypothesis REFUTED); ~490 B/row on
+  the August partition still unexplained - per-index breakdown pending, *_old preserved on the spare
+  for comparison; NOT a drop blocker. NEXT: spot-verify restored *_old vs Ledger -> STEP 1 gate + DROP
+  -> stepped shrink (off-peak) -> E4 baseline backup.
