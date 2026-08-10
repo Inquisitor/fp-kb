@@ -62,3 +62,7 @@ Pending execution — cutover downtime part DONE 2026-08-10 (August boundaries):
 - [ ] **Phase 6 (online, ASAP - Z: ~69 GB): STEP 0 pre-drop FULL + VERIFYONLY (HARD gate) -> STEP 1 gate + DROP *_old -> STEP 2 stepped shrink (expect Z: -> ~2.4 TB) -> E4 baseline backup**
 - [ ] Phase 6 STEP 3 index rebuild of fragmented remaining tables (needs a downtime; offline on Standard)
 - [ ] Phase 8 job after cutover (dry-run -> job -> smoke, as PS); Phase 7 archive deferred (source = the pre-drop FULL's `*_old`)
+- [ ] Missions row-width follow-up: August PK partition = ~511 B/row, ALL in-row, PAGE everywhere (NCI 14.9 B/row is fine; overflow/LOB = 0). Verify on the spare's restored `*_old` (avg width of the August range) that rows are genuinely wide (~PS old avg 417 B) vs Steam-historic 143 B avg; affects Missions archive sizing (~70 GB/month August rate), not correctness
+- [ ] Re-shrink `Stats_log` to 12 GB (first pass stopped at ~29 GB - active VLF; retry after checkpoints)
+- [ ] `DBCC CHECKDB` the restored copy on the spare (real integrity check - prod pages carried no checksums until PAGE_VERIFY was enabled 2026-08-10)
+- [ ] Pre-size + cap tempdb on STEAMSTATS (8 MB initial files, no MAXSIZE - same runaway config PS had; ballooned to ~33 GB from NCI-build spills 2026-08-10)

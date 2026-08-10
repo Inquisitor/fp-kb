@@ -369,3 +369,16 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   the August partition still unexplained - per-index breakdown pending, *_old preserved on the spare
   for comparison; NOT a drop blocker. NEXT: spot-verify restored *_old vs Ledger -> STEP 1 gate + DROP
   -> stepped shrink (off-peak) -> E4 baseline backup.
+- 2026-08-10 (cont. 2) — **GATE PASSED, *_old DROPPED on STEAM PROD.** Restore on the spare completed
+  clean; spot-verification matched the Ledger EXACTLY (StatsFact_old max 15,204,222,555 / aug rows
+  60,242,179; MissionsFact_old 3,672,059,566 / 44,382,770) -> gate (a) closed with the strongest proof
+  (actual restore + content check; copies = backup file + live restored DB). STEP 1 gate re-verified
+  both preloads + *_old untouched -> DROP at 11:14 server time. Deferred drop drained in minutes:
+  mdf used 3452 -> **736 GB** (~2.7 TB free-in-file - the fixed-file ceiling is dead for good).
+  TRUNCATEONLY returned 0 to the OS as expected (interior pages, not a free tail). Missions width
+  anomaly narrowed further: ALL in-row (LOB/overflow = 0), PAGE metadata everywhere -> genuinely wide
+  rows suspected (PS old avg was 417 B/row; Steam-historic 143 B avg likely sparse-era data); final
+  check on the spare's *_old, affects archive sizing only. REMAINING: stepped shrink in the nightly
+  trough (~02:00 NY; target ~850 GB file, Z: -> ~2.6 TB), then E4 baseline FULL (+VERIFYONLY);
+  log re-shrink to 12 GB; CHECKDB on the spare; tempdb pre-size+cap; Phase 8 job; Phase 7 archive
+  build from the spare's restored copy.
