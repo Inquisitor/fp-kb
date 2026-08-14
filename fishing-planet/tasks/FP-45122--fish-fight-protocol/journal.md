@@ -69,4 +69,113 @@ Related: module cards [game-processor](../../server/modules/game-processor/_card
   opcode; instead two client defects surfaced (no `CanSendGameActions` guard on the pod path, three arguments
   hardcoded to `false`), which also means the `wLn` third state collapses on the pod path and `isPoolingOrStriking`
   never reaches anti-cheat from a rod on a stand. Of the server-written response keys only `b` proved dead on
-  arrival — it will not be carried into the v2 schema.
+  arrival — it will not be carried into the v2 schema.- 2026-08-11..12 — D2 answered in full and the exchange became two-way at speed. Five reply letters published to
+  `protocol-docs` (guard sequencing, v2 envelope, response-key inventory, server-side audit, divergence policy),
+  plus corrections to `server-refusals.md`, the state-map reply, the glossary and the FSM generator. Decisions taken:
+  the r1435 unhitch guard ships on the v2 branch together with the client `lTf` fix and not before, because reaching
+  prod first would remove jerk-unhitch entirely - a narrower replay of the 2015 r1442 revert; `NeedClientReset` is
+  renamed `StateCorrection` with an enum target, a mandatory else branch and an acknowledgement; class A is a rule
+  ("every server-initiated transition opens a legal window"), not a hand-written list; B1 gains the clause that a
+  client may converge presentationally but never fix value; and the anti-cheat is removed whole rather than repaired -
+  it measures playtime, not cheating (81 of the top 100 by tournament rating sit above the ban threshold, mean rating
+  224572 against a threshold of 20), and `BanCheaters` is off in every configuration.
+- Three defects found that are worth more than the documents they came from. (1) A free exit from a snag: staying
+  silent for the unsync window and then sending `Move` with `fkt = true` reaches the fake-transition branch of
+  `Rollback`, where `Hitch` is in `inWaterStates`, so the rollback is non-null and `DoNeedClientReset` performs
+  `ReleaseTackle` before it - the tackle leaves the snag with no unhitch roll and no risk of losing rigging. The
+  client's debuff rule therefore closes a live hole rather than designing v2. (2) Wire byte 25 resolves to
+  `Transitions.LoseItem`: `GameActionCode` declares 1..24 and 250, 252..255, `Transitions` carries no explicit
+  numbers, and the adapter parses `actionCode.ToString()`, which for an undefined byte is a numeric string that
+  `Enum.Parse` accepts. `LoseItem` is permitted from `WithItem`, is not static and has no handler, so a modified
+  client leaves `WithItem` for `Move` with neither `ResetGeneratedItem()` nor the event. (3) `Rollback` dereferences
+  `transitionContext.Header` unconditionally while server transitions omit the optional header - unreachable today
+  because all eight server transitions are guarded by their callers, and armed the moment one is added without a guard.
+- Review discipline: nine adversarial rounds with two independent reviewers (agent + Codex), roughly sixty factual
+  corrections. Blockers per round 10 / 22 / 4 / 8 / 5. The character of the findings changed near the end - the last
+  rounds caught edit discipline rather than ignorance of the code: twice a fix introduced a new error (the landing-net
+  wording, the NRE paragraph), twice a fix reached one carrier of a claim and not the other two (the SVG legend was
+  corrected while the same sentence survived in the generated markdown and the as-is prose). Worth keeping as the
+  argument for reviewing after one's own corrections, not only after the first draft.
+- Client side verified our five letters and changed three of our facts. `iR` is closed and could not have reproduced -
+  the `RodId` read already carried a type check, precisely because `iR` rides every `Move`; all nine identifier keys
+  are pinned by `WearDecoderKeyCollisionTests` since CLN r56942. Their own "30 of 33" figure is retracted: both enums
+  are 35 transitions and 13 states with identical names and order, so the FSM mirror has not drifted at all - our
+  conclusion about moving the enumerations into `Photon.Interfaces` stands, but on the weaker and honest ground that
+  a manual copy happens to match and nobody checks it. And demolishing the backlash reaches DATA, not only the FSM
+  vocabulary: `Reel.BacklashProbability` is a `[JsonConfig]` field on every reel, assigned into
+  `RodCaster.ReelBacklashProbability` on tackle assembly, with the formula consumer commented out and `FormulasTest`
+  still asserting it - a decision to take with GD.
+- A fourth defect in the correction channel, theirs, removes a premise of ours: "for `Initial` the client resets the
+  rod" holds only for the ACTIVE rod, and even for a matching slot the flag is cleared in `onEnter` before anything
+  reads it. `StateCorrection` remains one message rather than two, but the client half is BUILT rather than completed,
+  and this also explains why the existing correction never helped - server resets mostly touch inactive slots, and
+  teleport resets them in a volley.
+- Open on our side: four named pin tests (`JerkUnhitch_RollsWithoutLowTerminalForce_`,
+  `StrongFishEscape_RollsOnEveryMessage_`, `StartDraw_FromFishFight_EntersDraw_`,
+  `Rollback_ServerTransitionWithoutHeader_`, all suffixed `KNOWN_DEFECT_FP45122`) do not exist yet, and every document
+  says so rather than implying convention 9 is satisfied; the small SVN batch on NPN (delete `UpdateObjectModel.cmd`,
+  mirror `CharacterEventType`, add a `TryParse` fallback in the restore path) is unstarted; and the backlash data
+  parameter needs a GD decision. Server tree moved r16404 -> r16422 during the exchange; the load-bearing facts were
+  re-checked at the new revision and hold, with the configuration sweep now covering 115 files instead of 106 and
+  giving the same result.
+- 2026-08-12..14 — Review cycle carried to seventeen rounds and the exchange turned two-way at speed.
+  Two independent reviewers per round until Codex ran out of workspace credits after round eleven; from twelve on it
+  was a single reviewer, which is a real loss - across the early rounds the two overlapped on almost nothing.
+  Blockers per round ran 10 / 22 / 4 / 8 / 5 / 6 / 3 / 4 / 5 / 3 / 5 / 8, and the flat tail is not stalled convergence:
+  each round opened a new search dimension. Round fifteen found the biggest one - the values of `GlobalVariables` and
+  `EnvironmentVariables` are readable from `SQL/Patches` in the branch, and fourteen rounds had searched only the C#
+  while repeatedly concluding "this needs a database measurement" for values the repository already carried.
+  Round seventeen found another: per-env server overrides do not live in `SoftwareDistributor/Configs` at all but in
+  `Photon/src-server/Loadbalancing/Config/<env>/<Role>/bin/Photon.LoadBalancing.dll.config`, where `IsDetailedLogging`
+  is `True` in 216 files while prod has no key and therefore runs `False` - which changes the measurement recipe we
+  had handed the client, since a QA stand and prod behave differently.
+- The dominant defect class shifted, and it is worth carrying into future work: from round eleven onward most blockers
+  were introduced BY THE PREVIOUS ROUND'S FIXES, not present in the original text. The pattern was consistent -
+  blockers were verified against code, while "improvements" were written from the reviewer's description or from
+  memory, and that is exactly where new errors landed: an invented method name (`LeaderBreaker.InjectGlobals`), a
+  wrong mechanism for constants, a new glossary term defined wrongly for two of its own three examples, a rename that
+  reached one carrier of a claim and not the other two. The working rule now is that a correction is not cheaper than
+  an original claim and gets the same verification.
+- Two claims about live values were published and then corrected, both worth remembering as method failures rather
+  than facts. The strong-fish escape threshold: the code default is 0.165 but `UgcOld/2016.02.08-063` seeds
+  `Fishing.LimitForce = .2` and `CLZ.M.2023.06.13-047` copies that row (its own 0.165 survives only as an `ISNULL`
+  fallback), `-049` renames it - so the expected value is 0.2. But the follow-on argument built on `UgcOld/<ENV>.log`
+  was wrong twice over: there are six Xbox logs, not none, and the runner does not read those files at all. The
+  correct and much shorter statement is that `SqlCheck` enumerates `*.sql` without recursion, so the `UgcOld` layer is
+  never applied and the live value must be measured in the database rather than derived from patch history.
+  The second claim - "the lure-fish step counter lost its 8 in 2024" - is RETRACTED outright: `GRM.M.2024.08.19-030`
+  deletes from `GlobalVariables` while the accessors read `EnvironmentVariables`, so the deleted rows were never read,
+  6/6 applied before the patch, and the patch is cleanup rather than cause.
+- Client side delivered four substantial pieces. A verification of our five replies that closed `iR` (the `RodId` read
+  already carried a type check, all nine identifier keys pinned by their test since CLN r56942) and retracted their
+  own "30 of 33" - though our pinned client tree still shows 33 against 35, so the question of which revision shows
+  35 is open. Envelope revision 2, where seven of fourteen fields turned out to be unserializable: the Photon encoding
+  registers no unsigned types at all, an unregistered type reaches `throw new Exception("Unknown type")`, and the
+  transport is chosen by a race at connect - so the failure would have landed on whichever share of players the race
+  sent down that path. A twelve-slide deck for management and game design, with a convention-11 proofreading request.
+  And key presence measured on live traffic: three gate keys never appeared in 1479 `Move` messages, the window leak
+  measured at 1.28 per cent as a floor, `Move` cadence median 210 ms against a nominal 200.
+- Their I1 letter is the one that needs our work. Recording player inputs cannot reproduce a fight - fish behaviour is
+  chosen client-side by roughly 55 generator calls feeding one physical body, and frame rate changes both the content
+  and the count of messages. So they will record the outgoing message stream instead, and ask us to make the seed
+  settable in five server generators: `GameProcessor` (hitch, bite, breaks), `StrongFishEscapeModel` (fight duration
+  and the escape itself), `FishGenerator` (which fish, weight, active escape), `FishTireModel` and BiteSystem's
+  `PlayerData`. Two already expose `RngSeed` and need only a constructor parameter; `HitchGenerator` needs nothing.
+  Two cautions from them are worth honouring: within one rod `GameProcessor.rnd` is shared by hitch, breaks, bite and
+  fish count, so any change to call counts shifts everything else - separate streams by purpose; and the
+  `TODO: refactor to Random.Shared` in `NormalRandom` must not be executed, because `Random.Shared` cannot be seeded.
+  If the seed also lands in the fight log, any player's fight becomes reproducible - complaints and anti-cheat
+  disputes turn into repeatable runs.
+- The radar author answered the `LocationFishData` question and it reframes more than it settles. `GenerationTime` ->
+  `StayTimeMinutes` was a deliberate optimisation: expiring the cache by date looked natural until it turned out the
+  cache never expires while the client is paused, because game time stands still and so does biting. The client was
+  simply not updated, and the field is useless to it either way. The consequence for us is that part of the
+  `ObjectModel` divergence is intentional - client and server need different data - and the root mistake is the
+  absence of DTOs separate from the business models on the server. So the comparison manifest we proposed must check
+  the subset that actually crosses the wire, or it will flag divergences that were made on purpose.
+- Our proofread of their deck confirmed slide 6 in full, corrected two things on slide 5 (a swallowed message does not
+  come back "exactly the same as a success", and "up to three repeats" is one budget of three) and one generalisation
+  on slide 7. Its own first draft contained the session's most instructive error: it "corrected" their `tPs` slide by
+  claiming the consequence lands in missions rather than biting, when the early exit on `tackleStatus` sits sixteen
+  lines above the `tMs` exit the same document had just cited as verified, and the key also feeds lure attraction,
+  hitch generation and wear. An internal review caught it before it went out.
