@@ -86,6 +86,6 @@ pages:
     verified: 2026-05-10
     last_pushed_version: 2
   - id: "5768642569"
-    title: "Git Flow for the Server Team: Options"
-    verified: 2026-07-14
-    last_pushed_version: 6
+    title: "Git Flow for the Server Team"
+    verified: 2026-08-15
+    last_pushed_version: 8

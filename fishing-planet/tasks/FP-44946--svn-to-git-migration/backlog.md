@@ -2,7 +2,8 @@
 
 - [ ] Decide the target surface for the final flow document (Confluence section, KB deep dive, or both)
 - [ ] Platform requirement checklist to feed the "Choose Git platform" workstream (enforced merge
-      method, protected branches, rebase UX, merge queue availability)
+      method, protected branches, rebase UX, merge queue availability; ff-only for task MRs must
+      coexist with direct-push allowance for structural cross-branch merge commits)
 - [ ] Tag convention for protocol-version increments (annotated tags at release boundaries)
 - [ ] Branch <> release mapping (which release ships from which server branch; one branch can host
       several releases, e.g. MFT: FTUE + FPA 2026.5) — needed for placing release tags in Git history

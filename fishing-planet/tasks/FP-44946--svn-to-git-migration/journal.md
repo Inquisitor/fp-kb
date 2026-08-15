@@ -9,9 +9,10 @@ type: story
 # FP-44946: Define Git workflow for the server team
 
 ## Status
-Team meeting held 2026-07-14: no final decisions yet, team leans toward Option A. Article
-published to Confluence (page 5768642569, v6, TECH > SERVER > Infrastructure) for the team to
-read; discussion continues 2026-07-15. Then: record decisions, write the final flow description.
+Final flow document published: options page 5768642569 evolved into the prescriptive "Git Flow
+for the Server Team" (content v7, rename v8); options content preserved as page history (up to
+v6), its workspace draft archived. Task deliverable complete — closure pending (JIRA transition,
+backlog bubble-up). Related workstreams (platform choice, sync, pilot deploy) remain separate.
 
 ## Summary
 Server code migrates from SVN (rotating role-based release branches, upward hotfix merges) to Git,
@@ -20,20 +21,35 @@ team: long-lived branch model, task-branch lifecycle, merge policy, hotfix propa
 release-cycle mapping. Related workstreams are tracked separately: Git platform choice, SVN-Git
 sync restoration, pilot deploy from a Git branch.
 
-## Design decisions (pending)
-- **History model**: Option A (first-parent linearity — structural merges between long-lived
-  branches stay real merge commits) vs Option B (strictly linear — cross-branch propagation via
-  cherry-pick). Preliminary lean: **A** — keeps git-native merge tracking (the `svn:mergeinfo`
-  replacement); B substitutes it with a hand-maintained audit process and risks silently missed or
-  semantically drifted cherry-picks of security-sensitive fixes. Team decision at the meeting.
-- **Landing style within A**: fast-forward / semi-linear (`rebase` + `--no-ff` boundary commit) /
-  squash. Squash matches today's one-commit-per-task SVN granularity most closely.
+## Design decisions
+- **History model — DECIDED: Option A (first-parent linearity)** (team meeting, recorded
+  2026-07-22). Structural merges between long-lived branches stay real merge commits; task
+  branches land linearly. Option B (cherry-pick propagation) rejected — hand-maintained tracking,
+  silent miss/drift risks.
+- **Landing style within A — DECIDED: fast-forward only** (recorded 2026-08-02). Task branches
+  land via rebase + ff; squash is a per-MR option for small/messy branches; curated multi-commit
+  landing when behavior/NFC separation is worth keeping. Semi-linear rejected: whole-task revert
+  is an exceptional event in team practice and does not justify a boundary commit per task —
+  mainline grouping is already carried by the `FP-#####:` commit prefix. Structural merges between
+  long-lived branches are exempt from the ff-only rule (privileged maintainer push, not a task MR).
+- **Branch naming — DECIDED**: `fp-12345-short-slug` (recorded 2026-08-04).
+- **`Fixes:` trailer — optional** (recorded 2026-08-15): hotfix commits may carry it; not mandated.
+- **Structural merge messages — DECIDED** (recorded 2026-08-04): git default subject + auto
+  shortlog of merged subjects (`merge.log 500`), reproducing the SVN merge-message habit without
+  hand-authoring; full bodies not embedded (merged commits are already in the target history).
+- **Commit convention — DECIDED** (recorded 2026-08-02): `[NFC]` marker after `[Topic]` for
+  behavior-neutral commits (LLVM precedent); unrelated cleanup goes to its own MR under the
+  standing quarterly Tech Debt ticket; subject format enforced by a platform push rule (allowed
+  forms: task commit / structural merge / protocol increment — concrete regex in the flow doc);
+  body bullets are plain `-` items — the SVN `+/-/=/*` classification is dropped in Git
+  (recorded 2026-08-04).
 
 ## Plan
 - [x] Create problem-only JIRA issue
 - [x] Draft flow-options article for the team meeting — [confluence draft](../../../confluence/workspace/FP-44946--git-flow-options.md)
-- [ ] Team meeting (2026-07-14): capture decisions — history model, landing style, hotfix convention
-- [ ] Write the final Git flow description (target surface TBD — likely Confluence)
+- [x] Team meetings: history model decided — Option A (first-parent)
+- [x] Settle landing style + commit-granularity convention (squash vs curated commits, NFC separation)
+- [x] Final Git flow description — published over the options page (5768642569, retitled "Git Flow for the Server Team", v8)
 
 ## Milestones (log)
 - 2026-07-13: Task opened. Feasibility of the rebase + fast-forward flow assessed: feasible,
@@ -46,3 +62,24 @@ sync restoration, pilot deploy from a Git branch.
   Confluence: TECH > SERVER > Infrastructure, page 5768642569 (v3 — v2 had the Option B note
   truncated by the md converter; reformatted to a blockquote). Draft moved from task artifacts to
   confluence/workspace/FP-44946--git-flow-options.md.
+- 2026-07-22: Team accepted **Option A** (first-parent linearity), no objections. Still open:
+  landing style and commit-granularity convention — direction voiced: keep branches squashable OR
+  curate meaningful commits, and make behavior-affecting commits distinguishable from
+  behavior-neutral cleanup/refactoring.
+- 2026-08-02: Landing style settled — **fast-forward only**; semi-linear dropped (whole-task
+  revert is exceptional in team practice; FP-ID prefixes group mainline commits by task). Squash
+  stays a per-MR option. Structural cross-branch merges exempt from ff-only (privileged push, not
+  a task MR).
+- 2026-08-02: Commit-convention tails accepted — `[NFC]` marker; standing quarterly Tech Debt
+  ticket as the FP-ID home for standalone cleanup MRs. Final flow document drafted to
+  confluence/workspace/FP-44946--git-flow.md.
+- 2026-08-04: Doc review round — commit bullets simplified to plain dashes (Git era only);
+  enforcement regex extended with the concrete protocol-increment alternative (verified against
+  SVN r16281/r16321); branch naming `fp-12345-short-slug` approved; structural merge messages =
+  git default + `merge.log` shortlog.
+- 2026-08-15: `Fixes:` trailer kept optional — flow-document content finalized; publication
+  placement pending.
+- 2026-08-15: Published — options page evolved into the final document (v7 content via
+  confluence-md, v8 rename to "Git Flow for the Server Team" via API; title-only publish is not
+  supported by the tool). Rationale link now points to page version history. Options draft moved
+  to confluence/archive/.

@@ -40,7 +40,7 @@
 | Draft                    | Task     | Target                                                                        |
 |--------------------------|----------|-------------------------------------------------------------------------------|
 | twitch-no-email-handling | FP-44591 | TECH > SERVER > Twitch integration (child) — published v2 (5696978945)        |
-| git-flow-options         | FP-44946 | TECH > SERVER > Infrastructure (child) — published v6 (5768642569)            |
+| git-flow                 | FP-44946 | TECH > SERVER > Infrastructure (child) — published v8 (5768642569)            |
 
 > See [confluence backlog](confluence/backlog.md) for the broader assessment plan.
 
