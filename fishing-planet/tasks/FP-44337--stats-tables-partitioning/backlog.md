@@ -59,7 +59,8 @@ Pending pre-flight (Steam):
 - [ ] Pre-drop backup target space (~3.2 TB) + a 2nd retained copy
 Pending execution — cutover downtime part DONE 2026-08-10 (August boundaries):
 - [x] Phase 1 (log right-size 9.8->32 GB) + Phase 2 (swap; seeds 15,205,222,555 / 3,673,059,566; verification clean) + Phase 3 (tail 60,242,179 / 44,382,770 verified; both NCIs; sanity clean) -> START PROD (~1h downtime); live inserts confirmed (from MaxOldId+1 - see journal identity-cushion finding)
-- [ ] **Phase 6 (online, ASAP - Z: ~69 GB): STEP 0 pre-drop FULL + VERIFYONLY (HARD gate) -> STEP 1 gate + DROP *_old -> STEP 2 stepped shrink (expect Z: -> ~2.4 TB) -> E4 baseline backup**
+- [x] Phase 6 STEP 0-2 DONE: pre-drop FULL (verified via restore-on-spare + exact Ledger spot-check) -> gate + DROP *_old (2026-08-10; mdf used 3452 -> 736 GB) -> stepped shrink (2026-08-20: **Z: ~2.56 TB free**)
+- [ ] **E4 baseline FULL backup (+ VERIFYONLY WITH CHECKSUM) - do NOT skip: the post-STOP August tail has no independent copy until this lands**
 - [ ] Phase 6 STEP 3 index rebuild of fragmented remaining tables (needs a downtime; offline on Standard)
 - [ ] Phase 8 job after cutover (dry-run -> job -> smoke, as PS); Phase 7 archive deferred (source = the pre-drop FULL's `*_old`)
 - [ ] Missions row-width follow-up: August PK partition = ~511 B/row, ALL in-row, PAGE everywhere (NCI 14.9 B/row is fine; overflow/LOB = 0). Verify on the spare's restored `*_old` (avg width of the August range) that rows are genuinely wide (~PS old avg 417 B) vs Steam-historic 143 B avg; affects Missions archive sizing (~70 GB/month August rate), not correctness

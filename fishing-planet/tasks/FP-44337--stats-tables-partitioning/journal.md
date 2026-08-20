@@ -382,3 +382,11 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   trough (~02:00 NY; target ~850 GB file, Z: -> ~2.6 TB), then E4 baseline FULL (+VERIFYONLY);
   log re-shrink to 12 GB; CHECKDB on the spare; tempdb pre-size+cap; Phase 8 job; Phase 7 archive
   build from the spare's restored copy.
+- 2026-08-20 — **Steam STEP 2 stepped shrink COMPLETE: Z: ~2.56 TB free** (was 10 GB at the worst
+  moment of the backup day; 307 GB at assessment). The Steam disk reclaim is done - both platforms
+  (PS ~2.67 TB, Steam ~2.56 TB) now run partitioned facts with recovered volumes. REMAINING on Steam:
+  E4 baseline FULL (+VERIFYONLY) - do not skip (the post-STOP August tail needs its independent copy;
+  new pages now carry checksums); Phase 8 sliding-window job (no downtime needed; PS-style dry-run ->
+  job -> smoke); STEP 3 rebuild of shrink-fragmented remaining tables (needs a downtime, offline on
+  Standard - same pending state as PS); log re-shrink to 12 GB; CHECKDB + Missions-width check on the
+  spare; tempdb pre-size+cap; Phase 7 archive from the spare's restored copy (deferred).
