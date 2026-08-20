@@ -10,10 +10,18 @@ platforms: [PS, Steam, XB, MOB, NX]
 
 ## Status
 
-Plan and PS runbook drafted; JIRA FP-44337 created (Story, Highest). Awaiting the PS
-maintenance window. Execution by DBA + DevOps; agent on support. Next: confirm pre-flight
-measurements (current-month tail rows, delta since backup, IFI enabled, `log_reuse_wait_desc`)
-and schedule the window.
+**PS and Steam production are LIVE on partitioned facts — the two largest platforms are at
+parity** (stage closed 2026-08-20): monthly-partitioned + PAGE-compressed `StatsFact`/`MissionsFact`,
+reclaimed volumes (PS ~2.67 TB / Steam ~2.56 TB free), sliding-window Agent jobs running
+(`Facts_AddNextMonth`, 28th 02:00 NY-local), page-verified weekly backups from 2026-08-24
+(PAGE_VERIFY CHECKSUM + `backup checksum default` on both instances). JIRA comment with the full
+rollout status + issue log posted 2026-08-20.
+
+Next (all background, no dates committed): STEP 3 index rebuild of shrink-fragmented tables on
+BOTH platforms (needs a maintenance downtime); CHECKDB + Missions row-width check on the Steam
+spare copy; Steam log re-shrink to 12 GB + tempdb pre-size/cap; Phase 7 analyst archives (PS from
+its pre-drop backup, Steam from the spare's restored copy) — KEEP the pre-drop backups until then;
+adapt the runbook for XB / MOB / NX. Blockers: none.
 
 ## Summary
 
@@ -51,23 +59,26 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
 
 - `artifacts/Runbook_PS_Stats_Partitioning.md` — master PS runbook (phases, scripts, rollback, risks).
 - `artifacts/Operator_Checklist.md` — step-by-step operator playbook over the scripts (pre-flight, values ledger, per-phase what/where/paste/verify, stuck-shrink sub-procedure, rollback).
-- Execution scripts (canonical, corrected, MissionsFact included), run order 1-8:
+- Execution scripts (canonical, corrected, MissionsFact included), run order 1-3, 6-8
+  (Phases 4/5 — the SQLSTAGING delta — were removed as redundant, see Milestones 2026-06-09):
   - `artifacts/Phase1_PROD_ShrinkLog.sql` — log shrink (PROD, online).
   - `artifacts/Phase2_PROD_Swap.sql` — rename + create partitioned StatsFact & MissionsFact (PROD, downtime).
-  - `artifacts/Phase3_PROD_TailLoad.sql` — pre-load June tail + counts to `FP44337_TailLoadControl`, then START (PROD, downtime).
-  - `artifacts/Phase4_PROD_DeltaExport.sql` — delta bcp out (PROD, online).
-  - `artifacts/Phase5_STAGING_DeltaImport.sql` — delta bcp in + verify, completes restored copy (SQLSTAGING, online).
+  - `artifacts/Phase3_PROD_TailLoad.sql` — pre-load current-month tail + counts to `FP44337_TailLoadControl`, then START (PROD, downtime).
   - `artifacts/Phase6_PROD_Drop_Shrink.sql` — gated drop (asserts preload via control table), shrink, index maint (PROD, online).
   - `artifacts/Phase7_SQLARCHIVE_BuildAndLoad.sql` — build + load partitioned analyst archive (SQLARCHIVE, deferrable).
   - `artifacts/Phase8_PROD_SlidingWindowJob.sql` — monthly `usp_Fact_AddNextMonth` + Agent job (PROD).
+- `artifacts/steam/` — the Steam adaptation, AS-RUN 2026-08 (August boundaries; Phase 1 is a log
+  right-size there; runbook + operator checklist included). Template for XB / MOB / NX.
+- `staging-rehearsal/` — Test2 rehearsal copies used before the PS cutover.
 - `artifacts/original-plan/` — raw DevOps-authored materials (reference):
   - `DevOps_Original_Plan.md` — original high-level sequence (superseded by the runbook phasing).
   - `01_Create_Partitioned_Tables_And_Job.sql` — rename, PF/PS/FG, DDL, `usp_..AddNextMonth`, Agent job.
   - `02_Delta_Sync_BCP.sql` — post-backup delta export/import + verification.
   - `03_Drop_Old_Tables_And_Shrink.sql` — drop old tables + `SHRINKFILE`.
 
-> Cross-platform rollout (Steam/XB/MOB/NX) and steady-state (24-month retention, sliding-window
-> job) are tracked here but executed after PS is stabilized; a separate adapted runbook per platform.
+> Cross-platform rollout is tracked here; PS and Steam are DONE (see Status), XB / MOB / NX remain —
+> a separate adapted runbook per platform (the `artifacts/steam/` set is the template). Steady-state
+> (24-month retention, archives) follows the platform rollouts.
 
 ## Milestones
 
