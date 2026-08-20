@@ -61,7 +61,7 @@ Pending execution — cutover downtime part DONE 2026-08-10 (August boundaries):
 - [x] Phase 1 (log right-size 9.8->32 GB) + Phase 2 (swap; seeds 15,205,222,555 / 3,673,059,566; verification clean) + Phase 3 (tail 60,242,179 / 44,382,770 verified; both NCIs; sanity clean) -> START PROD (~1h downtime); live inserts confirmed (from MaxOldId+1 - see journal identity-cushion finding)
 - [x] Phase 6 STEP 0-2 DONE: pre-drop FULL (verified via restore-on-spare + exact Ledger spot-check) -> gate + DROP *_old (2026-08-10; mdf used 3452 -> 736 GB) -> stepped shrink (2026-08-20: **Z: ~2.56 TB free**)
 - [x] E4 baseline backup — covered by the weekly Monday FULL (2026-08-17: contains the post-STOP August tail; taken post-DROP, so already small-content). The true post-shrink baseline arrives with the next weekly (2026-08-24)
-- [ ] Confirm the weekly backup job now runs `WITH CHECKSUM` (meaningful since PAGE_VERIFY=CHECKSUM + the shrink page-moves stamped much of the DB)
+- [x] Backup checksums — audited msdb.backupset (ALL history = no checksums, both platforms); fixed instance-wide via `backup checksum default = 1` on STEAMSTATS **and** PSSTATS (value_in_use=1); PS PAGE_VERIFY was already CHECKSUM, Steam enabled 2026-08-10. Next weeklies (2026-08-24) = first page-verified baselines
 - [ ] KEEP the 2026-08-10 pre-drop backup file AND the restored copy on the spare until the Phase 7 archive is built & verified — all pre-August history lives ONLY there (weekly FULLs no longer contain it)
 - [ ] Phase 6 STEP 3 index rebuild of fragmented remaining tables (needs a downtime; offline on Standard)
 - [ ] Phase 8 job after cutover (dry-run -> job -> smoke, as PS); Phase 7 archive deferred (source = the pre-drop FULL's `*_old`)

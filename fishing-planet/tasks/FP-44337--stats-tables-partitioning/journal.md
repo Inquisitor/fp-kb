@@ -390,3 +390,14 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   job -> smoke); STEP 3 rebuild of shrink-fragmented remaining tables (needs a downtime, offline on
   Standard - same pending state as PS); log re-shrink to 12 GB; CHECKDB + Missions-width check on the
   spare; tempdb pre-size+cap; Phase 7 archive from the spare's restored copy (deferred).
+- 2026-08-20 (cont.) — **E4 closed via the weekly cycle + backup checksums enabled on BOTH platforms.**
+  The 2026-08-17 weekly FULL (post-DROP) already contains the August tail -> no separate E4 run; the
+  post-DROP effect is visible in the backup cycle itself: **291.7 GB / 27 min vs ~1.1 TB / ~2 h before**
+  (every week, ~4x smaller/faster). msdb.backupset audit: ALL historical backups on both platforms ran
+  WITHOUT checksums (has_backup_checksums=0). Fixed instance-wide via `backup checksum default = 1`
+  (online, no downtime; value_in_use=1 confirmed on STEAMSTATS and PSSTATS) - the next weeklies
+  (2026-08-24) become the first fully page-verified baselines. PAGE_VERIFY: PS was already CHECKSUM
+  (its pages were stamped all along - only the backup-time verification was missing); Steam enabled
+  2026-08-10 (+ the shrink's page moves stamped much of the rewritten DB). Retention guards recorded:
+  keep the 2026-08-10 pre-drop backup AND the spare's restored copy until the Phase 7 archive is
+  verified - pre-August history lives only there.
