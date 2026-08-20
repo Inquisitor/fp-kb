@@ -401,3 +401,17 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   2026-08-10 (+ the shrink's page moves stamped much of the rewritten DB). Retention guards recorded:
   keep the 2026-08-10 pre-drop backup AND the spare's restored copy until the Phase 7 archive is
   verified - pre-August history lives only there.
+- 2026-08-20 (cont. 2) — **Phase 8 sliding-window job CREATED & verified on STEAM PROD** (PS playbook
+  replay). Pre-flight green (Agent Running/Automatic, `sa` enabled, PF boundaries Aug1/Sep1/Oct1).
+  Proc + dry-runs matched: @MonthsAhead=2 -> no-op ("buffer OK through 2026-10-01, added 0" both);
+  @MonthsAhead=3 -> printed the real ADD path (FG_StatsFact_2026_11, STEAMSTATS path, SPLIT
+  '2026-11-01'), nothing committed. NOTE: the deployed proc carries @InitSizeMB=8192 (the pre-devops
+  default, not their tight-Z: 1024) - deliberately KEPT: post-shrink Z: is ~2.56 TB and their own
+  comment allows 8192 once space is comfortable. Job `Facts_AddNextMonth` (owner sa, 2 steps, retry
+  2/5, eventlog-on-fail, `Monthly_28th_at_02`) created; sysjobschedules.next_run_date stayed 0 even
+  after the PS-style enabled-toggle - but sysjobactivity (the LIVE Agent session source) showed
+  next_scheduled_run_date = 2026-08-28 02:00, i.e. the cache lag is cosmetic (lesson vs PS: check
+  sysjobactivity first, don't fight the cache). Smoke via sp_start_job: outcome + both steps
+  run_status=1, no-op added 0, `Executed as STEAMSTATSGOLD\Administrator` - service context holds the
+  DDL rights. First real action: 28 Sep (adds November). STEAM NOW AT FULL PS PARITY: partitioned
+  facts, reclaimed disk, sliding-window automation live on both platforms.
