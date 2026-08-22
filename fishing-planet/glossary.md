@@ -8,6 +8,7 @@
 | FishGenerator Carousel | Legacy alternative fish selection in `FishGenerator.GenerateCarouselFishTemplate()` — Absolute (Source=`A`) and Active (Source=`C`)                                                        | Rarely used, lives inside FishBox path. Weight via `GameUtils.RandomizeFishWeight()`, not BiteSystem   |
 | FishBox                | Legacy fish spawn system — predefined boxes with fish lists, conditions, cooldowns                                                                                                         | Ancient system, currently used only in missions. Mostly replaced by BiteSystem                         |
 | BiteSystem             | Primary fish generation system — uses bite maps, weather layers, attractors to select and weigh fish                                                                                       | `Shared/BiteSystem/`. Weight via `FishDescription.GenerateRandomWeight()` → `GetPossibleNormalFloat()` |
+| FTUE                   | First-Time User Experience — the new-player tutorial                                                                                                                                      | Established team term (sprint names, Scrum Team option, ticket titles) — do not rewrite the team's own usage. In prose we author, prefer the plain word "tutorial" |
 
 ## Matchmaking
 | Term         | Code Name               | Notes                                          |
