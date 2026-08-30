@@ -11,7 +11,32 @@
 - [x] **Residual scan** — Query B re-run with relaxed threshold `NoShowSharePct ≥ 30` across STEAM/PS/XB yielded 107 candidates total. Full list shared with Support via the same Google Sheet; ban actions applied by them.
 
 ## Immediate
-(none — operational scope of FP-43631 delivered)
+- [ ] **Counterfactual PCR as the displacement measure.** Replaces the lifetime prize score, which
+  is old evidence of skill standing in for current misplacement. Replay the player's rating
+  without no-show/DQ penalties from matchmaking launch (or a fixed recent window) and test, at the
+  moment of each lower-bracket prize, whether the no-absence rating would have placed him in the
+  bracket above: *prize taken while actual bracket = MIDDLES but no-absence PCR >= 1001*. Inputs
+  already exist (`TournamentIndividualResults.Rating` per participation plus the
+  `IsStarted`/`IsDisqualified` flags). Note it is a first-order estimate, not a true
+  counterfactual — removing the penalties would have changed bracket, opponents and results, so it
+  answers "what if he had kept what he earned" and is admissible as evidence, not as simulation.
+  Solves the capping case natively: a capper's no-absence rating clears the boundary while his
+  actual rating sits below it. Raised in the week-14 Codex review
+  (`artifacts/codex-review-2026-08-09.md`)
+- [ ] **Fold the zero-score drain into the same detector.** Rating can be shed by entering and
+  producing nothing (`ZeroScoreRatingPenalty`) instead of by not appearing, at roughly half the
+  cost per event and with a real time cost to the player. The detection SQL already emits a
+  `ZeroScore` column per candidate and no rule consumes it. This is both a live evasion route
+  (offset winnings with started-but-bad results and the chosen-descent test goes quiet) and the
+  *only* remaining route once FP-45377 removes `NoShowRatingPenalty` altogether. The drain metric
+  should count all unproductive participation, not no-shows alone
+- [ ] **Re-examine the wide-gate thresholds.** They have been unchanged since week-3 (no-shows >= 6,
+  share >= 30%, rating from absence <= -90, prizes > 3), which makes them a stable boundary a
+  player can sit just underneath. Loosening catches the careful case at the cost of cohort size;
+  quantify the trade-off before changing anything
+- [ ] **Check the outage explanation.** A platform or connection incident produces no-shows that
+  look chosen. Testable and never tested: whether a candidate's no-show timestamps coincide with
+  those of unrelated players. Cheap enough to run as a standing pre-trial filter
 
 ## Open questions / Deferred
 - [x] **Zero-score policy** — handed off to Community team monitoring; they will raise a separate ticket if abuse pivots from no-show to zero-score.

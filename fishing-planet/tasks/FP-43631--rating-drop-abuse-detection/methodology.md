@@ -180,8 +180,10 @@ A `Workflow` script (using the `Workflow` MCP tool) runs three subagents per can
   cycles, MIDDLES drops), proposes duration `2W-NEW` or `4W-REPEAT`.
 - **Defense** (parallel with Prosecutor): reads the same card, argues `EXONERATE` / `WATCH` /
   `CONCEDE` with doubt score and alternative explanations (server-flush artifact, skill-cap
-  oscillation, MIDDLES-only / TOP-only flavor mismatch with NOOBS-farming methodology,
-  sample-size objection on a fresh-lifetime candidate, etc.).
+  oscillation, sample-size objection on a fresh-lifetime candidate, chronic over-registration,
+  a platform or connection outage — checkable by whether the same timestamps hit other players,
+  etc.). **Bracket flavor is no longer a defense** — prizes sitting in MIDDLES or TOPS rather
+  than NOOBS does not answer the charge in rule 1.
 - **Judge** (sequential after both arguments): reads both arguments, may consult the case file
   for verification, renders `finalVerdict` (BAN / WATCH / EXONERATE), `banDuration`, `reasoning`,
   `prosecutorResponse`, `defenseResponse`, `confidence` 1-10.
@@ -197,10 +199,29 @@ Without this the trial loses calibration.
 
 **Standing rules the judge prompt enforces:**
 
-1. BAN is for clear NOOBS-bracket-farming via deliberate no-show deflation. Not for absence
-   alone; not for MIDDLES-only or TOP-only sandbagging (different mechanism).
-2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak. When status is
-   REPEAT and prize flavor is TOP/MIDDLES not NOOBS, WATCH applies just like NEW.
+1. (rewritten week-14) BAN is for **bracket-relative harvesting**: taking prizes in a bracket
+   below the one the player's own play would place him in, having arrived there by shedding
+   rating. The mechanism is not specific to NOOBS — it operates at every bracket boundary, and
+   the standing exclusion of MIDDLES/TOPS candidates as "flavor mismatch" was wrong. Two things
+   must hold together:
+   **(a) chosen descent** — rating from actual play is positive while net rating is flat or
+   falling, with the gap accounted for by no-shows and DQs, *and* the ledger shows the temporal
+   order: play lifts the player toward the boundary, absence pulls him back, prizes are then
+   taken below it. Aggregate signs alone are not enough; the sequence is the evidence.
+   **(b) payoff below the ceiling** — prizes concentrated in a bracket below the highest one the
+   player reaches with meaningful exposure.
+   Absence alone is not BAN. Rating shed by *losing* rather than by absence is not BAN — that is
+   an honest player at his ceiling. A player who plays and cashes in the same bracket is not a
+   target of this task however much rating he sheds there.
+   *Corroboration where exposure allows*: conversion in the harvest bracket materially above
+   conversion in the top bracket reached — one-sided two-proportion comparison (Fisher for small
+   samples) with a rate ratio at or below one half, computed on the **cumulative** window, never
+   the weekly one. Its silence is not exculpatory. Raw prize share is descriptive only: it tracks
+   exposure, so it identifies which bracket is being harvested and does not itself carry
+   enforcement.
+2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak. Where the pattern
+   is weak, WATCH applies to a REPEAT just as it would to a NEW candidate. The bracket in which
+   the prizes sit is not what makes a pattern weak — see rule 1.
 3. (reframed week-13) Data-sufficiency objection, and the **only** leniency available on
    evidentiary grounds: fewer than 10 competitions **PLAYED** in the window. This is a claim
    about how much evidence exists, not about who the player is. Unavailable where SQL volume is
@@ -231,12 +252,20 @@ Without this the trial loses calibration.
    versions -- the old rules missed two players Support had independently banned
    (ELPEZGORDO12, ZacKasoN), the rewrite missed none, and no confident BAN flipped the other
    way. See `bans-2026-08-02.md`.
-7. (week-8 TR-dennisfb refinement + week-10 closure) High-PCR sandbagging WATCH (PCR >= 800
-   OR Lifetime TOPS >= 5) carries a one-cycle clock. **Direction 1**: if NOOBS shift appears
-   next cycle, rule 4 fires (BAN). **Direction 2** (post-Codex closure): if the candidate
-   remains in the wide cohort for 3+ consecutive cycles with unchanged TOP-flavor and 0 NOOBS
-   shift (VM_Vigor / Panonski_Alas pattern), close the case as "not FP-43631 target" and stop
-   re-listing on the watchlist -- separate anti-abuse framework should own it if needed.
+7. (week-8 TR-dennisfb refinement; **direction 2 withdrawn week-14**) High-PCR sandbagging WATCH
+   (PCR >= 800 OR Lifetime TOPS >= 5) carries a one-cycle clock. **Direction 1**: if the harvest
+   signature of rule 1 appears next cycle, rule 4 fires (BAN).
+   **Direction 2 is withdrawn.** It let a candidate be closed as "not FP-43631 target" after
+   three unchanged upper-bracket cycles, on the reasoning that only NOOBS farming was in scope.
+   Rule 1 no longer says that, so the basis is gone. Two closures made under it
+   (Panonski_Alas week-12, X1aoDouYa week-13) are reversed and both return to the cohort.
+   They do **not** return equal: Panonski_Alas carries a corroborated conversion differential
+   (5 prizes in 72 TOPS starts against 37 in 177 MIDDLES starts) and goes to trial as a live
+   candidate; X1aoDouYa is reopened only — his TOPS exposure is thin and positive, the reading
+   "strong MIDDLES player, occasional TOPS entrant, chronic no-shower" survives the aggregate
+   table, and trajectory timing plus recurrence must decide rather than the summary numbers.
+   Persistent upper-bracket presence without the rule 1 signature is no longer grounds to close,
+   but it is not grounds to ban either — such candidates simply keep rolling forward on WATCH.
    **Uniformity (week-13)**: two candidates with the same multi-cycle upper-bracket profile must
    receive the same disposition. Note the limit found in practice -- an instruction alone does
    not achieve this, because each candidate is judged independently and the judges cannot see
@@ -333,10 +362,20 @@ forces uncommenting per-section, which is error-prone. After running a section, 
 comments out the executed block in their local copy to make accidental re-runs harmless; this is
 a per-execution side effect, not the canonical shipped state.
 
-**Date conventions**:
-- NEW BanUntil = next-next Monday from sweep day (2W). Example: sweep on Sun 2026-06-21 → next
-  Mon is 06-22 → next-next Mon is 07-06.
-- REPEAT BanUntil = 4 weeks (Monday-aligned). Same example: 07-06 + 14d = 07-20.
+**Do not build the new cycle's file by copying the previous cycle's.** That artifact is left in
+post-run state — sections commented out as the operator worked through them — and copying it
+reproduces exactly the shape this rule forbids. Week-14 broke the rule that way: the previous
+file was treated as a template, the operator had to uncomment section by section, and the
+protection the convention exists to give was inverted. Compose from this section, then diff
+against the previous cycle only to check the UserId list and the dates.
+
+**Date conventions** (durations raised week-13; the 2W/4W figures this block used to carry were
+stale from week-3 and are wrong):
+- NEW BanUntil = 4 weeks from the Monday following the sweep. Example: sweep Sun 2026-08-09 →
+  following Mon is 08-10 → BanUntil 2026-09-07.
+- REPEAT BanUntil = 8 weeks, same Monday alignment. Same example: 08-10 + 56d = 2026-10-05.
+- Rationale for the raise, and the measured recidivism intervals behind it, are in the week-13
+  ledger row and in `bans-2026-08-02.sql`.
 
 ### 7. Verification — 3-layer post-ban check
 
@@ -353,6 +392,19 @@ present with the right NEW/REPEAT flag.
 The standing rule from week-3/4 incidents (Xbox LB sync forgotten, Steam profile not COMMITted,
 Mongo backfill ran on wrong connection): **verify all three layers per platform individually,
 every cycle**.
+
+**The leaderboard check must be split by `PeriodId`, not aggregated across periods (week-14).**
+The sweep runs on Sunday and `CompetitiveRatingsCurrent` rolls to the next weekly period around
+the same time, so by verification time a player can carry rows for both the closing week and the
+new one. A check that only counts banned-vs-not-banned across all rows returns `OK` when the new
+week is banned and the **closing** week — the one the imminent reward run pays out on — is not.
+Assert explicitly that the closing week's row exists and is banned; the weekly `PeriodId` is the
+window's Monday as `yyyymmdd` (sweep 2026-08-09 → closing period `20260803`, new `20260810`).
+Caught only because the operator flagged the rollover; the script as written would have passed.
+
+**Aggregate these checks database-side.** The MCP result view truncates at ten rows, and a
+per-row listing of ten banned players across three period types is far past that — a verdict read
+off the visible rows is a verdict read off an arbitrary subset. Return counts, not rows.
 
 ### 8. Community/Support handoff
 
