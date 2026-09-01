@@ -24,8 +24,21 @@ durable account-ban decisions on their side.
 ## Domain glossary
 
 - **PCR** — `Profiles.CompetitionRating` (int). The deflated value is the exploit lever.
-- **Bracket** — NOOBS (PCR 0-100), MIDDLES (101-1000), TOPS / MASTERS (1001+). Bracket assignment
-  is per tournament, snapped at registration time.
+- **Bracket** — NOOBS (PCR 0-100), MIDDLES (101-1000), TOPS / MASTERS (1001+). These are the
+  standard bands; a competition may configure its own via `MinRating` in its grouping JSON.
+- **`TournamentParticipants.BracketId` is NOT the rating band** *(established week-17)*. It is the
+  bucket the player ended up in once matchmaking had balanced the field at competition start.
+  Everyone starts in the bucket matching his own band, then undersized buckets pull participants
+  from their neighbours, and a bucket still short of `MinSize` merges — with the nearest stronger
+  bucket by preference, with the weaker one only when there is no stronger. So a strong player can
+  legitimately appear in bucket 1: week-17 found a rating of 20562 there. Agreement with the
+  standard bands runs about 92% and concentrates its misses in thin or oddly-configured
+  competitions. See `<kb>/fishing-planet/server/modules/matchmaking/_card.md` and the FP-41746 GDD.
+  **Consequence for this task**: `BracketId` is usable as a cohort-level signal and must not carry
+  an individual verdict. Derive the bracket from `CompetitionRatingAtStart` instead — it is exact,
+  and for prize rows it is fully populated because a prize requires a start. The `Played_NMT` and
+  `Prizes_NMT` columns were computed from the label up to and including week-14; where the two
+  disagree the label **overstated** the share won in the bottom bracket.
 - **No-show** — `TournamentParticipants.IsStarted = 0`. Player registered, did not start. Penalty
   is applied to PCR regardless.
 - **Batched-flush group** — multiple `Tournament reward Competition #X added CompetitionRating`
@@ -89,9 +102,27 @@ The triage is informal and only used to brief the trial; the trial itself decide
 
 ### 3. Trajectory dump — Mongo Tournament-log
 
-Each candidate gets a 3-week Tournament-log slice from `tournamentLog` collection (schema
-`main2`, not `main` which is stale). The 3-week window gives ~2 weeks of pre-context plus the
-detection window.
+Each candidate gets a Tournament-log slice from the `tournamentLog` collection (schema `main2`,
+not `main` which is stale), covering the detection window plus whatever pre-context is still
+available.
+
+**`tournamentLog` retains fourteen days and no more** *(measured week-17: the whole Steam PROD
+collection spanned exactly 2026-08-16..2026-08-30)*. The "3-week slice" this step used to claim
+was never delivered — in an ordinary cycle the detection window is the last 7 days and 14 days of
+retention covers it with a week to spare, so nobody noticed. Ask for a wider window and the query
+returns silently truncated data: every card in week-17 began on the same day, six days after the
+window opened.
+
+Consequences, and they bite:
+- **Never conclude anything about a period older than fourteen days from the ledger.** Week-17
+  produced findings of the form "no boundary crossing" and "confined to PCR 0..60" that were true
+  of the ledger and false of the record.
+- **Beyond fourteen days, SQL is the only source.** It is complete and unlimited in time.
+  `TournamentIndividualResults.Rating` per participation reconstructs the trajectory, and
+  `TournamentParticipants.CompetitionRatingAtStart` / `...AtReg` (FP-43816, live since 2026-08-01)
+  give the rating actually carried into each competition.
+- When the charge spans more than two weeks, say so in the pre-trial context and supply the SQL
+  reconstruction alongside the card, or the judges will read the gap as absence of evidence.
 
 **One consolidated aggregate** (introduced week-7) runs once per platform Mongo PROD with all
 UserIds in `$in: [...]`. The query is in `artifacts/pcr-trajectory-queries-<date>.js`. UserIds
@@ -208,11 +239,27 @@ Without this the trial loses calibration.
    falling, with the gap accounted for by no-shows and DQs, *and* the ledger shows the temporal
    order: play lifts the player toward the boundary, absence pulls him back, prizes are then
    taken below it. Aggregate signs alone are not enough; the sequence is the evidence.
-   **(b) payoff below the ceiling** — prizes concentrated in a bracket below the highest one the
-   player reaches with meaningful exposure.
+   **(b) payoff below the ceiling** *(amended week-17)* — prizes concentrated in a bracket below
+   the one the player's own results place him in. The ceiling is the **higher** of:
+   (i) the highest bracket he actually reaches with meaningful exposure in the window, and
+   (ii) the bracket his rating would sit in **without the penalties he took by not appearing** —
+   his rating on entering the window plus everything he earned by playing. Where (ii) is used,
+   state both figures.
+   *Why (ii) exists*: the week-14 wording exempted precisely the most deflated accounts. A player
+   already pushed to the floor has no bracket above him inside the window, so there was nothing
+   for his prizes to be "below", and the same-bracket carve-out then sheltered him. Six of the ten
+   week-17 first-hearing WATCH verdicts were this, including an account that entered the window at
+   927 and ended at 0 with 83 no-shows in 89 entries.
+   *The counterfactual is a first-order estimate, not a simulation*: without the penalties he
+   would have faced a different bracket, different opponents and different results. It is evidence
+   of displacement, not a prediction of his score. Anchor it on the recorded
+   `CompetitionRatingAtStart`/`AtReg`, and prefer the endpoint reconstruction as a cross-check —
+   assessed and applied rating diverge by design (see the rating-application deep dive).
    Absence alone is not BAN. Rating shed by *losing* rather than by absence is not BAN — that is
    an honest player at his ceiling. A player who plays and cashes in the same bracket is not a
-   target of this task however much rating he sheds there.
+   target of this task however much rating he sheds there — **but that carve-out applies only if
+   the counterfactual ceiling is also that same bracket**, otherwise it automatically shelters
+   anyone already lying on the floor.
    *Corroboration where exposure allows*: conversion in the harvest bracket materially above
    conversion in the top bracket reached — one-sided two-proportion comparison (Fisher for small
    samples) with a rate ratio at or below one half, computed on the **cumulative** window, never
