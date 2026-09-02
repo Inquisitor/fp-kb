@@ -82,3 +82,26 @@ Bite-map data (`CanBreak`, `MaxLoad` of the hitch box) feeds only the OTHER unhi
 the client `lTf` fix does not touch. Consequence recorded for the v2 work: the client fix changes when the roll
 fires, while the only hot compensator changes how often it is thrown — a coarse substitute, hence the commitment to
 move the three constants into `GlobalVariables` first.
+
+2026-08-16 Convention-9 pins committed (SRV r16427/r16428/r16429), scope decisions recorded: (1) the Rollback pin
+scopes to the METHOD's null-unsafety via reflection on an uninitialized instance (sound — no instance state is read
+before the `Header` dereference); two fix shapes acknowledged in the test comment — an in-method guard fails the pin,
+an upstream `Header` normalization keeps it green and mandates manual pin deletion. (2) The StrongFishEscape pin
+covers only the dead 1-second gate plus the `IsStrongFishEscapeOn` toggle; roll frequency inside the probabilistic
+window is unpinnable without a seedable RNG (arrives with the I1 seed work). (3) The contract pin samples the
+`Clear()`-before-handlers mechanism on `Throw`; the client fix rides `tP` on `FinishAttack`, so a per-handler-Clear
+refactor is a known blind spot — direct FinishAttack coverage is a named follow-up. (4) The JerkUnhitch pin landed
+earlier and separately from the r1435-form guard, departing from the 1640-letter sequencing (recorded per
+convention 10); the guard and both GlobalVariables/logging commitments stay on the v2 branch.
+
+2026-08-16 Correction (convention 10/12): the client `IsAttackFinished`/`FinishAttack` fix is CLN r56960 (FP-45737),
+NOT r56959 (a render commit, FP-44796) — the wrong number came from the client-side letters and had spread into
+`divergence-policy.md` (three spots) and the contract pin's comment; all corrected, client confirmation requested.
+
+2026-08-16 Environment fact (test infrastructure): the entire Integrated category of `LoadBalancing.Tests` is broken
+locally — the shared ut profile is a 2014 snapshot whose dev rod (`ItemId` 323) matches no current `RodTemplate`
+(`CantTakeRodNewRodUnequipped` on the way to Hands), the `save: UnitTestTemplate` checkpoint restored by
+`AssemblyInitialize` exists in NO local DB (and the restore's `false` return is ignored), and both legacy harnesses
+rotted (on-pond purchases land in unreachable Storage; equip-capacity conflicts with legacy components; the slot
+processor initializes only when the rod is taken into Hands ON the pond). Working pattern: register a temp player
+(`CreateTempPlayerAndExecuteAction`) — fresh starter setup, self-cleaning. Candidate separate ticket.

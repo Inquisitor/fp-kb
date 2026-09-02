@@ -20,7 +20,7 @@ system: fishing
 - `FishingSessionManager` — session rows in Stats DB (`GameLogic/`)
 
 ## Dependencies
-→ fish-generator (per-rod `FishGenerator`), bite-system (`Pond`/`BiteMap`), licenses, wear, boats, missions (side-channel: `RodInGame = Profile.MissionsContext[Slot]`), anti-cheat, tournaments/FTG
+→ [fish-fight](../fish-fight/_card.md) (fight loop detail + defect register), fish-generator (per-rod `FishGenerator`), bite-system (`Pond`/`BiteMap`), licenses, wear, boats, missions (side-channel: `RodInGame = Profile.MissionsContext[Slot]`), anti-cheat, tournaments/FTG
 ← `GameClientPeer` (all game actions), `TournamentAdapter`/`TogetherAdapter` (`EscapeFishOnRoomEnd`)
 
 ## Deep Dives

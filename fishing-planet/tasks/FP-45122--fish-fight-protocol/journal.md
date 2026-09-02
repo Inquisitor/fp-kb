@@ -8,9 +8,35 @@ type: epic
 ---
 
 ## Status
-Answer round complete; the shadow/pre-contract fork is CLOSED — straight v2 only, owner confirmed 2026-08-05.
-Next: execute D1 (refusal table, generated FSM diagram, as-is with corrected P-3; the client's wire-key registry as
-input); unhitch redesign enters observation phase after GD picks parameters.
+The D1-D2 decision retro is COMPLETE: 17/17 items walked and verdicted by the user (2026-08-17..24), mostly HOLDS
+with riders; the one reopened half is anti-cheat detection checks (item 11 user rider: per-check audit before any v2
+migration). All retro outputs live in backlog.md: design deltas (ignore-budget replacement + reverse-ack candidate,
+§3.6 suppression refinements, divergence-§2C notification correction, gap-stall wall-clock deadline, fixation points
++ catch-flow value-disclosure, two rules-pass filters), pending user sign-offs (format, campaign invariant, I1 sequencing), and
+the narrowed I1 scope (bite/generation out — scripted-fish entry; stream split before recording; two comparison
+modes). `PreserveFishingState` measured `N` on ALL FIVE F2P PROD Mains (2026-08-23) — the 2258/envelope caveat is
+retired. PUSHED 2026-08-31 (`a19592c`, `13eb40e`): the types+t0 reply (with the user's §3 wording split applied) and the
+sticky-keys classification answering rev.3 §6 — the schema-v2.0 gate is now closed from our side.
+SESSION HANDOFF 2026-09-02: the I1-scope letter (`2026-09-01-2024-srv-i1-scope-simplified.md`) is PUSHED
+(`a6ef7aa`) after ~10 review rounds (3 reviewer seats: fact-checker agent, Codex, recipient-simulation) plus the
+user's annotation rounds — it grew into the de-facto recording-protocol spec (DebugConfig knob rules:
+mandatory fish assignment / optional wait-skippers / forbidden outcome-clamps, identical config in record and
+replay; two comparison modes; fifth unseeded generator = sounder; open forks in its §6). Glossary pushed
+(`1f7abec`): the bite-off term now names the fish's action instead of the angler's cut (alias row kept, cutover 2026-09-01), LeaderCutter rename queued
+for v2. COMMIT LANGUAGE RULE settled: English/ASCII everywhere incl. protocol-docs (three Russian ones of ours
+and three of theirs stay in history). PENDING: the second letter `2026-09-01-2046-srv-two-keys-l-and-columns.md`
+is FINAL-reviewed (3 rounds clean) but UNPUSHED — the user's last annotation batch on it is saved in
+`artifacts/2026-09-02-letter2-annotations-pending.md` (process before push); its Plannotator window may still be
+open at restart. GD throttle verdict (the GD lead: legalize as-is) rides in the pushed letter §4 — the promised
+client ping is thereby delivered in-repo; Slack reply draft was left with the user. Client side
+delivered three commits (2026-08-24 pull):
+r56960 CONFIRMED (their error, acknowledged); our pins letter proofread clean by their side ("ready for a human read"); schema rev.3 — STICKY FIELDS (absence = previous message's value; measured dominant; v2 bans it;
+their §6 question to us is an OWED ANSWER — intentional-vs-accidental per sticky key); live traffic measurement
+relocating the short-Move window leak to retrieves (solid burst per retrieve, ZERO leaks in fights) and showing
+key composition depends on boat/motor. Still awaiting: the schema-tag checklist edits and the human read. Next: the own-tempo queue by the user's priorities —
+SVN batch on NPN (`UpdateObjectModel.cmd`, `CharacterEventType` mirror, `TryParse` fallback), I1 seeds work as
+re-scoped, GD package (escape throttle, strike-by-reeling, unhitch thresholds + observability), rules pass on the
+user's go.
 
 ## Summary
 Server half of the client player-core campaign (FP-44583 phase 5, fish-fight). Rework the fishing sync layer properly instead of re-patching: as-is documentation → authority/interruption analysis → joint target design with the client team → implementation. Ships in a single release with a protocol version bump and forced update — no backward compatibility, no feature flags.
@@ -41,8 +67,8 @@ Related: module cards [game-processor](../../server/modules/game-processor/_card
 - 2026-07-31 — Fish-fight study (D1 core): three client-team documents of 07-30 digested (codebase verdict, dormant machinery fate, FP-45194 blocker-2 deck) + comment 133151 in the epic; full code sweep of the fight on both sides (server NPN20260602, client Win64_CodeBranch r56789); every client-team claim verified and confirmed, several amplified; Q1-Q14 answers drafted. KB module `fish-fight` created (card + fight-tick + transport-contract + defect-register deep dives). Key new findings beyond the client docs: dead strong-fish escape throttle; no-escape returns suppressing tooth cutters; duplicate-"success" echoing the client's own request; cycle 0 on post-reconnect events; rod-on-pod event drain commented out on the client.
 - 2026-08-01..05 — Answer round: Q1-Q14 + follow-up questions answered in writing to the client team; the four 133151 findings verified and answered in JIRA (comment 133365). Two corrections after cross-checks: Q11 (the "1 of 6" number belongs to fish GENERATION — `FishSelector.TryToGenerateFish` steps counter, not the fight path) and Q4/P-3 (cycle-0 events are ACCEPTED unchecked by the client filter, not dropped). `IsNetworkThreadEnabled` swept across all prod/test/QA/CERT/DEV DBs — off everywhere; `PondAustralia` provenance resolved (uncommitted Australia-campaign tail in a dev working copy; DLL commits to carry source revision going forward). Shadow/pre-contract fork CLOSED: straight v2, measurements via server logs. Client team delivered protocol-v2 input accepted as D1/D3 material: seven schema requirements (absence != zero, server-issued persistent cycle, dense per-slot event numbering, timestamps + evaluation-clock decoupling, refusal taxonomy, authority matrix, idempotency), wire-key registry (86 keys; `iF`/`iR` collisions, three case-pair hazards, dual-meaning `hTf`), three design proposals (server-derived unhitch slack, rod-replace hold via event, pod identity in the same bump) and client-side constraints for the format choice (IL2CPP/AOT, five stands, above-ITransport, schema-generated debug log). Unhitch redesign assessed and accepted as direction with two caveats (the `"l"` flag stays client-owned; C-7 latch leaks require flag-quality measurement in the observation phase).
 - 2026-08-06..10 — D1 server half shipped and the exchange moved to Git. Contracts repo
-  `fishing-planet/server/r-n-d/protocol-docs` created on the company GitLab (private, master append-only, client lead
-  as Developer); the old exchange folder stays only as an inbox for out-of-repo drops. Delivered: generated server FSM
+  `fishing-planet/server/r-n-d/protocol-docs` created on the company GitLab (private, master append-only, the company
+  owner — who personally drives the client side of this campaign — as Developer); the old exchange folder stays only as an inbox for out-of-repo drops. Delivered: generated server FSM
   (SVG + per-state tables, regenerable from the transition tables), `server-refusals.md` (three parts: operation
   envelope, FSM refusal layer with the provenance-annotated rollback table, per-opcode pass) with answers to the six
   client questions, and `server-fight-path.md` (tick pipeline, clock/pause coverage, escape and break trees, identity,
@@ -179,3 +205,46 @@ Related: module cards [game-processor](../../server/modules/game-processor/_card
   claiming the consequence lands in missions rather than biting, when the early exit on `tackleStatus` sits sixteen
   lines above the `tMs` exit the same document had just cited as verified, and the key also feeds lure attraction,
   hitch generation and wear. An internal review caught it before it went out.
+- 2026-08-15..17 — Convention 9 closed, and the local stand resurrected to prove it. The five pin tests written via a
+  subagent-driven flow (one batch implementer, two independent adversarial seats, one fix round) and committed: SRV
+  r16427; contract-pin assert strengthening r16428 (pP absence on the applied response; value-exact sN, pP presence
+  and exact key count on the echo); comment revision fix r16429. Four Unit pins pass in suite; the contract pin
+  verified TWICE against a live local NPN stand — original and strengthened editions. Bringing the stand up was its
+  own excavation: the deploy loop needs the per-machine env-folder argument (a deploy without `-p:deploy` wipes every
+  app's `dll.config` — Chat then kills the whole instance with "Connection string 'sql' cannot be blank"); local DBs
+  turned out to be ONE PER BRANCH behind the user's environment-switcher tool (the active one is always named `Main`);
+  the NPN DB was ten patches behind its own series (`PondPinIcons` was the boot blocker). Verification findings worth
+  more than the run: the whole Integrated category is broken environment-wide — the shared ut profile is a 2014 relic
+  whose dev rod matches no RodTemplate, the "save: UnitTestTemplate" checkpoint that AssemblyInitialize silently
+  restores does not exist in ANY local DB, and both legacy harnesses are bit-rotted (pond purchases land in the
+  unreachable Storage; component equip capacity; the slot processor initializes only on an on-pond Hands move) — the
+  contract pin now runs on a freshly registered temp player and shows the repair pattern. The pins-landed letter took
+  three review rounds before publication (opus seat 10 findings, Codex 7, then a scoped recheck of the rewrite): three
+  REAL blockers caught — the client-fix revision in the exchange docs was off by one (r56959 is a foreign render
+  commit; the actual fix is CLN r56960/FP-45737, verified by svn log, corrected in three doc spots plus the pin's own
+  comment), the suite numbers had gone stale mid-work (a foreign r16424 added nine Unit tests to the same project;
+  re-measured 292/0/3 at r16427 after svn update and a stand rebuild), and the "all five promised" claim was false for the
+  escape pin (name never published before; the letter now also answers the client's open "fix or keep"
+  question: pinned as baseline, GD decides before I1 recording). Letter + doc edits published to protocol-docs
+  `fefa4a2`; JIRA comment on the epic posted (135754). Register lesson re-learned the hard way: impersonal voice in
+  cross-team documents bans the SECOND person too ("your fix" -> "the client-side fix"); verbatim quotes exempt.
+- 2026-08-17..24 — D1-D2 decision retro run to completion: 17 items, each re-owned by the user with the source
+  document open in Plannotator (his annotations drove the depth; the assistant answered each with code/doc
+  verification, confirm-or-refute). Verdicts: HOLDS across the board with riders; item 11's checks half REOPENED
+  (detection system indicted by its own astronomical scores — per-check audit gates any v2 migration); item 13's
+  premise DOWNGRADED (the 12.08 "both encodings forever" label treated as an acknowledgement of dual-transport
+  reality, not a binding owner requirement — convention-12 treatment). The retro out-earned its cost in design
+  deltas, all recorded to backlog: ignore-budget replacement (staleness/escalation/rate-limit + reverse-ack candidate
+  field), §3.6 accumulate-not-drop + server-vs-client suppression split, divergence-§2C "no notification needed"
+  correction (holds only under continuous traffic), the GAP-STALL analysis (dt lower bound unenforceable by
+  construction; anti-stall = wall-clock deadline + per-reason gap policy + telemetry; user goal: "do not let the client stretch the fight to its own benefit"), FIXATION POINTS reconnected (a concept from the user's earlier matrix work with a server developer; already a glossary candidate via srv 2140 §5 — the user's synchronization rider is the new half), the catch-flow value-disclosure rule
+  (weight hidden until landing — licenses/fines/kukan), the anti-cheat checks audit, the campaign invariant pending
+  the user's sign-off, and TWO rules-pass filters (construction-level vs cosmetic; no v2 rule may rest on an as-is
+  observation). Side products: an explainer of the seq/srvSeq counter anatomy (with a worked trace);
+  `PreserveFishingState = N` measured on all five F2P PROD Mains, retiring the 2258 platform assumption; the
+  FinishAttack contract-pin blind spot narrowed by code walk (central Clear, `tP` never re-echoed — Throw pin protects
+  transitively); I1 scope narrowed at verdict (bite/generation out of the campaign's critical path — fight entry via
+  the existing scripted-fish mechanism; stream split lands before any recording; exact-replay vs distributional
+  comparison modes). Process rules that emerged: Plannotator windows are named per retro item and their lifecycle is
+  managed (announce unseen content before closing; re-ask on comment-less closes); annotation replies always restate
+  the annotated subject (the user cannot see his own annotations after submitting).

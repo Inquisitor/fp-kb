@@ -43,7 +43,9 @@ Cast → Pond.OnThrown() resets FishSelector state
 
 ## Module Cards
 - [game-processor](../game-processor/_card.md) — per-rod FSM orchestrator, action routing, unsync tolerance
+- [fish-fight](../fish-fight/_card.md) — fight loop + client counterpart + sync-defect register
 - [fish-generator](../fish-generator/_card.md) — spawning, weight, hooking
+- [anti-cheat](../anti-cheat/_card.md) — scoring-only rules, never blocks; rebuild pending
 - [bite-system](../bite-system/_card.md) — probabilistic selection (TODO: create card)
 
 ## Code Locations

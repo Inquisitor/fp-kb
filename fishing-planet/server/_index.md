@@ -7,7 +7,10 @@ See CLAUDE.md in server repo for full architecture overview.
 ## Fishing Gameplay → [system overview](modules/_systems/fishing.md)
 Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor (5900 LOC).
 - [game-processor](modules/game-processor/_card.md) — per-rod fishing FSM, action routing, fight models, unsync tolerance
+- [fish-fight](modules/fish-fight/_card.md) — fight loop (stamina/escapes/breaks/cuts/catch), client counterpart, sync contract; defect register for FP-45122
 - [fish-generator](modules/fish-generator/_card.md) — spawning, weight, hooking
+- [shared-code](modules/shared-code/_card.md) — code living on both sides: DLL sharing vs dead/bidirectional copy scripts, measured drift
+- [anti-cheat](modules/anti-cheat/_card.md) — scoring-only rules, ban paths gated off; measured to track playtime, not cheating — rebuild pending
 - bite-system — probabilistic fish selection, maps, attractors (TODO: create card)
 
 ## Inventory

@@ -27,7 +27,7 @@ system: fishing
 - [Defect register](defect-register.md) — 58 verified defects (D=server fight, C=client, P=protocol) with file:line
 
 ## Related Tasks
-- FP-45122: Fish Fight Sync Contract (Server) — this module is the D1/D2 ground truth
+- FP-45122: Fish Fight Sync Contract (Server) — this module is the D1/D2 ground truth; convention-9 pins committed SRV r16427-r16429 (2026-08-16), scopes in [log](log.md)
 - FP-38709: Unsync Game State Fixes — historical desync taxonomy
 
 See also: [backlog](backlog.md) | [log](log.md)
