@@ -24,16 +24,34 @@ mandatory fish assignment / optional wait-skippers / forbidden outcome-clamps, i
 replay; two comparison modes; fifth unseeded generator = sounder; open forks in its §6). Glossary pushed
 (`1f7abec`): the bite-off term now names the fish's action instead of the angler's cut (alias row kept, cutover 2026-09-01), LeaderCutter rename queued
 for v2. COMMIT LANGUAGE RULE settled: English/ASCII everywhere incl. protocol-docs (three Russian ones of ours
-and three of theirs stay in history). PENDING: the second letter `2026-09-01-2046-srv-two-keys-l-and-columns.md`
-is FINAL-reviewed (3 rounds clean) but UNPUSHED — the user's last annotation batch on it is saved in
-`artifacts/2026-09-02-letter2-annotations-pending.md` (process before push); its Plannotator window may still be
-open at restart. GD throttle verdict (the GD lead: legalize as-is) rides in the pushed letter §4 — the promised
+and three of theirs stay in history). The second letter `2026-09-01-2046-srv-two-keys-l-and-columns.md` is PUSHED 2026-09-02 (`97ee383`) after the
+user's two annotation rounds and six review seats (fact-checker x4, Codex, recipient simulation). Its load-bearing
+NEW finding, verified on both code trees: the short `Move` form cannot be sent after the hook (only the `*Floating`
+states call the adapter `Move`; fight states send `FightFish`, which carries `l` only when latched), so the fast-reel
+slack immunity does not exist in a fight — but the common extractor erases the slack stopwatch on ANY applied slot
+opcode without `l`, and `Spool`/`ElectricAutoWinding` are legal in `FishFight`: the electric reel (manual toggle plus
+automatic on/off around `ElectricReelDisableDistance`) is the legitimate in-fight erasure and the real GD subject;
+`Spool` in a fight is refused by the stock client (`PlayerIdleThrown` warning) and stays an anticheat/authority-matrix
+item. This retracts our own 2026-08-06-1509 conclusion (years of missed escapes and cuts on reel speed 4) — the letter
+carries a convention-10 correction block and asks the client side to amend `client-fight-path.md` §5.2. Positions
+taken: the registry RULE (no key without a category) accepted, the enforcing TOOL declined for v1 (Australia release
+work ends within one-two weeks; the server side watches the vocabulary at each merge); two orthogonal columns
+(interpretation of absence x side effects of absence) instead of a fourth category, with the v2 rule "absence has
+no side effects" keeping the optional-with-default category; FP-46028 ordered AFTER the `l`-on-phases cure (an order,
+not a package); the `schema-v2.0` tag is the client side's marker — the server side treats the schema as frozen only
+after the rules pass; the live-session recording offer dropped. PROCESS RULES settled: edits to outgoing documents
+are proposed (what/where/why/wording) and applied only on the user's word — reviewer findings and annotation
+questions are not edit orders; the assistant acts as arbiter (evaluate, criticize, advise deferral of
+over-complication); the server side leads the exchange at its own tempo. KB records translated to English
+(quotes rendered, names replaced by roles). GD throttle verdict (the GD lead: legalize as-is) rides in the pushed letter §4 — the promised
 client ping is thereby delivered in-repo; Slack reply draft was left with the user. Client side
 delivered three commits (2026-08-24 pull):
 r56960 CONFIRMED (their error, acknowledged); our pins letter proofread clean by their side ("ready for a human read"); schema rev.3 — STICKY FIELDS (absence = previous message's value; measured dominant; v2 bans it;
 their §6 question to us is an OWED ANSWER — intentional-vs-accidental per sticky key); live traffic measurement
 relocating the short-Move window leak to retrieves (solid burst per retrieve, ZERO leaks in fights) and showing
-key composition depends on boat/motor. Still awaiting: the schema-tag checklist edits and the human read. Next: the own-tempo queue by the user's priorities —
+key composition depends on boat/motor. Awaiting from the client side: re-verification of the §2/§5 client-code reading, the TSV timestamps check (30 short
+`Move`s outside the per-slot `FightFish` interval), the `client-fight-path.md` §5.2 amendment, their reaction to the
+two-column layout and to the freeze criterion. Next: the own-tempo queue by the user's priorities —
 SVN batch on NPN (`UpdateObjectModel.cmd`, `CharacterEventType` mirror, `TryParse` fallback), I1 seeds work as
 re-scoped, GD package (escape throttle, strike-by-reeling, unhitch thresholds + observability), rules pass on the
 user's go.
