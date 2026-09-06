@@ -56,11 +56,19 @@ Prod report - <Slack permalink>          <- prod reports only
 <what should happen>
 ```
 
+For a server-side bug the ENV line names the server build as well: platform / environment / server branch tag with protocol version and server revision, then the client version on the next line, e.g. `STEAM / PROD / [MFT] | Protocol: 1126.0 | Revision: 16375` followed by `Client version: 6.0.13 (revision 56736)` (FP-46092).
+
 A full-word variant is equally legitimate: `**Precondition:**` / `**Steps:**` / `**Actual:**` / `**Expected:**`, optionally closing Actual with `:x:` and Expected with `:white_check_mark:`. `**AR:**` / `**ER:**` also appear. Pick one dialect and stay internally consistent; do not mix abbreviations with full words in the same ticket. Optional trailing `**NOTE:**` or `**Comments:**` carries caveats such as "cannot reproduce on STEAM" or a proposed fix.
 
 When there are no reproduction steps (an unreproducible prod report), `**ENV:**` / `**Problem description**` / `**Research**` / `**Desired outcome**` is the accepted free-form fallback.
 
 Steps are numbered, imperative, one UI action each, and the last one is habitually an observation instruction ("Pay attention to the timer"). Multi-player bugs prefix each step with the actor. `->` is the navigation arrow; `>` appears for menu paths (`SHOP > LICENSES`). Typical body runs 120-250 words.
+
+## Content rules
+
+- **Observed facts only.** The Research block holds log lines, DB state before and after the event, and links, all for THIS case. Inferences from indirect data (profile counts, leaderboard outliers, "probably not the first occurrence") do not belong in the ticket; bring them to the reporter in chat.
+- **No root-cause narrative, no code references.** The ticket states the symptom and the desired outcome; the analysis lives in the KB card. A ticket that explains the cause reads as developer-authored and invites skipping verification.
+- **One ticket per side.** When a symptom spans server and client (bad data sent by the client, mishandled by the server), file a server bug and a client bug separately; do not fold "investigate the other side" into one ticket. A research or census task is a third ticket, and only when asked for.
 
 ## Evidence placement
 
@@ -96,3 +104,4 @@ Field ids and option values for create: [jira_required_fields.md](jira_required_
 - Forgetting Severity, which is a separate field from Priority.
 - Attaching screenshots instead of embedding them under ACT.
 - Omitting the Slack permalink on a player-reported bug.
+- Padding Research with population statistics that were never verified to be caused by the bug.
