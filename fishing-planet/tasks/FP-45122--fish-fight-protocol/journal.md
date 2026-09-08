@@ -49,7 +49,23 @@ delivered three commits (2026-08-24 pull):
 r56960 CONFIRMED (their error, acknowledged); our pins letter proofread clean by their side ("ready for a human read"); schema rev.3 — STICKY FIELDS (absence = previous message's value; measured dominant; v2 bans it;
 their §6 question to us is an OWED ANSWER — intentional-vs-accidental per sticky key); live traffic measurement
 relocating the short-Move window leak to retrieves (solid burst per retrieve, ZERO leaks in fights) and showing
-key composition depends on boat/motor. Awaiting from the client side: re-verification of the §2/§5 client-code reading, the TSV timestamps check (30 short
+key composition depends on boat/motor. 2026-09-07: the client side delivered six commits (two letters — slack-to-phase design 2026-09-02-1939 with three findings, and a unilateral rules pass 2026-09-03-2021 with a generated schema draft of 87 pairs / 33 open decisions, four Python tools, CONVENTIONS rule 16, glossary entries, the 25-08 TSV records, the §5.2 as-is amendment) plus Slack: trigger precision for the electric reel, the owner's decision to legalize the electric-reel slack immunity, a status report to the owner framing the server side as the blocker. Letter A PUSHED 2026-09-07 (`c904898`): decision accepted as the owner's, three candidate rule texts (the 'timer stands while autowinding is on' variant is stronger than today), GD text via the former GD lead by 2026-09-08, reference preconditions restated in the sense of 2024 §4 (two remain: stream split, seedable generators), recount/admin-form closed, 1939 answer promised by 2026-09-10. Verified along the way: a missing `sN` addresses the player's own slot 0, not another rod; the server already has a designed electric-reel no-escape window on the pod (`ElectricReelFishEscapeSlackDelayOnPod`, 2.5 s). 2026-09-08 (late): two more letters PUSHED — `1e086cb` the slack pause letter (two GD verdicts obtained in person from the
+former GD lead: electric-reel protection NOT to be made — option 3 of 1940 §2, diverging from the client side's
+"legalize as is", decision left to the owner with prod counters to follow; the windowed slack flag is deliberate
+smoothing, a spike shorter than a window must not break the phase — so the client's "level" is rejected as the phase
+carrier while "level + duration" is partially accepted via duration > 0; wire form of `l` and the slack-dependent
+layout rows paused because the owner proposed server-computed slack from geometry plus a delta-based state model;
+glossary rows hooking / slack synonym / window smoothing / phase carrier / slack suppressor, latch entry amended;
+the 0045 draft was superseded and deleted) and `225fa28` the git-rules letter for the owner's own server work
+(integration branch `fp-45122-fish-fight-protocol-v2` created and protected, `env/fp-45122-*` tag mask, owner added
+as Developer, merge method ff — all set up via glab and read back). While these were in review the client side pushed
+four commits (17:39–18:13): a full v2 protocol spec (`design/protocol-v2.md`, 711 lines), a state model "snapshot and
+deltas" (`protocol-v2-state-model.md`), two implementation plans (client/server), two PDFs and a catalogue tool —
+the written formulation the pause letter asked for arrived before the letter did; NOT yet read. Process rules settled
+today: edits only via the Edit tool section by section (never scripts or whole-file rewrites for reviewed documents);
+review seats are «ревьюеры», never «кресла»; letters must stay short — reviewer precision goes in only where a sentence
+would otherwise be refuted; the user's terms: «засекание» (hooking), «провис» kept as synonym of «слабина».
+Awaiting from the client side: confirmation of the owner's decision vs the GD verdict, re-verification of the §2/§5 client-code reading, the TSV timestamps check (30 short
 `Move`s outside the per-slot `FightFish` interval), the `client-fight-path.md` §5.2 amendment, their reaction to the
 two-column layout and to the freeze criterion. Next: the own-tempo queue by the user's priorities —
 SVN batch on NPN (`UpdateObjectModel.cmd`, `CharacterEventType` mirror, `TryParse` fallback), I1 seeds work as
