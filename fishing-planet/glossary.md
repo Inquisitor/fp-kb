@@ -9,6 +9,7 @@
 | FishBox                | Legacy fish spawn system — predefined boxes with fish lists, conditions, cooldowns                                                                                                         | Ancient system, currently used only in missions. Mostly replaced by BiteSystem                         |
 | BiteSystem             | Primary fish generation system — uses bite maps, weather layers, attractors to select and weigh fish                                                                                       | `Shared/BiteSystem/`. Weight via `FishDescription.GenerateRandomWeight()` → `GetPossibleNormalFloat()` |
 | FTUE                   | First-Time User Experience — the new-player tutorial                                                                                                                                      | Established team term (sprint names, Scrum Team option, ticket titles) — do not rewrite the team's own usage. In prose we author, prefer the plain word "tutorial" |
+| Hooking                | The moment the fish is on the hook and the fight starts — the server's entry into `FishFight` (accepted `FinishAttack` → `GoToFightFish`; client event `FishHooked`). Distinct from the hookset — the angler's strike (`HandleAttackFinished`) | Russian letters: «засекание» (user's term, FP-45122); «засечка» is not used; hookset = «подсечка». Shared Russian glossary row: protocol-docs `GLOSSARY.md` |
 
 ## Matchmaking
 | Term         | Code Name               | Notes                                          |
