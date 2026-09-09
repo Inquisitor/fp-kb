@@ -77,7 +77,7 @@ Server half of the client player-core campaign (FP-44583 phase 5, fish-fight). R
 
 ## Design decisions
 - Plan restructured from contract-first (S0–S6 draft) to understand-first (D1–D3 → I1–I3): this campaign is the chance to design the system properly, not to codify the patched status quo.
-- Protocol v2: message schema as the single source of truth → typed DTOs, binary serialization, auto-generated readable debug log (schema-driven pretty-printer on both sides — hand-rolled binary without a schema would reproduce the `iR`/`iF` problem in bytes).
+- Fish Fight Protocol v2: message schema as the single source of truth → typed DTOs, binary serialization, auto-generated readable debug log (schema-driven pretty-printer on both sides — hand-rolled binary without a schema would reproduce the `iR`/`iF` problem in bytes).
 - Terminology: D3 produces a fight/FSM/protocol section of the KB glossary; new naming mandatory for new code and the protocol boundary; legacy renames deferred to I3 and scoped to the fish-fight zone (no server-wide mass renames).
 - Current-FSM diagram is generated from the transition tables (`StateTransitions`/`TransitionTargets`/`StateTransitionsIgnore`) — regenerable, cannot drift from code; rendered to SVG for Confluence.
 - Model pins (I1) freeze gameplay outcome models only (stamina, escapes, breaks, wear) — the transport is deliberately replaced, not pinned.
@@ -90,7 +90,7 @@ Server half of the client player-core campaign (FP-44583 phase 5, fish-fight). R
 | D2 authority/interruption analysis      | FP-45138 | To Do  |
 | D3 target design (with the client team) | TBD      |        |
 | I1 gameplay-model pins                  | TBD      |        |
-| I2 implementation (protocol v2 + FSM)   | TBD      |        |
+| I2 implementation (Fish Fight Protocol v2 + FSM)   | TBD      |        |
 | I3 cleanup (crutches, renames, docs)    | TBD      |        |
 
 Related: module cards [game-processor](../../server/modules/game-processor/_card.md) (incl. [unsync-tolerance](../../server/modules/game-processor/unsync-tolerance.md)) and [fish-fight](../../server/modules/fish-fight/_card.md) — the canonical record of both studies.

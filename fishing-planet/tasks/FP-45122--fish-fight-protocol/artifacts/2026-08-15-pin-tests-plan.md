@@ -51,7 +51,7 @@ public void StartDraw_FromFishFight_EntersDraw_KNOWN_DEFECT_FP45122()
     // (though GameActionCode.StartDraw = 8 is alive on the wire) and no handler exists for any
     // Draw-family transition. Yet the whitelist keeps StartDraw reachable from FishFight, so a
     // modified client can park a fighting slot in Draw where the fight logic never runs.
-    // Pins current behavior; protocol v2 removes the Draw family from the whitelist.
+    // Pins current behavior; Fish Fight Protocol v2 removes the Draw family from the whitelist.
     DoTransition(Transitions.Throw, GameStates.Cast);
     DoTransition(Transitions.Water, GameStates.Move);
     DoTransition(Transitions.Move, GameStates.Move);

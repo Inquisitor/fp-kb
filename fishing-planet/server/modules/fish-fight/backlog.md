@@ -8,7 +8,7 @@
   clock-decoupling discipline with this module.
 
 - [ ] D2 input: fold the defect register into the authority/interruption matrix (per state/transition: who initiates, who may interrupt, what bounds the input)
-- [ ] Point fixes shippable before protocol v2 (candidates for the first implementation series of FP-45122): D-3 pause/wear, D-5 dead throttle, dt clamps, ping guards (P-22), NRE in Rollback (P-17)
+- [ ] Point fixes shippable before Fish Fight Protocol v2 (candidates for the first implementation series of FP-45122): D-3 pause/wear, D-5 dead throttle, dt clamps, ping guards (P-22), NRE in Rollback (P-17)
 - [ ] Unhitch redesign (client-team design doc 2026-08-05, variant C accepted as direction): server derives the
   "slack recently" condition from the `HasLineSlack` ("l") flag over the last N Move windows instead of the dead `lTf`
   minimum. Sequence: observation logging in `HandleUnhitch` (old vs new condition vs slack presence — no behavior
