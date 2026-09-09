@@ -42,6 +42,14 @@ version's role, not the checkbox.
 `MinorProtocolVersion` (minor). Error/analytics reports stamp `"{F2PProtocolVersion}.{MinorProtocolVersion}"`
 (via `AnalyticsAdapter`), so the protocol version tells which release an error belongs to.
 
+**Only the major version gates connections.** `Auth/ProtocolVersionValidator.Validate()` compares the
+client-reported `ParameterCode.ProtocolVersion` against `SharedConsts.F2PProtocolVersion` (or
+`RetailProtocolVersion` on Retail) and refuses the client on mismatch, writing a security-log entry and an
+analytics exception. `MinorProtocolVersion` is never consulted there — it appears only in `AnalyticsAdapter`,
+stamping `{major}.{minor}` onto reports. A minor bump is therefore purely a log marker separating releases: a
+client on `1122.7` connects to a server on `1122.9` without noticing. Only a major bump requires a paired
+client update.
+
 After a release ships from a branch, a commit **increments the minor protocol version** — message
 pattern `[<BRANCH>] Increment minor protocol version after the <release>: <maj>.<old> -> <maj>.<new>`.
 This commit is the **boundary** between released code and new post-release code:
