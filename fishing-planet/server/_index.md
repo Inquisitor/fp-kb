@@ -11,6 +11,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 - [fish-generator](modules/fish-generator/_card.md) — spawning, weight, hooking
 - [shared-code](modules/shared-code/_card.md) — code living on both sides: DLL sharing vs dead/bidirectional copy scripts, measured drift
 - [anti-cheat](modules/anti-cheat/_card.md) — scoring-only rules, ban paths gated off; measured to track playtime, not cheating — rebuild pending
+- [tpm](modules/tpm/_card.md) — third-person avatar relay: unreliable binary frame broadcast unread; wrong content model; TPMv3 rewrite intent, out of FP-45122 scope (stub)
 - bite-system — probabilistic fish selection, maps, attractors (TODO: create card)
 
 ## Inventory
