@@ -49,6 +49,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 
 ## Configuration & Deployment
 - [configuration](modules/configuration/_card.md) — per-env / per-component server config; `Source` platform-list semantics, deployment topology, prod reference matrix, canonical `Source` rules
+- [software-distributor](modules/software-distributor/_card.md) — **stub**; farm/node lifecycle UI and the packaging-to-deployment path: `Package.cmd` shares, manifests with `%FarmName%` substitution, per-node action scripts. Delivers what `configuration` describes
 
 ## Key Paths
 - Game logic: `Photon/src-server/Loadbalancing/GameLogic/`
