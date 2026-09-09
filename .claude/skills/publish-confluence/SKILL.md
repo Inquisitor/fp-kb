@@ -121,7 +121,9 @@ Use MCP `getConfluencePage` with the page ID to confirm it exists and has conten
 
 Report to the user:
 - Page title and version number
-- Page URL: `https://fishingplanet.atlassian.net/wiki/pages/<PAGE_ID>`
+- Page URL: `https://fishingplanet.atlassian.net/wiki/spaces/<SPACE_KEY>/pages/<PAGE_ID>` — or
+  `https://fishingplanet.atlassian.net/wiki/pages/viewpage.action?pageId=<PAGE_ID>` when the space key is not
+  at hand. **Do not use `/wiki/pages/<PAGE_ID>`** — that is the legacy Server form and 404s on Cloud.
 - Diff URL: `https://fishingplanet.atlassian.net/wiki/pages/diffpagesbyversion.action?pageId=<PAGE_ID>&selectedPageVersions=<VERSION>&selectedPageVersions=<VERSION-1>`
 - Ask the user to check the diff and verify rendering
 
