@@ -22,6 +22,13 @@ wrong direction. Verify item in the backlog.
 optimizes the wrong content model, contradicts itself on whether the server knows the frame layout, and ignores
 reliability and ordering. Details in the deep dive. Not to be used as the TPMv3 design as it stands.
 
-2026-09-09 Finding (verified, NPN20260602; belongs to missions and recorded there): the mission position operation is
-removable — the aim point falls back to the fight wire's throw target (`RodInGameMissionsContext.TargetPosition` returns
-`ThrowTarget` when unset). See the missions backlog, "Position Operation Cleanup".
+2026-09-09 Finding (verified, NPN20260602; belongs to missions and recorded there): the mission position operation can
+be retired only with two source substitutions — `Walk` does not write the missions context (only fight-wire opcodes and
+boat travel do), and the rotation it carries feeds the photo analytics. The aim point falls back to the throw target,
+but only after the cast. See the missions backlog, "Position Operation Cleanup".
+
+2026-09-09 Correction (user; verified in the client checkout): the TPM event is raised with `sendReliable = false`, but the
+game connection is TCP on every platform except Xbox (WSS) — `StaticUserData.ServerConnectionProtocol`, port 4530 — and
+GameCarrier runs over QUIC/WSS/TCP, so the frames arrive reliably and in order. The card and the design-intent note had
+called the channel "unreliable" after the client team's documents; both now say the flag is nominal. Lesson: a Photon
+reliability flag says nothing until the transport is known.

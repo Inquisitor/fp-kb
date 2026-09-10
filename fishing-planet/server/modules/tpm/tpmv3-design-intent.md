@@ -26,7 +26,7 @@ Why this doc exists: the intent for the third-person rewrite lives in the server
 Sound, and partly the server lead's own input (its "additional optimization" section credits a conversation with him): static vs dynamic data, server keeps per-object state, full data to newcomers and deltas to everyone else, a bitmask of changed fields per category. Gaps that make it unusable as the design:
 - It optimizes the transport of the wrong content: dynamic rod data stays rod points plus transforms (~239 bytes per rod by its own count); the model question above is never raised
 - It contradicts itself: the server "need not know the client's serialization" and stores two opaque byte arrays, yet must "patch" deltas and later trim fields by distance — both require knowing the layout. Either an opaque relay or a server model, not both
-- Nothing on reliability and ordering: deltas over an unreliable event diverge until the next full frame; no keyframes, no acknowledgements — although the originating bug FP-39149 was an ordering bug
+- Nothing on baselines and ordering: the event carries the unreliable flag, but the game connection is TCP (WSS on Xbox; QUIC/WSS/TCP on GameCarrier), so loss in flight is not the issue; what the TDD leaves open is the baseline for a late joiner or a reconnect (no keyframes) and the ordering problem that started FP-39149
 - The client lead asked in the ticket for a survey of current systems; the page has none. Frequency is stated as 10 Hz; code says 5 Hz (`DATA_FRACTION_DELAY = 0.2`)
 
 ## Relation to Fish Fight Protocol v2 (FP-45122)

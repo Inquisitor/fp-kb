@@ -8,69 +8,14 @@ type: epic
 ---
 
 ## Status
-The D1-D2 decision retro is COMPLETE: 17/17 items walked and verdicted by the user (2026-08-17..24), mostly HOLDS
-with riders; the one reopened half is anti-cheat detection checks (item 11 user rider: per-check audit before any v2
-migration). All retro outputs live in backlog.md: design deltas (ignore-budget replacement + reverse-ack candidate,
-§3.6 suppression refinements, divergence-§2C notification correction, gap-stall wall-clock deadline, fixation points
-+ catch-flow value-disclosure, two rules-pass filters), pending user sign-offs (format, campaign invariant, I1 sequencing), and
-the narrowed I1 scope (bite/generation out — scripted-fish entry; stream split before recording; two comparison
-modes). `PreserveFishingState` measured `N` on ALL FIVE F2P PROD Mains (2026-08-23) — the 2258/envelope caveat is
-retired. PUSHED 2026-08-31 (`a19592c`, `13eb40e`): the types+t0 reply (with the user's §3 wording split applied) and the
-sticky-keys classification answering rev.3 §6 — the schema-v2.0 gate is now closed from our side.
-SESSION HANDOFF 2026-09-02: the I1-scope letter (`2026-09-01-2024-srv-i1-scope-simplified.md`) is PUSHED
-(`a6ef7aa`) after ~10 review rounds (3 reviewer seats: fact-checker agent, Codex, recipient-simulation) plus the
-user's annotation rounds — it grew into the de-facto recording-protocol spec (DebugConfig knob rules:
-mandatory fish assignment / optional wait-skippers / forbidden outcome-clamps, identical config in record and
-replay; two comparison modes; fifth unseeded generator = sounder; open forks in its §6). Glossary pushed
-(`1f7abec`): the bite-off term now names the fish's action instead of the angler's cut (alias row kept, cutover 2026-09-01), LeaderCutter rename queued
-for v2. COMMIT LANGUAGE RULE settled: English/ASCII everywhere incl. protocol-docs (three Russian ones of ours
-and three of theirs stay in history). The second letter `2026-09-01-2046-srv-two-keys-l-and-columns.md` is PUSHED 2026-09-02 (`97ee383`) after the
-user's two annotation rounds and six review seats (fact-checker x4, Codex, recipient simulation). Its load-bearing
-NEW finding, verified on both code trees: the short `Move` form cannot be sent after the hook (only the `*Floating`
-states call the adapter `Move`; fight states send `FightFish`, which carries `l` only when latched), so the fast-reel
-slack immunity does not exist in a fight — but the common extractor erases the slack stopwatch on ANY applied slot
-opcode without `l`, and `Spool`/`ElectricAutoWinding` are legal in `FishFight`: the electric reel (manual toggle plus
-automatic on/off around `ElectricReelDisableDistance`) is the legitimate in-fight erasure and the real GD subject;
-`Spool` in a fight is refused by the stock client (`PlayerIdleThrown` warning) and stays an anticheat/authority-matrix
-item. This retracts our own 2026-08-06-1509 conclusion (years of missed escapes and cuts on reel speed 4) — the letter
-carries a convention-10 correction block and asks the client side to amend `client-fight-path.md` §5.2. Positions
-taken: the registry RULE (no key without a category) accepted, the enforcing TOOL declined for v1 (Australia release
-work ends within one-two weeks; the server side watches the vocabulary at each merge); two orthogonal columns
-(interpretation of absence x side effects of absence) instead of a fourth category, with the v2 rule "absence has
-no side effects" keeping the optional-with-default category; FP-46028 ordered AFTER the `l`-on-phases cure (an order,
-not a package); the `schema-v2.0` tag is the client side's marker — the server side treats the schema as frozen only
-after the rules pass; the live-session recording offer dropped. PROCESS RULES settled: edits to outgoing documents
-are proposed (what/where/why/wording) and applied only on the user's word — reviewer findings and annotation
-questions are not edit orders; the assistant acts as arbiter (evaluate, criticize, advise deferral of
-over-complication); the server side leads the exchange at its own tempo. KB records translated to English
-(quotes rendered, names replaced by roles). GD throttle verdict (the GD lead: legalize as-is) rides in the pushed letter §4 — the promised
-client ping is thereby delivered in-repo; Slack reply draft was left with the user. Client side
-delivered three commits (2026-08-24 pull):
-r56960 CONFIRMED (their error, acknowledged); our pins letter proofread clean by their side ("ready for a human read"); schema rev.3 — STICKY FIELDS (absence = previous message's value; measured dominant; v2 bans it;
-their §6 question to us is an OWED ANSWER — intentional-vs-accidental per sticky key); live traffic measurement
-relocating the short-Move window leak to retrieves (solid burst per retrieve, ZERO leaks in fights) and showing
-key composition depends on boat/motor. 2026-09-07: the client side delivered six commits (two letters — slack-to-phase design 2026-09-02-1939 with three findings, and a unilateral rules pass 2026-09-03-2021 with a generated schema draft of 87 pairs / 33 open decisions, four Python tools, CONVENTIONS rule 16, glossary entries, the 25-08 TSV records, the §5.2 as-is amendment) plus Slack: trigger precision for the electric reel, the owner's decision to legalize the electric-reel slack immunity, a status report to the owner framing the server side as the blocker. Letter A PUSHED 2026-09-07 (`c904898`): decision accepted as the owner's, three candidate rule texts (the 'timer stands while autowinding is on' variant is stronger than today), GD text via the GD lead by 2026-09-08, reference preconditions restated in the sense of 2024 §4 (two remain: stream split, seedable generators), recount/admin-form closed, 1939 answer promised by 2026-09-10. Verified along the way: a missing `sN` addresses the player's own slot 0, not another rod; the server already has a designed electric-reel no-escape window on the pod (`ElectricReelFishEscapeSlackDelayOnPod`, 2.5 s). 2026-09-08 (late): two more letters PUSHED — `1e086cb` the slack pause letter (two GD verdicts obtained in person from the
-GD lead: electric-reel protection NOT to be made — option 3 of 1940 §2, diverging from the client side's
-"legalize as is", decision left to the owner with prod counters to follow; the windowed slack flag is deliberate
-smoothing, a spike shorter than a window must not break the phase — so the client's "level" is rejected as the phase
-carrier while "level + duration" is partially accepted via duration > 0; wire form of `l` and the slack-dependent
-layout rows paused because the owner proposed server-computed slack from geometry plus a delta-based state model;
-glossary rows hooking / slack synonym / window smoothing / phase carrier / slack suppressor, latch entry amended;
-the 0045 draft was superseded and deleted) and `225fa28` the git-rules letter for the owner's own server work
-(integration branch `fp-45122-fish-fight-protocol-v2` created and protected, `env/fp-45122-*` tag mask, owner added
-as Developer, merge method ff — all set up via glab and read back). While these were in review the client side pushed
-four commits (17:39–18:13): a full v2 protocol spec (`design/protocol-v2.md`, 711 lines), a state model "snapshot and
-deltas" (`protocol-v2-state-model.md`), two implementation plans (client/server), two PDFs and a catalogue tool —
-the written formulation the pause letter asked for arrived before the letter did; NOT yet read. Process rules settled
-today: edits only via the Edit tool section by section (never scripts or whole-file rewrites for reviewed documents);
-review seats are «ревьюеры», never «кресла»; letters must stay short — reviewer precision goes in only where a sentence
-would otherwise be refuted; the user's terms: «засекание» (hooking), «провис» kept as synonym of «слабина».
-Awaiting from the client side: confirmation of the owner's decision vs the GD verdict, re-verification of the §2/§5 client-code reading, the TSV timestamps check (30 short
-`Move`s outside the per-slot `FightFish` interval), the `client-fight-path.md` §5.2 amendment, their reaction to the
-two-column layout and to the freeze criterion. Next: the own-tempo queue by the user's priorities —
-SVN batch on NPN (`UpdateObjectModel.cmd`, `CharacterEventType` mirror, `TryParse` fallback), I1 seeds work as
-re-scoped, GD package (escape throttle, strike-by-reeling, unhitch thresholds + observability), rules pass on the
-user's go.
+Fish Fight Protocol v2 is under evaluation: the client side's package v2.1 (cover letter as the written formulation;
+layers transport, state model, schema, fight rules, decisions; telemetry; plans) is read, and the frame letter
+`96be4ad` sets the epic to the fight wire only and the contract to DTOs from the schema with the encoding as the
+server side's replaceable layer; the evaluation letter is due 2026-09-22. Next: the evaluation letter (materials in
+`artifacts/2026-09-09-v2-1-package-first-read.md` §6), the principle-independent rows letter including the four
+2026-09-03 findings, GD proofreading of the verdicts, the mission-position-operation ticket, then the server queue
+(unhitch observability batch, I1 seeds). The slack rows and the wire form of the slack flag stay paused until the
+evaluation.
 
 ## Summary
 Server half of the client player-core campaign (FP-44583 phase 5, fish-fight). Rework the fishing sync layer properly instead of re-patching: as-is documentation → authority/interruption analysis → joint target design with the client team → implementation. Ships in a single release with a protocol version bump and forced update — no backward compatibility, no feature flags.
@@ -282,3 +227,33 @@ Related: module cards [game-processor](../../server/modules/game-processor/_card
   comparison modes). Process rules that emerged: Plannotator windows are named per retro item and their lifecycle is
   managed (announce unseen content before closing; re-ask on comment-less closes); annotation replies always restate
   the annotated subject (the user cannot see his own annotations after submitting).
+- 2026-08-31..09-02 — Published: the types-and-t0 reply and the sticky-keys classification (`a19592c`, `13eb40e`),
+  the I1-scope letter `a6ef7aa` (recording-protocol rules: mandatory fish assignment, optional wait-skippers, no
+  outcome clamps, identical config in record and replay, two comparison modes) and the two-keys letter `97ee383`.
+  Verified on both trees: the short `Move` form cannot be sent after the hook, so the fast-reel slack immunity does
+  not exist in a fight; the common extractor erases the slack stopwatch on any applied slot opcode without the slack
+  key, and `Spool`/`ElectricAutoWinding` are legal in `FishFight` — the electric reel is the real in-fight erasure;
+  this retracts the 2026-08-06-1509 conclusion (convention-10 correction in the letter). Positions: the registry rule
+  "no key without a category" accepted, the enforcing tool declined for v1; two orthogonal absence columns instead of
+  a fourth category; FP-46028 ordered after the slack-on-phases cure; the schema counts as frozen only after the rules
+  pass. Glossary `1f7abec`: bite-off names the fish's action. Commit language English/ASCII in every repo.
+- 2026-09-07..08 — Client side delivered the slack-to-phase design (2026-09-02-1939), a unilateral rules pass with a
+  generated schema draft (2026-09-03-2021), tools and glossary entries; the owner decided to legalize the
+  electric-reel slack immunity. Published: `c904898` (the decision accepted as the owner's, three candidate rule
+  texts, GD text to follow, recount and admin form closed); `1e086cb` (GD-lead verdicts in person: electric-reel
+  protection not to be made, pending prod counters and the owner's word; the windowed slack flag is intended
+  smoothing, so "level" is rejected as the phase carrier and "duration > 0" accepted; slack rows and the wire form of
+  the slack flag paused because the owner proposed server-computed slack with a delta-based state model; glossary
+  rows hooking, slack synonym, window smoothing, phase carrier, slack suppressor); `225fa28` (git rules for the
+  owner's own server work: integration branch `fp-45122-fish-fight-protocol-v2` from NPN, rebase-only task branches,
+  MR landing, `env/fp-45122-*` tags; branch protection, tag mask and the owner's Developer role set up and read
+  back). Verified: a missing slot number addresses slot 0; the pod no-escape window
+  `ElectricReelFishEscapeSlackDelayOnPod` already exists. The client side then published the full v2 package — the
+  written formulation the pause letter asked for.
+- 2026-09-09 — Package v2.1 read; frame letter `96be4ad` published: FP-45122 = the fight wire only (TPM, the mission
+  position operation, telemetry and diagnostics out); contract = DTOs from the schema, the encoding is the server
+  side's layer and is slated for replacement; the 08-17 acceptance of the type whitelist as a permanent schema rule
+  retracted; answers to the client side's requests (intervals as `GlobalVariables`, missed-interval policy,
+  `SnapshotRequested`, the TPM relay is by design, the GD lead named); two questions ahead of the evaluation (delta as
+  a separate type; console certification vs hard cutover). KB: module `tpm` created; the missions position-operation
+  item corrected (two source substitutions needed); glossary rows Hooking and Fish Fight Protocol v2.
