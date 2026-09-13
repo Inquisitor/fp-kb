@@ -9,6 +9,7 @@
 - [x] **Post-finalize verification** (Query G on `CompetitiveRatingWeeklyHistory` across STEAM/PS/XB): 100% ban success — none of the 29 reached the reward list.
 - [x] **Durable account ban** — handed off to Community/Support; they applied `Profiles.IsCompetitionsBanned` with their standard policy. Out of our hands from here.
 - [x] **Residual scan** — Query B re-run with relaxed threshold `NoShowSharePct ≥ 30` across STEAM/PS/XB yielded 107 candidates total. Full list shared with Support via the same Google Sheet; ban actions applied by them.
+- [x] **Fold the zero-score drain into the same detector** (done week-18). The screen now counts unproductive registrations -- no-shows plus zero-score finishes, DQ excluded because it follows a ban. Rule 1(a) now reads rating from *productive* play, so a zero-score finish no longer drags the earnings figure down and makes the drainer look like an honest loser. Measured over August across all three platforms: recall on capable bottom-bracket harvesters 70/109 -> 91/109, nothing lost, about a third more candidates per cycle; a 35% share threshold was tried and rejected. Residual, not covered: a candidate whose net rating is *rising* still fails rule 1(a) whichever route he sheds by -- rule 5 is what reaches that shape.
 
 ## Immediate
 - [ ] **Counterfactual PCR as the displacement measure.** Replaces the lifetime prize score, which
@@ -23,16 +24,9 @@
   Solves the capping case natively: a capper's no-absence rating clears the boundary while his
   actual rating sits below it. Raised in the week-14 Codex review
   (`artifacts/codex-review-2026-08-09.md`)
-- [ ] **Fold the zero-score drain into the same detector.** Rating can be shed by entering and
-  producing nothing (`ZeroScoreRatingPenalty`) instead of by not appearing, at roughly half the
-  cost per event and with a real time cost to the player. The detection SQL already emits a
-  `ZeroScore` column per candidate and no rule consumes it. This is both a live evasion route
-  (offset winnings with started-but-bad results and the chosen-descent test goes quiet) and the
-  *only* remaining route once FP-45377 removes `NoShowRatingPenalty` altogether. The drain metric
-  should count all unproductive participation, not no-shows alone
-- [ ] **Re-examine the wide-gate thresholds.** They have been unchanged since week-3 (no-shows >= 6,
-  share >= 30%, rating from absence <= -90, prizes > 3), which makes them a stable boundary a
-  player can sit just underneath. Loosening catches the careful case at the cost of cohort size;
+- [ ] **Re-examine the screening thresholds.** The numbers have been unchanged since week-3 (>= 6
+  events, >= 30% share, <= -90 rating, > 3 prizes) even though week-18 changed what is counted,
+  which makes them a stable boundary a player can sit just underneath. Loosening catches the careful case at the cost of cohort size;
   quantify the trade-off before changing anything
 - [ ] **Check the outage explanation.** A platform or connection incident produces no-shows that
   look chosen. Testable and never tested: whether a candidate's no-show timestamps coincide with
@@ -45,7 +39,7 @@
   - GDD-level: per-bracket prize caps (MaxWins / Max2nd / Max3rd) — natural progression pushes successful abusers out of NOOBS, removing the incentive entirely.
   - Twink/multi-account detection by IP / MAC — separate planned ticket.
 - [x] **Mobile / Nintendo passes** — no action until matchmaking ships on those platforms. If structural mitigations (per-bracket prize caps, twink detection) land first, this may never be needed. Otherwise: re-use `discovery-sql.sql` + `weekly-leaderboard-ban.sql` from this task with the appropriate `@WindowStart` per platform launch date.
-- [x] **Threshold drift** — Community monitors complaint volume; they will spawn a new ticket (or reopen this one) if the 30% gate stops separating signal from noise.
+- [x] **Threshold drift** — Community monitors complaint volume; they will spawn a new ticket (or reopen this one) if the 30% share threshold stops separating signal from noise.
 
 ## Out of scope (separate task / GDD work)
 - The structural fix (MaxWins / MaxMedals cap per bracket so no-show abuse becomes pointless) is a GDD-level change — separate ticket. This task delivered the *detection + reactive ban* loop only.
