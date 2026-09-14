@@ -1,0 +1,28 @@
+Test run for D:\FishingPlanet\src\server\svn\branches\NPN20260602\Photon\src-server\Loadbalancing\LoadBalancing.Tests\bin\Debug\LoadBalancing.Tests.dll (.NETFramework,Version=v4.7.2)
+VSTest version 17.14.0 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+D:\FishingPlanet\src\server\svn\branches\NPN20260602\Photon\src-server\Loadbalancing\LoadBalancing.Tests\bin\Debug\LoadBalancing.Tests.dll
+[MSTest][Discovery][D:\FishingPlanet\src\server\svn\branches\NPN20260602\Photon\src-server\Loadbalancing\LoadBalancing.Tests\bin\Debug\LoadBalancing.Tests.dll] UTA001: TestClass attribute defined on non-public class LoadBalancing.Tests.AssemblyConfiguration
+[MSTest][Discovery][D:\FishingPlanet\src\server\svn\branches\NPN20260602\Photon\src-server\Loadbalancing\LoadBalancing.Tests\bin\Debug\LoadBalancing.Tests.dll] MSTestAdapter failed to discover tests in class 'Photon.LoadBalancing.UnitTests.LeagueTests' of assembly 'D:\FishingPlanet\src\server\svn\branches\NPN20260602\Photon\src-server\Loadbalancing\LoadBalancing.Tests\bin\Debug\LoadBalancing.Tests.dll' because Object reference not set to an instance of an object..
+  Passed FightFishMessage_PhotonGpBinary_versus_PackedDto_costs [190 ms]
+  Standard Output Messages:
+ FightFish, 19 keys, 20000 iterations per figure
+ Photon GpBinaryV162: wire bytes = 204; serialize = 5168 B/op; parse = 5729 B/op
+ Packed DTO:          wire bytes = 56; write = 385 B/op; read = 0 B/op
+ Ratio wire bytes GpBinary/packed = 3,64
+ 
+
+TestContext Messages:
+FightFish, 19 keys, 20000 iterations per figure
+ Photon GpBinaryV162: wire bytes = 204; serialize = 5168 B/op; parse = 5729 B/op
+ Packed DTO:          wire bytes = 56; write = 385 B/op; read = 0 B/op
+ Ratio wire bytes GpBinary/packed = 3,64
+
+
+
+Test Run Successful.
+Total tests: 1
+     Passed: 1
+ Total time: 2,4887 Seconds

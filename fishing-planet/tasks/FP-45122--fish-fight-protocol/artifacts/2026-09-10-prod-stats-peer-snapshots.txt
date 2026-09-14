@@ -1,0 +1,232 @@
+Photon Tool `stats peer` snapshots from three prod game nodes, 2026-09-10, taken by the server lead: a first series
+`stats peer 50 1` (by name) and a second series `stats peer 20 2` (by count) further down.
+`stats reset` at :00 and the snapshot at the next :00, so every `count` is per 60 s; order 1 is alphabetical and
+the top of 50 cuts the listing before `Game.FightFish` / `Game.Move` on nodes 86 and 2. Online at the time: node 86 about 677, node 2 (game server co-hosted with the
+Master) about 676, node 25 about 755. Columns: opName, count, error, wAVG, wMAX, duraAVG, duraMAX, duraTot,
+long.5, long1.
+
+===== node 86 (game server), online ~677 =====
+Authenticate                                       45       0     0.0       1      0.612      1.625     27.529       20         5
+BuyItem                                            14       0     0.0       0      0.028      0.046      0.385        0         0
+BuyLicense                                          7       0     0.0       0      0.011      0.015      0.075        0         0
+Cache.GetAllPondInfos                              12       0     0.0       0      0.023      0.031      0.276        0         0
+Cache.GetBoats                                     11       0     0.0       0      0.003      0.015      0.030        0         0
+Cache.GetBuoyColors                                11       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetFishBrief                                 12       0     0.0       0      0.066      0.078      0.793        0         0
+Cache.GetGlobalVariables                           11       0     0.0       0      0.001      0.015      0.015        0         0
+Cache.GetInventorySortingGroups                    11       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetItemAssets                                11       0     0.0       0      0.036      0.046      0.401        0         0
+Cache.GetItemBrief                                 12       0     0.1       1      0.501      0.578      6.010       11         0
+Cache.GetProductCategories                         12       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetProductComponentGroups                    12       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetProducts                                  11       0     0.0       0      0.321      0.484      3.526        0         0
+Cache.GetTackleCompatibility                       12       0     0.0       0      0.053      0.062      0.633        0         0
+CaptureAction                                     329       0     0.0       0      0.001      0.015      0.375        0         0
+Chat.ConfirmChatMessage                             2       0     0.0       0      0.000      0.000      0.000        0         0
+Chat.GetChatPlayersCount                          251       0     0.0       0      0.000      0.015      0.015        0         0
+Chat.SendChatMessage                              101       0     0.0       0      0.001      0.015      0.150        0         0
+CheckForProductSales                               34       0     0.0       0      0.002      0.015      0.075        0         0
+Clubs.GetClubDonatableItems                         2       0     0.0       0      0.109      0.125      0.218        0         0
+Clubs.GetClubsLogo                                468       0     0.0       0      0.002      0.031      1.006        0         0
+Clubs.GetCountries                                 10       0     0.0       0      0.003      0.015      0.030        0         0
+Clubs.GetMembers                                    3       0     0.3       1      0.000      0.000      0.000        0         0
+Clubs.GetTrophies                                   1       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.PreviewSaveClubLogo                           6       0     0.0       0      0.003      0.015      0.015        0         0
+Clubs.Search                                        1       0     0.0       0      1.374      1.374      1.374        1         1
+Clubs.SendMessage                                   1       0     0.0       0      0.000      0.000      0.000        0         0
+CreateGame                                          2       0     0.0       0      0.211      0.218      0.421        0         0
+Debug                                               1       0     1.0       1      0.000      0.000      0.000        0         0
+DestroyItem                                         7       0     0.0       0      0.015      0.015      0.105        0         0
+Diag.Debug.Clien                                    4       0     0.0       0      0.000      0.000      0.000        0         0
+Diag.Error                                          1       0     0.0       0      0.000      0.000      0.000        0         0
+Diag.Fps                                          115       0     0.0       0      0.001      0.015      0.105        0         0
+Diag.SysInfo.{"Ip"                                  5       0     0.0       0      0.000      0.000      0.000        0         0
+Disconnect                                         44       0     0.0       0      0.076      0.218      3.356        0         0
+ExchangeCurrency                                    2       0     0.0       0      0.008      0.015      0.015        0         0
+FinalizeSteamTransaction                            1       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.GetBoats                                       32       0     0.0       0      0.017      0.031      0.544        0         0
+FTG.GetPonds                                       10       0     0.0       0      0.005      0.015      0.045        0         0
+FTG.GetPondWeather                                  2       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.InviteAccept                                    1       0     0.0       0      0.015      0.015      0.015        0         0
+FTG.ReturnBoatControl                               1       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.SyncBoatContext                              6140       0     0.0       0      0.000      0.046      2.177        0         0
+FTG.TakeBoatControl                                 1       0     0.0       0      0.000      0.000      0.000        0         0
+Game.Board                                          2       0     0.0       0      0.000      0.000      0.000        0         0
+Game.CatchFish                                    151       0     0.0       1      0.034      0.312      5.159        0         0
+Game.CatchItem                                      5       0     0.0       0      0.017      0.031      0.083        0         0
+Game.ConfirmBite                                  308       0     0.0       0      0.001      0.016      0.376        0         0
+Game.ElectricAutoWinding                            8       0     0.0       0      0.002      0.015      0.015        0         0
+
+===== node 2 (game server co-hosted with the Master), online ~676 =====
+Authenticate                                       29       0     0.0       0      0.728      1.734     21.122       23         4
+BuyItem                                            12       0     0.0       0      0.023      0.031      0.276        0         0
+BuyLicense                                          5       0     0.0       0      0.012      0.015      0.060        0         0
+BuyProduct                                          1       0     0.0       0      0.062      0.062      0.062        0         0
+Cache.GetAllPondInfos                               9       0     0.0       0      0.017      0.031      0.151        0         0
+Cache.GetBoats                                      7       0     0.0       0      0.006      0.015      0.045        0         0
+Cache.GetBuoyColors                                13       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetFishBrief                                 13       0     0.0       0      0.069      0.078      0.892        0         0
+Cache.GetGlobalVariables                            9       0     0.0       0      0.002      0.015      0.015        0         0
+Cache.GetInventorySortingGroups                    13       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetItemAssets                                 9       0     0.0       0      0.036      0.046      0.324        0         0
+Cache.GetItemBrief                                 13       0     0.0       0      0.688      0.937      8.948       13         0
+Cache.GetProductCategories                         13       0     0.0       0      0.001      0.015      0.015        0         0
+Cache.GetProductComponentGroups                    12       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetProducts                                  13       0     0.0       0      0.268      0.312      3.487        0         0
+Cache.GetTackleCompatibility                       12       0     0.0       0      0.062      0.062      0.744        0         0
+CaptureAction                                     287       0     0.0       0      0.001      0.015      0.210        0         0
+Chat.ConfirmChatMessage                             1       0     0.0       0      0.000      0.000      0.000        0         0
+Chat.GetChatMessages                                1       0     0.0       0      0.000      0.000      0.000        0         0
+Chat.GetChatPlayersCount                          249       0     0.0       0      0.000      0.000      0.000        0         0
+Chat.SendChatMessage                               48       0     0.0       0      0.001      0.015      0.060        0         0
+CheckForProductSales                               16       0     0.0       0      0.002      0.015      0.030        0         0
+Clubs.GetClub                                       1       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.GetClubDonatableItems                         5       0     0.0       0      0.118      0.140      0.591        0         0
+Clubs.GetClubsLogo                                285       0     0.0       0      0.002      0.046      0.541        0         0
+Clubs.GetCountries                                  9       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.GetJoinRequests                               1       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.GetMembers                                    5       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.Search                                        4       0     0.0       0      1.325      1.655      5.300        4         4
+CreateGame                                          1       0     0.0       0      0.187      0.187      0.187        0         0
+Debug                                               1       0     1.0       1      0.000      0.000      0.000        0         0
+DestroyItem                                         4       0     0.0       0      0.008      0.015      0.030        0         0
+Diag.Debug.Clien                                    6       0     0.0       0      0.000      0.000      0.000        0         0
+Diag.Error.  at                                     3       0     0.0       0      0.000      0.000      0.000        0         0
+Diag.Fps                                          107       0     0.0       0      0.000      0.015      0.045        0         0
+Diag.SysInfo.{"Ip"                                  4       0     0.0       0      0.004      0.015      0.015        0         0
+Disconnect                                         33       0     0.0       0      0.101      0.312      3.349        0         0
+ExchangeCurrency                                    1       0     0.0       0      0.000      0.000      0.000        0         0
+FindPlayers                                         1       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.GetBoats                                       18       0     0.0       0      0.013      0.031      0.241        0         0
+FTG.GetPonds                                        8       0     0.0       0      0.002      0.015      0.015        0         0
+FTG.GetPondWeather                                  2       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.InviteAccept                                    1       0     0.0       0      0.015      0.015      0.015        0         0
+FTG.ReturnBoatControl                               5       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.SetScreenMode                                   4       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.SyncBoatContext                              3454       0     0.0       0      0.000      0.062      0.993        0         0
+FTG.TakeBoatControl                                 5       0     0.0       0      0.000      0.000      0.000        0         0
+Game.Board                                          3       0     0.0       0      0.000      0.000      0.000        0         0
+Game.CatchFish                                    141       0     0.0       0      0.034      0.546      4.743        1         0
+Game.CatchItem                                      5       0     0.0       0      0.037      0.046      0.184        0         0
+
+===== node 25 (game server), online ~755 =====
+Authenticate                                       45       0     0.0       1      0.662      3.343     29.803       20         9
+BuyItem                                            10       0     0.0       0      0.015      0.031      0.151        0         0
+BuyLicense                                          3       0     0.0       0      0.010      0.015      0.030        0         0
+Cache.GetAllPondInfos                              11       0     0.0       0      0.019      0.031      0.213        0         0
+Cache.GetBoats                                     12       0     0.0       0      0.010      0.015      0.120        0         0
+Cache.GetBuoyColors                                10       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetFishBrief                                 10       0     0.0       0      0.051      0.062      0.509        0         0
+Cache.GetGlobalVariables                           10       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetInventorySortingGroups                    10       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetItemAssets                                10       0     0.0       0      0.031      0.031      0.310        0         0
+Cache.GetItemBrief                                 10       0     0.0       0      0.626      1.036      6.255       10         2
+Cache.GetProductCategories                         10       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetProductComponentGroups                    10       0     0.0       0      0.000      0.000      0.000        0         0
+Cache.GetProducts                                  10       0     0.0       0      0.275      0.468      2.746        0         0
+Cache.GetTackleCompatibility                       10       0     0.0       0      0.049      0.062      0.492        0         0
+CaptureAction                                     254       0     0.0       0      0.002      0.078      0.393        0         0
+Chat.GetChatPlayersCount                          224       0     0.0       0      0.000      0.000      0.000        0         0
+Chat.SendChatMessage                               95       0     0.0       0      0.001      0.015      0.105        0         0
+CheckForProductSales                               30       0     0.0       0      0.002      0.015      0.045        0         0
+Clubs.GetClubDonatableItems                         3       0     0.0       0      0.104      0.109      0.311        0         0
+Clubs.GetClubsLogo                                852       0     0.0       0      0.002      0.015      1.530        0         0
+Clubs.GetCountries                                 10       0     0.0       0      0.003      0.015      0.030        0         0
+Clubs.GetJoinRequests                               1       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.GetMembers                                    4       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.GetTrophies                                   1       0     0.0       0      0.000      0.000      0.000        0         0
+Clubs.Search                                        4       0     0.0       0      0.746      1.405      2.982        2         2
+Clubs.SendMessage                                   4       0     0.0       0      0.000      0.000      0.000        0         0
+CreateGame                                          6       0     0.0       0      0.195      0.203      1.170        0         0
+Debug                                               1       0     1.0       1      0.000      0.000      0.000        0         0
+DestroyItem                                        19       0     0.0       0      0.015      0.031      0.287        0         0
+Diag.Error                                          1       0     0.0       0      0.000      0.000      0.000        0         0
+Diag.Fps                                           97       0     0.0       0      0.001      0.015      0.060        0         0
+Diag.SysInfo.{"Ip"                                  8       0     0.0       0      0.000      0.000      0.000        0         0
+Disconnect                                         30       0     0.0       0      0.082      0.468      2.445        0         0
+FTG.GetBoats                                       27       0     0.0       0      0.016      0.031      0.422        0         0
+FTG.GetPonds                                       10       0     0.0       0      0.000      0.000      0.000        0         0
+FTG.SyncBoatContext                              2862       0     0.0       0      0.000      0.015      0.571        0         0
+Game.Board                                          2       0     0.0       0      0.008      0.015      0.015        0         0
+Game.CatchFish                                    173       0     0.0       0      0.025      0.109      4.318        0         0
+Game.CatchItem                                      7       0     0.0       0      0.080      0.472      0.563        0         0
+Game.ConfirmBite                                  341       0     0.0       0      0.001      0.015      0.345        0         0
+Game.ElectricAutoWinding                            6       0     0.0       0      0.000      0.000      0.000        0         0
+Game.EscapeFish                                     4       0     0.0       0      0.004      0.015      0.015        0         0
+Game.FightFish                                  28034       0     0.0       0      0.001      0.296     21.954        0         0
+Game.FinishAttack                                 269       0     0.0       0      0.002      0.016      0.451        0         0
+Game.FinishMove                                   344       0     0.0       0      0.006      0.062      1.901        0         0
+Game.LeaveLocation                                  8       0     0.0       0      0.000      0.000      0.000        0         0
+Game.Move                                      168188       0     0.0       1      0.001      0.487    186.345        0         0
+Game.Pause                                        107       0     0.0       0      0.000      0.015      0.045        0         0
+Game.ReleaseFish                                    9       0     0.0       0      0.010      0.015      0.090        0         0
+
+===== second series, `stats peer 20 2` (top by count), `stats reset` at :00 and the snapshot at the next :00 =====
+`RaiseEvent` and `Game::RaiseEvent` are the same client events counted at the peer and at the game level; count once.
+`Game::UpdateLastActivity` is internal, not a client operation.
+
+--- node 25, online 760-768 ---
+Game.Move                                      160504       0     0.0       0      0.001      1.529    211.367        8         6
+RaiseEvent                                     153760       0     0.0       0      0.000      0.249     17.674        0         0
+Game::RaiseEvent                               153758       0     0.0       0      0.000      1.434     24.956        1         1
+Ping                                            45654       0     0.0       0      0.000      0.124     12.231        0         0
+Game::UpdateLastActivity                        38635       0     0.0       0      0.000      0.015      0.660        0         0
+Game.FightFish                                  28839       0     0.0       0      0.001      1.435     25.765        1         1
+Game.Walk                                       10769       0     0.0       1      0.000      0.046      5.034        0         0
+Missions.PlayerPositionAndRotation               4814       0     0.0       0      0.001      0.046      6.767        0         0
+Game.TravelByBoat                                4357       0     0.0       1      0.001      0.046      3.279        0         0
+GetRoomsPopulation                               4130       0     0.0       0      0.003      1.435     11.183        1         1
+Missions.Switch                                  2765       0     0.0       0      0.000      0.015      1.065        0         0
+GetTime                                          2744       0     0.0       1      0.003      0.078      7.233        0         0
+Game.UnHitch                                     2382       0     0.0       0      0.001      0.031      1.354        0         0
+FTG.SyncBoatContext                              2323       0     0.0       0      0.000      0.016      0.496        0         0
+Game.UpdateFeedings                              1839       0     0.0       0      0.002      1.466      2.787        1         1
+Missions.SetIndicator                            1375       0     0.0       0      0.001      0.046      1.067        0         0
+Inventory.SetClipLength                          1338       0     0.0       0      0.001      0.078      1.144        0         0
+GetRoomPopulation                                1309       0     0.0       0      0.002      0.046      2.595        0         0
+Missions.SetGameScreen                           1256       0     0.0       0      0.002      0.062      2.561        0         0
+GetSounderFish                                   1043       0     0.0       0      0.001      0.031      1.100        0         0
+
+--- node 2 (game server co-hosted with the Master), online 679-687 ---
+Game.Move                                      181202       0     0.0       1      0.001      0.234    189.908        0         0
+Game::RaiseEvent                               153381       0     0.0       0      0.000      0.124     22.680        0         0
+RaiseEvent                                     153373       0     0.0       0      0.000      0.218     23.512        0         0
+Ping                                            40653       0     0.0       0      0.000      0.265     13.604        0         0
+Game::UpdateLastActivity                        36348       0     0.0       0      0.000      0.031      0.646        0         0
+Game.FightFish                                  22085       0     0.0       0      0.001      0.124     17.184        0         0
+Game.Walk                                       10961       0     0.0       0      0.000      0.078      5.404        0         0
+Missions.PlayerPositionAndRotation               4277       0     0.0       0      0.001      0.140      5.327        0         0
+GetRoomsPopulation                               3860       0     0.0       0      0.003      0.124     10.253        0         0
+Game.TravelByBoat                                3678       0     0.0       0      0.001      0.078      3.055        0         0
+FTG.SyncBoatContext                              3482       0     0.0       0      0.000      0.062      1.162        0         0
+GetTime                                          2552       0     0.0       0      0.003      0.140      7.285        0         0
+Missions.Switch                                  2530       0     0.0       0      0.001      0.062      1.429        0         0
+Game.UpdateFeedings                              2237       0     0.0       0      0.001      0.140      2.003        0         0
+Game.UnHitch                                     1446       0     0.0       0      0.001      0.016      0.917        0         0
+Inventory.SetClipLength                          1339       0     0.0       0      0.001      0.031      0.992        0         0
+Missions.SetIndicator                            1284       0     0.0       0      0.001      0.062      0.907        0         0
+GetRoomPopulation                                1245       0     0.0       0      0.002      0.124      2.251        0         0
+Missions.SetGameScreen                            915       0     0.0       0      0.002      0.062      1.808        0         0
+GetSounderFish                                    902       0     0.0       0      0.002      0.062      2.020        0         0
+
+--- node 86, online 675-679 ---
+Game.Move                                      144299       0     0.0       1      0.001      0.671    175.080        8         0
+RaiseEvent                                     141954       0     0.0       0      0.000      0.358     20.801        0         0
+Game::RaiseEvent                               141953       0     0.0       0      0.000      0.390     24.774        0         0
+Ping                                            41442       0     0.0       0      0.000      0.390     14.366        0         0
+Game::UpdateLastActivity                        35310       0     0.0       0      0.000      0.016      0.811        0         0
+Game.FightFish                                  24703       0     0.0       0      0.001      0.640     20.821        1         0
+Game.Walk                                       10609       0     0.0       0      0.001      0.358      5.880        0         0
+FTG.SyncBoatContext                              4930       0     0.0       0      0.000      0.031      1.636        0         0
+Game.UnHitch                                     4207       0     0.0       0      0.001      0.203      2.348        0         0
+GetRoomsPopulation                               3625       0     0.0       0      0.003      0.640     10.155        1         0
+Game.TravelByBoat                                3200       0     0.0       0      0.001      0.031      3.246        0         0
+Missions.PlayerPositionAndRotation               3187       0     0.0       0      0.001      0.046      4.220        0         0
+Missions.Switch                                  2599       0     0.0       0      0.000      0.015      1.230        0         0
+GetTime                                          2436       0     0.0       1      0.003      0.640      8.140        1         0
+Game.UpdateFeedings                              1532       0     0.0       0      0.001      0.062      1.222        0         0
+Missions.SetIndicator                            1381       0     0.0       0      0.001      0.015      1.230        0         0
+Inventory.SetClipLength                          1202       0     0.0       0      0.001      0.093      0.906        0         0
+GetRoomPopulation                                1159       0     0.0       0      0.002      0.062      2.099        0         0
+Missions.SetGameScreen                            961       0     0.0       0      0.003      0.656      2.595        1         0
+Telemetry.Trade                                   831       0     0.0       0      0.000      0.015      0.195        0         0
