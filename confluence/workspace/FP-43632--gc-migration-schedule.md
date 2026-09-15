@@ -34,7 +34,7 @@ Dates are approximate. What matters is the sequence and the recorded fact of com
 
 | Milestone | Planned | Actual |
 |-----------|---------|--------|
-| Mobile pilot node live on GameCarrier | 9 Sep | |
+| Mobile pilot node live on GameCarrier | 9 Sep | 10 Sep |
 | Mobile fully on GameCarrier | 15 Sep | |
 | PlayStation fully on GameCarrier | 22 Sep | |
 | Steam fully on GameCarrier — migration complete | 30 Sep | |
@@ -44,9 +44,10 @@ Dates are approximate. What matters is the sequence and the recorded fact of com
 | Date | Work | Status |
 |------|------|--------|
 | 7 Sep | Staging environment prepared; QA testing started | ✔ done |
-| 8 Sep | Configuration merged across branches; Mobile package built; QA completes testing | |
-| 9 Sep | Pilot node introduced on Mobile production | |
-| 10–13 Sep | Pilot under observation | |
+| 8 Sep | QA testing continued; pilot node prepared | ✔ done |
+| 9 Sep | Configuration merged across all branches; Mobile package built | ✔ done |
+| 10 Sep | Pilot node introduced on Mobile production | ✔ done |
+| 11–13 Sep | Pilot under observation; rotation switching exercised; entire platform traffic served by the pilot node | ✔ no incidents |
 | 14 Sep | Pilot accepted; second Mobile node taken out of rotation | |
 | 15 Sep | **Mobile maintenance window — Mobile complete** | |
 | 16 Sep | GameCarrier nodes introduced on PlayStation | |
