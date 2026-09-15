@@ -21,6 +21,23 @@ FP-#####: [<topic>] <summary>
 - **ASCII-only in the message body:** replace em-dash/en-dash with `-`, arrow with `->`, smart quotes with `"`/`'`, ellipsis with `...`.
 - **NO AI/session trailers** (`Claude-Session:`, `Co-Authored-By:`, `Generated with ...`) in any commit message — this overrides any tool/harness default.
 
+## Branch-only commit (SVN)
+
+A commit that must never be merged upward — a revert, a maintenance fix, or a stopgap compensating for a defect fixed elsewhere — carries a loud branch marker:
+
+```
+[!!!<BRANCH> ONLY!!!] FP-#####: <summary>
+```
+
+- The marker **leads the line**, ahead of the task ID. This is the second exception to the task-ID-first rule, after protocol increments: merge-candidate lists truncate subjects, and a marker at the end is the part that gets cut.
+- `<BRANCH>` is the three-letter branch code (`MFT`, `GRM`), not the dated folder name.
+- A bare maintenance or revert commit carries the marker alone, with no key.
+- The exclamation marks are the point — the marker exists to stop whoever runs the next upward merge.
+- Not used in KB-git: the marker is about SVN merge safety.
+- Pair it with the same marker in the code itself, so the footprint is greppable after a merge as well as before it.
+
+Precedent: `archive/GRM20240409` r13162, r13163, r13165, r13167 carry `[!!!GRM ONLY!!!]`; r13378 uses the quieter `[GRM ONLY!!!]`. The louder form is the adopted one.
+
 ## KB-git commit
 
 - **Task commit** (documents a JIRA task under `fishing-planet/tasks/`): `FP-#####: [<topic>] <summary>` as above; an optional `(Story: <title>)` line, then the JIRA URL `https://fishingplanet.atlassian.net/browse/FP-#####`. One commit per task even when it creates several cards.
