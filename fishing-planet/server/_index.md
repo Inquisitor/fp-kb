@@ -21,6 +21,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 - [missions](modules/missions/_card.md) — conditions, interactions, progression (stub)
 
 ## Tournaments
+- [tournaments](modules/tournaments/_card.md) — serie/competition templates, nightly generation, serie instance assignment, stage progression (stub)
 - [matchmaking](modules/matchmaking/_card.md) — grouping algorithm, brackets, buckets
 
 ## Leaderboards
