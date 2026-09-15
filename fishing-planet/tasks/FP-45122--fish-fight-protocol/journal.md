@@ -13,10 +13,11 @@ Fish Fight Protocol v2 moves by a plan of seven steps instead of an evaluation l
 layer), the owner narrowed the first stage to envelope numbers and acks inside operation 193 with no second
 operation code and no protocol switching, and the server side answered with the ordered steps, their costs and
 dependencies; first queue = schema and DTOs, envelope and acks, packed codec; deltas, groups and snapshot are
-deferred by dependency, no dates anywhere. Next: the numbers-letter corrections, the rows letter with the four
-2026-09-03 findings before the step-1 schema closes, GD proofreading of the verdicts, and the step letters (2, 4, 5)
-as each step comes up; the slack wire form stays paused until the server journal has slack measurements after
-step 4.
+deferred by dependency, no dates anywhere. Next, in this order: the server lead's talk with the owner on the two
+divergences (codec before ticks; snapshot and groups after the first five steps), the rows letter with the four
+2026-09-03 findings before the step-1 schema closes, the numbers-letter corrections, the GameCarrier codec
+measurement for step 3, then the step letters (2, 4, 5) as each step comes up; the slack wire form stays paused
+until the server journal has slack measurements after step 4.
 
 ## Summary
 Server half of the client player-core campaign (FP-44583 phase 5, fish-fight). Rework the fishing sync layer properly instead of re-patching: as-is documentation → authority/interruption analysis → joint target design with the client team → implementation. Ships in a single release with a protocol version bump and forced update — no backward compatibility, no feature flags.
