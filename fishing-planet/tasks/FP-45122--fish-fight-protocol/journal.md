@@ -8,14 +8,15 @@ type: epic
 ---
 
 ## Status
-Fish Fight Protocol v2 is under evaluation: the client side's package v2.1 (cover letter as the written formulation;
-layers transport, state model, schema, fight rules, decisions; telemetry; plans) is read, and the frame letter
-`96be4ad` sets the epic to the fight wire only and the contract to DTOs from the schema with the encoding as the
-server side's replaceable layer; the evaluation letter is due 2026-09-22. Next: the evaluation letter (materials in
-`artifacts/2026-09-09-v2-1-package-first-read.md` §6), the principle-independent rows letter including the four
-2026-09-03 findings, GD proofreading of the verdicts, the mission-position-operation ticket, then the server queue
-(unhitch observability batch, I1 seeds). The slack rows and the wire form of the slack flag stay paused until the
-evaluation.
+Fish Fight Protocol v2 moves by a plan of seven steps instead of an evaluation letter (letter `a961a80`,
+2026-09-15): the client side accepted the frame (fight wire only, contract = DTOs, encoding = the server side's
+layer), the owner narrowed the first stage to envelope numbers and acks inside operation 193 with no second
+operation code and no protocol switching, and the server side answered with the ordered steps, their costs and
+dependencies; first queue = schema and DTOs, envelope and acks, packed codec; deltas, groups and snapshot are
+deferred by dependency, no dates anywhere. Next: the numbers-letter corrections, the rows letter with the four
+2026-09-03 findings before the step-1 schema closes, GD proofreading of the verdicts, and the step letters (2, 4, 5)
+as each step comes up; the slack wire form stays paused until the server journal has slack measurements after
+step 4.
 
 ## Summary
 Server half of the client player-core campaign (FP-44583 phase 5, fish-fight). Rework the fishing sync layer properly instead of re-patching: as-is documentation → authority/interruption analysis → joint target design with the client team → implementation. Ships in a single release with a protocol version bump and forced update — no backward compatibility, no feature flags.
@@ -257,3 +258,40 @@ Related: module cards [game-processor](../../server/modules/game-processor/_card
   `SnapshotRequested`, the TPM relay is by design, the GD lead named); two questions ahead of the evaluation (delta as
   a separate type; console certification vs hard cutover). KB: module `tpm` created; the missions position-operation
   item corrected (two source substitutions needed); glossary rows Hooking and Fish Fight Protocol v2.
+- 2026-09-10 — Codec cost measured (`artifacts/2026-09-10-codec-cost-measurement.md`, KB `b5ecbc1`): full-form
+  `FightFish` on the Photon GpBinary path 204 bytes and about 11 KB of allocations per message against 56 bytes and
+  about zero packed; prod counters from three game nodes give 4.4 fight-loop messages per online player per second;
+  load model for today and for the five-slot ceiling.
+- 2026-09-14 — Letter `e5d8d83` published: reply to the client side's one-page table of 2026-09-10 (four rows against
+  the frame; the codec measurement and the load model; GameCarrier platform correction). The push rebased onto the
+  client side's letter of 2026-09-10 12:30 and package edits (`c81d429`), unseen before the push: the frame is
+  accepted (fight wire only, contract = DTOs, encoding = the server side's layer, unsigned = codec rule, response
+  field names, intervals and the missed-interval policy, telemetry level removed); the owner keeps delta as a
+  separate type with acks; the electric-reel rule is not built; hard cutover is replaced by two protocols side by
+  side (protocol 2 on its own operation code, proposal 201 `FishFightV2`, selection per session via
+  `GetProtocolVersion`). They ask: confirm the operation code and name; element order of the array fields in the
+  snapshot response; GD proofreading. The published letter's §2 restates rows their letter had already settled.
+- 2026-09-15 — Letter `a961a80` published: reply to the client side's five decisions. Facts of 2026-09-14 recorded
+  as the server lead relayed them: the owner narrowed the first stage to envelope numbers, ticks and acks inside
+  operation 193, left protocol switching to the server side, and by phone dropped the second operation code, agreed
+  that binary packing covers the envelope's traffic and that the server lead's client-side changes reach the client
+  tree as diffs. Server side's decisions in the letter: no second operation code, no dual support, no switches on
+  either side (the only server variable enables the step-5 penalty after a journal-only release); the second
+  question of 2026-09-09 §4 withdrawn (installations release separately, canonical order Steam/EGS first because one
+  small team prepares releases); the evaluation of the principle replaced, without dates, by seven ordered steps with
+  costs, dependencies and the mapping to the client's plan §33: 1 schema and DTOs on `IPhotonServerConnection` and the
+  `GameProcessor` boundary with a codec interface (Hashtable behind it, wire byte for byte, unsigned DTO types over
+  unchanged wire types, absence reproduced as absence); 2 envelope and acks per §8 with `v` dropped, `t0`/`t1` kept as
+  `int` (a game-server connection lives at most `MaxDaysOnPond`, 7.5 real days), event numbering in, client acks of
+  events later; 3 packed codec behind the interface for all 28 opcodes of operation 193, presence bits while a field
+  is optional, Hashtable implementation removed; 4 full windows (all fields with values, four meanings of silence
+  gone, slack read only as "was there slack in the window", timer source unchanged until step 5); 5 accounting by
+  declared window with window arithmetic, two tolerances (relative for clock rate, constant seconds for silence and
+  lag), gap budgets per sliding minute and per cycle, penalty left open between disconnect and forced fish escape
+  (`EscapeFishOnRoomEnd`), first release journal-only, slot lifecycle table to answer question 12; 6 seeded
+  randomness; 7 numeric state codes with a one-off migration. Deltas, thresholds and groups deferred by dependency
+  (base = acked full state); division of labour: schema, generator and DTO types on the client side (FP-46119 minus
+  the codec), codec, `PhotonServerConnection`, `GameActionAdapter` boundary on the server side, client-end changes
+  as diffs. Two divergences with the owner's order, to be settled by the server lead in person: codec before ticks;
+  snapshot, delta and groups after the first five steps. Four review rounds (fact-check, recipient read, Codex) before
+  the push; the fish-restore benefit was dropped from the plan (needs FP-45678 first).
