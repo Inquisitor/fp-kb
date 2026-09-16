@@ -24,6 +24,10 @@ Close KB task `$ARGUMENTS` — finalize the last milestone, clean up all referen
 - Run `kb-finalize-milestone` with the same task slug
 - This captures the last batch of work: journal Status + milestone, module log/card, task backlog, plan collapse
 
+### 2.5. Re-read the journal for claims that have gone stale
+- The card accumulates statements written before the work finished. Check that every instruction it gives still works and every count it states still holds: greppable tokens must match what is in the code, referenced file and field names must still exist, and a "next step" must not describe something already done.
+- A card that prescribes a guard nobody can run is worse than one that says nothing.
+
 ### 3. Set status: completed
 - Journal YAML frontmatter: `status: completed`
 - Journal `## Status`: replace with final summary (what was delivered, no "next" items)
@@ -69,6 +73,7 @@ Close KB task `$ARGUMENTS` — finalize the last milestone, clean up all referen
 - **Transition reminder** — extract the task key (everything before the first `--`); remind the user to transition the task to Resolved, including the key and `jira:` URL from journal frontmatter.
 
 ### 10. Commit KB changes
+- Stage as the **last** action. Steps 3-7 keep editing the journal and backlog, and anything staged before them commits at its older content — `git commit` writes the index, not the working tree. If part of the work was staged earlier in the session, re-add those paths before committing and check `git diff --cached` against the working tree.
 - Run `git -C D:\kb status` to see what changed.
 - Stage ONLY the closing task's files (its `tasks/<folder>/`) plus the cross-reference edits made in Steps 4-7. Never `git add -A`.
 - Explicitly exclude unrelated or parallel-session changes (other tasks' folders/journals, untracked folders, `_index.md` hunks owned by another session) — they are not part of this close.
