@@ -108,9 +108,13 @@ Microsoft platform certification disallows the unencrypted Photon TCP protocol f
 
 However, GameCarrier (at the time XBox was migrated) had a runtime constraint: the TCP transport could not start unless at least one TCP vhost was bound. S2S communication in this codebase uses Photon TCP, so the TCP transport must be running — and to satisfy the constraint, a "dummy" TCP vhost was added on the Game-only node (`Game tcp 4520` labelled `Dummy S2S endpoint`). The Master node already has Master S2S TCP vhosts so no dummy is needed there.
 
-Nintendo, Mobile, PlayStation, and Steam/EGS do not have this restriction — public TCP from clients is permitted. Their configs include the standard `Game tcp 4531 PHOTON` endpoint and do not need the dummy.
+Nintendo, Mobile, PlayStation, and Steam/EGS do not have this restriction — public TCP from clients is permitted, so their configs carry a real `Game tcp PHOTON` endpoint rather than the dummy.
 
-**Implication**: when authoring Mobile, PS, and Steam configs, **use Nintendo as the template**, not XBox.
+**Port caveat — corrected 2026-09-16.** The port matrix assigns the Game application `4531` on every node role, and the GC configs follow it. The Photon side did not: a **dedicated** Game node on Mobile, PlayStation and Steam/EGS listened on and announced **4530** (`<Platform>.Game.Photon.LoadBalancing.dll.config` → `GamingTcpPort`, with `RelayPortTcp = 0`), a legacy state that predates the matrix and took the lowest free port of the range. [FP-46179](https://fishingplanet.atlassian.net/browse/FP-46179) *[GameServer] Bind the Game application to 4531 regardless of node role* moved those nodes to `4531` and states GC configs are out of its scope.
+
+The earlier wording of this paragraph read as a statement about the platforms' actual configs, where it was wrong for Mobile/PS/Steam, rather than about the target convention, where it holds. That mattered because both families ship to the same node — `GameCarrier/Game.json` copies the GC `config.json` *and* the Game `Photon.LoadBalancing.dll.config` — so between the GC configs landing and FP-46179 a dedicated node redeployed onto GameCarrier would have had its transport on 4531 while the Game application reported 4530. The Master relays whatever the Game application reports; a game node's port exists only in that node's own config. See the [FP-43670 review](../../../review/FP-43670--gc-prod-configs/review.md), F-1.
+
+**Implication**: when authoring Mobile, PS, and Steam configs, **use Nintendo as the template**, not XBox — but treat "use platform X as the template" as a claim about *structure* only. Per-platform scalars (`GamingTcpPort`, listener ports, `RelayPort*`) must be read from that platform's own `Photon.LoadBalancing.dll.config` and `PhotonServer.config` before they are copied, not inherited from the template by assumption. That omission is exactly what F-1 was.
 
 ## Canonical vhosts ordering
 
