@@ -44,6 +44,7 @@ Cast → bite selection → hook → fight → land. Orchestrator: GameProcessor
 - [data-editing](modules/data-editing/_card.md) — admin table-edit + DataChanges commit-log (audit / replay / restore); read-only-join leak gotcha
 
 ## Monetization
+- [product-contents](modules/product-contents/_card.md) — what a product contains and the two independent paths out of `Products.ItemJson`: display briefs to the shop windows, inventory to the player. Quantity semantics per item kind, and why the printed number is the catalog's rather than the pack's
 - [product-local-prices](modules/product-local-prices/_card.md) — regional pricing: rates, exchange, rounding, beautify
 - [local-shop](modules/local-shop/_card.md) — per-pond item shop; LocalShop stores only Price (level/rarity/currency from InventoryItems); Premium ×1.0 / Common ×1.5; pond 119 (FTUE) ×1.0
 - [twitch-drops](modules/twitch-drops/_card.md) — Twitch account linking + Drop entitlement delivery; spans linking site / Photon delivery / AsyncProcessor token refresh; no-email capture/backfill + reward gate (epic FP-44593)
