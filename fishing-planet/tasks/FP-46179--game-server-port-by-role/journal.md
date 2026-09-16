@@ -1,7 +1,7 @@
 ---
 jira: https://fishingplanet.atlassian.net/browse/FP-46179
 title: "[GameServer] Listening port differs depending on the node role"
-status: in-progress
+status: waiting-for-release
 executor: Stanislav Samoilov
 created: 2026-09-14
 type: story
@@ -10,10 +10,10 @@ platforms: [Steam/EGS, PlayStation, Mobile]
 # FP-46179: [GameServer] Listening port differs depending on the node role
 
 ## Status
-The config change is committed across all five branches (IMV r16547 through NPN r16551). Not complete until
-deployed: the dedicated Game nodes of PlayStation and Steam need 4531 open before their next deployment,
-otherwise client connections to those nodes break the moment the updated config ships. Stays in progress
-until the deployment lands.
+The config change is committed across all five branches (IMV r16547 through NPN r16551) and resolved on the
+JIRA side; what remains is deployment. The dedicated Game nodes of PlayStation and Steam need 4531 open
+before they are redeployed, otherwise client connections to those nodes break the moment the updated config
+ships.
 
 ## Summary
 The `Game` application bound a different port depending on the role of the node hosting it — 4531 on Master

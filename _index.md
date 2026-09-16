@@ -25,7 +25,7 @@
 | FP-45231 | nonroot-mergeinfo-cleanup      | in-progress   | fishing-planet/tasks/FP-45231--nonroot-mergeinfo-cleanup/               |
 | FP-45678 | player-session-ownership       | planning      | fishing-planet/tasks/FP-45678--player-session-ownership/                |
 | FP-46092 | nan-tackle-xp-overflow         | investigating | fishing-planet/tasks/FP-46092--nan-tackle-xp-overflow/                  |
-| FP-46179 | game-server-port-by-role       | in-progress   | fishing-planet/tasks/FP-46179--game-server-port-by-role/                |
+| FP-46179 | game-server-port-by-role       | waiting-for-release | fishing-planet/tasks/FP-46179--game-server-port-by-role/                |
 
 ## Active Reviews
 | Task     | Executor       | Path                                                                                    |
