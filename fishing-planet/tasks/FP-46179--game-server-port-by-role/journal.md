@@ -13,7 +13,8 @@ platforms: [Steam/EGS, PlayStation, Mobile]
 The config change is committed across all five branches (IMV r16547 through NPN r16551) and resolved on the
 JIRA side; what remains is deployment. The dedicated Game nodes of PlayStation and Steam need 4531 open
 before they are redeployed, otherwise client connections to those nodes break the moment the updated config
-ships.
+ships. Fix version is `2026.5.1 GameCarrier Migration`, shipping from the same build as
+`2026.5.2 PremiumShop Rod-Setup Display Server Hotfix`.
 
 ## Summary
 The `Game` application bound a different port depending on the role of the node hosting it — 4531 on Master
