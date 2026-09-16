@@ -8,7 +8,9 @@ related: FP-43669, FP-43670
 # FP-43632: [GameCarrier] Migration coordination — Mobile / PS / Steam
 
 ## Status
-**On hold** as of 2026-05-10, awaiting external delivery on Tracks 1 and 2 (FP-43669 build automation, FP-43670 prod GC configs in VCS — both with GC dev). Server-side coordination cycle is complete: TeamCity pipeline audit done, canonical `vhosts[]` ordering established and applied to existing Nintendo/XBox configs, two adjacent JIRA stories filed for GC-dev work, context comment + canonical reference attached to FP-43670, Confluence reference page "Server Transport Ports" published under Infrastructure (id 5579014145). Track 3 (local dev environment) intentionally deferred until Track 1 lands the first automatic build. Two non-blocking parking lots in [backlog](backlog.md): Chat-port cleanup tech-debt and a one-time GC sources audit for PHOTON-over-UDP transport. Resumes when Track 1 / Track 2 progress lands.
+**Track 2 delivered** (2026-09-16): FP-43670 is closed and the prod GC configs for Mobile / PS / Steam are in VCS and merged to MFT. First production rollout is being prepared under `2026.5.1 GameCarrier Migration` — mobile nodes onto Master plus the first PlayStation wave — shipping from the same build as the 2026.5.2 hotfix. Track 1 (FP-43669 build automation) is still To Do with GC dev; Track 3 (local dev environment) stays deferred behind it. The Photon -> GameCarrier host switch itself is run by DevOps under their own procedure.
+
+Earlier context (through 2026-05-10), awaiting external delivery on Tracks 1 and 2 (FP-43669 build automation, FP-43670 prod GC configs in VCS — both with GC dev). Server-side coordination cycle is complete: TeamCity pipeline audit done, canonical `vhosts[]` ordering established and applied to existing Nintendo/XBox configs, two adjacent JIRA stories filed for GC-dev work, context comment + canonical reference attached to FP-43670, Confluence reference page "Server Transport Ports" published under Infrastructure (id 5579014145). Track 3 (local dev environment) intentionally deferred until Track 1 lands the first automatic build. Two non-blocking parking lots in [backlog](backlog.md): Chat-port cleanup tech-debt and a one-time GC sources audit for PHOTON-over-UDP transport. Resumes when Track 1 / Track 2 progress lands.
 
 ## Summary
 Meta-task tracking the migration of the FP server transport layer from Photon to GameCarrier. GameCarrier is an in-house drop-in replacement that hosts the unchanged business logic (`Photon.LoadBalancing.dll`); the migration replaces only the transport framework underneath. Inter-server communication is implemented in business logic, so it is binary-compatible across both frameworks. This task does **not** implement the migration itself — it decomposes the work into independent subtasks (each will get its own JIRA-ID), drives requirements gathering, and tracks delivery.
@@ -54,3 +56,15 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
 - 2026-05-10: Page published to Confluence as [Server Transport Ports](https://fishingplanet.atlassian.net/wiki/pages/viewpage.action?pageId=5579014145) (id 5579014145, parent Infrastructure 46628932, version 2). Workspace frontmatter updated with page_id; parent_id removed
 - 2026-05-10: KB index reorganised — Infrastructure converted from a flat-page entry under `tech-guidelines/server/_pages.yml` into its own indexed subsection. Created `tech-guidelines/server/infrastructure/_pages.yml` populated with all 39 direct child pages of the Infrastructure Confluence page (descendants pulled via API), Server Transport Ports listed there with `verified: 2026-05-10` / `last_pushed_version: 2`. Server-section `_pages.yml` updated: Infrastructure removed from `pages:`, added under `subsections:` (slug `infrastructure`, indexed). `tree.md` updated to show Infrastructure as indexed (39 pages). Workspace draft `section:` field rebased to `tech-guidelines/server/infrastructure`
 - 2026-05-10: Task placed on hold pending external delivery on Tracks 1/2. No active server-side work until GC dev lands FP-43669 / FP-43670
+- 2026-09-16: Track 2 delivered and the first production rollout scoped. FP-43670 closed — prod GC configs for
+  Mobile / PS / Steam now in VCS (authored in NPN r16405-16406, reached MFT by merge r16524); Nintendo/XBox configs
+  gained `counters.per_second_window`. Release vehicle created — `2026.5.1 GameCarrier Migration` carrying FP-43632
+  (driver; stays open and moves to the next stage when the version is released), FP-43670 and FP-46179 — shipping
+  from the same build as `2026.5.2 PremiumShop Rod-Setup Display Server Hotfix`. Patch window: r16388 (minor
+  increment after the 2026.5 Anniversary Steam release) to r16550.
+  Verified while scoping: GC configs are inert on platforms still on Photon, because `Actions/` and
+  `Actions/GameCarrier/` are parallel script sets and no Photon script reads `config.json`.
+  Process note: the server release checklist template does not apply to this rollout — the Photon -> GameCarrier host
+  switch is run by DevOps, with the server side supplying configs rather than checklist steps.
+  Relates: FP-46179 (the Game port unification shipping in the same version; its own card carries the port detail and
+  the firewall prerequisite)

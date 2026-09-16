@@ -48,10 +48,10 @@ Dates are approximate. What matters is the sequence and the recorded fact of com
 | 9 Sep | Configuration merged across all branches; Mobile package built | ✔ done |
 | 10 Sep | Pilot node introduced on Mobile production | ✔ done |
 | 11–13 Sep | Pilot under observation; rotation switching exercised; entire platform traffic served by the pilot node | ✔ no incidents |
-| 14 Sep | Pilot accepted; second Mobile node taken out of rotation | |
-| 15 Sep | **Mobile maintenance window — Mobile complete** | |
-| 16 Sep | GameCarrier nodes introduced on PlayStation | |
-| 17–20 Sep | PlayStation under observation | |
+| 14 Sep | Pilot accepted | ✔ done |
+| 15–16 Sep | Release package prepared | ✔ done |
+| 17 Sep | **Mobile maintenance window — Mobile complete**; GameCarrier nodes introduced on PlayStation | |
+| 18–20 Sep | PlayStation under observation | |
 | 21 Sep | PlayStation Photon nodes taken out of rotation | |
 | 22 Sep | **PlayStation maintenance window — PlayStation complete** | |
 | 23 Sep | GameCarrier nodes introduced on Steam | |

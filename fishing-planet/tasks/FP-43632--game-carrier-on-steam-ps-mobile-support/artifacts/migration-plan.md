@@ -285,7 +285,7 @@ Two cut-offs, because the two packages are built from different branches at diff
 
 | Package | Platforms                | Built                                | Content must be committed by |
 |---------|--------------------------|--------------------------------------|------------------------------|
-| IMV     | Mobile, Nintendo         | 8 Sep                                | 8 Sep, before the build      |
+| IMV     | Mobile, Nintendo         | 9 Sep                                | 9 Sep, before the build      |
 | MFT     | Steam, PlayStation, Xbox | 15 Sep, before the PlayStation phase | 15 Sep, before the build     |
 
 The order of these windows — IMV a week ahead of MFT — is deliberate and must not be swapped, however
@@ -469,8 +469,8 @@ calendar date. Completed days are marked ✔ in the table below, so progress aga
 | Date       | Day     | Work                                                                                                                                                                                  |
 |------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 7 Sep      | Mon     | ✔ staging build deployed to MOBTEST2; QA started                                                                                                                                     |
-| **8 Sep**  | Tue     | back up the Xbox set (package `27` + `Cfg` + `Act`) **first**, then the branch-chain merges, then build the Mobile package; QA finishes the short BVT; devops finish preparing Node73 |
-| **9 Sep**  | Wed     | **introduce Node73 on GameCarrier** in production                                                                                                                                     |
+| **8 Sep**  | Tue     | ✔ QA continued the BVT; devops prepared Node73. The merges slipped to the 9th |
+| **9 Sep**  | Wed     | ✔ branch chain merged and committed — IMV `r16519` (plus `r16520` reverting two local files swept in by mistake), KNW `r16522`, LBM `r16523`, MFT `r16524`, NPN `r16525` record-only. Still open: back up the Xbox set (package `27` + `Cfg` + `Act`) **before** building, then build the Mobile package and **introduce Node73 on GameCarrier**                                                                                                                                     |
 | **10 Sep** | Thu     | first day of observation, during working hours                                                                                                                                        |
 | 11–13 Sep  | Fri–Sun | observation — devops                                                                                                                                                                  |
 | **14 Sep** | Mon     | verdict on the pilot; Node138 leaves rotation                                                                                                                                         |
@@ -496,8 +496,11 @@ recreated by a rebuild.
 Introductions are deliberately placed on Wednesdays and Thursdays so that observation lands on Friday to
 Sunday, when the team is off and devops are on. That is what the weekly rhythm is for.
 
-**The detector is 8 September.** If QA does not close the BVT on Tuesday, or the package does not build,
-the pilot moves to Thursday and the schedule reverts to finishing on 1 October with no reserve at all.
+**The detector is the end of Thursday 10 September.** The merges slipping by a day costs nothing on its own —
+the pilot introduced on the 9th or the 10th is observed over the same weekend and judged on Monday the 14th
+either way; only the length of observation shrinks. What matters is that the pilot reaches production before
+the team's week ends. If it does not, the weekend is spent idle and the whole chain shifts by one week, to
+8 October.
 
 **The buffer is one day.** With a four-day week a troubled week slips everything by exactly one week — there is
 no "we'll make up half a day" — so the reserve absorbs a bad day, not a bad week. A lost week means 8 October.
