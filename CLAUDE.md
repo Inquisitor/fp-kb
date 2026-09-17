@@ -253,6 +253,7 @@ Do NOT document defensively "just in case". Document what actually came up — a
 - [ASP.NET MVC Area ambient strand](feedback/aspnet_mvc_area_ambient_strand.md) — don't use Areas for admin tools that share `_Layout` ActionLinks; ambient `area` token strands on root Default route
 - [Branch-copy inheritance check](feedback/branch_copy_inheritance.md) — verify before svn merge that the fix isn't already inherited via branch copy
 - [ConfigJson schema extension back-fill](feedback/configjson_extension_backfill.md) — extending the schema of a `ConfigJson` column populated into pre-generated rows requires an idempotent back-fill SQL script
+- [Confluence edits preserve manual layout](feedback/confluence_edit_preserves_layout.md) — check for `data-local-id` and edit nodes in place; a full body rewrite discards table widths and anything else set by hand, and `confluence-md` turns task lists into plain bullets
 - [Don't track other teams' bugs in our backlog](feedback/dont_track_others_team_bugs.md) — when review surfaces bugs in code owned by another team, flag or drop; don't pollute our backlog
 - [FP client IPhotonServerConnection sync](feedback/fp_client_iphotonserverconnection_sync.md) — public additions to `PhotonServerConnection_*.cs` partials must also be declared in `IPhotonServerConnection.cs`; the factory exposes the interface
 - [Impersonal register](feedback/impersonal_register.md) — JIRA comments/issues and cross-team documents carry neither first nor second person; name the actor instead of contorting; verbatim quotes exempt
