@@ -456,8 +456,8 @@ two documents.
 
 | Milestone                                       | Planned | Actual |
 |-------------------------------------------------|---------|--------|
-| Mobile pilot node live on GameCarrier           | 9 Sep   |        |
-| Mobile fully on GameCarrier                     | 15 Sep  |        |
+| Mobile pilot node live on GameCarrier           | 9 Sep   | 10 Sep |
+| Mobile fully on GameCarrier                     | 15 Sep  | 17 Sep |
 | PlayStation fully on GameCarrier                | 22 Sep  |        |
 | Steam fully on GameCarrier — migration complete | 30 Sep  |        |
 
@@ -471,13 +471,13 @@ calendar date. Completed days are marked ✔ in the table below, so progress aga
 | 7 Sep      | Mon     | ✔ staging build deployed to MOBTEST2; QA started                                                                                                                                     |
 | **8 Sep**  | Tue     | ✔ QA continued the BVT; devops prepared Node73. The merges slipped to the 9th |
 | **9 Sep**  | Wed     | ✔ branch chain merged and committed — IMV `r16519` (plus `r16520` reverting two local files swept in by mistake), KNW `r16522`, LBM `r16523`, MFT `r16524`, NPN `r16525` record-only. Still open: back up the Xbox set (package `27` + `Cfg` + `Act`) **before** building, then build the Mobile package and **introduce Node73 on GameCarrier**                                                                                                                                     |
-| **10 Sep** | Thu     | first day of observation, during working hours                                                                                                                                        |
-| 11–13 Sep  | Fri–Sun | observation — devops                                                                                                                                                                  |
-| **14 Sep** | Mon     | verdict on the pilot; Node138 leaves rotation                                                                                                                                         |
-| **15 Sep** | Tue     | Node138 shut down; **Mobile downtime window** the same morning                                                                                                                        |
-| **16 Sep** | Wed     | **introduce five GameCarrier nodes on PlayStation**                                                                                                                                   |
-| **17 Sep** | Thu     | observation — PlayStation                                                                                                                                                             |
-| 18–20 Sep  | Fri–Sun | observation — devops                                                                                                                                                                  |
+| **10 Sep** | Thu     | ✔ Node73 introduced on GameCarrier; observation started                                                                                                                              |
+| 11–13 Sep  | Fri–Sun | ✔ observation, no incidents — rotation switching exercised, and at times the whole platform ran on Node73                                                                            |
+| **14 Sep** | Mon     | ✔ pilot accepted. Node138 left rotation and returned: mobile sessions are short, so a node empties within the hour                                                                    |
+| **15 Sep** | Tue     | ✔ release package prepared; the Mobile window moved to the 17th                                                                                                                      |
+| **16 Sep** | Wed     | ✔ Game port fixed at 4531 across the branch chain — IMV `r16547` through NPN `r16551`                                                                                                |
+| **17 Sep** | Thu     | ✔ **Mobile downtime window — Mobile complete** (build `NxGC#18` from `r16547`); two GameCarrier nodes introduced on PlayStation                                                       |
+| 18–20 Sep  | Fri–Sun | observation — PlayStation, devops                                                                                                                                                     |
 | **21 Sep** | Mon     | five PlayStation Photon nodes leave rotation                                                                                                                                          |
 | **22 Sep** | Tue     | shut down; **PlayStation downtime window**                                                                                                                                            |
 | **23 Sep** | Wed     | **Steam — swap the fleet**, GameCarrier nodes paired with Photon nodes leaving rotation                                                                                               |
