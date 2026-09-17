@@ -5,9 +5,10 @@ pilot is in the task journal; this file holds the measurement and the defect it 
 
 Tracing is off by default in production: a node writes `TracePeers-<App>.log` only while the flag file
 `Flags/TracePeers` exists in the application directory, and the flag is checked once a minute. It was enabled
-by hand on the Mobile pilot node and is permanently on for Nintendo and Xbox. It should be removed once an
-evaluation is over — every check appends a full snapshot of every peer, which cost roughly a quarter of a
-gigabyte per day on the pilot.
+by hand on the Mobile pilot node and is permanently on for Nintendo and Xbox. The log does not grow without
+bound: the three traces below were taken whole, yet they span nearly the same two and a half days while
+ranging from half a gigabyte to two — so something rotates them. Leaving the flag on is established practice
+rather than an oversight; the mechanism has not been identified.
 
 ## Method
 

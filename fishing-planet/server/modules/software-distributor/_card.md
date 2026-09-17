@@ -38,9 +38,15 @@ Entries may declare `"Variables": "PublicIp,PublicAddress"`, which the distribut
 
 `Build/Package.cmd` publishes to three separate locations: the versioned archive `pack<N>.7z` to `C:\Shared\Pub`, `SoftwareDistributor/Actions/*` to `C:\Shared\Act`, and `SoftwareDistributor/Configs/*` to `C:\Shared\Cfg`. The two latter are wiped before copying. On the node, `Download.cmd` fetches package and configs from those separate shares; `Apply.cmd` unpacks and applies.
 
+Which of the two script sets a node runs is decided on the node, not by the package: the agent's `Web.config`
+carries `ActionDir`, pointing at `\\Distributor\Act` on a Photon node and `\\Distributor\Act\GameCarrier` on a
+GameCarrier one. Moving a node between the frameworks is that key plus the GameCarrier runtime under
+`C:\Photon`, which is delivered outside the package — the package is the same either way, since it carries
+only the business logic.
+
 ## Gotchas (firm)
 - **Only the last build is available.** Package numbers shown as "Installed" / "Available" are TeamCity build counters, and the shares hold one current set. Different platforms therefore sit on wildly different numbers (Photon prod in the 800s, Xbox GC in the 20s, Nintendo in the 10s) purely because they are separate build configurations with separate counters.
-- **Neither configs nor actions are versioned with the package.** A deployment is three artefacts — `pack<N>.7z` in `C:\Shared\Pub`, configs in `C:\Shared\Cfg`, action scripts in `C:\Shared\Act` — and only the first carries a version; the other two are wiped and rewritten by every build. Redeploying an older package pairs it with whatever the last build left in the two shares. A backup must cover all three: the package alone does not restore a working node, and a mismatched `Act` breaks Apply itself rather than merely deploying stale settings. See [backlog](backlog.md).
+- **Neither configs nor actions are versioned with the package.** A deployment is three artefacts — `pack<N>.7z` in `C:\Shared\Pub`, configs in `C:\Shared\Cfg`, action scripts in `C:\Shared\Act` — and only the first carries a version; the other two are wiped and rewritten by every build. Redeploying an older package pairs it with whatever the last build left in the two shares, so a rollback needs all three. Two routes exist: back the set up before building (current DevOps practice), or restore `Act` and `Cfg` from SVN at the revision the build recorded in TeamCity. What does not work is the package alone — and a mismatched `Act` breaks Apply itself rather than merely deploying stale settings. See [backlog](backlog.md).
 - **Production build configurations differ only by branch.** One build script serves all F2P platforms; separate scripts exist where a platform builds from a different SVN branch, not because the packaging differs.
 - **Synchronous I/O in `Distributor.cs` constructor** — `.Result` on file load blocks on a network filesystem (from the FP-43424 catalogue; not re-verified here).
 
