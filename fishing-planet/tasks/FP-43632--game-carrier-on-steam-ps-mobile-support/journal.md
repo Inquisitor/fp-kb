@@ -85,3 +85,9 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   markdown task lists as plain bullets, so the page is maintained through the API and no local copy is held.
   The release-checklists section was indexed in KB in the process, and the converter gap parked in the KB
   backlog.
+- 2026-09-17: First production rollout shipped. Mobile is fully on GameCarrier - build 18 from IMV deployed, farm
+  rebooted and verified - and the first two PlayStation nodes were introduced on GameCarrier the same day, from the
+  MFT-side package (Xbox build 28; one package serves every platform, the distributor picks configs by farm name).
+  Minor protocol version incremented on IMV afterwards - r16565, `1122.9 -> 1122.10` - marking the boundary in
+  Stats -> Errors; the farm had been on an October 2025 build, so it took three accumulated fixes along with the
+  transport switch. Schedule page updated with the actual date.
