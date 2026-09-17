@@ -68,3 +68,12 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   switch is run by DevOps, with the server side supplying configs rather than checklist steps.
   Relates: FP-46179 (the Game port unification shipping in the same version; its own card carries the port detail and
   the firewall prerequisite)
+- 2026-09-17: Mobile pilot accepted on connection-level evidence rather than absence of complaints. Over 46 hours
+  under the full load of the platform, with GameCarrier carrying about 490 of the 526 connections at peak, not one
+  GameCarrier connection was ever orphaned. Comparing the pilot against Nintendo and Xbox traces did uncover a
+  defect, present on Nintendo for 220 days and never measured before: peer objects whose connection dropped before
+  authentication are never released, in exactly one combination - the Game application over TCP. The same TCP on a
+  Master node and the same Game application over WSS and QUIC are clean, and counters show the sockets are already
+  closed while the objects remain. Not a regression of the migration, and cleared by any deployment; questions for
+  GC dev parked in [backlog](backlog.md). Measurement and matrix:
+  [artifacts/orphaned-peers-2026-09-17.md](artifacts/orphaned-peers-2026-09-17.md)
