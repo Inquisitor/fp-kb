@@ -289,7 +289,9 @@ answer is in `DataChanges`.
 
 - [JIRA comment formats](reference/jira_comment_formats.md) — ADF formats for SVN commit notes and cross-branch merge notes
 - [Commit message format](reference/commit_message_format.md) — SVN task/merge + KB-git commit templates and rules; **read before composing any commit message**
-- [Knowledge homes & authoring](reference/knowledge_homes.md) — where a rule belongs (homes + visibility nesting), the cross-audience mirror exception, memory-note abstraction/drop rules; **read when authoring or promoting**
+- [Knowledge homes & authoring](reference/knowledge_homes.md) — where a rule belongs (homes + visibility nesting), the cross-audience mirror exception, memory-note abstraction/drop rules, and where the last-checked date of an external claim is kept; **read when authoring or promoting**
+- [Confluence API and tooling](reference/confluence_api.md) — what the tooling does (page/database reads, in-place node edits, body rewrites, size limits), REST endpoints and auth, anchor-link format; claims are dated and meant to be re-tested
+- [External claims and their re-check cycle](reference/external_claims_recheck.md) — how a claim about an external system is recorded so it can expire: claim and first-observed date in KB, last-checked and due dates in a memory register, re-check only after asking; **read before working around any external limitation**
 - [JIRA Executor field](reference/jira_executor_field.md) — `customfield_11224` (userpicker), fetch explicitly via `getJiraIssue`
 - [JIRA required fields on create](reference/jira_required_fields.md) — Scrum Team `customfield_11001` required (Other=`10203`); option ids, Severity, components, no "Task" type (use Story), epic-link via `parent`, cloudId
 - [JIRA bug ticket format](reference/jira_bug_ticket_format.md) — the standard for every bug, ours included: summary tag formula, ENV/PRE-STR/STR/ACT/EXP skeleton, evidence placement, which fields are always filled and which are never touched; **read before filing a bug**
@@ -312,6 +314,7 @@ answer is in `DataChanges`.
 - No counts in enumerative prose — write "Open questions:", not "three open questions"; the number goes stale the moment an item is added or removed. Keep a count only when a claim depends on it. Applies to KB notes, JIRA, plans, commit bodies, docs
 - log.md is append-only — never delete entries
 - backlog.md items bubble up on task close, never deleted silently
+- **Before working around any limitation of an external system** (tooling, third-party service, someone else's configuration), Read [`reference/external_claims_recheck.md`](reference/external_claims_recheck.md) and consult the memory register it describes. Such claims expire; a re-check is **asked for, never taken on your own initiative**
 - Never write security root causes (exploit details, bypass methods)
 - Never store credentials, connection strings, API keys
 - Use Executor (not Assignee) in task/review files

@@ -32,6 +32,16 @@ This exception is narrow: it does NOT license copying within one audience/visibi
 
 Nothing lives in memory long-term except machine-specific / personal-project bits with no other home. Everything else is **transit**: cement it into its home — a skill (for a behavior), a KB reference (for a rule), project CLAUDE.md (for a project fact), global (for a personal pref) — and clear it. The periodic memory sweep IS this cementing.
 
+## The exception: external claims
+
+A claim about an external system — tooling behaviour, third-party configuration, someone else's limits — splits
+across homes. The claim and the date it was first observed go to KB; the last-checked and due dates go to a
+memory register that is deliberately never promoted, because updating them must not cost a commit. This is the
+one sanctioned exception to the inbox rule above.
+
+Full procedure, including the rule to ask before spending a re-check:
+[external_claims_recheck](external_claims_recheck.md).
+
 ## Abstracting a memory note on the way into KB
 
 - **Paths**: `<kb>/...` (KB root) and `<project>/...` (working tree root) placeholders, not absolute paths
