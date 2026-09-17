@@ -77,3 +77,11 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   closed while the objects remain. Not a regression of the migration, and cleared by any deployment; questions for
   GC dev parked in [backlog](backlog.md). Measurement and matrix:
   [artifacts/orphaned-peers-2026-09-17.md](artifacts/orphaned-peers-2026-09-17.md)
+- 2026-09-17: Verification checklist for the rollout published as
+  [2026.5.1 - GameCarrier Migration Server Release checklist](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5960925185/2026.5.1+-+GameCarrier+Migration+Server+Release+checklist)
+  under SERVER RELEASE CHECKLISTS, in the standard template format. Built from the DevOps reconfiguration kit,
+  the distributor mechanics and this task's findings; the database and content steps of the template are
+  listed as explicitly out of scope, with the reason. Kept in Confluence only - `confluence-md` publishes
+  markdown task lists as plain bullets, so the page is maintained through the API and no local copy is held.
+  The release-checklists section was indexed in KB in the process, and the converter gap parked in the KB
+  backlog.

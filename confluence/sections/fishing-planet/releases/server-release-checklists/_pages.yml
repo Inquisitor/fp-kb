@@ -1,0 +1,29 @@
+title: SERVER RELEASE CHECKLISTS
+page_id: 60097315
+parent_id: 28442650
+indexed: 2026-09-17
+
+pages:
+  - id: "4395597825"
+    title: "[TEMPLATE] YYYY.N - ReleaseName Server Release checklist"
+    notes: current template; items still carrying the construction marker are unvalidated
+  - id: "5960925185"
+    title: "2026.5.1 - GameCarrier Migration Server Release checklist"
+    verified: 2026-09-17
+    last_pushed_version: 4
+    notes: template format, own step set - database and content steps do not apply; maintained via API, not confluence-md
+  - id: "5815500832"
+    title: "2026.6 - Australia Server Release checklist"
+  - id: "5803934180"
+    title: "2026.5 - Anniversary (ex.Fathers Day) Server Release checklist"
+  - id: "5551947777"
+    title: "2026.4 - FTUE/Old Ponds Rework Server Release checklist"
+  - id: "5403607042"
+    title: "2026.3 - Leaderboards/Matchmaking/DailyMissions Server Release checklist"
+  - id: "5204312065"
+    title: "2025.8 - Norway Server Release checklist"
+  - id: "4767252482"
+    title: "2025.5 Maldives - Server Release checklist"
+  - id: "60097431"
+    title: "[OLD] Server release checklist template"
+    notes: superseded by the template above

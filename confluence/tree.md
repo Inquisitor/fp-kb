@@ -2,7 +2,7 @@
 
 > Section router. Lists indexed sections with themes — NOT individual pages.
 > For page-level detail, follow the link to `_pages.md` in sections/.
-> Last updated: 2026-03-23
+> Last updated: 2026-09-17
 
 ## GDD (1146886)
 | Section Path                              | ID         | Pages | What's Inside                                                  |
@@ -23,10 +23,14 @@
 | TECH > SERVER > Analytics / Stats                   | 1947140105 | —     | Analytics and statistics                                          |
 | TECH > SERVER > Modules                             | 3616899087 | —     | Module-level docs                                                 |
 
+## RELEASES (28442650)
+| Section Path                          | ID       | Pages | What's Inside                                            |
+|---------------------------------------|----------|-------|-----------------------------------------------------------|
+| RELEASES > SERVER RELEASE CHECKLISTS  | 60097315 | 9     | Per-release server checklists and the current template   |
+
 ## Unindexed Top-Level Sections
 - TOOLS / WEBADMIN (208306645)
 - QA department (1540168)
-- RELEASES (28442650)
 - CONTENT (1931313161)
 - MARKETING (208077015)
 - PLANS (2949304)
