@@ -91,3 +91,9 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   Minor protocol version incremented on IMV afterwards - r16565, `1122.9 -> 1122.10` - marking the boundary in
   Stats -> Errors; the farm had been on an October 2025 build, so it took three accumulated fixes along with the
   transport switch. Schedule page updated with the actual date.
+- 2026-09-17: Firewall gating folded into the release procedure, out of this rollout. The farm is now closed to
+  players before it is started, checked from the inside while they are still shut out, and opened only after;
+  clearing the maintenance file moved to the very end, because that file is what explains an outage to the
+  client - cleared early, an emergency stop looks to players like a plain connection failure. The value showed
+  immediately: missing performance counters were caught behind the gate and fixed with a farm restart nobody
+  saw. Applied to the checklist template and to both unreleased checklists, this release's and Australia's.
