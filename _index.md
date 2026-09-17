@@ -65,11 +65,13 @@
 
 Release↔branch mapping — one branch can host several releases at once; a reviewed commit's merge targets follow the RELEASE it ships with, not the role table alone (downward merges are user-directed; see `jira-review-close` → Step 3).
 
-| Release                  | Ships from (server) | Status                                                                                                                                         |
-|--------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| FTUE                     | MFT20260325         | Released on Steam/EGS, PlayStation, Xbox; not released on Mobile and Nintendo — expected to catch up via FPA                                   |
-| 2026.5 Anniversary (FPA) | MFT20260325         | In progress, target 2026-07-27; continuation of FTUE from the same branch — in-branch boundary is the `F2PProtocolVersion` 1125→1126 increment |
-| 2026.6 Australian        | NPN20260602         | In development                                                                                                                                 |
+| Release                                              | Ships from (server)                                               | Status                                                                                                                                  |
+|------------------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| FTUE                                                 | MFT20260325                                                       | Released on Steam/EGS, PlayStation, Xbox; not released on Mobile and Nintendo — expected to catch up via FPA                            |
+| 2026.5 Anniversary (FPA)                             | MFT20260325                                                       | Released on Steam 2026-07-30, PlayStation 2026-08-04, Xbox 2026-08-05 (all on SRV/16375, protocol 1126.0); Mobile and Nintendo pending  |
+| 2026.5.1 GameCarrier Migration                       | IMV20250220 (Mobile, Nintendo) / MFT20260325 (Steam, PlayStation) | Mobile live 2026-09-17 — build NxGC#18 from IMV r16547, protocol 1122.10; PlayStation under observation, window 22 Sep; Steam 23-30 Sep |
+| 2026.5.2 PremiumShop Rod-Setup Display Server Hotfix | MFT20260325                                                       | Pending — MFT-only, so it did not travel with the Mobile rollout                                                                        |
+| 2026.6 Australia                                     | NPN20260602                                                       | In development                                                                                                                          |
 
 > The client always releases from MainClient (per-release pin revisions: Branch Roles above).
 > Update on each release cut / release-plan change.
