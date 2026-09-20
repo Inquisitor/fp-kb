@@ -83,3 +83,11 @@ sync restoration, pilot deploy from a Git branch.
   confluence-md, v8 rename to "Git Flow for the Server Team" via API; title-only publish is not
   supported by the tool). Rationale link now points to page version history. Options draft moved
   to confluence/archive/.
+- 2026-08-15: Follow-up conversion ticket FP-45872 created (Story, Server, Internal/Async, Tech
+  Debt 2026 Q3): convert the repo to Git on GitLab. First-conversion audit input gathered —
+  [fp-server branch inventory](../FP-45872--repo-conversion/artifacts/fp-server-branch-inventory.md) (full SVN
+  tree as of 2026-04-08, no MFT20260325/NPN20260602, no SVN-rev metadata, committer dates =
+  import dates). Retroactive semver tagging agreed as a separate follow-up after conversion.
+- 2026-08-15: Semver follow-up ticket FP-45873 created (Story, Server, Internal/Async, Tech Debt
+  2026 Q3; Relates: FP-45872 (JIRA-linked as blocked-by)): go-forward scheme, retroactive release
+  tags on the converted repo, Confluence timeline documentation.
