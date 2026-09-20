@@ -20,6 +20,7 @@
 | FP-33074 | chat-messages-disappear        | implementing  | fishing-planet/tasks/FP-33074--chat-messages-disappear/                 |
 | FP-44725 | abtests-cache-refresh-reminder | planned       | fishing-planet/tasks/FP-44725--ab-tests-cache-refresh-reminder-on-prod/ |
 | FP-44946 | git-workflow                   | in-progress   | fishing-planet/tasks/FP-44946--svn-to-git-migration/                    |
+| FP-45872 | repo-conversion                | in-progress   | fishing-planet/tasks/FP-45872--repo-conversion/                         |
 | FP-45093 | fpa-release                    | planned       | fishing-planet/tasks/FP-45093--fpa-release/                             |
 | FP-45122 | fish-fight-protocol            | in-progress   | fishing-planet/tasks/FP-45122--fish-fight-protocol/                     |
 | FP-45231 | nonroot-mergeinfo-cleanup      | in-progress   | fishing-planet/tasks/FP-45231--nonroot-mergeinfo-cleanup/               |
