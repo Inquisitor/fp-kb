@@ -63,8 +63,22 @@ The cycle runs Sundays. Window is the prior Mon-Sun (e.g. week-7 sweep on 2026-0
 This step is a **screen**, not a verdict: a broad, cheap first pass that deliberately over-selects
 and hands everything it catches to the review. Say "screen", not "gate".
 
-Run `artifacts/week3-cs-report.sql` on each platform PROD MAIN with `@WindowStart` set to the
-window's Monday. Screening criteria:
+Run `artifacts/detection-screen.sql` on each platform PROD MAIN with `@WindowStart` set to the
+window's Monday at 00:00 and `@WindowEnd` to the following Monday at 00:00.
+
+**The window is bounded at both ends and cut on `EndDate`** *(corrected week-20)*. A competition
+belongs to the week in which it **ends**, which is how the leaderboard attributes it: competition
+331553 ran Sunday 2026-09-06 22:00 to Monday 00:00 and both its winners carry those wins in the
+following period. Cutting on `StartDate`, as the screen did from week-3 to week-19, therefore
+selected a different set from the board -- it pulled in the Sunday 22:00 competition belonging to
+the next week and dropped the previous Sunday's, which belonged to this one. Measured on the week-19
+Steam window: the same 83 competitions either way, but 1 candidate different in each direction, and
+the one the old filter missed was a returning WATCH.
+The upper bound matters separately: the screen had none until week-20, so its span depended on when
+the script was run. Re-running the week-19 window on 2026-09-20 returned 91 registrations for a
+candidate who had 33 — the mechanism behind the contaminated post-ban re-run recorded in week-18.
+
+Screening criteria:
 
 - `Unproductive >= 6` — registrations that produced no competitive result: **no-shows plus
   zero-score finishes**. Disqualifications are excluded: a DQ follows a ban, so those accounts are
@@ -142,10 +156,23 @@ prize zone itself.
 Leaderboards are per-platform, and only a ban on the same board can lift anyone. The bound is
 deliberately loose: the exact figure is recursive and the loose one is a minute of arithmetic.
 
-**Drift.** The period is still running when the zone is computed, so a candidate can still climb.
-The bound is not a guess: by the time the sweep is judged, registration for the remaining
-competition has closed, so a candidate can gain at most as many wins as he has **unfinished
-competitions still registered for**. Query it rather than padding N by feel.
+**The board is final from 22:00 UTC on Sunday** *(established week-20)*. A competition belongs to
+the week in which it ends, so the last one counting to a week is the one ending at 22:00; anything
+starting at 22:00 ends at midnight and belongs to the next week. Compute the risk zone after 22:00
+and the figures cannot move.
+
+The drift allowance this step carried in week-19 — bounding a candidate's remaining climb by the
+competitions he is still registered for — is **withdrawn**. It answers a question that cannot arise,
+and on its first use it gave a wrong answer, crediting a candidate with a possible extra win from a
+competition that could not count to his week.
+
+**Tie-break, and why it does not open a route.** Places within an equal win count are ordered by the
+timestamp at which the count was reached, earliest first — verified across 3 tie groups in period
+20260907. The winner of the boundary competition therefore holds the earliest possible timestamp of
+the following period and heads every tie he is in. Measured across 20 finalised weekly periods on
+Steam: a single win was **never once rewarded**, the fewest wins ever paid was 2, and the closest a
+single win came was 14th place against a paying depth of 10. The position is real and worth nothing;
+do not spend review time on it.
 
 Compute the zone **before** dispatching the trial, and order the cohort by leaderboard position.
 Candidates outside the zone are still judged in the same run and banned the same way — they are
@@ -414,10 +441,25 @@ makes release profitable.
 2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak. Where the pattern
    is weak, WATCH applies to a REPEAT just as it would to a NEW candidate. The bracket in which
    the prizes sit is not what makes a pattern weak — see rule 1.
-3. (reframed week-13) Data-sufficiency objection, and the **only** leniency available on
-   evidentiary grounds: fewer than 10 competitions **PLAYED** in the window. This is a claim
-   about how much evidence exists, not about who the player is. Unavailable where SQL volume is
-   high and the ledger merely looks thin because the rating sat at the floor (see Step 4.5).
+3. (reframed week-13; **counter corrected week-19**) Data-sufficiency objection, and the **only**
+   leniency available on evidentiary grounds: fewer than **15 registrations** in the window. This
+   is a claim about how much evidence exists, not about who the player is. Unavailable where SQL
+   volume is high and the ledger merely looks thin because the rating sat at the floor (see
+   Step 4.5).
+   **Count events, not games.** Between weeks 13 and 19 the counter was "fewer than 10 competitions
+   PLAYED", and that measures the wrong thing: the offence consists of *not* playing, so the harder
+   a candidate drains the fewer games he has and the more readily the leniency shelters him. At a
+   68% unproductive share it takes more than 30 registrations to reach 10 games. Week-19 released
+   two candidates on the old counter, one of them (ZellyRolled) with limb 1(b) expressly found met
+   and the rule 5 signature verified on the rating chain — the pattern was established and the
+   release rested on a single missing game. That required an operator override to correct.
+   **Why 15 and not 10.** The screen requires at least 6 unproductive events and more than 3 prizes,
+   and a prize requires a start, so **every candidate reaching review has at least 10 events by
+   construction**. A threshold of 10 on events could therefore never fire — it is the floor, not a
+   measure. 15 sits above the floor and reaches the cases the rule is actually for: at 11 events a
+   candidate is 6 unproductive and 5 played with 4 prizes, a stark ratio on denominators far too
+   small to carry it. Do not lower this to 10 for symmetry with the screen; that is the mistake this
+   note exists to prevent.
 4. (broadened week-13) Any candidate returning to the cohort after a prior WATCH whose NOOBS
    flavor has appeared or grown (NOOBS prizes appear or increase, or MIDDLES->NOOBS drops appear
    or increase) is BAN without further deliberation. Previously scoped to watchlist entries
@@ -499,6 +541,20 @@ for t in data['result']['trials']:
     print(t['name'], v.get('finalVerdict'), v.get('banDuration'), v.get('confidence'))
 ```
 
+**Persist the verdicts** *(added week-20)*. The workflow's output lives in a session-temporary file
+and does not survive the session. Immediately after the run, write the verdicts to
+`pcr-log-trajectories-<date>/_verdicts.md` alongside the cards: one entry per candidate carrying
+name, platform, board rank, verdict, duration, confidence, the rules the judge actually relied on,
+the counterfactual ceiling where one was computed, and the reasoning. Leave the prosecution and
+defence arguments out — they run to hundreds of kilobytes and are only useful while the case is
+live. The result is on the order of 100 KB and belongs in the cycle commit.
+
+Week-19 is the cautionary case: its ban record cites a 6/6 split, per-case confidences and a finding
+that limb 1(b) was met, and a week later none of that could be checked against anything in the
+repository. That cycle also carried an operator override — precisely the decision a later reader
+will want to audit. Its verdicts were recovered on 2026-09-20 only because the temporary file
+happened to still be on disk.
+
 ### 6. Ban execution — three layers
 
 Trial-confirmed BAN verdicts (minus any already-Support-actioned with future BanEnd) go into
@@ -568,6 +624,27 @@ stale from week-3 and are wrong):
 - REPEAT BanUntil = 8 weeks, same Monday alignment. Same example: 08-10 + 56d = 2026-10-05.
 - Rationale for the raise, and the measured recidivism intervals behind it, are in the week-13
   ledger row and in `bans-2026-08-02.sql`.
+
+**REPEAT counts any expired competition ban, not only ours** *(settled week-20)*. The detection
+query has always defined it that way — an expired competition ban dated after the matchmaking launch
+of 2026-04-29 — and practice had drifted to counting only bans this project issued.
+
+The drift came from conflating 2 different stages. Week-13 made the review **Support-blind** so that
+judges could not reason "banned because someone else banned", and NEW/REPEAT was narrowed to our own
+history to keep the pre-trial context clean. That was right for the context field. It was never
+meant to reach the **tariff**, which the operator sets after the verdict, where no blindness is
+required or useful.
+
+No reason-based downgrade. Support's banLog entries carry no reason string, so the vector is usually
+unknowable — but a competition ban means the account did something in competitions, and rating-drop
+is the mildest thing that earns one. An unknown reason is therefore more likely to be graver than
+this offence, not lighter.
+
+**The trial stays Support-blind.** The case context continues to carry our own ban history only. The
+operator reads the full history when setting the duration.
+
+Effect, measured: 2 to 3 candidates per cycle. On week-19, Pilou62 and FOGGIA1920 would have carried
+8 weeks rather than 4. Not applied retroactively.
 
 ### 7. Verification — 3-layer post-ban check
 
@@ -751,8 +828,12 @@ artifacts/
 ```
 
 Static shared artifacts (not per-cycle):
-- `artifacts/week3-cs-report.sql` — the canonical detection query (only `@WindowStart` ever
-  changes; despite the "week3" name, the query is the same for every cycle 3+)
+- `artifacts/detection-screen.sql` — the canonical detection query. Only `@WindowStart` and
+  `@WindowEnd` change between cycles, and **the values committed in the file are last cycle's, not
+  this one's** — the dates are run parameters that happen to live in the source, so the committed
+  state is always one week stale by design. Set both before running. Renamed from
+  `week3-cs-report.sql` in week-20; it had carried the name of its first cycle for 17 weeks and
+  records written before then refer to it by the old name.
 - `artifacts/leaderboard-ban-sync.sql` — LB sync, idempotent, safe to re-run
 
 ## Key concepts that distinguish BAN from WATCH
@@ -908,6 +989,12 @@ section the cycle it's discovered, then carried forward via memory rules.
 | week-18 | **Outage defence closed.** Planned downtime cancels competitions outright, so it produces no absences; unplanned incidents are rare and are a question for the operator, not a query. Measured once and found absent | (step 5) |
 | week-18 | **SQL is complete but split** at roughly 60 days into `Archive*` tables, which do carry the FP-43816 columns. The failure mode is silent — the live tables simply return nothing for older periods, which reads as inactivity | (step 3) |
 | week-18 | **Trial-Support alignment counter retired.** Unmaintained since week-13 and never a validation; Support overlap stays as per-cycle context in the ban record, unscored | (alignment table above) |
+| week-20 | **Screen window cut on `EndDate` and bounded at both ends.** A competition belongs to the week it ends in, which is how the leaderboard attributes it; the old `StartDate` filter selected a different set and had no upper bound, so its span depended on run time. Measured: same 83 competitions, 1 candidate different each way, and the one missed was a returning WATCH | (step 1; `detection-screen.sql`) |
+| week-20 | **`week3-cs-report.sql` renamed `detection-screen.sql`** after 17 weeks under the name of its first cycle. Committed window dates are always last cycle's -- they are run parameters living in source | (step 1) |
+| week-20 | **Board is final from 22:00 UTC Sunday; the week-19 drift allowance is withdrawn.** Tie-break is by earliest timestamp, so the boundary competition's winner heads his tie group -- measured worthless: across 20 weekly periods a single win was never rewarded, best placing 14th against a paying depth of 10 | (step 1.5) |
+| week-20 | **Trial verdicts are persisted** to `pcr-log-trajectories-<date>/_verdicts.md`. Week-19's cited a 6/6 split and per-case confidences that could not be checked a week later; recovered only because the temporary file happened to survive | (step 5) |
+| week-20 | **REPEAT counts any expired competition ban, not only ours.** Support-blindness belongs to the trial, not to the tariff; the 2 were conflated in week-13. No reason-based downgrade -- rating-drop is the mildest offence a competition ban is given for | (step 6) |
+| week-19 | **Rule 3 counts events, not games, and the threshold moves to 15.** The old counter (fewer than 10 PLAYED) measured the wrong quantity -- the offence is not playing, so the heaviest drainers had the fewest games and were sheltered most readily. It released 2 of 12 candidates this cycle, one with the pattern expressly established, and needed an operator override to correct. 10 events is the screen's structural floor and cannot serve as a threshold | (step 5 rule 3; `bans-2026-09-13.md`) |
 
 ## Example: week-7 walkthrough (2026-06-22 ban date)
 
@@ -941,7 +1028,7 @@ was always real).
 
 This document is the entry point. Concrete recent examples for every step are in:
 
-- `artifacts/week3-cs-report.sql` — detection query
+- `artifacts/detection-screen.sql` — detection query
 - `artifacts/bans-2026-07-12.sql` — most recent ban execution
 - `artifacts/bans-2026-07-12.md` — most recent execution record with full trial verdicts + refinements ledger
 - `artifacts/ban-log-backfill-2026-07-12.js` — Mongo banLog backfill
@@ -983,7 +1070,7 @@ consultation post-week-10; not blocking for the weekly cycle but worth acting on
 - **ZeroScore column as second detection path.** The current gate treats `IsStarted=1 AND
   Score=0` (zero-score) as a legitimate play. A farmer who starts a comp and immediately
   disconnects/idles achieves the same NOOBS-drain outcome as a no-show without triggering the
-  `IsStarted=0` signature. `week3-cs-report.sql` already emits `ZeroScore` per candidate; add
+  `IsStarted=0` signature. `detection-screen.sql` already emits `ZeroScore` per candidate; add
   a second-path detection query `zero-score-abuse.sql` that gates on `ZeroScore >= 6` AND
   `NoShowSharePct < 30` (i.e. the population no-show gate misses) AND `TotalPrizes > 3`. Run
   alongside the no-show gate; merge cohorts for the trial.

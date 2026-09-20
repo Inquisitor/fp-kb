@@ -38,15 +38,29 @@
 --
 -- Already-banned players are NOT excluded — Verdict (trailing) classifies them so Support sees recidivism.
 BEGIN
-    DECLARE @WindowStart                 datetime     = '2026-08-31';
+    DECLARE @WindowStart                 datetime     = '2026-09-14';   -- the window's Monday, 00:00
+    DECLARE @WindowEnd                   datetime     = '2026-09-21';   -- the following Monday, 00:00 (exclusive)
     DECLARE @MinUnproductive             int          = 6;
     DECLARE @MinUnproductiveSharePct     decimal(6,2) = 30.00;
     DECLARE @MaxRatingFromUnproductive   int          = -90;
     DECLARE @MinTotalPrizes              int          = 4;
 
+    -- A competition belongs to the week in which it ENDS, which is how the leaderboard attributes
+    -- it (established week-20 on competition 331553: it ran Sun 22:00 -> Mon 00:00 and both its
+    -- winners carry those wins in the following period). Filtering on StartDate therefore selected
+    -- a different set from the board: it pulled in the Sunday 22:00 competition that belongs to the
+    -- next week, and dropped the previous Sunday's, which belongs to this one. Measured on week-19
+    -- Steam, the two windows cover the same 83 competitions but differ by 1 candidate each way --
+    -- and the one the old filter missed was a returning WATCH.
+    --
+    -- @WindowEnd also gives the window an upper bound, which it never had. Without one the screen's
+    -- span depended on when the script was run: re-running the week-19 window on 2026-09-20 returned
+    -- 91 registrations for a candidate who had 33. That is the mechanism behind the contaminated
+    -- post-ban re-run recorded in week-18.
     WITH Window AS (
         SELECT t.TournamentId FROM Tournaments t WITH (NOLOCK)
-        WHERE t.StartDate >= @WindowStart AND t.KindId=3 AND t.IsEnded=1 AND t.IsCanceled=0 AND ISNULL(t.IsDeleted,0)=0
+        WHERE t.EndDate >= @WindowStart AND t.EndDate < @WindowEnd
+          AND t.KindId=3 AND t.IsEnded=1 AND t.IsCanceled=0 AND ISNULL(t.IsDeleted,0)=0
     ),
     Activity AS (
         SELECT p.UserId, p.IsStarted, p.IsDisqualified, p.CompetitionRatingAtStart AS RatingAtStart,
