@@ -8,7 +8,7 @@ related: FP-43669, FP-43670
 # FP-43632: [GameCarrier] Migration coordination — Mobile / PS / Steam
 
 ## Status
-**Mobile is on GameCarrier** (2026-09-17). The first production rollout shipped under `2026.5.1 GameCarrier Migration`: build NxGC#18 from IMV r16547, farm rebooted and verified behind a closed firewall, minor protocol version incremented afterwards (IMV r16565, `1122.9 -> 1122.10`). The first two PlayStation nodes went onto GameCarrier the same day; PlayStation is under observation until the verdict on 21 September, its window is 22 September, and Steam follows 23-30 September. Track 2 is delivered — FP-43670 closed, prod GC configs for Mobile / PS / Steam in VCS and merged to MFT. Track 1 (FP-43669 build automation) is still To Do with GC dev; Track 3 (local dev environment) stays deferred behind it. The host switch itself is run by DevOps under the release checklist, which now shuts players out with the firewall while the farm is checked.
+**Mobile is on GameCarrier** (2026-09-17). The first production rollout shipped under `2026.5.1 GameCarrier Migration`: build NxGC#18 from IMV r16547, farm rebooted and verified behind a closed firewall, minor protocol version incremented afterwards (IMV r16565, `1122.9 -> 1122.10`). The first two PlayStation nodes went onto GameCarrier the same day; PlayStation came through its observation weekend without incident; its downtime window is 23-24 September, when the four remaining Photon nodes leave, two more prepared GameCarrier nodes join the two already carrying the farm, and the master is moved over. Steam is being prepared in parallel rather than after, so the two platforms overlap. Track 2 is delivered — FP-43670 closed, prod GC configs for Mobile / PS / Steam in VCS and merged to MFT. Track 1 (FP-43669 build automation) is still To Do with GC dev; Track 3 (local dev environment) stays deferred behind it. The host switch itself is run by DevOps under the release checklist, which now shuts players out with the firewall while the farm is checked.
 
 Earlier context (through 2026-05-10), awaiting external delivery on Tracks 1 and 2 (FP-43669 build automation, FP-43670 prod GC configs in VCS — both with GC dev). Server-side coordination cycle is complete: TeamCity pipeline audit done, canonical `vhosts[]` ordering established and applied to existing Nintendo/XBox configs, two adjacent JIRA stories filed for GC-dev work, context comment + canonical reference attached to FP-43670, Confluence reference page "Server Transport Ports" published under Infrastructure (id 5579014145). Track 3 (local dev environment) intentionally deferred until Track 1 lands the first automatic build. Two non-blocking parking lots in [backlog](backlog.md): Chat-port cleanup tech-debt and a one-time GC sources audit for PHOTON-over-UDP transport. Resumes when Track 1 / Track 2 progress lands.
 
@@ -73,10 +73,10 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   GameCarrier connection was ever orphaned. Comparing the pilot against Nintendo and Xbox traces did uncover a
   defect, present on Nintendo for 220 days and never measured before: peer objects whose connection dropped before
   authentication are never released, in exactly one combination - the Game application over TCP. The same TCP on a
-  Master node and the same Game application over WSS and QUIC are clean, and counters show the sockets are already
-  closed while the objects remain. Not a regression of the migration, and cleared by any deployment; questions for
+  Master node and the same Game application over WSS and QUIC are clean, and counters appeared to show the
+  sockets already closed while the objects remained - a reading overturned on 21 September, see below. Not a regression of the migration, and cleared by any deployment; questions for
   GC dev parked in [backlog](backlog.md). Measurement and matrix:
-  [artifacts/orphaned-peers-2026-09-17.md](artifacts/orphaned-peers-2026-09-17.md)
+  [artifacts/orphaned-peers.md](artifacts/orphaned-peers.md)
 - 2026-09-17: Verification checklist for the rollout published as
   [2026.5.1 - GameCarrier Migration Server Release checklist](https://fishingplanet.atlassian.net/wiki/spaces/FP/pages/5960925185/2026.5.1+-+GameCarrier+Migration+Server+Release+checklist)
   under SERVER RELEASE CHECKLISTS, in the standard template format. Built from the DevOps reconfiguration kit,
@@ -97,3 +97,19 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   client - cleared early, an emergency stop looks to players like a plain connection failure. The value showed
   immediately: missing performance counters were caught behind the gate and fixed with a farm restart nobody
   saw. Applied to the checklist template and to both unreleased checklists, this release's and Australia's.
+- 2026-09-21: PlayStation passed its observation weekend without incident, and the orphaned-peer question was
+  settled from the nodes themselves, with counters and socket state rather than trace alone. The earlier reading
+  was wrong: an orphan is not an object outliving its connection but an open `Established` socket, matched one by
+  one against the trace by remote address and creation time. The cause shows in the counters - the TCP transport
+  never sets a connection timer, `tcp.api.calls.connectionsettimer.total` standing at zero across 162 533 accepted
+  connections on one node - so a connection that sends nothing after being established has nothing to close it,
+  while QUIC escapes because msquic times out idle connections itself. A Photon node on the same farm accumulates
+  the same way at a fraction of the rate: three such sockets over 48 days against GameCarrier's eight over four.
+  Not a blocker, not a regression of the migration, and the question to GC dev is now specific enough to act on.
+  Full analysis: [artifacts/orphaned-peers.md](artifacts/orphaned-peers.md)
+- 2026-09-21: PlayStation window moved to 23-24 September and its shape settled - four Photon nodes out, the two
+  prepared GameCarrier nodes in alongside the two already running, master and chat moved in the same window, the
+  rest of the spare pool introduced by load as needed. Steam preparation runs in parallel rather than waiting for
+  PlayStation to close, which is the overlap the plan describes as possible acceleration and does not assume: the
+  cost is two farms mid-swap at once and a messier retreat, accepted deliberately. The 22 September detector in
+  the plan is therefore spent without the schedule slipping.

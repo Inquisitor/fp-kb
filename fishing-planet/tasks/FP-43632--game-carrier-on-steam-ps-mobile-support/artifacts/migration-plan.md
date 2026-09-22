@@ -477,12 +477,11 @@ calendar date. Completed days are marked ✔ in the table below, so progress aga
 | **15 Sep** | Tue     | ✔ release package prepared; the Mobile window moved to the 17th                                                                                                                      |
 | **16 Sep** | Wed     | ✔ Game port fixed at 4531 across the branch chain — IMV `r16547` through NPN `r16551`                                                                                                |
 | **17 Sep** | Thu     | ✔ **Mobile downtime window — Mobile complete** (build `NxGC#18` from `r16547`); two GameCarrier nodes introduced on PlayStation                                                       |
-| 18–20 Sep  | Fri–Sun | observation — PlayStation, devops                                                                                                                                                     |
-| **21 Sep** | Mon     | five PlayStation Photon nodes leave rotation                                                                                                                                          |
-| **22 Sep** | Tue     | shut down; **PlayStation downtime window**                                                                                                                                            |
-| **23 Sep** | Wed     | **Steam — swap the fleet**, GameCarrier nodes paired with Photon nodes leaving rotation                                                                                               |
-| **24 Sep** | Thu     | drained nodes shut down; observation                                                                                                                                                  |
-| 25–27 Sep  | Fri–Sun | observation — devops                                                                                                                                                                  |
+| 18–20 Sep  | Fri–Sun | ✔ observation — PlayStation, no incidents and nothing from support                                                                          |
+| **21 Sep** | Mon     | ✔ observation accepted; node replacement folded into the window rather than run ahead of it. Orphaned peers diagnosed from the nodes themselves |
+| **22 Sep** | Tue     | Steam preparation; the remaining PlayStation GameCarrier nodes readied                                                                       |
+| **23–24 Sep** | Wed–Thu | **PlayStation downtime window** — four Photon nodes out, two prepared GameCarrier nodes in beside the two already carrying the farm, master and chat moved. **Steam — swap the fleet** in parallel |
+| 25–27 Sep  | Fri–Sun | observation — devops, both farms                                                                                                                                                                  |
 | **28 Sep** | Mon     | slack — finish any node not yet swapped                                                                                                                                               |
 | **29 Sep** | Tue     | observation; preparation for the window                                                                                                                                               |
 | **30 Sep** | Wed     | **Steam downtime window — migration complete**                                                                                                                                        |
@@ -506,7 +505,14 @@ the team's week ends. If it does not, the weekend is spent idle and the whole ch
 no "we'll make up half a day" — so the reserve absorbs a bad day, not a bad week. A lost week means 8 October.
 
 The schedule therefore carries a second detector further along: **if PlayStation is not closed by 22
-September, Steam moves to 8 October.** Saying that up front turns a one-iteration slip into something
+September, Steam moves to 8 October.**
+
+That detector fired on 21 September and was deliberately not obeyed. PlayStation did not close on the 22nd —
+its window moved to 23–24 — and Steam did not move to 8 October, because the slip is not the kind the detector
+was built to catch. It guards against one platform falling behind while the next one waits its turn; here Steam is
+being prepared in parallel instead of waiting, which is exactly the acceleration Section 4 describes and
+deliberately leaves out of the schedule. The cost is the one named there: two farms mid-swap at once, and a
+retreat that is messier while both are. Saying that up front turns a one-iteration slip into something
 anticipated rather than a failure discovered at the end of the month.
 
 How each platform is converted differs by what its spare capacity allows, and the reasoning sits in Sections 3
