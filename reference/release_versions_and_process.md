@@ -88,6 +88,13 @@ built and tested breaks every developer on that branch pair — their local clie
 gate against the updated server. Never commit the server increment until the paired DLL is built,
 tested, and sitting in the client WC ready to commit.
 
+That pairing is about the **major** increment, which is what gates the connection: `ProtocolVersionValidator`
+compares only the major version, and the client sends only that (`PhotonServerConnection.ProtocolVersion` returns
+`F2PProtocolVersion` or `RetailProtocolVersion`, never the minor). The **minor** increment needs no client-side
+commit at all — the client never reads it, and on the server it reaches nothing beyond `AnalyticsAdapter`, where
+it separates releases in `Stats → Errors`. Treating the minor bump as a paired landing costs a client build and
+buys nothing.
+
 **The same atomicity applies to any paired server+client landing, not only increments.** A
 cross-branch merge whose server side has a client counterpart (ObjectModel mirror, message wiring, a
 `Photon.Interfaces` change) lands as a pair: prepare BOTH working copies first, verify, then commit
