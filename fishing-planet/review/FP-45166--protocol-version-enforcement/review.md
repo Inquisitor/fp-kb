@@ -15,6 +15,8 @@ Error/diagnostic reporting and the operation that reports the server's own proto
 
 Ships with 2026.5 Anniversary (FPA), which releases from MFT20260325.
 
+**Why the check moved server-side at all** (background from the executor, recorded 2026-09-23): compatibility was originally validated on the client alone. A commit that muted that client-side check was landed by accident, after which nothing stopped incompatible clients, and a server-side guard became necessary. Worth carrying into any reading of the findings: no client built before FPA has a handler for the new refusal code, so those builds bail out silently to their start screen, while the FPA client and later show the update prompt. The silent drop is therefore a transitional property of the old client population, not of the refusal.
+
 ## Scope
 
 ### MFT20260325
@@ -235,3 +237,175 @@ To verify when the rework lands, before the release:
 
 - Executor field (`customfield_11224`) was empty at intake; set to Yuriy Burda during close.
 - Executor stated in JIRA that platforms other than Steam were not manually tested.
+
+## Round 2
+
+Executor: Yuriy Burda. Opened 2026-09-17, reviewing the rework returned in round 1.
+
+### Scope
+
+- **NPN20260602 r16384** — Rework server protocol version check per review
+
+### Investigation
+
+- Phase 1 intake: existing card reused per the re-review guard; JIRA re-read at round-2 intake rather than carried from the round-1 session — status `In Review`, assignee Stanislav Samoilov, Executor field populated (Yuriy Burda). Commit taken at face value from the executor's JIRA comment; SVN audit deferred to Phase 2.
+- Round-1 close left two open threads that round 2 must settle: the rework's absence from MFT (the branch the `Next Server Hotfix` fix version would ship from), and whether the shipped 2026.5 defects are actually fixed by this commit.
+- VCS audit: `svn log | grep FP-45166` finds exactly one rework commit, NPN r16384, matching the executor's JIRA note. Layer 3 (grep both branch logs for `16384`) finds no revert or follow-up citing it. MFT carries no FP-45166 commit above r16363 — the rework exists only on the Code branch.
+- WC freshness: NPN WC sits at r16551 — above the reviewed r16384 and below branch HEAD r16566 — so it shows neither state exactly. All reads went through `svn diff -c 16384` and `svn cat`; the same warning was propagated into both delegated reviewers' prompts.
+- HEAD verification (commit is ~7 weeks old): `svn cat` at branch HEAD shows both guards still in place and unmodified — the relocated check at the top of `HandleAuthenticateOperation` and the one inside `HandleProfileOperation`. No later commit rewrote the reviewed code.
+- Compile-surface check on the changed exemption: `IsServiceAccount` changed signature from `Guid` to `string`; `MessengerUserEmail` / `ServiceUserEmail` already existed as constants in `LoginAdapter`, and the method has exactly one call site, so no other caller was left behind.
+- `DbAssert.AssertRecordCount` (used by the new database assertion in `LoginTest`) exists in the test project and runs its SQL against the test connection — the assertion is real, not a stub.
+- Contract properties the guards now read were confirmed present at r16384: `AuthenticateRequest.UserId` is bound to `ParameterCode.UserId`, and `ProfileRequest.ExternalId` exists; both are what the refusal is attributed to.
+- Production measurement (DataGrip reconnected for round 2; unavailable in round 1). Steam prod `Stats.dbo.ServerExceptions`, filtered `Exception = 'ProtocolVersionMismatch'`: 30 498 refusals across 36 grouped rows, 2026-08-01 → still arriving today. Every refusal is `client reported none`; refusals carrying a wrong number: zero. Distinct messages: 2 (one per operation). Distinct `ClientVersion`: 36. Probe was validated first — an initial `Message LIKE` filter returned zero because `TryParseExceptionClassFromMessage` strips the class out of the text into its own column; the control query (365 065 total rows, 53 by `Exception LIKE '%Protocol%'`) exposed the broken pattern before any conclusion was drawn from the zero.
+- Round-1 model corrected by that measurement: F-2 claimed rows multiply because the reported version escapes masking behind its `v` prefix. In practice no client ever reports a version, and row count tracks `ClientVersion` — a separate column that masking never touches. The mechanism described in round 1 was wrong, and the volume (~620 refusals/day) makes the "synchronous SQL at the login peak" concern from round 1 an overestimate.
+- Stuck-flag measurement: Steam prod has 4 655 rows with `IsOnLine = 1`, of which 4 499 were active within 24h (plausible live population) and 156 are stale; oldest stale activity 2026-08-11, i.e. no seven-week accumulation — the self-clearing path works. PlayStation shows the same shape (28 stale of 3 776). Mobile shows zero stale, but its farm restarted the same day, so it is a weak control rather than a clean negative.
+- Wire compatibility with the already-shipped client: `ParameterCode.ProtocolVersion = 226` and `ErrorCode.ProtocolVersionMismatch = 0x7FFF - 236` are unchanged at r16384, and no stale call site of the old `Validate` signature remains. The rework can ship server-side without a paired client change.
+- Delegation (Step 7): `code-reviewer` agent and Codex (gpt-5.6-sol) run in parallel, blind. Codex settled the Photon contract-validation question the agent had to leave unresolved, by checking the branch's Photon assemblies directly.
+- Delegated claim rejected — "the changed tests do not prove the new ordering" (Codex): disproven. `SqlLoginProvider.ValidateUser(email, password)` calls `MarkLoggedIn`, so under the old ordering the test's own email/password login would set `IsOnLine = 1` and the new `DbAssert` would fail. The test does discriminate on the ordering.
+- Delegated claim rejected — "attribution regressed because external auth formerly logged `ExternalId`" (Codex): disproven. The client's `OpAuthenticate` never sends `ProfileParameterCode.ExternalId`, so that value was already absent on the Authenticate path before the rework; for email/password logins the new `request.UserId` is strictly more informative.
+- Delegated claim narrowed — the agent concluded the claimed-service-email exemption "does not grant access, ValidateUser still requires the real password". True only for the Default path. `ValidateLoginInformation` dispatches on `ClientAuthenticationType`, and `ValidateSteamAuth` authenticates from the ticket in `Secret` without reading `UserId`, so on every external-auth platform the claim grants a complete bypass, not a delayed failure (see R2-F1).
+
+### Findings
+
+Round-1 items settled by this rework: F-1 (guard moved above `ValidateLoginInformation`), F-4 (version arrives through the request contract, `Convert.ToInt32` gone from the path), F-8 (guard relocated into `HandleProfileOperation` after the allowed-without-auth list), F-9's main gap (`DbAssert` asserts `IsOnline = 0` after a refusal). F-2 is only partially settled — see R2-F5.
+
+#### R2-F1: Claiming a service email bypasses the version check entirely on external-auth platforms [Medium]
+
+**Description:** `MasterAuthenticator.HandleAuthenticateOperation` now exempts service logins by the *claimed* email (`LoginAdapter.IsServiceAccount(request.UserId)`), before any identity is proven. The code comment justifies this by saying a spoofed claim fails the login below anyway. That holds only for the Default email/password path. On every external-auth platform the login never reads `UserId`, so a client supplying a service email plus its own ordinary platform ticket skips the guard and authenticates fully — session, token and profile included — without its protocol version ever being checked.
+
+**Investigation:**
+- Read `LoginAdapter.ValidateLoginInformation` at r16384: the path is chosen by `switch (context.Request.ClientAuthenticationType)`, not by `UserId`.
+- Read `ValidateSteamAuth` at r16384: the main path verifies `context.Request.Secret` as a Steam ticket and resolves the account through `ValidateUserByExternalId(SteamSource, steamId)`; `request.UserId` is read only on the secondary-password fallback used when Steam is unreachable. The Xbox/PS/Apple/Android/Epic/Nintendo cases have the same shape. Concluded the comment's premise is false for these paths.
+- Grepped the branch for the two literals: `svc@domain.com` and `messenger@domain.com` appear in 135 checked-in `.config` files, including per-environment deploy configs. Concluded the claim needs no guessing.
+- Confirmed the fix carries no collateral: every named service tool authenticates through `PhotonStandaloneClient.CreateAuthenticateRequest(email, password)`, which sets no `ClientAuthenticationType` and therefore uses `ClientAuthenticationTypeDefault = 0`. Narrowing the exemption to that type keeps all of them exempt.
+- Severity held at Medium rather than High: reaching this requires a deliberately modified client, and the ticket scopes the mechanism as a compatibility guard rather than an anti-cheat measure, noting that a modified client can already supply the expected value — so the same class of client had an equivalent bypass before. It remains a regression against r16363, where the exemption keyed off a DB-resolved `Guid`.
+
+**Resolution:** Accepted — not patched on its own. The only prize is playing on an outdated client, which breaks the player's own game. The bypass disappears once the login refactor restores a resolved identity as the exemption key, and the misleading comment goes with it.
+
+**Discovered by:** skill recon and Codex independently; the code-reviewer agent found the exemption change but stopped at the Default path.
+
+#### R2-F2: A version sent with the wrong wire type yields the generic contract error, not the update-prompt code [Low]
+
+**Description:** `ProtocolVersion` is now a `DataMember` of type `int?` on both request contracts, and `OperationHelper.ValidateOperation` runs before the validator. A value that is present but of another type — including a correct version sent as `Int64` — fails contract validation and returns `ErrorCode.OperationInvalid`, so the client gets no distinguishable code and no refusal is logged. The previous manual read used `Convert.ToInt32` and accepted convertible representations.
+
+**Investigation:**
+- Read both contracts and both call sites at r16384: `ValidateOperation` precedes `ProtocolVersionValidator.Validate` on the Authenticate and ProfileOperation paths alike, and returns `OperationInvalid` when the contract is not valid.
+- Absence is unaffected: `IsOptional = true` makes a missing member valid and `null`, which the validator refuses with the correct code — that is the mainline outdated-client scenario.
+- Verified the shipped client sends a C# `int` (`LoadbalancingPeer.OpAuthenticate`, `AddProtocolVersion`), so no real client is affected.
+- Not reproduced by this reviewer: the claim that Photon marks the alternative representations contract-invalid rather than coercing them. Codex reports verifying it against the branch's Photon assemblies for GP Binary V17, V16, V16V2 and the base byte protocol; disassembling the closed SDK was not attempted here, so the claim is recorded with its source rather than as independently settled.
+
+**Resolution:** Accepted — unreachable with the clients we ship. Every client that sends the field (Unity, `PhotonStandaloneClient`, `NunitClient`) sends a C# `int`, and absence — the actual outdated-client case — is handled correctly through `IsOptional`. `int?` is also the right width: the version is a four-digit number and would stay in range even if it later encoded a date. Tolerance to the wire representation itself sits in the Photon libraries, outside what this codebase can reasonably change, and is not worth pursuing.
+
+**Discovered by:** Codex (the agent reached the same architectural point but labelled the SDK behaviour unresolved).
+
+#### R2-F3: Refusals are no longer attributable to a player in analytics [Low]
+
+**Description:** `ProtocolVersionValidator.Validate` now always passes a null user id to `AnalyticsAdapter.SaveMasterException`, which stores `Guid.Empty`, and the per-player `Sys.Log` write was removed. A refusal can no longer be traced to an account in the analytics store or in that player's log history.
+
+**Investigation:**
+- Read the diff: both the user-id argument and the `DalFactory.GetLogger().Sys.Log(...)` call are gone.
+- Traced why it is unavoidable: the guard now runs before credentials are validated, so no proven identity exists at refusal time. Concluded this is inherent to the ordering fix, not an oversight.
+- Checked the claimed additional loss of `ExternalId` attribution and rejected it — the parameter was never present on the Authenticate path.
+- ProfileOperation refusals pass a null client version, recorded as `0.0`; confirmed against production, where ProfileOperation rows indeed carry `ClientVersion = 0.0`. Pre-existing rather than introduced: the old code read `ParameterCode.AppVersion`, which ProfileOperation requests do not carry either.
+
+**Resolution:** Requirement for the refactor, not an accepted loss. The per-player `sys` entry is what diagnosed the 2026-09-22 support case, and r16384 removed it. The refactor restores it by resolving identity before the check; where identity does not resolve, the entry goes to the dedicated `00000000-0000-0000-0000-000000000000` id with whatever the client sent. The DB round trip is not an objection — an ordinary login attempt costs one too.
+
+**Discovered by:** Codex and the code-reviewer agent.
+
+#### R2-F4: Grouped error statistics no longer separate reported versions [Info]
+
+**Description:** `BuildRefusalMessage` drops the `v` prefix, so `HashHelper` masks both version numbers to `NUM` and all numeric mismatches collapse into one grouped row. The ticket's measurability requirement is still met by the raw `Log.Error` line, which carries the unmasked value.
+
+**Investigation:**
+- Read `BuildRefusalMessage` and `HashHelper.CleanupExceptionMessageFromParameters`: `PatternNumber2` matches a digit run preceded by whitespace, which the new wording produces and the old `v`-prefixed wording did not. The new test locks the masked form in.
+- Measured the practical loss in production: every one of the 30 498 refusals reports `none`, which is a literal and stays its own group, and none reports a number — so there is currently no version distribution to lose. Per-build breakdown survives regardless, in the unmasked `ClientVersion` column with its 36 distinct values.
+- Concluded the delegates overstated the practical effect, and recorded the scope caveat: this binds to today's population, where no client sends a version. If a future client sends a wrong number, that distribution would indeed be invisible in grouped stats.
+
+**Resolution:** Accepted, with a refactor note — express the masking explicitly with `[[...]]` instead of relying on `PatternNumber2` catching digits after a space, so the intent survives any rewording of the message. Collapsing is the right call: slices by server and client version are available as filters in the admin panel, so grouping does not need to carry them, and the reported number itself lives in the `sys` log, which is where support reads it anyway — per player, which is the only way that question is ever asked. A text scan across the whole `sysLog` is too heavy on production, but a per-user, time-boxed lookup is not. Collapsing buys no abuse protection either way: that vector stays open through the client-controlled `AppVersion`.
+
+**Discovered by:** code-reviewer agent and Codex.
+
+#### R2-F5: The refusal still writes to analytics per event and still does not drop the peer [Info]
+
+**Description:** Round 1 returned F-2 with two asks — stop the per-refusal analytics write, and disconnect the refused peer after the response is delivered. The rework does neither; it only rewords the message, which closes the abuse vector of inflating row count by varying the version.
+
+**Investigation:**
+- Read the diff: `AnalyticsAdapter.SaveMasterException` remains on the refusal path, and no disconnect was added at either call site.
+- Measured the cost this was meant to avoid: about 620 refusals per day on Steam prod, spread across the day. Concluded the residual cost is immaterial, and that round 1's framing of synchronous SQL at the login peak was an overestimate on the reviewer's part.
+
+**Resolution:** Deferred to the refactor. The logging stays by decision (~100 refusals/day at the tail; round 1's framing of synchronous SQL at the login peak was the reviewer's overestimate). Requirement: once refused, a peer must not be able to keep issuing requests that cost the server anything. Two candidate mechanisms, to be chosen during the refactor:
+- **disconnect after the refusal is delivered** — open questions: the Photon docs contrast `Disconnect` ("closes the connection") with `AbortConnection` ("forces the connection to close immediately", for when `Disconnect` does not shut down cleanly), which suggests but does not state that queued data is sent first, and nothing in our code sends a response and then disconnects, so delivery must be verified by a run; and r56688 had to stop the client's own disconnect path in `DisconnectServerAction` from tearing the update prompt down, so the FPA client's reaction to a server-side disconnect is a known risk;
+- **mute the peer** — stop processing further requests, optionally answering each with a cached copy of the refusal without touching the database, and let the client leave on its own. Sidesteps both open questions; the cost is that a looping client holds its slot indefinitely (its pings keep the connection alive), which can be bounded by dropping a muted peer after a period well beyond human reaction time.
+
+**Discovered by:** skill recon.
+
+#### R2-F6: The rework is absent from the branch its fix version ships from [Info]
+
+**Description:** The ticket carries fix version `Next Server Hotfix`, and 2026.5.x hotfixes ship from MFT20260325, but r16384 exists only on NPN20260602. As it stands the fix version is unbacked and the defects fixed here remain live in production.
+
+**Investigation:**
+- `svn log` on MFT for r16364 through HEAD (r16566) finds no FP-45166 commit; the only protocol-related commit there is r16388, the post-release minor increment from 1126.0 to 1126.1.
+- Measured the backport cost: MFT and NPN differ by 38, 84, 70 and 35 lines across `MasterAuthenticator.cs`, `ProtocolVersionValidator.cs`, `MasterClientPeer.cs` and `LoginAdapter.cs` — largely the rework itself, so the backport looks tractable rather than a rewrite.
+- Wire compatibility confirmed separately, so the backport needs no paired client change.
+
+**Resolution:** Deferred to the refactor — backported to MFT once the refactor lands, not in r16384's shape, which is not shipping. Branch divergence on the affected files is small, and rolling out the resulting patch is not expected to be an obstacle.
+
+**Discovered by:** skill recon.
+
+### Considered and rejected (round 2)
+
+- Codex reported the legacy `Loadbalancing/TestClient` as Medium, since it sends no version and would be refused. This is round 1's F-5, already closed as Skipped after the user confirmed the project is unused and outside the solution. The rework does not change it.
+- Codex reported that the changed tests do not prove the new ordering. Disproven: `ValidateUser(email, password)` calls `MarkLoggedIn`, so the old ordering would leave `IsOnLine = 1` and fail the new `DbAssert`.
+- Codex reported lost `ExternalId` attribution on external-auth refusals. Disproven: the client never sends that parameter in `OpAuthenticate`, so it was already absent before the rework.
+- Still valid from that same Codex item: the validator unit tests build their input from `ProtocolVersionValidator.Expected`, so they cannot catch a wrong Retail/F2P branch inside `Expected`. This is round 1's F-9 residue, still Info.
+
+### Decision (2026-09-23, reviewer + executor)
+
+The rework is not taken as the final shape. Instead the login flow gets refactored, and this task's remaining items are folded into that work.
+
+**Root cause named by the executor and the user, above any individual finding:** `ValidateLoginInformation` mutates state while answering a yes/no question. Everything in this review — the ordering fix, the claimed-email exemption, the lost attribution — is the code dancing around that fact. A function called `Validate` should validate and at most *return* context, never write it. The refactor splits identity resolution from effect application so the rest stops being contorted.
+
+Consequences for the findings:
+
+- **Round-1 F-1** — confirmed in production by a live support case (2026-09-22), not just by code reading: a player on an IMV-era build was silently dropped to the login screen, the server log carries `ProtocolVersionMismatch: on Authenticate, client reported none, server expects v1126`, and support reported the account showing permanently online in the admin panel while the machine was off. That is the stuck `Users.IsOnLine` flag. Fixed as part of the refactor.
+- **R2-F1 (claimed-email bypass)** — accepted as a low-value prize on its own (it only buys playing on an outdated client, which breaks the player's own game). Not patched separately; it disappears once the exemption keys off a resolved identity again after the refactor.
+- **R2-F3 (lost per-player attribution)** — promoted from an accepted consequence to a requirement. The support case above was diagnosed *because* the mismatch is written to the player's `sys` log; that write exists in production only because the guard currently runs after authentication, and r16384 removed it. The refactor must keep it. The cost objection (a DB round trip per refusal) was rejected on the grounds that an ordinary login attempt costs a DB round trip too, and anyone intent on spamming would spam login — which is heavier — rather than the version check.
+- **R2-F5 (analytics write retained, peer not dropped)** — resolved by the same decision: the logging stays.
+- **Logged identity is worth fixing while there** — the production log shows `external id "none"` because the client never sends `ProfileParameterCode.ExternalId` on `Authenticate`; r16384's `identity` is `request.UserId`, likewise empty on platform logins. With identity resolved before the check, a real identifier can be logged instead of an IP alone.
+
+#### Production exposure, measured 2026-09-23
+
+Measured to decide whether the unfixed state needs a separate backport ahead of the refactor. Source: `Stats.dbo.ServerExceptionUsers` joined to the `ProtocolVersionMismatch` hashes in `ServerExceptions`, Steam prod. (The event-level `sysLog` in Mongo was the better instrument for a day-by-day curve, but a text scan of that collection times out on production, so the SQL side was used instead — a limitation of the probe, not a property of the data.)
+
+- Whole period since the FPA release: **2 470 distinct real accounts** refused, 30 956 refusals, first 2026-07-30 09:50 (release day on Steam), latest 2026-09-23 13:32. All of it sits under server protocol `1126.0` — the only value possible, since the feature did not exist before it, which doubles as a check that the selection is clean.
+- Weekly curve by each account's last occurrence: 1 496 users in release week, then 400, 169, 109, 94, 67, 56, 59, and 22 in the partial current week. Better than half the affected population hit this in the first week; the rest decays to a plateau of roughly 55-60 accounts per week.
+- An earlier pass measured September alone (186 accounts) and read the plateau as the whole picture. Corrected here: the plateau is the tail, not the scale.
+- Stuck `IsOnLine = 1` rows hold at roughly 150 — the same order as the affected population, and what made the admin panel show the support case as permanently online.
+- Support conversion is tiny: one ticket out of those 186.
+
+**Conclusion — no separate backport, but the refactor is on a release clock.** The wave has passed: what remains is the tail, and its infrastructure load is nil (round 1's "synchronous SQL at the login peak" concern is fully retired). A patch of its own into a release branch, with its own review and deployment cycle, does not pay for a tail of ~55-60 accounts a week.
+
+What that release-week figure does and does not predict (corrected after the executor's explanation):
+
+- The silent drop to the login screen is a property of **pre-FPA clients**, not of the refusal. They have never seen `ProtocolVersionMismatch`, fall into their generic branch and bail out without a message. The FPA client handles the code and shows the update prompt — verified in MainClient r56710. So this symptom decays on its own as players move to FPA and later builds, and the next forced-update release will not reproduce it: by then the affected clients know the code.
+- A version mismatch itself is simply what a forced-update release looks like, not a defect.
+- What **does** reproduce on the next blocking release is the server-side symptom: every refusal leaves a stuck `Users.IsOnLine = 1`, and no client update can fix that. That, rather than the prompt, is what puts the refactor on a release clock.
+
+**Additional requirement captured during the discussion:** a dedicated user id (`00000000-0000-0000-0000-000000000000`) already receives entries for failed logins, and is the intended sink for failed protocol checks and failed identity resolutions alike, including the data the client sent. This removes identity resolution as a precondition for logging: write to the player's log when the identity resolves, and to that id with whatever arrived (IP, claimed value, operation, client build) when it does not. The inability to resolve a user has to be a designed-for path from the start — an outdated client sends, by definition, what the server may no longer parse — with forward compatibility added later only if it proves feasible.
+
+### Verdict — Round 2
+
+**Not an approve and not a rejection: the work continues as a refactor.** r16384 stays on NPN as an intermediate state; it is not backported and does not ship on its own. The task's remaining substance moves into the login-flow refactor agreed on 2026-09-23.
+
+On its own merits the rework is sound. Verified by diff reading, by tracing at r16384, and by re-reading branch HEAD (r16566, ~7 weeks later, unchanged): the guard now precedes `ValidateLoginInformation`, so no state is mutated before a refusal; the version arrives through the request contract instead of a manual `Convert.ToInt32`; the ProfileOperation guard sits inside `HandleProfileOperation` after the allowed-without-auth list, restoring the cheap `Unauthorized` for protected operations; `Diag` and `GetProtocolVersion` stay open; the five pre-auth sub-operations are untouched; wire codes are unchanged, so the shipped client stays compatible. The new `DbAssert` on `IsOnline` genuinely discriminates — a claim tested by checking that `ValidateUser(email, password)` calls `MarkLoggedIn`, which is what would make the old ordering fail it.
+
+What the refactor has to carry forward:
+- Identity resolution must be separated from effect application, so the version check can sit between them — early enough to leave no side effects, late enough to name the player.
+- The per-player `sys` log entry for a mismatch is a requirement, not an optional extra; it is what diagnosed the 2026-09-22 support case. Where identity does not resolve, the entry goes to the dedicated `00000000-0000-0000-0000-000000000000` id with whatever the client sent. Unresolvable identity is a designed-for path, not an error.
+- With identity available, the logged value should be a real identifier — today it is `external id "none"` on every Authenticate refusal, because the client never sends that parameter.
+- `Validate` must stop writing anything: it answers, and at most returns context. That is the root cause behind the ordering problem, the claimed-email exemption and the lost attribution alike.
+- Masking in the refusal message is expressed explicitly with `[[...]]`, not left to `PatternNumber2` catching digits after a space.
+- A refused peer must not be able to keep issuing requests that cost the server anything — disconnect-after-delivery or mute, per R2-F5, with the client-reaction and delivery questions settled by a run.
+- Once the refactor lands, it is backported to MFT for the `Next Server Hotfix`.
+
+**Verification scope:** static analysis of the diff and of both branch states, plus production measurement over `Stats` on Steam, PlayStation and Mobile. Not performed: running the test suite; independent confirmation that Photon rejects rather than coerces a wrong-typed contract member (recorded on Codex's verification against the branch assemblies, see R2-F2); an event-level day-by-day curve from the Mongo `sysLog`, where a text scan times out on production — the SQL aggregates were used instead, and they report last-occurrence days rather than per-event history.
