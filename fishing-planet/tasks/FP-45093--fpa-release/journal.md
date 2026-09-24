@@ -79,3 +79,11 @@ authored from this release; read it before touching a checklist page.
   (To Do, unspeced GD work that was never going to ship) so the release report is clean.
   Known and accepted: MFT r16321 and NPN r16322 both took major protocol 1126.0 eight minutes apart, so
   1126.0 is currently shared between shipped Steam prod and the NPN code branch; NPN will move to 1127
+- 2026-09-24: FPA cleared from the lead's side. Of the 43 tasks the ledger tracked, 28 have closed; three
+  still carry `2026.5 Anniversary` and none needs work from the lead — FP-45166 is reopened for rework and
+  will not ship as it stands, its FPA tag legitimate because the first part shipped in MFT r16363 before
+  the r16388 boundary, with the rework waiting in Next Server Hotfix; FP-44701 and FP-43181 are Resolved
+  and wait on their reporters. The remaining twelve left the release during the scope trim and are tracked
+  with 2026.6 Australia, Next Server Hotfix or Internal/Async.
+  Watch item: FP-45166 has sat in the incubator since July — if the rework is not near-term, it needs a
+  concrete version rather than the collector.
