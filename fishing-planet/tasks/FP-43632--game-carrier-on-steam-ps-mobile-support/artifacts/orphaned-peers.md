@@ -110,7 +110,36 @@ notice, and any deployment restart clears it. Mobile, PlayStation and Steam all 
 clients on the old protocol, so all three will accumulate at this rate; Xbox is spared only because
 certification left it without client TCP.
 
+## Reproduced on a test stand
+
+On 23 September the whole thing was reproduced deliberately, with a probe that opens plain TCP connections to a
+Game port and sends nothing on them ([tcp-idle-probe.ps1](tcp-idle-probe.ps1)):
+
+| Server | Idle timeout | Result |
+|---|---|---|
+| Photon, local | `InactivityTimeout="0"` | still open after 120 s |
+| Photon, local | `InactivityTimeout="25000"` | closed after 25.22 s, by RST rather than FIN |
+| GameCarrier, `yellowtest` | none exists | still open after 600 s |
+
+Then the distinction that narrows the defect. When the probe closed its sockets normally, the peers left the
+trace in the very next snapshot — a client that says goodbye is handled correctly. When the network was pulled
+from the client machine *before* the probe was closed, so that no FIN could leave, the peers stayed, and the
+sockets on the node stayed in `Established` rather than `CloseWait`. That second case is what happens in life
+whenever a player loses signal, backgrounds the app, or sits behind a NAT that drops its entry.
+
+So the defect states precisely: a silent connection is closed by no timeout, and a connection whose client
+vanished without FIN is never closed at all. Snapshots of all three phases:
+[yellowtest-idle-tcp-repro.txt](yellowtest-idle-tcp-repro.txt).
+
+`InactivityTimeout` is a listener attribute in `PhotonServer.config`, set per platform and role — 25 s on
+PlayStation Game, 90 s on Mobile Game, `0` on Chat. The GameCarrier `config.json` has no counterpart at all:
+its `transports[]` carry only `name`, `type` and `counters.prefix`, and its `vhosts[]` only the endpoint
+itself.
+
 ## For GC dev
+
+Filed 23 September as [FP-46379](https://fishingplanet.atlassian.net/browse/FP-46379), with the probe and the
+stand snapshots attached.
 
 The TCP transport never sets a connection timer — `tcp.api.calls.connectionsettimer.total` is zero across
 hundreds of thousands of accepted connections. A connection that sends nothing after being established stays

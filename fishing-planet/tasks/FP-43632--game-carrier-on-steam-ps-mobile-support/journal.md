@@ -8,7 +8,7 @@ related: FP-43669, FP-43670
 # FP-43632: [GameCarrier] Migration coordination — Mobile / PS / Steam
 
 ## Status
-**Mobile is on GameCarrier** (2026-09-17). The first production rollout shipped under `2026.5.1 GameCarrier Migration`: build NxGC#18 from IMV r16547, farm rebooted and verified behind a closed firewall, minor protocol version incremented afterwards (IMV r16565, `1122.9 -> 1122.10`). The first two PlayStation nodes went onto GameCarrier the same day; PlayStation came through its observation weekend without incident; its downtime window is 23-24 September, when the four remaining Photon nodes leave, two more prepared GameCarrier nodes join the two already carrying the farm, and the master is moved over. Steam is being prepared in parallel rather than after, so the two platforms overlap. Track 2 is delivered — FP-43670 closed, prod GC configs for Mobile / PS / Steam in VCS and merged to MFT. Track 1 (FP-43669 build automation) is still To Do with GC dev; Track 3 (local dev environment) stays deferred behind it. The host switch itself is run by DevOps under the release checklist, which now shuts players out with the firewall while the farm is checked.
+**Mobile and PlayStation are on GameCarrier; Steam is in progress.** Mobile moved on 2026-09-17 under `2026.5.1 GameCarrier Migration` (build NxGC#18 from IMV r16547; increment IMV r16565, `1122.9 -> 1122.10`). PlayStation's Game fleet moved by rolling replacement on 23 September and its master and chat in the window of 24 September, on build XbGC#28 from MFT r16550, which also shipped `2026.5.2 PremiumShop Rod-Setup Display Server Hotfix` (increment MFT r16583, `1126.1 -> 1126.2`). Both farms run GameCarrier `797ae1c5`. Steam started on 23 September with its first GameCarrier node; its window is planned for 30 September. Track 2 is delivered — FP-43670 closed, prod GC configs for Mobile / PS / Steam in VCS and merged to MFT. Track 1 (FP-43669 build automation) is still To Do with GC dev; Track 3 (local dev environment) stays deferred behind it. The host switch itself is run by DevOps under the release checklist, which now shuts players out with the firewall while the farm is checked.
 
 Earlier context (through 2026-05-10), awaiting external delivery on Tracks 1 and 2 (FP-43669 build automation, FP-43670 prod GC configs in VCS — both with GC dev). Server-side coordination cycle is complete: TeamCity pipeline audit done, canonical `vhosts[]` ordering established and applied to existing Nintendo/XBox configs, two adjacent JIRA stories filed for GC-dev work, context comment + canonical reference attached to FP-43670, Confluence reference page "Server Transport Ports" published under Infrastructure (id 5579014145). Track 3 (local dev environment) intentionally deferred until Track 1 lands the first automatic build. Two non-blocking parking lots in [backlog](backlog.md): Chat-port cleanup tech-debt and a one-time GC sources audit for PHOTON-over-UDP transport. Resumes when Track 1 / Track 2 progress lands.
 
@@ -113,3 +113,22 @@ Sequencing: Track 1 first (it produces the artifact channel that Track 3 consume
   PlayStation to close, which is the overlap the plan describes as possible acceleration and does not assume: the
   cost is two farms mid-swap at once and a messier retreat, accepted deliberately. The 22 September detector in
   the plan is therefore spent without the schedule slipping.
+- 2026-09-23: The stuck-connection finding reproduced on a stand and handed to GC dev as
+  [FP-46379](https://fishingplanet.atlassian.net/browse/FP-46379). A probe that opens a TCP connection and then
+  sends nothing settles what the transport owes: Photon with `InactivityTimeout="25000"` drops such a connection
+  after 25 s, Photon with `0` holds it forever, and GameCarrier holds it past 600 s, having no such setting at
+  all - its `config.json` carries no timeout key on either `transports[]` or `vhosts[]`. The defect narrowed in
+  the process: a client that closes its sockets normally is handled correctly and its peers leave the trace at
+  once, while a client whose network is pulled before it closes leaves peers and `Established` sockets behind for
+  good - which is what a lost signal, a backgrounded app or an expired NAT entry looks like from the server. The
+  probe and the stand snapshots are in the task artifacts and attached to the ticket.
+- 2026-09-23: PlayStation Game fleet fully on GameCarrier, swapped by rolling replacement rather than inside the
+  window - no Photon Game node is left on the farm. The window on the morning of 24 September therefore moves
+  only the master and chat, which makes it shorter and its retreat cheaper than planned. Steam began the same
+  day with its first GameCarrier node in rotation.
+- 2026-09-24: PlayStation fully on GameCarrier - master and chat moved in the morning window, two days after the
+  planned 22 September. The farm runs build XbGC#28 from MFT r16550, the same build that carries
+  `2026.5.2 PremiumShop Rod-Setup Display Server Hotfix`, so the minor protocol increment that followed (MFT
+  r16583, `1126.1 -> 1126.2`) names both releases. The release records gained the GameCarrier version as a line
+  of its own (`GC/` plus eight characters of the artifacts commit); both GameCarrier farms run `797ae1c5`, and the
+  earlier Xbox and Nintendo builds were back-filled from TeamCity in the same pass.

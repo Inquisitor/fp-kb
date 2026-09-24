@@ -458,7 +458,7 @@ two documents.
 |-------------------------------------------------|---------|--------|
 | Mobile pilot node live on GameCarrier           | 9 Sep   | 10 Sep |
 | Mobile fully on GameCarrier                     | 15 Sep  | 17 Sep |
-| PlayStation fully on GameCarrier                | 22 Sep  |        |
+| PlayStation fully on GameCarrier                | 22 Sep  | 24 Sep |
 | Steam fully on GameCarrier — migration complete | 30 Sep  |        |
 
 Dates are a plan, not a per-day commitment. Several steps can finish early — a pilot that looks clean after
@@ -478,9 +478,10 @@ calendar date. Completed days are marked ✔ in the table below, so progress aga
 | **16 Sep** | Wed     | ✔ Game port fixed at 4531 across the branch chain — IMV `r16547` through NPN `r16551`                                                                                                |
 | **17 Sep** | Thu     | ✔ **Mobile downtime window — Mobile complete** (build `NxGC#18` from `r16547`); two GameCarrier nodes introduced on PlayStation                                                       |
 | 18–20 Sep  | Fri–Sun | ✔ observation — PlayStation, no incidents and nothing from support                                                                          |
-| **21 Sep** | Mon     | ✔ observation accepted; node replacement folded into the window rather than run ahead of it. Orphaned peers diagnosed from the nodes themselves |
-| **22 Sep** | Tue     | Steam preparation; the remaining PlayStation GameCarrier nodes readied                                                                       |
-| **23–24 Sep** | Wed–Thu | **PlayStation downtime window** — four Photon nodes out, two prepared GameCarrier nodes in beside the two already carrying the farm, master and chat moved. **Steam — swap the fleet** in parallel |
+| **21 Sep** | Mon     | ✔ observation accepted; the remaining nodes and the window scheduled together for later in the week. Orphaned peers diagnosed from the nodes themselves |
+| **22 Sep** | Tue     | ✔ Steam preparation; the remaining PlayStation GameCarrier nodes readied                                                                     |
+| **23 Sep** | Wed     | ✔ PlayStation Game fleet swapped by rolling replacement — no Photon Game node left on the farm; first Steam node introduced |
+| **24 Sep** | Thu     | ✔ **PlayStation downtime window — PlayStation complete** (build `XbGC#28` from `r16550`, GameCarrier `797ae1c5`); master and chat moved. Minor protocol version incremented afterwards, MFT `r16583`. **Steam — swap the fleet** continues |
 | 25–27 Sep  | Fri–Sun | observation — devops, both farms                                                                                                                                                                  |
 | **28 Sep** | Mon     | slack — finish any node not yet swapped                                                                                                                                               |
 | **29 Sep** | Tue     | observation; preparation for the window                                                                                                                                               |
@@ -521,7 +522,11 @@ cheap, and it is the first thing that will look expendable if the schedule tight
 
 ## Open items
 
-- **Staging environments still run Photon** and will need their own migration to GameCarrier.
+- **Staging environments: PlayStation and Steam still run Photon.** As of 24 September the Mobile, Nintendo and
+  Xbox stands are on GameCarrier (MOBDEV, MOBTEST, MOBTEST2, MOBQA, NXDEV, NXTEST, NXQA, NXCERT, XBTEST, XBQA,
+  XBCERT), together with YELLOWTEST and GC TEST. PSDEV, PSTEST, PSQA, STEAMDEV, TEST and QA are still on Photon and
+  need their own migration. DevOps mark each stand in the branch table of Environment and branch status as they
+  move it; that table is the one to trust.
 - **Xbox and Nintendo patches** for whatever ships in these packages — both are already on GameCarrier, so they
   take a separate ~45-minute window each, outside the 1 October deadline. Xbox goes right after Steam.
 - **Binding-redirect cleanup in IMV** (r15848, r15773, r16278) — deliberately out of scope here. Do it after

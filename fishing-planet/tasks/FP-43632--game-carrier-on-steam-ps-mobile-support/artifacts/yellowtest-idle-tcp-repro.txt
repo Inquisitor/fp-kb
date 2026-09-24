@@ -1,0 +1,55 @@
+Yellowtest, Game application on GameCarrier. Reproduction of a TCP connection that is never closed.
+
+The trace writes UTC. The probe ran from a machine one hour ahead of it.
+The probe opens plain TCP connections to port 4531 and sends nothing at all on them.
+
+Run 1 - connected at 16:15:01 UTC, held 3 connections for 10 minutes, then closed them normally.
+Run 2 - connected at 16:27:37 UTC, held 3 connections, then the network cable and the wifi were switched
+        off, so the client disappeared without sending FIN. Those connections are still on the server.
+
+In both runs the server never closed anything by itself.
+
+====================================================================================================
+Run 1, snapshot at 16:24:06 - the 3 probe connections have been idle for 9 minutes and are still listed.
+Peers 1 and 5 are live clients, one over TCP and one over QUIC, so the server is working normally.
+====================================================================================================
+2026-09-23 16:24:06
+peers: 5
+1) GameClientPeer: protocol = GameCarrier + QUIC, remote = 192.40.222.26, age = 00:35:58.5856116, user = d7bca6a8-6855-4e23-b914-a86d8187a638, name = BigBlackBoss, last = [PingRequest/00:00:00.2002937, OperationRequest/00:00:00.3328295, PingRequest/00:00:01.2135852, OperationRequest/00:00:01.3348927, PingRequest/00:00:02.2240256, OperationRequest/00:00:02.3380616, PingRequest/00:00:03.2438667, OperationRequest/00:00:03.3427686, PingRequest/00:00:04.2566916, OperationRequest/00:00:04.3435668, PingRequest/00:00:05.2753976, OperationRequest/00:00:05.3493979, PingRequest/00:00:06.2912400, OperationRequest/00:00:06.3522474, PingRequest/00:00:07.3033003, OperationRequest/00:00:07.3522900]
+2) GameClientPeer: protocol = Photon + TCP, remote = 192.40.222.26, age = 00:16:03.9735762, user = ab1f5d2c-baef-4849-acbc-a0db62564d38, name = MelserDev2, last = [PingRequest/00:00:00.5426657, OperationRequest/00:00:00.9600572, PingRequest/00:00:01.5438376, OperationRequest/00:00:01.9611891, PingRequest/00:00:02.5452905, OperationRequest/00:00:02.9624032, PingRequest/00:00:03.5464590, OperationRequest/00:00:03.9629597, PingRequest/00:00:04.5466677, OperationRequest/00:00:04.9638874, PingRequest/00:00:05.5476060, OperationRequest/00:00:05.9653656, PingRequest/00:00:06.5497957, OperationRequest/00:00:06.9658106, PingRequest/00:00:07.5503047, OperationRequest/00:00:07.9674966]
+3) GameClientPeer: protocol = Photon + TCP, remote = 8.44.201.100, age = 00:09:04.1150246, user = , last = []
+4) GameClientPeer: protocol = Photon + TCP, remote = 8.44.201.100, age = 00:09:03.9925335, user = , last = []
+5) GameClientPeer: protocol = Photon + TCP, remote = 8.44.201.100, age = 00:09:03.8790714, user = , last = []
+
+====================================================================================================
+Run 1, snapshot at 16:25:06 - the probe closed its sockets normally and the peers are gone at once.
+A client that says goodbye is handled correctly.
+====================================================================================================
+2026-09-23 16:25:06
+peers: 2
+1) GameClientPeer: protocol = GameCarrier + QUIC, remote = 192.40.222.26, age = 00:36:58.5861071, user = d7bca6a8-6855-4e23-b914-a86d8187a638, name = BigBlackBoss, last = [OperationRequest/00:00:00.1481548, PingRequest/00:00:00.2586840, OperationRequest/00:00:01.1514775, PingRequest/00:00:01.2764860, OperationRequest/00:00:02.1547860, PingRequest/00:00:02.2910114, OperationRequest/00:00:03.1569162, PingRequest/00:00:03.3075661, OperationRequest/00:00:04.1620621, PingRequest/00:00:04.3243059, OperationRequest/00:00:05.1706415, PingRequest/00:00:05.3348486, OperationRequest/00:00:06.1715607, PingRequest/00:00:06.3552914, OperationRequest/00:00:07.1749925, PingRequest/00:00:07.3678802]
+2) GameClientPeer: protocol = Photon + TCP, remote = 192.40.222.26, age = 00:17:03.9740717, user = ab1f5d2c-baef-4849-acbc-a0db62564d38, name = MelserDev2, last = [PingRequest/00:00:00.4814138, OperationRequest/00:00:00.8988329, PingRequest/00:00:01.4828092, OperationRequest/00:00:01.8998869, PingRequest/00:00:02.4843049, OperationRequest/00:00:02.9007907, PingRequest/00:00:03.4851452, OperationRequest/00:00:03.9021680, PingRequest/00:00:04.4859077, OperationRequest/00:00:04.9026380, PingRequest/00:00:05.4868816, OperationRequest/00:00:05.9042324, PingRequest/00:00:06.4883557, OperationRequest/00:00:06.9055366, PingRequest/00:00:07.4888655, OperationRequest/00:00:07.9061775]
+
+====================================================================================================
+Run 2, last snapshot at 16:33:06 - the client is gone from the network, but its 3 peers are still here
+and keep ageing. Nothing was ever sent on them.
+====================================================================================================
+2026-09-23 16:33:06
+peers: 5
+1) GameClientPeer: protocol = Photon + TCP, remote = 192.40.222.26, age = 00:25:04.0360546, user = ab1f5d2c-baef-4849-acbc-a0db62564d38, name = MelserDev2, last = [PingRequest/00:00:00.0517477, OperationRequest/00:00:00.4185956, PingRequest/00:00:01.0526984, OperationRequest/00:00:01.4197269, PingRequest/00:00:02.0530548, OperationRequest/00:00:02.4203929, PingRequest/00:00:03.0548307, OperationRequest/00:00:03.4222011, PingRequest/00:00:04.0553476, OperationRequest/00:00:04.4229415, PingRequest/00:00:05.0565122, OperationRequest/00:00:05.4235065, PingRequest/00:00:06.0576589, OperationRequest/00:00:06.4250631, PingRequest/00:00:07.0582097, OperationRequest/00:00:07.4255346]
+2) GameClientPeer: protocol = Photon + TCP, remote = 8.44.201.100, age = 00:05:27.7406426, user = , last = []
+3) GameClientPeer: protocol = Photon + TCP, remote = 8.44.201.100, age = 00:05:27.6202945, user = , last = []
+4) GameClientPeer: protocol = Photon + TCP, remote = 8.44.201.100, age = 00:05:27.5072907, user = , last = []
+5) GameClientPeer: protocol = GameCarrier + QUIC, remote = 192.40.222.26, age = 00:04:01.8575573, user = d7bca6a8-6855-4e23-b914-a86d8187a638, name = BigBlackBoss, last = [OperationRequest/00:00:00.5026070, PingRequest/00:00:00.9419744, OperationRequest/00:00:01.5027897, PingRequest/00:00:01.9585661, OperationRequest/00:00:02.5063125, PingRequest/00:00:02.9748322, OperationRequest/00:00:03.5061977, PingRequest/00:00:03.9869752, OperationRequest/00:00:04.5097518, PingRequest/00:00:05.0050843, OperationRequest/00:00:05.5124938, PingRequest/00:00:06.0186608, OperationRequest/00:00:06.5187355, PingRequest/00:00:07.0357915, OperationRequest/00:00:07.5235995, PingRequest/00:00:08.0520836]
+
+====================================================================================================
+Get-NetTCPConnection -LocalPort 4531 on the node after run 2.
+The 3 sockets are in state Established, not CloseWait.
+====================================================================================================
+
+LocalAddress        LocalPort  RemoteAddress    RemotePort  State
+192.40.222.120      4531       192.40.222.26    62408       Established
+192.40.222.120      4531       8.44.201.100     58958       Established
+192.40.222.120      4531       8.44.201.100     58961       Established
+192.40.222.120      4531       8.44.201.100     58959       Established
+0.0.0.0             4531       0.0.0.0          0           Listen
