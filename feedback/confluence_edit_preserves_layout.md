@@ -26,6 +26,12 @@ author had set; line breaks inside a table cell did not come out as written. Eac
 success and the markdown export looked plausible, so neither of those proves anything about layout — only
 opening the page does.
 
+The line-break part is narrower than it looked. On 2026-09-24 several table cells on two pages were written as
+HTML through in-place node edits, each value with `<br>` between its lines, and every break survived — the
+read-back matched, and the author confirmed the pages by eye. What loses the breaks is some other path —
+markdown input or a whole-body rewrite; which one has not been isolated. Write a multi-line cell as HTML with
+`<br>`, through an in-place edit.
+
 Treat this as a dated observation, not a property of the tooling. Before concluding "the API cannot do it",
 spend one edit finding out: make the change, open the page, look. If the layout lands correctly, the converter
 or the API has been fixed — delete this file and its line in `CLAUDE.md` rather than work around a problem

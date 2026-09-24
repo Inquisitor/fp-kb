@@ -13,7 +13,12 @@ memory register, and a re-check is asked for rather than taken on your own initi
 - **Pages** read as html, markdown, outline or summary. A markdown read renders neither date macros, nor
   panels, nor task lists, so it verifies wording but never layout. *(2026-09-17)*
 - **Databases** read as CSV — field definitions, then views, then one row per record. *(2026-09-17)* Writing
-  to one takes a CSV edit envelope; not yet exercised, so treat it as untested.
+  to one takes a CSV edit envelope plus the current CSV as context, and a write of a multi-line cell did not
+  land. With `\n` between envelope rows the newlines inside the quoted value were read as further operations
+  and the call was rejected; with `\r\n` the call returned success, yet the version number stayed put and a
+  read-back showed no row changed. A dry run validates nothing for databases — it echoes the envelope, and the
+  real call with the same text failed. So a success reply proves nothing here; only a read-back does.
+  Single-line cell edits were not tried. *(2026-09-24)*
 - **In-place edits** replace a node named by its `data-local-id` and leave everything else alone. This is the
   only safe way to change a page someone has formatted by hand. Not every page carries those ids — of two
   pages published from the same account, one had them and the other did not. *(2026-09-17)*
