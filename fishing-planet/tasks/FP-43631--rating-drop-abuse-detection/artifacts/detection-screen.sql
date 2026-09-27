@@ -22,13 +22,17 @@
 -- BRACKET SPLITS COME FROM RATING, NOT FROM BracketId (week-17). TournamentParticipants.BracketId
 -- is the bucket after matchmaking balancing -- undersized buckets pull from neighbours and then
 -- merge -- so it is not the player's rating band. Played_NMT and Prizes_NMT below are computed
--- from CompetitionRatingAtStart (FP-43816), which is exact and, for prize rows, always populated
--- because a prize requires a start.
+-- from CompetitionRatingAtStart (FP-43816), which is exact where present but is NOT always
+-- populated, prize rows included (corrected week-20 -- AppL33 lost 2 plays and 1 prize from the
+-- split). The BracketCoverage column below reports the shortfall and the parser recovers the
+-- missing brackets from the ledger PCR chain.
 --
 -- Verdict:
 --   NEW    — never competition-banned
---   REPEAT — has a competition ban that already EXPIRED (re-offending; a ban dated before the
---            2026-04-29 matchmaking launch is an old/unrelated comp ban — judge accordingly)
+--   REPEAT — has a competition ban that already EXPIRED (re-offending). There is no date
+--            condition here and there cannot be one: Profiles carries only the END date, so a
+--            long pre-launch ban is indistinguishable from a recent one. The tariff does not ask
+--            what the prior ban was for -- see step 6 of the methodology
 --   BANNED — currently competition-banned (by us this cycle, or a prior active ban)
 --
 -- N/M/T = NOOBS (rating <= 100) / MIDDLES (101-1000) / TOPS (1001+), each a single "N / M / T"
@@ -45,13 +49,18 @@ BEGIN
     DECLARE @MaxRatingFromUnproductive   int          = -90;
     DECLARE @MinTotalPrizes              int          = 4;
 
-    -- A competition belongs to the week in which it ENDS, which is how the leaderboard attributes
-    -- it (established week-20 on competition 331553: it ran Sun 22:00 -> Mon 00:00 and both its
-    -- winners carry those wins in the following period). Filtering on StartDate therefore selected
-    -- a different set from the board: it pulled in the Sunday 22:00 competition that belongs to the
-    -- next week, and dropped the previous Sunday's, which belongs to this one. Measured on week-19
-    -- Steam, the two windows cover the same 83 competitions but differ by 1 candidate each way --
-    -- and the one the old filter missed was a returning WATCH.
+    -- A competition belongs to the week in which it ENDS, and that agrees with the board
+    -- (established week-20 on competition 331553: it ran Sun 22:00 -> Mon 00:00 and both its
+    -- winners carry those wins in the following period). The agreement is not by design --
+    -- UpdateCompetitiveLeaderboards() never receives the tournament and derives the period from
+    -- UtcNow when the row is written -- it holds because the scheduled end path writes 2 seconds
+    -- after EndDate, and the deferred review path is never reached for KindId=3 (IsResultReviewed
+    -- is not a column and is assigned nowhere). Screen and board diverge only under a processing
+    -- stall, i.e. an incident. Filtering on StartDate selected a different set from the board: it
+    -- pulled in the Sunday 22:00 competition that belongs to the next week, and dropped the
+    -- previous Sunday's, which belongs to this one. Measured on week-19 Steam: 83 competitions on
+    -- each side of the change, differing by 1 candidate at each end -- and the one the old filter
+    -- missed was a returning WATCH.
     --
     -- @WindowEnd also gives the window an upper bound, which it never had. Without one the screen's
     -- span depended on when the script was run: re-running the week-19 window on 2026-09-20 returned
@@ -92,12 +101,19 @@ BEGIN
             SUM(CASE WHEN a.Place=2 THEN 1 ELSE 0 END)                                        AS Silver,
             SUM(CASE WHEN a.Place=3 THEN 1 ELSE 0 END)                                        AS Bronze,
             SUM(CASE WHEN a.IsDisqualified=1 THEN 1 ELSE 0 END)                               AS Disqualifications,
+            -- Diagnostics for the BracketCoverage self-check below. Expected 0 on both; carried
+            -- for one cycle to prove that the prize predicates can be aligned safely.
+            SUM(CASE WHEN a.Place=0 THEN 1 ELSE 0 END)                                        AS PlaceZero,
+            SUM(CASE WHEN a.IsDisqualified=1 AND a.Place IN (1,2,3) THEN 1 ELSE 0 END)        AS DqWithPlace,
             SUM(CASE WHEN a.IsStarted=1 AND a.IsDisqualified=0 AND a.RatingAtStart<=100 THEN 1 ELSE 0 END)              AS PlayN,
             SUM(CASE WHEN a.IsStarted=1 AND a.IsDisqualified=0 AND a.RatingAtStart BETWEEN 101 AND 1000 THEN 1 ELSE 0 END) AS PlayM,
             SUM(CASE WHEN a.IsStarted=1 AND a.IsDisqualified=0 AND a.RatingAtStart>=1001 THEN 1 ELSE 0 END)             AS PlayT,
-            SUM(CASE WHEN a.Place<=3 AND a.RatingAtStart<=100 THEN 1 ELSE 0 END)                     AS PrzN,
-            SUM(CASE WHEN a.Place<=3 AND a.RatingAtStart BETWEEN 101 AND 1000 THEN 1 ELSE 0 END)     AS PrzM,
-            SUM(CASE WHEN a.Place<=3 AND a.RatingAtStart>=1001 THEN 1 ELSE 0 END)                    AS PrzT,
+            -- Place IN (1,2,3), not Place<=3: the two must use the identical predicate or the
+            -- BracketCoverage check below can go negative on a Place=0 row and mask a real
+            -- shortfall. Prz* are not in the HAVING clause, so aligning them cannot move the cohort.
+            SUM(CASE WHEN a.Place IN (1,2,3) AND a.RatingAtStart<=100 THEN 1 ELSE 0 END)                 AS PrzN,
+            SUM(CASE WHEN a.Place IN (1,2,3) AND a.RatingAtStart BETWEEN 101 AND 1000 THEN 1 ELSE 0 END) AS PrzM,
+            SUM(CASE WHEN a.Place IN (1,2,3) AND a.RatingAtStart>=1001 THEN 1 ELSE 0 END)                AS PrzT,
             SUM(CASE WHEN a.Place IN (1,2,3) THEN 1 ELSE 0 END)                               AS TotalPrizes,
             MAX(a.RatingAtStart)                                                              AS MaxRatingAtStart
         FROM Activity a GROUP BY a.UserId
@@ -134,6 +150,26 @@ BEGIN
         CONCAT(ag.PlayN, ' / ', ag.PlayM, ' / ', ag.PlayT)                           AS Played_NMT,
         CONCAT(ag.PrzN,  ' / ', ag.PrzM,  ' / ', ag.PrzT)                            AS Prizes_NMT,
         ag.TotalPrizes,
+        -- Self-check: the bracket split must reconcile with the totals it is split from.
+        -- A non-zero value means rows carry no usable RatingAtStart, so their bracket is simply
+        -- absent from Played_NMT / Prizes_NMT -- AppL33 (week-19) lost 2 plays and 1 prize this
+        -- way, and the lost prize was the NOOBS one, on the account's first event at PCR 0.
+        -- This is a RECOVERY trigger, never a leniency. Unclassified rows are overwhelmingly the
+        -- account's earliest events, which are bottom-bracket by definition, so the omission runs
+        -- in the candidate's favour every time. The parser resolves the bracket from the ledger
+        -- PCR chain and fills the split; an unclassified row is not an argument for the defence
+        -- and does not feed evidence_completeness.
+        -- DQ is reported separately (Disqualifications, DqWithPlace) and deliberately kept OUT of
+        -- this predicate: a non-ok value instructs the parser to recover missing brackets, and a
+        -- DQ count is not something to recover.
+        CASE WHEN ag.Started = ag.PlayN + ag.PlayM + ag.PlayT
+              AND ag.TotalPrizes = ag.PrzN + ag.PrzM + ag.PrzT
+             THEN 'ok'
+             ELSE CONCAT(ag.Started - (ag.PlayN + ag.PlayM + ag.PlayT), ' play, ',
+                         ag.TotalPrizes - (ag.PrzN + ag.PrzM + ag.PrzT), ' prize unclassified')
+        END                                                                          AS BracketCoverage,
+        ag.PlaceZero,
+        ag.DqWithPlace,
         pr.IsCompetitionsBanned                                                      AS IsBanned,
         pr.CompetitionsBanEndDate                                                    AS BanEnd,
         CASE WHEN ISNULL(pr.IsCompetitionsBanned,0)=0 THEN 'NEW'

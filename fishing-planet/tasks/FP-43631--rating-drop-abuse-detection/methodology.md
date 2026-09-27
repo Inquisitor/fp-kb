@@ -35,8 +35,14 @@ durable account-ban decisions on their side.
   standard bands runs about 92% and concentrates its misses in thin or oddly-configured
   competitions. See `<kb>/fishing-planet/server/modules/matchmaking/_card.md` and the FP-41746 GDD.
   **Consequence for this task**: `BracketId` is usable as a cohort-level signal and must not carry
-  an individual verdict. Derive the bracket from `CompetitionRatingAtStart` instead — it is exact,
-  and for prize rows it is fully populated because a prize requires a start. The `Played_NMT` and
+  an individual verdict. Derive the bracket from `CompetitionRatingAtStart` instead — it is exact
+  where present, but it is **not always present, prize rows included** *(corrected week-20)*.
+  `AppL33` in week-19 carried `Started` 26 against a split of 24 and `TotalPrizes` 4 against a
+  split of 3; the unclassified prize was the NOOBS one, taken on the account's first event at
+  PCR 0. The gap runs one way: a row with no rating at start is an early event, and early events
+  are bottom-bracket by definition, so what drops out of the split is the aggravating half — and
+  the wrong figure reached Support unflagged. The screen's `BracketCoverage` column reports the
+  shortfall and the parser fills it from the ledger PCR chain (step 4). The `Played_NMT` and
   `Prizes_NMT` columns were computed from the label up to and including week-14; where the two
   disagree the label **overstated** the share won in the bottom bracket.
 - **No-show** — `TournamentParticipants.IsStarted = 0`. Player registered, did not start. Penalty
@@ -47,7 +53,13 @@ durable account-ban decisions on their side.
   evidence (climb-then-flush, NOOBS-bracket prize concentration).
 - **Climb-then-flush** — PLAYED entry pushes PCR into MIDDLES, followed within hours by NO-SHOW
   entries dropping it back below 100. The classic bracket-farming move.
-- **MIDDLES → NOOBS drop** — single no-show entry where `pcr_before >= 100 AND pcr_after < 100`.
+- **MIDDLES → NOOBS drop** — single **unproductive** entry, no-show or zero-score, where
+  `pcr_before >= 101 AND pcr_after <= 100` *(boundary corrected week-20: NOOBS is 0-100 inclusive
+  and MIDDLES starts at 101, so a 110 -> 100 move is a drop and a 100 -> 95 move is not. The old
+  `>= 100 / < 100` form counted NOOBS-internal moves and missed real crossings; harmless while the
+  field was descriptive, load-bearing now that rule 5 fires at exactly 2. Widened week-20; the
+  parser has counted both since
+  week-18 and the card reports the split)*.
 - **Stale flag** — `IsCompetitionsBanned = true` with `BanEndDate` in the past OR NULL. The
   canonical game-engine check `ProfileLogic.IsCompetitionsBannedNow()` is the AND of
   `IsCompetitionsBanned = true` AND `BanEndDate > now` — null/past BanEnd means **not effectively
@@ -67,9 +79,15 @@ Run `artifacts/detection-screen.sql` on each platform PROD MAIN with `@WindowSta
 window's Monday at 00:00 and `@WindowEnd` to the following Monday at 00:00.
 
 **The window is bounded at both ends and cut on `EndDate`** *(corrected week-20)*. A competition
-belongs to the week in which it **ends**, which is how the leaderboard attributes it: competition
-331553 ran Sunday 2026-09-06 22:00 to Monday 00:00 and both its winners carry those wins in the
-following period. Cutting on `StartDate`, as the screen did from week-3 to week-19, therefore
+belongs to the week in which it **ends**, and that agrees with the board: competition 331553 ran
+Sunday 2026-09-06 22:00 to Monday 00:00 and both its winners carry those wins in the following
+period. The agreement is not by design — `UpdateCompetitiveLeaderboards()` never receives the
+tournament and derives the period from `UtcNow` at the moment the row is written. It agrees because
+the scheduled end path writes 2 seconds after `EndDate`, and the deferred path (`EndDate +
+TournamentReviewThreshold`, 20 minutes) does not apply to `KindId = 3`. Screen and board therefore
+diverge only under a genuine processing stall, which is an incident, not a schedule. Do not carry
+this agreement over to a changed competition grid or a changed end-processing path without
+re-checking it. Cutting on `StartDate`, as the screen did from week-3 to week-19, therefore
 selected a different set from the board -- it pulled in the Sunday 22:00 competition belonging to
 the next week and dropped the previous Sunday's, which belonged to this one. Measured on the week-19
 Steam window: the same 83 competitions either way, but 1 candidate different in each direction, and
@@ -142,10 +160,24 @@ the same SQL on each; cohort size at this stage is typically 15-30.
 ### 1.5 Risk zone — who has to be judged before the payout
 
 The weekly reward pays the **top 10 by wins** (`CompetitiveRatingWeeklyHistory`,
-`DimensionTypeId = 2`; the other dimensions either pay nothing or are out of scope here). Prizes are
-the thing that cannot be taken back after the fact, so the cycle's success condition is narrow: **no
-unconvicted abuser collects a top-10 reward.** Everything else — the bans themselves, the handoff,
-the paperwork — can land on Monday without loss.
+`DimensionTypeId = 2`). Monthly and yearly boards pay too, and more richly — see the note at the end
+of this section. The cycle's success condition is narrow: **no unconvicted abuser collects a top-10
+reward.** Everything else — the bans themselves, the handoff, the paperwork — can land on Monday
+without loss.
+
+**The deadline is soft, and the softness has a price** *(corrected week-20)*. A prize is not the
+irreversible loss this section used to claim. It can be annulled after the fact and passed to the
+next player on the table, an offline delivery can be caught before it lands, a missed prize can be
+granted late. But every one of those is a **manual compensation action**: operator time, and players
+disturbed because of our delay. They are last resorts — they work, and their cost is the reason to
+judge the risk zone first, not a licence to run late.
+
+**The asymmetry decides which way to err at the boundary.** Moving a prize **down** the table is
+honest and comparatively cheap. Moving it **up** is not: taking a prize from someone who turns out
+innocent and handing it to the player above him cannot be put right except by clawing it back from
+that player or by paying it out twice. So a case still undecided when the board closes keeps its
+prize, and the conviction follows on the next cycle. Err towards letting a prize go, never towards
+taking one.
 
 A ban **vacates the place**: measured week-18 on Xbox, both candidates banned out of the would-be
 top 10 disappeared from the board and 2 players on 2 wins each were paid in their stead. So banning
@@ -167,12 +199,26 @@ and on its first use it gave a wrong answer, crediting a candidate with a possib
 competition that could not count to his week.
 
 **Tie-break, and why it does not open a route.** Places within an equal win count are ordered by the
-timestamp at which the count was reached, earliest first — verified across 3 tie groups in period
-20260907. The winner of the boundary competition therefore holds the earliest possible timestamp of
+timestamp at which the count was reached, earliest first — verified across 3 tie groups in period 20260907.
+The winner of the boundary competition therefore holds the earliest possible timestamp of
 the following period and heads every tie he is in. Measured across 20 finalised weekly periods on
 Steam: a single win was **never once rewarded**, the fewest wins ever paid was 2, and the closest a
 single win came was 14th place against a paying depth of 10. The position is real and worth nothing;
 do not spend review time on it.
+
+**Monthly and yearly boards pay as well, and the prizes get richer with the period** *(recorded
+week-20)*. `PopulateCompetitiveLeaderboardRewards` seeds rewards as the cross product of
+{Played, Won, Rating} × {Weekly, Monthly, Yearly} × 10 places, and `DistributeLeaderboardRewards`
+returns early only for `Played` — so 6 of the 9 boards pay. This section previously said the other
+dimensions pay nothing, which was wrong, and the cycle has checked the weekly board only since
+week-8. What follows from it:
+- every cycle, after the weekly risk zone, check the month's cohort so far against the monthly
+  top 10 and ask only whether anyone is within reach — remaining wins needed against the
+  candidate's observed rate. Out of reach is a line in the record and nothing more;
+- on the **last sweep of the month** the monthly check is binding, exactly as the weekly one is;
+- in December the same for the yearly board, with margin, because the yearly prize is the largest
+  and a 4-week ban is the weakest instrument against a counter that has been accumulating since
+  the matchmaking launch of 2026-04-29.
 
 Compute the zone **before** dispatching the trial, and order the cohort by leaderboard position.
 Candidates outside the zone are still judged in the same run and banned the same way — they are
@@ -271,12 +317,30 @@ mappings: `IIGot-_-Smoked` → `iigot-smoked`, `M4R5H_57_` → `m4r5h-57`, `LEBO
 ### 4. Parser agent — distill raw .tsv into trajectory cards
 
 A general-purpose subagent reads the 24 (or however many) per-candidate raw .tsv files and emits
-one `<uid>-<slug>.md` trajectory card per input. The agent recognises five event types via regex
+one `<uid>-<slug>.md` trajectory card per input. The agent recognises these event types via regex
 anchors:
 
 - **PCR ledger entry**: `Tournament reward Competition #(\d+) '(.*)' added CompetitionRating (-?\d+) \((-?\d+) -> (-?\d+)\)` — the spine.
 - **Played-confirmation**: `Player started scoring time for Competition #(\d+)` — PLAYED iff
   present for the comp, NO-SHOW iff absent for a comp with a reward entry.
+- **ZERO-SCORE** *(added week-18, spelled out here week-20)* — a started competition that produced
+  nothing. The ledger cannot tell an empty start from a scored one, so the status is **fed in from
+  the SQL competition ids**, not derived from the log: a comp id on that list with a
+  played-confirmation is ZERO-SCORE rather than PLAYED. Carry the status through to the ledger
+  table and to `middles_to_noobs_drops`. `batched_flush_groups` and `longest_no_show_streak_hours`
+  stay **no-show-only by design** — they are about absence, not about shedding route.
+  *Where the list comes from*: it is produced ad hoc from the same step-1 connection as the screen,
+  one query per platform returning `UserId, TournamentId` for rows matching the screen's zero-score
+  predicate (started, not disqualified, `Score` and `SecondaryScore` both zero), and pasted into
+  the parser prompt beside the platform map. The screen itself emits only the aggregate
+  `ZeroScore`, so it cannot serve as the source. This has worked since week-18 and was simply
+  never written down.
+  **Pull the list over the card's span, not the screen's window** *(week-20)*. The card carries the
+  sweep week plus up to 14 days of pre-context, so a list cut to the sweep week alone tags a
+  zero-score event in the pre-context as PLAYED. Since `middles_to_noobs_drops` counts both routes
+  and rule 5 fires at exactly 2 drops, the mismatch would count a no-show drop in the pre-context
+  and silently drop a zero-score one beside it — the same event, the same week, a different answer
+  depending on route. Same row predicate, widened dates.
 - **Registration**: `Player registered for Competition #(\d+)` and `Registration for tournament Competition #(\d+) ... failed`.
 - **Process marker** (skip): `About to process tournament Competition #`.
 - **Cheat trigger** (count + capture notable): `CHEAT: ...`.
@@ -287,9 +351,37 @@ The card's frontmatter computes:
 - `pcr_range` / `pcr_at_start` / `pcr_at_end` / `net_delta`
 - `batched_flush_groups` — same-second clusters of size >= 2 with at least one NO-SHOW
 - `longest_no_show_streak_hours` — longest run of >= 5 consecutive no-shows
-- `middles_to_noobs_drops` — counter of pcr_before>=100 AND pcr_after<100 AND status=NO-SHOW
+- `middles_to_noobs_drops` — counter of pcr_before>=101 AND pcr_after<=100 AND status IN
+  (NO-SHOW, ZERO-SCORE) *(widened week-20 to match the glossary; report the split, e.g.
+  `5 (no-show 5, zero-score 0)`)*. Rule 5's operative test reads this field, so a zero-score
+  drainer would score 0 here under a NO-SHOW-only definition and the test would silently fail to
+  reach him. **The parser has in fact counted both since week-18** — 75 `ZERO-SCORE` ledger rows
+  in that cycle, 21 in week-19, and 3 cards across the two carry a non-zero zero-score component —
+  so this line documents existing behaviour rather than changing it, and cross-cycle comparisons
+  under rules 4 and 8(a) are already like-for-like back to week-18. Do not introduce a correction
+  for a discontinuity that is not there
 - `cheat_triggers` count
 - `notable[]` — up to 8 short verbatim-style descriptions of significant events
+- `presence_gaps` *(added week-20)* — every interval of 2 hours or more inside the window carrying
+  **no log line of any type** for that user, reported as `start -> end (Nh)`, plus the share of
+  window hours spent inside such gaps. **Use every line's timestamp for this, not only the five
+  recognised types** — the whole point is whether the account was visible at all, so scoring
+  listings, `Fish caught`, `Update overall` and the rest all count as presence even though they
+  are ignored for the card body. Then mark each unproductive ledger entry `in-gap` or `in-presence`
+  by where its timestamp falls.
+  **What this can and cannot say.** The ledger timestamp is the flush moment, so `in-presence`
+  locates when the penalty was *applied*, not when the competition ran; it does not by itself prove
+  the player chose to skip that competition. What the field does deliver is the bound: a candidate
+  dark for twenty hours cannot be argued about the same way as one who was logged in and catching
+  fish throughout. Tying an absence to its own competition's start window needs the competition
+  start times, which the ledger does not carry — see the backlog item on dumping
+  `CompetitionId -> StartDate` alongside step 3.
+- `bracket_recovery` *(added week-20)* — where the SQL row's `BracketCoverage` is not `ok`, the
+  bracket split is short because those rows carry no `CompetitionRatingAtStart`. Resolve each one
+  from the ledger: the `pcr_before` of the competition's own reward entry is the rating the player
+  carried into it, so the bracket follows from the same 0-100 / 101-1000 / 1001+ bands. Report the
+  completed split on the card and list the recovered competitions here. The shortfall is a data
+  gap to be filled, not a thin record — see the standing defect list in step 5.
 
 The body is the full chronological PCR ledger as a markdown table (`Timestamp | Comp ID | Comp name | Status | Δ | PCR`).
 
@@ -301,19 +393,35 @@ data; the current prompt explicitly forbids this.
 
 ### 4.5 Evidence completeness check (post-Codex refinement)
 
-Before dispatching the cohort to trial, cross-check parser-reported NO-SHOW counts against the
-Step 1 SQL numbers per candidate. If a candidate's parser NO-SHOW count differs from SQL by more
-than 20% OR by more than 5 absolute events (whichever is larger), flag the card with
-`evidence_completeness: degraded` and include the SQL/parser diff in the pre-trial context. The
-judge should downgrade confidence and prefer WATCH on degraded evidence unless the trajectory
-signature is independently overwhelming (Da Sneaky Snake week-10 is an example where completeness
-would be flagged but severity is sufficient to sustain BAN anyway).
+Before dispatching the cohort to trial, cross-check the parser's counts against the Step 1 SQL
+numbers per candidate — **NO-SHOW, ZERO-SCORE and their sum against SQL `NoShows`, `ZeroScore` and
+`Unproductive`** *(widened week-20; it checked no-shows alone)*. If any of the three differs from
+SQL by more than 20% OR by more than 5 absolute events (whichever is larger), flag the card with
+`evidence_completeness: degraded` and include the SQL/parser diff in the pre-trial context.
+Checking no-shows alone leaves a hole now that zero-score feeds `middles_to_noobs_drops`: a parser
+miss on the zero-score half moves rule 5's operative count without tripping the flag.
+**Degraded evidence caps confidence at 7** *(week-20; it used to read "prefer WATCH")*. It is not
+a release and not a route to WATCH in itself — the same treatment rule 3 now gets, and for the same
+reason: thin or doubtful evidence limits how confidently a case can be decided, it does not decide
+it. The two caps do not stack. Where the trajectory signature is independently overwhelming the
+judge convicts under the cap and says so (Da Sneaky Snake week-10 is the worked example:
+completeness flagged, severity sufficient, BAN sustained).
 
-Observed cases: Gustyn112 week-9 (parser 10 vs SQL 15, diff −5), alphaBiTsoop16 week-10 (parser
-26 vs SQL 50, diff −24). Both remained BAN because signature severity dominated, but recurring
-disagreement is a data-integrity signal that warrants investigation (possible Support pre-action
-redaction of tail ledger entries, tail entries appearing post-parser-run, or parser regex
-missing a variant).
+**Floor absorption is the first cause to rule out, and it is exempt from the flag** *(week-20)*.
+A penalty landing on an already-zero rating writes no ledger line at all (week-12), and the parser
+tags statuses onto ledger rows — so for a candidate parked at the floor the parser count is
+structurally below SQL with nothing wrong anywhere. That is exactly rule 9's population: maximum
+PCR under 100, the bottom-bracket farmer. Flagging him `degraded` would cap his confidence at 7
+for the very reason rule 3 says must not shelter him ("unavailable where the ledger merely looks
+thin because the rating sat at the floor"), handing him through the other door what rule 3 refuses
+at the front. Where the window contains `-> 0)` ledger entries and the shortfall is consistent
+with them, record the divergence in the pre-trial context and do **not** set `degraded`.
+
+Other causes, which do set it: Support pre-action redacting tail ledger entries, tail entries
+appearing after the parser ran, or a parser regex missing a variant. Observed cases: Gustyn112
+week-9 (parser 10 vs SQL 15, diff −5), alphaBiTsoop16 week-10 (parser 26 vs SQL 50, diff −24).
+Both remained BAN because signature severity dominated, but recurring disagreement is a
+data-integrity signal that warrants investigation.
 
 ### 5. Adversarial trial — workflow with prosecutor / defense / judge per case
 
@@ -331,6 +439,18 @@ A `Workflow` script (using the `Workflow` MCP tool) runs three subagents per can
 - **Judge** (sequential after both arguments): reads both arguments, may consult the case file
   for verification, renders `finalVerdict` (BAN / WATCH / EXONERATE), `banDuration`, `reasoning`,
   `prosecutorResponse`, `defenseResponse`, `confidence` 1-10.
+
+**What `confidence` means, and what it does not** *(stated week-20)*. It measures how firmly the
+finding is established, **not** how serious the case is and **not** whether the verdict clears
+some bar. **There is no minimum confidence for BAN.** A capped case is convicted at the cap, with
+the reason for the cap named in the reasoning. This has to be said because the record shows judges
+treating the number as a threshold — ZellyRolled (week-19) and Lay_D14S (week-5) both returned
+WATCH at exactly 7, the latter writing "conviction threshold not met" in terms. Left unsaid, the two caps
+below would quietly restore the defeater that week-20 removed: cap at 7, judge reads 7 as "not
+enough for a ban", and the thin-record candidate walks exactly as before.
+
+The caps are rule 3 (thin record) and step 4.5 (degraded evidence). Both cap at 7. A case carrying
+both is still capped at 7, not lower — they do not compound.
 
 Schemas (`PROSECUTOR_SCHEMA`, `DEFENSE_SCHEMA`, `JUDGE_SCHEMA`) are typed via JSON Schema so the
 subagent's StructuredOutput is forced and parseable. The whole workflow is ~3N agent calls
@@ -362,6 +482,17 @@ prosecution built its sequence cases on the artifact. The list, all binding on b
 - the ledger under-reports: a competition can carry a process marker and no reward line, so a ledger
   count is a floor and absence of an entry is not evidence that nothing happened (week-18);
 - printed rating deltas overstate the loss where rating floors at zero (week-12);
+- `presence_gaps` bounds the argument, it does not settle it (week-20). A candidate dark for
+  twenty hours and one logged in and catching fish throughout cannot be argued about the same way,
+  and both sides must work from the field rather than from assertion. But the ledger timestamp is
+  the flush moment, so `in-presence` says when the penalty landed, not that the player was at his
+  keyboard while the competition ran. Neither side may treat the mark as proof of choice, and a
+  long silence is not exculpatory on its own — a player can be absent because he is absent;
+- an unclassified bracket is **not** a defence argument (week-20). Where `BracketCoverage` reports
+  a shortfall, rows exist whose `CompetitionRatingAtStart` is absent; the parser resolves them from
+  the ledger PCR chain and the split on the card is complete. Missing classification is a data gap
+  that has already been filled, never a reason to read the record as thin, and it does not feed
+  `evidence_completeness`;
 - the charge is the SQL sweep week; the card's fourteen-day aggregates are shape, order and timing
   only (week-17);
 - what rule 1(a)'s temporal limb can be proved from at all: the rating chain of resolved
@@ -410,13 +541,28 @@ makes release profitable.
    Note what the split does *not* fix. It leaves the sums unchanged, so a candidate whose net
    rating is **rising** still fails this limb — FM_AirForceZero's net was +37 and he was held on
    WATCH for that reason, not because of the drain route. Where a rising net sits alongside heavy
-   shedding, rule 5 is the provision that reaches it.
+   shedding, rule 5 is the provision that reaches it — but only above the threshold rule 5 states,
+   and only at the MIDDLES/NOOBS boundary its counter measures. Below the threshold the rising net
+   stands and this limb fails. At another boundary rule 5 has nothing to say, and the limb must be
+   proved directly from the rating chain instead.
    **(b) payoff below the ceiling** *(amended week-17)* — prizes concentrated in a bracket below
    the one the player's own results place him in. The ceiling is the **higher** of:
    (i) the highest bracket he actually reaches with meaningful exposure in the window, and
-   (ii) the bracket his rating would sit in **without the penalties he took by not appearing** —
-   his rating on entering the window plus everything he earned by playing. Where (ii) is used,
-   state both figures.
+   (ii) the bracket his rating would sit in **without the penalties he took by unproductive
+   participation — no-shows and zero-score starts alike** *(corrected week-20; the wording said
+   "by not appearing" and so refunded only the no-show half)*.
+   **Compute it one way and one way only: rating on entering the window + `RatingFromProductivePlay`.**
+   Do not compute it as net minus `RatingFromUnproductive`; the two disagree for any candidate
+   carrying a disqualification, because DQ rating sits in neither column, and a ceiling that
+   depends on which formula the judge picked is not evidence. Note honestly what the pinned route
+   does with DQ: since DQ rating is in neither column, `entering + RatingFromProductivePlay` omits
+   it, i.e. it **does** refund the DQ penalty. That is accepted as the price of one unambiguous
+   formula, and it is inert in practice — `Disqualifications` was 0 for every candidate across
+   weeks 18, 19 and 20 but one. Where a candidate does carry a DQ, say so and state the ceiling
+   both with and without it. Where (ii) is used, state both figures.
+   The correction matters most for the drainer the screen was widened to catch in week-18: refund
+   only his no-shows and a zero-score drainer's ceiling comes out near his actual rating, limb (b)
+   fails, and he is acquitted on the precise route he used.
    *Why (ii) exists*: the week-14 wording exempted precisely the most deflated accounts. A player
    already pushed to the floor has no bracket above him inside the window, so there was nothing
    for his prizes to be "below", and the same-bracket carve-out then sheltered him. Six of the ten
@@ -441,11 +587,21 @@ makes release profitable.
 2. REPEAT status alone is not automatic BAN if the trajectory pattern is weak. Where the pattern
    is weak, WATCH applies to a REPEAT just as it would to a NEW candidate. The bracket in which
    the prizes sit is not what makes a pattern weak — see rule 1.
-3. (reframed week-13; **counter corrected week-19**) Data-sufficiency objection, and the **only**
-   leniency available on evidentiary grounds: fewer than **15 registrations** in the window. This
-   is a claim about how much evidence exists, not about who the player is. Unavailable where SQL
-   volume is high and the ledger merely looks thin because the rating sat at the floor (see
-   Step 4.5).
+3. (reframed week-13; counter corrected week-19; **turned from a defeater into a confidence cap
+   week-20**) Data-sufficiency objection, and the **only** leniency available on evidentiary
+   grounds: fewer than **15 registrations** in the window. This is a claim about how much evidence
+   exists, not about who the player is. Unavailable where SQL volume is high and the ledger merely
+   looks thin because the rating sat at the floor (see Step 4.5).
+   **Rule 3 does not release.** A thin record caps the confidence of a conviction at **7** and
+   obliges the judge to name it as the reason for the cap. Conviction on a thin record is
+   available; confident conviction is not. As a hard defeater the rule published an immunity band:
+   the screen's own floor is 10 events, so a candidate between 10 and 14 was released whatever the
+   severity of everything else — 10 unproductive of 14, -150 rating and 4 pure-NOOBS prizes walked
+   automatically. The cap closes that band without pretending the record is thicker than it is, and
+   it removes the precedence question the defeater created against rules 4, 8 and 9, none of which
+   now have anything to be defeated by. Measured over weeks 18 and 19: 1 candidate per cycle falls
+   under the threshold, so the cap changes the treatment of about 1 case a cycle and adds no
+   material volume.
    **Count events, not games.** Between weeks 13 and 19 the counter was "fewer than 10 competitions
    PLAYED", and that measures the wrong thing: the offence consists of *not* playing, so the harder
    a candidate drains the fewer games he has and the more readily the leniency shelters him. At a
@@ -464,10 +620,32 @@ makes release profitable.
    flavor has appeared or grown (NOOBS prizes appear or increase, or MIDDLES->NOOBS drops appear
    or increase) is BAN without further deliberation. Previously scoped to watchlist entries
    only; broadened because rule 6's withdrawal removed the wording that carried the other cases.
-5. (week-7 Kacumi refinement) Net-positive PCR alone does NOT defeat the bracket-farming
-   hypothesis when the climbs are followed by no-show flushes and re-engagement at
-   NOOBS-bracket competitions. The climb is the up-arc of a climb-and-cash cycle, not climber
-   behavior. Only use net-positive as defense when there is NO climb-then-flush signature.
+5. (week-7 Kacumi refinement; **operative test added week-20**) Net-positive PCR alone does NOT
+   defeat the bracket-farming hypothesis when the climbs are followed by no-show flushes and
+   re-engagement at NOOBS-bracket competitions. The climb is the up-arc of a climb-and-cash cycle,
+   not climber behavior. Only use net-positive as defense when there is NO climb-then-flush
+   signature.
+   **What the rule does, exactly.** It supplies limb 1(a) where, and only where, the trajectory
+   shows at least **2 downward crossings of the MIDDLES/NOOBS boundary caused by unproductive
+   participation, inside the charge window** — the card's `middles_to_noobs_drops`, which counts
+   that boundary and no other. **The 2 must fall in the sweep week**, not anywhere in the card's
+   fourteen days: the charge is the sweep week and the card's longer aggregates are shape, order
+   and timing only (standing defect list). The counter as printed spans the whole card, so read
+   the dates off the ledger before applying the threshold. Lesky2123 (week-19) is the worked
+   warning — both his drops are dated 08-31 and 09-02 against a charge window of 09-07..09-13, so
+   he does **not** satisfy this test, and the ledger row that cited him as satisfying it was wrong.
+   FOGGIA1920's two are in-window and do.
+   A TOPS→MIDDLES drainer is therefore outside this test as written. **Do not route him to limb
+   1(b)** — that is the payoff limb and cannot supply 1(a), so the redirection would leave him
+   with no conviction route at all. Prove limb 1(a) for him directly from the rating chain: the
+   shedding, the boundary it crosses and the re-engagement below it are all in the ledger, and the
+   limb asks for chosen descent, not for a particular boundary. Record the case so the counter can
+   be widened if the shape recurs. Below the threshold rule 5 only removes the net-positive
+   defence and supplies no limb, and a judge may not convict on rule 5 alone.
+   **Rule 5 never supplies limb 1(b)**, which must still be proved on its own — a candidate with
+   2 or more drops whose prizes all sit in MIDDLES satisfies rule 5 and fails 1(b), and that is an
+   acquittal on the charge, not a technicality. The threshold is 2 because a single crossing can be
+   a bad week; a return is a pattern.
 6. (**REWRITTEN week-13 — the week-8 KingYakO2 novice-deference version is withdrawn**)
    **There is no standalone novice deference.** A thin record is handled by rule 3 and only
    rule 3. Affirmatively: **low lifetime volume is AGGRAVATING when in-window extraction is
@@ -476,7 +654,7 @@ makes release profitable.
    both volume and cashing. If a large share of the candidate's lifetime prize count was earned
    inside the window, their entire competitive record consists of the conduct under review --
    the pattern in its strongest form, not an excuse for it. The judge computes the ratio
-   explicitly (in-window TotalPrizes against lifetime Gold+Silver+Bronze) and states it.
+   explicitly (in-window `TotalPrizes` against lifetime `Gold`+`Silver`+`Bronze`) and states it.
    Two arguments are expressly closed to the defense: (i) a **recovery-climb**, because rule 5
    already classifies the climb as the up-arc of a climb-and-cash cycle; (ii) **absence from a
    later cohort**, because a candidate can simply pause -- absence proves nothing either way.
@@ -509,25 +687,43 @@ makes release profitable.
 8. (week-9 CreekSamurai refinement / week-10 validation / broadened week-13) Persistence check
    on **any** prior WATCH, not only a novice one. Rule 4 auto-BAN fires next cycle if ANY of:
    (a) at least one additional MIDDLES->NOOBS drop compared to prior cycle, (b) NOOBS prize
-   count grew by >= 2, (c) NoShowSharePct maintained above 30% on a >= 20% larger sample
-   (Registrations grew materially without proportional Played growth). Validated week-10:
+   count grew by >= 2, (c) `UnproductiveSharePct` maintained above 30% on a >= 20% larger sample
+   (`Registrations` grew materially without proportional growth in **productive** finishes, i.e.
+   `Started` minus `ZeroScore` — a zero-score drainer's `Started` grows in step with his
+   registrations, so the old gloss excluded exactly the shape this clause was widened for).
+   Validated week-10:
    CreekSamurai returned with 8 M->N drops (up from 3) satisfying condition (a) with margin --
    Support pre-actioned at the exact 2W duration our rule would have applied.
 9. (week-10 sandaljepitt refinement) **Within-bracket detector** for cases entirely inside the
    NOOBS bracket [0..100] where rules 1/4/6 miss because no MIDDLES->NOOBS drops and no
-   climb-then-flush arcs are possible. Rule 9 fires on ALL of: (a) NoShowSharePct >= 40 (higher
-   than the screening threshold of 30%), (b) Prizes_NMT >= 4N with 0M and 0T (pure NOOBS flavor),
-   (c) max PCR across the trajectory window < 100 (never climbs into MIDDLES), (d) at least
-   10 Registrations in the sweep window (avoid tiny-sample false positives). Judge should
+   climb-then-flush arcs are possible. Rule 9 fires on ALL of: (a) `UnproductiveSharePct` >= 40
+   (higher than the screening threshold of 30%), (b) `Prizes_NMT` >= 4N with 0M and 0T (pure NOOBS
+   flavor), (c) max PCR across the trajectory window < 100 (never climbs into MIDDLES), (d) at
+   least 10 `Registrations` in the sweep window (avoid tiny-sample false positives). Judge should
    accept "within-bracket abuse" as a load-bearing BAN argument even without cross-bracket
-   evidence. **Precedence (corrected week-13): rule 9 stands on its own and is NOT outranked by
-   any consideration of the player's inexperience; the only defense that defeats it is rule 3.**
+   evidence. **Precedence (corrected week-13; rule 3 clause updated week-20): rule 9 stands on its
+   own and is NOT outranked by any consideration of the player's inexperience. Rule 3 no longer
+   defeats it either — a thin record caps confidence instead of releasing.** Do not read that as
+   reviving clause (d): 10 registrations is the screen's structural floor, so (d) is satisfied by
+   every candidate who reaches review and decides nothing either way. The live constraint on a thin
+   rule 9 case is rule 3's confidence cap.
    The earlier week-12 precedence — rule 6 outranking rule 9 on a first-cycle candidate — is
    withdrawn: in the week-13 A/B it was the mechanism that let ZacKasoN through (rule 9's gates
    all fired at PCR 4 with pure 4N flavor, and the deference branch suppressed them) while
    Support banned him for a month. Discovered from sandaljepitt week-10 dissent -- Support
    pre-actioned 2W (rating-drop duration; cheat bans are permanent on FP), trial WATCH under
    the then-current rule 6, alignment counter 27/28 at the time.
+
+**Why 30 and 40 did not move when the metric did** *(week-20)*. Rules 8(c) and 9(a) read
+`UnproductiveSharePct`, not `NoShowSharePct`; the glossary's boundary drop counts any unproductive
+entry. Both thresholds were always defined relative to the screening threshold — rule 9(a) says so
+in its own text — and the screening threshold moved from no-shows to unproductive participation in
+week-18, so the rules follow it and the numbers keep their meaning: 30 is "at the screening
+threshold", 40 is "clearly above it". They are not stale figures awaiting recalibration. Until this
+was written down the judges were substituting the new metric silently, without recording that they
+had departed from the text — KovlekPlayz and sidelong-beak10 in week-19 both did. The rules as
+written could never have reached a zero-score drainer at all: Myky0576 (week-18) ran 27 zero-score
+finishes against 1 no-show, a no-show share near 2% and an unproductive share near 67%.
 
 Output is `{ trials: [{ name, platform, status, prosArg, defArg, verdict }] }` — extract
 verdicts via:
@@ -554,6 +750,26 @@ that limb 1(b) was met, and a week later none of that could be checked against a
 repository. That cycle also carried an operator override — precisely the decision a later reader
 will want to audit. Its verdicts were recovered on 2026-09-20 only because the temporary file
 happened to still be on disk.
+
+**An operator override requires a blind re-hearing** *(added week-20)*. Where the operator
+overrides a verdict, the case goes back through prosecution, defence and judge on the full brief,
+with no mention that an override happened, and the result is written into the cycle record whether
+it confirms the override or contradicts it. 3 agents.
+
+The re-hearing does not bind. The operator sees what the trial cannot — board position, links
+between accounts, history across cycles — so it informs the record rather than reversing the
+decision. What it audits is **the reason, not the outcome**, because the reason is what turns into
+methodology here. Week-19 is the whole argument: the ZellyRolled override was correct on the merits
+(5 boundary drops, which rule 5 reaches) but its recorded ground was rule 3, and rule 3 was
+rewritten the same night on that ground. The verdict in fact rested on two independent legs and
+named limb 1(a) as "not relied on". A re-hearing would have shown that before the rule changed.
+Week-18 did re-hear its two overrides blind and both came back convicted at 8 and 9, which is what
+made those overrides confirmed rather than merely unopposed.
+
+Two re-hearings contradicting overrides in a row is a signal in itself: either the criterion the
+operator is applying is wrong, or it is right and belongs in the standing rules so the judges can
+apply it themselves. The week-12 leaderboard-urgency criterion has decided 3 cases and is still not
+written down — see the backlog.
 
 ### 6. Ban execution — three layers
 
@@ -625,20 +841,28 @@ stale from week-3 and are wrong):
 - Rationale for the raise, and the measured recidivism intervals behind it, are in the week-13
   ledger row and in `bans-2026-08-02.sql`.
 
-**REPEAT counts any expired competition ban, not only ours** *(settled week-20)*. The detection
-query has always defined it that way — an expired competition ban dated after the matchmaking launch
-of 2026-04-29 — and practice had drifted to counting only bans this project issued.
+**REPEAT counts any expired competition ban, whatever it was for** *(settled week-20)*. The
+detection query defines it exactly as it reads: `IsCompetitionsBanned` set, with
+`CompetitionsBanEndDate` in the past. Practice had drifted to counting only bans this project
+issued.
+
+There is **no date condition in the query, and there cannot be one**. `Profiles` carries only the
+end date, so a ban issued before the matchmaking launch of 2026-04-29 and served for six months is
+indistinguishable from one issued last month. The 2026-04-29 caveat in the file header is advice to
+a reader, not a filter — earlier versions of this section claimed the query applied it, and that
+was simply wrong.
+
+The **type** matters and the **reason** does not. `IsCompetitionsBanned` is competition-specific, so
+a chat ban or a purchase ban never reaches this test; but among competition bans the tariff does not
+ask what the ban was for. That is a policy, not a finding: an account already banned out of
+competitions once, and convicted again here, serves the longer term. Support's banLog entries carry
+no reason string, so the vector is usually unknowable anyway, and guessing at it buys nothing.
 
 The drift came from conflating 2 different stages. Week-13 made the review **Support-blind** so that
 judges could not reason "banned because someone else banned", and NEW/REPEAT was narrowed to our own
 history to keep the pre-trial context clean. That was right for the context field. It was never
 meant to reach the **tariff**, which the operator sets after the verdict, where no blindness is
 required or useful.
-
-No reason-based downgrade. Support's banLog entries carry no reason string, so the vector is usually
-unknowable — but a competition ban means the account did something in competitions, and rating-drop
-is the mildest thing that earns one. An unknown reason is therefore more likely to be graver than
-this offence, not lighter.
 
 **The trial stays Support-blind.** The case context continues to carry our own ban history only. The
 operator reads the full history when setting the duration.
@@ -700,7 +924,11 @@ OR pre-actioned by Support before our sweep) and **WATCH** (reviewed, not bannin
 methodology). Internal sub-categories (which BANNED rows are ours vs Support's, which WATCH is
 which flavor) get explained in the `cs-report-<date>.md` Reading notes — not in the TSV.
 
-The TSV column order is documented in `cs-report-<date>.md` and matches the SQL output 1:1.
+The TSV column order is documented in `cs-report-<date>.md` and follows the SQL output, **minus the
+internal diagnostics**: `BracketCoverage`, `PlaceZero` and `DqWithPlace` are ours, not Support's,
+and are stripped before the handoff *(week-20)*. Where `BracketCoverage` was not `ok`, what Support
+receives is the **recovered** bracket split from the card, not the short one the screen emitted —
+that is the whole point of recovering it.
 Per-bracket cells use `N / M / T` with spaces (`8 / 12 / 0`) on purpose because Google Sheets
 auto-parses `8/12/0` as a date.
 
@@ -838,32 +1066,54 @@ Static shared artifacts (not per-cycle):
 
 ## Key concepts that distinguish BAN from WATCH
 
-The trial's discriminator over weeks 3-10 has stabilized to:
+**This section is a map, not the law** *(rewritten week-20)*. The standing rules in step 5 govern;
+where the two disagree, step 5 wins and this block is wrong and must be fixed. It drifted badly
+between weeks 13 and 20 — describing a withdrawn rule 6, a rule 3 that has since stopped
+releasing, and a rule 5 without its operative test — and a judge working from it applied a
+different rule set than one working from step 5.
 
-**BAN if all four hold:**
-1. Net-negative PCR over the trajectory window
-2. PCR demonstrably crosses bracket boundaries downward via no-shows (MIDDLES → NOOBS drops
-   present, OR sustained dwell below 100 after a drain)
-3. NOOBS-bracket prize concentration this cycle (`Prizes_NMT` 4N+ with 0M)
-4. Lifetime profile doesn't structurally exclude NOOBS-farming (fresh accounts pass trivially;
-   long-tenured MIDDLES/TOPS veterans require flavor change to NOOBS prizes)
+**There are three independent conviction routes**, and only the first needs rule 1's two limbs:
+rule 1 (both limbs), **rule 9** (the within-bracket farmer, who satisfies limb 1(a) and fails
+1(b) because there is no bracket below him to be displaced into), and **rules 4 and 8** (the
+returning-WATCH ladder, "BAN without further deliberation", which asks for no limb analysis at
+all). Failing rule 1 is not an acquittal until the other two have been checked.
 
-**WATCH if any of these dominate:**
-- MIDDLES-only or TOP-only prize signature regardless of no-show share (different mechanism);
-  under rule 7, high-PCR sandbagging WATCH also carries a one-cycle clock for NOOBS-flavor shift
-- Net-positive PCR across the window with PCR ending in MIDDLES — but **only** if the climbs
-  are not climb-then-flush cycles; if they are, BAN per the week-7 Kacumi rule 5
-- Sample size too thin (< 10 played events) on a first-cycle candidate
-- Sandbagging-within-MASTERS (PCR > 1000 throughout, prizes in 0N+kM+0T pattern)
-- Novice-deference: NEW first-cycle with TotalPrizes < 10 AND structural counter-evidence
-  (recovery-climb, continuous absence block, scheduler-artifact batches) — WATCH with
-  one-cycle clock per rule 6 / rule 8 ladder
+**Route 1 — rule 1, both limbs, plus the profile check:**
+1. **Chosen descent** — limb 1(a). Either net-negative PCR over the window with the gap
+   attributable to unproductive participation, **or** net-positive where rule 5's operative test
+   is met: at least 2 `middles_to_noobs_drops`. Net-positive alone is not a defence and is not a
+   bar.
+2. **Payoff below the ceiling** — limb 1(b). Prizes concentrated below the higher of the bracket
+   he actually reaches and his counterfactual ceiling (entering rating + `RatingFromProductivePlay`).
+   NOOBS concentration is the common case, not the required one: the mechanism is bracket-relative
+   and operates at every boundary. Rule 5 never supplies this limb.
+3. **Lifetime profile does not structurally exclude the shape** — fresh accounts pass trivially;
+   long-tenured MIDDLES/TOPS veterans need a flavour change toward the lower bracket.
+
+**WATCH where all three routes fail** — none of these is sufficient on its own, because rule 9 and
+the rules 4/8 ladder convict without rule 1:
+- limb 1(b) fails on **both** ceilings: neither the bracket actually reached with meaningful
+  exposure nor the counterfactual ceiling rises above the bracket the prizes sit in, so the
+  shedding bought no displacement — **and** rule 9 does not fire
+- the prize signature sits in one bracket only, no ceiling above it can be established, and the
+  player is not inside the bottom bracket (where rule 9 governs instead); under rule 7 a high-PCR
+  sandbagging WATCH carries a one-cycle clock
+- sandbagging entirely inside TOPS: PCR above 1000 throughout **and** prizes in TOPS. A player
+  above 1000 taking MIDDLES prizes is displaced and belongs under rule 1
+- the returning-WATCH ladder has not fired — rules 4 and 8 carry the escalation on the clock
+
+**Not WATCH routes, though they were once written here:**
+- *a thin record* — rule 3 caps conviction confidence at 7 since week-20; it does not release,
+  and there is no minimum confidence for BAN
+- *novice deference* — withdrawn in week-13. Low lifetime volume is **aggravating** where
+  in-window extraction is high, not mitigating
+- *degraded evidence* — caps confidence the same way, and does not decide the verdict
 
 **Within-bracket abuse pattern** (post-week-10 sandaljepitt, rule 9 formalized): a player
 farming NOOBS prizes entirely below PCR 100 (never climbs into MIDDLES, no MIDDLES->NOOBS
-drops possible) satisfies rules 1 and 3 but fails rule 2 by absence-of-signal. Rule 9 (see
-Standing rules section) closes this gap: high NoShowSharePct + pure NOOBS flavor + max PCR
-below 100 across the window + >= 10 Registrations. Judges should accept within-bracket abuse
+drops possible) satisfies limb 1(a) but fails limb 1(b) by absence-of-signal. Rule 9 (see
+Standing rules section) closes this gap: high `UnproductiveSharePct` + pure NOOBS flavor + max PCR
+below 100 across the window + >= 10 `Registrations`. Judges should accept within-bracket abuse
 as load-bearing BAN evidence even without cross-bracket signature.
 
 **Watchlist escalation rule** (rule 4): a player carried over from a prior cycle's watchlist
@@ -989,12 +1239,22 @@ section the cycle it's discovered, then carried forward via memory rules.
 | week-18 | **Outage defence closed.** Planned downtime cancels competitions outright, so it produces no absences; unplanned incidents are rare and are a question for the operator, not a query. Measured once and found absent | (step 5) |
 | week-18 | **SQL is complete but split** at roughly 60 days into `Archive*` tables, which do carry the FP-43816 columns. The failure mode is silent — the live tables simply return nothing for older periods, which reads as inactivity | (step 3) |
 | week-18 | **Trial-Support alignment counter retired.** Unmaintained since week-13 and never a validation; Support overlap stays as per-cycle context in the ban record, unscored | (alignment table above) |
-| week-20 | **Screen window cut on `EndDate` and bounded at both ends.** A competition belongs to the week it ends in, which is how the leaderboard attributes it; the old `StartDate` filter selected a different set and had no upper bound, so its span depended on run time. Measured: same 83 competitions, 1 candidate different each way, and the one missed was a returning WATCH | (step 1; `detection-screen.sql`) |
+| week-19 | **Rule 3 counts events, not games, and the threshold moves to 15.** The old counter (fewer than 10 PLAYED) measured the wrong quantity -- the offence is not playing, so the heaviest drainers had the fewest games and were sheltered most readily. It released 2 of 12 candidates this cycle, one with the pattern expressly established, and needed an operator override to correct. 10 events is the screen's structural floor and cannot serve as a threshold | (step 5 rule 3; `bans-2026-09-13.md`) |
+| week-20 | **Screen window cut on `EndDate` and bounded at both ends.** A competition belongs to the week it ends in, and the scheduled end path writes the board row 2 seconds after `EndDate` while the review path does not apply to `KindId = 3`, so screen and board agree except under a processing stall; the old `StartDate` filter selected a different set and had no upper bound, so its span depended on run time. Measured: same 83 competitions, 1 candidate different each way, and the one missed was a returning WATCH | (step 1; `detection-screen.sql`) |
 | week-20 | **`week3-cs-report.sql` renamed `detection-screen.sql`** after 17 weeks under the name of its first cycle. Committed window dates are always last cycle's -- they are run parameters living in source | (step 1) |
 | week-20 | **Board is final from 22:00 UTC Sunday; the week-19 drift allowance is withdrawn.** Tie-break is by earliest timestamp, so the boundary competition's winner heads his tie group -- measured worthless: across 20 weekly periods a single win was never rewarded, best placing 14th against a paying depth of 10 | (step 1.5) |
 | week-20 | **Trial verdicts are persisted** to `pcr-log-trajectories-<date>/_verdicts.md`. Week-19's cited a 6/6 split and per-case confidences that could not be checked a week later; recovered only because the temporary file happened to survive | (step 5) |
-| week-20 | **REPEAT counts any expired competition ban, not only ours.** Support-blindness belongs to the trial, not to the tariff; the 2 were conflated in week-13. No reason-based downgrade -- rating-drop is the mildest offence a competition ban is given for | (step 6) |
-| week-19 | **Rule 3 counts events, not games, and the threshold moves to 15.** The old counter (fewer than 10 PLAYED) measured the wrong quantity -- the offence is not playing, so the heaviest drainers had the fewest games and were sheltered most readily. It released 2 of 12 candidates this cycle, one with the pattern expressly established, and needed an operator override to correct. 10 events is the screen's structural floor and cannot serve as a threshold | (step 5 rule 3; `bans-2026-09-13.md`) |
+| week-20 | **REPEAT counts any expired competition ban, whatever it was for.** Support-blindness belongs to the trial, not to the tariff; the 2 were conflated in week-13. The type matters and the reason does not -- a policy, not a finding. Corrected in the same pass: the section claimed the query filters on a ban date after the matchmaking launch. It does not and cannot -- `Profiles` holds only the end date, so a long pre-launch ban is indistinguishable from a recent one | (step 6) |
+| week-20 | **The BAN/WATCH summary block rewritten and subordinated to the standing rules.** It had drifted since week-13 -- describing the withdrawn novice deference, a rule 3 that no longer releases, a rule 5 without its operative test, net-negative PCR as a requirement, and NOOBS concentration as the required rather than the common case -- so a judge working from the summary applied a different rule set than one working from step 5. It now says in its first line that step 5 governs | (Key concepts section) |
+| week-20 | **Limb 1(b)'s counterfactual ceiling refunds unproductive participation, not just no-shows.** The wording still read "the penalties he took by not appearing" after week-18 widened everything around it, so a zero-score drainer's ceiling came out near his actual rating, limb (b) failed and he was acquitted on the precise route he used -- the Myky0576 shape, invisible again by a different mechanism. Found by Codex on the consistency pass; neither the reviewer nor the operator caught it | (step 5 rule 1(b)) |
+| week-20 | **`confidence` measures how firmly the finding is established, and there is no minimum confidence for BAN.** A capped case is convicted at the cap with the cap's reason named. Without saying so, the two caps introduced this cycle -- rule 3 for a thin record, step 4.5 for degraded evidence, both at 7 -- would have quietly restored the defeater rule 3 stopped being: the record shows ZellyRolled and Lay_D14S both returned WATCH at exactly 7, the last writing "conviction threshold not met" in terms. The caps do not compound | (step 5) |
+| week-20 | **An operator override now requires a blind re-hearing**, recorded either way, informing rather than binding. It audits the reason, not the outcome: the ZellyRolled override was right on the merits but its recorded ground was rule 3, and rule 3 was rewritten the same night on that ground, while the verdict actually rested on two legs and named limb 1(a) as not relied on. Week-18 re-heard its 2 overrides and both came back convicted at 8 and 9 | (step 5) |
+| week-20 | **The payout deadline is soft and the softness is priced; monthly and yearly boards pay too.** A prize is not irreversible -- it can be annulled and passed down the table, an offline delivery caught, a missed prize granted late -- but each is a manual compensation action costing operator time and disturbing players, so the zone is judged first and lateness is not free. The asymmetry decides the boundary case: moving a prize down the table is honest and cheap, taking one from someone who turns out innocent is neither, so an undecided case keeps its prize and conviction follows next cycle. Urgency was what produced the week-18 and week-19 overrides, and it rested on an irreversibility that does not exist. Separately: 6 of the 9 boards pay, not 1 -- Won and Rating on weekly, monthly and yearly | (step 1.5) |
+| week-20 | **`presence_gaps` on the card: intervals of 2h or more with no log line of any type, and every unproductive entry marked `in-gap` or `in-presence`.** The outage defence, the over-registration argument and the operator's memory were all standing in for a measurement nobody took; a judge had already reconstructed it by hand for AdmiralAckbar98 from lines the parser was told to discard. Anchored on the flush moment, so it bounds the argument rather than settling it -- completing it needs competition start times, which the ledger does not carry | (step 4; step 5 defect list) |
+| week-20 | **Rules 8(c) and 9(a) and the glossary now read unproductive participation, not no-shows.** The screening threshold moved in week-18 and the rules that reference it did not follow, so judges were substituting the new metric silently; as written the rules could never reach a zero-score drainer -- Myky0576 ran 27 zero-score finishes against 1 no-show. Thresholds of 30 and 40 are unchanged because both were defined relative to the screening threshold, not as absolute figures. Rule 9's own floor of 10 registrations is live again now that rule 3 caps rather than defeats | (step 5 rules 8, 9; glossary) |
+| week-20 | **`CompetitionRatingAtStart` is not always populated, prize rows included, and the screen now says so.** `AppL33` lost 2 plays and 1 prize from the bracket split in week-19, and the lost prize was the NOOBS one on his first event at PCR 0 -- the split understated exactly the evidence that aggravates, and the wrong figure went to Support. New `BracketCoverage` column reconciles the split against its own totals; the parser recovers the missing brackets from the ledger PCR chain. Recovery, not leniency: the shortfall does not feed `evidence_completeness` and is not a defence argument | (step 1; step 4; step 5 defect list) |
+| week-20 | **Rule 3 stops being a defeater and becomes a confidence cap of 7.** As a defeater it published an immunity band between the screen's floor of 10 events and the threshold of 15, inside which any severity walked automatically, and it left rule 9(d)'s own floor of 10 as dead text while creating an undefined precedence against rule 4's "BAN without further deliberation". Measured over weeks 18 and 19, 1 candidate a cycle falls under 15 -- KovlekPlayz at 13 and Lesky2123 at 14 -- so the cap costs no material volume. Cancelled registrations are correctly absent from the counter: an unregistration before start is free and sheds nothing | (step 5 rule 3) |
+| week-20 | **Rule 5 gets an operative test: it supplies limb 1(a) at 2 or more `middles_to_noobs_drops`, and below that only strips the net-positive defence.** Judges had read it both ways on the same brief -- as a charging provision for seagate22022, Myky0576 and codeco (all BAN) and as a defence-stripper for KovlekPlayz, Lesky2123 and AppL33 (all WATCH) -- and one judge recorded the tension as unresolved without it being picked up. A rising net fails limb 1(a) by arithmetic, so the whole Kacumi shape the rule was written for was convictable or not depending on which judge drew it. Measured against week-19: ZellyRolled 5 drops, FOGGIA1920 2, Lesky2123 2 all satisfy the test; YOUTUBE-Eduzera-YT has 0 and stays outside it, correctly -- his trajectory sits in 434..535 and never approaches a boundary. **Corrected the same cycle:** the 2 drops must fall inside the charge window, and on that reading Lesky2123 does not qualify -- both his are dated 08-31 and 09-02 against a window of 09-07..09-13 | (step 5 rule 5) |
 
 ## Example: week-7 walkthrough (2026-06-22 ban date)
 
@@ -1074,6 +1334,10 @@ consultation post-week-10; not blocking for the weekly cycle but worth acting on
   a second-path detection query `zero-score-abuse.sql` that gates on `ZeroScore >= 6` AND
   `NoShowSharePct < 30` (i.e. the population no-show gate misses) AND `TotalPrizes > 3`. Run
   alongside the no-show gate; merge cohorts for the trial.
+  **Done in week-18 by another route** *(closed week-20)*: zero-score was folded into the screen
+  itself rather than given a companion query. The gate now counts unproductive participation —
+  no-shows plus zero-score finishes — on a single pass, so there is no second cohort to merge and
+  no `NoShowSharePct < 30` carve-out to maintain.
 - **Blind falsification test.** The alignment counter is a sanity check, not validation
   (Codex critique). A real falsification would replay 1-2 prior weeks blind: strip Support
   pre-action flags, watchlist history, and prior verdict labels from the pre-trial context;
