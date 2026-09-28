@@ -18,9 +18,9 @@ var TS      = ISODate("2026-09-21T14:06:53.000Z");
 var MSG_NEW = "User banned with Competition ban via WebAdmin by Stanislav Samoilov with reason 'FP-43631 follow-up - rating-drop abuse (week-20)' until 2026-10-19 00:00:00";
 
 // ---- [F2P] STEAM PROD Mongo (1 NEW) ----
-//db.banLog.insertMany([
-//  { Timestamp: TS, UserId: "6b94e751-0d2f-40b0-81ea-fb7c9da0fd14", Message: MSG_NEW, RequestId: null }  // Iron.Claw (no schedule to explain the absences at all; 4 entries above rating 100 in 14 days with 0 prizes and an average of 20th, against 20 entries and 5 prizes below it; registered 3 slots at rating 105 three minutes after the reward that took him across, attended none; 0 unregistrations in 48 participations)
-//]);
+db.banLog.insertMany([
+  { Timestamp: TS, UserId: "6b94e751-0d2f-40b0-81ea-fb7c9da0fd14", Message: MSG_NEW, RequestId: null }  // Iron.Claw (no schedule to explain the absences at all; 4 entries above rating 100 in 14 days with 0 prizes and an average of 20th, against 20 entries and 5 prizes below it; registered 3 slots at rating 105 three minutes after the reward that took him across, attended none; 0 unregistrations in 48 participations)
+]);
 // Verify (expect 1): db.banLog.find({ Timestamp: TS, Message: /week-20/ }).count();
 
 // ---- [F2P] PS PROD Mongo (1 NEW) ----

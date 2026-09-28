@@ -24,17 +24,17 @@ var TS      = ISODate("2026-09-20T23:59:15.000Z");
 var MSG_NEW = "User banned with Competition ban via WebAdmin by Stanislav Samoilov with reason 'FP-43631 follow-up - rating-drop abuse (week-20)' until 2026-10-19 00:00:00";
 
 // ---- [F2P] STEAM PROD Mongo (2 NEW) ----
-//db.banLog.insertMany([
-//  { Timestamp: TS, UserId: "dcb21f48-6b54-4f74-8a3f-9caae8bff6a0", Message: MSG_NEW, RequestId: null }, // LEK_TARNO (trial BAN conf 8; board place 1 with 7 wins, 6 in-window boundary drops, 9 of 12 prizes in NOOBS against a MIDDLES ceiling)
-//  { Timestamp: TS, UserId: "f3150296-cc7f-43b0-90a5-cc941b45e960", Message: MSG_NEW, RequestId: null }  // HavocHHH  (operator override of WATCH; peaks at 988 against a TOPS floor of 1001 and flushes there in the same second, all 7 prizes in MIDDLES, counterfactual ceiling 1264)
-//]);
+db.banLog.insertMany([
+  { Timestamp: TS, UserId: "dcb21f48-6b54-4f74-8a3f-9caae8bff6a0", Message: MSG_NEW, RequestId: null }, // LEK_TARNO (trial BAN conf 8; board place 1 with 7 wins, 6 in-window boundary drops, 9 of 12 prizes in NOOBS against a MIDDLES ceiling)
+  { Timestamp: TS, UserId: "f3150296-cc7f-43b0-90a5-cc941b45e960", Message: MSG_NEW, RequestId: null }  // HavocHHH  (operator override of WATCH; peaks at 988 against a TOPS floor of 1001 and flushes there in the same second, all 7 prizes in MIDDLES, counterfactual ceiling 1264)
+]);
 // Verify (expect 2): db.banLog.find({ Timestamp: TS, Message: /week-20/ }).count();
 
 // ---- [F2P] PS PROD Mongo (2 NEW) ----
-//db.banLog.insertMany([
-//  { Timestamp: TS, UserId: "80b05c6c-7719-40b5-89ca-3a358f0bd166", Message: MSG_NEW, RequestId: null }, // Gentleman83190 (trial BAN conf 9; 26 unproductive of 35 at 74%, net -149, 3 in-window boundary drops, 5 of 6 prizes in NOOBS)
-//  { Timestamp: TS, UserId: "a92ed0c7-bb5e-43ac-971c-7af91fd47d31", Message: MSG_NEW, RequestId: null }  // CrazyGepard    (operator override of WATCH; parks at exactly 100 -- the top of NOOBS -- and sheds 5 no-shows at 2-hour intervals, twice in the window, all 8 prizes in NOOBS, counterfactual ceiling 375)
-//]);
+db.banLog.insertMany([
+  { Timestamp: TS, UserId: "80b05c6c-7719-40b5-89ca-3a358f0bd166", Message: MSG_NEW, RequestId: null }, // Gentleman83190 (trial BAN conf 9; 26 unproductive of 35 at 74%, net -149, 3 in-window boundary drops, 5 of 6 prizes in NOOBS)
+  { Timestamp: TS, UserId: "a92ed0c7-bb5e-43ac-971c-7af91fd47d31", Message: MSG_NEW, RequestId: null }  // CrazyGepard    (operator override of WATCH; parks at exactly 100 -- the top of NOOBS -- and sheds 5 no-shows at 2-hour intervals, twice in the window, all 8 prizes in NOOBS, counterfactual ceiling 375)
+]);
 // Verify (expect 2): db.banLog.find({ Timestamp: TS, Message: /week-20/ }).count();
 
 // ---- [F2P] XB PROD Mongo (1 NEW) ----
