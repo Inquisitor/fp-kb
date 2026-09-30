@@ -426,3 +426,20 @@ tables write-only at runtime (the one `EntityId`-cursor consumer is `FishingRate
   run_status=1, no-op added 0, `Executed as STEAMSTATSGOLD\Administrator` - service context holds the
   DDL rights. First real action: 28 Sep (adds November). STEAM NOW AT FULL PS PARITY: partitioned
   facts, reclaimed disk, sliding-window automation live on both platforms.
+- 2026-09-30 — **XB prep: assessment + full artifact set built (window targeted 2026-10-01).** The
+  "Microsoft-required encryption" concern resolved by FACT: TDE is on Main only - Stats has
+  `is_encrypted=0`, no DEK/certs -> no TDE adaptations needed (had it been on, the deltas were mapped:
+  cert+key on the restore target, MAXTRANSFERSIZE for compressed TDE backups). Assessment surprises:
+  **ENTERPRISE edition** (STEP 3 rebuild goes ONLINE - no downtime, unlike PS/Steam), **Pacific TZ**
+  (Phase 8 schedule becomes 23:00 local = 06:00 UTC trough, `Monthly_28th_at_23`), single **C:** system
+  volume (~363 GB free - comfortable), config rot: mdf growth **1 MB**, log **136.58 GB at 10% percent
+  growth** (Phase 1 = shrink to 32 GB + fixed-step growth fixes + `backup checksum default`, Agent
+  startup Manual->Automatic). Facts: StatsFact 1004 GB/3.38B, Missions 598 GB/3.84B (~1.6 TB of ~2 TB
+  mdf). `artifacts/xbox/` built from the steam set via an ordered-replacement transform + targeted
+  edits (a sed cascade in the header boundary line was caught by the residual-token sweep); all
+  accumulated fixes inherited (identity-cushion reseed, Rank capture, growth configs, sysjobactivity
+  check). NEW timing guard unique to a 1st-of-month window: **Timestamp is UTC, so STOP PROD must land
+  >= ~2 h after 2026-10-01 00:00 UTC** or the incremental cursor's ~1 h lag reaches into September,
+  which the >= Oct 1 tail does not cover; combined with the nightly backup (00:20-01:45 local,
+  serialization/3023), the safe slot is **~02:00+ local (~09:00+ UTC)**. Early-October cutover = tail
+  of hours -> the window shrinks to minutes, the lowest-risk run of the three.

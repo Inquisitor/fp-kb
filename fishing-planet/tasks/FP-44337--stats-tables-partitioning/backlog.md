@@ -69,3 +69,11 @@ Pending execution — cutover downtime part DONE 2026-08-10 (August boundaries):
 - [ ] Re-shrink `Stats_log` to 12 GB (first pass stopped at ~29 GB - active VLF; retry after checkpoints)
 - [ ] `DBCC CHECKDB` the restored copy on the spare (real integrity check - prod pages carried no checksums until PAGE_VERIFY was enabled 2026-08-10)
 - [ ] Pre-size + cap tempdb on STEAMSTATS (8 MB initial files, no MAXSIZE - same runaway config PS had; ballooned to ~33 GB from NCI-build spills 2026-08-10)
+
+## XB (artifact set prepared 2026-09-30; window targeted 2026-10-01)
+Assessment (2026-09-30): `WIN-4J27M0I84AC\XBSTATS`, **ENTERPRISE** 15.0.2000.5, **Pacific TZ**, SIMPLE, PAGE_VERIFY already CHECKSUM. Single **C:** volume, ~363 GB free; mdf ~2 TB (**growth was 1 MB**), log **136.58 GB (growth 10%)** -> Phase 1 = shrink+growth fixes. `StatsFact` 1004 GB/3.38B, `MissionsFact` 598 GB/3.84B; PK-on-EntityId only. **TDE NOT on Stats** (Main-only) - no plan impact. Nightly full 00:20-~01:45, ~590 GB, was checksum-less. Agent Running but startup **Manual**. Scripts + runbook + checklist in `artifacts/xbox/` (October boundaries `10/11/12`).
+- [ ] Run `Phase1_XB_LogRightsize.sql` (online, pre-window) + set Agent service to Automatic
+- [ ] Confirm the SPARE box for restore-verification (~2 TB) + pre-drop backup target
+- [ ] Window slot 06:05 UTC = 23:05 local Pacific (2026-09-30): 6 h past the UTC month start (cursor-lag guard OK), 75 min before the 07:20 UTC nightly full; Phase 2 `ADD FILE` must finish before 07:20 UTC (3023). The nightly full = STEP 0 pre-drop backup (starts post-START, holds `*_old`, checksummed via Phase 1) - pin it against rotation, then restore-verify on the SPARE
+- [ ] Execute the window (Phase 2+3, minutes) -> START -> Phase 6 STEP 0 backup -> restore-verify on SPARE -> gate+DROP -> stepped shrink (C: -> ~1.8-1.9 TB)
+- [ ] STEP 3 rebuild ONLINE (Enterprise - no downtime, unlike PS/Steam); Phase 8 job at **23:00 local Pacific** (`Monthly_28th_at_23`); tempdb pre-size+cap; Phase 7 archive deferred
