@@ -3,13 +3,16 @@ name: Technical Debt epic quarterly rotation
 description: Recurring quarterly rotation of the rolling "Technical Debt" epic in FP JIRA — naming, fields, Prev/Next comment chain, rotation steps, orphan sweep, and the updated-field staleness gotcha
 type: reference
 ---
-A rolling **Technical Debt** epic is rotated once per quarter in the FP JIRA project (reporter/assignee = the tech-debt owner), one epic per quarter, created on the first day of the quarter. The epics form a continuous chain back to Q4 2024; two older thematic "Technical debt" epics (2022-2023) predate the series and are unrelated. Head epic at time of writing: FP-44818 (2026 Q3), predecessor FP-43213 (2026 Q2).
+A rolling **Technical Debt** epic is rotated once per quarter in the FP JIRA project (reporter/assignee = the tech-debt owner), one epic per quarter, created on the first day of the quarter. The epics form a continuous chain back to Q4 2024; two older thematic "Technical debt" epics (2022-2023) predate the series and are unrelated. Head epic at time of writing: FP-46603 (2026 Q4), predecessor FP-44818 (2026 Q3).
 
 ## Epic fields (mirror the predecessor)
 - issuetype **Epic**, summary `Technical Debt - YYYY QN`
 - priority **Medium**
 - Scrum Team (`customfield_11001`) = **Tech Debt** (id `10783`)
-- empty description; no components / labels / fixVersions
+- Feature Owner (`customfield_11000`) = the tech-debt owner
+- description (from 2026 Q4 on; copy it verbatim into each new epic — earlier epics have none):
+  `Rolling quarterly epic: home for technical-debt work and for tasks with no better epic. Open items carry over to the next quarter's epic on rotation.`
+- no components / labels / fixVersions
 
 ## Link convention (comments)
 Epics form a doubly-linked chain via a single smartlink comment per epic:
@@ -34,7 +37,7 @@ Prev: <browse url of prev epic>
 Only **Closed** and **Verified** are statusCategory `done`. **Resolved** is `indeterminate` (still open). So "unclosed" = every status except Closed.
 
 ## Staleness gotcha (for the planned year-idle auto-close)
-Auto-closing tasks idle for a year is planned but not yet done. The `updated` field is **contaminated** by periodic bulk edits (children get `updated` reset en masse; all epics were touched the same day), so it cannot measure inactivity. Use JQL `status NOT CHANGED AFTER -365d` instead — immune to bulk field/parent edits.
+Auto-closing tasks idle for a year is planned but not yet done. The `updated` field is **contaminated** by periodic bulk edits (children get `updated` reset en masse; all epics were touched the same day), so it cannot measure inactivity. Use JQL `NOT status CHANGED AFTER -365d AND created <= -365d` instead — immune to bulk field/parent edits. The `created` bound keeps out recent issues that have never changed status.
 
 ## See also
 - [JIRA required fields on issue create](jira_required_fields.md) — Scrum Team option ids, epic-link via parent
