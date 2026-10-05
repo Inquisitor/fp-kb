@@ -231,8 +231,21 @@ are not listed here — they are in the methodology refinement ledger. What rema
 - [ ] **Session intervals inside the competition window.** The `Online` column gives minutes; the
   operator also needs when inside the window the player was in the game. `STARI40K_YT` was decided
   from the sessions file read by hand
-- [ ] **Blind re-hearing of the operator decisions**: `LaterGENJI` (week-21) and `ChaChaWuu9588`
-  (week-22)
+- [ ] **Blind re-hearing of the operator decisions**: `LaterGENJI` (week-21) still to do.
+  `ChaChaWuu9588` (week-22) was re-heard blind on 2026-10-05 in the role-based hearing: BAN,
+  confidence 7, reached from the manual without treating it as an exception
+- [ ] **Run the hearing on the next cohort before the operator reads** (`artifacts/hearing/README.md`).
+  On the week-22 cohort it agreed with the operator in 16 of 18 cases, but the manual was written
+  from those cases, so the first unseen cohort is the real test. One case flipped between 2
+  identical hearings: give a borderline case 2 or 3 judges, not 1. Afterwards read the judges'
+  reasoning for behaviour the manual does not describe and add it to `reading-guide.md`
+- [ ] **Say when "shedding ahead of the line" applies.** The operator banned `MP_Alan` on one
+  episode at a peak of 941; 2 hearings gave WATCH under "mid-bracket shedding that has bought
+  nothing yet". The guide carries both rules and does not say how near the line or how many
+  episodes turn one into the other
+- [ ] **Put the unregistrations on the card**: when each was made and at what rating. Both judges
+  of `zezinho_curuja` and both of `MP_Alan` named it as the fact that would settle the case: does
+  he cancel at a low rating and let slots stand at a high one
 - [ ] **Fallback platform detector for the ban-log script**: any `tournamentLog` line for the
   UserId, for an account with no `diagIpLog` line in 180 days
 - [ ] **Result tab titles.** `verify-bans` carries a short comment line directly before each

@@ -782,6 +782,29 @@ Read it before the first card of a cycle. In short, what the operator looks for:
 
 An expired ban sets the term if the player is convicted; it does not decide the case.
 
+#### Hearing before the reading
+
+The cards go to a hearing before the operator reads them. For every candidate a prosecution and a
+defence argue the case from the same manual and the same case file, and a judge decides BAN, WATCH
+or CLEAR with a confidence of 1 to 10 and the facts that decided it. The manual is
+`reading-guide.md` as it stands, which names no players, with a page on the setting; all 3 roles get the same text and are
+told it is not a checklist but a description of behaviour to think with. The case file is
+everything the operator has: the card, a case sheet (platform, place on the weekly board, ban
+history, earlier reviews), the full list of game sessions, the raw columns of odd rows. Each agent
+reads exactly its 2 files.
+
+How the operator uses it:
+
+- The hearing is there to convict the plain cases. A BAN at high confidence on a plain case is
+  confirmed from the judge's decisive facts and the card.
+- A WATCH below confidence 8, and every borderline case, is read by hand as before. A borderline
+  verdict at confidence 6 can go either way on the same inputs; such a case gets 2 or 3 judges.
+- After the cycle the judges' reasoning is read for behaviour the manual does not describe. A real
+  new pattern goes into `reading-guide.md`, so that every later hearing looks for it. While the
+  manual works, it is left alone.
+
+Tooling and steps: `artifacts/hearing/README.md`. 19 cases take about 25 minutes.
+
 ### 6. Ban execution — three layers
 
 Trial-confirmed BAN verdicts (minus any already-Support-actioned with future BanEnd) go into
