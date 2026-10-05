@@ -1,9 +1,7 @@
 ---
 title: FP-43631 — Rating-drop abuse detection & ban methodology
 purpose: Self-contained operational playbook for the weekly FP-43631 cycle. Hand-off ready.
-status: stable (calibrated through weeks 5-10, in production since week-3)
 jira: https://fishingplanet.atlassian.net/browse/FP-43631
-example_cycle: week-10 (2026-07-12) — file references point to that cycle; week-7 walkthrough kept below as historical illustration
 ---
 
 # FP-43631 — Rating-drop abuse detection & ban methodology
@@ -15,11 +13,12 @@ tournaments and not showing up, accruing `NoShowRatingPenalty` to deflate their 
 (PCR) and dropping into the easier **NOOBS bracket [PCR 0-100]** where they farm low-difficulty
 prizes. The MIDDLES bracket is **[101-1000]**, TOPS/MASTERS is **[1001+]**.
 
-The task runs as a **weekly operational loop**: a Sunday sweep across three platform PROD databases
-identifies abusers from the past week's tournament data, an adversarial trial filters and
-classifies the cohort, surgical Profile-bans land via WebAdmin-equivalent SQL, three persistence
-layers get verified, and the Community/Support team gets a handoff sheet of the same cohort for
-durable account-ban decisions on their side.
+The task runs as a **weekly loop**: a Sunday sweep across three platform PROD databases selects
+candidates from the past week's competitions, each candidate is reviewed from a trajectory card,
+competition bans land through SQL equivalent to the WebAdmin action, three persistence layers are
+verified, and the Community/Support team gets the same cohort as a sheet.
+
+All times are UTC and written with a Z suffix: 22:00Z.
 
 ## Domain glossary
 
@@ -70,31 +69,26 @@ durable account-ban decisions on their side.
 The cycle runs Sundays. Window is the prior Mon-Sun (e.g. week-7 sweep on 2026-06-21 covered
 2026-06-15 → 2026-06-21). Ban effective date is Monday-aligned.
 
-### 1. Detection SQL — the screen
+### 1. Detection query
 
-This step is a **screen**, not a verdict: a broad, cheap first pass that deliberately over-selects
-and hands everything it catches to the review. Say "screen", not "gate".
+The detection query is a broad first pass: it selects more accounts than will be banned and hands
+every one of them to the review.
 
-Run `artifacts/detection-screen.sql` on each platform PROD MAIN with `@WindowStart` set to the
-window's Monday at 00:00 and `@WindowEnd` to the following Monday at 00:00.
+Run `artifacts/detection-screen.sql` on each platform PROD MAIN after 22:00Z on Sunday, with
+`@WindowStart` set to the window's Monday 00:00Z and `@WindowEnd` to the following Monday 00:00Z.
 
-**The window is bounded at both ends and cut on `EndDate`** *(corrected week-20)*. A competition
-belongs to the week in which it **ends**, and that agrees with the board: competition 331553 ran
-Sunday 2026-09-06 22:00 to Monday 00:00 and both its winners carry those wins in the following
-period. The agreement is not by design — `UpdateCompetitiveLeaderboards()` never receives the
-tournament and derives the period from `UtcNow` at the moment the row is written. It agrees because
-the scheduled end path writes 2 seconds after `EndDate`, and the deferred path (`EndDate +
-TournamentReviewThreshold`, 20 minutes) does not apply to `KindId = 3`. Screen and board therefore
-diverge only under a genuine processing stall, which is an incident, not a schedule. Do not carry
-this agreement over to a changed competition grid or a changed end-processing path without
-re-checking it. Cutting on `StartDate`, as the screen did from week-3 to week-19, therefore
-selected a different set from the board -- it pulled in the Sunday 22:00 competition belonging to
-the next week and dropped the previous Sunday's, which belonged to this one. Measured on the week-19
-Steam window: the same 83 competitions either way, but 1 candidate different in each direction, and
-the one the old filter missed was a returning WATCH.
-The upper bound matters separately: the screen had none until week-20, so its span depended on when
-the script was run. Re-running the week-19 window on 2026-09-20 returned 91 registrations for a
-candidate who had 33 — the mechanism behind the contaminated post-ban re-run recorded in week-18.
+The week's last competition ends at 22:00Z and its prizes land seconds later; an earlier run can
+miss an account whose fourth prize came in that slot. An earlier run is for orientation only; the
+cohort is the run after 22:00Z.
+
+**The window is bounded at both ends and selects on `EndDate`.** A competition belongs to the week
+in which it ends, and that matches the leaderboard: `UpdateCompetitiveLeaderboards()` derives the
+period from `UtcNow` when the row is written, and the scheduled end path writes it 2 seconds after
+`EndDate` (the deferred review path does not apply to `KindId = 3`). The two differ only under a
+processing stall. Selecting on `StartDate` would take a different set: it pulls in the Sunday
+22:00Z competition, which belongs to the next week, and drops the previous Sunday's. The upper
+bound is required: without it the result depends on when the query is run. Re-check this match if
+the competition grid or the end-processing path changes.
 
 Screening criteria:
 
@@ -225,28 +219,11 @@ Candidates outside the zone are still judged in the same run and banned the same
 simply not on the critical path, and if the clock runs out they can be applied Monday morning or
 handed to Support.
 
-### 2. Sample triage — manual pre-trial categorization
+### 2. Reading order
 
-Before the adversarial trial, eyeball the SQL output and tag each row mentally:
-
-- **Pure NOOBS-farmer** — prizes 4N+ with 0M and 0T, no-show share >= 40%. Strong BAN candidate.
-- **Watchlist holdover** — UserId matches a prior-cycle watchlist entry. Check for flavor change
-  to NOOBS prizes; if yes, the standing watchlist-to-ban rule fires without further deliberation.
-- **REPEAT** — `IsBanned=true` and `BanEnd <= GETUTCDATE()`. Likely 4W candidate under the
-  recidivism rule.
-- **Already Support-actioned** — `IsBanned=true` and `BanEnd > GETUTCDATE()`. Note the BanEnd; do
-  not re-ban (the Step 5 SQL WHERE clause will skip them anyway).
-- **MIDDLES-only veteran** — prizes 0N+(M)+0, lifetime prizes 50+. Different flavor; trial
-  typically gives WATCH.
-- **TOP/MASTERS-tier sandbagging** — PCR > 800, prizes concentrated in upper brackets. Same
-  flavor mismatch; usually WATCH.
-- **Mixed N+M with NET POSITIVE PCR** — borderline. Trial discriminates by whether the climbs
-  are followed by climb-then-flush cycles into NOOBS prize-zone (BAN) or genuine MIDDLES
-  competition (WATCH).
-- **Fresh-lifetime in LB top-10** — surface-level suspicious. Trial requires the joint test
-  (fresh + 3+ wins + net-negative PCR + MIDDLES exposure) before BAN.
-
-The triage is informal and only used to brief the trial; the trial itself decides.
+Order the cohort by board place and read the reward zone first. Before reading, mark from the
+detection output: REPEAT (sets the term), already banned elsewhere (nothing to apply), returning
+WATCH (rules 4 and 8 apply). Nothing else is decided before the card is read.
 
 ### 3. Trajectory dump — Mongo Tournament-log
 
@@ -771,6 +748,40 @@ operator is applying is wrong, or it is right and belongs in the standing rules 
 apply it themselves. The week-12 leaderboard-urgency criterion has decided 3 cases and is still not
 written down — see the backlog.
 
+#### Direct reading
+
+The operator may replace the tribunal with a direct reading. Cards are read one at a time with
+the assistant, the reward zone first, against the standing rules. The verdict and its ground are
+written to `_verdicts.md` as each case is decided. A decision against the standing rules is marked
+as an operator decision and gets a blind re-hearing.
+
+One pack per cycle: every candidate is decided before the bans are run, so there is one data pull,
+one ban script, one sync and one ban-log run. A candidate who appears only in the run after 22:00Z
+is pulled once and joins the same pack.
+
+The full reading guide, with the cases behind each point, is [`reading-guide.md`](reading-guide.md).
+Read it before the first card of a cycle. In short, what the operator looks for:
+
+- **What the shedding bought.** A prize taken right after a run of absences, at a rating the
+  absences produced, is the offence. Absences followed by nothing are not.
+- **Registrations placed to be missed.** A batch registered right after a prize, or at a rating
+  peak, and then not attended; a slot registered while the prize competition is still running;
+  slots added when the rating has not yet fallen far enough.
+- **Win, shed, win.** The same cycle repeated inside the week: a prize, absences back down, the
+  next prize at the bottom of them.
+- **In the game during the absence.** `Online` near the full window on a missed competition means
+  the player was in the game and chose not to enter. Offline absences are weaker and can be a
+  schedule; they still count when they are placed as above.
+- **Where the player ends the week.** A player who climbs out of the bottom bracket and wins above
+  it is watched, not banned, even with a ban history. A player who returns to the same low rating
+  before every win is banned.
+- **Careful single registrations**, made shortly before a competition the player then attends,
+  are ordinary play.
+- **Same bracket throughout.** A player who plays and takes prizes in one bracket, with the
+  counterfactual ceiling in that bracket too, gains nothing from absences: no case.
+
+An expired ban sets the term if the player is convicted; it does not decide the case.
+
 ### 6. Ban execution — three layers
 
 Trial-confirmed BAN verdicts (minus any already-Support-actioned with future BanEnd) go into
@@ -813,62 +824,30 @@ across Weekly/Monthly/Yearly periods. Must be COMMITted separately — the gotch
 week-3/4/6 incidents was forgetting the COMMIT here. Verify SELECT shows `RowsExpectedToFlip` /
 `RowsActuallyFlipped` so a mismatch is visible.
 
-**Layer 3: Mongo banLog** — `artifacts/ban-log-backfill-<date>.js`. Mimics WebAdmin
-`BanSource.WebAdmin` format with author "Stanislav Samoilov", reason
-`'FP-43631 follow-up - rating-drop abuse (week-<n>)'` for NEW or
-`'... (week-<n>, recidivism)'` for REPEAT, until clause matches the BanUntil. Three sections
-(Steam / PS / Xbox), each `insertMany([...])` against the matching Mongo PROD.
+**Layer 3: Mongo banLog** — `artifacts/ban-log-backfill-<date>.js`. One expression, run whole on
+each platform Mongo, safe to run twice. The line imitates the WebAdmin format (author "Stanislav
+Samoilov", reason `'FP-43631 follow-up - rating-drop abuse (week-<n>)'` for a first offence or
+`'... (week-<n>, recidivism)'` for a repeat, `until` matching the ban end) and carries the commit
+time of the pack that banned the account.
 
-**Ship the script with the `insertMany([...])` blocks ACTIVE (not `//`-commented).** The
-operator selects each section together with the `var TS/MSG_NEW/MSG_REPEAT` assignments in one
-highlight before running — having the inserts pre-commented breaks that selection workflow and
-forces uncommenting per-section, which is error-prone. After running a section, the operator
-comments out the executed block in their local copy to make accidental re-runs harmless; this is
-a per-execution side effect, not the canonical shipped state.
+The script finds which accounts belong to this platform by a `diagIpLog` lookup (180 days of
+retention, indexed by UserId), inserts only the lines not already present, and returns how many it
+inserted, how many were present, how many are not on this platform, and whether the cycle's line
+count matches the accounts found here. The platform of each account and the expected count per
+platform are written beside the rows as comments for the reader; the script does not use them. The
+operator checks that the three platform counts add up to the cohort. The file in the KB is never
+edited after a run. Between cycles only `CYCLE`, `MSG`, the commit times and `ROWS` change.
 
-**Do not build the new cycle's file by copying the previous cycle's.** That artifact is left in
-post-run state — sections commented out as the operator worked through them — and copying it
-reproduces exactly the shape this rule forbids. Week-14 broke the rule that way: the previous
-file was treated as a template, the operator had to uncomment section by section, and the
-protection the convention exists to give was inverted. Compose from this section, then diff
-against the previous cycle only to check the UserId list and the dates.
+**Ban term.** First offence: one calendar month from the Monday after the sweep. Repeat: two
+calendar months. Example: sweep Sunday 2026-10-04, Monday 2026-10-05, ban until 2026-11-05 or
+2026-12-05. The term always covers the month of the offence. Agreed with the CS lead 2026-09-29.
 
-**Date conventions** (durations raised week-13; the 2W/4W figures this block used to carry were
-stale from week-3 and are wrong):
-- NEW BanUntil = 4 weeks from the Monday following the sweep. Example: sweep Sun 2026-08-09 →
-  following Mon is 08-10 → BanUntil 2026-09-07.
-- REPEAT BanUntil = 8 weeks, same Monday alignment. Same example: 08-10 + 56d = 2026-10-05.
-- Rationale for the raise, and the measured recidivism intervals behind it, are in the week-13
-  ledger row and in `bans-2026-08-02.sql`.
-
-**REPEAT counts any expired competition ban, whatever it was for** *(settled week-20)*. The
-detection query defines it exactly as it reads: `IsCompetitionsBanned` set, with
-`CompetitionsBanEndDate` in the past. Practice had drifted to counting only bans this project
-issued.
-
-There is **no date condition in the query, and there cannot be one**. `Profiles` carries only the
-end date, so a ban issued before the matchmaking launch of 2026-04-29 and served for six months is
-indistinguishable from one issued last month. The 2026-04-29 caveat in the file header is advice to
-a reader, not a filter — earlier versions of this section claimed the query applied it, and that
-was simply wrong.
-
-The **type** matters and the **reason** does not. `IsCompetitionsBanned` is competition-specific, so
-a chat ban or a purchase ban never reaches this test; but among competition bans the tariff does not
-ask what the ban was for. That is a policy, not a finding: an account already banned out of
-competitions once, and convicted again here, serves the longer term. Support's banLog entries carry
-no reason string, so the vector is usually unknowable anyway, and guessing at it buys nothing.
-
-The drift came from conflating 2 different stages. Week-13 made the review **Support-blind** so that
-judges could not reason "banned because someone else banned", and NEW/REPEAT was narrowed to our own
-history to keep the pre-trial context clean. That was right for the context field. It was never
-meant to reach the **tariff**, which the operator sets after the verdict, where no blindness is
-required or useful.
-
-**The trial stays Support-blind.** The case context continues to carry our own ban history only. The
-operator reads the full history when setting the duration.
-
-Effect, measured: 2 to 3 candidates per cycle. On week-19, Pilou62 and FOGGIA1920 would have carried
-8 weeks rather than 4. Not applied retroactively.
+**A repeat is any expired competition ban, whatever it was for.** The detection query reads it as
+`IsCompetitionsBanned` set with `CompetitionsBanEndDate` in the past. `Profiles` carries only the
+end date, so the query cannot tell when or why the earlier ban was issued. The type matters and the
+reason does not: `IsCompetitionsBanned` is competition-specific, so a chat or purchase ban never
+reaches this test, and among competition bans the term does not depend on the cause. Support's
+banLog entries carry no reason, so the cause is usually unknown anyway.
 
 ### 7. Verification — 3-layer post-ban check
 

@@ -42,8 +42,8 @@
 --
 -- Already-banned players are NOT excluded — Verdict (trailing) classifies them so Support sees recidivism.
 BEGIN
-    DECLARE @WindowStart                 datetime     = '2026-09-21';   -- the window's Monday, 00:00
-    DECLARE @WindowEnd                   datetime     = '2026-09-28';   -- the following Monday, 00:00 (exclusive)
+    DECLARE @WindowStart                 datetime     = '2026-09-28';   -- the window's Monday, 00:00
+    DECLARE @WindowEnd                   datetime     = '2026-10-05';   -- the following Monday, 00:00 (exclusive)
     DECLARE @MinUnproductive             int          = 6;
     DECLARE @MinUnproductiveSharePct     decimal(6,2) = 30.00;
     DECLARE @MaxRatingFromUnproductive   int          = -90;

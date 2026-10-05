@@ -97,14 +97,17 @@
 - [ ] **Check the outage explanation.** A platform or connection incident produces no-shows that
   look chosen. Testable and never tested: whether a candidate's no-show timestamps coincide with
   those of unrelated players. Cheap enough to run as a standing pre-trial filter
-- [ ] **Define the card span by competition start on both edges.** The left edge currently comes
+- [x] **Define the card span by competition start on both edges.** Done: the card rows come from
+  the SQL participation rows selected by competition start (`participation-ledger-<date>.sql`), and
+  the log only adds `Registered`, `Applied` and the chain. Original note: the left edge came
   from the award date in the log while the SQL spine starts at the competition start date, so the
   two disagree. Week-20 result: 6 rows on 5 cards for competitions starting 2026-09-06 whose
   rewards landed on 09-07 — they appear in the ledger with an empty `Registered` because the spine
   never covered them. Harmless that cycle, every one of them sitting in pre-context well outside
   the charge window, but it is the same boundary error the sweep window had. Fix in the generator,
   not by hand-editing cards
-- [ ] **One lead sentence for every card.** `Iron.Claw` still opens the ledger with the old
+- [x] **One lead sentence for every card.** Done: every card is written by `_build_cards.py` with
+  the same lead. Original note: `Iron.Claw` still opens the ledger with the old
   log-era wording ("N reward entries over the card span") while the other 15 read "N participations
   over the card span, M of them carrying a reward line in the log". His card was the hand-built
   template the rest were generated from and it never got the regenerated lead
@@ -126,7 +129,9 @@ are not listed here — they are in the methodology refinement ledger. What rema
 - [x] **Classify absences by presence, not by assumption.** `presence_gaps` added to the parser
   brief in week-20: intervals >= 2h with no log line of any type, each unproductive entry marked
   `in-gap` or `in-presence`
-- [ ] **Finish the presence test: dump `CompetitionId -> StartDate` alongside step 3.** The
+- [x] **Finish the presence test: dump `CompetitionId -> StartDate` alongside step 3.** Done: the
+  participation rows carry `StartDate` and `EndDate`, and `game-sessions-<date>.sql` gives the
+  minutes in the game inside each competition window (the `Online` column). Original note: the
   week-20 `presence_gaps` field anchors on the ledger timestamp, which is the flush moment, so it
   bounds what can be argued but does not tie an absence to its own competition's start window.
   With the start times a no-show taken while the player was demonstrably active during that
@@ -205,6 +210,34 @@ are not listed here — they are in the methodology refinement ledger. What rema
   places in `TournamentEndAdapter`, and is assigned nowhere; it is not on `TournamentDto` and has
   no column. Review is a Sport-tournament concern, so competitions always take the scheduled end
   path and the board row is written `EndDate + 2s`
+
+## From the week-22 cycle (2026-10-04)
+
+- [ ] **Decide what to do with plain shedding below the prize threshold.** The operator's position:
+  shedders are to be banned even when they have only begun to wreck their rating. `keeno1`,
+  `mr.GreeM` and `popeye-43` were shedding a week before their ban with 1 or 2 prizes, under the
+  detection query's threshold of 4, and were not listed. Reading order is not in question: reward
+  zone first. Open: whether the query also lists heavy shedding with fewer prizes, and what verdict
+  such a row gets
+- [ ] **Widen the card span from SQL rows.** The log keeps 14 days; the participation rows do not
+  expire. Build the card for 3 or 4 weeks, with `Registered`, `Applied` and the chain empty on rows
+  older than the log. `popeye-43` was decided by the earlier week and would have been missed a
+  week later
+- [ ] **Entries with no counted fish.** A started entry with 0 fish, an empty main score, a
+  non-zero secondary score, an empty place and rating change 0 (`Panonski_Alas`, competitions
+  380472 and 380576) is classed as played by the card and by the detection query, because both
+  test the two scores together. Find in the code why the secondary score is filled, then decide the
+  status such a row gets on the card
+- [ ] **Session intervals inside the competition window.** The `Online` column gives minutes; the
+  operator also needs when inside the window the player was in the game. `STARI40K_YT` was decided
+  from the sessions file read by hand
+- [ ] **Blind re-hearing of the operator decisions**: `LaterGENJI` (week-21) and `ChaChaWuu9588`
+  (week-22)
+- [ ] **Fallback platform detector for the ban-log script**: any `tournamentLog` line for the
+  UserId, for an account with no `diagIpLog` line in 180 days
+- [ ] **Result tab titles.** `verify-bans` carries a short comment line directly before each
+  query, which DataGrip shows as the tab title. The ban script's result comes from inside a
+  `BEGIN ... END` block; check what title it gets before adding a line there
 
 ## Open questions / Deferred
 - [x] **Zero-score policy** — handed off to Community team monitoring; they will raise a separate ticket if abuse pivots from no-show to zero-score.
